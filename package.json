@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
   "name": "arpymedical-client",
   "version": "0.1.0",
   "private": true,
@@ -36,24 +35,4 @@
       "last 1 safari version"
     ]
   }
-=======
-  "name": "pfhenryfront",
-  "version": "1.0.0",
-  "description": "Front End Arpy Medical",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/GrupoPrivado/pfHenryFront.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/GrupoPrivado/pfHenryFront/issues"
-  },
-  "homepage": "https://github.com/GrupoPrivado/pfHenryFront#readme"
->>>>>>> 7c725c21b70965f8a9dba1afbfac4d2dbd8f6db3
 }
