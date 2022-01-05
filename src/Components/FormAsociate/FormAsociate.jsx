@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from "react";
-import FormAddAsociateGrup from "./FormAddAsociateGrup";
+
 import { Link } from "react-router-dom";
 
 
 
 
 export default function FormAsociate() {
+    
 
     return (
         <div>
@@ -56,7 +57,9 @@ export default function FormAsociate() {
             </div>
             <div>
                 <label>Planes</label>
-                <select name="" id=""></select>
+                <select name="" id="">
+                    <option value={e.id}></option>
+                </select>
             </div>
             <div>
                 <button>Enviar</button>
