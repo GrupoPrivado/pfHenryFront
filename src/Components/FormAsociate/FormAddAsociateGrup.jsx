@@ -3,7 +3,7 @@ import React, {useState, useEffect} from "react";
 
 import React from 'react'
 
-export default function FormAsociate() {
+export default function FormAddAsociateGrup() {
 
     return (
         <div>
@@ -47,14 +47,14 @@ export default function FormAsociate() {
                 <input type="text" />
             </div>
             <div>
-                <label>Agregar miembro</label>
-                <button>+</button>
+                <select name="" id="">
+                    <option value="">Hijo/a</option>
+                    <option value=''>Conyugue</option>
+                </select>
             </div>
+            
             <div>
-                <label>Planes</label>
-                <select name="" id=""></select>
-            </div>
-            <div>
+           
                 <button>Enviar</button>
             </div>
 
