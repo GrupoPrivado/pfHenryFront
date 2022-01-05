@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from "react";
+import FormAddAsociateGrup from "./FormAddAsociateGrup";
+import { Link } from "react-router-dom";
 
 
-import React from 'react'
+
 
 export default function FormAsociate() {
 
@@ -48,7 +50,9 @@ export default function FormAsociate() {
             </div>
             <div>
                 <label>Agregar miembro</label>
+                <Link to ='/asociate/group'>
                 <button>+</button>
+                </Link>
             </div>
             <div>
                 <label>Planes</label>
