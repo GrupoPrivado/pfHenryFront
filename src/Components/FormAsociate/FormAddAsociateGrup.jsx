@@ -47,6 +47,7 @@ export default function FormAddAsociateGrup() {
                 <input type="text" />
             </div>
             <div>
+                
                 <select name="" id="">
                     <option value="">Hijo/a</option>
                     <option value=''>Conyugue</option>
