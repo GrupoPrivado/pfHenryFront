@@ -14,11 +14,16 @@ export function getPlanes() {
       
     };
   }
-  export function postAfiliate(payload) {
-    console.log('action',payload)
-    return async function (dispatch) {
-      var json = await axios.post(`https://arpymedical.herokuapp.com/api/addPreCarga`,payload);
-      console.log('json', json)
-      return json
-    };
-  }
+
+export function postAfiliate(payload) {
+  console.log('Llega >>>>>>>>', payload)
+  return async function (dispatch) {
+    var json = await axios.post('https://arpymedical.herokuapp.com/api/addPreCarga', payload);
+    console.log(' >>>>>>> ', json.data)
+    return json.data
+  };
+}
+
+  
+
+

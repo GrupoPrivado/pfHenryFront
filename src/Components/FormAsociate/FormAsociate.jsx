@@ -4,20 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getPlanes } from "../../actions/actionPlanes";
 import { postAfiliate } from "../../actions/actionPlanes";
 
-// {
-//   "nombre": "Juan",
-//   "apellido": "Perez",
-//   "DNI": 99999999,
-//   "fechaNacimiento": "20-10-1990",
-//   "telefono": 99999999,
-//   "correoElectronico": "juanperez@hotmail.com",
-//   "localidad": "Zarate",
-//   "provincia": "Bs. As.",
-//   "direccion": "Calle 23 556",
-//   "password": "patito",
-//   "idPlan": "61d43544d350432e7c3946a8",
-//    "parentezco": "titular"
-// }
 
 export default function FormAsociate({setOutput, output}) {
   const dispatch = useDispatch();
@@ -48,23 +34,18 @@ export default function FormAsociate({setOutput, output}) {
       [e.target.name]: e.target.value,
     });
   }
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
     
-    const newState = [
-      input,
-      ...output,
-      
+    const newState = [input,...output]
 
-    ]
-    setOutput(
-      newState
-      
-      
+    setOutput(newState)
 
-    )
     alert("afiliate create");
+    
     dispatch(postAfiliate(newState));
+
+ 
     setInput({
       nombre: "",
       apellido: "",
@@ -89,9 +70,8 @@ export default function FormAsociate({setOutput, output}) {
     
   }
   return (
-    <div>
-      <form onSubmit={(e) => handleSubmit(e)}
-      id="formulario">
+    <div style={{backgroundColor: 'gray'}}>
+      <form onSubmit={handleSubmit}>
         <div>
           <label> Nombre:</label>
           <input
@@ -201,7 +181,7 @@ export default function FormAsociate({setOutput, output}) {
         </div>
 
         <div>
-          <button form="formulario">Enviar</button>
+          <button type="submit">Enviar</button>
         </div>
       </form>
     </div>
