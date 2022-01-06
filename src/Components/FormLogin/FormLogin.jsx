@@ -106,31 +106,6 @@ function FormLogin() {
                 </form>
             </div>
         </div>
-        // <form onSubmit={(e) => handleSubmit(e)}>
-        //     <div>
-        //         <label>Usuario: </label>
-        //         <input type="text"
-        //         value={input.user}
-        //         name="user"
-        //         placeholder='Usuario'
-        //         onChange={(e) => handleChange(e)}
-        //         />
-        //     </div>
-
-        //     <div>
-        //         <label>Contraseña: </label>
-        //         <input type="password"
-        //         value={input.password}
-        //         name="password"
-        //         placeholder='Contraseña'
-        //         onChange={(e) => handleChange(e)}
-        //         />
-        //     </div>
-
-        //     <input type="submit"
-        //     value="Ingresar"
-        //     />
-        // </form>
     );
 }
 
