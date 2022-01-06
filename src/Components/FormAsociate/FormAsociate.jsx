@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import { getPlanes } from "../../actions/actionPlanes";
 import { postAfiliate } from "../../actions/actionPlanes";
 
@@ -19,15 +19,13 @@ import { postAfiliate } from "../../actions/actionPlanes";
 //    "parentezco": "titular"
 // }
 
-export default function FormAsociate() {
+export default function FormAsociate({setOutput, output}) {
   const dispatch = useDispatch();
   const { planes } = useSelector((state) => state.planes);
+ 
+  
 
-  useEffect(() => {
-    dispatch(getPlanes());
-  }, [dispatch]);
-
-  const [input, setInput] = useState([{
+  const [input, setInput] = useState({
     nombre: "",
     apellido: "",
     DNI: "",
@@ -40,8 +38,9 @@ export default function FormAsociate() {
     idPlan: "",
     password: "",
     parentezco: "titular",
-  }]);
-  console.log(input);
+  });
+
+  
 
   function handleChange(e) {
     setInput({
@@ -51,8 +50,21 @@ export default function FormAsociate() {
   }
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(postAfiliate(input));
+    
+    const newState = [
+      input,
+      ...output,
+      
+
+    ]
+    setOutput(
+      newState
+      
+      
+
+    )
     alert("afiliate create");
+    dispatch(postAfiliate(newState));
     setInput({
       nombre: "",
       apellido: "",
@@ -164,9 +176,9 @@ export default function FormAsociate() {
         </div>
         <div>
           <label>Agregar miembro</label>
-          <Link to="/asociate/group">
+          
             <button>+</button>
-          </Link>
+          
         </div>
         <div>
           <label>Planes</label>
