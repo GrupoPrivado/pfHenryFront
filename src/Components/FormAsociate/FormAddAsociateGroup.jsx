@@ -36,7 +36,6 @@ export default function FormAddAsociateGroup({ setOutput, output }) {
     setOutput([
       ...output,
       input,
-
     ])
     
     setInput({
@@ -52,11 +51,10 @@ export default function FormAddAsociateGroup({ setOutput, output }) {
       parentezco: "",
     });
   }
- console.log(input)
+
   return (
     <div>
-        <form action="" 
-      id="formulario">
+        <form>
       <div>
         <label> Nombre:</label>
         <input type="text" value={input.nombre}
