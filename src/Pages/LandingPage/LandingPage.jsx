@@ -1,22 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
-
-
+import NavBar from '../../Components/NavBar/NavBar'
 
 export default function LandingPage() {
     return (
         <div>
-            <Link to='/login'>
-            <button>Ingresar</button>
-            </Link>
-            <Link to='/asociate'>
-            <button>Quiero asociarme</button>
-            </Link>
-            <Link to ='/contact'>
-            <button>Contacto</button>
-            </Link>
-            
+            <NavBar/>
         </div>
     )
 }
