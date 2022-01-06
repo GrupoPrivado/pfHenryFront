@@ -1,16 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { getPlanes } from "../../actions";
+//import { Link } from "react-router-dom";
+import { getPlanes } from "../../actions/actionPlanes";
+import { postAfiliate } from "../../actions/actionPlanes";
 
-export default function FormAsociate() {
- const dispatch = useDispatch();
-  const planes = useSelector((state) => state.planes);
+// {
+//   "nombre": "Juan",
+//   "apellido": "Perez",
+//   "DNI": 99999999,
+//   "fechaNacimiento": "20-10-1990",
+//   "telefono": 99999999,
+//   "correoElectronico": "juanperez@hotmail.com",
+//   "localidad": "Zarate",
+//   "provincia": "Bs. As.",
+//   "direccion": "Calle 23 556",
+//   "password": "patito",
+//   "idPlan": "61d43544d350432e7c3946a8",
+//    "parentezco": "titular"
+// }
 
-  useEffect(() => {
-    dispatch(getPlanes());
-    
-  }, [dispatch]);
+export default function FormAsociate({setOutput, output}) {
+  const dispatch = useDispatch();
+  const { planes } = useSelector((state) => state.planes);
+ 
+  
 
   const [input, setInput] = useState({
     nombre: "",
@@ -23,17 +36,62 @@ export default function FormAsociate() {
     provincia: "",
     direccion: "",
     idPlan: "",
+    password: "",
+    parentezco: "titular",
   });
- 
+
+  
+
   function handleChange(e) {
     setInput({
       ...input,
       [e.target.name]: e.target.value,
     });
   }
+  function handleSubmit(e) {
+    e.preventDefault();
+    
+    const newState = [
+      input,
+      ...output,
+      
+
+    ]
+    setOutput(
+      newState
+      
+      
+
+    )
+    alert("afiliate create");
+    dispatch(postAfiliate(newState));
+    setInput({
+      nombre: "",
+      apellido: "",
+      DNI: "",
+      fechaNacimiento: "",
+      telefono: "",
+      correoElectronico: "",
+      localidad: "",
+      provincia: "",
+      direccion: "",
+      idPlan: "",
+      password: "",
+    });
+  }
+  function handleSelect(e) {
+    if (e.target.value !== "select") {
+      setInput({
+        ...input,
+        idPlan: e.target.value,
+      });
+    }
+    
+  }
   return (
     <div>
-      <form action="">
+      <form onSubmit={(e) => handleSubmit(e)}
+      id="formulario">
         <div>
           <label> Nombre:</label>
           <input
@@ -91,39 +149,59 @@ export default function FormAsociate() {
         </div>
         <div>
           <label>Domicilio:</label>
-          <input type="text" value={input.direccion}
-                      name="direccion"
-                      onChange={(e) => handleChange(e)} />
+          <input
+            type="text"
+            value={input.direccion}
+            name="direccion"
+            onChange={(e) => handleChange(e)}
+          />
         </div>
         <div>
           <label>Localidad:</label>
-          <input type="text" value={input.localidad}
-                      name="localidad"
-                      onChange={(e) => handleChange(e)}/>
+          <input
+            type="text"
+            value={input.localidad}
+            name="localidad"
+            onChange={(e) => handleChange(e)}
+          />
         </div>
         <div>
           <label>Provincia:</label>
-          <input type="text" 
-          value={input.provincia}
-          name="provincia"
-          onChange={(e) => handleChange(e)}/>
+          <input
+            type="text"
+            value={input.provincia}
+            name="provincia"
+            onChange={(e) => handleChange(e)}
+          />
         </div>
         <div>
           <label>Agregar miembro</label>
-          <Link to="/asociate/group">
+          
             <button>+</button>
-          </Link>
+          
         </div>
         <div>
           <label>Planes</label>
-          <select name="" id="">
-              {planes?.map(e=> (
-              <option value="">{e.name}</option>))}
-            
+          <select name="" id="" onChange={(e) => handleSelect(e)}>
+            <option value="select">Selecciona tu Plan</option>
+            {planes?.map((e) => (
+              <option value={e._id}>{e.name}</option>
+            ))}
           </select>
         </div>
+
         <div>
-          <button>Enviar</button>
+          <label>Password:</label>
+          <input
+            type="password"
+            value={input.password}
+            name="password"
+            onChange={(e) => handleChange(e)}
+          />
+        </div>
+
+        <div>
+          <button form="formulario">Enviar</button>
         </div>
       </form>
     </div>
