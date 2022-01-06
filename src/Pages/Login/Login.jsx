@@ -13,7 +13,6 @@ function Login() {
             </div>
             <div>
                 <div>
-                    <img src={Logo} alt="arpiMedical" />
                     <p>Administra tu información: cobertura, trámites
                         y gestiones médicas. Todo en un mismo lugar,
                         mucho más fácil.
@@ -24,12 +23,6 @@ function Login() {
                 </div>
                 <div>
                     <FormLogin/>
-                    <Link to="/login">
-                        <h3>Olvide mi Usuario</h3>
-                    </Link>
-                    <Link to="/login">
-                        <h3>Olvide mi Contraseña</h3>
-                    </Link>
                 </div>
             </div>
         </div>
