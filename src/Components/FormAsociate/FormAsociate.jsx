@@ -1,11 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getPlanes } from "../../actions";
+import { getPlanes } from "../../actions/actionPlanes";
+
+
+
+
+// {
+//   "nombre": "Juan",
+//   "apellido": "Perez",
+//   "DNI": 99999999,
+//   "fechaNacimiento": "20-10-1990",
+//   "telefono": 99999999,
+//   "correoElectronico": "juanperez@hotmail.com",
+//   "localidad": "Zarate",
+//   "provincia": "Bs. As.",
+//   "direccion": "Calle 23 556",
+//   "password": "patito",
+//   "idPlan": "61d43544d350432e7c3946a8",
+//    "parentezco": "titular"
+// }
 
 export default function FormAsociate() {
  const dispatch = useDispatch();
-  const planes = useSelector((state) => state.planes);
+  const {planes} = useSelector((state) => state.planes);
 
   useEffect(() => {
     dispatch(getPlanes());

@@ -1,7 +1,8 @@
 const inicialState = {
   planes: [],
+  
 };
-export default function rootReducer(state = inicialState, action) {
+export default function getPlanes(state = inicialState, action) {
   switch (action.type) {
     case "GET_PLANES":
       return {
