@@ -1,6 +1,5 @@
 const inicialState = {
   planes: [],
-  
 };
 export default function getPlanes(state = inicialState, action) {
   switch (action.type) {
@@ -8,6 +7,10 @@ export default function getPlanes(state = inicialState, action) {
       return {
         ...state,
         planes: action.payload,
+      };
+    case "POST_AFILIATE":
+      return {
+        ...state,
       };
     default:
       return state;

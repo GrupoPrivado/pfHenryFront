@@ -2,9 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getPlanes } from "../../actions/actionPlanes";
-
-
-
+import { postAfiliate } from "../../actions/actionPlanes";
 
 // {
 //   "nombre": "Juan",
@@ -22,15 +20,14 @@ import { getPlanes } from "../../actions/actionPlanes";
 // }
 
 export default function FormAsociate() {
- const dispatch = useDispatch();
-  const {planes} = useSelector((state) => state.planes);
+  const dispatch = useDispatch();
+  const { planes } = useSelector((state) => state.planes);
 
   useEffect(() => {
     dispatch(getPlanes());
-    
   }, [dispatch]);
 
-  const [input, setInput] = useState({
+  const [input, setInput] = useState([{
     nombre: "",
     apellido: "",
     DNI: "",
@@ -41,17 +38,48 @@ export default function FormAsociate() {
     provincia: "",
     direccion: "",
     idPlan: "",
-  });
- 
+    password: "",
+    parentezco: "titular",
+  }]);
+  console.log(input);
+
   function handleChange(e) {
     setInput({
       ...input,
       [e.target.name]: e.target.value,
     });
   }
+  function handleSubmit(e) {
+    e.preventDefault();
+    dispatch(postAfiliate(input));
+    alert("afiliate create");
+    setInput({
+      nombre: "",
+      apellido: "",
+      DNI: "",
+      fechaNacimiento: "",
+      telefono: "",
+      correoElectronico: "",
+      localidad: "",
+      provincia: "",
+      direccion: "",
+      idPlan: "",
+      password: "",
+    });
+  }
+  function handleSelect(e) {
+    if (e.target.value !== "select") {
+      setInput({
+        ...input,
+        idPlan: e.target.value,
+      });
+    }
+    
+  }
   return (
     <div>
-      <form action="">
+      <form onSubmit={(e) => handleSubmit(e)}
+      id="formulario">
         <div>
           <label> Nombre:</label>
           <input
@@ -109,22 +137,30 @@ export default function FormAsociate() {
         </div>
         <div>
           <label>Domicilio:</label>
-          <input type="text" value={input.direccion}
-                      name="direccion"
-                      onChange={(e) => handleChange(e)} />
+          <input
+            type="text"
+            value={input.direccion}
+            name="direccion"
+            onChange={(e) => handleChange(e)}
+          />
         </div>
         <div>
           <label>Localidad:</label>
-          <input type="text" value={input.localidad}
-                      name="localidad"
-                      onChange={(e) => handleChange(e)}/>
+          <input
+            type="text"
+            value={input.localidad}
+            name="localidad"
+            onChange={(e) => handleChange(e)}
+          />
         </div>
         <div>
           <label>Provincia:</label>
-          <input type="text" 
-          value={input.provincia}
-          name="provincia"
-          onChange={(e) => handleChange(e)}/>
+          <input
+            type="text"
+            value={input.provincia}
+            name="provincia"
+            onChange={(e) => handleChange(e)}
+          />
         </div>
         <div>
           <label>Agregar miembro</label>
@@ -134,14 +170,26 @@ export default function FormAsociate() {
         </div>
         <div>
           <label>Planes</label>
-          <select name="" id="">
-              {planes?.map(e=> (
-              <option value="">{e.name}</option>))}
-            
+          <select name="" id="" onChange={(e) => handleSelect(e)}>
+            <option value="select">Selecciona tu Plan</option>
+            {planes?.map((e) => (
+              <option value={e._id}>{e.name}</option>
+            ))}
           </select>
         </div>
+
         <div>
-          <button>Enviar</button>
+          <label>Password:</label>
+          <input
+            type="password"
+            value={input.password}
+            name="password"
+            onChange={(e) => handleChange(e)}
+          />
+        </div>
+
+        <div>
+          <button form="formulario">Enviar</button>
         </div>
       </form>
     </div>
