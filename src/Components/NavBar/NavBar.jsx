@@ -5,21 +5,23 @@ import Logo from "../../assets/logo.svg"
 function NavBar() {
     return (
         <nav>
-            <Link to="/">
-                <img src={Logo} alt="Arpi Medical Logo"/>
-            </Link>
+            <div className='flex p-6'>
+                <Link to="/">
+                    <img src={Logo} alt="Arpi Medical Logo"/>
+                </Link>
 
-            <Link to="/login">
-                <li>Ingresar</li>
-            </Link>
+                <Link to="/login">
+                    <li>Ingresar</li>
+                </Link>
 
-            <Link to="/asociate">
-                <li>Quiero ser socio</li>
-            </Link>
+                <Link to="/asociate">
+                    <li>Quiero ser socio</li>
+                </Link>
 
-            <Link to="/contact">
-                <li>Contacto</li>
-            </Link>
+                <Link to="/contact">
+                    <li>Contacto</li>
+                </Link>
+            </div>
         </nav>
     )
 }
