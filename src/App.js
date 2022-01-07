@@ -8,6 +8,8 @@ import Asociate from './Pages/Asociate/Asociate';
 
 import Login from './Pages/Login/Login';
 import Contact from './Pages/Contact/Contact';
+import DashAdmin from "./Pages/DashAdmin/DashAdmin";
+import DashAfil from "./Pages/DashAfiliado/DashAfil";
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
         <Route path='/asociate' element={<Asociate/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/contact' element={<Contact/>}/>
+        <Route path='/afiliado' element={ <DashAfil/> }/>
+        <Route path='/administrador' element={<DashAdmin />}/>
       </Routes>
     </Fragment>
   );
