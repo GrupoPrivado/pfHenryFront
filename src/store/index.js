@@ -1,6 +1,10 @@
-import {createStore, applyMiddleware} from "redux";
+import {createStore, applyMiddleware, combineReducers} from "redux";
 import{composeWithDevTools} from "redux-devtools-extension";
 import thunk from "redux-thunk";
-import rootReducer from "../reducer";
+import reducerPlanes from "../reducer/reducerPlanes";
 
-export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))
+const reducers= combineReducers({
+    planes : reducerPlanes,
+    
+})
+export const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)))

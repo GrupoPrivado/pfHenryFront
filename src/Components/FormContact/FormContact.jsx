@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
-import {sendMail} from '../../actions/index'
+import {sendMail} from '../../actions/actionMail'
 
 export default function FormContact() {
 
