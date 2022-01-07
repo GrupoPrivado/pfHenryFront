@@ -3,9 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 //import { Link } from "react-router-dom";
 import { getPlanes } from "../../actions/actionPlanes";
 import { postAfiliate } from "../../actions/actionPlanes";
+import { useNavigate } from "react-router-dom";
 
 export default function FormAsociate({ setOutput, output }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { planes } = useSelector((state) => state.planes);
 
   const [input, setInput] = useState({
@@ -53,6 +55,7 @@ export default function FormAsociate({ setOutput, output }) {
       idPlan: "",
       password: "",
     });
+    navigate("/");
   };
   function handleSelect(e) {
     if (e.target.value !== "select") {
@@ -77,6 +80,7 @@ export default function FormAsociate({ setOutput, output }) {
             Nombre:
           </label>
           <input
+            required
             className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
             type="text"
             value={input.nombre}
@@ -89,6 +93,7 @@ export default function FormAsociate({ setOutput, output }) {
         <div className="flex">
           <label className="text-sm font-medium rounded-md"> Apellido:</label>
           <input
+            required
             className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
             type="text"
             value={input.apellido}
@@ -100,6 +105,7 @@ export default function FormAsociate({ setOutput, output }) {
         <div className="flex">
           <label className="text-sm font-medium rounded-md">DNI:</label>
           <input
+            required
             className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
             type="number"
             value={input.DNI}
@@ -114,6 +120,7 @@ export default function FormAsociate({ setOutput, output }) {
             Fecha de Nacimiento:
           </label>
           <input
+            required
             className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
             type="date"
             value={input.fechaNacimiento}
@@ -125,6 +132,7 @@ export default function FormAsociate({ setOutput, output }) {
         <div className="flex">
           <label className="text-sm font-medium rounded-md">Telefono:</label>
           <input
+            required
             className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
             type="number"
             value={input.telefono}
@@ -136,6 +144,7 @@ export default function FormAsociate({ setOutput, output }) {
         <div className="flex">
           <label className="text-sm font-medium rounded-md">Email:</label>
           <input
+            required
             className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
             type="text"
             value={input.correoElectronico}
@@ -147,6 +156,7 @@ export default function FormAsociate({ setOutput, output }) {
         <div className="flex">
           <label className="text-sm font-medium rounded-md">Domicilio:</label>
           <input
+            required
             className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
             type="text"
             value={input.direccion}
@@ -158,6 +168,7 @@ export default function FormAsociate({ setOutput, output }) {
         <div className="flex">
           <label className="text-sm font-medium rounded-md">Localidad:</label>
           <input
+            required
             className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
             type="text"
             value={input.localidad}
@@ -169,6 +180,7 @@ export default function FormAsociate({ setOutput, output }) {
         <div className="flex">
           <label className="text-sm font-medium rounded-md">Provincia:</label>
           <input
+            required
             className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
             type="text"
             value={input.provincia}
@@ -200,6 +212,7 @@ export default function FormAsociate({ setOutput, output }) {
         <div className="flex">
           <label className="text-sm font-medium rounded-md">Planes</label>
           <select
+            required
             className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
             name=""
             id=""
@@ -220,6 +233,7 @@ export default function FormAsociate({ setOutput, output }) {
         <div className="flex">
           <label className="text-sm font-medium rounded-md">Contraseña:</label>
           <input
+            required
             className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
             type="password"
             value={input.password}
