@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { LockClosedIcon } from "@heroicons/react/solid";
 import Logo from "../../assets/logo.svg"
-import { postLogin } from "../../actions/actionLogin";
-
+import { getUserToken } from "../../utils/authUtils";
 
 function FormLogin() {
     const [input, setInput] = useState({
@@ -12,14 +10,7 @@ function FormLogin() {
         password: "",
     });
 
-    const dispatch = useDispatch();
     const navigate = useNavigate();
-    //const users = useSelector((state) => state.users);
-
-    // useEffect(() => {
-    //     dispatch(postLogin());
-
-    // }, [dispatch]);
 
     const handleChange = (e) => {
         setInput({
@@ -28,19 +19,24 @@ function FormLogin() {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
-        dispatch(postLogin(input));
-        alert("paso!")
-        navigate("/dashboard");
+        const result = await getUserToken(input)
+        if(result.error) return alert(result.error)
+        navigate(`/${result.url}`)
     };
 
+    const styles = {
+        contenedor: "min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8",
+        img: "mx-auto h-12 w-auto"
+    }
+
     return (
-        <div className="flex items-center justify-center min-h-full px-4 py-12 sm:px-6 lg:px-8">
+        <div className={styles.contenedor}>
             <div className="w-full max-w-md space-y-8">
                 <div>
                     <img
-                        className="w-auto h-12 mx-auto"
+                        className={styles.img}
                         src={Logo}
                         alt="Workflow"
                     />
