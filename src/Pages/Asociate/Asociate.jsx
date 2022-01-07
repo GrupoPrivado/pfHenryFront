@@ -13,6 +13,7 @@ export default function Asociate() {
       }, [dispatch]);
 
     const [output, setOutput] = useState([])
+    //const [family, setFamily] = useState([])
  
     //const [modal, showModal] = useState(true)
     
@@ -21,7 +22,7 @@ export default function Asociate() {
             <NavBar/>
             <div className="flex">
             <div>
-            <FormAsociate setOutput={setOutput} output={output}/>
+            <FormAsociate setOutput={setOutput} output={output} />
             </div>
             <div>
             <FormAddAsociateGroup setOutput={setOutput} output={output}/>
