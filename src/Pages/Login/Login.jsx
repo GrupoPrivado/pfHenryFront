@@ -6,23 +6,16 @@ import HappyFamily from "./../../assets/happyFamily.jpeg"
 import NavBar from '../../Components/NavBar/NavBar'
 function Login() {
     return (
-        <div>
+        <div className='w-screen h-screen'>
             <NavBar/>
-            <div>
-                <img src={HappyFamily} alt="Happy family Arpi Medical" />
-            </div>
-            <div>
-                <div>
-                    <p>Administra tu información: cobertura, trámites
-                        y gestiones médicas. Todo en un mismo lugar,
-                        mucho más fácil.
-                    </p>
-                    <Link to="/asociate">
-                        <h3>Quiero ser socio</h3>
-                    </Link>
+            <div className='flex w-full h-full'>
+                <div className='flex justify-center w-1/2 h-full'>
+                    <img className='object-cover w-screen h-screen' src={HappyFamily} alt="Happy family Arpi Medical" />
                 </div>
-                <div>
-                    <FormLogin/>
+                <div className='w-1/2 h-screen flex flex-column items-center justify-center'>
+                    <div>
+                        <FormLogin/>
+                    </div>
                 </div>
             </div>
         </div>
