@@ -27,7 +27,7 @@ export default function FormContact() {
         e.preventDefault();
         let response = await dispatch(sendMail(input));
         console.log('response',response)
-        //navigate("/");
+        navigate("/");
     }
 
     return (
@@ -40,43 +40,52 @@ export default function FormContact() {
                                 <label className='block text-sm font-medium text-gray-700'>Nombre: </label>
                                 <input type="text" 
                                 className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md h-8'
-                                required value={input.name}
+                                required 
+                                value={input.name}
                                 onChange={(e) => handleChange(e)} name="name"/>
                             </div>
                             
                             <div className='col-span-6 sm:col-span-3'>
-                                <label value={input.lastName}
-                                onChange={(e) => handleChange(e)}
+                                <label 
                                 className='block text-sm font-medium text-gray-700'>Apellido: </label>
                                 <input type="text" 
                                 className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md h-8'
-                                required/>
+                                required
+                                value={input.lastName}
+                                onChange={(e) => handleChange(e)}
+                                name='lastName'/>
                             </div>
 
                             <div className='col-span-6 sm:col-span-4'>
-                                <label value={input.phone}
-                                onChange={(e) => handleChange(e)}
+                                <label 
                                 className='block text-sm font-medium text-gray-700'>Telefono: </label>
                                 <input type="text" 
-                                className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md h-8'/>
+                                className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md h-8'
+                                value={input.phone}
+                                onChange={(e) => handleChange(e)}
+                                name='phone'/>
                             </div>
 
                             <div className='col-span-6 sm:col-span-4'>
-                                <label value={input.mail}
-                                onChange={(e) => handleChange(e)}
+                                <label
                                 className='block text-sm font-medium text-gray-700'>Mail: </label>
                                 <input type="text" 
                                 className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md h-8'
-                                required/>
+                                required
+                                value={input.mail}
+                                onChange={(e) => handleChange(e)}
+                                name='mail'/>
                             </div>    
 
                             <div className='col-span-6 sm:col-span-4'>
-                                <label value={input.message}
-                                onChange={(e) => handleChange(e)}
+                                <label
                                 className='block text-sm font-medium text-gray-700'>Consulta: </label>
                                 <input type="text" 
                                 className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md h-10'
-                                required/>
+                                required
+                                value={input.message}
+                                onChange={(e) => handleChange(e)}
+                                name='message'/>
                             </div>    
 
                                 <input type="submit"
