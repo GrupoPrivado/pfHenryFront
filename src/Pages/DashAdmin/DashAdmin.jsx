@@ -7,20 +7,16 @@ function DashAdmin() {
     const navigate = useNavigate()
 
     const result = verifyRole('administrador');
-
+    
     useEffect(() => {
         if(!result) navigate('/login')
 
     }, [result, navigate])
    
     return (
-        <>
-        
-            <div>
-            Dashboard Administrador </div> 
-        
-
-        </>
+        <div>
+            Dashboard Administrador  
+        </div> 
     )
 }
 
