@@ -26,7 +26,7 @@ export default function FormContact() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         let response = await dispatch(sendMail(input));
-        console.log(response)
+        console.log('response',response)
         //navigate("/");
     }
 
@@ -37,12 +37,11 @@ export default function FormContact() {
                     <div className='px-4 py-5 bg-white sm:p-6'>
                         <div className='grid grid-cols-6 gap-6'>
                             <div className='col-span-6 sm:col-span-3'>
-                                <label value={input.name}
-                                onChange={(e) => handleChange(e)}
-                                className='block text-sm font-medium text-gray-700'>Nombre: </label>
+                                <label className='block text-sm font-medium text-gray-700'>Nombre: </label>
                                 <input type="text" 
                                 className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md h-8'
-                                required/>
+                                required value={input.name}
+                                onChange={(e) => handleChange(e)} name="name"/>
                             </div>
                             
                             <div className='col-span-6 sm:col-span-3'>
