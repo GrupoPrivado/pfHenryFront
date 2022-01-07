@@ -4,6 +4,7 @@ import FormAsociate from "../../Components/FormAsociate/FormAsociate";
 import FormAddAsociateGroup from "../../Components/FormAsociate/FormAddAsociateGroup";
 //import { postAfiliate } from "../../actions/actionPlanes";
 import { getPlanes } from "../../actions/actionPlanes";
+import NavBar from "../../Components/NavBar/NavBar";
 
 export default function Asociate() {
     const dispatch = useDispatch()
@@ -16,11 +17,16 @@ export default function Asociate() {
     //const [modal, showModal] = useState(true)
     
     return (
-        <div>
+        <div >
+            <NavBar/>
+            <div className="flex">
+            <div>
             <FormAsociate setOutput={setOutput} output={output}/>
-
+            </div>
+            <div>
             <FormAddAsociateGroup setOutput={setOutput} output={output}/>
-         
+            </div>
+            </div>
 
         </div>
     )
