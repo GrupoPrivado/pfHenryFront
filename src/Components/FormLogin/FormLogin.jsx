@@ -3,8 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { LockClosedIcon } from "@heroicons/react/solid";
 import Logo from "../../assets/logo.svg"
 import { getUserToken } from "../../utils/authUtils";
-
+import {getAfiliate} from '../../actions/actionGroup'
+import { useDispatch } from "react-redux";
 function FormLogin() {
+    const dispatch = useDispatch()
     const [input, setInput] = useState({
         dni: "",
         password: "",
@@ -24,6 +26,8 @@ function FormLogin() {
         const result = await getUserToken(input)
         if(result.error) return alert(result.error)
         navigate(`/${result.url}`)
+        dispatch(getAfiliate(input.dni))
+
     };
 
     const styles = {
