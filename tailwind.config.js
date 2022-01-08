@@ -6,7 +6,11 @@ module.exports = {
     extend: {
       backgroundImage: {
         'happy-family': "url('assets/happyFamily.jpeg')",
-      }
+      },
+      colors: {
+        primary: '#26349B',
+        secondary: '#009872',
+      },
     },
   },
   plugins: [],
