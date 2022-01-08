@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { LockClosedIcon } from "@heroicons/react/solid";
 import Logo from "../../assets/logo.svg"
 import { getUserToken } from "../../utils/authUtils";
-
 
 function FormLogin() {
     const [input, setInput] = useState({
@@ -12,14 +10,7 @@ function FormLogin() {
         password: "",
     });
 
-    // const dispatch = useDispatch();
     const navigate = useNavigate();
-    //const users = useSelector((state) => state.users);
-
-    // useEffect(() => {
-    //     dispatch(getUsers());
-
-    // }, [dispatch]);
 
     const handleChange = (e) => {
         setInput({
@@ -30,18 +21,11 @@ function FormLogin() {
 
     const handleSubmit = async(e) => {
         e.preventDefault();
- 
-
         const result = await getUserToken(input)
-
-        console.log(result, '>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
         if(result.error) return alert(result.error)
-
         navigate(`/${result.url}`)
-
-        //navigate("/");
     };
- 
+
     const styles = {
         contenedor: "min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8",
         img: "mx-auto h-12 w-auto"
@@ -49,7 +33,7 @@ function FormLogin() {
 
     return (
         <div className={styles.contenedor}>
-            <div className="max-w-md w-full space-y-8">
+            <div className="w-full max-w-md space-y-8">
                 <div>
                     <img
                         className={styles.img}
@@ -59,7 +43,7 @@ function FormLogin() {
                 </div>
                 <form className="mt-8 space-y-6 " action="#" method="POST" onSubmit={(e) => handleSubmit(e)}>
                     <input type="hidden" name="remember" defaultValue="true" />
-                    <div className="rounded-md shadow-sm -space-y-px">
+                    <div className="-space-y-px rounded-md shadow-sm">
                         <div>
                             <label htmlFor="dni" className="sr-only">
                                 DNI
@@ -70,7 +54,7 @@ function FormLogin() {
                                 type="dni"
                                 autoComplete="dni"
                                 required
-                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                 placeholder="DNI"
                                 onChange={(e) => handleChange(e)}
                                 value={input.dni}
@@ -86,7 +70,7 @@ function FormLogin() {
                                 type="password"
                                 autoComplete="current-password"
                                 required
-                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                 placeholder="Contraseña"
                                 onChange={(e) => handleChange(e)}
                                 value={input.password}
@@ -108,11 +92,11 @@ function FormLogin() {
                     <div>
                         <button
                             type="submit"
-                            className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md group hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         >
-                            <span className="absolute left-0 inset-y-0 flex items-center pl-3">
+                            <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                                 <LockClosedIcon
-                                    className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400"
+                                    className="w-5 h-5 text-indigo-500 group-hover:text-indigo-400"
                                     aria-hidden="true"
                                 />
                             </span>
