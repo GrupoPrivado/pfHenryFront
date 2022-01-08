@@ -5,7 +5,7 @@ import reducerPlanes from "../reducer/reducerPlanes";
 import reducerGroup from "../reducer/reducerGroup"
 
 const reducers= combineReducers({
-    grupo : reducerGroup,
+    grupos : reducerGroup,
     planes : reducerPlanes,
     
     

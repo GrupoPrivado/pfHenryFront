@@ -4,6 +4,7 @@ import { verifyRole } from '../../utils/authUtils'
 import NavBarDashboard from "./../../Components/NavBarDashboard/NavBarDashboard"
 import { getAllGroup } from '../../actions/actionGroup'
 import{useDispatch} from 'react-redux'
+import FamilyGroupDash from '../../Components/FamilyGroup/FamilyGroupDash'
 
 function DashAfil() {
     const dispatch = useDispatch()
@@ -19,6 +20,9 @@ function DashAfil() {
     return (
         <div>
             <NavBarDashboard/>
+
+            
+            <FamilyGroupDash/>
         </div>
     )
 }
