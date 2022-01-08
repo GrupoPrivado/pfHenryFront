@@ -18,5 +18,10 @@ export const verifyRole = (autorizado) => {
         return userType === autorizado 
     }
     return false
+}
 
+
+export const logout = () => {
+    localStorage.removeItem('userToken');
+    localStorage.removeItem('userType');
 }

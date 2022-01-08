@@ -2,6 +2,7 @@ import React, {useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 import { getAfiliate, getItem, removeItem } from '../../actions/actionAuth';
+import { logout } from '../../utils/authUtils';
 
 
 function DashAfil() {
@@ -24,6 +25,7 @@ function DashAfil() {
             Dashboard Afiliado
 
             <p>{user.nombre}</p>
+            <button onClick={() => { logout(); navigate('/') }}>Cerrar Sesión</button>
         </div>
   
     )

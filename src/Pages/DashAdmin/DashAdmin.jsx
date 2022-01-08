@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import { useNavigate } from 'react-router-dom';
+import { logout } from '../../utils/authUtils';
 
 
 function DashAdmin() {
@@ -17,6 +18,8 @@ function DashAdmin() {
     return (
         <div>
             Dashboard Administrador  
+            <button onClick={() => { logout(); navigate('/') }}>Cerrar Sesión</button>
+
         </div> 
     )
 }
