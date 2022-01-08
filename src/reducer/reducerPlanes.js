@@ -6,7 +6,7 @@ export default function getPlanes(state = inicialState, action) {
     case "GET_PLANES":
       return {
         ...state,
-        planes: action.payload,
+        planes: action.payload.message,
       };
     case "POST_AFILIATE":
       return {
