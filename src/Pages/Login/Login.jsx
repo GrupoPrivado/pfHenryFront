@@ -6,13 +6,13 @@ import HappyFamily from "./../../assets/happyFamily.jpeg"
 import NavBar from '../../Components/NavBar/NavBar'
 import { getItem } from '../../actions/actionAuth'
 function Login() {
-    
+
     const navigate = useNavigate()
     useEffect(() => {
         const userType = getItem('userType')
         if(userType) navigate(`/${userType}`)
     }, [navigate])
-
+//
     return (
         <div className='w-screen h-screen'>
             <NavBar/>
