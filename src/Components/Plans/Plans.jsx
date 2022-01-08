@@ -14,11 +14,11 @@ function Plans() {
 
     return (
         <div className='flex justify-evenly'>
-            {planes?.map((plan) => (
-                <div className='w-80 h-80 bg-gradient-to-r from-indigo-500 to-indigo-900 m-10 rounded-3xl flex flex-col items-center justify-evenly p-6'>
-                    <h2 className='text-5xl text-white text-center '>Plan {plan.name}</h2>
+            {planes.length && planes.map((plan) => (
+                <div className='flex flex-col items-center p-6 m-10 w-80 h-80 bg-gradient-to-r from-indigo-500 to-indigo-900 rounded-3xl justify-evenly'>
+                    <h2 className='text-5xl text-center text-white '>Plan {plan.name}</h2>
                     <Link to="/contact">
-                        <button className='bg-white text-lg p-2 rounded-md'>Conocer más</button>
+                        <button className='p-2 text-lg bg-white rounded-md'>Conocer más</button>
                     </Link>
                 </div>
             ))}

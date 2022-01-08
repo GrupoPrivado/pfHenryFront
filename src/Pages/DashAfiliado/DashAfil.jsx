@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { verifyRole } from '../../utils/authUtils'
+import NavBarDashboard from "./../../Components/NavBarDashboard/NavBarDashboard"
 
 function DashAfil() {
-
     const navigate = useNavigate()
 
     const result = verifyRole('afiliado');
@@ -15,9 +15,8 @@ function DashAfil() {
 
     return (
         <div>
-            Dashboard Afiliado
+            <NavBarDashboard/>
         </div>
-  
     )
 }
 
