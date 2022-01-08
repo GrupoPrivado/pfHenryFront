@@ -9,6 +9,7 @@ import Login from './Pages/Login/Login';
 import Contact from './Pages/Contact/Contact';
 import DashAdmin from "./Pages/DashAdmin/DashAdmin";
 import DashAfil from "./Pages/DashAfiliado/DashAfil";
+import FamilyGroupDetail from "./Components/FamilyGroup/FamilyGroupDetail";
 
 function App() {
   return (
@@ -20,6 +21,8 @@ function App() {
         <Route path='/contact' element={<Contact/>}/>
         <Route path='/afiliado' element={ <DashAfil/> }/>
         <Route path='/administrador' element={<DashAdmin />}/>
+        <Route path='/afiliado/group' element={ <FamilyGroupDetail/> }/>
+
       </Routes>
     </Fragment>
   );
