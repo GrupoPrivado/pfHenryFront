@@ -22,7 +22,7 @@ export default function FormAsociate({ setOutput, output }) {
     direccion: "",
     codePlan: "",
     password: "",
-    parentezco: "titular",
+    parentesco: "titular",
   });
 
   function handleChange(e) {
@@ -52,7 +52,7 @@ export default function FormAsociate({ setOutput, output }) {
       localidad: "",
       provincia: "",
       direccion: "",
-      idPlan: "",
+      codePlan: "",
       password: "",
     });
     navigate("/");
@@ -61,7 +61,7 @@ export default function FormAsociate({ setOutput, output }) {
     if (e.target.value !== "select") {
       setInput({
         ...input,
-        idPlan: e.target.value,
+        codePlan: e.target.value,
       });
     }
   }

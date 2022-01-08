@@ -11,8 +11,8 @@ export default function FormAddAsociateGroup({ setOutput, output }) {
     localidad: "",
     provincia: "",
     direccion: "",
-
-    parentezco: "",
+    codePlan: "",
+    parentesco: "",
   });
 
   function handleChange(e) {
@@ -25,7 +25,7 @@ export default function FormAddAsociateGroup({ setOutput, output }) {
     if (e.target.value !== "") {
       setInput({
         ...input,
-        parentezco: e.target.value,
+        parentesco: e.target.value,
       });
     }
   }
@@ -44,7 +44,8 @@ export default function FormAddAsociateGroup({ setOutput, output }) {
       localidad: "",
       provincia: "",
       direccion: "",
-      parentezco: "",
+      parentesco: "",
+      codePlan: "",
     });
   }
 
@@ -154,10 +155,9 @@ export default function FormAddAsociateGroup({ setOutput, output }) {
         <div className="flex">
           <label className="text-sm font-medium rounded-md">Provincia:</label>
           <input
-          required
+            required
             type="text"
             value={input.provincia}
-            
             name="provincia"
             onChange={(e) => handleChange(e)}
             className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-blue-500 focus:z-10 sm:text-sm"
@@ -175,7 +175,7 @@ export default function FormAddAsociateGroup({ setOutput, output }) {
             required
             className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-blue-500 focus:z-10 sm:text-sm"
           >
-            <option value="">Parentezco</option>
+            <option value="">Parentesco</option>
             <option value="hijo/a">Hijo/a</option>
             <option value="conyugue">Conyugue</option>
             <option value="familiar">Familiar a cargo</option>
@@ -184,7 +184,7 @@ export default function FormAddAsociateGroup({ setOutput, output }) {
 
         <div className="flex justify-around">
           <button
-           type="submit"
+            type="submit"
             form="formulario"
             onClick={handleClick}
             className="group relative w-28 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-blue-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
