@@ -7,15 +7,17 @@ export const getUserToken = async(user) => {
         localStorage.setItem('userToken', result.data.token);
         localStorage.setItem('userType', result.data.TipoUsuario);
         return {url: result.data.TipoUsuario}
+        
+ 
     }
-    return {error: 'Credenciales inválidas'};
+    return {error: 'Su nombre de usuario o contraseña es inválida'};
 }
-
+                        
 export const verifyRole = (autorizado) => {
     const userToken = localStorage.getItem('userToken');
     const userType = localStorage.getItem('userType');
     if(userType && userToken){
-        return userType === autorizado
+        return userType === autorizado 
     }
     return false
 
