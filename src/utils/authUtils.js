@@ -1,14 +1,12 @@
 import axios from "axios";
 
 export const getUserToken = async(user) => {
-    const result = await axios.post('https://arpymedical.herokuapp.com/api/login', user);
+    const result = await axios.post('http://localhost:3001/api/login', user);
     
     if(result.data.token){
         localStorage.setItem('userToken', result.data.token);
         localStorage.setItem('userType', result.data.TipoUsuario);
-        return {url: result.data.TipoUsuario}
-        
- 
+        return {url: result.data.TipoUsuario} 
     }
     return {error: 'Su nombre de usuario o contraseña es inválida'};
 }

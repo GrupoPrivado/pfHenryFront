@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { LockClosedIcon } from "@heroicons/react/solid";
 import Logo from "../../assets/logo.svg"
@@ -12,14 +11,8 @@ function FormLogin() {
         password: "",
     });
 
-    // const dispatch = useDispatch();
     const navigate = useNavigate();
-    //const users = useSelector((state) => state.users);
 
-    // useEffect(() => {
-    //     dispatch(getUsers());
-
-    // }, [dispatch]);
 
     const handleChange = (e) => {
         setInput({
@@ -34,12 +27,11 @@ function FormLogin() {
 
         const result = await getUserToken(input)
 
-        console.log(result, '>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
+
         if(result.error) return alert(result.error)
 
         navigate(`/${result.url}`)
 
-        //navigate("/");
     };
  
     const styles = {
