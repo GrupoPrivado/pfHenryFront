@@ -23,7 +23,10 @@ export default function FamilyGroupDash() {
         </div>
         <div>
           {grupo ? (
-            grupo.map((e) => <div key={e._id}>{e.nombre}</div>)
+            grupo.map((e) => <div key={e._id}>
+                <label htmlFor="">{e.nombre}</label>
+                <label htmlFor="">{e.apellido}</label>
+                </div>)
           ) : (
             <div>
               <h1>No tenes familiares</h1>
