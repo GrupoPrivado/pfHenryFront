@@ -4,12 +4,15 @@ import thunk from "redux-thunk";
 import reducerAuth from "../reducer/reducerAuth";
 import reducerPlanes from "../reducer/reducerPlanes";
 import reducerGroup from "../reducer/reducerGroup"
+import reducerProviders from "../reducer/reducerProviders";
+
 
 
 const reducers= combineReducers({
     grupos : reducerGroup,
     planes : reducerPlanes,
-    auth: reducerAuth
+    auth: reducerAuth,
+    providers: reducerProviders,
 
     
     
