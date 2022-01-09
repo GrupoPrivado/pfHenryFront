@@ -3,10 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { LockClosedIcon } from "@heroicons/react/solid";
 import Logo from "../../assets/logo.svg"
 import { getUserToken } from "../../utils/authUtils";
-import {getAfiliate} from '../../actions/actionGroup'
 import { useDispatch } from "react-redux";
 function FormLogin() {
-    const dispatch = useDispatch()
     const [input, setInput] = useState({
         dni: "",
         password: "",
@@ -26,8 +24,6 @@ function FormLogin() {
         const result = await getUserToken(input)
         if(result.error) return alert(result.error)
         navigate(`/${result.url}`)
-        dispatch(getAfiliate(input.dni))
-
     };
 
     const styles = {
@@ -85,7 +81,7 @@ function FormLogin() {
                     <div className="flex items-center justify-between">
                         <div className="text-sm">
                             <a
-                                href="#"
+                                href="" 
                                 className="font-medium text-indigo-600 hover:text-indigo-500"
                             >
                                 Olvide mi contraseña

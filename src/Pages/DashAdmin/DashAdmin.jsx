@@ -1,21 +1,25 @@
 import React, {useEffect} from 'react'
-import { useNavigate } from 'react-router-dom'
-import { verifyRole } from '../../utils/authUtils'
+import {useSelector, useDispatch} from 'react-redux'
+import { useNavigate } from 'react-router-dom';
+import { logout } from '../../utils/authUtils';
+
 
 function DashAdmin() {
-
+    const dispatch = useDispatch();
     const navigate = useNavigate()
-
-    const result = verifyRole('administrador');
     
-    useEffect(() => {
-        if(!result) navigate('/login')
+    const {user, route} = useSelector(state => state.auth)
 
-    }, [result, navigate])
-   
+
+    useEffect(() => {
+        if(route !== '') navigate(`/${route}`)
+    }, [dispatch, route, navigate])
+  
     return (
         <div>
             Dashboard Administrador  
+            <button onClick={() => { logout(); navigate('/') }}>Cerrar Sesión</button>
+
         </div> 
     )
 }
