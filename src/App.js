@@ -11,7 +11,7 @@ import DashAdmin from "./Pages/DashAdmin/DashAdmin";
 import DashAfil from "./Pages/DashAfiliado/DashAfil";
 import PrivateRouter from "./Components/PrivateRouter/PrivateRouter";
 import Credencial from "./Components/Credencial/Credencial";
-
+import CartPrest from "./Components/Providers/CartPrest";
 import { roles } from './utils/roles';
 import FamilyGroupDetail from "./Components/FamilyGroup/FamilyGroupDetail";
 import MedicalHistory from "./Components/MedicalHistory/MedicalHistory";
@@ -32,6 +32,7 @@ function App() {
         <Route path='/afiliado/credencial' element={ <Credencial/> }/>
         <Route path='/afiliado/autorizaciones' element={ <Authorizations/> }/>
         <Route path='/afiliado/historial' element={ <MedicalHistory/> }/>
+        <Route path='/afiliado/prestadores' element={ <CartPrest/> }/>
 
 
         <Route path='*' element={<div><h1>Recurso no encontrado</h1></div>} />

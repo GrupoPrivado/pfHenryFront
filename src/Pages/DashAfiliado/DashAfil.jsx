@@ -45,6 +45,8 @@ function DashAfil() {
             <Link to='/afiliado/credencial'>
                 <button> Credencial</button>
             </Link>
+            <Link to='/afiliado/prestadores'>
+            <button> Cartilla Prestadores</button></Link>
 
         </div>
     )
