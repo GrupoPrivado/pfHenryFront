@@ -13,7 +13,7 @@ export const removeItem = (item) => localStorage.removeItem(item)
 
 
 export const postAfiliate = (payload) => {
-  console.log('Llega >>>>>>>>', payload)
+  //console.log('Llega >>>>>>>>', payload)
   return async function (dispatch) {
     var json = await axios.post('https://arpymedical.herokuapp.com/api/addPreCarga', payload);
     console.log(' >>>>>>> ', json.data)
@@ -28,7 +28,7 @@ export const getAfiliate = (payload) => {
                     'x-access-token' : payload
                 }
         });
-        console.log(data)
+        //console.log(data)
         if(data.success){
             return dispatch({type: GET_AFILIATE, payload: data.message})
         } else {

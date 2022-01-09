@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { getAfiliate, getItem, removeItem } from '../../actions/actionAuth';
 import { logout } from '../../utils/authUtils';
 
@@ -10,7 +10,7 @@ import FamilyGroupDash from '../../Components/FamilyGroup/FamilyGroupDash'
 
 function DashAfil() {
     const dispatch = useDispatch();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     
     const {user, route} = useSelector(state => state.auth)
  
@@ -37,6 +37,8 @@ function DashAfil() {
 
             <p>{user.nombre}</p>
             <button onClick={() => { logout(); navigate('/') }}>Cerrar Sesión</button>
+            
+            <button> Credencial</button>
 
         </div>
     )
