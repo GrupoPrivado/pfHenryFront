@@ -41,6 +41,7 @@ function DashAfil() {
             <NavBarDashboard/>
             <h1>Bienvenidx {user.nombre}</h1>
             <FamilyGroupDash/>
+            <Authorizations/>
             
             <Link to='/afiliado/credencial'>
                 <button> Credencial</button>
