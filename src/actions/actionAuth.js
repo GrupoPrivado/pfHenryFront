@@ -1,16 +1,11 @@
 import axios from "axios";
 import {api} from '../urlHostApi'
-const AUTHENTICATED = 'AUTHENTICATED'
 const GET_AFILIATE = 'GET_AFILIATE'
 const GET_MEDICAL_TOKEN = 'GET_MEDICAL_TOKEN'
 const NOT_AUTHENTICATED = 'NOT_AUTHENTICATED'
 
 
 export { GET_AFILIATE, GET_MEDICAL_TOKEN, NOT_AUTHENTICATED}
-
-
-const {REACT_APP_ROUTE_BACK} = process.env;
-
 
 
 export const getItem = (item) => localStorage.getItem(item)
