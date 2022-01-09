@@ -15,7 +15,7 @@ function DashAfil() {
     const {user, route} = useSelector(state => state.auth)
  
     
-    console.log(user, ' <<<<< user >')
+   // console.log(user, ' <<<<< user >')
     
     useEffect(() => {
         dispatch(getAfiliate(getItem('userToken')))
@@ -38,7 +38,9 @@ function DashAfil() {
             <p>{user.nombre}</p>
             <button onClick={() => { logout(); navigate('/') }}>Cerrar Sesión</button>
             
+            <Link to='/afiliado/credencial'>
             <button> Credencial</button>
+            </Link>
 
         </div>
     )

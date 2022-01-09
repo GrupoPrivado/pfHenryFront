@@ -10,6 +10,7 @@ import Contact from './Pages/Contact/Contact';
 import DashAdmin from "./Pages/DashAdmin/DashAdmin";
 import DashAfil from "./Pages/DashAfiliado/DashAfil";
 import PrivateRouter from "./Components/PrivateRouter/PrivateRouter";
+import Credencial from "./Components/Credencial/Credencial";
 
 import { roles } from './utils/roles';
 import FamilyGroupDetail from "./Components/FamilyGroup/FamilyGroupDetail";
@@ -26,6 +27,7 @@ function App() {
         <Route path='/afiliado' element={<PrivateRouter rol={roles.AFIL}><DashAfil/></PrivateRouter>}/>
         <Route path='/administrador' element={<PrivateRouter rol={roles.ADMIN}><DashAdmin /></PrivateRouter>}/>
         <Route path='/afiliado/group' element={ <FamilyGroupDetail/> }/>
+        <Route path='/afiliado/credencial' element={ <Credencial/> }/>
 
 
         <Route path='*' element={<div><h1>Recurso no encontrado</h1></div>} />
