@@ -1,22 +1,20 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, Link } from 'react-router-dom';
 import { getAfiliate, getItem, removeItem } from '../../actions/actionAuth';
 import { logout } from '../../utils/authUtils';
-
 import NavBarDashboard from "./../../Components/NavBarDashboard/NavBarDashboard"
 import { getGroup } from '../../actions/actionGroup'
 import FamilyGroupDash from '../../Components/FamilyGroup/FamilyGroupDash'
+import { TokenMedico } from '../../Components/TokenMedico/TokenMedico';
 
 function DashAfil() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     
     const {user, route} = useSelector(state => state.auth)
- 
-    
-   // console.log(user, ' <<<<< user >')
-    
+    const [isActive, setActive] = useState(false);
+        
     useEffect(() => {
         dispatch(getAfiliate(getItem('userToken')))
         if(route !== '') {
@@ -30,6 +28,11 @@ function DashAfil() {
         if(user.codeGF) dispatch(getGroup(user.codeGF))
     }, [dispatch, user] )
 
+    const toggleClass = () => {
+        setActive(!isActive);
+      };
+
+
     return (
         <div>
             <NavBarDashboard/>
@@ -39,9 +42,14 @@ function DashAfil() {
             <button onClick={() => { logout(); navigate('/') }}>Cerrar Sesión</button>
             
             <Link to='/afiliado/credencial'>
-            <button> Credencial</button>
+                <button>Credencial</button>
             </Link>
 
+            <button onClick={toggleClass}> Token </button>
+            {
+                isActive && <TokenMedico /> 
+            }
+            
         </div>
     )
 }
