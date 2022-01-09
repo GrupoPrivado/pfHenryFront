@@ -2,13 +2,26 @@ import React from 'react'
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
+import { logout } from '../../utils/authUtils';
+import { useNavigate} from 'react-router-dom';
 import { Link } from 'react-router-dom'
 
 const navigation = [
-    { name: 'Dashboard', href: '/afiliado', current: true },
-    { name: 'Team', href: '#', current: false },
-    { name: 'Grupo Familiar', href: '/afiliado/group', current: false },
-    { name: 'Calendar', href: '#', current: false },
+    {   name: 'Dashboard', 
+        href: '/afiliado', 
+        current: true },
+    {   name: 'Autorizaciones', 
+        href: '/afiliado/autorizaciones', 
+        current: false },
+    {   name: 'Grupo Familiar', 
+        href: '/afiliado/group', 
+        current: false },
+    {   name: 'Credencial Digital', 
+        href: '/afiliado/credencial', 
+        current: false },
+    {   name: 'Historial Médico', 
+        href: '/afiliado/historial', 
+        current: false },
 ]
 
 function classNames(...classes) {
@@ -16,6 +29,7 @@ function classNames(...classes) {
 }
 
 export default function Example() {
+    const navigate = useNavigate();
     return (
         <Disclosure as="nav" className="bg-gray-800">
             {({ open }) => (
@@ -101,7 +115,7 @@ export default function Example() {
                                                         href="#"
                                                         className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                                                     >
-                                                        Your Profile
+                                                        Perfil
                                                     </a>
                                                 )}
                                             </Menu.Item>
@@ -110,8 +124,9 @@ export default function Example() {
                                                     <a
                                                         href="#"
                                                         className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                                        onClick={() => { logout(); navigate('/') }}
                                                     >
-                                                        Settings
+                                                        Cerrar Sesión
                                                     </a>
                                                 )}
                                             </Menu.Item>

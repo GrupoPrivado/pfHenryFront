@@ -14,6 +14,8 @@ import Credencial from "./Components/Credencial/Credencial";
 import CartPrest from "./Components/Providers/CartPrest";
 import { roles } from './utils/roles';
 import FamilyGroupDetail from "./Components/FamilyGroup/FamilyGroupDetail";
+import MedicalHistory from "./Components/MedicalHistory/MedicalHistory";
+import Authorizations from "./Components/Authorizations/Authorizations";
 
 
 function App() {
@@ -28,6 +30,8 @@ function App() {
         <Route path='/administrador' element={<PrivateRouter rol={roles.ADMIN}><DashAdmin /></PrivateRouter>}/>
         <Route path='/afiliado/group' element={ <FamilyGroupDetail/> }/>
         <Route path='/afiliado/credencial' element={ <Credencial/> }/>
+        <Route path='/afiliado/autorizaciones' element={ <Authorizations/> }/>
+        <Route path='/afiliado/historial' element={ <MedicalHistory/> }/>
         <Route path='/afiliado/prestadores' element={ <CartPrest/> }/>
 
 
