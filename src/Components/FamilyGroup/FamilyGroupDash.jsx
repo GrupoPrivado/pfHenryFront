@@ -21,11 +21,11 @@ export default function FamilyGroupDash() {
 
         <Link to='/afiliado/group'>
         <div className='flex  items-center p-6 m-10 w-80 h-50 bg-gradient-to-r from-indigo-500 to-indigo-900 rounded-3xl justify-evenly'> 
-            {/* {
-                grupo? grupo.dataOfIntegrants.map(e => (
+            {
+                grupo? grupo.map(e => (
                     <div>{e.nombre}</div>
                 )): <div><h1>No tenes familiares</h1></div>
-            } */}
+            }
             
         </div>
         </Link>
