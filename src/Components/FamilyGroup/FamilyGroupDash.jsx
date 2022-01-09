@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getGroup } from "../../actions/actionGroup";
 
 export default function FamilyGroupDash() {
-  const { grupo } = useSelector((state) => state.grupos);
+  const { group } = useSelector((state) => state.grupos);
   const { afiliado } = useSelector((state) => state.grupos);
 
   const dispatch = useDispatch();
@@ -22,8 +22,8 @@ export default function FamilyGroupDash() {
           <h1>Grupo Familiar</h1>
         </div>
         <div>
-          {grupo ? (
-            grupo.map((e) => <div key={e._id}>
+          {group ? (
+            group.map((e) => <div key={e._id}>
                 <label htmlFor="">{e.nombre}</label>
                 <label htmlFor="">{e.apellido}</label>
                 </div>)
