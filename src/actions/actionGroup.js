@@ -6,7 +6,7 @@ import { getItem } from "./actionAuth";
 export function getGroup(codeGroup) {
   return async function (dispatch) {
     const { data } = await axios.get(
-      `http://localhost:3001/api/gruposFamiliares/${codeGroup}`,
+      `https://arpymedical.herokuapp.com/api/gruposFamiliares/${codeGroup}`,
       {
         headers: {
           "x-access-token": getItem("userToken"),
