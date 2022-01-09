@@ -8,7 +8,7 @@ import { getItem } from '../../actions/actionAuth'
 function Login() {
 
     const navigate = useNavigate()
-    useEffect(() => {
+    useEffect(() => {   
         const userType = getItem('userType')
         if(userType) navigate(`/${userType}`)
     }, [navigate])
