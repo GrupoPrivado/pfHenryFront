@@ -15,7 +15,7 @@ export const removeItem = (item) => localStorage.removeItem(item)
 export const postAfiliate = (payload) => {
   console.log('Llega >>>>>>>>', payload)
   return async function (dispatch) {
-    var json = await axios.post('http://localhost:3001/api/addPreCarga', payload);
+    var json = await axios.post('https://arpymedical.herokuapp.com/api/addPreCarga', payload);
     console.log(' >>>>>>> ', json.data)
     return json.data
   };
@@ -23,7 +23,7 @@ export const postAfiliate = (payload) => {
 // token por header => authorization => x - access - token
 export const getAfiliate = (payload) => {
     return async (dispatch) => {
-        const {data} = await axios.get(`http://localhost:3001/api/afiliados`, {
+        const {data} = await axios.get(`https://arpymedical.herokuapp.com/api/afiliados`, {
                 headers:{
                     'x-access-token' : payload
                 }
