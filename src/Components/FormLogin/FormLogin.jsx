@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { LockClosedIcon } from "@heroicons/react/solid";
 import Logo from "../../assets/logo.svg"
 import { getUserToken } from "../../utils/authUtils";
-import { useDispatch } from "react-redux";
+
 function FormLogin() {
     const [input, setInput] = useState({
         dni: "",
@@ -81,7 +81,7 @@ function FormLogin() {
                     <div className="flex items-center justify-between">
                         <div className="text-sm">
                             <a
-                                href="" 
+                                href="#"
                                 className="font-medium text-indigo-600 hover:text-indigo-500"
                             >
                                 Olvide mi contraseña

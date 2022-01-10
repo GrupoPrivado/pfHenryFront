@@ -12,6 +12,7 @@ import FamilyGroupDetail from '../../Components/FamilyGroup/FamilyGroupDetail';
 import Credencial from '../../Components/Credencial/Credencial';
 import Authorizations from '../../Components/Authorizations/Authorizations';
 import MedicalHistory from '../../Components/MedicalHistory/MedicalHistory';
+import DashContainer from '../../Components/DashContainer/DashContainer';
 
 function DashAfil() {
     const dispatch = useDispatch();
@@ -40,7 +41,9 @@ function DashAfil() {
         <div>
             <NavBarDashboard/>
             <h1>Bienvenidx {user.nombre}</h1>
+            <DashContainer/>
             <FamilyGroupDash/>
+            <MedicalHistory/>
             <Authorizations/>
             
             <Link to='/afiliado/credencial'>
