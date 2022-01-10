@@ -77,7 +77,7 @@ export default function NavBarDashboard() {
                                             </button>
 
                                             {/* Profile dropdown */}
-                                            <Menu as="div" className="relative ml-3">
+                                            <Menu as="div" className="relative ml-3 z-50">
                                                 <div>
                                                     <Menu.Button className="flex items-center max-w-xs text-sm bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                                                         <span className="sr-only">Open user menu</span>
@@ -97,7 +97,7 @@ export default function NavBarDashboard() {
                                                         <Menu.Item>
                                                             {({ active }) => (
                                                                 <a
-                                                                    href="#"
+                                                                    href="/"
                                                                     className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                                                                 >
                                                                     Perfil
@@ -107,7 +107,7 @@ export default function NavBarDashboard() {
                                                         <Menu.Item>
                                                             {({ active }) => (
                                                                 <a
-                                                                    href="#"
+                                                                    href="/"
                                                                     className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                                                                     onClick={() => { logout(); navigate('/') }}
                                                                 >

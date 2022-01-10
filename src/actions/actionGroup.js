@@ -1,12 +1,13 @@
-import { logRoles } from "@testing-library/react";
+//import { logRoles } from "@testing-library/react";
 import axios from "axios";
 import { getItem } from "./actionAuth";
+import {api} from '../urlHostApi'
 
 
 export function getGroup(codeGroup) {
   return async function (dispatch) {
     const { data } = await axios.get(
-      `https://arpymedical.herokuapp.com/api/gruposFamiliares/${codeGroup}`,
+      `${api}/gruposFamiliares/${codeGroup}`,
       {
         headers: {
           "x-access-token": getItem("userToken"),

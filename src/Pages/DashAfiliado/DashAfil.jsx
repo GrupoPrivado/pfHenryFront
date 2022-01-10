@@ -3,12 +3,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, Link } from 'react-router-dom';
 import { getAfiliate, getItem, removeItem } from '../../actions/actionAuth';
 import { logout } from '../../utils/authUtils';
-import {  Route, Routes } from "react-router-dom";
-
 import NavBarDashboard from "./../../Components/NavBarDashboard/NavBarDashboard"
 import { getGroup } from '../../actions/actionGroup'
 import FamilyGroupDash from '../../Components/FamilyGroup/FamilyGroupDash'
-import FamilyGroupDetail from '../../Components/FamilyGroup/FamilyGroupDetail';
+import { TokenMedico } from '../../Components/TokenMedico/TokenMedico';
 import Credencial from '../../Components/Credencial/Credencial';
 import Authorizations from '../../Components/Authorizations/Authorizations';
 import MedicalHistory from '../../Components/MedicalHistory/MedicalHistory';
@@ -19,11 +17,13 @@ function DashAfil() {
     const navigate = useNavigate();
     
     const {user, route} = useSelector(state => state.auth)
-    const [dash, setDash] = useState()
-
-    
-   // console.log(user, ' <<<<< user >')
-    
+    const [isActive, setActive] = useState({
+        credencial: false,
+        token: false,
+        farmacia: false,
+        cartilla: false
+    });
+        
     useEffect(() => {
         dispatch(getAfiliate(getItem('userToken')))
         if(route !== '') {
@@ -37,21 +37,48 @@ function DashAfil() {
         if(user.codeGF) dispatch(getGroup(user.codeGF))
     }, [dispatch, user] )
 
+    const toggleClass = (e) => {
+        const modal = isActive[e.target.name]
+        setActive({
+            ...isActive,
+            [e.target.name]: !modal
+        })
+      };
+
+
     return (
         <div>
             <NavBarDashboard/>
             <h1>Bienvenidx {user.nombre}</h1>
             <DashContainer/>
             <FamilyGroupDash/>
-            <MedicalHistory/>
+            {/* <MedicalHistory/>  */}
             <Authorizations/>
             
-            <Link to='/afiliado/credencial'>
-                <button> Credencial</button>
-            </Link>
-            <Link to='/afiliado/prestadores'>
-            <button> Cartilla Prestadores</button></Link>
+            {/* <Link to='/afiliado/credencial'>
+                <button>Credencial</button>
+            </Link> */}
+            {/* <Link to='/afiliado/prestadores'>
+            <button> Cartilla Prestadores</button></Link> */}
 
+            <button name='token' onClick={toggleClass}> Token </button>
+            {
+                isActive.token && <TokenMedico /> 
+            }
+            <button name='credencial' onClick={toggleClass}> Credencial </button>
+            {
+                isActive.credencial && <Credencial/>
+            }
+
+            <button name='farmacia' onClick={toggleClass}> farmacia </button>
+            {
+                isActive.farmacia && <div> Farmacia </div>
+            }
+            <button name='cartilla' onClick={toggleClass}> cartilla </button>
+            {
+                isActive.cartilla && <div> Cartilla </div>
+            }
+            
         </div>
     )
 }
