@@ -17,19 +17,20 @@ export default function FamilyGroupDash() {
 
   return (
     <Link to="/afiliado/group">
-      <div className="flex flex-col items-center p-6 m-10 w-80 h-50 bg-gradient-to-r from-indigo-500 to-indigo-900 rounded-3xl justify-evenly">
-        <div>
+      <div className="relative flex flex-col justify-center p-4 bg-white md:col-span-2 md:row-span-2 shrink-0 rounded-2xl backdrop-filter backdrop-blur-lg bg-opacity-20 undefined">
+        <div className="mt-4 mb-2 text-lg font-medium text-center text-white">
           <h1>Grupo Familiar</h1>
         </div>
-        <div>
-          {group ? (
-            group.map((e) => <div key={e._id}>
-                <label htmlFor="">{e.nombre}</label>
-                <label htmlFor="">{e.apellido}</label>
-                </div>)
-          ) : (
+        <div className='flex flex-col justify-around px-2.5 w-full font-normal text-white shrink-0'>
+          {group.length ? (
+            group.map((e) => 
+              <div className='flex justify-between text-left' key={e._id}>
+                <p>{e.nombre}</p>
+                <p>{e.apellido}</p>
+              </div>
+              )) : (
             <div>
-              <h1>No tenes familiares</h1>
+              <h1 className='text-center'>Sin Grupo Familiar</h1>
             </div>
           )}
         </div>

@@ -49,11 +49,7 @@ function DashAfil() {
     return (
         <div>
             <NavBarDashboard/>
-            <h1>Bienvenidx {user.nombre}</h1>
             <DashContainer/>
-            <FamilyGroupDash/>
-            {/* <MedicalHistory/>  */}
-            <Authorizations/>
             
             {/* <Link to='/afiliado/credencial'>
                 <button>Credencial</button>

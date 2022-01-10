@@ -1,36 +1,34 @@
 import React from "react";
-import {  useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 function Authorizations() {
-    const {recetas} = useSelector(state => state.recetas)
-    console.log(' recetas auto',recetas[0].autorizadas)
+  const { recetas } = useSelector(state => state.recetas)
+  console.log(' recetas auto', recetas[0].autorizadas)
   return (
-    <div className="flex flex-col items-center p-6 m-10 w-80 h-50 bg-gradient-to-r from-indigo-500 to-indigo-900 rounded-3xl justify-evenly">
-      <div>
+    <div className="relative flex flex-col justify-center p-4 bg-white md:col-span-2 md:row-span-2 shrink-0 rounded-2xl backdrop-filter backdrop-blur-lg bg-opacity-20 undefined">
+      <div className="mt-4 mb-2 text-lg font-medium text-center text-white">
         <h1>Recetas</h1>
-
-         <div>
-             <label htmlFor="">Autorizadas</label>
-             {recetas.map(e=>(
-                 <div>
-                 <label htmlFor="">{e.autorizadas.practica}</label>
-                 <label htmlFor="">{e.autorizadas.fecha}</label>
-                 </div>
-             ))}
-         </div>
-         <div>
-             <label htmlFor="">Pendientes</label>
-             {recetas.map(e=>(
-                 <div>
-                 <label htmlFor="">{e.pendientes.practica}</label>
-                 <label htmlFor="">{e.pendientes.fecha}</label>
-                 </div>
-             ))}
-         </div>
-
       </div>
-
-
+      <div className="flex flex-row justify-around">
+        <div className='flex flex-col px-2.5 font-normal text-white shrink-0'>
+          <label htmlFor="">Autorizadas</label>
+          {recetas.map(e => (
+            <div className='flex justify-between text-left'>
+              <p>{e.autorizadas.practica}</p>
+              <p>{e.autorizadas.fecha}</p>
+            </div>
+          ))}
+        </div>
+        <div className='flex flex-col px-2.5 font-normal text-white shrink-0'>
+          <label htmlFor="">Pendientes</label>
+          {recetas.map(e => (
+            <div className='flex flex-col justify-between text-left'>
+              <p htmlFor="">{e.pendientes.practica}</p>
+              <p htmlFor="">{e.pendientes.fecha}</p>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
