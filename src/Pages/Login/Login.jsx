@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import FormLogin from '../../Components/FormLogin/FormLogin'
-import Logo from "./../../assets/logo.svg"
+//import Logo from "./../../assets/logo.svg"
 import HappyFamily from "./../../assets/happyFamily.jpeg"
 import NavBar from '../../Components/NavBar/NavBar'
 import { getItem } from '../../actions/actionAuth'

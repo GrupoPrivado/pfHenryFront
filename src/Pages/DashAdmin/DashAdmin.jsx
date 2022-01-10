@@ -8,7 +8,7 @@ function DashAdmin() {
     const dispatch = useDispatch();
     const navigate = useNavigate()
     
-    const {user, route} = useSelector(state => state.auth)
+    const {route} = useSelector(state => state.auth)
 
 
     useEffect(() => {
