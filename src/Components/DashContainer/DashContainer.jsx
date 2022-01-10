@@ -1,7 +1,11 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import Authorizations from '../Authorizations/Authorizations'
+import FamilyGroupDash from '../FamilyGroup/FamilyGroupDash'
 import MedicalHistory from '../MedicalHistory/MedicalHistory'
+import { TokenMedico } from '../TokenMedico/TokenMedico'
 import Logo from "./../../assets/bg2.jpg"
+import {Link} from "react-router-dom"
 
 function DashContainer() {
     const { user, route } = useSelector(state => state.auth)
@@ -17,48 +21,19 @@ function DashContainer() {
                             </svg>
                             <div className="ml-4 font-bold">Bienvenidx {user.nombre}</div>
                         </div>
-                        <div className="grid grid-cols-1 grid-rows-4 gap-4 md:grid-rows-2 md:grid-cols-2">
+                        <div className="grid grid-cols-1 gap-4 grid-rows-7 md:grid-rows-3 md:grid-cols-3">
                             <MedicalHistory/> 
-                            <div className="relative flex flex-col p-4 bg-white rounded-2xl backdrop-filter backdrop-blur-lg bg-opacity-20 undefined">
-                                <div className="absolute text-white right-2">
-                                    <svg className="w-10 h-10" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z">
-                                        </path>
-                                    </svg>
+                            <FamilyGroupDash/>
+                            <Authorizations/>
+                            <Link to="/afiliado/credencial">
+                                <div className="relative flex flex-col p-4 bg-white rounded-2xl backdrop-filter backdrop-blur-lg bg-opacity-20 undefined">
+                                    <div className="mt-4 mb-2 text-lg font-medium text-center text-white">
+                                        <h1>Credencial</h1>
+                                    </div>
                                 </div>
-                                <div className="mt-4 mb-2 text-lg font-medium text-white">Front-End</div>
-                                <div className="font-normal text-white">Visual page, graphic pages, colors, button positions and
-                                    interfaces Required skills are HTML ,CSS , JAVASCRIPT.</div>
-                            </div>
-                            <div className="relative flex flex-col p-4 bg-white rounded-2xl backdrop-filter backdrop-blur-lg bg-opacity-20 undefined">
-                                <div className="absolute text-white right-2">
-                                    <svg className="w-10 h-10" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fillRule="evenodd" d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5zm3.293 1.293a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 01-1.414-1.414L7.586 10 5.293 7.707a1 1 0 010-1.414zM11 12a1 1 0 100 2h3a1 1 0 100-2h-3z" clipRule="evenodd" />
-                                    </svg>
-                                </div>
-                                <div className="mt-4 mb-2 text-lg font-medium text-white">Back-End</div>
-                                <div className="font-normal text-white">Writing the actual code for the site, as it controls everything
-                                    that happens behind the scenes of the site.</div>
-                            </div>
-                            <div className="relative flex flex-col p-4 bg-white rounded-2xl backdrop-filter backdrop-blur-lg bg-opacity-20 undefined">
-                                <div className="absolute text-white right-2">
-                                    <svg className="w-10 h-10" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
-                                    </svg> </div>
-                                <div className="mt-4 mb-2 text-lg font-medium text-white">Full-Stack</div>
-                                <div className="font-normal text-white">He works on designing interfaces and writing code in the
-                                    background. He has all the skills for both sides.</div>
-                            </div>
-                            <div className="relative flex flex-col p-4 bg-white rounded-2xl backdrop-filter backdrop-blur-lg bg-opacity-20 undefined">
-                                <div className="absolute text-white right-2">
-                                    <svg className="w-10 h-10" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fillRule="evenodd" d="M4 2a2 2 0 00-2 2v11a3 3 0 106 0V4a2 2 0 00-2-2H4zm1 14a1 1 0 100-2 1 1 0 000 2zm5-1.757l4.9-4.9a2 2 0 000-2.828L13.485 5.1a2 2 0 00-2.828 0L10 5.757v8.486zM16 18H9.071l6-6H16a2 2 0 012 2v2a2 2 0 01-2 2z" clipRule="evenodd" />
-                                    </svg>
-                                </div>
-                                <div className="mt-4 mb-2 text-lg font-medium text-white">UI</div>
-                                <div className="font-normal text-white">It is the design of the website interface and all its contents
-                                    before starting programming and development.</div>
-                            </div>
+                            </Link>
+                            <TokenMedico/>
+                            
                         </div>
                     </div>
                 </main>
