@@ -1,9 +1,11 @@
 import React from 'react'
 
-export default function CardMemberGroup() {
+export default function CardMemberGroup({name, lastname, dni , id}) {
     return (
         <div>
-            <label></label>
+            <label>{name}</label>
+            <label>{lastname}</label>
+            <label>{dni}</label>
         </div>
     )
 }

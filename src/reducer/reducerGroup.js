@@ -1,18 +1,18 @@
 const inicialState = {
-    grupo: [],
-    afiliado :[],
+    group: [],
+    afiliate:[],
   };
   export default function reducerGroup(state = inicialState, action) {
     switch (action.type) {
       case "GET_GROUP":
         return {
           ...state,
-          grupo: action.payload,
+          group: action.payload,
         };
         case "GET_AFILIATE":
             return {
               ...state,
-              afiliado: action.payload,
+              afiliate: action.payload,
             };
       default:
         return state;
