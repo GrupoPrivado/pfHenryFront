@@ -7,6 +7,10 @@ import NavBarDashboard from "./../../Components/NavBarDashboard/NavBarDashboard"
 import { getGroup } from '../../actions/actionGroup'
 import FamilyGroupDash from '../../Components/FamilyGroup/FamilyGroupDash'
 import { TokenMedico } from '../../Components/TokenMedico/TokenMedico';
+import Credencial from '../../Components/Credencial/Credencial';
+import Authorizations from '../../Components/Authorizations/Authorizations';
+import MedicalHistory from '../../Components/MedicalHistory/MedicalHistory';
+import DashContainer from '../../Components/DashContainer/DashContainer';
 
 function DashAfil() {
     const dispatch = useDispatch();
@@ -45,14 +49,17 @@ function DashAfil() {
     return (
         <div>
             <NavBarDashboard/>
+            <h1>Bienvenidx {user.nombre}</h1>
+            <DashContainer/>
             <FamilyGroupDash/>
-
-            <p>{user.nombre}</p>
-            <button onClick={() => { logout(); navigate('/') }}>Cerrar Sesión</button>
+            {/* <MedicalHistory/> */}
+            <Authorizations/>
             
             <Link to='/afiliado/credencial'>
                 <button>Credencial</button>
             </Link>
+            <Link to='/afiliado/prestadores'>
+            <button> Cartilla Prestadores</button></Link>
 
             <button name='token' onClick={toggleClass}> Token </button>
             {

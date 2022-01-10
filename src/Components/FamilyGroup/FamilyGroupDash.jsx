@@ -6,7 +6,7 @@ import { getGroup } from "../../actions/actionGroup";
 
 export default function FamilyGroupDash() {
   const { group } = useSelector((state) => state.grupos);
-  const { afiliado } = useSelector((state) => state.grupos);
+  const { afiliate} = useSelector((state) => state.grupos);
 
   const dispatch = useDispatch();
 
