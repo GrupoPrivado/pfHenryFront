@@ -9,16 +9,11 @@ export default function () {
 
   return (
     <div>
-      <NavbarDasboard/>
         <div className="flex flex-col">
         <label>{user.nombre}</label>
         <label>{user.apellido}</label>
         <label>{user.DNI}</label>
         <label>{user.codePlan}</label>
-
-        <Link to="/afiliado">
-          <button>Volver</button>
-        </Link>
         </div>
     </div>
     
