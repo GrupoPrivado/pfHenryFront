@@ -52,20 +52,32 @@ function DashAfil() {
             <h1>Bienvenidx {user.nombre}</h1>
             <DashContainer/>
             <FamilyGroupDash/>
-            {/* <MedicalHistory/> */}
+            {/* <MedicalHistory/>  */}
             <Authorizations/>
             
-            <Link to='/afiliado/credencial'>
+            {/* <Link to='/afiliado/credencial'>
                 <button>Credencial</button>
-            </Link>
-            <Link to='/afiliado/prestadores'>
-            <button> Cartilla Prestadores</button></Link>
+            </Link> */}
+            {/* <Link to='/afiliado/prestadores'>
+            <button> Cartilla Prestadores</button></Link> */}
 
             <button name='token' onClick={toggleClass}> Token </button>
             {
                 isActive.token && <TokenMedico /> 
             }
+            <button name='credencial' onClick={toggleClass}> Credencial </button>
+            {
+                isActive.credencial && <Credencial/>
+            }
 
+            <button name='farmacia' onClick={toggleClass}> farmacia </button>
+            {
+                isActive.farmacia && <div> Farmacia </div>
+            }
+            <button name='cartilla' onClick={toggleClass}> cartilla </button>
+            {
+                isActive.cartilla && <div> Cartilla </div>
+            }
             
         </div>
     )
