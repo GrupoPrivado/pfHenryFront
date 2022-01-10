@@ -1,14 +1,47 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Authorizations from '../Authorizations/Authorizations'
 import FamilyGroupDash from '../FamilyGroup/FamilyGroupDash'
 import MedicalHistory from '../MedicalHistory/MedicalHistory'
 import { TokenMedico } from '../TokenMedico/TokenMedico'
 import Logo from "./../../assets/bg2.jpg"
-import {Link} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
+import { getGroup } from '../../actions/actionGroup'
+import { getAfiliate, getItem, removeItem } from '../../actions/actionAuth';
+
 
 function DashContainer() {
     const { user, route } = useSelector(state => state.auth)
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    
+    const [isActive, setActive] = useState({
+        credencial: false,
+        token: false,
+        farmacia: false,
+        cartilla: false
+    });
+        
+    useEffect(() => {
+        dispatch(getAfiliate(getItem('userToken')))
+        if(route !== '') {
+            removeItem('userType')
+            navigate(`/${route}`)
+        } 
+    }, [dispatch, route, navigate])
+    
+    
+    useEffect(()=>{
+        if(user.codeGF) dispatch(getGroup(user.codeGF))
+    }, [dispatch, user] )
+
+    const toggleClass = (e) => {
+        const modal = isActive[e.target.name]
+        setActive({
+            ...isActive,
+            [e.target.name]: !modal
+        })
+    };
     return (
         <div>
             <style dangerouslySetInnerHTML={{ __html: "\n\t@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&display=swap');\n\n\t* {\n\t\tfont-family: 'Noto Sans JP', sans-serif;\n\t}\n\n\t.bg-app {\n\t\tbackground-image: url('');\n\t}\n" }} />
@@ -32,8 +65,14 @@ function DashContainer() {
                                     </div>
                                 </div>
                             </Link>
-                            <TokenMedico/>
-                            
+                            <div className="relative flex flex-col p-4 bg-white rounded-2xl backdrop-filter backdrop-blur-lg bg-opacity-20 undefined">
+                                    <div className="mt-4 mb-2 text-lg font-medium text-center text-white">
+                                        <button name='token' onClick={toggleClass}> Token </button>
+                                    </div>
+                                    {
+                                        isActive.token && <TokenMedico /> 
+                                    }
+                                </div>
                         </div>
                     </div>
                 </main>
