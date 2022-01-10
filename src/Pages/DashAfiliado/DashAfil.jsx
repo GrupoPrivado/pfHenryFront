@@ -13,7 +13,12 @@ function DashAfil() {
     const navigate = useNavigate();
     
     const {user, route} = useSelector(state => state.auth)
-    const [isActive, setActive] = useState(false);
+    const [isActive, setActive] = useState({
+        credencial: false,
+        token: false,
+        farmacia: false,
+        cartilla: false
+    });
         
     useEffect(() => {
         dispatch(getAfiliate(getItem('userToken')))
@@ -28,8 +33,12 @@ function DashAfil() {
         if(user.codeGF) dispatch(getGroup(user.codeGF))
     }, [dispatch, user] )
 
-    const toggleClass = () => {
-        setActive(!isActive);
+    const toggleClass = (e) => {
+        const modal = isActive[e.target.name]
+        setActive({
+            ...isActive,
+            [e.target.name]: !modal
+        })
       };
 
 
@@ -45,10 +54,11 @@ function DashAfil() {
                 <button>Credencial</button>
             </Link>
 
-            <button onClick={toggleClass}> Token </button>
+            <button name='token' onClick={toggleClass}> Token </button>
             {
-                isActive && <TokenMedico /> 
+                isActive.token && <TokenMedico /> 
             }
+
             
         </div>
     )
