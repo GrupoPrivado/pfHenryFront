@@ -44,6 +44,7 @@ function DashAfil() {
             <DashContainer/>
             <FamilyGroupDash/>
             <MedicalHistory/>
+            <Authorizations/>
             <Link to='/afiliado/credencial'>
                 <button> Credencial</button>
             </Link>
