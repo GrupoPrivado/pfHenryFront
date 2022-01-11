@@ -17,8 +17,8 @@ function DashAdmin() {
   
     return (
         <div>
-            <NavBarDashAdmin/>
-
+            {/* <NavBarDashAdmin/> */}
+        
             Dashboard Administrador  
             <button onClick={() => { logout(); navigate('/') }}>Cerrar Sesión</button>
 

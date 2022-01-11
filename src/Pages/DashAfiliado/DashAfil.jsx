@@ -7,10 +7,10 @@ import NavBarDashboard from "./../../Components/NavBarDashboard/NavBarDashboard"
 import { getGroup } from '../../actions/actionGroup'
 import FamilyGroupDash from '../../Components/FamilyGroup/FamilyGroupDash'
 import { TokenMedico } from '../../Components/TokenMedico/TokenMedico';
-import Credencial from '../../Components/Credencial/Credencial';
 import Authorizations from '../../Components/Authorizations/Authorizations';
 
 import DashContainer from '../../Components/DashContainer/DashContainer';
+import { Credencial } from '../../Components/Credencial/Credencial';
 
 function DashAfil() {
     const dispatch = useDispatch();
@@ -48,7 +48,7 @@ function DashAfil() {
 
     return (
         <div>
-            <NavBarDashboard/>
+            {/* <NavBarDashboard/> */}
             <DashContainer/>
             
             {/* <Link to='/afiliado/credencial'>
