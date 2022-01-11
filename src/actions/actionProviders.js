@@ -1,10 +1,11 @@
 import axios from "axios";
+import {api} from '../urlHostApi'
 
 
 export function getAllProviders() {
     return async function (dispatch) {
       var json = await axios.get(
-        "http://localhost:3001/api/profesionales"
+        `${api}/profesionales`
       );
   
       return dispatch({
@@ -17,7 +18,7 @@ export function getAllProviders() {
 export function getAllCities() {
     return async function (dispatch) {
       var json = await axios.get(
-        "http://localhost:3001/api/ciudades"
+        `${api}/ciudades`
       );
   
       return dispatch({
@@ -30,7 +31,7 @@ export function getAllCities() {
 export function getAllSpecialties() {
     return async function (dispatch) {
       var json = await axios.get(
-        "http://localhost:3001/api/especialidades"
+        `${api}/especialidades`
       );
   
       return dispatch({
