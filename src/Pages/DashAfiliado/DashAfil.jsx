@@ -10,7 +10,7 @@ import { TokenMedico } from '../../Components/TokenMedico/TokenMedico';
 import Authorizations from '../../Components/Authorizations/Authorizations';
 
 import DashContainer from '../../Components/DashContainer/DashContainer';
-import { Credencial } from '../../Components/Credencial/Credencial';
+import Credencial from '../../Components/Credencial/Credencial';
 
 function DashAfil() {
     const dispatch = useDispatch();
