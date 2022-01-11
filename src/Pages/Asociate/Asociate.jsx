@@ -15,20 +15,22 @@ export default function Asociate() {
     const [output, setOutput] = useState([])
     //const [family, setFamily] = useState([])
  
-    //const [modal, showModal] = useState(true)
+    const [modal, setModal] = useState(false)
     
     return (
-        <div >
-            <NavBar/>
-            <div className="flex">
-            <div>
+      <div>
+        {/* <NavBar /> */}
+        <div className="flex">
+          <div>
             <FormAsociate setOutput={setOutput} output={output} />
-            </div>
-            <div>
-            <FormAddAsociateGroup setOutput={setOutput} output={output}/>
-            </div>
-            </div>
+          </div>
+          {modal && (
+            <FormAddAsociateGroup setOutput={setOutput} output={output} />
+          )}
+          <button onClick={() => setModal(!modal)}>añadir miembro</button>
 
+          <div></div>
         </div>
-    )
+      </div>
+    );
 }

@@ -6,7 +6,7 @@ import Plans from "../../Components/Plans/Plans";
 export default function LandingPage() {
     return (
         <div>
-            <NavBar/>
+            {/* <NavBar/> */}
             <CarouselSlide/>
             <Plans/>
         </div>

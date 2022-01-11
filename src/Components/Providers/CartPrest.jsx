@@ -31,7 +31,7 @@ export default function CartPrest() {
 
   return (
     <div>
-      <NavBarDashboard />
+      {/* <NavBarDashboard /> */}
       <select name="" id="">
         <option value="">Seleccione su ciudad</option>
         {cities?.map(e=> (
