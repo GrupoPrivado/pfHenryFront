@@ -18,29 +18,23 @@ function Authorizations() {
 
 
   return (
-    <div className="relative flex flex-col justify-center p-4 bg-primary md:col-span-2 md:row-span-2 shrink-0 rounded-2xl backdrop-filter backdrop-blur-lg bg-opacity-20 undefined">
+    <div className="relative flex flex-col justify-start p-4 bg-white md:col-span-2 md:row-span-1 sm:row-span-1 sm:col-span-3 shrink-0 rounded-2xl backdrop-filter backdrop-blur-lg bg-opacity-20 undefined">
       <div className="mt-4 mb-2 text-lg font-medium text-center text-white">
         <h1>Recetas</h1>
       </div>
       <div className="flex flex-row justify-around">
-        <div className='flex flex-col px-2.5 font-normal text-white shrink-0'>
+        <div className='flex flex-col px-2.5 font-normal text-white w-full shrink-0'>
           
-          {recetas.map(e => (
-            <div className='flex justify-between text-left'>
+          {recetas.length ? recetas.map(e => (
+            <li key={e.numReceta} className='flex justify-between px-16 text-left'>
               <p>{e.tipoReceta}</p>
               <p>{e.descripcion}</p>
-              <p>{e.autorizada}</p>
-            </div>
-          ))}
+              {/* <p>{e.autorizada}</p> */}
+            </li>
+          )) : <div>
+                <h1 className='text-center'>Sin Recetas</h1>
+              </div>}
         </div>
-       
-          {/* {recetas.map(e => (
-            <div className='flex flex-col justify-between text-left'>
-              <p htmlFor="">{e.pendientes.practica}</p>
-              <p htmlFor="">{e.pendientes.fecha}</p>
-            </div>
-          ))} */}
-        
       </div>
     </div>
   );
