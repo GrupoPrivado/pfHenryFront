@@ -40,3 +40,18 @@ export function getAllSpecialties() {
       });
     };
 }
+export function filterByCity(payload) {
+  const payNum = Number(payload)
+  console.log('asfdgahds',payNum)
+  return {
+    type: "FILTER_BY_CITY",
+    payload,
+  };
+}
+export function filterBySpecialties(payload) {
+  console.log('special',payload)
+  return {
+    type: "FILTER_BY_SPECIALTIES",
+    payload,
+  };
+}

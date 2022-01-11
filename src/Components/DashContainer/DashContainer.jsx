@@ -9,6 +9,7 @@ import {Link, useNavigate} from "react-router-dom"
 import { getGroup } from '../../actions/actionGroup'
 import { getAfiliate, getItem, removeItem } from '../../actions/actionAuth';
 import Credencial from './../Credencial/Credencial'
+import {getRecetas} from '../../actions/actionRecet'
 
 
 function DashContainer() {
@@ -34,6 +35,10 @@ function DashContainer() {
     
     useEffect(()=>{
         if(user.codeGF) dispatch(getGroup(user.codeGF))
+    }, [dispatch, user] )
+
+    useEffect(()=>{
+        if(user.DNI) dispatch(getRecetas(user.DNI))
     }, [dispatch, user] )
 
     const toggleClass = (e) => {
