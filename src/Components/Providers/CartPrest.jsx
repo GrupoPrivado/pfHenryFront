@@ -25,30 +25,26 @@ export default function CartPrest() {
     dispatch(getAllSpecialties());
   }, [dispatch]);
 
-  // function handleSelectCity(e) {
-  //   if (e.target.value !== "") {
-  //     setCity({
-  //       ...city,
-  //       city: e.target.value,
-  //     });
-  //   }
-  //   dispatch(filterByCity(city));
-  // }
-  // console.log(city);
-  // function handleSelectSpecialties(e) {
-  //   if (e.target.value !== "") {
-  //     setSpeciality({
-  //       ...speciality,
-  //       speciality: e.target.value,
-  //     });
-  //   }
-  //   dispatch(filterBySpecialties(city));
-  // }
-  // console.log(speciality);
+  function handleSelectCity(e) {
+    if (e.target.value !== "") {
+      dispatch(filterByCity(e.target.value))
+    }
+    dispatch(filterByCity(city));
+  }
+  
+  function handleSelectSpecialties(e) {
+    if (e.target.value !== "") {
+      
+        dispatch(filterBySpecialties(e.target.value));
+      
+    }
+    
+  }
+  
   return (
     <div>
       {/* <NavBarDashboard /> */}
-      <select name="" id="" >
+      <select name="" id="" onClick={handleSelectCity} >
         <option value="">Seleccione su ciudad</option>
         {cities?.map((e) => (
           <option value={e.CP} key={e._id}>
