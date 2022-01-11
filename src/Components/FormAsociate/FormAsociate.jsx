@@ -5,7 +5,7 @@ import { getPlanes } from "../../actions/actionPlanes";
 import { postAfiliate } from "../../actions/actionPlanes";
 import { useNavigate } from "react-router-dom";
 
-export default function FormAsociate({ setOutput, output }) {
+export default function FormAsociate({ setOutput, output , modal, setModal}) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { planes } = useSelector((state) => state.planes);
@@ -146,7 +146,7 @@ export default function FormAsociate({ setOutput, output }) {
           <input
             required
             className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-            type="text"
+            type="email"
             value={input.correoElectronico}
             name="correoElectronico"
             onChange={(e) => handleChange(e)}
@@ -194,7 +194,7 @@ export default function FormAsociate({ setOutput, output }) {
             Agregar miembro
           </label>
 
-          <button>+</button>
+          <button onClick={() => setModal(!modal)}>+</button>
         </div>
         <div>
           {output?.map((e) => (
