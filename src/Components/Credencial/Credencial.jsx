@@ -1,10 +1,9 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import NavbarDasboard from '../NavBarDashboard/NavBarDashboard'
 
 
-export default function () {
+export const Credencial = () => {
   const { user, route } = useSelector((state) => state.auth);
 
   return (

@@ -1,7 +1,8 @@
 import axios from "axios";
+import {api} from '../urlHostApi'
 
 export const getUserToken = async(user) => {
-    const result = await axios.post('https://arpymedical.herokuapp.com/api/login', user);
+    const result = await axios.post(`${api}/login`, user);
     
     if(result.data.token){
         localStorage.setItem('userToken', result.data.token);

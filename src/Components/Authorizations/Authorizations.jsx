@@ -2,10 +2,10 @@ import React from "react";
 import { useSelector } from 'react-redux'
 
 function Authorizations() {
-  const { recetas } = useSelector(state => state.recetas)
-  console.log(' recetas auto', recetas[0].autorizadas)
+    const {recetas} = useSelector(state => state.recetas)
+    console.log(' recetas auto',recetas)
   return (
-    <div className="relative flex flex-col justify-center p-4 bg-white md:col-span-2 md:row-span-2 shrink-0 rounded-2xl backdrop-filter backdrop-blur-lg bg-opacity-20 undefined">
+    <div className="relative flex flex-col justify-center p-4 bg-primary md:col-span-2 md:row-span-2 shrink-0 rounded-2xl backdrop-filter backdrop-blur-lg bg-opacity-20 undefined">
       <div className="mt-4 mb-2 text-lg font-medium text-center text-white">
         <h1>Recetas</h1>
       </div>

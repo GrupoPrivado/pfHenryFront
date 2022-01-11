@@ -39,7 +39,7 @@ function MedicalHistoryDetails() {
     }
     return (
         <div>
-            <NavBarDashboard/>
+            {/* <NavBarDashboard/> */}
             <div className="flex items-center justify-center w-full min-h-screen bg-cover contenair" style={{ backgroundImage: `url(${Logo})` }}>
                 {/* card */}
                 <div className="w-1/2 p-5 bg-white bg-opacity-40 rounded-xl backdrop-filter backdrop-blur-lg">
