@@ -1,62 +1,80 @@
-import React,{useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import NavBarDashboard from "../NavBarDashboard/NavBarDashboard";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux'
-import { getAllProviders, getAllCities, getAllSpecialties } from "../../actions/actionProviders";
-
-
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getAllProviders,
+  getAllCities,
+  getAllSpecialties,
+  filterByCity,
+  filterBySpecialties,
+} from "../../actions/actionProviders";
 
 export default function CartPrest() {
   const dispatch = useDispatch();
-  const {allProviders, cities, specialties} = useSelector(state => state.providers)
- const [ciudad, setCiudad] = useState()
+  const { allProviders, cities, specialties, providers } = useSelector(
+    (state) => state.providers
+  );
 
-  useEffect(()=> {
-  dispatch(getAllProviders())
-  dispatch(getAllCities())
-  dispatch(getAllSpecialties())
-},[dispatch]
+  const [city, setCity] = useState();
+  const [speciality, setSpeciality] = useState();
 
-  
-  )
+  useEffect(() => {
+    dispatch(getAllProviders());
+    dispatch(getAllCities());
+    dispatch(getAllSpecialties());
+  }, [dispatch]);
 
-  function handleSelect(e) {
-    if (e.target.value !== "") {
-      setCiudad({
-        ...ciudad,
-        ciudad: e.target.value,
-      });
-    }
-  }
-
+  // function handleSelectCity(e) {
+  //   if (e.target.value !== "") {
+  //     setCity({
+  //       ...city,
+  //       city: e.target.value,
+  //     });
+  //   }
+  //   dispatch(filterByCity(city));
+  // }
+  // console.log(city);
+  // function handleSelectSpecialties(e) {
+  //   if (e.target.value !== "") {
+  //     setSpeciality({
+  //       ...speciality,
+  //       speciality: e.target.value,
+  //     });
+  //   }
+  //   dispatch(filterBySpecialties(city));
+  // }
+  // console.log(speciality);
   return (
     <div>
       {/* <NavBarDashboard /> */}
-      <select name="" id="">
+      <select name="" id="" >
         <option value="">Seleccione su ciudad</option>
-        {cities?.map(e=> (
-          <option value={e.localidad} key={e._id}>{e.localidad}</option>
+        {cities?.map((e) => (
+          <option value={e.CP} key={e._id}>
+            {e.localidad}
+          </option>
         ))}
       </select>
-      <select name="" id="">
+      <select name="" id="" >
         <option value="">Seleccione especialidad</option>
-        {specialties?.map(e=> (
-          <option value={e.nombre} key={e._id}>{e.nombre}</option>
+        {specialties?.map((e) => (
+          <option value={e.codeEsp} key={e._id}>
+            {e.nombre}
+          </option>
         ))}
       </select>
       <div>
-       { allProviders?.map(e=> (
-         <div key={e._id}>
-           <label >{e.nombre}</label>
-           <label >{e.apellido}</label>
-           <label>{e.codeEsp}</label>
-         </div>
-       ))}
-
+        {providers?.map((e) => (
+          <div key={e._id}>
+            <label>{e.nombre}</label>
+            <label>{e.apellido}</label>
+            <label>{e.codeEsp}</label>
+          </div>
+        ))}
       </div>
 
       <Link to="/afiliado">
-
         <button>Volver</button>
       </Link>
     </div>

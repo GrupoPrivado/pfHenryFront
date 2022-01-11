@@ -40,3 +40,16 @@ export function getAllSpecialties() {
       });
     };
 }
+export function filterByCity(payload) {
+  console.log(payload)
+  return {
+    type: "FILTER_BY_CITY",
+    payload,
+  };
+}
+export function filterBySpecialties(payload) {
+  return {
+    type: "FILTER_BY_SPECIALTIES",
+    payload,
+  };
+}

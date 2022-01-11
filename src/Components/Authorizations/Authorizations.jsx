@@ -9,7 +9,7 @@ function Authorizations() {
   const dispatch = useDispatch();
   const { user } = useSelector(state => state.auth);
   const { recetas } = useSelector(state => state.recetas);
- console.log('recetas', recetas)
+ 
 
   useEffect(()=>{
     dispatch(getRecetas(user.DNI))
