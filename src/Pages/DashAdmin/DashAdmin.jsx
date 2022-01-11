@@ -4,7 +4,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../../utils/authUtils';
 import NavBarDashAdmin from '../../Components/NavBarDashboard/NavbarDashAdmin'
 
-import AdminABMCiudades from '../../Components/ABMAdmin/Ciudades/ABMCiudades';
+import ABMCities from '../../Components/ABMAdmin/ABMCities/ABMCities';
+import ABMSpecialities from '../../Components/ABMAdmin/ABMSpecialties/ABMSpecialties';
+import ABMAffiliates from '../../Components/ABMAdmin/ABMAffiliates/ABMAffiliates';
 
 function DashAdmin() {
     const dispatch = useDispatch();
@@ -22,7 +24,11 @@ function DashAdmin() {
             <NavBarDashAdmin/>
             
             ABM 
-            <AdminABMCiudades/>
+            <ABMCities/>
+
+            <ABMSpecialities/>
+            
+            <ABMAffiliates/>
 
             Dashboard Administrador  
             <button onClick={() => { logout(); navigate('/') }}>Cerrar Sesión</button>

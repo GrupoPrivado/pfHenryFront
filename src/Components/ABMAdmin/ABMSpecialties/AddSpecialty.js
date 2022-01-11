@@ -3,15 +3,17 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { addCity, getAllCities } from "../../../actions/actionAMBReducer";
+import {
+  addSpeciality,
+  getAllSpecialities,
+} from "../../../actions/actionAMBAdmin";
 
-import styles from "./addCityDevice.module.css"
+import styles from "./addSpecialty.module.css";
 
 const functionErrors = (data) => {
   const arrayKeys = Object.keys(data);
   const arrayData = arrayKeys.filter((element, index) => data[element] !== "");
-  console.log('arrayKeys', arrayKeys)
-  console.log('arrayData', arrayData)
+
   if (arrayKeys.length === arrayData.length) {
     return false;
   } else {
@@ -19,50 +21,53 @@ const functionErrors = (data) => {
   }
 }; //cambiarla en un utils ya que se puede usar en todos los forms
 
-const AddCity = ({ showModalAdd, setShowModalAdd }) => {
+const AddSpeciality = ({ showModalAdd, setShowModalAdd }) => {
   const dispatch = useDispatch();
 
   const [errors, setErrors] = useState(true);
 
-  let [inputCity, setInputCity] = useState({
-    CP: "",
-    localidad: "",
-    provincia: "",
+  let [inputSpeciality, setInputSpeciality] = useState({
+    codeEsp: "",
+    nombre: "",
+    descripcion: "",
+    activa: false,
   });
 
   const showHideClassName = showModalAdd ? "displayblock" : "displaynone";
 
   const handleChange = (event) => {
-    let newCity = {
-      ...inputCity,
+    let newSpeciality = {
+      ...inputSpeciality,
       [event.target.name]: event.target.value,
     };
-    setInputCity(newCity);
+    setInputSpeciality(newSpeciality);
 
-    setErrors(functionErrors(newCity));
+    setErrors(functionErrors(newSpeciality));
 
-    newCity = {};
+    newSpeciality = {};
   };
 
-  const handleSubmitCity = async (event) => {
+  const handleSubmitSpeciality = async (event) => {
     event.preventDefault();
-    let response = await dispatch(addCity(inputCity));
+    let response = await dispatch(addSpeciality(inputSpeciality));
     alert(response.success);
-    setInputCity({
-      CP: "",
-      localidad: "",
-      provincia: "",
+    setInputSpeciality({
+      codeEsp: "",
+      nombre: "",
+      descripcion: "",
+      activa: false,
     });
-    await dispatch(getAllCities())
+    await dispatch(getAllSpecialities());
     setErrors(true);
     setShowModalAdd(false);
   };
 
   const handleClose = () => {
-    setInputCity({
-      CP: "",
-      localidad: "",
-      provincia: "",
+    setInputSpeciality({
+      codeEsp: "",
+      nombre: "",
+      descripcion: "",
+      activa: false,
     });
     setErrors(true);
     setShowModalAdd(false);
@@ -71,58 +76,68 @@ const AddCity = ({ showModalAdd, setShowModalAdd }) => {
   return (
     <div className={styles[showHideClassName]}>
       <section className={styles.modalmain}>
-        <h5>Agregar Nueva Ciudad</h5>
+        <h5>Agregar Nueva Especialidad</h5>
         <div className={styles.container}>
-          <form onSubmit={(e) => handleSubmitCity(e)} id="addCity">
+          <form onSubmit={(e) => handleSubmitSpeciality(e)} id="addSpeciality">
             <div>
-              <label>CP: </label>
+              <label>Codigo: ESP-</label>
               <input
                 type="text"
-                name="CP"
+                name="codeEsp"
                 autoComplete="off"
-                value={inputCity.CP}
+                value={inputSpeciality.codeEsp}
                 onChange={(e) => handleChange(e)}
-                placeholder="Ingrese el Cod. Post...."
+                placeholder="Ingrese el Codigo...."
               />
             </div>
 
             <div>
-              <label>Localidad: </label>
+              <label>Nombre: </label>
               <input
                 type="text"
-                name="localidad"
+                name="nombre"
                 autoComplete="off"
-                value={inputCity.localidad}
+                value={inputSpeciality.nombre}
                 onChange={(e) => handleChange(e)}
-                placeholder="Ingrese la Localidad...."
+                placeholder="Ingrese el nombre...."
               />
             </div>
 
             <div>
-              <label>Provincia: </label>
+              <label>Descripción: </label>
               <input
                 type="text"
-                name="provincia"
+                name="descripcion"
                 autoComplete="off"
-                value={inputCity.provincia}
+                value={inputSpeciality.descripcion}
                 onChange={(e) => handleChange(e)}
-                placeholder="Ingrese la Provincia...."
+                placeholder="Ingrese la Descripcion...."
               />
             </div>
+
+            <select
+              id="activa"
+              name="activa"
+              onChange={(e) => handleChange(e)}
+              defaultValue={0}
+            >
+              <option value="false">No</option>
+              <option value="true">Si</option>
+            </select>
           </form>
 
           {errors ? (
             <button
               type="submit"
               key="submitFormButton"
-              form="addCity"
+              form="addSpeciality"
               disabled={errors}
               className="disabledButton"
             >
               Cargar
             </button>
           ) : (
-            <button type="submit" key="submitFormButton" form="addCity">
+            <button type="submit" key="submitFormButton" form="addSpeciality">
               Cargar
             </button>
           )}
@@ -133,4 +148,4 @@ const AddCity = ({ showModalAdd, setShowModalAdd }) => {
   );
 };
 
-export default AddCity;
+export default AddSpeciality;

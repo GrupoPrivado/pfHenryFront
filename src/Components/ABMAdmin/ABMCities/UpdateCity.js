@@ -2,15 +2,13 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
-import { updateCity, getAllCities } from "../../../actions/actionAMBReducer";
+import { updateCity, getAllCities, resetDataUpdate } from "../../../actions/actionAMBAdmin";
 
 import styles from "./UpdateCity.module.css";
 
 const functionErrors = (data) => {
   const arrayKeys = Object.keys(data);
   const arrayData = arrayKeys.filter((element, index) => data[element] !== "");
-  console.log("arrayKeys", arrayKeys);
-  console.log("arrayData", arrayData);
   if (arrayKeys.length === arrayData.length) {
     return false;
   } else {
@@ -20,7 +18,7 @@ const functionErrors = (data) => {
 
 const UpdateCity = ({ setShowModalUpdate, showModalUpdate }) => {
   const dispatch = useDispatch();
-  const { cityData } = useSelector((state) => state.ABMAdmin);
+  const { updateData } = useSelector((state) => state.ABMAdmin);
 
   const [errors, setErrors] = useState(false);
 
@@ -36,17 +34,17 @@ const UpdateCity = ({ setShowModalUpdate, showModalUpdate }) => {
 
   useEffect(() => {
     setUpdateCityData({
-        id:cityData._id,
-      newCP: cityData.CP,
-      newLocalidad: cityData.localidad,
-      newProvincia: cityData.provincia,
-      oldCP: cityData.CP,
-      oldLocalidad: cityData.localidad,
-      oldProvincia: cityData.provincia,
+        id:updateData._id,
+      newCP: updateData.CP,
+      newLocalidad: updateData.localidad,
+      newProvincia: updateData.provincia,
+      oldCP: updateData.CP,
+      oldLocalidad: updateData.localidad,
+      oldProvincia: updateData.provincia,
     });
-  }, [cityData, dispatch]);
+  }, [updateData, dispatch]);
 
-  const handleUpdateDevice = async (event) => {
+  const handleUpdateCity = async (event) => {
     let updatedCity = {
       ...updateCityData,
       [event.target.name]: event.target.value,
@@ -70,6 +68,8 @@ const UpdateCity = ({ setShowModalUpdate, showModalUpdate }) => {
       oldProvincia: "",
     });
     await dispatch(getAllCities());
+    dispatch(resetDataUpdate());
+  
     setErrors(true);
     setShowModalUpdate(false);
   };
@@ -84,6 +84,7 @@ const UpdateCity = ({ setShowModalUpdate, showModalUpdate }) => {
       oldLocalidad: "",
       oldProvincia: "",
     });
+    dispatch(resetDataUpdate());
     setErrors(true);
     setShowModalUpdate(false);
   };
@@ -103,7 +104,7 @@ const UpdateCity = ({ setShowModalUpdate, showModalUpdate }) => {
                 name="newCP"
                 autoComplete="off"
                 value={updateCityData.newCP}
-                onChange={(e) => handleUpdateDevice(e)}
+                onChange={(e) => handleUpdateCity(e)}
                 placeholder="Ingrese el Cod. Post...."
               />
             </div>
@@ -115,7 +116,7 @@ const UpdateCity = ({ setShowModalUpdate, showModalUpdate }) => {
                 name="newLocalidad"
                 autoComplete="off"
                 value={updateCityData.newLocalidad}
-                onChange={(e) => handleUpdateDevice(e)}
+                onChange={(e) => handleUpdateCity(e)}
                 placeholder="Ingrese la Localidad...."
               />
             </div>
@@ -127,7 +128,7 @@ const UpdateCity = ({ setShowModalUpdate, showModalUpdate }) => {
                 name="newProvincia"
                 autoComplete="off"
                 value={updateCityData.newProvincia}
-                onChange={(e) => handleUpdateDevice(e)}
+                onChange={(e) => handleUpdateCity(e)}
                 placeholder="Ingrese la Provincia...."
               />
             </div>

@@ -2,7 +2,7 @@ import React from "react";
 
 import { useDispatch} from "react-redux";
 
-import { getCityData, deleteCity, getAllCities } from "../../../actions/actionAMBReducer";
+import { getCityData, deleteCity, getAllCities } from "../../../actions/actionAMBAdmin";
 
 import styles from "./ABMCiudades.module.css";
 
@@ -16,7 +16,6 @@ const ABMCiudadesList = ({ allCities, setShowModalUpdate }) => {
 
   const handleDeleteCity = async (event) => {
     let response = await dispatch(deleteCity(event.target.value));
-    console.log("response deleted", response);
 
     await dispatch(getAllCities());
   };
@@ -32,6 +31,7 @@ const ABMCiudadesList = ({ allCities, setShowModalUpdate }) => {
         allCities.map((element) => {
           return (
             <div key={element.CP} className={styles.tabla}>
+              <label>{element.CP}</label>
               <label>{element.localidad}</label>
               <label>{element.provincia}</label>
               <button
