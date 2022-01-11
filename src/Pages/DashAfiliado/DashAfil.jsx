@@ -43,38 +43,11 @@ function DashAfil() {
             ...isActive,
             [e.target.name]: !modal
         })
-      };
-
+    };
 
     return (
         <div>
-            {/* <NavBarDashboard/> */}
             <DashContainer/>
-            
-            {/* <Link to='/afiliado/credencial'>
-                <button>Credencial</button>
-            </Link> */}
-            {/* <Link to='/afiliado/prestadores'>
-            <button> Cartilla Prestadores</button></Link> */}
-
-            <button name='token' onClick={toggleClass}> Token </button>
-            {
-                isActive.token && <TokenMedico /> 
-            }
-            <button name='credencial' onClick={toggleClass}> Credencial </button>
-            {
-                isActive.credencial && <Credencial/>
-            }
-
-            <button name='farmacia' onClick={toggleClass}> farmacia </button>
-            {
-                isActive.farmacia && <div> Farmacia </div>
-            }
-            <button name='cartilla' onClick={toggleClass}> cartilla </button>
-            {
-                isActive.cartilla && <div> Cartilla </div>
-            }
-            
         </div>
     )
 }
