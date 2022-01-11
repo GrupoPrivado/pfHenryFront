@@ -133,8 +133,8 @@ const handleSubmit = () =>{
 
             <div>
               <label>Teléfono: </label>
-              <input
-                type="number"
+              <input type="tel"  pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
+              
                 name="telefono"
                 autoComplete="off"
                 value={inputAdherent.telefono}
