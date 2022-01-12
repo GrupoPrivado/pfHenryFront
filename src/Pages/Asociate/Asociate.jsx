@@ -25,7 +25,7 @@ export default function Asociate() {
             <FormAsociate setOutput={setOutput} output={output} modal={modal} setModal={setModal}/>
           </div>
           {modal && (
-            <FormAddAsociateGroup setOutput={setOutput} output={output} />
+            <FormAddAsociateGroup setOutput={setOutput} output={output} modal={modal} setModal={setModal}/>
           )}
           
 
