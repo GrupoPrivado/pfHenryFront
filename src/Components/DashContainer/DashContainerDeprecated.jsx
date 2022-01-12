@@ -8,7 +8,7 @@ import Logo from "./../../assets/bg2.jpg"
 import {Link, useNavigate} from "react-router-dom"
 import { getGroup } from '../../actions/actionGroup'
 import { getAfiliate, getItem, removeItem } from '../../actions/actionAuth';
-import Credencial from './../Credencial/Credencial'
+import Credencial from '../Credencial/Credencial'
 import {getRecetas} from '../../actions/actionRecet'
 
 
@@ -71,16 +71,16 @@ function DashContainer() {
                             {/* <Link to="/afiliado/credencial"> */}
                             <div name='credencial' onClick={toggleClass} className="relative flex flex-col p-4 bg-white rounded-2xl justify-start items-center backdrop-filter backdrop-blur-lg bg-opacity-20 undefined object-top cursor-pointer" >
                                     <div className="mt-4 mb-2 text-lg  text-center text-white">
-                                        <label className='text-xl font-medium'>Credencial</label>
+                                        <label name='credencial' className='text-xl font-medium'>Credencial</label>
                                         <svg name='credencial' xmlns="http://www.w3.org/2000/svg" className="h-28 w-28" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
                                         </svg>
                                     </div>
                             </div>
+                            {
+                                isActive.credencial && <Credencial toggleClass={toggleClass} /> 
+                            }
 
-                                    {
-                                        isActive.credencial && <Credencial toggleClass={toggleClass} /> 
-                                    }
                             {/* </Link> */}
                             <div className="relative flex flex-col p-4 bg-white rounded-2xl justify-start items-center backdrop-filter backdrop-blur-lg bg-opacity-20 undefined object-top">
                                     <div className="mt-4 mb-2 text-lg  text-center text-white">

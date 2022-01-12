@@ -6,7 +6,7 @@ function Credencial({toggleClass}) {
   const { user, route } = useSelector((state) => state.auth);
 
   return (
-    <div name='credencial' onClick={toggleClass} className="z-50 cursor-pointer absolute inset-8 bg-black-rgba">
+    <div name='credencial' onClick={toggleClass} className="z-50 w-screen h-screen cursor-pointer absolute inset-8 bg-black-rgba">
       <div className="flex absolute bg-secondary flex-col">
         <label>{user.nombre}</label>
         <label>{user.apellido}</label>
