@@ -42,12 +42,10 @@ function DashContainer() {
     }, [dispatch, user] )
 
     const toggleClass = (e) => {
-        //console.log(e.target.getAttribute('name'))
-        const name = e.target.getAttribute('name')
-        const modal = isActive[name]
+        const modal = isActive[e.target.name]
         setActive({
             ...isActive,
-            [name]: !modal
+            [e.target.name]: !modal
         })
     };
 
@@ -58,8 +56,8 @@ function DashContainer() {
                 <main className="flex flex-col w-full max-w-5xl m-4 overflow-hidden bg-white shadow-lg lg:flex-row backdrop-filter backdrop-blur-lg bg-opacity-20 rounded-xl lg:m-6">
                     <div className="flex-1 p-4 lg:p-6">
                         <div className="flex items-center mb-8 text-4xl text-white">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-9 w-9" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokelineloin="round" strokeWidth="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-9 w-9" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                             <div className="ml-4 font-bold">Bienvenidx {user.nombre}</div>
                         </div>
@@ -69,10 +67,10 @@ function DashContainer() {
                             <FamilyGroupDash/>
                             
                             {/* <Link to="/afiliado/credencial"> */}
-                            <div name='credencial' onClick={toggleClass} className="relative flex flex-col p-4 bg-white rounded-2xl justify-start items-center backdrop-filter backdrop-blur-lg bg-opacity-20 undefined object-top cursor-pointer" >
+                            <div onClick={toggleClass} className="relative flex flex-col p-4 bg-white rounded-2xl justify-start items-center backdrop-filter backdrop-blur-lg bg-opacity-20 undefined object-top" >
                                     <div className="mt-4 mb-2 text-lg  text-center text-white">
-                                        <label className='text-xl font-medium'>Credencial</label>
-                                        <svg name='credencial' xmlns="http://www.w3.org/2000/svg" className="h-28 w-28" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <button className='text-xl font-medium' name='credencial'>Credencial</button>
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-28 w-28" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
                                         </svg>
                                     </div>
@@ -89,10 +87,10 @@ function DashContainer() {
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
                                         </svg>
                                     </div>
-                            </div>
                                     {
                                         isActive.token && <TokenMedico /> 
                                     }
+                            </div>
                         </div>
                     </div>
                 </main>

@@ -44,7 +44,7 @@ function DashAfil() {
             [e.target.name]: !modal
         })
     };
-
+    // habria que: quitar el div que envuelve a dashcontainer o pasar lo de dash a este componente
     return (
         <div>
             <DashContainer/>
