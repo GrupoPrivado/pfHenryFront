@@ -38,7 +38,7 @@ export default function NavBarDashboard() {
     
     const navigate = useNavigate()
     const { user, route } = useSelector(state => state.auth)
-    
+    console.log(user)
 
     return (
       <>
@@ -100,7 +100,7 @@ export default function NavBarDashboard() {
                               <span className="sr-only">Open user menu</span>
                               <img
                                 className="w-8 h-8 rounded-full"
-                                src={userDetails.imageUrl}
+                                src={user.urlPhoto}
                                 alt=""
                               />
                             </Menu.Button>

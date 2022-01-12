@@ -80,9 +80,33 @@ export const getNewMedicalToken = () => {
   
       console.log('<<< data action >>> ', data)
       if (data.success) {
-        return dispatch({ type: GET_MEDICAL_TOKEN, payload: data.message });
+        return dispatch({ type: GET_AFILIATE, payload: data.message });
       } else {
         return {error: true}
+      }
+      
+    } catch (error) {
+      console.error(error) 
+      return {error: error.message} 
+    }
+  };
+};
+
+export const putProfilePhoto = (payload) => {
+  return async (dispatch) => {
+    try {
+      const token = getItem("userToken");
+      const { data } = await axios.put(`${api}/afiliados/profile`,payload,{
+          headers: {
+            "x-access-token": token,
+          },});
+  
+      console.log('<<< data action >>> ', data)
+      if(data.success){
+        return dispatch({type: GET_AFILIATE, payload: data.message})
+      } else {
+          return dispatch({type: NOT_AUTHENTICATED, payload: data})
+
       }
       
     } catch (error) {
