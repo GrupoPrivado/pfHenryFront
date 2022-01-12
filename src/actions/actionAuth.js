@@ -15,56 +15,79 @@ export const removeItem = (item) => localStorage.removeItem(item)
 export const postAfiliate = (payload) => {
   //console.log('Llega >>>>>>>>', payload)
   return async function (dispatch) {
-    var json = await axios.post(`${api}/addPreCarga`, payload);
-    console.log(' >>>>>>> ', json.data)
-    return json.data
+    try {
+      const {data} = await axios.post(`${api}/addPreCarga`, payload);
+      console.log(' >>>>>>> ', data)
+      return data;
+      // tanto back y front => verificar si el ddni de registro ya existe en la DB
+    } catch (error) {
+      console.error(error) 
+      return {error: error.message} 
+    }
   };
 }
 // token por header => authorization => x - access - token
 export const getAfiliate = (payload) => {
     return async (dispatch) => {
-        const {data} = await axios.get(`${api}/afiliados`, {
-                headers:{
-                    'x-access-token' : payload
-                }
-        });
-        //console.log(data)
-        if(data.success){
-            return dispatch({type: GET_AFILIATE, payload: data.message})
-        } else {
-            return dispatch({type: NOT_AUTHENTICATED, payload: data})
+      try {
+          const {data} = await axios.get(`${api}/afiliados`, {
+                  headers:{
+                      'x-access-token' : payload
+                  }
+          });
+          //console.log(data)
+          if(data.success){
+              return dispatch({type: GET_AFILIATE, payload: data.message})
+          } else {
+              return dispatch({type: NOT_AUTHENTICATED, payload: data})
 
-        }
+          }
+      } catch (error) {
+        console.error(error) 
+        return {error: error.message} 
+      }
     }
 }
 
 export const getMedicalToken = () => {
   return async (dispatch) => {
-    const token = getItem("userToken");
-    const { data } = await axios.get(`${api}/afiliados/tokens`,{
-        headers: {
-          "x-access-token": token,
-        },});
-    if (data.success) {
-      return dispatch({ type: GET_MEDICAL_TOKEN, payload: data.message });
-    } else {
-      return dispatch({ type: NOT_AUTHENTICATED }) 
+    try {
+      const token = getItem("userToken");
+      const { data } = await axios.get(`${api}/afiliados/tokens`,{
+          headers: {
+            "x-access-token": token,
+          },});
+      if (data.success) {
+        return dispatch({ type: GET_MEDICAL_TOKEN, payload: data.message });
+      } else {
+        return dispatch({ type: NOT_AUTHENTICATED }) 
+      }
+      
+    } catch (error) {
+      console.error(error) 
+      return {error: error.message} 
     }
   };
 };
 export const getNewMedicalToken = () => {
   return async (dispatch) => {
-    const token = getItem("userToken");
-    const { data } = await axios.get(`${api}/afiliados/newToken`,{
-        headers: {
-          "x-access-token": token,
-        },});
-
-    console.log('<<< data action >>> ', data)
-    if (data.success) {
-      return dispatch({ type: GET_MEDICAL_TOKEN, payload: data.message });
-    } else {
-      return {error: true}
+    try {
+      const token = getItem("userToken");
+      const { data } = await axios.get(`${api}/afiliados/newToken`,{
+          headers: {
+            "x-access-token": token,
+          },});
+  
+      console.log('<<< data action >>> ', data)
+      if (data.success) {
+        return dispatch({ type: GET_MEDICAL_TOKEN, payload: data.message });
+      } else {
+        return {error: true}
+      }
+      
+    } catch (error) {
+      console.error(error) 
+      return {error: error.message} 
     }
   };
 };

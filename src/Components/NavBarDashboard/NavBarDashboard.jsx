@@ -22,7 +22,7 @@ function classNames(...classes) {
 const navigationa = [
     { name: 'Dashboard', href: '/afiliado', current: true },
     { name: 'Grupo Familiar', href: '/afiliado/group', current: false },
-    { name: 'Credencial Digital', href: '/afiliado/credencial', current: false },
+    { name: 'Credencial Digital', href: '/afiliado/credencial', current: false }, // anularia la ruta
     { name: 'Autorizaciones', href: '/afiliado/autorizaciones', current: false },
     { name: 'Historial', href: '/afiliado/historial', current: false },
     { name: 'Cartilla', href: '/afiliado/prestadores', current: false },
@@ -31,7 +31,6 @@ export default function NavBarDashboard() {
     const [navigation, setNavigation] = useState([
         { name: 'Dashboard', href: '/afiliado', current: true },
         { name: 'Grupo Familiar', href: '/afiliado/group', current: false },
-        { name: 'Credencial Digital', href: '/afiliado/credencial', current: false },
         { name: 'Autorizaciones', href: '/afiliado/autorizaciones', current: false },
         { name: 'Historial', href: '/afiliado/historial', current: false },
         { name: 'Cartilla', href: '/afiliado/prestadores', current: false },
