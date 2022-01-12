@@ -4,6 +4,7 @@ import Afiliado from "./Components/Layout/Afiliado";
 import Guest from "./Components/Layout/Guest";
 import Admin from "./Components/Layout/Admin";
 import { Profesionales } from "./Components/Layout/Profesionales";
+import Footer from "./Components/Footer/Footer";
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path='profesionales/*' element={<Profesionales/>} />
         <Route path='*' element={<div><h1>Recurso no encontrado</h1></div>} />
       </Routes>
+        <Footer />
     </Fragment>
   );
   
