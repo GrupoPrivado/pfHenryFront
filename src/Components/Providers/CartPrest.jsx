@@ -7,7 +7,7 @@ import {
   getAllCities,
   getAllSpecialties,
   filterByCity,
-  filterBySpecialties,
+  
 } from "../../actions/actionProviders";
 
 export default function CartPrest() {
@@ -16,35 +16,45 @@ export default function CartPrest() {
     (state) => state.providers
   );
 
-  const [city, setCity] = useState();
-  const [speciality, setSpeciality] = useState();
-
+  const [filter, setfilter] = useState({
+    city:'',
+    speciality :''
+  });
+  
+  
   useEffect(() => {
     dispatch(getAllProviders());
     dispatch(getAllCities());
     dispatch(getAllSpecialties());
   }, [dispatch]);
 
-  function handleSelectCity(e) {
-    if (e.target.value !== "") {
-      dispatch(filterByCity(e.target.value))
-    }
-    dispatch(filterByCity(city));
+  async function handleSelectCity (e) {
+ const hand = {
+  ...filter,
+  [e.target.name] : e.target.value,
+
+}
+    setfilter(
+      hand
+    )
+      
+    
+     await dispatch(filterByCity(hand.city,hand.speciality));
   }
   
-  function handleSelectSpecialties(e) {
-    if (e.target.value !== "") {
+  // function handleSelectSpecialties(e) {
+  //   if (e.target.value !== "") {
       
-        dispatch(filterBySpecialties(e.target.value));
+  //       dispatch(filterBySpecialties(e.target.value));
       
-    }
+  //   }
     
-  }
+  // }
   
   return (
     <div>
       {/* <NavBarDashboard /> */}
-      <select name="" id="" onClick={handleSelectCity} >
+      <select name="city" id="" onClick={handleSelectCity} >
         <option value="">Seleccione su ciudad</option>
         {cities?.map((e) => (
           <option value={e.CP} key={e._id}>
@@ -52,7 +62,7 @@ export default function CartPrest() {
           </option>
         ))}
       </select>
-      <select name="" id="" >
+      <select name="speciality" id=""  onClick={handleSelectCity}>
         <option value="">Seleccione especialidad</option>
         {specialties?.map((e) => (
           <option value={e.codeEsp} key={e._id}>
