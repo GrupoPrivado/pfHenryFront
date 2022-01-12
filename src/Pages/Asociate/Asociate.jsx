@@ -5,11 +5,14 @@ import FormAddAsociateGroup from "../../Components/FormAsociate/FormAddAsociateG
 //import { postAfiliate } from "../../actions/actionPlanes";
 import { getPlanes } from "../../actions/actionPlanes";
 import NavBar from "../../Components/NavBar/NavBar";
+import { useTitle } from "../../hooks/useTitle";
 
 export default function Asociate() {
     const dispatch = useDispatch()
+    useTitle('Asociate a ArpyMedical')
     useEffect(() => {
-        dispatch(getPlanes());
+      dispatch(getPlanes());
+
       }, [dispatch]);
 
     const [output, setOutput] = useState([])
