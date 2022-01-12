@@ -18,9 +18,8 @@ function Plans() {
         ORO: false
     });
 
-    const toggleClass = (e) => {
-        console.log(e.target.getAttribute('name'))
-        const name = e.target.getAttribute('name')
+    const toggleClass = ({target}) => {
+        const name = target.name
         const modal = active[name]
         setActive({
             ...active,
