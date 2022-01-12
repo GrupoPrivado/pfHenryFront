@@ -7,7 +7,7 @@ export default function FamilyGroupDetail() {
     const { group } = useSelector((state) => state.grupos);
     return (
         <div>
-        <NavbarDasboard/>
+        {/* <NavbarDasboard/> */}
 
             {group && group.map(e => (
                     <CardMemberGroup

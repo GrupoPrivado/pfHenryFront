@@ -1,6 +1,6 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {Link} from "react-router-dom"
-import Banner1 from "./../../assets/bannerCoberturaMedica.jpg"
+//import Banner1 from "./../../assets/bannerCoberturaMedica.jpg"
 import Banner2 from "./../../assets/BannerCoberturaMedica2.jpg"
 
 function CarouselSlide() {

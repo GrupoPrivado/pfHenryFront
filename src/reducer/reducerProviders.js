@@ -1,5 +1,6 @@
 const inicialState = {
   allProviders: [],
+  providers:[],
   cities: [],
   specialties: [],
 };
@@ -8,6 +9,7 @@ export default function reducerPrestadores(state = inicialState, action) {
     case "GET_ALL_PROVIDERS":
       return {
         ...state,
+        providers:action.payload,
         allProviders: action.payload,
       };
     case "GET_ALL_CITIES":
@@ -21,6 +23,18 @@ export default function reducerPrestadores(state = inicialState, action) {
         ...state,
         specialties: action.payload,
       };
+      case "FILTER_BY_CITY":
+        
+ console.log(action.payload)
+      return {
+        ...state,
+        providers: action.payload
+      };
+      // case "FILTER_BY_SPECIALTIES":
+      // return {
+      //   ...state,
+      //   providers: action.payload,
+      // };
 
     default:
       return state;

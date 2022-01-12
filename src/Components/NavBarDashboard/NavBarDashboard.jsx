@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import { logout } from '../../utils/authUtils';
@@ -14,20 +14,28 @@ const userDetails = {
     imageUrl:
         'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
 }
-const navigation = [
-    { name: 'Dashboard', href: '/afiliado', current: true },
-    { name: 'Grupo Familiar', href: '/afiliado/group', current: false },
-    { name: 'Credencial Digital', href: '/afiliado/credencial', current: false },
-    { name: 'Autorizaciones', href: '/afiliado/autorizaciones', current: false },
-    { name: 'Historial', href: '/afiliado/historial', current: false },
-    { name: 'Cartilla', href: '/afiliado/prestadores', current: false },
-]
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
+const navigationa = [
+    { name: 'Dashboard', href: '/afiliado', current: true },
+    { name: 'Grupo Familiar', href: '/afiliado/group', current: false },
+    { name: 'Credencial Digital', href: '/afiliado/credencial', current: false }, // anularia la ruta
+    { name: 'Autorizaciones', href: '/afiliado/autorizaciones', current: false },
+    { name: 'Historial', href: '/afiliado/historial', current: false },
+    { name: 'Cartilla', href: '/afiliado/prestadores', current: false },
+]
 export default function NavBarDashboard() {
+    const [navigation, setNavigation] = useState([
+        { name: 'Dashboard', href: '/afiliado', current: true },
+        { name: 'Grupo Familiar', href: '/afiliado/group', current: false },
+        { name: 'Autorizaciones', href: '/afiliado/autorizaciones', current: false },
+        { name: 'Historial', href: '/afiliado/historial', current: false },
+        { name: 'Cartilla', href: '/afiliado/prestadores', current: false },
+    ])
+    
     const navigate = useNavigate()
     const { user, route } = useSelector(state => state.auth)
 
@@ -48,7 +56,7 @@ export default function NavBarDashboard() {
                                         </div>
                                         <div className="hidden md:block">
                                             <div className="flex items-baseline ml-10 space-x-4">
-                                                {navigation.map((item) => (
+                                                {navigation.map((item, index) => (
                                                     <Link
                                                         key={item.name}
                                                         to={item.href}
@@ -59,6 +67,14 @@ export default function NavBarDashboard() {
                                                             'px-3 py-2 rounded-md text-sm font-medium'
                                                         )}
                                                         aria-current={item.current ? 'page' : undefined}
+                                                        onClick={() =>{
+                                                            const oldState = navigation
+                                                            const prev = oldState.find((e) => e.current === true)
+                                                            prev.current = !prev.current
+
+                                                            oldState[index].current = !oldState[index].current
+                                                            setNavigation([...oldState])
+                                                        }}
                                                     >
                                                         {item.name}
                                                     </Link>
@@ -77,7 +93,7 @@ export default function NavBarDashboard() {
                                             </button>
 
                                             {/* Profile dropdown */}
-                                            <Menu as="div" className="relative ml-3">
+                                            <Menu as="div" className="relative ml-3 z-50">
                                                 <div>
                                                     <Menu.Button className="flex items-center max-w-xs text-sm bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                                                         <span className="sr-only">Open user menu</span>
@@ -97,7 +113,7 @@ export default function NavBarDashboard() {
                                                         <Menu.Item>
                                                             {({ active }) => (
                                                                 <a
-                                                                    href="#"
+                                                                    href="/"
                                                                     className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                                                                 >
                                                                     Perfil
@@ -107,7 +123,7 @@ export default function NavBarDashboard() {
                                                         <Menu.Item>
                                                             {({ active }) => (
                                                                 <a
-                                                                    href="#"
+                                                                    href="/"
                                                                     className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                                                                     onClick={() => { logout(); navigate('/') }}
                                                                 >
