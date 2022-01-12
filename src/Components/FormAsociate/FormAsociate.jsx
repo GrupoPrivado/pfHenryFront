@@ -5,10 +5,21 @@ import { getPlanes } from "../../actions/actionPlanes";
 import { postAfiliate } from "../../actions/actionPlanes";
 import { useNavigate } from "react-router-dom";
 
-export default function FormAsociate({ setOutput, output }) {
+const functionErrors = (data) => {
+  const arrayKeys = Object.keys(data);
+  const arrayData = arrayKeys.filter((element, index) => data[element] !== "");
+  if (arrayKeys.length === arrayData.length) {
+    return false;
+  } else {
+    return true;
+  }
+};
+
+export default function FormAsociate({ setOutput, output, modal, setModal }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { planes } = useSelector((state) => state.planes);
+  const [errors, setErrors] = useState(true);
 
   const [input, setInput] = useState({
     nombre: "",
@@ -26,11 +37,14 @@ export default function FormAsociate({ setOutput, output }) {
   });
 
   function handleChange(e) {
-    setInput({
+    const newInp = {
       ...input,
       [e.target.name]: e.target.value,
-    });
+    };
+    setInput(newInp);
+    setErrors(functionErrors(newInp));
   }
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -55,6 +69,7 @@ export default function FormAsociate({ setOutput, output }) {
       codePlan: "",
       password: "",
     });
+    setErrors(true);
     navigate("/");
   };
   function handleSelect(e) {
@@ -146,7 +161,7 @@ export default function FormAsociate({ setOutput, output }) {
           <input
             required
             className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-            type="text"
+            type="email"
             value={input.correoElectronico}
             name="correoElectronico"
             onChange={(e) => handleChange(e)}
@@ -194,7 +209,7 @@ export default function FormAsociate({ setOutput, output }) {
             Agregar miembro
           </label>
 
-          <button>+</button>
+          <button onClick={() => setModal(!modal)}>+</button>
         </div>
         <div>
           {output?.map((e) => (
@@ -243,14 +258,28 @@ export default function FormAsociate({ setOutput, output }) {
           />
         </div>
 
-        <div>
+        {errors ? (
+          <button
+            type="submit"
+            
+            disabled={errors}
+            className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            Enviar
+          </button>
+        ) : (
+          <button type="submit" className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-700  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            Enviar
+          </button>
+        )}
+        {/* <div>
           <button
             type="submit"
             className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             Enviar
           </button>
-        </div>
+        </div> */}
       </form>
     </div>
   );

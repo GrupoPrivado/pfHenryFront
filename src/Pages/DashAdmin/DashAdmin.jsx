@@ -12,7 +12,7 @@ function DashAdmin() {
     const dispatch = useDispatch();
     const navigate = useNavigate()
     
-    const {user, route} = useSelector(state => state.auth)
+    const {route} = useSelector(state => state.auth)
 
 
     useEffect(() => {
@@ -21,6 +21,7 @@ function DashAdmin() {
   
     return (
         <div>
+
             <NavBarDashAdmin/>
             
             ABM 
@@ -29,6 +30,9 @@ function DashAdmin() {
             <ABMSpecialities/>
             
             <ABMAffiliates/>
+
+           
+        
 
             Dashboard Administrador  
             <button onClick={() => { logout(); navigate('/') }}>Cerrar Sesión</button>
