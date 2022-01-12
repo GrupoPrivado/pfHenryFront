@@ -1,18 +1,18 @@
 import React, {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import Authorizations from '../../Components/Authorizations/Authorizations'
-import FamilyGroupDash from '../../Components/FamilyGroup/FamilyGroupDash'
-import MedicalHistory from '../../Components/MedicalHistory/MedicalHistory'
-import { TokenMedico } from '../../Components/TokenMedico/TokenMedico'
+import Authorizations from '../Authorizations/Authorizations'
+import FamilyGroupDash from '../FamilyGroup/FamilyGroupDash'
+import MedicalHistory from '../MedicalHistory/MedicalHistory'
+import { TokenMedico } from '../TokenMedico/TokenMedico'
 import Logo from "./../../assets/bg2.jpg"
 import {Link, useNavigate} from "react-router-dom"
 import { getGroup } from '../../actions/actionGroup'
 import { getAfiliate, getItem, removeItem } from '../../actions/actionAuth';
-import Credencial from '../../Components/Credencial/Credencial'
+import Credencial from '../Credencial/Credencial'
 import {getRecetas} from '../../actions/actionRecet'
 
 
-function DashAfil() {
+function DashContainer() {
     const { user, route } = useSelector(state => state.auth)
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -101,4 +101,4 @@ function DashAfil() {
     )
 }
 
-export default DashAfil
+export default DashContainer

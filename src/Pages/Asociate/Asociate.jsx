@@ -19,15 +19,15 @@ export default function Asociate() {
     
     return (
       <div>
-        {/* <NavBar /> */}
+        
         <div className="flex">
           <div>
-            <FormAsociate setOutput={setOutput} output={output} />
+            <FormAsociate setOutput={setOutput} output={output} modal={modal} setModal={setModal}/>
           </div>
           {modal && (
-            <FormAddAsociateGroup setOutput={setOutput} output={output} />
+            <FormAddAsociateGroup setOutput={setOutput} output={output} modal={modal} setModal={setModal}/>
           )}
-          <button onClick={() => setModal(!modal)}>añadir miembro</button>
+          
 
           <div></div>
         </div>

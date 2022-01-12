@@ -1,6 +1,23 @@
 import React, { useState } from "react";
 
-export default function FormAddAsociateGroup({ setOutput, output }) {
+
+
+const functionErrors = (data) => {
+  const arrayKeys = Object.keys(data);
+  const arrayData = arrayKeys.filter((element, index) => data[element] !== "");
+console.log('arraykey', arrayKeys)
+console.log('arraydata',arrayData)
+
+  if (arrayKeys.length === arrayData.length +1) {
+    return false;
+  } else {
+    return true;
+  }
+};
+
+export default function FormAddAsociateGroup({ setOutput, output, modal, setModal }) {
+  const [errors, setErrors] = useState(true);
+  console.log(errors)
   const [input, setInput] = useState({
     nombre: "",
     apellido: "",
@@ -16,20 +33,22 @@ export default function FormAddAsociateGroup({ setOutput, output }) {
   });
 
   function handleChange(e) {
-    setInput({
+    const newInp = {
       ...input,
       [e.target.name]: e.target.value,
-    });
+    };
+    setInput(newInp);
+    setErrors(functionErrors(newInp));
   }
-  function handleSelect(e) {
-    if (e.target.value !== "") {
-      setInput({
-        ...input,
-        parentesco: e.target.value,
-      });
-    }
-  }
-  function handleClick(e) {
+  // function handleSelect(e) {
+  //   if (e.target.value !== "") {
+  //     setInput({
+  //       ...input,
+  //       parentesco: e.target.value,
+  //     });
+  //   }
+  // }
+  function handleSubmit(e) {
     e.preventDefault();
     alert("afiliate create");
     setOutput([...output, input]);
@@ -47,6 +66,8 @@ export default function FormAddAsociateGroup({ setOutput, output }) {
       parentesco: "",
       codePlan: "",
     });
+    setErrors(true);
+    setModal(!modal);
   }
 
   return (
@@ -169,9 +190,9 @@ export default function FormAddAsociateGroup({ setOutput, output }) {
             Seleccione su parentesco:
           </label>
           <select
-            name=""
+            name="parentesco"
             id=""
-            onChange={(e) => handleSelect(e)}
+            onChange={(e) => handleChange(e)}
             required
             className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-blue-500 focus:z-10 sm:text-sm"
           >
@@ -183,15 +204,32 @@ export default function FormAddAsociateGroup({ setOutput, output }) {
         </div>
 
         <div className="flex justify-around">
-          <button
+
+          {errors? (<button
             type="submit"
             form="formulario"
-            onClick={handleClick}
+            disabled={errors}
+            onClick={handleSubmit}
+            className="group relative w-28 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            Guardar
+          </button>):(<button
+            type="submit"
+            form="formulario"
+            onClick={handleSubmit}
+            className="group relative w-28 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            Guardar
+          </button>)}
+          {/* <button
+            type="submit"
+            form="formulario"
+            onClick={handleSubmit}
             className="group relative w-28 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-blue-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             Guardar
-          </button>
-          <button className="group relative w-28 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-500 hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+          </button> */}
+          <button onClick={() => setModal(!modal)} className="group relative w-28 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-500 hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             Cancelar
           </button>
         </div>
