@@ -36,19 +36,11 @@ export default function reducerABMAdmin(state = initialState, action) {
       return { ...state, allAffiliates: action.payload };
 
     case "AFFILIATE_DATA":
-      let affData = state.allAffiliates.filter(
-        (element) => element._id === action.payload
-      );
+      console.log('affiliate_data', action.payload)
       return {
         ...state,
-        updateData: affData[0],
+        updateData: action.payload,
       };
-
-
-
-
-
-
 
     case "GET_PLANS":
       return { ...state, allPlans: action.payload };

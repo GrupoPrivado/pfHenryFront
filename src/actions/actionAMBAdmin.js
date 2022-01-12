@@ -1,5 +1,7 @@
 import { api } from "../urlHostApi";
 
+import { getItem } from "./actionAuth";
+
 import axios from "axios";
 
 /************* Actions Para ABM Ciudades***********/
@@ -47,9 +49,9 @@ export function updateCity(data) {
   };
 }
 
-export function deleteCity(data) {
+export function deleteCity(DNIAfilFam) {
   return async (dispatch) => {
-    const response = await axios.delete(`${api}/ciudades/${data}`);
+    const response = await axios.delete(`${api}/ciudades/${DNIAfilFam}`);
     return response.data.message;
     // if(data.success){
     //     return dispatch({type: "GET_CIUDADES", payload: data.message})
@@ -97,7 +99,6 @@ export const getSpecialityData = (data) => {
 
 export function updateSpecialityAct(data) {
   return async (dispatch) => {
-
     const response = await axios.put(`${api}/especialidades`, data);
     return response.data.message;
     // if(data.success){
@@ -128,7 +129,12 @@ export function deleteSpeciality(data) {
 
 export function getAllAffiliates() {
   return async (dispatch) => {
-    const { data } = await axios.get(`${api}/afiliados`);
+    const token = getItem("userToken");
+    const { data } = await axios.get(`${api}/afiliados/all`, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
     if (data.success) {
       return dispatch({ type: "GET_AFFILIATES", payload: data.message });
     } else {
@@ -138,55 +144,68 @@ export function getAllAffiliates() {
 }
 
 export function addAffiliate(data) {
-  // return async (dispatch) => {
-  //   const response = await axios.post(`${api}/afiliados`, data);
-  //   return response.data.message;
-  //   // if(data.success){
-  //   //     return dispatch({type: "GET_CIUDADES", payload: data.message})
-  //   // } else {
-  //   //     return dispatch({type: "ERRORS", payload: data})
+  return async (dispatch) => {
+    const response = await axios.post(`${api}/afiliados`, data);
+    return response.data.message;
+    // if(data.success){
+    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
+    // } else {
+    //     return dispatch({type: "ERRORS", payload: data})
 
-  //   // }
-  // };
+    // }
+  };
 }
 
-export const getAffiliateData = (data) => {
-  // return {
-  //   type: "AFFILIATE_DATA",
-  //   payload: data,
-  // };
+export const getAffiliateData = (payload) => {
+  return async (dispatch) => {
+    const { data } = await axios.get(`${api}/afiliados?idAfilFam=${payload}`, {
+      headers: {
+        "x-access-token": payload,
+      },
+    });
+
+    return dispatch({
+      type: "AFFILIATE_DATA",
+      payload: data.message,
+    });
+    // if(data.success){
+    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
+    // } else {
+    //     return dispatch({type: "ERRORS", payload: data})
+
+    // }
+  };
 };
 
 export function updateAffiliateAct(data) {
-  // return async (dispatch) => {
-  
-  //   const response = await axios.put(`${api}/afiliados`, data);
-  //   return response.data.message;
-  //   // if(data.success){
-  //   //     return dispatch({type: "GET_CIUDADES", payload: data.message})
-  //   // } else {
-  //   //     return dispatch({type: "ERRORS", payload: data})
-
-  //   // }
-  // };
+  console.log('data',data)
+  return async (dispatch) => {
+    const response = await axios.put(`${api}/afiliados/admin`, data);
+    console.log('response', response)
+    return response.data.message;
+    // if(data.success){
+    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
+    // } else {
+    //     return dispatch({type: "ERRORS", payload: data})
+    // }
+  };
 }
 
 export function deleteAffiliate(data) {
-  // return async (dispatch) => {
-  //   const response = await axios.delete(`${api}/afiliado/${data}`);
-  //   return response.data.message;
-  //   // if(data.success){
-  //   //     return dispatch({type: "GET_CIUDADES", payload: data.message})
-  //   // } else {
-  //   //     return dispatch({type: "ERRORS", payload: data})
-
-  //   // }
-  // };
+  return async (dispatch) => {
+    const response = await axios.delete(`${api}/afiliado/${data}`);
+    return response.data.message;
+    // if(data.success){
+    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
+    // } else {
+    //     return dispatch({type: "ERRORS", payload: data})
+    // }
+  };
 }
 
-export function getAllPlans(){
+export function getAllPlans() {
   return async (dispatch) => {
-    const { data } = await axios.get(`${api}/planes`);
+    const { data } = await axios.get(`${api}/planesMutual`);
     if (data.success) {
       return dispatch({ type: "GET_PLANS", payload: data.message });
     } else {
