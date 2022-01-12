@@ -1,6 +1,7 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import DashAfil from '../../Pages/DashAfiliado/DashAfil'
+import MiCuenta from '../../Pages/MiCuenta/MiCuenta'
 import { roles } from '../../utils/roles'
 import Authorizations from '../Authorizations/Authorizations'
 import Credencial from '../Credencial/Credencial'
@@ -28,6 +29,7 @@ const Afiliado = () => {
         <Route path="/autorizaciones" element={<PrivateRouter rol={roles.AFIL}><Authorizations /></PrivateRouter>} />
         <Route path="/historial" element={<PrivateRouter rol={roles.AFIL}><MedicalHistoryDetails /></PrivateRouter>} />
         <Route path="/prestadores" element={<PrivateRouter rol={roles.AFIL}><CartPrest /></PrivateRouter>} />
+        <Route path="/micuenta" element={<PrivateRouter rol={roles.AFIL}><MiCuenta /></PrivateRouter>} />
         <Route path='*' element={<div><h1>Recurso no encontrado</h1></div>} />
 
       </Routes>
