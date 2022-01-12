@@ -12,15 +12,18 @@ const functionErrors = (data) => {
     return false;
   } else {
     return true;
-}
+  }
 }; //cambiarla en un utils ya que se puede usar en todos los forms
 
-const AddAdherent = ({ handleAddAdherent, showModalAdherent, setShowModalAdherent }) => {
+const AddAdherent = ({
+  handleAddAdherent,
+  showModalAdherent,
+  setShowModalAdherent,
+}) => {
+  const [errors, setErrors] = useState(true);
 
-    const [errors, setErrors] = useState(true);
+  const showHideClassName = showModalAdherent ? "displayblock" : "displaynone";
 
-    const showHideClassName = showModalAdherent ? "displayblock" : "displaynone";
-    
   const arrParentesco = [
     { display: "Hijo/a", value: "hijo" },
     { display: "Conyugue", value: "conyugue" },
@@ -41,11 +44,11 @@ const AddAdherent = ({ handleAddAdherent, showModalAdherent, setShowModalAdheren
     parentesco: "",
   });
 
-const handleSubmit = () =>{
-    alert('Me cree')
-    handleAddAdherent(inputAdherent)
+  const handleSubmit = () => {
+    alert("Me cree");
+    handleAddAdherent(inputAdherent);
     setShowModalAdherent(false);
-}
+  };
   const handleChange = (event) => {
     let newAdherent = {
       ...inputAdherent,
@@ -82,7 +85,7 @@ const handleSubmit = () =>{
         <h5>Agregar Nuevo Adherente</h5>
         <div className={styles.container}>
           {/* <form onSubmit={handleSubmit} id="addAdhernt"> */}
-          <form >
+          <form>
             <div>
               <label>Nombre: </label>
               <input
@@ -133,8 +136,9 @@ const handleSubmit = () =>{
 
             <div>
               <label>Teléfono: </label>
-              <input type="tel"  pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
-              
+              <input
+                type="tel"
+                pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
                 name="telefono"
                 autoComplete="off"
                 value={inputAdherent.telefono}
@@ -231,7 +235,7 @@ const handleSubmit = () =>{
               Cargar
             </button>
           ) : (
-            <button  key="submitFormButton" onClick={handleSubmit}>
+            <button key="submitFormButton" onClick={handleSubmit}>
               Cargar
             </button>
           )}

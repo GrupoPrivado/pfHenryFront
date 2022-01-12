@@ -3,7 +3,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { getAllAffiliates } from "../../../actions/actionAMBAdmin";
+import { getAllAffiliates, getAllPlans, } from "../../../actions/actionAMBAdmin";
 
 import AddAffiliate from "./AddAffiliate";
 import UpdateAffiliate from "./UpdateAffiliate";
@@ -19,6 +19,7 @@ const ABMAffiliates = () => {
 
   useEffect(() => {
     dispatch(getAllAffiliates());
+    dispatch(getAllPlans());
   }, [dispatch]);
 
   return (
@@ -27,14 +28,20 @@ const ABMAffiliates = () => {
         Agregar Afiliado
       </button>
 
-      {/* <ABMAffiliatesList allAffiliates={allAffiliates} setShowModalUpdate={setShowModalUpdate}/> */}
+      <ABMAffiliatesList
+        allAffiliates={allAffiliates}
+        setShowModalUpdate={setShowModalUpdate}
+      />
 
-      <AddAffiliate showModalAdd={showModalAdd} setShowModalAdd={setShowModalAdd} />
+      <AddAffiliate
+        showModalAdd={showModalAdd}
+        setShowModalAdd={setShowModalAdd}
+      />
 
-      {/* <UpdateAffiliate
+      <UpdateAffiliate
         showModalUpdate={showModalUpdate}
         setShowModalUpdate={setShowModalUpdate}
-      /> */}
+      />
     </div>
   );
 };

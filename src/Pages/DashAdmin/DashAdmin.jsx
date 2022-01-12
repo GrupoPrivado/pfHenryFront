@@ -25,9 +25,9 @@ function DashAdmin() {
             <NavBarDashAdmin/>
             
             ABM 
-            <ABMCities/>
+            {/* <ABMCities/>
 
-            <ABMSpecialities/>
+            <ABMSpecialities/> */}
             
             <ABMAffiliates/>
 

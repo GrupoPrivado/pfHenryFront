@@ -1,198 +1,263 @@
-// import React from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import { useEffect, useState } from "react";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
-// import {
-//   updateSpecialityAct,
-//   getAllSpecialities,
-//  resetDataUpdate
-// } from "../../../actions/actionAMBAdmin";
+import {
+  updateAffiliateAct,
+  getAllAffiliates,
+  resetDataUpdate,
+} from "../../../actions/actionAMBAdmin";
 
-// import styles from "./UpdateAffiliate.module.css";
+import styles from "./UpdateAffiliate.module.css";
 
-// const functionErrors = (data) => {
-//   const arrayKeys = Object.keys(data);
-//   const arrayData = arrayKeys.filter((element, index) => data[element] !== "");
-//   if (arrayKeys.length === arrayData.length) {
-//     return false;
-//   } else {
-//     return true;
-//   }
-// }; //cambiarla en un utils ya que se puede usar en todos los forms
+const functionErrors = (data) => {
+  const arrayKeys = Object.keys(data);
+  const arrayData = arrayKeys.filter((element, index) => data[element] !== "");
+  if (arrayKeys.length === arrayData.length) {
+    return false;
+  } else {
+    return true;
+  }
+}; //cambiarla en un utils ya que se puede usar en todos los forms
 
-// const UpdateSpeciality = ({ setShowModalUpdate, showModalUpdate }) => {
-//   const dispatch = useDispatch();
-//   const { updateData } = useSelector((state) => state.ABMAdmin);
+const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
+  const dispatch = useDispatch();
+  const { updateData, allPlans } = useSelector((state) => state.ABMAdmin);
 
-//   const [errors, setErrors] = useState(false);
+  const [errors, setErrors] = useState(false);
 
-//   let [updateSpecialityData, setUpdateSpecialityData] = useState({
-//     id: "",
-//     newCodeEsp: "",
-//     newNombre: "",
-//     newDescripcion: "",
-//     newActiva: false,
-//     oldCodeEsp: "",
-//     oldNombre: "",
-//     oldDescripcion: "",
-//     oldActiva: false,
-//   });
+  let [updateAffiliateData, setUpdateAffiliateData] = useState({
+    id: "",
+    telefono: 0,
+    correoElectronico: "",
+    direccion: 0,
+    localidad: "",
+    ciudadCP: 0,
+    provincia: "",
+    codePlan: "",
+    oldTelefono: 0,
+    oldCorreoElectronico: "",
+    oldDireccion: 0,
+    oldLocalidad: "",
+    oldCiudadCP: 0,
+    oldProvincia: "",
+    oldCodePlan: "",
+  });
 
-//   useEffect(() => {
-//     setUpdateSpecialityData({
-//       id: updateData._id,
-//       newCodeEsp: updateData.codeEsp,
-//       newNombre: updateData.nombre,
-//       newDescripcion: updateData.descripcion,
-//       newActiva: updateData.activa,
-//       oldCodeEsp: updateData.codeEsp,
-//       oldNombre: updateData.nombre,
-//       oldDescripcion: updateData.descripcion,
-//       oldActiva: updateData.activa,
-//     });
-//   }, [updateData, dispatch]);
+  useEffect(() => {
+    setUpdateAffiliateData({
+      id: updateData._id,
+      telefono: updateData.telefono,
+      correoElectronico: updateData.correoElectronico,
+      direccion: updateData.direccion,
+      localidad: updateData.localidad,
+      ciudadCP: updateData.ciudadCP,
+      provincia: updateData.provincia,
+      codePlan: updateData.codePlan,
+      oldTelefono: updateData.telefono,
+      oldCorreoElectronico: updateData.correoElectronico,
+      oldDireccion: updateData.direccion,
+      oldLocalidad: updateData.localidad,
+      oldCiudadCP: updateData.ciudadCP,
+      oldProvincia: updateData.provincia,
+      oldCodePlan: updateData.codePlan,
+    });
+  }, [updateData, dispatch]);
 
-//   const handleUpdateSpeciality = async (event) => {
-//     let updatedSpeciality = {
-//       ...updateSpecialityData,
-//       [event.target.name]: event.target.value,
-//     };
+  const handleUpdateAffiliate = async (event) => {
+    let updatedAffiliate = {
+      ...updateAffiliateData,
+      [event.target.name]: event.target.value,
+    };
 
-//     setUpdateSpecialityData(updatedSpeciality);
+    setUpdateAffiliateData(updatedAffiliate);
 
-//     setErrors(functionErrors(updatedSpeciality));
-//   };
+    setErrors(functionErrors(updatedAffiliate));
+  };
 
-//   const handleSubmitUpdateSpeciality = async (event) => {
-//     event.preventDefault();
-//     let response = await dispatch(updateSpecialityAct(updateSpecialityData));
-//     alert(response.success);
-//     setUpdateSpecialityData({
-//       id: "",
-//       newCodeEsp: "",
-//       newNombre: "",
-//       newDescripcion: "",
-//       newActiva: false,
-//       oldCodeEsp: "",
-//       oldNombre: "",
-//       oldDescripcion: "",
-//       oldActiva: false,
-//     });
-//     await dispatch(getAllSpecialities());
-//     dispatch(resetDataUpdate());
-//     setErrors(true);
-//     setShowModalUpdate(false);
-//   };
+  const handleSubmitUpdateAffiliate = async (event) => {
+    event.preventDefault();
+    let response = await dispatch(updateAffiliateAct(updateAffiliateData));
+    alert(response.success);
+    setUpdateAffiliateData({
+      id: "",
+      telefono: 0,
+      correoElectronico: "",
+      direccion: 0,
+      localidad: "",
+      ciudadCP: 0,
+      provincia: "",
+      codePlan: "",
+      oldTelefono: 0,
+      oldCorreoElectronico: "",
+      oldDireccion: 0,
+      oldLocalidad: "",
+      oldCiudadCP: 0,
+      oldProvincia: "",
+      oldCodePlan: "",
+    });
+    await dispatch(getAllAffiliates());
+    dispatch(resetDataUpdate());
+    setErrors(true);
+    setShowModalUpdate(false);
+  };
 
-//   const handleClose = () => {
-//     setUpdateSpecialityData({
-//       id: "",
-//       newCodeEsp: "",
-//       newNombre: "",
-//       newDescripcion: "",
-//       newActiva: false,
-//       oldCodeEsp: "",
-//       oldNombre: "",
-//       oldDescripcion: "",
-//       oldActiva: false,
-//     });
-//     dispatch(resetDataUpdate());
-//     setErrors(true);
-//     setShowModalUpdate(false);
-//   };
+  const handleClose = () => {
+    setUpdateAffiliateData({
+      id: "",
+      telefono: 0,
+      correoElectronico: "",
+      direccion: 0,
+      localidad: "",
+      ciudadCP: 0,
+      provincia: "",
+      codePlan: "",
+      password: "",
+      oldTelefono: 0,
+      oldCorreoElectronico: "",
+      oldDireccion: 0,
+      oldLocalidad: "",
+      oldCiudadCP: 0,
+      oldProvincia: "",
+      oldCodePlan: "",
+      oldPassword: "",
+    });
+    dispatch(resetDataUpdate());
+    setErrors(true);
+    setShowModalUpdate(false);
+  };
 
-//   const showHideClassName = showModalUpdate ? "displayblock" : "displaynone";
+  const showHideClassName = showModalUpdate ? "displayblock" : "displaynone";
 
-//   return (
-//     <div className={styles[showHideClassName]}>
-//       <section className={styles.modalmain}>
-//         <h5>Modificar Especialidad</h5>
-//         <div className={styles.container}>
-//           <form
-//             onSubmit={(e) => handleSubmitUpdateSpeciality(e)}
-//             id="updateSpeciality"
-//           >
-//             <div>
-//               <label>Codigo: </label>
-//               <input
-//                 type="text"
-//                 name="newCodeEsp"
-//                 autoComplete="off"
-//                 value={updateSpecialityData.newCodeEsp}
-//                 onChange={(e) => handleUpdateSpeciality(e)}
-//                 placeholder="Ingrese el Codódigo...."
-//               />
-//             </div>
+  return (
+    <div className={styles[showHideClassName]}>
+      <section className={styles.modalmain}>
+        <h5>Modificar Afiliado</h5>
+        <div className={styles.container}>
+          <form
+            onSubmit={(e) => handleSubmitUpdateAffiliate(e)}
+            id="updateAffiliate"
+          >
+            <div>
+              <label>Teléfono: </label>
+              <input
+                type="number"
+                // pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
+                name="telefono"
+                autoComplete="off"
+                value={updateAffiliateData.telefono}
+                onChange={(e) => handleUpdateAffiliate(e)}
+                placeholder="Ingrese el Teléfono...."
+              />
+            </div>
 
-//             <div>
-//               <label>Nombre: </label>
-//               <input
-//                 type="text"
-//                 name="newNombre"
-//                 autoComplete="off"
-//                 value={updateSpecialityData.newNombre}
-//                 onChange={(e) => handleUpdateSpeciality(e)}
-//                 placeholder="Ingrese el nombre...."
-//               />
-//             </div>
+            <div>
+              <label>E-Mail: </label>
+              <input
+                type="email"
+                name="correoElectronico"
+                autoComplete="off"
+                value={updateAffiliateData.correoElectronico}
+                onChange={(e) => handleUpdateAffiliate(e)}
+                placeholder="Ingrese el E-Mail...."
+              />
+            </div>
 
-//             <div>
-//               <label>Descripción: </label>
-//               <input
-//                 type="text"
-//                 name="newDescripcion"
-//                 autoComplete="off"
-//                 value={updateSpecialityData.newDescripcion}
-//                 onChange={(e) => handleUpdateSpeciality(e)}
-//                 placeholder="Ingrese la Descripcion...."
-//               />
-//             </div>
+            <div>
+              <label>Domicilio: </label>
+              <input
+                type="test"
+                name="direccion"
+                autoComplete="off"
+                value={updateAffiliateData.direccion}
+                onChange={(e) => handleUpdateAffiliate(e)}
+                placeholder="Ingrese el domocilio...."
+              />
+            </div>
 
-//             <select
-//               id="activa"
-//               name="newActiva"
-//               onChange={(e) => handleUpdateSpeciality(e)}
-//               defaultValue={0}
-//             >
-//               <option
-//                 value="false"
-//                 selected={updateSpecialityData.oldActiva === false}
-//               >
-//                 No
-//               </option>
-//               <option
-//                 value="true"
-//                 selected={updateSpecialityData.oldActiva === true}
-//               >
-//                 Si
-//               </option>
-//             </select>
-//           </form>
+            <div>
+              <label>Localidad: </label>
+              <input
+                type="text"
+                name="localidad"
+                autoComplete="off"
+                value={updateAffiliateData.localidad}
+                onChange={(e) => handleUpdateAffiliate(e)}
+                placeholder="Ingrese la Localidad...."
+              />
+            </div>
 
-//           {errors ? (
-//             <button
-//               type="submit"
-//               key="submitFormButton"
-//               form="updateSpeciality"
-//               disabled={errors}
-//               className="disabledButton"
-//             >
-//               Cargar
-//             </button>
-//           ) : (
-//             <button
-//               type="submit"
-//               key="submitFormButton"
-//               form="updateSpeciality"
-//             >
-//               Cargar
-//             </button>
-//           )}
-//           <button onClick={() => handleClose()}>Cerrar</button>
-//         </div>
-//       </section>
-//     </div>
-//   );
-// };
+            <div>
+              <label>C.P.: </label>
+              <input
+                type="number"
+                name="ciudadCP"
+                autoComplete="off"
+                value={updateAffiliateData.ciudadCP}
+                onChange={(e) => handleUpdateAffiliate(e)}
+                placeholder="Ingrese el Cod. Postal...."
+              />
+            </div>
 
-// export default UpdateSpeciality;
+            <div>
+              <label>Provincia: </label>
+              <input
+                type="text"
+                name="provincia"
+                autoComplete="off"
+                value={updateAffiliateData.provincia}
+                onChange={(e) => handleUpdateAffiliate(e)}
+                placeholder="Ingrese la Provincia...."
+              />
+            </div>
+
+            <select
+              id="planes"
+              name="odePlan"
+              onChange={(e) => handleUpdateAffiliate(e)}
+            >
+              <option value="">Seleccione su Plan</option>
+              {allPlans &&
+                allPlans.map((element) => {
+                  return (
+                    <option
+                      value={element.codePlan}
+                      id={element._id}
+                      selected={
+                        element.codePlan === updateAffiliateData.oldCodePlan
+                      }
+                    >
+                      {element.name}
+                    </option>
+                  );
+                })}
+            </select>
+          </form>
+
+          {errors ? (
+            <button
+              type="submit"
+              key="submitFormButton"
+              form="updateAffiliate"
+              disabled={errors}
+              className="disabledButton"
+            >
+              Cargar
+            </button>
+          ) : (
+            <button
+              type="submit"
+              key="submitFormButton"
+              form="updateAffiliate"
+            >
+              Cargar
+            </button>
+          )}
+          <button onClick={() => handleClose()}>Cerrar</button>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default UpdateAffiliate;
