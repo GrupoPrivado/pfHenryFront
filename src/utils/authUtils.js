@@ -4,6 +4,7 @@ import {api} from '../urlHostApi'
 export const getUserToken = async(user) => {
     try {
         const result = await axios.post(`${api}/login`, user);
+        console.log('result authUtils', result)
         if(result.data.token){
             localStorage.setItem('userToken', result.data.token);
             localStorage.setItem('userType', result.data.TipoUsuario);
