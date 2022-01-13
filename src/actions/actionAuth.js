@@ -92,4 +92,26 @@ export const getNewMedicalToken = () => {
   };
 };
   
+export const updateUser = (payload) => {
+  return async (dispatch) => {
+    try {
+      const token = getItem("userToken");
+      const { data } = await axios.put(`${api}/afiliados`,payload,{
+          headers: {
+            "x-access-token": token,
+          },});
+  
+      console.log('<<< data action >>> ', data)
+      if(data.success){
+        return dispatch({type: GET_AFILIATE, payload: data.message})
+      } else {
+          return ;// dispatch({type: NOT_AUTHENTICATED, payload: data})
+      }
+      
+    } catch (error) {
+      console.error(error) 
+      return {error: error.message} 
+    }
+  };
+};
 //if success false =>  si back responde "sin privilegios" => desencadenar => NOT_AUTHENTICATED => ...state, user: {}, route: '' 
