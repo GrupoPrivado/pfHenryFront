@@ -14,7 +14,7 @@ export default function SideBar({showSidebar,setShowSidebar}) {
   // }
 
   return (
-    <div className={`${showSidebar ? "translate-y-0 " : "translate-y-full"} ease-in-out duration-200 `}>
+    <div className={`${showSidebar ? "translate-x-0 " : "translate-x-full"}  `}>
 
       {/* {showSidebar ? (
     <button
