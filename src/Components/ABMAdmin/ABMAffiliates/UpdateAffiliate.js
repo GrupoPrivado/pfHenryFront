@@ -35,6 +35,10 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
     ciudadCP: 0,
     provincia: "",
     codePlan: "",
+    alta: "",
+    activo: "",
+    titularGF: "",
+    codeGF: "",
     oldTelefono: 0,
     oldCorreoElectronico: "",
     oldDireccion: 0,
@@ -42,6 +46,8 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
     oldCiudadCP: 0,
     oldProvincia: "",
     oldCodePlan: "",
+    oldAlta: "",
+    oldActivo: "",
   });
 
   useEffect(() => {
@@ -54,6 +60,10 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
       ciudadCP: updateData.ciudadCP,
       provincia: updateData.provincia,
       codePlan: updateData.codePlan,
+      alta: updateData.alta,
+      activo: updateData.activo,
+      titularGF: updateData.titularGF,
+      codeGF: updateData.codeGF,
       oldTelefono: updateData.telefono,
       oldCorreoElectronico: updateData.correoElectronico,
       oldDireccion: updateData.direccion,
@@ -61,6 +71,8 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
       oldCiudadCP: updateData.ciudadCP,
       oldProvincia: updateData.provincia,
       oldCodePlan: updateData.codePlan,
+      oldAlta: updateData.alta,
+      oldActivo: updateData.activo,
     });
   }, [updateData, dispatch]);
 
@@ -88,6 +100,10 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
       ciudadCP: 0,
       provincia: "",
       codePlan: "",
+      alta: "",
+      activo: "",
+      titularGF: "",
+      codeGF: "",
       oldTelefono: 0,
       oldCorreoElectronico: "",
       oldDireccion: 0,
@@ -95,6 +111,8 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
       oldCiudadCP: 0,
       oldProvincia: "",
       oldCodePlan: "",
+      oldAlta: "",
+      oldActivo: "",
     });
     await dispatch(getAllAffiliates());
     dispatch(resetDataUpdate());
@@ -112,7 +130,10 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
       ciudadCP: 0,
       provincia: "",
       codePlan: "",
-      password: "",
+      alta: "",
+      activo: "",
+      titularGF: "",
+      codeGF: "",
       oldTelefono: 0,
       oldCorreoElectronico: "",
       oldDireccion: 0,
@@ -120,7 +141,8 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
       oldCiudadCP: 0,
       oldProvincia: "",
       oldCodePlan: "",
-      oldPassword: "",
+      oldAlta: "",
+      oldActivo: "",
     });
     dispatch(resetDataUpdate());
     setErrors(true);
@@ -232,6 +254,44 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
                   );
                 })}
             </select>
+
+            <div>
+              <label>Alta: </label>
+              <select name="alta" onChange={(e) => handleUpdateAffiliate(e)}>
+                <option value="">Seleccione:</option>
+                <option
+                  value={true}
+                  selected={true === updateAffiliateData.oldAlta}
+                >
+                  Si
+                </option>
+                <option
+                  value={false}
+                  selected={false === updateAffiliateData.oldAlta}
+                >
+                  No
+                </option>
+              </select>
+            </div>
+
+            <div>
+              <label>Activo: </label>
+              <select name="activo" onChange={(e) => handleUpdateAffiliate(e)}>
+                <option value="">Seleccione:</option>
+                <option
+                  value={true}
+                  selected={true === updateAffiliateData.oldActivo}
+                >
+                  Si
+                </option>
+                <option
+                  value={false}
+                  selected={false === updateAffiliateData.oldActivo}
+                >
+                  No
+                </option>
+              </select>
+            </div>
           </form>
 
           {errors ? (
@@ -245,11 +305,7 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
               Cargar
             </button>
           ) : (
-            <button
-              type="submit"
-              key="submitFormButton"
-              form="updateAffiliate"
-            >
+            <button type="submit" key="submitFormButton" form="updateAffiliate">
               Cargar
             </button>
           )}

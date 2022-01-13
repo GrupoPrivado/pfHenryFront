@@ -18,7 +18,7 @@ export function getAllCities() {
 
 export function addCity(data) {
   return async (dispatch) => {
-    const response = await axios.post(`${api}/ciudades`, data);
+    const response = await axios.post(`${api}/admin/addCity`, data);
     return response.data.message;
     // if(data.success){
     //     return dispatch({type: "GET_CIUDADES", payload: data.message})
@@ -38,7 +38,7 @@ export const getCityData = (data) => {
 
 export function updateCity(data) {
   return async (dispatch) => {
-    const response = await axios.put(`${api}/ciudades`, data);
+    const response = await axios.put(`${api}/admin/updateCity`, data);
     return response.data.message;
     // if(data.success){
     //     return dispatch({type: "GET_CIUDADES", payload: data.message})
@@ -49,9 +49,9 @@ export function updateCity(data) {
   };
 }
 
-export function deleteCity(DNIAfilFam) {
+export function deleteCity(payload) {
   return async (dispatch) => {
-    const response = await axios.delete(`${api}/ciudades/${DNIAfilFam}`);
+    const response = await axios.delete(`${api}/admin/deleteCity/${payload}`);
     return response.data.message;
     // if(data.success){
     //     return dispatch({type: "GET_CIUDADES", payload: data.message})
@@ -79,7 +79,7 @@ export function getAllSpecialities() {
 
 export function addSpeciality(data) {
   return async (dispatch) => {
-    const response = await axios.post(`${api}/especialidades`, data);
+    const response = await axios.post(`${api}/admin/addEspeciality`, data);
     return response.data.message;
     // if(data.success){
     //     return dispatch({type: "GET_CIUDADES", payload: data.message})
@@ -99,7 +99,7 @@ export const getSpecialityData = (data) => {
 
 export function updateSpecialityAct(data) {
   return async (dispatch) => {
-    const response = await axios.put(`${api}/especialidades`, data);
+    const response = await axios.put(`${api}/admin/updateEspeciality`, data);
     return response.data.message;
     // if(data.success){
     //     return dispatch({type: "GET_CIUDADES", payload: data.message})
@@ -112,7 +112,7 @@ export function updateSpecialityAct(data) {
 
 export function deleteSpeciality(data) {
   return async (dispatch) => {
-    const response = await axios.delete(`${api}/especialidades/${data}`);
+    const response = await axios.delete(`${api}/admin/deleteEspeciality/${data}`);
     return response.data.message;
     // if(data.success){
     //     return dispatch({type: "GET_CIUDADES", payload: data.message})
@@ -130,7 +130,7 @@ export function deleteSpeciality(data) {
 export function getAllAffiliates() {
   return async (dispatch) => {
     const token = getItem("userToken");
-    const { data } = await axios.get(`${api}/afiliados/all`, {
+    const { data } = await axios.get(`${api}/admin/all`, {
       headers: {
         "x-access-token": token,
       },
@@ -143,10 +143,16 @@ export function getAllAffiliates() {
   };
 }
 
-export function addAffiliate(data) {
+export function addAffiliate(payload) {
   return async (dispatch) => {
-    const response = await axios.post(`${api}/afiliados`, data);
-    return response.data.message;
+    const token = getItem("userToken");
+    const { data } = await axios.post(`${api}/admin/addAffiliate`, payload, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
+    //const response = await axios.post(`${api}/afiliados`, data);
+    return data;
     // if(data.success){
     //     return dispatch({type: "GET_CIUDADES", payload: data.message})
     // } else {
@@ -158,12 +164,13 @@ export function addAffiliate(data) {
 
 export const getAffiliateData = (payload) => {
   return async (dispatch) => {
-    const { data } = await axios.get(`${api}/afiliados?idAfilFam=${payload}`, {
+    const token = getItem("userToken");
+    const { data } = await axios.get(`${api}/admin/affiliateData?idAfilFam=${payload}`, {
+    //const { data } = await axios.get(`${api}/afiliados`, { idAfilFam: payload} ,{
       headers: {
-        "x-access-token": payload,
+        "x-access-token": token,
       },
     });
-
     return dispatch({
       type: "AFFILIATE_DATA",
       payload: data.message,
@@ -177,12 +184,17 @@ export const getAffiliateData = (payload) => {
   };
 };
 
-export function updateAffiliateAct(data) {
-  console.log('data',data)
+export function updateAffiliateAct(payload) {
   return async (dispatch) => {
-    const response = await axios.put(`${api}/afiliados/admin`, data);
-    console.log('response', response)
-    return response.data.message;
+    const token = getItem("userToken");
+    const { data } = await axios.get(`${api}}/admin/updateAffiliate`, payload, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
+    //  const response = await axios.put(`${api}/afiliados/admin`, data);
+    console.log("response update affiliate", data);
+    return data;
     // if(data.success){
     //     return dispatch({type: "GET_CIUDADES", payload: data.message})
     // } else {
@@ -191,17 +203,18 @@ export function updateAffiliateAct(data) {
   };
 }
 
-export function deleteAffiliate(data) {
-  return async (dispatch) => {
-    const response = await axios.delete(`${api}/afiliado/${data}`);
-    return response.data.message;
-    // if(data.success){
-    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
-    // } else {
-    //     return dispatch({type: "ERRORS", payload: data})
-    // }
-  };
-}
+// export function deleteAffiliate(data) {
+//   return async (dispatch) => {
+//     const token = getItem("userToken");
+//     const response = await axios.delete(`${api}/afiliado/admin/${data}`);
+//     return response.data.message;
+//     // if(data.success){
+//     //     return dispatch({type: "GET_CIUDADES", payload: data.message})
+//     // } else {
+//     //     return dispatch({type: "ERRORS", payload: data})
+//     // }
+//   };
+// }
 
 export function getAllPlans() {
   return async (dispatch) => {

@@ -2,7 +2,7 @@ import React from "react";
 
 import { useDispatch} from "react-redux";
 
-import { getAllAffiliates, getAffiliateData, deleteAffiliate  } from "../../../actions/actionAMBAdmin";
+import { getAllAffiliates, getAffiliateData  } from "../../../actions/actionAMBAdmin";
 
 import styles from "./ABMAffiliates.module.css";
 
@@ -14,12 +14,7 @@ const ABMAffiliatesList = ({ allAffiliates, setShowModalUpdate }) => {
     setShowModalUpdate(true);
   };
 
-  const handleDeleteAffiliate = async (event) => {
-    let response = await dispatch(deleteAffiliate(event.target.value));
-
-    await dispatch(getAllAffiliates());
-  };
-
+  
   return (
     <div className={styles.divScroll}>
       <div className={styles.tabla}>
@@ -40,14 +35,7 @@ const ABMAffiliatesList = ({ allAffiliates, setShowModalUpdate }) => {
               <label>{element.telefono}</label>
               <label>{element.activo?"Si":"No"}</label>
               <label>{element.alta?"Si":"No"}</label>
-              <button
-                key={"delete" + element._id}
-                title="Delete"
-                value={element._id}
-                onClick={(e) => handleDeleteAffiliate(e)}
-              >
-                XXXX
-              </button>
+             
               <button
                 title="Edit"
                 key={"edit" + element._id}

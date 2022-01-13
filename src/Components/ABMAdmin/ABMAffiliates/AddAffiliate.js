@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addAffiliate,
   getAllAffiliates,
-  
 } from "../../../actions/actionAMBAdmin";
 import AddAdherent from "./addAdherent";
 
@@ -45,6 +44,8 @@ const AddAffiliate = ({ showModalAdd, setShowModalAdd }) => {
     provincia: "",
     codePlan: "",
     password: "",
+    alta: "",
+    activo: "",
   });
 
   let [inputAdherent, setInputAdherent] = useState([]);
@@ -97,6 +98,8 @@ const AddAffiliate = ({ showModalAdd, setShowModalAdd }) => {
       provincia: "",
       codePlan: "",
       password: "",
+      alta: "",
+      activo: "",
     });
     await dispatch(getAllAffiliates());
     setErrors(true);
@@ -117,6 +120,8 @@ const AddAffiliate = ({ showModalAdd, setShowModalAdd }) => {
       provincia: "",
       codePlan: "",
       password: "",
+      alta: "",
+      activo: "",
     });
     setErrors(true);
     setShowModalAdd(false);
@@ -263,6 +268,24 @@ const AddAffiliate = ({ showModalAdd, setShowModalAdd }) => {
                   );
                 })}
             </select>
+
+            <div>
+              <label>Alta: </label>
+              <select name="alta" onChange={(e) => handleChange(e)}>
+                <option value="">Seleccione:</option>
+                <option value={true}>Si</option>
+                <option value={false}>No</option>
+              </select>
+            </div>
+
+            <div>
+              <label>Activo: </label>
+              <select name="activo" onChange={(e) => handleChange(e)}>
+                <option value="">Seleccione:</option>
+                <option value={true}>Si</option>
+                <option value={false}>No</option>
+              </select>
+            </div>
           </form>
 
           <div>
