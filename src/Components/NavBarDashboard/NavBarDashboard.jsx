@@ -35,6 +35,9 @@ export default function NavBarDashboard() {
         { name: 'Historial', href: '/afiliado/historial', current: false },
         { name: 'Cartilla', href: '/afiliado/prestadores', current: false },
     ])
+    const [profile, setProfile] = useState([
+        {name: "Perfil", href: "/afiliado/perfil", current: false}
+    ])
     
     const navigate = useNavigate()
     const { user, route } = useSelector(state => state.auth)
@@ -113,10 +116,11 @@ export default function NavBarDashboard() {
                                                         <Menu.Item>
                                                             {({ active }) => (
                                                                 <a
-                                                                    href="/"
-                                                                    className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                                                    href={profile.href}
+                                                                    className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700 cursor-pointer')}
+                                                                    onClick={() => { navigate('/afiliado/perfil') }}
                                                                 >
-                                                                    Perfil
+                                                                    Mi Cuenta
                                                                 </a>
                                                             )}
                                                         </Menu.Item>
