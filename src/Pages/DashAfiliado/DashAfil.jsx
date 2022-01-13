@@ -63,7 +63,7 @@ function DashAfil() {
                             </svg>
                             <div className="ml-4 font-bold">Bienvenidx {user.nombre}</div>
                         </div>
-                        <div className="grid grid-cols-3 gap-4 grid-rows-3 md:grid-rows-2 md:grid-cols-3">
+                        <div className="grid sm:grid-cols-3 gap-4 sm:grid-rows-3 md:grid-rows-2 md:grid-cols-3">
                             <MedicalHistory/> 
                             <Authorizations/>
                             <FamilyGroupDash/>
