@@ -16,12 +16,24 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-export default function NavbarDashAdmin() {
+export default function NavbarDashAdmin({showSidebar,setShowSidebar}) {
     const navigate = useNavigate();
     return (
         <Disclosure as="nav" className="bg-gray-800 	" >
             {({ open }) => (
                 <>
+                {/* <svg
+      onClick={() => setShowSidebar(!showSidebar)}
+      className="fixed  z-30 flex items-center cursor-pointer right-10 top-6"
+      fill="#2563EB"
+      viewBox="0 0 100 80"
+      width="40"
+      height="40"
+    >
+      <rect width="100" height="10"></rect>
+      <rect y="30" width="100" height="10"></rect>
+      <rect y="60" width="100" height="10"></rect>
+    </svg> */}
                     <div className="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8 z-50">
                         <div className="relative flex items-center justify-between h-16 ">
                             <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -35,7 +47,7 @@ export default function NavbarDashAdmin() {
                                     )}
                                 </Disclosure.Button>
                             </div>
-                            <div className="flex items-center justify-center flex-1 sm:items-stretch sm:justify-start">
+                            <div className="flex items-center justify-center flex-1 sm:items-stretch sm:justify-start" onClick={() => setShowSidebar(!showSidebar)}>
                                 <div className="flex items-center flex-shrink-0">
                                     <img
                                         className="block w-auto h-8 lg:hidden"

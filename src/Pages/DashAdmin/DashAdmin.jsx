@@ -7,8 +7,9 @@ import NavBarDashAdmin from '../../Components/NavBarDashboard/NavbarDashAdmin'
 import ABMCities from '../../Components/ABMAdmin/ABMCities/ABMCities';
 import ABMSpecialities from '../../Components/ABMAdmin/ABMSpecialties/ABMSpecialties';
 import ABMAffiliates from '../../Components/ABMAdmin/ABMAffiliates/ABMAffiliates';
-import SideBar from '../../Components/ABMAdmin/ABMSelector/SideBar';
-//import SelectorContainer from '../../Components/ABMAdmin/ABMSelector/SelectorContainer';
+
+
+
 function DashAdmin() {
     const dispatch = useDispatch();
     const navigate = useNavigate()
@@ -24,7 +25,7 @@ function DashAdmin() {
     return (
         <div>
  
- <SideBar/>
+ 
             
 {/*             
             ABM 
