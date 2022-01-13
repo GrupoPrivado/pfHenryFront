@@ -5,15 +5,15 @@ import { getRecetas } from "../../actions/actionRecet";
 
 
 
-function Authorizations() {
+function DashAuthorizations() {
   const dispatch = useDispatch();
   const { user } = useSelector(state => state.auth);
   const { recetas } = useSelector(state => state.recetas);
  
 
-  useEffect(()=>{
-    dispatch(getRecetas(user.DNI))
-  }, [dispatch])
+  // useEffect(()=>{
+  //   dispatch(getRecetas(user.DNI))
+  // }, [dispatch])
 
 
 
@@ -40,4 +40,4 @@ function Authorizations() {
   );
 }
 
-export default Authorizations;
+export default DashAuthorizations;

@@ -37,8 +37,7 @@ export default function NavBarDashboard() {
     ])
     
     const navigate = useNavigate()
-    const { user, route } = useSelector(state => state.auth)
-    console.log(user)
+    const { user, route } = useSelector(state => state.auth)  
 
     return (
       <>
