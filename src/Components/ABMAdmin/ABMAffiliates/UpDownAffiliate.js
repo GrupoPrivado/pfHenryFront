@@ -20,39 +20,29 @@ const functionErrors = (data) => {
   }
 }; //cambiarla en un utils ya que se puede usar en todos los forms
 
-const UpDownAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
+const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
   const dispatch = useDispatch();
   const { updateData } = useSelector((state) => state.ABMAdmin);
 
   const [errors, setErrors] = useState(false);
 
   let [upDownAffiliateData, setupDowndateAffiliateData] = useState({
-    id: "",
-    nombre: 0,
-    apellido: "",
-    DNI: 0,
-    codePlan: "",
+    DNI: "",
     alta: "",
     activo: "",
     titularGF: "",
+    grupoFamiliar: "",
     codeGF: "",
-    oldAlta: "",
-    oldActivo: "",
   });
 
   useEffect(() => {
     setupDowndateAffiliateData({
-      id: updateData._id,
-      nombre: updateData.nombre,
-      apellido: updateData.apellido,
       DNI: updateData.DNI,
-      codePlan: updateData.codePlan,
       alta: updateData.alta,
       activo: updateData.activo,
       titularGF: updateData.titularGF,
+      grupoFamiliar: updateData.grupoFamiliar,
       codeGF: updateData.codeGF,
-      oldAlta: updateData.alta,
-      oldActivo: updateData.activo,
     });
   }, [updateData, dispatch]);
 
@@ -69,47 +59,37 @@ const UpDownAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
 
   const handleSubmitUpdateAffiliate = async (event) => {
     event.preventDefault();
-    let response = await dispatch(updateAffiliateAct(upDownAffiliateData));
+    let response = await dispatch(upDownAffiliateAct(upDownAffiliateData));
     alert(response.success);
     setupDowndateAffiliateData({
-        id: "",
-        nombre: 0,
-        apellido: "",
-        DNI: 0,
-        codePlan: "",
-        alta: "",
-        activo: "",
-        titularGF: "",
-        codeGF: "",
-        oldAlta: "",
-        oldActivo: "",
+      DNI: "",
+      alta: "",
+      activo: "",
+      titularGF: "",
+      grupoFamiliar: "",
+      codeGF: "",
     });
     await dispatch(getAllAffiliates());
     dispatch(resetDataUpdate());
     setErrors(true);
-    setShowModalUpdate(false);
+    setShowModalUpDown(false);
   };
 
   const handleClose = () => {
     setupDowndateAffiliateData({
-        id: "",
-        nombre: 0,
-        apellido: "",
-        DNI: 0,
-        codePlan: "",
-        alta: "",
-        activo: "",
-        titularGF: "",
-        codeGF: "",
-        oldAlta: "",
-        oldActivo: "",
+      DNI: "",
+      alta: "",
+      activo: "",
+      titularGF: "",
+      grupoFamiliar: "",
+      codeGF: "",
     });
     dispatch(resetDataUpdate());
     setErrors(true);
-    setShowModalUpdate(false);
+    setShowModalUpDown(false);
   };
 
-  const showHideClassName = showModalUpdate ? "displayblock" : "displaynone";
+  const showHideClassName = showModalUpDown ? "displayblock" : "displaynone";
 
   return (
     <div className={styles[showHideClassName]}>
@@ -118,94 +98,16 @@ const UpDownAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
         <div className={styles.container}>
           <form
             onSubmit={(e) => handleSubmitUpdateAffiliate(e)}
-            id="updateAffiliate"
+            id="upDownAffiliate"
           >
             <div>
-              <label>Nombre: {}</label>
-           
+              <label>Nombre: {updateData.nombre}</label>
+              <label>Apellido: {updateData.apellido}</label>
+              <label>DNI: {updateData.DNI}</label>
+              <label>Plan: {updateData.codePlan}</label>
+              <label>Grupo familiar: {updateData.codeGF ? codeGF : "No"}</label>
+              <label>Titular: {updateData.titularGF}</label>
             </div>
-
-            <div>
-              <label>E-Mail: </label>
-              <input
-                type="email"
-                name="correoElectronico"
-                autoComplete="off"
-                value={updateAffiliateData.correoElectronico}
-                onChange={(e) => handleUpdateAffiliate(e)}
-                placeholder="Ingrese el E-Mail...."
-              />
-            </div>
-
-            <div>
-              <label>Domicilio: </label>
-              <input
-                type="test"
-                name="direccion"
-                autoComplete="off"
-                value={updateAffiliateData.direccion}
-                onChange={(e) => handleUpdateAffiliate(e)}
-                placeholder="Ingrese el domocilio...."
-              />
-            </div>
-
-            <div>
-              <label>Localidad: </label>
-              <input
-                type="text"
-                name="localidad"
-                autoComplete="off"
-                value={updateAffiliateData.localidad}
-                onChange={(e) => handleUpdateAffiliate(e)}
-                placeholder="Ingrese la Localidad...."
-              />
-            </div>
-
-            <div>
-              <label>C.P.: </label>
-              <input
-                type="number"
-                name="ciudadCP"
-                autoComplete="off"
-                value={updateAffiliateData.ciudadCP}
-                onChange={(e) => handleUpdateAffiliate(e)}
-                placeholder="Ingrese el Cod. Postal...."
-              />
-            </div>
-
-            <div>
-              <label>Provincia: </label>
-              <input
-                type="text"
-                name="provincia"
-                autoComplete="off"
-                value={updateAffiliateData.provincia}
-                onChange={(e) => handleUpdateAffiliate(e)}
-                placeholder="Ingrese la Provincia...."
-              />
-            </div>
-
-            <select
-              id="planes"
-              name="odePlan"
-              onChange={(e) => handleUpdateAffiliate(e)}
-            >
-              <option value="">Seleccione su Plan</option>
-              {allPlans &&
-                allPlans.map((element) => {
-                  return (
-                    <option
-                      value={element.codePlan}
-                      id={element._id}
-                      selected={
-                        element.codePlan === updateAffiliateData.oldCodePlan
-                      }
-                    >
-                      {element.name}
-                    </option>
-                  );
-                })}
-            </select>
 
             <div>
               <label>Alta: </label>
@@ -213,13 +115,13 @@ const UpDownAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
                 <option value="">Seleccione:</option>
                 <option
                   value={true}
-                  selected={true === updateAffiliateData.oldAlta}
+                  selected={true === upDownAffiliateData.oldAlta}
                 >
                   Si
                 </option>
                 <option
                   value={false}
-                  selected={false === updateAffiliateData.oldAlta}
+                  selected={false === upDownAffiliateData.oldAlta}
                 >
                   No
                 </option>
@@ -232,13 +134,13 @@ const UpDownAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
                 <option value="">Seleccione:</option>
                 <option
                   value={true}
-                  selected={true === updateAffiliateData.oldActivo}
+                  selected={true === upDownAffiliateData.oldActivo}
                 >
                   Si
                 </option>
                 <option
                   value={false}
-                  selected={false === updateAffiliateData.oldActivo}
+                  selected={false === upDownAffiliateData.oldActivo}
                 >
                   No
                 </option>
@@ -250,14 +152,14 @@ const UpDownAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
             <button
               type="submit"
               key="submitFormButton"
-              form="updateAffiliate"
+              form="upDownAffiliate"
               disabled={errors}
               className="disabledButton"
             >
               Cargar
             </button>
           ) : (
-            <button type="submit" key="submitFormButton" form="updateAffiliate">
+            <button type="submit" key="submitFormButton" form="upDownAffiliate">
               Cargar
             </button>
           )}

@@ -187,7 +187,7 @@ export const getAffiliateData = (payload) => {
 export function updateAffiliateAct(payload) {
   return async (dispatch) => {
     const token = getItem("userToken");
-    const { data } = await axios.get(`${api}}/admin/updateAffiliate`, payload, {
+    const { data } = await axios.put(`${api}}/admin/updateAffiliate`, payload, {
       headers: {
         "x-access-token": token,
       },
@@ -202,6 +202,26 @@ export function updateAffiliateAct(payload) {
     // }
   };
 }
+
+export function upDownAffiliateAct(payload) {
+  return async (dispatch) => {
+    const token = getItem("userToken");
+    const { data } = await axios.put(`${api}}/admin/upDownAffiliate`, payload, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
+    //  const response = await axios.put(`${api}/afiliados/admin`, data);
+    console.log("response update affiliate", data);
+    return data;
+    // if(data.success){
+    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
+    // } else {
+    //     return dispatch({type: "ERRORS", payload: data})
+    // }
+  };
+}
+
 
 // export function deleteAffiliate(data) {
 //   return async (dispatch) => {
