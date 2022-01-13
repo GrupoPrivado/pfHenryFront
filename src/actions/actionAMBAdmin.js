@@ -184,6 +184,20 @@ export function deleteAffiliate(data) {
   // };
 }
 
+export function getByName(name){
+  return async function(dispatch){
+      try {
+          let json = await axios.get(`${api}/afiliados` + name);
+          return dispatch({
+              type: 'GET_BY_NAME',
+              payload: json.data
+          })
+      } catch (error) {
+          console.log('No se pudo encontrar el afiliado')
+      }
+  }
+}
+
 export function getAllPlans(){
   return async (dispatch) => {
     const { data } = await axios.get(`${api}/planes`);
