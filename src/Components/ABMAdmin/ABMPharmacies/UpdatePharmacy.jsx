@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
 import {
-  updateCity,
-  getAllCities,
+  updatePharmacy,
+  getAllPharmacies,
   resetDataUpdate,
 } from "../../../actions/actionAMBAdmin";
 
-import styles from "./UpdateCity.module.css";
+import styles from "./UpdatePharmacy.module.css";
 
 const functionErrors = (data) => {
   const arrayKeys = Object.keys(data);
@@ -38,12 +38,12 @@ const UpdatePharmacy = ({ setShowModalUpdate, showModalUpdate }) => {
     setUpdatePharmacyData({
       id: updateData._id,
       direccion:  updateData.direccion,
-      telefono:  updateData._id.telefono,
+      telefono:  updateData.telefono,
       mail:  updateData.mail,
     });
   }, [updateData, dispatch]);
 
-  const handleUpdateCity = async (event) => {
+  const handleUpdatePharmacy = async (event) => {
     let updatedPharmacy = {
       ...updatePharmacyData,
       [event.target.name]: event.target.value,
@@ -53,13 +53,13 @@ const UpdatePharmacy = ({ setShowModalUpdate, showModalUpdate }) => {
     setErrors(functionErrors(updatedPharmacy));
   };
 
-  const handleSubmitUpdateCity = async (event) => {
+  const handleSubmitUpdatePharmacy = async (event) => {
     event.preventDefault();
-    let response = await dispatch(UpdatePharmacy(updatePharmacyData));
+    let response = await dispatch(updatePharmacy(updatePharmacyData));
     alert(response.success);
     setUpdatePharmacyData({
       id: "",
-      direccion: "",
+     direccion: "",
       telefono: "",
       mail: "",
     });
@@ -73,9 +73,9 @@ const UpdatePharmacy = ({ setShowModalUpdate, showModalUpdate }) => {
   const handleClose = () => {
     setUpdatePharmacyData({
       id: "",
-      direccion: "",
-      telefono: "",
-      mail: "",
+     direccion: "",
+     telefono: "",
+     mail: "",
     });
     dispatch(resetDataUpdate());
     setErrors(true);
@@ -89,15 +89,15 @@ const UpdatePharmacy = ({ setShowModalUpdate, showModalUpdate }) => {
       <section className={styles.modalmain}>
         <h5>Modificar la Farmacia</h5>
         <div className={styles.container}>
-          <form onSubmit={(e) => handleSubmitUpdateCity(e)} id="updatePharmacy">
+          <form onSubmit={(e) => handleSubmitUpdatePharmacy(e)} id="updPharmacy">
             <div>
-              <label>Dirección: </label>
+               <label>Dirección: </label>
               <input
                   type="text"
                   name="direccion"
                 autoComplete="off"
                 value={updatePharmacyData.direccion}
-                onChange={(e) => handleUpdateCity(e)}
+                onChange={(e) => handleUpdatePharmacy(e)}
                 placeholder="Ingrese la Dirección...."
               />
             </div>
@@ -109,7 +109,7 @@ const UpdatePharmacy = ({ setShowModalUpdate, showModalUpdate }) => {
                 name="telefono"
                 autoComplete="off"
                 value={updatePharmacyData.telefono}
-                onChange={(e) => handleChange(e)}
+                onChange={(e) => handleUpdatePharmacy(e)}
                 placeholder="Ingrese el Teléfono...."
               />
             </div>
@@ -121,7 +121,7 @@ const UpdatePharmacy = ({ setShowModalUpdate, showModalUpdate }) => {
                 name="mail"
                 autoComplete="off"
                 value={updatePharmacyData.mail}
-                onChange={(e) => handleChange(e)}
+                onChange={(e) => handleUpdatePharmacy(e)}
                 placeholder="Ingrese el E-mail...."
               />
             </div>
@@ -131,14 +131,14 @@ const UpdatePharmacy = ({ setShowModalUpdate, showModalUpdate }) => {
             <button
               type="submit"
               key="submitFormButton"
-              form="updatePharmacy"
+              form="updPharmacy"
               disabled={errors}
               className="disabledButton"
             >
               Cargar
             </button>
           ) : (
-            <button type="submit" key="submitFormButton" form="updatePharmacy">
+            <button type="submit" key="submitFormButton" form="updPharmacy">
               Cargar
             </button>
           )}

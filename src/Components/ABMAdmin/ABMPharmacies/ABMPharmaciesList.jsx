@@ -1,6 +1,7 @@
 import React from "react";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
 import {
   getPharmacyData,
@@ -9,7 +10,23 @@ import {
   getAllPharmacies,
 } from "../../../actions/actionAMBAdmin";
 
-import styles from "./ABMPharmaciesList.module.css";
+import styles from "./ABMPharmacies.module.css";
+
+// const pharmacyCity = (allCities, ciudadCP ) =>{
+//   const name = allCities.filter((city) =>
+//     city.CP === ciudadCP
+//   )
+
+//   return name.localidad
+// }
+
+// const pharmacyProv = (allCities, ciudadCP ) =>{
+//   const name = allCities.filter((city) =>
+//     city.CP === ciudadCP
+//   )
+
+//   return name.provincia
+// }
 
 const ABMPharmaciesList = ({ allPharmacies, setShowModalUpdate }) => {
   const dispatch = useDispatch();
@@ -44,19 +61,18 @@ const ABMPharmaciesList = ({ allPharmacies, setShowModalUpdate }) => {
         allPharmacies.map((element) => {
           return (
             <div key={element.nombre} className={styles.tabla}>
+              <label>{element.nombre}</label>
               <label>{element.direccion}</label>
               <label>
                 {
-                  allCities.filter((city) => {
-                    city.CP === element.ciudadCP;
-                  }).nombre
+                  allCities.filter((city) => city.CP === element.ciudadCP)
+                    .nombre
                 }
               </label>
               <label>
                 {
-                  allCities.filter((city) => {
-                    city.CP === element.ciudadCP;
-                  }).provincia
+                  allCities.filter((city) => city.CP === element.ciudadCP)
+                    .provincia
                 }
               </label>
               <label>{element.activa ? "Si" : "No"}</label>
@@ -71,7 +87,7 @@ const ABMPharmaciesList = ({ allPharmacies, setShowModalUpdate }) => {
               <button
                 title="Edit"
                 key={"edit" + element._id}
-                value={element.CP}
+                value={element._id}
                 onClick={(e) => handleEditPharmacy(e)}
               >
                 Edit

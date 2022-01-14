@@ -5,6 +5,7 @@ import { getItem } from "./actionAuth";
 import axios from "axios";
 
 /************* Actions Para ABM Ciudades***********/
+
 export function getAllCities() {
   return async (dispatch) => {
     const { data } = await axios.get(`${api}/ciudades`);
@@ -16,10 +17,16 @@ export function getAllCities() {
   };
 }
 
-export function addCity(data) {
+export function addCity(payload) {
   return async (dispatch) => {
-    const response = await axios.post(`${api}/admin/addCity`, data);
-    return response.data.message;
+    const token = getItem("userToken");
+    const { data } = await axios.post(`${api}/admin/addCity`, payload, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
+    return data;
+
     // if(data.success){
     //     return dispatch({type: "GET_CIUDADES", payload: data.message})
     // } else {
@@ -29,17 +36,23 @@ export function addCity(data) {
   };
 }
 
-export const getCityData = (data) => {
+export const getCityData = (payload) => {
   return {
     type: "CITY_DATA",
-    payload: data,
+    payload: payload,
   };
 };
 
-export function updateCity(data) {
+export function updateCity(payload) {
   return async (dispatch) => {
-    const response = await axios.put(`${api}/admin/updateCity`, data);
-    return response.data.message;
+    const token = getItem("userToken");
+    const { data } = await axios.put(`${api}/admin/updateCity`, payload, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
+    return data;
+
     // if(data.success){
     //     return dispatch({type: "GET_CIUDADES", payload: data.message})
     // } else {
@@ -51,8 +64,14 @@ export function updateCity(data) {
 
 export function deleteCity(payload) {
   return async (dispatch) => {
-    const response = await axios.delete(`${api}/admin/deleteCity/${payload}`);
-    return response.data.message;
+    const token = getItem("userToken");
+    const { data } = await axios.delete(`${api}/admin/deleteCity/${payload}`, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
+    return data;
+
     // if(data.success){
     //     return dispatch({type: "GET_CIUDADES", payload: data.message})
     // } else {
@@ -77,10 +96,16 @@ export function getAllSpecialities() {
   };
 }
 
-export function addSpeciality(data) {
+export function addSpeciality(payload) {
   return async (dispatch) => {
-    const response = await axios.post(`${api}/admin/addEspeciality`, data);
-    return response.data.message;
+    const token = getItem("userToken");
+    const { data } = await axios.post(`${api}/admin/addEspeciality`, payload, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
+    return data;
+
     // if(data.success){
     //     return dispatch({type: "GET_CIUDADES", payload: data.message})
     // } else {
@@ -97,10 +122,20 @@ export const getSpecialityData = (data) => {
   };
 };
 
-export function updateSpecialityAct(data) {
+export function updateSpecialityAct(payload) {
   return async (dispatch) => {
-    const response = await axios.put(`${api}/admin/updateEspeciality`, data);
-    return response.data.message;
+    const token = getItem("userToken");
+    const { data } = await axios.put(
+      `${api}/admin/updateEspeciality`,
+      payload,
+      {
+        headers: {
+          "x-access-token": token,
+        },
+      }
+    );
+    return data;
+
     // if(data.success){
     //     return dispatch({type: "GET_CIUDADES", payload: data.message})
     // } else {
@@ -110,10 +145,19 @@ export function updateSpecialityAct(data) {
   };
 }
 
-export function deleteSpeciality(data) {
+export function deleteSpeciality(payload) {
   return async (dispatch) => {
-    const response = await axios.delete(`${api}/admin/deleteEspeciality/${data}`);
-    return response.data.message;
+    const token = getItem("userToken");
+    const { data } = await axios.delete(
+      `${api}/admin/deleteEspeciality/${payload}`,
+      {
+        headers: {
+          "x-access-token": token,
+        },
+      }
+    );
+    return data;
+
     // if(data.success){
     //     return dispatch({type: "GET_CIUDADES", payload: data.message})
     // } else {
@@ -130,7 +174,7 @@ export function deleteSpeciality(data) {
 export function getAllAffiliates() {
   return async (dispatch) => {
     const token = getItem("userToken");
-    const { data } = await axios.get(`${api}/admin/all`, {
+    const { data } = await axios.get(`${api}/admin/allAffiliates`, {
       headers: {
         "x-access-token": token,
       },
@@ -151,7 +195,7 @@ export function addAffiliate(payload) {
         "x-access-token": token,
       },
     });
-    //const response = await axios.post(`${api}/afiliados`, data);
+
     return data;
     // if(data.success){
     //     return dispatch({type: "GET_CIUDADES", payload: data.message})
@@ -165,16 +209,19 @@ export function addAffiliate(payload) {
 export const getAffiliateData = (payload) => {
   return async (dispatch) => {
     const token = getItem("userToken");
-    const { data } = await axios.get(`${api}/admin/affiliateData?idAfilFam=${payload}`, {
-    //const { data } = await axios.get(`${api}/afiliados`, { idAfilFam: payload} ,{
-      headers: {
-        "x-access-token": token,
-      },
-    });
+    const { data } = await axios.get(
+      `${api}/admin/affiliateData?idAfilFam=${payload}`,
+      {
+        headers: {
+          "x-access-token": token,
+        },
+      }
+    );
     return dispatch({
       type: "AFFILIATE_DATA",
       payload: data.message,
     });
+
     // if(data.success){
     //     return dispatch({type: "GET_CIUDADES", payload: data.message})
     // } else {
@@ -192,8 +239,7 @@ export function updateAffiliateAct(payload) {
         "x-access-token": token,
       },
     });
-    //  const response = await axios.put(`${api}/afiliados/admin`, data);
-    console.log("response update affiliate", data);
+
     return data;
     // if(data.success){
     //     return dispatch({type: "GET_CIUDADES", payload: data.message})
@@ -211,9 +257,8 @@ export function upDownAffiliateAct(payload) {
         "x-access-token": token,
       },
     });
-    //  const response = await axios.put(`${api}/afiliados/admin`, data);
-    console.log("response update affiliate", data);
     return data;
+
     // if(data.success){
     //     return dispatch({type: "GET_CIUDADES", payload: data.message})
     // } else {
@@ -221,20 +266,6 @@ export function upDownAffiliateAct(payload) {
     // }
   };
 }
-
-
-// export function deleteAffiliate(data) {
-//   return async (dispatch) => {
-//     const token = getItem("userToken");
-//     const response = await axios.delete(`${api}/afiliado/admin/${data}`);
-//     return response.data.message;
-//     // if(data.success){
-//     //     return dispatch({type: "GET_CIUDADES", payload: data.message})
-//     // } else {
-//     //     return dispatch({type: "ERRORS", payload: data})
-//     // }
-//   };
-// }
 
 export function getAllPlans() {
   return async (dispatch) => {
@@ -250,6 +281,7 @@ export function getAllPlans() {
 /************* FIN Actions Para ABM Afiliados***********/
 
 /************* Actions Para ABM Farmacias***********/
+
 export function getAllPharmacies() {
   return async (dispatch) => {
     const { data } = await axios.get(`${api}/farmacias`);
@@ -261,10 +293,18 @@ export function getAllPharmacies() {
   };
 }
 
-export function addPharmacy(data) {
+export function addPharmacy(payload) {
   return async (dispatch) => {
-    const response = await axios.post(`${api}/admin/addPharmacy`, data);
-    return response.data.message;
+    const token = getItem("userToken");
+    const { data } = await axios.post(`${api}/admin/addPharmacy`, payload, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
+    return data;
+
+    // const response = await axios.post(`${api}/admin/addPharmacy`, data);
+    // return response.data.message;
     // if(data.success){
     //     return dispatch({type: "GET_CIUDADES", payload: data.message})
     // } else {
@@ -274,17 +314,24 @@ export function addPharmacy(data) {
   };
 }
 
-export const getPharmacyData = (data) => {
+export const getPharmacyData = (payload) => {
   return {
     type: "PHARMACY_DATA",
-    payload: data,
+    payload: payload,
   };
 };
 
-export function updateCity(data) {
+export function updatePharmacy(payload) {
   return async (dispatch) => {
-    const response = await axios.put(`${api}/admin/updatePharmacy`, data);
-    return response.data.message;
+    const token = getItem("userToken");
+    const { data } = await axios.put(`${api}/admin/updatePharmacy`, payload, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
+
+    return data;
+
     // if(data.success){
     //     return dispatch({type: "GET_CIUDADES", payload: data.message})
     // } else {
@@ -294,10 +341,19 @@ export function updateCity(data) {
   };
 }
 
-export function deleteCity(payload) {
+export function deletePharmacy(payload) {
   return async (dispatch) => {
-    const response = await axios.delete(`${api}/admin/deletePharmacy/${payload}`);
-    return response.data.message;
+    const token = getItem("userToken");
+    const { data } = await axios.delete(
+      `${api}/admin/deletePharmacy/${payload}`,
+      {
+        headers: {
+          "x-access-token": token,
+        },
+      }
+    );
+    return data;
+
     // if(data.success){
     //     return dispatch({type: "GET_CIUDADES", payload: data.message})
     // } else {
@@ -309,11 +365,11 @@ export function deleteCity(payload) {
 
 /************* Fin Actions Para ABM Farmacias***********/
 
-
 /*************Actions Comunes Para ABM***********/
 export const resetDataUpdate = () => {
   return {
     type: "DATA_RESET",
   };
 };
+
 /*************FIN Actions Comunes Para ABM***********/

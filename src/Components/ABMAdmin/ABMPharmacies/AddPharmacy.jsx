@@ -1,11 +1,11 @@
 import React from "react";
 
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { addPharmacy, getAllPharmacies } from "../../../actions/actionAMBAdmin";
 
-import styles from "./addPharmacy.module.css"
+import styles from "./addPharmacy.module.css";
 
 const functionErrors = (data) => {
   const arrayKeys = Object.keys(data);
@@ -59,7 +59,7 @@ const AddPharmacy = ({ showModalAdd, setShowModalAdd }) => {
       numHabilitacion: 0,
       ciudadCP: 0,
     });
-    await dispatch(getAllPharmacies())
+    await dispatch(getAllPharmacies());
     setErrors(true);
     setShowModalAdd(false);
   };
@@ -158,7 +158,6 @@ const AddPharmacy = ({ showModalAdd, setShowModalAdd }) => {
                 );
               })}
             </select>
-
           </form>
 
           {errors ? (
