@@ -37,14 +37,14 @@ function MedicalHistory() {
     ]
     }
     return (
-        <Link to="/afiliado/historial">
-                <div className="relative flex flex-col justify-center w-full p-4 m-10 bg-white md:col-span-2 md:row-span-2 rounded-2xl backdrop-filter backdrop-blur-lg bg-opacity-20 undefined">
+        <Link className='relative flex flex-col justify-center p-4 bg-white  md:col-span-1 rounded-2xl backdrop-filter backdrop-blur-lg bg-opacity-20 undefined sm:row-span-1 sm:col-span-3 md:row-span-1' to="/afiliado/historial">
+                <div>
                     <div className="mt-4 mb-2 text-lg font-medium text-center text-white">
-                        <h1>Historial Médico</h1>
+                        <h3>Historial Médico</h3>
                     </div>
-                    <div className='flex flex-col justify-around px-2.5 w-full font-normal text-white shrink-0'>
+                    <div className='flex flex-col px-2.5 font-normal text-white w-full shrink-0'>
                         {history.consult.map((el) => (
-                            <li className='flex justify-between text-left' key={el.professionalName}>
+                            <li className='flex justify-between sm:px-10 md:px-0 text-left' key={el.professionalName}>
                                 <p>{el.date}</p>
                                 <p>{el.specialty}</p>
                             </li>

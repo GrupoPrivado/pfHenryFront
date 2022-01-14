@@ -8,6 +8,8 @@ import Logo from "./../../assets/bg2.jpg"
 import {Link, useNavigate} from "react-router-dom"
 import { getGroup } from '../../actions/actionGroup'
 import { getAfiliate, getItem, removeItem } from '../../actions/actionAuth';
+import Credencial from './../Credencial/Credencial'
+import {getRecetas} from '../../actions/actionRecet'
 
 
 function DashContainer() {
@@ -35,6 +37,10 @@ function DashContainer() {
         if(user.codeGF) dispatch(getGroup(user.codeGF))
     }, [dispatch, user] )
 
+    useEffect(()=>{
+        if(user.DNI) dispatch(getRecetas(user.DNI))
+    }, [dispatch, user] )
+
     const toggleClass = (e) => {
         const modal = isActive[e.target.name]
         setActive({
@@ -42,6 +48,7 @@ function DashContainer() {
             [e.target.name]: !modal
         })
     };
+
     return (
         <div>
             <style dangerouslySetInnerHTML={{ __html: "\n\t@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&display=swap');\n\n\t* {\n\t\tfont-family: 'Noto Sans JP', sans-serif;\n\t}\n\n\t.bg-app {\n\t\tbackground-image: url('');\n\t}\n" }} />
@@ -54,25 +61,36 @@ function DashContainer() {
                             </svg>
                             <div className="ml-4 font-bold">Bienvenidx {user.nombre}</div>
                         </div>
-                        <div className="grid grid-cols-1 gap-4 grid-rows-7 md:grid-rows-3 md:grid-cols-3">
+                        <div className="grid grid-cols-3 gap-4 grid-rows-3 md:grid-rows-2 md:grid-cols-3">
                             <MedicalHistory/> 
-                            <FamilyGroupDash/>
                             <Authorizations/>
-                            <Link to="/afiliado/credencial">
-                                <div className="relative flex flex-col p-4 bg-white rounded-2xl backdrop-filter backdrop-blur-lg bg-opacity-20 undefined">
-                                    <div className="mt-4 mb-2 text-lg font-medium text-center text-white">
-                                        <h1>Credencial</h1>
+                            <FamilyGroupDash/>
+                            
+                            {/* <Link to="/afiliado/credencial"> */}
+                            <div onClick={toggleClass} className="relative flex flex-col p-4 bg-white rounded-2xl justify-start items-center backdrop-filter backdrop-blur-lg bg-opacity-20 undefined object-top" >
+                                    <div className="mt-4 mb-2 text-lg  text-center text-white">
+                                        <button className='text-xl font-medium' name='credencial'>Credencial</button>
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-28 w-28" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                                        </svg>
                                     </div>
-                                </div>
-                            </Link>
-                            <div className="relative flex flex-col p-4 bg-white rounded-2xl backdrop-filter backdrop-blur-lg bg-opacity-20 undefined">
-                                    <div className="mt-4 mb-2 text-lg font-medium text-center text-white">
-                                        <button name='token' onClick={toggleClass}> Token </button>
+                            </div>
+
+                                    {
+                                        isActive.credencial && <Credencial toggleClass={toggleClass} /> 
+                                    }
+                            {/* </Link> */}
+                            <div className="relative flex flex-col p-4 bg-white rounded-2xl justify-start items-center backdrop-filter backdrop-blur-lg bg-opacity-20 undefined object-top">
+                                    <div className="mt-4 mb-2 text-lg  text-center text-white">
+                                        <button className='text-xl font-medium' name='token' onClick={toggleClass}>Token</button>
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-28 w-28" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+                                        </svg>
                                     </div>
                                     {
                                         isActive.token && <TokenMedico /> 
                                     }
-                                </div>
+                            </div>
                         </div>
                     </div>
                 </main>
