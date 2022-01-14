@@ -7,6 +7,7 @@ import NavBarDashAdmin from '../../Components/NavBarDashboard/NavbarDashAdmin'
 import ABMCities from '../../Components/ABMAdmin/ABMCities/ABMCities';
 import ABMSpecialities from '../../Components/ABMAdmin/ABMSpecialties/ABMSpecialties';
 import ABMAffiliates from '../../Components/ABMAdmin/ABMAffiliates/ABMAffiliates';
+import ABMPharmacies from '../../Components/ABMAdmin/ABMPharmacies/ABMPharmacies';
 
 
 
@@ -26,20 +27,22 @@ function DashAdmin() {
         <div>
  
  
+
+            {/* <NavBarDashAdmin/> 
             
-{/*             
+             
             ABM 
             <ABMCities/>
 
             <ABMSpecialities/>
             
-            <ABMAffiliates/>
+             <ABMAffiliates/> */}
 
-           
+           <ABMPharmacies/>
         
 
             Dashboard Administrador  
-            <button onClick={() => { logout(); navigate('/') }}>Cerrar Sesión</button> */}
+            <button onClick={() => { logout(); navigate('/') }}>Cerrar Sesión</button> 
 
 
         </div> 

@@ -3,6 +3,7 @@ const initialState = {
   allSpecialities: [],
   allAffiliates: [],
   allPlans: [],
+  allPharmacies: [],
   updateData: {},
 };
 
@@ -36,22 +37,26 @@ export default function reducerABMAdmin(state = initialState, action) {
       return { ...state, allAffiliates: action.payload };
 
     case "AFFILIATE_DATA":
-      let affData = state.allAffiliates.filter(
+      console.log("affiliate_data", action.payload);
+      return {
+        ...state,
+        updateData: action.payload,
+      };
+
+    case "GET_PLANS":
+      return { ...state, allPlans: action.payload };
+
+    case "GET_PHARMACIES":
+      return { ...state, allPharmacies: action.payload };
+
+    case "PHARMACY_DATA":
+      let pharmData = state.allPharmacies.filter(
         (element) => element._id === action.payload
       );
       return {
         ...state,
-        updateData: affData[0],
+        updateData: pharmData[0],
       };
-
-
-
-
-
-
-
-    case "GET_PLANS":
-      return { ...state, allPlans: action.payload };
 
     case "DATA_RESET":
       return { ...state, updateData: {} };

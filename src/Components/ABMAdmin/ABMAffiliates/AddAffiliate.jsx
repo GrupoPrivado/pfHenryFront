@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addAffiliate,
   getAllAffiliates,
-  getAllPlans,
 } from "../../../actions/actionAMBAdmin";
 import AddAdherent from "./addAdherent";
 
@@ -28,10 +27,6 @@ const AddAffiliate = ({ showModalAdd, setShowModalAdd }) => {
 
   const { allPlans } = useSelector((state) => state.ABMAdmin);
 
-  useEffect(() => {
-    dispatch(getAllPlans());
-  }, [dispatch]);
-
   let [showModalAdherent, setShowModalAdherent] = useState(false);
 
   const [errors, setErrors] = useState(true);
@@ -47,11 +42,12 @@ const AddAffiliate = ({ showModalAdd, setShowModalAdd }) => {
     localidad: "",
     ciudadCP: 0,
     provincia: "",
-    plan: "dsfsfds",
+    codePlan: "",
     password: "",
+    alta: "",
+    activo: "",
   });
 
-  let [outputAffiliate, setOutpuAffiliate] = useState([]);
   let [inputAdherent, setInputAdherent] = useState([]);
 
   const showHideClassName = showModalAdd ? "displayblock" : "displaynone";
@@ -61,6 +57,9 @@ const AddAffiliate = ({ showModalAdd, setShowModalAdd }) => {
       ...inputAffiliate,
       [event.target.name]: event.target.value,
     };
+    if (event.target.name === "DNI") {
+      newAffiliate = { ...newAffiliate, password: event.target.value };
+    }
     setInputAffiliate(newAffiliate);
 
     setErrors(functionErrors(newAffiliate));
@@ -72,9 +71,18 @@ const AddAffiliate = ({ showModalAdd, setShowModalAdd }) => {
     setInputAdherent([...inputAdherent, data]);
   };
 
+  const deleteAdherent = (event) => {
+    const adherentArray = inputAdherent.filter(
+      (element) => element.DNI !== event.target.name
+    );
+    if (adherentArray) setInputAdherent(adherentArray);
+    else setInputAdherent([]);
+  };
+
   const handleSubmitAffiliate = async (event) => {
     event.preventDefault();
-    await setOutpuAffiliate([inputAffiliate, ...inputAdherent]);
+    const outputAffiliate = [inputAffiliate, ...inputAdherent];
+
     let response = await dispatch(addAffiliate(outputAffiliate));
     alert(response.success);
     setInputAffiliate({
@@ -88,8 +96,10 @@ const AddAffiliate = ({ showModalAdd, setShowModalAdd }) => {
       localidad: "",
       ciudadCP: 0,
       provincia: "",
-      plan: "",
+      codePlan: "",
       password: "",
+      alta: "",
+      activo: "",
     });
     await dispatch(getAllAffiliates());
     setErrors(true);
@@ -108,8 +118,10 @@ const AddAffiliate = ({ showModalAdd, setShowModalAdd }) => {
       localidad: "",
       ciudadCP: 0,
       provincia: "",
-      plan: "",
+      codePlan: "",
       password: "",
+      alta: "",
+      activo: "",
     });
     setErrors(true);
     setShowModalAdd(false);
@@ -241,7 +253,11 @@ const AddAffiliate = ({ showModalAdd, setShowModalAdd }) => {
               />
             </div>
 
-            <select id="planes" name="plan" onChange={(e) => handleChange(e)}>
+            <select
+              id="planes"
+              name="codePlan"
+              onChange={(e) => handleChange(e)}
+            >
               <option value="">Seleccione su Plan</option>
               {allPlans &&
                 allPlans.map((element) => {
@@ -254,22 +270,42 @@ const AddAffiliate = ({ showModalAdd, setShowModalAdd }) => {
             </select>
 
             <div>
-              <label>Contraseña: </label>
-              <input
-                type="password"
-                name="password"
-                autoComplete="off"
-                value={inputAffiliate.password}
-                onChange={(e) => handleChange(e)}
-                placeholder="Ingrese la contraseña...."
-              />
+              <label>Alta: </label>
+              <select name="alta" onChange={(e) => handleChange(e)}>
+                <option value="">Seleccione:</option>
+                <option value={true}>Si</option>
+                <option value={false}>No</option>
+              </select>
             </div>
 
+            <div>
+              <label>Activo: </label>
+              <select name="activo" onChange={(e) => handleChange(e)}>
+                <option value="">Seleccione:</option>
+                <option value={true}>Si</option>
+                <option value={false}>No</option>
+              </select>
+            </div>
           </form>
 
           <div>
-
-
+            {inputAdherent &&
+              inputAdherent.map((element) => {
+                return (
+                  <div>
+                    <label id={"label" + element.nombre}>
+                      {element.nombre + " " + element.apellido}
+                    </label>
+                    <button
+                      id={"delete" + element.nombre}
+                      name={element.DNI}
+                      onClick={(e) => deleteAdherent(e)}
+                    >
+                      XXX
+                    </button>
+                  </div>
+                );
+              })}
           </div>
 
           {errors ? (
@@ -287,7 +323,9 @@ const AddAffiliate = ({ showModalAdd, setShowModalAdd }) => {
               Cargar
             </button>
           )}
-          <button onClick={() => setShowModalAdherent(true)}>Agregar Adherente</button>
+          <button onClick={() => setShowModalAdherent(true)}>
+            Agregar Adherente
+          </button>
           <button onClick={() => handleClose()}>Cerrar</button>
         </div>
       </section>

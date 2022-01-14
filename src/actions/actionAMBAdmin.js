@@ -1,8 +1,11 @@
 import { api } from "../urlHostApi";
 
+import { getItem } from "./actionAuth";
+
 import axios from "axios";
 
 /************* Actions Para ABM Ciudades***********/
+
 export function getAllCities() {
   return async (dispatch) => {
     const { data } = await axios.get(`${api}/ciudades`);
@@ -14,10 +17,16 @@ export function getAllCities() {
   };
 }
 
-export function addCity(data) {
+export function addCity(payload) {
   return async (dispatch) => {
-    const response = await axios.post(`${api}/ciudades`, data);
-    return response.data.message;
+    const token = getItem("userToken");
+    const { data } = await axios.post(`${api}/admin/addCity`, payload, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
+    return data;
+
     // if(data.success){
     //     return dispatch({type: "GET_CIUDADES", payload: data.message})
     // } else {
@@ -27,17 +36,23 @@ export function addCity(data) {
   };
 }
 
-export const getCityData = (data) => {
+export const getCityData = (payload) => {
   return {
     type: "CITY_DATA",
-    payload: data,
+    payload: payload,
   };
 };
 
-export function updateCity(data) {
+export function updateCity(payload) {
   return async (dispatch) => {
-    const response = await axios.put(`${api}/ciudades`, data);
-    return response.data.message;
+    const token = getItem("userToken");
+    const { data } = await axios.put(`${api}/admin/updateCity`, payload, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
+    return data;
+
     // if(data.success){
     //     return dispatch({type: "GET_CIUDADES", payload: data.message})
     // } else {
@@ -47,10 +62,16 @@ export function updateCity(data) {
   };
 }
 
-export function deleteCity(data) {
+export function deleteCity(payload) {
   return async (dispatch) => {
-    const response = await axios.delete(`${api}/ciudades/${data}`);
-    return response.data.message;
+    const token = getItem("userToken");
+    const { data } = await axios.delete(`${api}/admin/deleteCity/${payload}`, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
+    return data;
+
     // if(data.success){
     //     return dispatch({type: "GET_CIUDADES", payload: data.message})
     // } else {
@@ -75,10 +96,16 @@ export function getAllSpecialities() {
   };
 }
 
-export function addSpeciality(data) {
+export function addSpeciality(payload) {
   return async (dispatch) => {
-    const response = await axios.post(`${api}/especialidades`, data);
-    return response.data.message;
+    const token = getItem("userToken");
+    const { data } = await axios.post(`${api}/admin/addEspeciality`, payload, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
+    return data;
+
     // if(data.success){
     //     return dispatch({type: "GET_CIUDADES", payload: data.message})
     // } else {
@@ -95,11 +122,20 @@ export const getSpecialityData = (data) => {
   };
 };
 
-export function updateSpecialityAct(data) {
+export function updateSpecialityAct(payload) {
   return async (dispatch) => {
+    const token = getItem("userToken");
+    const { data } = await axios.put(
+      `${api}/admin/updateEspeciality`,
+      payload,
+      {
+        headers: {
+          "x-access-token": token,
+        },
+      }
+    );
+    return data;
 
-    const response = await axios.put(`${api}/especialidades`, data);
-    return response.data.message;
     // if(data.success){
     //     return dispatch({type: "GET_CIUDADES", payload: data.message})
     // } else {
@@ -109,10 +145,19 @@ export function updateSpecialityAct(data) {
   };
 }
 
-export function deleteSpeciality(data) {
+export function deleteSpeciality(payload) {
   return async (dispatch) => {
-    const response = await axios.delete(`${api}/especialidades/${data}`);
-    return response.data.message;
+    const token = getItem("userToken");
+    const { data } = await axios.delete(
+      `${api}/admin/deleteEspeciality/${payload}`,
+      {
+        headers: {
+          "x-access-token": token,
+        },
+      }
+    );
+    return data;
+
     // if(data.success){
     //     return dispatch({type: "GET_CIUDADES", payload: data.message})
     // } else {
@@ -128,7 +173,12 @@ export function deleteSpeciality(data) {
 
 export function getAllAffiliates() {
   return async (dispatch) => {
-    const { data } = await axios.get(`${api}/afiliados`);
+    const token = getItem("userToken");
+    const { data } = await axios.get(`${api}/admin/allAffiliates`, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
     if (data.success) {
       return dispatch({ type: "GET_AFFILIATES", payload: data.message });
     } else {
@@ -137,56 +187,89 @@ export function getAllAffiliates() {
   };
 }
 
-export function addAffiliate(data) {
-  // return async (dispatch) => {
-  //   const response = await axios.post(`${api}/afiliados`, data);
-  //   return response.data.message;
-  //   // if(data.success){
-  //   //     return dispatch({type: "GET_CIUDADES", payload: data.message})
-  //   // } else {
-  //   //     return dispatch({type: "ERRORS", payload: data})
+export function addAffiliate(payload) {
+  return async (dispatch) => {
+    const token = getItem("userToken");
+    const { data } = await axios.post(`${api}/admin/addAffiliate`, payload, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
 
-  //   // }
-  // };
+    return data;
+    // if(data.success){
+    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
+    // } else {
+    //     return dispatch({type: "ERRORS", payload: data})
+
+    // }
+  };
 }
 
-export const getAffiliateData = (data) => {
-  // return {
-  //   type: "AFFILIATE_DATA",
-  //   payload: data,
-  // };
+export const getAffiliateData = (payload) => {
+  return async (dispatch) => {
+    const token = getItem("userToken");
+    const { data } = await axios.get(
+      `${api}/admin/affiliateData?idAfilFam=${payload}`,
+      {
+        headers: {
+          "x-access-token": token,
+        },
+      }
+    );
+    return dispatch({
+      type: "AFFILIATE_DATA",
+      payload: data.message,
+    });
+
+    // if(data.success){
+    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
+    // } else {
+    //     return dispatch({type: "ERRORS", payload: data})
+
+    // }
+  };
 };
 
-export function updateAffiliateAct(data) {
-  // return async (dispatch) => {
-  
-  //   const response = await axios.put(`${api}/afiliados`, data);
-  //   return response.data.message;
-  //   // if(data.success){
-  //   //     return dispatch({type: "GET_CIUDADES", payload: data.message})
-  //   // } else {
-  //   //     return dispatch({type: "ERRORS", payload: data})
-
-  //   // }
-  // };
-}
-
-export function deleteAffiliate(data) {
-  // return async (dispatch) => {
-  //   const response = await axios.delete(`${api}/afiliado/${data}`);
-  //   return response.data.message;
-  //   // if(data.success){
-  //   //     return dispatch({type: "GET_CIUDADES", payload: data.message})
-  //   // } else {
-  //   //     return dispatch({type: "ERRORS", payload: data})
-
-  //   // }
-  // };
-}
-
-export function getAllPlans(){
+export function updateAffiliateAct(payload) {
   return async (dispatch) => {
-    const { data } = await axios.get(`${api}/planes`);
+    const token = getItem("userToken");
+    const { data } = await axios.put(`${api}}/admin/updateAffiliate`, payload, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
+
+    return data;
+    // if(data.success){
+    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
+    // } else {
+    //     return dispatch({type: "ERRORS", payload: data})
+    // }
+  };
+}
+
+export function upDownAffiliateAct(payload) {
+  return async (dispatch) => {
+    const token = getItem("userToken");
+    const { data } = await axios.put(`${api}}/admin/upDownAffiliate`, payload, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
+    return data;
+
+    // if(data.success){
+    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
+    // } else {
+    //     return dispatch({type: "ERRORS", payload: data})
+    // }
+  };
+}
+
+export function getAllPlans() {
+  return async (dispatch) => {
+    const { data } = await axios.get(`${api}/planesMutual`);
     if (data.success) {
       return dispatch({ type: "GET_PLANS", payload: data.message });
     } else {
@@ -197,10 +280,96 @@ export function getAllPlans(){
 
 /************* FIN Actions Para ABM Afiliados***********/
 
+/************* Actions Para ABM Farmacias***********/
+
+export function getAllPharmacies() {
+  return async (dispatch) => {
+    const { data } = await axios.get(`${api}/farmacias`);
+    if (data.success) {
+      return dispatch({ type: "GET_PHARMACIES", payload: data.message });
+    } else {
+      return dispatch({ type: "ERRORS", payload: data });
+    }
+  };
+}
+
+export function addPharmacy(payload) {
+  return async (dispatch) => {
+    const token = getItem("userToken");
+    const { data } = await axios.post(`${api}/admin/addPharmacy`, payload, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
+    return data;
+
+    // const response = await axios.post(`${api}/admin/addPharmacy`, data);
+    // return response.data.message;
+    // if(data.success){
+    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
+    // } else {
+    //     return dispatch({type: "ERRORS", payload: data})
+
+    // }
+  };
+}
+
+export const getPharmacyData = (payload) => {
+  return {
+    type: "PHARMACY_DATA",
+    payload: payload,
+  };
+};
+
+export function updatePharmacy(payload) {
+  return async (dispatch) => {
+    const token = getItem("userToken");
+    const { data } = await axios.put(`${api}/admin/updatePharmacy`, payload, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
+
+    return data;
+
+    // if(data.success){
+    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
+    // } else {
+    //     return dispatch({type: "ERRORS", payload: data})
+
+    // }
+  };
+}
+
+export function deletePharmacy(payload) {
+  return async (dispatch) => {
+    const token = getItem("userToken");
+    const { data } = await axios.delete(
+      `${api}/admin/deletePharmacy/${payload}`,
+      {
+        headers: {
+          "x-access-token": token,
+        },
+      }
+    );
+    return data;
+
+    // if(data.success){
+    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
+    // } else {
+    //     return dispatch({type: "ERRORS", payload: data})
+
+    // }
+  };
+}
+
+/************* Fin Actions Para ABM Farmacias***********/
+
 /*************Actions Comunes Para ABM***********/
 export const resetDataUpdate = () => {
   return {
     type: "DATA_RESET",
   };
 };
+
 /*************FIN Actions Comunes Para ABM***********/
