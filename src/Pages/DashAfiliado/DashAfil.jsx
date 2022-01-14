@@ -5,7 +5,7 @@ import FamilyGroupDash from '../../Components/FamilyGroup/FamilyGroupDash'
 import MedicalHistory from '../../Components/MedicalHistory/MedicalHistory'
 import { TokenMedico } from '../../Components/TokenMedico/TokenMedico'
 import Logo from "./../../assets/bg2.jpg"
-import {Link, useNavigate} from "react-router-dom"
+import {useNavigate} from "react-router-dom"
 import { getGroup } from '../../actions/actionGroup'
 import { getAfiliate, getItem, removeItem } from '../../actions/actionAuth';
 import Credencial from '../../Components/Credencial/Credencial'
