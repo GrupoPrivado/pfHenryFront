@@ -24,18 +24,17 @@ export default function reducerPrestadores(state = inicialState, action) {
         specialties: action.payload,
       };
       case "FILTER_BY_CITY":
-        const allProviders2 = state.allProviders
-        const providerCities = action.payload === ''? allProviders2: allProviders2.filter(e => e.ciudadCP === action.payload )
-
+        
+ console.log(action.payload)
       return {
         ...state,
-        providers: providerCities,
+        providers: action.payload
       };
-      case "FILTER_BY_SPECIALTIES":
-      return {
-        ...state,
-        providers: action.payload,
-      };
+      // case "FILTER_BY_SPECIALTIES":
+      // return {
+      //   ...state,
+      //   providers: action.payload,
+      // };
 
     default:
       return state;

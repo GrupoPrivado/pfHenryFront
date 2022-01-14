@@ -10,6 +10,7 @@ import { getGroup } from '../../actions/actionGroup'
 import { getAfiliate, getItem, removeItem } from '../../actions/actionAuth';
 import Credencial from '../../Components/Credencial/Credencial'
 import {getRecetas} from '../../actions/actionRecet'
+import Modal from '../../Components/Modal/Modal'
 
 
 function DashAfil() {
@@ -63,11 +64,13 @@ function DashAfil() {
                             </svg>
                             <div className="ml-4 font-bold">Bienvenidx {user.nombre}</div>
                         </div>
-                        <div className="grid grid-cols-3 gap-4 grid-rows-3 md:grid-rows-2 md:grid-cols-3">
+                        <div className="grid sm:grid-cols-3 gap-4 sm:grid-rows-3 md:grid-rows-2 md:grid-cols-3">
                             <MedicalHistory/> 
                             <DashAuthorizations/>
                             <FamilyGroupDash/>
                             
+                            {/* <Modal/> */}
+
                             {/* <Link to="/afiliado/credencial"> */}
                             <div name='credencial' onClick={toggleClass} className="relative flex flex-col p-4 bg-white rounded-2xl justify-start items-center backdrop-filter backdrop-blur-lg bg-opacity-20 undefined object-top cursor-pointer" >
                                     <div className="mt-4 mb-2 text-lg  text-center text-white">

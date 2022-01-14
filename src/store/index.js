@@ -6,7 +6,7 @@ import reducerPlanes from "../reducer/reducerPlanes";
 import reducerGroup from "../reducer/reducerGroup"
 import reducerProviders from "../reducer/reducerProviders";
 import reducerRecetas from "../reducer/reducerRecetas";
-
+import reducerABMAdmin from "../reducer/reducerABMAdmin"
 
 
 const reducers= combineReducers({
@@ -15,7 +15,7 @@ const reducers= combineReducers({
     auth: reducerAuth,
     providers: reducerProviders,
     recetas: reducerRecetas,
-
+    ABMAdmin: reducerABMAdmin,
     
     
 })

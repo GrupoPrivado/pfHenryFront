@@ -19,7 +19,7 @@ export default function FamilyGroupDash() {
     <Link to="/afiliado/group">
       <div className="relative h-full flex flex-col justify-evenly items-center p-4 bg-white  md:col-span-1 md:row-span-1 rounded-2xl backdrop-filter backdrop-blur-lg bg-opacity-20 undefined">
         <div className="mt-4 mb-2 text-lg font-medium text-center place-self-center text-white">
-          <h1>Grupo Familiar</h1>
+          <h3>Grupo Familiar</h3>
         </div>
         <div className="flex items-center mb-8 text-4xl text-white">
         <svg xmlns="http://www.w3.org/2000/svg" className="h-11 w-11" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -35,7 +35,7 @@ export default function FamilyGroupDash() {
             </li>
               )) : (
             <div>
-              <h1 className='text-center'>Sin Grupo Familiar</h1>
+              <h3 className='text-center'>Sin Grupo Familiar</h3>
             </div>
           )}
         </div>
