@@ -38,11 +38,11 @@ function DashAdmin() {
             
              <ABMAffiliates/> */}
 
-           <ABMPharmacies/>
+           {/* <ABMPharmacies/> */}
         
 
             Dashboard Administrador  
-            <button onClick={() => { logout(); navigate('/') }}>Cerrar Sesión</button> 
+            {/* <button onClick={() => { logout(); navigate('/') }}>Cerrar Sesión</button>  */}
 
 
         </div> 

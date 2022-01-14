@@ -23,11 +23,9 @@ const ABMSpecialities = () => {
 
   return (
     <div>
-      <button title="Agregar Especialidad" onClick={() => setShowModalAdd(true)}>
-        Agregar Especialidad
-      </button>
+      
 
-      <ABMSpecialitiesList allSpecialities={allSpecialities} setShowModalUpdate={setShowModalUpdate}/>
+      <ABMSpecialitiesList showModalAdd={showModalAdd} setShowModalAdd={setShowModalAdd} allSpecialities={allSpecialities} setShowModalUpdate={setShowModalUpdate}/>
 
       <AddSpeciality showModalAdd={showModalAdd} setShowModalAdd={setShowModalAdd} />
 
