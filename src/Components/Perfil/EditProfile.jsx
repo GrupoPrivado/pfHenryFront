@@ -48,7 +48,6 @@ function EditProfile() {
     }
     return (
             <div className='flex items-center justify-start w-full px-4 py-12 sm:px-6 lg:px-8'>
-            {/* <h3 className='col-span-4 row-span-1 text-2xl font-bold text-left text-primary'>Mi Cuenta</h3> */}
             <div className="w-full max-w-md space-y-8">
                 <form className="mt-8 space-y-6 " onSubmit={e => handleSubmit(e)}>
                 <input type="hidden" name="remember" defaultValue="true" />
@@ -152,7 +151,7 @@ function EditProfile() {
                             <button 
                             type="submit" 
                             value="Guardar Cambios"
-                            className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md  disabled:bg-gray-500 bg-primary group hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary" 
+                            className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md disabled:bg-gray-500 bg-primary group hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary" 
                             disabled={
                                 !activityChanged ||
                                 !input.email ||

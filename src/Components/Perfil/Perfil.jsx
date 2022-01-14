@@ -7,11 +7,11 @@ function Perfil() {
     
     return (
         <div className='mt-4'>
-            <div className='flex justify-between'>
-                <h1 className='col-span-4 row-span-1 ml-8 text-4xl font-bold text-left text-primary'>Mi Cuenta</h1>
-                <EditImage/>
-            </div>
-            <EditPassword/>
+                <h1 className='col-span-4 row-span-1 mb-10 ml-8 text-4xl font-bold text-left text-primary'>Mi Cuenta</h1>
+                <div>
+                    <EditImage/>
+                    <EditPassword/>
+                </div> 
             <EditProfile/>
         </div>
     )

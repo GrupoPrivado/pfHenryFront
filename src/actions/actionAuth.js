@@ -141,6 +141,7 @@ export const changePassword = (payload) => {
 
 
 export const putProfilePhoto = (payload) => {
+  console.log('<<< data action profile photo >>> ', payload)
   return async (dispatch) => {
     try {
       const token = getItem("userToken");
@@ -149,7 +150,6 @@ export const putProfilePhoto = (payload) => {
             "x-access-token": token,
           },});
   
-      console.log('<<< data action >>> ', data)
       if(data.success){
         return dispatch({type: GET_AFILIATE, payload: data.message})
       } else {

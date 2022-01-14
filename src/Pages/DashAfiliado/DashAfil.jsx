@@ -69,7 +69,7 @@ function DashAfil() {
                             <Authorizations/>
                             <FamilyGroupDash/>
                             
-                            <Modal/>
+                            {/* <Modal/> */}
 
                             {/* <Link to="/afiliado/credencial"> */}
                             <div name='credencial' onClick={toggleClass} className="relative flex flex-col p-4 bg-white rounded-2xl justify-start items-center backdrop-filter backdrop-blur-lg bg-opacity-20 undefined object-top cursor-pointer" >
