@@ -10,6 +10,7 @@ import { getGroup } from '../../actions/actionGroup'
 import { getAfiliate, getItem, removeItem } from '../../actions/actionAuth';
 import Credencial from '../../Components/Credencial/Credencial'
 import {getRecetas} from '../../actions/actionRecet'
+import Modal from '../../Components/Modal/Modal'
 
 
 function DashAfil() {
@@ -68,6 +69,8 @@ function DashAfil() {
                             <Authorizations/>
                             <FamilyGroupDash/>
                             
+                            <Modal/>
+
                             {/* <Link to="/afiliado/credencial"> */}
                             <div name='credencial' onClick={toggleClass} className="relative flex flex-col p-4 bg-white rounded-2xl justify-start items-center backdrop-filter backdrop-blur-lg bg-opacity-20 undefined object-top cursor-pointer" >
                                     <div className="mt-4 mb-2 text-lg  text-center text-white">

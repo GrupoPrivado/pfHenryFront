@@ -6,13 +6,12 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from 'react-redux'
 import Logo from "../../assets/logo.svg"
-
+import { profilePhoto } from '../../utils/constantes';
 
 const userDetails = {
     name: 'Tom Cook',
     email: 'tom@example.com',
-    imageUrl:
-        'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    imageUrl: profilePhoto
 }
 
 function classNames(...classes) {
@@ -96,7 +95,7 @@ export default function NavBarDashboard() {
                                             </button>
 
                                             {/* Profile dropdown */}
-                                            <Menu as="div" className="relative ml-3 z-50">
+                                            <Menu as="div" className="relative z-50 ml-3">
                                                 <div>
                                                     <Menu.Button className="flex items-center max-w-xs text-sm bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                                                         <span className="sr-only">Open user menu</span>
