@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../../utils/authUtils';
@@ -9,12 +9,15 @@ import ABMSpecialities from '../../Components/ABMAdmin/ABMSpecialties/ABMSpecial
 import ABMAffiliates from '../../Components/ABMAdmin/ABMAffiliates/ABMAffiliates';
 import ABMPharmacies from '../../Components/ABMAdmin/ABMPharmacies/ABMPharmacies';
 
+
+
 function DashAdmin() {
     const dispatch = useDispatch();
     const navigate = useNavigate()
     
+    
     const {route} = useSelector(state => state.auth)
-
+ 
 
     useEffect(() => {
         if(route !== '') navigate(`/${route}`)
@@ -22,11 +25,14 @@ function DashAdmin() {
   
     return (
         <div>
+ 
+ 
 
-            {/* <NavBarDashAdmin/> */}
+            {/* <NavBarDashAdmin/> 
             
+             
             ABM 
-            {/* <ABMCities/>
+            <ABMCities/>
 
             <ABMSpecialities/>
             
@@ -36,7 +42,7 @@ function DashAdmin() {
         
 
             Dashboard Administrador  
-            <button onClick={() => { logout(); navigate('/') }}>Cerrar Sesión</button>
+            <button onClick={() => { logout(); navigate('/') }}>Cerrar Sesión</button> 
 
 
         </div> 
