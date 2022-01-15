@@ -9,7 +9,7 @@ import ABMSpecialities from "../../Components/ABMAdmin/ABMSpecialties/ABMSpecial
 import ABMAffiliates from "../../Components/ABMAdmin/ABMAffiliates/ABMAffiliates";
 import ABMPharmacies from "../../Components/ABMAdmin/ABMPharmacies/ABMPharmacies";
 import ABMPlans from "../../Components/ABMAdmin/ABMPlan/ABMPlans";
-import ABMProfessionals from "../../Components/ABMAdmin/ABMProfessionals/ABMProfessionals";
+
 
 function DashAdmin() {
 
@@ -25,16 +25,9 @@ function DashAdmin() {
 
   return (
     <div>
-      <ABMProfessionals />
+      
       Dashboard Administrador
-      <button
-        onClick={() => {
-          logout();
-          navigate("/");
-        }}
-      >
-        Cerrar Sesión
-      </button>
+      
     </div>
   );
 

@@ -8,6 +8,8 @@ import SideBar from '../ABMAdmin/ABMSelector/SideBar'
 import ABMSpecialities from '../ABMAdmin/ABMSpecialties/ABMSpecialties'
 import ABMAffiliates from '../ABMAdmin/ABMAffiliates/ABMAffiliates'
 import ABMPharmacies from '../ABMAdmin/ABMPharmacies/ABMPharmacies'
+import ABMProfessionals from "../../Components/ABMAdmin/ABMProfessionals/ABMProfessionals";
+import ABMPlans from '../ABMAdmin/ABMPlan/ABMPlans'
 
 
 
@@ -23,6 +25,8 @@ const Admin = () => {
                 <Route path='/especialidades' element={<PrivateRouter rol={roles.ADMIN}><ABMSpecialities/></PrivateRouter>}/>
                 <Route path='/farmacias' element={<PrivateRouter rol={roles.ADMIN}><ABMPharmacies/></PrivateRouter>}/>
                 <Route path='/afiliados' element={<PrivateRouter rol={roles.ADMIN}><ABMAffiliates/></PrivateRouter>}/>
+                <Route path='/prestadores' element={<PrivateRouter rol={roles.ADMIN}><ABMProfessionals/></PrivateRouter>}/>
+                <Route path='/planes' element={<PrivateRouter rol={roles.ADMIN}><ABMPlans/></PrivateRouter>}/>
                 
 
             </Routes>
