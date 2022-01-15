@@ -1,14 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { putProfilePhoto } from "../../actions/actionAuth";
 import { profilePhoto } from "../../utils/constantes";
 
-function EditImage() {
+function EditImage({photo}) {
     const { user } = useSelector(state => state.auth)
 
     const dispatch = useDispatch();
     const [file, setFile] = useState("");
-    const [pathImage, setPathImage] = useState(user.urlPhoto || profilePhoto);
+    const [pathImage, setPathImage] = useState(profilePhoto);
+
+    useEffect(() => {
+        if(photo){
+            setPathImage(photo)
+        }
+    }, [photo])
 
     const sendImages = async (file) => {
         const form = new FormData();
