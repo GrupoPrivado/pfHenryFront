@@ -12,6 +12,8 @@ import ABMPlans from "../../Components/ABMAdmin/ABMPlan/ABMPlans";
 import ABMProfessionals from "../../Components/ABMAdmin/ABMProfessionals/ABMProfessionals";
 
 function DashAdmin() {
+
+  
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -35,6 +37,7 @@ function DashAdmin() {
       </button>
     </div>
   );
+
 }
 
 export default DashAdmin;
