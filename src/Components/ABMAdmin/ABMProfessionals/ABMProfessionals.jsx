@@ -7,7 +7,7 @@ import { getAllProfessionals, getAllSpecialities } from "../../../actions/action
 
 import AddProfessional from "./AddProfessional";
 import UpdateProfessional from "./UpdateProfessional";
-import ProfessionalsList from "./ProfessionalsList";
+import ProfessionalsList from "./ABMProfessionalsList";
 
 const ABMProfessionals = () => {
   const dispatch = useDispatch();

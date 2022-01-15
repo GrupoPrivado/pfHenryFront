@@ -74,7 +74,7 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
       oldAlta: updateData.alta,
       oldActivo: updateData.activo,
     });
-  }, [updateData, dispatch]);
+  }, [updateData]);
 
   const handleUpdateAffiliate = async (event) => {
     let updatedAffiliate = {

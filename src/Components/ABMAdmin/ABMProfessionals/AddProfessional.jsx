@@ -8,7 +8,7 @@ import {
   getAllProfessionals,
 } from "../../../actions/actionAMBAdmin";
 
-import styles from "./addProfessional.module.css";
+import styles from "./AddProfessional.module.css";
 
 const functionErrors = (data) => {
   const arrayKeys = Object.keys(data);
@@ -26,7 +26,6 @@ const AddProfessional = ({ showModalAdd, setShowModalAdd }) => {
 
   const { allSpecialities } = useSelector((state) => state.ABMAdmin);
   //Ver rutas para obtener las ciudades
-  let [showModalProfessional, setShowModalProfessional] = useState(false);
 
   const [errors, setErrors] = useState(true);
 
@@ -34,7 +33,7 @@ const AddProfessional = ({ showModalAdd, setShowModalAdd }) => {
     nombre: "",
     apellido: "",
     DNI: 0,
-    telefono:0,
+    telefono: 0,
     mail: "",
     ciudadID: "61e0c45d534c0844d9debf93",
     codeProv: "111",
@@ -44,8 +43,6 @@ const AddProfessional = ({ showModalAdd, setShowModalAdd }) => {
     password: "",
     activo: false,
   });
-
-  let [inputProfessional, setInputProfessional] = useState([]);
 
   const showHideClassName = showModalAdd ? "displayblock" : "displaynone";
 
@@ -73,7 +70,7 @@ const AddProfessional = ({ showModalAdd, setShowModalAdd }) => {
       nombre: "",
       apellido: "",
       DNI: 0,
-      telefono:0,
+      telefono: 0,
       mail: "",
       ciudadID: "",
       codeProv: "",
@@ -93,7 +90,7 @@ const AddProfessional = ({ showModalAdd, setShowModalAdd }) => {
       nombre: "",
       apellido: "",
       DNI: 0,
-      telefono:0,
+      telefono: 0,
       mail: "",
       ciudadID: "",
       codeProv: "",
@@ -156,7 +153,7 @@ const AddProfessional = ({ showModalAdd, setShowModalAdd }) => {
               <label>Matrícula: </label>
               <input
                 type="number"
-                name="matricuña"
+                name="matricula"
                 autoComplete="off"
                 value={inputProfessional.matricula}
                 onChange={(e) => handleChange(e)}
@@ -189,24 +186,25 @@ const AddProfessional = ({ showModalAdd, setShowModalAdd }) => {
             </div>
 
             {/* Colocar los selectores de ciudades y sacar el hardcodeo */}
-
-            <select
-              id="especialities"
-              name="codeEsp"
-              onChange={(e) => handleChange(e)}
-            >
-              <option value="">Seleccione la Especialidad</option>
-              {allSpecialities &&
-                allSpecialities.map((element) => {
-                  if (element.activa) {
-                    return (
-                      <option value={element.codeEsp} id={element._id}>
-                        {element.nombre}
-                      </option>
-                    );
-                  }
-                })}
-            </select>
+            <div>
+              <select
+                id="especialities"
+                name="codeEsp"
+                onChange={(e) => handleChange(e)}
+              >
+                <option value="">Seleccione la Especialidad</option>
+                {allSpecialities &&
+                  allSpecialities.map((element) => {
+                    if (element.activa) {
+                      return (
+                        <option value={element.codeEsp} id={element._id}>
+                          {element.nombre}
+                        </option>
+                      );
+                    }
+                  })}
+              </select>
+            </div>
 
             <div>
               <label>Activo: </label>
@@ -233,11 +231,9 @@ const AddProfessional = ({ showModalAdd, setShowModalAdd }) => {
               Cargar
             </button>
           )}
-                <button onClick={() => handleClose()}>Cerrar</button>
+          <button onClick={() => handleClose()}>Cerrar</button>
         </div>
       </section>
-
-    
     </div>
   );
 };

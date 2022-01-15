@@ -501,6 +501,7 @@ export const getProfessionalData = (payload) => {
 
 export function updateProfessional(payload) {
   return async (dispatch) => {
+    console.log('<<<<<update>>>>', payload)
     const token = getItem("userToken");
     const { data } = await axios.put(`${api}/admin/updateProfessional`, payload, {
       headers: {

@@ -14,6 +14,7 @@ const ABMAffiliatesList = ({ allProfessionals, setShowModalUpdate }) => {
   const dispatch = useDispatch();
 
   const handleEditProfessional = async (event) => {
+    console.log('<<<<<<Edit>>>>>>', event.target.value)
     await dispatch(getProfessionalData(event.target.value));
     setShowModalUpdate(true);
   };
