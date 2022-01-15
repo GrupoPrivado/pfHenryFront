@@ -6,7 +6,7 @@ import { profilePhoto } from "../../utils/constantes";
 function EditImage({photo}) {
     const dispatch = useDispatch();
     const [file, setFile] = useState("");
-    const [pathImage, setPathImage] = useState(profilePhoto);
+    const [pathImage, setPathImage] = useState(photo || profilePhoto);
 
     useEffect(() => {
         if(photo){
