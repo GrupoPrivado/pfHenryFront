@@ -458,6 +458,73 @@ export function deletePlan(payload) {
 
 /************* FIN Actions Para ABM Planes***********/
 
+/************* Actions Para ABM Profesionales***********/
+
+export function getAllProfessionals() {
+  return async (dispatch) => {
+    const { data } = await axios.get(`${api}/profesionales`);
+    if (data.success) {
+      return dispatch({ type: "GET_PROFESSIONALS", payload: data.message });
+    } else {
+      return dispatch({ type: "ERRORS", payload: data });
+    }
+  };
+}
+
+export function addProfessional(payload) {
+  return async (dispatch) => {
+    const token = getItem("userToken");
+    const { data } = await axios.post(`${api}/admin/addProfessional`, payload, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
+    return data;
+
+    // const response = await axios.post(`${api}/admin/addPharmacy`, data);
+    // return response.data.message;
+    // if(data.success){
+    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
+    // } else {
+    //     return dispatch({type: "ERRORS", payload: data})
+
+    // }
+  };
+}
+
+export const getProfessionalData = (payload) => {
+  return {
+    type: "PROFESSIONAL_DATA",
+    payload: payload,
+  };
+};
+
+export function updateProfessional(payload) {
+  return async (dispatch) => {
+    console.log('<<<<<update>>>>', payload)
+    const token = getItem("userToken");
+    const { data } = await axios.put(`${api}/admin/updateProfessional`, payload, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
+
+    return data;
+
+    // if(data.success){
+    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
+    // } else {
+    //     return dispatch({type: "ERRORS", payload: data})
+
+    // }
+  };
+}
+
+/************* FIN Actions Para ABM Profesionales***********/
+
+
+
+
 /*************Actions Comunes Para ABM***********/
 export const resetDataUpdate = () => {
   return {

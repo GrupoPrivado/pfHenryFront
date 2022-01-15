@@ -9,46 +9,34 @@ import ABMSpecialities from "../../Components/ABMAdmin/ABMSpecialties/ABMSpecial
 import ABMAffiliates from "../../Components/ABMAdmin/ABMAffiliates/ABMAffiliates";
 import ABMPharmacies from "../../Components/ABMAdmin/ABMPharmacies/ABMPharmacies";
 import ABMPlans from "../../Components/ABMAdmin/ABMPlan/ABMPlans";
+import ABMProfessionals from "../../Components/ABMAdmin/ABMProfessionals/ABMProfessionals";
 
 function DashAdmin() {
 
-    const dispatch = useDispatch();
-    const navigate = useNavigate()
-    
-    
-    const {route} = useSelector(state => state.auth)
- 
-
-    useEffect(() => {
-        if(route !== '') navigate(`/${route}`)
-    }, [dispatch, route, navigate])
   
-    return (
-        <div>
- 
- 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-            {/* <NavBarDashAdmin/> 
-            
-             
-            ABM 
-            <ABMCities/>
+  const { route } = useSelector((state) => state.auth);
 
-            <ABMSpecialities/>
-            
-             <ABMAffiliates/> */}
+  useEffect(() => {
+    if (route !== "") navigate(`/${route}`);
+  }, [dispatch, route, navigate]);
 
-           {/* <ABMPharmacies/> */}
-        
-
-            Dashboard Administrador  
-            {/* <button onClick={() => { logout(); navigate('/') }}>Cerrar Sesión</button>  */}
-
-
-        </div> 
-    )
-
-  
+  return (
+    <div>
+      <ABMProfessionals />
+      Dashboard Administrador
+      <button
+        onClick={() => {
+          logout();
+          navigate("/");
+        }}
+      >
+        Cerrar Sesión
+      </button>
+    </div>
+  );
 
 }
 
