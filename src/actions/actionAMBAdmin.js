@@ -365,6 +365,99 @@ export function deletePharmacy(payload) {
 
 /************* Fin Actions Para ABM Farmacias***********/
 
+/************* Actions Para ABM Planes***********/
+
+export function getAllPlansData() {
+  return async (dispatch) => {
+
+    const token = getItem("userToken");
+    const { data } = await axios.get(`${api}/admin/getAllPlansData`, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
+    if (data.success) {
+      return dispatch({ type: "GET_ALL_PLANS_DATA", payload: data.message });
+    } else {
+      return dispatch({ type: "ERRORS", payload: data });
+    }
+  };
+}
+
+export function addPlan(payload) {
+  return async (dispatch) => {
+    const token = getItem("userToken");
+    const { data } = await axios.post(`${api}/admin/addPlan`, payload, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
+    return data;
+
+    // if(data.success){
+    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
+    // } else {
+    //     return dispatch({type: "ERRORS", payload: data})
+
+    // }
+  };
+}
+
+export const getPlanData = (data) => {
+  return {
+    type: "PLAN_DATA",
+    payload: data,
+  };
+};
+
+export function updatePlan(payload) {
+  return async (dispatch) => {
+    console.log('updatePlan(payload) ',payload )
+    const token = getItem("userToken");
+    const { data } = await axios.put(
+      `${api}/admin/updatePlan`,
+      payload,
+      {
+        headers: {
+          "x-access-token": token,
+        },
+      }
+    );
+    return data;
+
+    // if(data.success){
+    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
+    // } else {
+    //     return dispatch({type: "ERRORS", payload: data})
+
+    // }
+  };
+}
+
+export function deletePlan(payload) {
+  return async (dispatch) => {
+    const token = getItem("userToken");
+    const { data } = await axios.delete(
+      `${api}/admin/deletePlan/${payload}`,
+      {
+        headers: {
+          "x-access-token": token,
+        },
+      }
+    );
+    return data;
+
+    // if(data.success){
+    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
+    // } else {
+    //     return dispatch({type: "ERRORS", payload: data})
+
+    // }
+  };
+}
+
+/************* FIN Actions Para ABM Planes***********/
+
 /*************Actions Comunes Para ABM***********/
 export const resetDataUpdate = () => {
   return {
