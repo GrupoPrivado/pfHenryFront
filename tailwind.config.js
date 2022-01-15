@@ -10,9 +10,15 @@ module.exports = {
       colors: {
         primary: '#26349B',
         secondary: '#009872',
-        'black-rgba': 'rgba(0, 0, 0, 0.95)'
+        'black-rgba': 'rgba(0, 0, 0, 0.95)',
+        'white-rgba': 'rgba(255, 255, 255, 0.4)0%',
+        'white-rgba2': 'rgba(255, 255, 255, 0)100%'
       },
       width: {
+        "40vw" : "40vw",
+        "50vw" : "50vw",
+        "60vw" : "60vw",
+        "70vw" : "70vw",
         "80vw" : "80vw",
         "90vw" : "90vw"
       },

@@ -12,7 +12,7 @@ function Authorizations() {
  
 
   useEffect(()=>{
-    dispatch(getRecetas(user.DNI))
+    dispatch(getRecetas())
   }, [dispatch])
 
 
@@ -26,7 +26,7 @@ function Authorizations() {
         <div className='flex flex-col px-2.5 font-normal text-white w-full shrink-0'>
           
           {recetas.length ? recetas.map(e => (
-            <li key={e.numReceta} className='flex justify-between sm:px-10 md:px-0 text-left'>
+            <li key={e.numReceta} className='flex justify-between text-left sm:px-10 md:px-0'>
               <p>{e.tipoReceta}</p>
               <p>{e.descripcion}</p>
               {/* <p>{e.autorizada}</p> */}
