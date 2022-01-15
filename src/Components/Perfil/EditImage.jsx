@@ -4,8 +4,6 @@ import { putProfilePhoto } from "../../actions/actionAuth";
 import { profilePhoto } from "../../utils/constantes";
 
 function EditImage({photo}) {
-    const { user } = useSelector(state => state.auth)
-
     const dispatch = useDispatch();
     const [file, setFile] = useState("");
     const [pathImage, setPathImage] = useState(profilePhoto);
@@ -16,16 +14,16 @@ function EditImage({photo}) {
         }
     }, [photo])
 
-    const sendImages = async (file) => {
+    const sendImages = (file) => {
         const form = new FormData();
         form.append("file", file, "form-data");
-        await dispatch(putProfilePhoto(form));
+        dispatch(putProfilePhoto(form));
     };
     const sendImage = (e) => {
         e.preventDefault();
-        sendImages(file)
-            .then((result) => console.log(result))
-            .catch((error) => console.log(error));
+        if(file){
+            sendImages(file)
+        }
     };
 
     const onFileChange = (e) => {
