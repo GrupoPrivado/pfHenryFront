@@ -35,20 +35,13 @@ function EditProfile({user}) {
     function handleSelect(e){
         setInput({
             ...input,
-            province: e.target.value
+            provincia: e.target.value
         })
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const dataUpdated = {
-            telefono: input.tel,
-            correoElectronico: input.email,
-            provincia: input.province,
-            direccion: input.address,
-            localidad: user.localidad,
-        }
-        dispatch(updateUser(dataUpdated));
+        dispatch(updateUser(input));
         alert("Cambios guardados con éxito")
     }
     return (
@@ -63,7 +56,7 @@ function EditProfile({user}) {
                             <input 
                             name="name" 
                             type="text" 
-                            value={user.nombre}
+                            value={user.nombre || ''}
                             className="relative block w-full px-3 py-2 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 " 
                             disabled />
                         </div>
@@ -72,7 +65,7 @@ function EditProfile({user}) {
                             <input 
                             name="lastName" 
                             type="text" 
-                            value={user.apellido} 
+                            value={user.apellido || ''} 
                             className="relative block w-full px-3 py-2 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 " 
                             disabled />
                         </div>
@@ -81,7 +74,7 @@ function EditProfile({user}) {
                             <input 
                             name="dateBirth" 
                             type="text" 
-                            value={user.fechaNacimiento}
+                            value={user.fechaNacimiento || ''}
                             className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 " 
                             disabled />
                         </div>
@@ -90,7 +83,7 @@ function EditProfile({user}) {
                             <input 
                             name="dni" 
                             type="dni" 
-                            value={user.DNI} 
+                            value={user.DNI || ''} 
                             className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 " 
                             disabled />
                         </div>
@@ -104,7 +97,7 @@ function EditProfile({user}) {
                             name="correoElectronico" 
                             type="email"
                             autoComplete="email" 
-                            value={input.correoElectronico} 
+                            value={input.correoElectronico || ''} 
                             placeholder="Tu email"
                             required
                             className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 " 
@@ -118,7 +111,7 @@ function EditProfile({user}) {
                             name="telefono" 
                             type="tel"
                             autoComplete="telefono" 
-                            value={input.telefono} 
+                            value={input.telefono || ''} 
                             placeholder="Tu dirección"
                             required
                             className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 " 
@@ -131,18 +124,17 @@ function EditProfile({user}) {
                             name="direccion" 
                             type="text"
                             autoComplete="address" 
-                            value={input.direccion} 
+                            value={input.direccion || ''} 
                             placeholder="Tu dirección"
                             required 
                             className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 " 
                             />
                         </div>
                         <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
-                            <label className="text-lg font-semibold" htmlFor="province">Provincia </label>
+                            <label className="text-lg font-semibold" htmlFor="provincia">Provincia </label>
                             <select 
                             onChange={e => handleSelect(e)} 
                             name="provincia" 
-                            id="province"
                             className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 " 
                             required
                             >
@@ -152,6 +144,7 @@ function EditProfile({user}) {
                                 ))} */}
                             </select>
                         </div>
+                       
                         <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-1 sm:row-span-1">
                             <button 
                             type="submit" 
@@ -159,10 +152,10 @@ function EditProfile({user}) {
                             className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md disabled:bg-gray-500 bg-primary group hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary" 
                             disabled={
                                 !activityChanged ||
-                                !input.email ||
-                                !input.tel ||
-                                !input.address ||
-                                !input.province
+                                !input.correoElectronico ||
+                                !input.telefono ||
+                                !input.direccion ||
+                                !input.provincia
                             }>Guardar Cambios</button>
                         </div>
                     </div>

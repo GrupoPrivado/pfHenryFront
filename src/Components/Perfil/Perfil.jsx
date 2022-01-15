@@ -15,7 +15,6 @@ function Perfil() {
     useEffect(() => {
 
       if (!data) {
-          console.log('<> PERFIL DISPATCH AFILIADO <>')
         dispatch(getAfiliate(getItem()));
       }
       if (route !== "") {
@@ -24,8 +23,6 @@ function Perfil() {
       }
     }, [dispatch, route, navigate, data]);
 
-    console.log('<<<<< PERFIL perfil <<<<<<', user)
-    console.log('<<<<< PERFIL data <<<<<<', data)
 
     return (
         <div className='mt-4'>
