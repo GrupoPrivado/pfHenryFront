@@ -10,6 +10,7 @@ import EditProfile from './EditProfile'
 function Perfil() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    
     const { user, route, data } = useSelector(state => state.auth)
 
     useEffect(() => {

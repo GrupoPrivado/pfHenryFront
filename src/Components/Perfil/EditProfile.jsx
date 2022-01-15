@@ -1,9 +1,13 @@
 import React, {useEffect, useState} from 'react'
-import {useDispatch} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 import { updateUser } from '../../actions/actionAuth';
+import { filterByCity, getAllCities } from '../../actions/actionProviders';
+import { provincias } from '../../utils/constantes';
 
 
 function EditProfile({user}) {
+    const { cities } = useSelector((state) => state.providers);
+    console.log(cities)
     const dispatch = useDispatch();
     const [input, setInput] = useState ({
         correoElectronico: '',
@@ -32,12 +36,28 @@ function EditProfile({user}) {
         setActivityChanged(true)
     }
 
-    function handleSelect(e){
-        setInput({
-            ...input,
-            provincia: e.target.value
-        })
-    }
+    // function handleSelect(e){
+    //     const newData = {
+    //       ...input,
+    //       [e.target.name]: e.target.value,
+    //     };
+    //     setInput(newData);
+    
+    //     dispatch(filterByCity(city));
+    //     setInput({
+    //         ...input,
+    //         [e.target.name]: e.target.value
+    //     })
+    // }
+
+    const handleChangeProvince = (e) => {
+        const newData = {
+          ...input,
+          provincia: e.target.value
+        }
+        dispatch(getAllCities(newData.provincia))
+        setInput(newData)
+      }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -132,18 +152,44 @@ function EditProfile({user}) {
                         </div>
                         <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
                             <label className="text-lg font-semibold" htmlFor="provincia">Provincia </label>
-                            <select 
-                            onChange={e => handleSelect(e)} 
+                            <select value={input.provincia}
+                            onChange={handleChangeProvince} 
                             name="provincia" 
                             className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 " 
                             required
                             >
-                                <option defaultValue={input.provincia} value={input.provincia} >{input.provincia}</option>
+                                {/* <option defaultValue={input.provincia} value={input.provincia} >{input.provincia}</option> */}
+                                {/* <option>{input.provincia || 'Seleccione una provincia'}</option> */}
+                                {
+                                    provincias && provincias.map(p => (
+                                        <option key={p.codeProv} value={p.codeProv}>{p.provincia}</option>
+                                    ))
+                                }
                                 {/* {provinces?.map((province, i) => (
                                     <option value={province.id} key={i}>{province.name}</option>
                                 ))} */}
                             </select>
                         </div>
+                        <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
+                            <label className="text-lg font-semibold" htmlFor="localidad">Localidad </label>
+                            <select 
+                            onChange={handleChange} 
+                            name="localidad" 
+                            className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 " 
+                            required
+                            >
+                                {/* <option defaultValue={input.provincia} value={input.provincia} >{input.provincia}</option> */}
+                                {
+                                    cities && cities.map(c => (
+                                        <option key={c._id} value={c.localidad}>{c.localidad}</option>
+                                    ))
+                                }
+                                {/* {provinces?.map((province, i) => (
+                                    <option value={province.id} key={i}>{province.name}</option>
+                                ))} */}
+                            </select>
+                        </div>
+
                        
                         <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-1 sm:row-span-1">
                             <button 
