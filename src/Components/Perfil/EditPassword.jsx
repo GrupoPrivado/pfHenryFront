@@ -2,7 +2,7 @@ import React , {useEffect, useState} from 'react';
 import {useDispatch} from "react-redux";
 import { changePassword } from '../../actions/actionAuth';
 
-function EditPassword({error}) {
+function    EditPassword({error}) {
     const dispatch = useDispatch()
     const [passwords, setPasswords] = useState({
         old: "",
