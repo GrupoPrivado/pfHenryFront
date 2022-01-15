@@ -11,29 +11,45 @@ import ABMPharmacies from "../../Components/ABMAdmin/ABMPharmacies/ABMPharmacies
 import ABMPlans from "../../Components/ABMAdmin/ABMPlan/ABMPlans";
 
 function DashAdmin() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
 
-  const { route } = useSelector((state) => state.auth);
+    const dispatch = useDispatch();
+    const navigate = useNavigate()
+    
+    
+    const {route} = useSelector(state => state.auth)
+ 
 
-  useEffect(() => {
-    if (route !== "") navigate(`/${route}`);
-  }, [dispatch, route, navigate]);
+    useEffect(() => {
+        if(route !== '') navigate(`/${route}`)
+    }, [dispatch, route, navigate])
+  
+    return (
+        <div>
+ 
+ 
 
-  return (
-    <div>
-      <ABMPlans />
-      Dashboard Administrador
-      <button
-        onClick={() => {
-          logout();
-          navigate("/");
-        }}
-      >
-        Cerrar Sesión
-      </button>
-    </div>
-  );
+            {/* <NavBarDashAdmin/> 
+            
+             
+            ABM 
+            <ABMCities/>
+
+            <ABMSpecialities/>
+            
+             <ABMAffiliates/> */}
+
+           {/* <ABMPharmacies/> */}
+        
+
+            Dashboard Administrador  
+            {/* <button onClick={() => { logout(); navigate('/') }}>Cerrar Sesión</button>  */}
+
+
+        </div> 
+    )
+
+  
+
 }
 
 export default DashAdmin;

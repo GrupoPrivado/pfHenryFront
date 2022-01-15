@@ -5,6 +5,10 @@ import { roles } from '../../utils/roles'
 import NavbarDashAdmin from '../NavBarDashboard/NavbarDashAdmin'
 import PrivateRouter from '../PrivateRouter/PrivateRouter'
 import SideBar from '../ABMAdmin/ABMSelector/SideBar'
+import ABMSpecialities from '../ABMAdmin/ABMSpecialties/ABMSpecialties'
+import ABMAffiliates from '../ABMAdmin/ABMAffiliates/ABMAffiliates'
+import ABMPharmacies from '../ABMAdmin/ABMPharmacies/ABMPharmacies'
+
 
 
 const Admin = () => {
@@ -16,6 +20,9 @@ const Admin = () => {
             <Routes>
                 <Route path='/' element={<PrivateRouter rol={roles.ADMIN}><DashAdmin /></PrivateRouter>}/>
                 <Route path='*' element={<div><h1>Recurso no encontrado</h1></div>} />
+                <Route path='/especialidades' element={<PrivateRouter rol={roles.ADMIN}><ABMSpecialities/></PrivateRouter>}/>
+                <Route path='/farmacias' element={<PrivateRouter rol={roles.ADMIN}><ABMPharmacies/></PrivateRouter>}/>
+                <Route path='/afiliados' element={<PrivateRouter rol={roles.ADMIN}><ABMAffiliates/></PrivateRouter>}/>
                 
 
             </Routes>
