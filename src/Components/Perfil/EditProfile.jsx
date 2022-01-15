@@ -1,23 +1,29 @@
-import React, {useState} from 'react'
-import {useDispatch, useSelector} from "react-redux"
+import React, {useEffect, useState} from 'react'
+import {useDispatch} from "react-redux"
 import { updateUser } from '../../actions/actionAuth';
 
 
-function EditProfile() {
+function EditProfile({user}) {
     const dispatch = useDispatch();
-    const { user, route } = useSelector(state => state.auth)
     const [input, setInput] = useState ({
-        name: user.nombre,
-        lastName: user.apellido,
-        dateBirth: user.fechaNacimiento,
-        dni: user.DNI,
-        email: user.correoElectronico,
-        tel: user.telefono,
-        address: user.direccion,
-        province: user.provincia,
+        correoElectronico: '',
+        telefono: '',
+        direccion: '',
+        provincia: '',
+        localidad: '' 
     })
+    useEffect(() => {
+        setInput({
+            correoElectronico: user.correoElectronico,
+            telefono: user.telefono,
+            direccion: user.direccion,
+            provincia: user.provincia,
+            localidad: user.localidad
+        })
+    }, [user])
+
+
     const [activityChanged, setActivityChanged] = useState(false);
-    console.log(user)
     const handleChange = (e) => {
         setInput({
             ...input,
@@ -40,7 +46,6 @@ function EditProfile() {
             correoElectronico: input.email,
             provincia: input.province,
             direccion: input.address,
-            DNI: input.dni,
             localidad: user.localidad,
         }
         dispatch(updateUser(dataUpdated));
@@ -58,7 +63,7 @@ function EditProfile() {
                             <input 
                             name="name" 
                             type="text" 
-                            value={input.name}
+                            value={user.nombre}
                             className="relative block w-full px-3 py-2 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 " 
                             disabled />
                         </div>
@@ -67,7 +72,7 @@ function EditProfile() {
                             <input 
                             name="lastName" 
                             type="text" 
-                            value={input.lastName} 
+                            value={user.apellido} 
                             className="relative block w-full px-3 py-2 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 " 
                             disabled />
                         </div>
@@ -76,7 +81,7 @@ function EditProfile() {
                             <input 
                             name="dateBirth" 
                             type="text" 
-                            value={input.dateBirth}
+                            value={user.fechaNacimiento}
                             className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 " 
                             disabled />
                         </div>
@@ -85,7 +90,7 @@ function EditProfile() {
                             <input 
                             name="dni" 
                             type="dni" 
-                            value={input.dni} 
+                            value={user.DNI} 
                             className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 " 
                             disabled />
                         </div>
@@ -96,10 +101,10 @@ function EditProfile() {
                             <label className="text-lg font-semibold" htmlFor="email">Email </label>
                             <input 
                             onChange={e => handleChange(e)} 
-                            name="email" 
+                            name="correoElectronico" 
                             type="email"
                             autoComplete="email" 
-                            value={input.email} 
+                            value={input.correoElectronico} 
                             placeholder="Tu email"
                             required
                             className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 " 
@@ -110,10 +115,10 @@ function EditProfile() {
                             <label className="text-lg font-semibold" htmlFor="tel">Teléfono </label>
                             <input 
                             onChange={e => handleChange(e)} 
-                            name="tel" 
+                            name="telefono" 
                             type="tel"
-                            autoComplete="tel" 
-                            value={input.tel} 
+                            autoComplete="telefono" 
+                            value={input.telefono} 
                             placeholder="Tu dirección"
                             required
                             className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 " 
@@ -123,10 +128,10 @@ function EditProfile() {
                             <label className="text-lg font-semibold" htmlFor="address">Dirección </label>
                             <input 
                             onChange={e => handleChange(e)} 
-                            name="address" 
+                            name="direccion" 
                             type="text"
                             autoComplete="address" 
-                            value={input.address} 
+                            value={input.direccion} 
                             placeholder="Tu dirección"
                             required 
                             className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 " 
@@ -136,12 +141,12 @@ function EditProfile() {
                             <label className="text-lg font-semibold" htmlFor="province">Provincia </label>
                             <select 
                             onChange={e => handleSelect(e)} 
-                            name="province" 
+                            name="provincia" 
                             id="province"
                             className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 " 
                             required
                             >
-                                <option value={input.province} selected>{input.province}</option>
+                                <option defaultValue={input.provincia} value={input.provincia} >{input.provincia}</option>
                                 {/* {provinces?.map((province, i) => (
                                     <option value={province.id} key={i}>{province.name}</option>
                                 ))} */}

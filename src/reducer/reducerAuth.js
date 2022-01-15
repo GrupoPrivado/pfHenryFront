@@ -3,6 +3,7 @@ import { GET_AFILIATE, GET_MEDICAL_TOKEN, NOT_AUTHENTICATED } from "../actions/a
 const inicialState = {
   user: {},
   medicalToken: [],
+  data: false,
   route: ''
 };
 
@@ -13,6 +14,7 @@ export default function reducerAuth(state = inicialState, {type, payload}) {
         ...state,
         route: '',
         medicalToken: [],
+        data: true,
         user: payload
       }
     case GET_MEDICAL_TOKEN:
@@ -24,6 +26,7 @@ export default function reducerAuth(state = inicialState, {type, payload}) {
       return {
         user: {},
         medicalToken: [],
+        data: false,
         route: 'login'
       }
 

@@ -29,10 +29,11 @@ export const postAfiliate = (payload) => {
 // token por header => authorization => x - access - token
 export const getAfiliate = (payload) => {
     return async (dispatch) => {
+      const token = getItem("userToken");
       try {
           const {data} = await axios.get(`${api}/afiliados`, {
                   headers:{
-                      'x-access-token' : payload
+                      'x-access-token' : token
                   }
           });
           //console.log(data)
