@@ -3,9 +3,10 @@ import {api} from '../urlHostApi'
 const GET_AFILIATE = 'GET_AFILIATE'
 const GET_MEDICAL_TOKEN = 'GET_MEDICAL_TOKEN'
 const NOT_AUTHENTICATED = 'NOT_AUTHENTICATED'
+const GET_ERROR = 'GET_ERROR'
 
 
-export { GET_AFILIATE, GET_MEDICAL_TOKEN, NOT_AUTHENTICATED}
+export { GET_AFILIATE, GET_MEDICAL_TOKEN, NOT_AUTHENTICATED, GET_ERROR}
 
 
 export const getItem = (item) => localStorage.getItem(item)
@@ -132,7 +133,8 @@ export const changePassword = (payload) => {
         console.log('<<< data password >>> ', data)
         return dispatch({type: GET_AFILIATE, payload: data.message})
       } else {
-          return ;// dispatch({type: NOT_AUTHENTICATED, payload: data})
+        return dispatch({type: GET_ERROR, payload: data.message})
+
       }
       
     } catch (error) {
@@ -156,7 +158,7 @@ export const putProfilePhoto = (payload) => {
       if(data.success){
         return dispatch({type: GET_AFILIATE, payload: data.message})
       } else {
-          return dispatch({type: NOT_AUTHENTICATED, payload: data})
+          return dispatch({type: GET_ERROR, payload: data.message})
 
       }
       

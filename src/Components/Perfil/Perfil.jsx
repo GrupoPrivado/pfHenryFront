@@ -11,8 +11,7 @@ function Perfil() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     
-    const { user, route, data } = useSelector(state => state.auth)
-
+    const { user, route, data, error } = useSelector(state => state.auth)
     useEffect(() => {
 
       if (!data) {
@@ -30,9 +29,9 @@ function Perfil() {
                 <h1 className='col-span-4 row-span-1 mb-10 ml-8 text-4xl font-bold text-left text-primary'>Mi Cuenta</h1>
                 <div>
                     <EditImage photo={user.urlPhoto}/>
-                    <EditPassword/>
+                    <EditPassword error={error}/>
                 </div> 
-            <EditProfile user={user} data={data}/>
+            <EditProfile user={user} data={data} />
 
         </div>
     )

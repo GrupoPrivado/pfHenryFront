@@ -21,11 +21,13 @@ function EditProfile({user}) {
             correoElectronico: user.correoElectronico,
             telefono: user.telefono,
             direccion: user.direccion,
-            provincia: user.provincia,
-            localidad: user.localidad
+            provincia: '133' || user.provincia,
+            localidad: '61e0c4a7534c0844d9deda0a' || user.localidad
         })
-    }, [user])
+        dispatch(getAllCities('133'))
 
+    }, [user, dispatch])
+    
 
     const [activityChanged, setActivityChanged] = useState(false);
     const handleChange = (e) => {
@@ -35,20 +37,6 @@ function EditProfile({user}) {
         })
         setActivityChanged(true)
     }
-
-    // function handleSelect(e){
-    //     const newData = {
-    //       ...input,
-    //       [e.target.name]: e.target.value,
-    //     };
-    //     setInput(newData);
-    
-    //     dispatch(filterByCity(city));
-    //     setInput({
-    //         ...input,
-    //         [e.target.name]: e.target.value
-    //     })
-    // }
 
     const handleChangeProvince = (e) => {
         const newData = {
@@ -61,6 +49,7 @@ function EditProfile({user}) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+            
         dispatch(updateUser(input));
         alert("Cambios guardados con éxito")
     }
@@ -174,6 +163,7 @@ function EditProfile({user}) {
                             <label className="text-lg font-semibold" htmlFor="localidad">Localidad </label>
                             <select 
                             onChange={handleChange} 
+                            value={input.localidad}
                             name="localidad" 
                             className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 " 
                             required
@@ -181,7 +171,7 @@ function EditProfile({user}) {
                                 {/* <option defaultValue={input.provincia} value={input.provincia} >{input.provincia}</option> */}
                                 {
                                     cities && cities.map(c => (
-                                        <option key={c._id} value={c.localidad}>{c.localidad}</option>
+                                        <option key={c._id} value={c._id}>{c.localidad}</option>
                                     ))
                                 }
                                 {/* {provinces?.map((province, i) => (

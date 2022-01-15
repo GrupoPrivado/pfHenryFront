@@ -1,8 +1,8 @@
-import React , {useState} from 'react';
+import React , {useEffect, useState} from 'react';
 import {useDispatch} from "react-redux";
 import { changePassword } from '../../actions/actionAuth';
 
-function EditPassword() {
+function EditPassword({error}) {
     const dispatch = useDispatch()
     const [passwords, setPasswords] = useState({
         old: "",
@@ -14,7 +14,7 @@ function EditPassword() {
         console.log("passwords", passwords)
         
         dispatch(changePassword(passwords))
-        alert("Contraseña cambiada con exito")
+        //alert("Contraseña cambiada con exito")
     }
 
     const handleChange = (e) => {
@@ -23,6 +23,14 @@ function EditPassword() {
             [e.target.name] : e.target.value
         })
     }
+
+    console.log(error, 'erroooor' )
+    useEffect(() => {
+        if(error){
+            alert(error)
+
+        }
+    }, [error])
 
     return (
         <div className='flex items-center justify-start w-full px-4 py-12 sm:px-6 lg:px-8'>
