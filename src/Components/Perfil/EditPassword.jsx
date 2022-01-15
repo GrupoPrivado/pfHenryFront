@@ -1,6 +1,7 @@
 import React , {useState} from 'react';
 import {useDispatch} from "react-redux";
 import { changePassword } from '../../actions/actionAuth';
+import SuccessAlert from '../Alerts/SuccessAlert';
 
 function EditPassword() {
     const dispatch = useDispatch()
@@ -9,12 +10,17 @@ function EditPassword() {
         newPass: "",
         repeat: "", 
     })
+    const [activeAlert, setActiveAlert] = useState(false)
     const handleSubmit = (e) => {
         e.preventDefault(e);
         console.log("passwords", passwords)
-        
         dispatch(changePassword(passwords))
-        alert("Contraseña cambiada con exito")
+        setTimeout(() => {
+            setActiveAlert(true)
+        }, 1000);
+        setTimeout(() => {
+            setActiveAlert(false)
+        }, 4000)
     }
 
     const handleChange = (e) => {
@@ -29,9 +35,9 @@ function EditPassword() {
             <div className="w-full max-w-md space-y-8">
                 <form className="mt-8 space-y-6 " onSubmit={handleSubmit}>
                     <input type="hidden" name="remember" defaultValue="true" />
-                    <div className="grid items-center grid-cols-3 grid-rows-5 gap-4 -space-y-px rounded-md shadow-sm w-90vw sm:grid-cols-4 sm:grid-rows-2">
+                    <div className="grid items-center grid-cols-3 grid-rows-5 gap-4 -space-y-px rounded-md shadow-sm w-90vw sm:w-40vw sm:grid-cols-3 sm:grid-rows-5">
                         <h3 className='col-span-4 row-span-1 text-2xl font-bold text-left text-primary'>Actualizar Contraseña</h3>
-                        <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
+                        <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-3 sm:row-span-1">
                             <label className="text-lg font-semibold" htmlFor="old">Contraseña Actual</label>
                             <input 
                             type="password" 
@@ -43,7 +49,7 @@ function EditPassword() {
                             required
                             />
                         </div>
-                        <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
+                        <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-3 sm:row-span-1">
                             <label className="text-lg font-semibold" htmlFor="newPass">Nueva Contraseña</label>
                             <input 
                             type="password" 
@@ -55,7 +61,7 @@ function EditPassword() {
                             required 
                             />
                         </div>
-                        <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
+                        <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-3 sm:row-span-1">
                             <label className="text-lg font-semibold" htmlFor="repeat">Repetir Contraseña</label>
                             <input 
                             type="password" 
@@ -67,11 +73,11 @@ function EditPassword() {
                             required 
                             />
                         </div>
-                        <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-1 sm:row-span-1">
+                        <div className="items-center col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-3 sm:row-span-1">
                             <button 
                             type="submit" 
                             value="Cambiar Contraseña"
-                            className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md disabled:bg-gray-500 bg-primary group hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary" 
+                            className="relative flex justify-center w-full px-4 py-2 text-sm font-semibold text-white border border-transparent rounded-md disabled:bg-gray-500 bg-primary group hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary" 
                             disabled={
                                 !passwords.old ||
                                 !passwords.newPass ||
@@ -81,6 +87,7 @@ function EditPassword() {
                     </div>
                 </form>
             </div>
+            {activeAlert && <SuccessAlert/>}
         </div>
     )
 }
