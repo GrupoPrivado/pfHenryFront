@@ -23,7 +23,7 @@ export default function FormAddAsociateGroup({
   modal,
   setModal,
 }) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [errors, setErrors] = useState(true);
   console.log(errors);
   const [input, setInput] = useState({
@@ -33,10 +33,10 @@ export default function FormAddAsociateGroup({
     fechaNacimiento: "",
     telefono: "",
     correoElectronico: "",
-    localidad: "",
-    provincia: "",
+    ciudadID: "",
+    provinciaID: "",
     direccion: "",
-    codePlan: "",
+    planID: "",
     parentesco: "",
   });
 
@@ -68,11 +68,11 @@ export default function FormAddAsociateGroup({
       fechaNacimiento: "",
       telefono: "",
       correoElectronico: "",
-      localidad: "",
-      provincia: "",
+      ciudadID: "",
+      provinciaID: "",
       direccion: "",
       parentesco: "",
-      codePlan: "",
+      planID: "",
     });
     setErrors(true);
     setModal(!modal);
@@ -81,9 +81,9 @@ export default function FormAddAsociateGroup({
   const handleChangeProvince = (e) => {
     const newData = {
       ...input,
-      provincia: e.target.value,
+      provinciaID: e.target.value,
     };
-    dispatch(getAllCities(newData.provincia))
+    dispatch(getAllCities(newData.provinciaID));
     setInput(newData);
   };
 
@@ -181,11 +181,10 @@ export default function FormAddAsociateGroup({
         <div className="flex">
           <label className="text-sm font-medium rounded-md">Provincia:</label>
           <select
-            value={input.provincia}
+            value={input.provinciaID}
             onChange={handleChangeProvince}
-            name="provincia"
+            name="provinciaID"
             className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-            
           >
             {provinces &&
               provinces.map((p) => (
@@ -197,22 +196,22 @@ export default function FormAddAsociateGroup({
         </div>
         <div className="flex">
           <label className="text-sm font-medium rounded-md">Localidad:</label>
-          <select 
-                            onChange={handleChange} 
-                            value={input.localidad}
-                            name="localidad" 
-                            className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                            required
-                            >
-                                {
-                                    cities && cities.map(c => (
-                                        <option key={c._id} value={c._id}>{c.localidad}</option>
-                                    ))
-                                }
-
-                            </select>
+          <select
+            onChange={handleChange}
+            value={input.ciudadID}
+            name="ciudadID"
+            className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            required
+          >
+            {cities &&
+              cities.map((c) => (
+                <option key={c._id} value={c._id}>
+                  {c.localidad}
+                </option>
+              ))}
+          </select>
         </div>
-        
+
         <div className="flex">
           <label className="text-sm font-medium rounded-md">
             Seleccione su parentesco:

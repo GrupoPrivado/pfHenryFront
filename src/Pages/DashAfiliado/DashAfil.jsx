@@ -37,7 +37,7 @@ function DashAfil() {
     
     
     useEffect(()=>{
-        if(user.codeGF) dispatch(getGroup(user.codeGF))
+        if(user.grupFamID) dispatch(getGroup(user.grupFamID))
     }, [dispatch, user] )
 
     useEffect(()=>{
