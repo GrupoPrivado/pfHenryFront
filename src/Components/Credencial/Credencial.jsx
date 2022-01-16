@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Dialog, Transition } from '@headlessui/react'
 import { ExclamationIcon } from '@heroicons/react/outline'
+import  logo  from '../../assets/logo_white_large.png'
 
 function Credencial({toggleClass}) {
   const [open, setOpen] = useState(true)
@@ -22,7 +23,7 @@ function Credencial({toggleClass}) {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Dialog.Overlay className="fixed inset-0 bg-gray-800 bg-opacity-75 transition-opacity" />
+            <Dialog.Overlay className="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity" />
           </Transition.Child>
 
           {/* This element is to trick the browser into centering the modal contents. */}
@@ -38,30 +39,29 @@ function Credencial({toggleClass}) {
             leaveFrom="opacity-80 translate-y-0 sm:scale-100"
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
-            <div className="inline-block align-bottom bg-gradient-to-b from-white-rgba to-white-rgba2 rounded-3xl text-center overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full border-t-gray-200 border-t border-l-gray-200 border-l border-solid">
-              <div className="px-4 pt-5 pb-4 sm:p-6 sm:pb-4 w-20">
-                <div className="sm:flex sm:items-center backdrop-filter backdrop-blur-lg">
-                  <div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+            <div className="h-full inline-block align-middle bg-gradient-to-b from-white-rgba to-white-rgba2 rounded-3xl overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full border-t-gray-200 border-t border-l-gray-200 border-l border-solid">
+              <div className="px-4 pt-5 pb-5 sm:p-6">
+                <div className="sm:flex  backdrop-filter backdrop-blur-lg">
+                  {/* <div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
                     <svg name='credencial' xmlns="http://www.w3.org/2000/svg" className="h-28 w-28" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
                     </svg>
-                  </div>
-                  <div className="mt-3 text-center sm:mt-0 sm:ml-4 items-center">
-                    <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900">
-                      Credencial
-                    </Dialog.Title>
-                    <div className="mt-2">
-                      <p className="text-sm text-gray-500">
-                      
-                        Nombre: <label>{user.nombre}</label>
-                        <hr/>
-                        Apellido: <label>{user.apellido}</label>
-                        <hr/>
-                        DNI: <label>{user.DNI}</label>
-                        <hr/>
-                        Plan: <label>{user.codePlan}</label>
-                      
-                      </p>
+                  </div> */}
+                  <div className="mt-6 sm:mt-0 sm:ml-4 flex flex-col justify-evenly">
+                    {/* <Dialog.Title as="h3" className="text-3xl leading-6 font-semibold text-white text-right top-0 -right-96 absolute mb-2">
+                      ARPYMEDICAL
+                    </Dialog.Title> */}
+                    <img src={logo} alt="Logo" className="top-0 self-center w-full pb-8 "/>
+                    <div className="mt-16 pt-14">
+                      <h3 className="text-2xl text-white font-normal absolute bottom-20 pb-4 tracking-widest">
+                        DNI {user.DNI}
+                      </h3>
+                      <h3 className="text-white font-normal text-xl absolute bottom-8 pb-4 tracking-widest">
+                        NOMBRE {user.nombre} {user.apellido}
+                      </h3>
+                      <h3 className="text-white font-normal text-xl bottom-0 pb-2 pt-6 absolute tracking-widest">
+                        PLAN {user.planID.name}
+                      </h3>
                     </div>
                   </div>
                 </div>
