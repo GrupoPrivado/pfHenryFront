@@ -31,10 +31,10 @@ const ABMSpecialitiesList = ({
 
   return (
     <div className={styles.divScroll}>
-      <div class="bg-gray-50 min-h-screen">
+      <div class="bg-gray-50 min-h-screen  ">
         <div>
           <div class="p-4">
-            <div class="bg-white p-4 rounded-md">
+            <div class="bg-white p-6 rounded-md">
               <div>
                 <div className=" flex justify-end">
                 <button
@@ -101,68 +101,7 @@ const ABMSpecialitiesList = ({
                           </div>
                         );
                       })}
-                    {/* <div>
-                <div class="flex justify-between border-t text-sm font-normal mt-4 space-x-4">
-                  <div class="px-2 flex">
-                    <span>John Deo</span>
-                  </div>
-                  <div>
-                    <span>johndeo@gmail.com</span>
-                  </div>
-                  <div class="px-2">
-                    <span>Admin</span>
-                  </div>
-                  <div class="px-2">
-                    <span>28/12/2021</span>
-                  </div>
-                  <div class="px-2">
-                    <select>
-                      <option>Admin</option>
-                      <option>User</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="flex justify-between border-t-2 text-sm font-normal mt-4 space-x-4">
-                  <div class="px-2">
-                    <span>John Deo</span>
-                  </div>
-                  <div>
-                    <span>johndeo@gmail.com</span>
-                  </div>
-                  <div class="px-2">
-                    <span>Admin</span>
-                  </div>
-                  <div class="px-2">
-                    <span>28/12/2021</span>
-                  </div>
-                  <div class="px-2">
-                    <select>
-                      <option>Admin</option>
-                      <option>User</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="flex justify-between border-t-2 text-sm font-normal mt-4 space-x-4">
-                  <div class="px-2">
-                    <span>John Deo</span>
-                  </div>
-                  <div>
-                    <span>johndeo@gmail.com</span>
-                  </div>
-                  <div class="px-2">
-                    <span>Admin</span>
-                  </div>
-                  <div class="px-2">
-                    <span>28/12/2021</span>
-                  </div>
-                  <div class="px-2">
-                    <select>
-                      <option>Admin</option>
-                      <option>User</option>
-                    </select>
-                  </div>
-                </div>
-              </div> */}
+                    
                   </div>
                 </div>
               </div>

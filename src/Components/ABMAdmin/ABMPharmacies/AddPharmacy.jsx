@@ -80,12 +80,18 @@ const AddPharmacy = ({ showModalAdd, setShowModalAdd }) => {
   return (
     <div className={styles[showHideClassName]}>
       <section className={styles.modalmain}>
-        <h5>Agregar Nueva Farmacia</h5>
-        <div className={styles.container}>
+      <div className="flex justify-center">
+          <h5 className="text-2xl font-bold text-gray-500">
+            Agregar Nueva Farmacia
+          </h5>
+        </div>
+        <div className="modal-content py-4 text-left px-6 ">
           <form onSubmit={(e) => handleSubmitPharmacy(e)} id="addPharmacy">
-            <div>
-              <label>Nombre: </label>
+            <div className="flex">
+            <div className=" w-1/2">
+              <label className="text-md text-gray-600">Nombre: </label>
               <input
+              className="h-2 p-4 w-full border-2 border-gray-300 mb-1 rounded-md"
                 type="text"
                 name="nombre"
                 autoComplete="off"
@@ -94,46 +100,10 @@ const AddPharmacy = ({ showModalAdd, setShowModalAdd }) => {
                 placeholder="Ingrese el Nombre...."
               />
             </div>
-
-            <div>
-              <label>Dirección: </label>
+            <div className=" w-1/2">
+              <label className="text-md text-gray-600">Nro. Habilitación: </label>
               <input
-                type="text"
-                name="direccion"
-                autoComplete="off"
-                value={inputPharmacy.direccion}
-                onChange={(e) => handleChange(e)}
-                placeholder="Ingrese la Dirección...."
-              />
-            </div>
-
-            <div>
-              <label>Teléfono: </label>
-              <input
-                type="text"
-                name="telefono"
-                autoComplete="off"
-                value={inputPharmacy.telefono}
-                onChange={(e) => handleChange(e)}
-                placeholder="Ingrese el Teléfono...."
-              />
-            </div>
-
-            <div>
-              <label>E-mail: </label>
-              <input
-                type="text"
-                name="mail"
-                autoComplete="off"
-                value={inputPharmacy.mail}
-                onChange={(e) => handleChange(e)}
-                placeholder="Ingrese el E-mail...."
-              />
-            </div>
-
-            <div>
-              <label>Nro. Habilitación: </label>
-              <input
+              className="h-2 p-4 w-full border-2 border-gray-300 mb-1 rounded-md"
                 type="number"
                 name="numHabilitacion"
                 autoComplete="off"
@@ -142,8 +112,36 @@ const AddPharmacy = ({ showModalAdd, setShowModalAdd }) => {
                 placeholder="Ingrese el Nro. Habilit....."
               />
             </div>
+            </div>
 
+            <div>
+              <label className="text-md text-gray-600">Dirección: </label>
+              <input
+              className="h-2 p-4 w-full border-2 border-gray-300 mb-1 rounded-md"
+                type="text"
+                name="direccion"
+                autoComplete="off"
+                value={inputPharmacy.direccion}
+                onChange={(e) => handleChange(e)}
+                placeholder="Ingrese la Dirección...."
+              />
+            </div>
+<div className="flex">
+            <div>
+              <label className="text-md text-gray-600">Teléfono: </label>
+              <input
+              className="h-2 p-4 w-full border-2 border-gray-300 mb-1 rounded-md"
+                type="text"
+                name="telefono"
+                autoComplete="off"
+                value={inputPharmacy.telefono}
+                onChange={(e) => handleChange(e)}
+                placeholder="Ingrese el Teléfono...."
+              />
+            </div>
+            <div><label className="text-md text-gray-600">Ciudad: </label>
             <select
+            className="h-2 p-4 w-full border-2 border-gray-300 mb-1 rounded-md"
               id="ciudad"
               name="ciudadCP"
               onChange={(e) => handleChange(e)}
@@ -158,24 +156,67 @@ const AddPharmacy = ({ showModalAdd, setShowModalAdd }) => {
                 );
               })}
             </select>
-          </form>
+            </div>
+            </div>
+            <div>
+              <label className="text-md text-gray-600">E-mail: </label>
+              <input
+              className="h-2 p-4 w-full border-2 border-gray-300 mb-5 rounded-md"
+                type="text"
+                name="mail"
+                autoComplete="off"
+                value={inputPharmacy.mail}
+                onChange={(e) => handleChange(e)}
+                placeholder="Ingrese el E-mail...."
+              />
+            </div>
 
-          {errors ? (
-            <button
-              type="submit"
-              key="submitFormButton"
-              form="addPharmacy"
-              disabled={errors}
-              className="disabledButton"
-            >
-              Cargar
-            </button>
-          ) : (
-            <button type="submit" key="submitFormButton" form="addPharmacy">
-              Cargar
-            </button>
-          )}
-          <button onClick={() => handleClose()}>Cerrar</button>
+            
+ 
+          <div className="flex justify-between">
+          <div className="flex w-1/3 items-center">
+                <label className="text-md text-gray-600">Activo: </label>
+                <select 
+                
+                  id="activa"
+                  name="activa"
+                  onChange={(e) => handleChange(e)}
+                  defaultValue={0}
+                >
+                  <option value="false">No</option>
+                  <option value="true">Si</option>
+                </select>
+              </div>
+          <div className="flex w-2/3 justify-around">
+                {errors ? (
+                  <button
+                    className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    type="submit"
+                    key="submitFormButton"
+                    form="addSpeciality"
+                    disabled={errors}
+                  >
+                    Guardar
+                  </button>
+                ) : (
+                  <button
+                    type="submit"
+                    key="submitFormButton"
+                    form="addSpeciality"
+                    className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  >
+                    Guardar
+                  </button>
+                )}
+                <button
+                  onClick={() => handleClose()}
+                  className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                  Cerrar
+                </button>
+              </div>
+              </div>
+              </form>
         </div>
       </section>
     </div>

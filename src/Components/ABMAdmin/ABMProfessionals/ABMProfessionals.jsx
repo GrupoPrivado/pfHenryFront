@@ -24,13 +24,14 @@ const ABMProfessionals = () => {
 
   return (
     <div>
-      <button title="Agregar Profesional" onClick={() => setShowModalAdd(true)}>
+      {/* <button title="Agregar Profesional" onClick={() => setShowModalAdd(true)}>
         Agregar Profesional
-      </button>
+      </button> */}
 
       <ProfessionalsList
         allProfessionals={allProfessionals}
         setShowModalUpdate={setShowModalUpdate}
+        setShowModalAdd={setShowModalAdd}
       />
 
       <AddProfessional
