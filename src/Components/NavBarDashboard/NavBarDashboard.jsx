@@ -48,60 +48,60 @@ export default function NavBarDashboard() {
     ]
     
     const navigate = useNavigate()
-    const { user, route } = useSelector(state => state.auth)
+    const { user, route } = useSelector(state => state.auth)  
 
     return (
-        <>
-            <div className="min-h-full">
-                <Disclosure as="nav" className="bg-white">
-                    {({ open }) => (
-                        <>
-                            <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-                                <div className="flex items-center justify-between h-16">
-                                    <div className="flex items-center">
-                                        <div className="flex-shrink-0">
-                                            <img
-                                                src={Logo}
-                                                alt="Workflow"
-                                            />
-                                        </div>
-                                        <div className="hidden md:block">
-                                            <div className="flex items-baseline ml-10 space-x-4">
-                                                {navigation.map((item, index) => (
-                                                    <Link
-                                                        key={item.name}
-                                                        to={item.href}
-                                                        className={classNames(
-                                                            item.current
-                                                                ? 'bg-secondary text-white'
-                                                                : 'text-primary hover:bg-primary hover:text-white',
-                                                            'px-3 py-2 rounded-md text-sm font-medium'
-                                                        )}
-                                                        aria-current={item.current ? 'page' : undefined}
-                                                        onClick={() =>{
-                                                            const oldState = navigation
-                                                            const prev = oldState.find((e) => e.current === true)
-                                                            prev.current = !prev.current
+      <>
+        <div className="min-h-full">
+          <Disclosure as="nav" className="bg-white">
+            {({ open }) => (
+              <>
+                <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+                  <div className="flex items-center justify-between h-16">
+                    <div className="flex items-center">
+                      <div className="flex-shrink-0">
+                        <img src={Logo} alt="Workflow" />
+                      </div>
+                      <div className="hidden md:block">
+                        <div className="flex items-baseline ml-10 space-x-4">
+                          {navigation.map((item, index) => (
+                            <Link
+                              key={item.name}
+                              to={item.href}
+                              className={classNames(
+                                item.current
+                                  ? "bg-secondary text-white"
+                                  : "text-primary hover:bg-primary hover:text-white",
+                                "px-3 py-2 rounded-md text-sm font-medium"
+                              )}
+                              aria-current={item.current ? "page" : undefined}
+                              onClick={() => {
+                                const oldState = navigation;
+                                const prev = oldState.find(
+                                  (e) => e.current === true
+                                );
+                                prev.current = !prev.current;
 
-                                                            oldState[index].current = !oldState[index].current
-                                                            setNavigation([...oldState])
-                                                        }}
-                                                    >
-                                                        {item.name}
-                                                    </Link>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="hidden md:block">
-                                        <div className="flex items-center ml-4 md:ml-6">
-                                            <button
-                                                type="button"
-                                                className="p-1 text-gray-400 bg-gray-800 rounded-full hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-                                            >
-                                                <span className="sr-only">View notifications</span>
-                                                <BellIcon className="w-6 h-6" aria-hidden="true" />
-                                            </button>
+                                oldState[index].current =
+                                  !oldState[index].current;
+                                setNavigation([...oldState]);
+                              }}
+                            >
+                              {item.name}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="hidden md:block">
+                      <div className="flex items-center ml-4 md:ml-6">
+                        <button
+                          type="button"
+                          className="p-1 text-gray-400 bg-gray-800 rounded-full hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                        >
+                          <span className="sr-only">View notifications</span>
+                          <BellIcon className="w-6 h-6" aria-hidden="true" />
+                        </button>
 
                                             {/* Profile dropdown */}
                                             <Menu as="div" className="relative z-50 ml-3">

@@ -1,6 +1,6 @@
 import React from 'react'
 
-function SuccessAlert() {
+function SuccessAlert({message}) {
     return (
         <div>
             <div className="absolute flex flex-row items-center p-5 bg-green-200 border-b-2 border-green-300 rounded bottom-11 right-3 alert">
@@ -13,7 +13,7 @@ function SuccessAlert() {
                 </div>
                 <div className="ml-4 alert-content">
                     <div className="text-sm text-green-600 alert-description">
-                        Cambios realizados con éxito!
+                        {message}
                     </div>
                 </div>
             </div>

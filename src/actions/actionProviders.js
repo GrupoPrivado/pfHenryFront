@@ -1,6 +1,8 @@
 import axios from "axios";
 import { api } from "../urlHostApi";
 
+export const GET_ALL_PROVINCES = 'GET_ALL_PROVINCES'
+
 export function getAllProviders() {
   return async function (dispatch) {
     var json = await axios.get(`${api}/profesionales`);
@@ -11,15 +13,34 @@ export function getAllProviders() {
     });
   };
 }
-
-export function getAllCities() {
+export function getAllProvinces() {
   return async function (dispatch) {
-    var json = await axios.get(`${api}/ciudades`);
-
+    const {data} = await axios.get(`${api}/provincias`);
     return dispatch({
-      type: "GET_ALL_CITIES",
-      payload: json.data.message,
+      type: GET_ALL_PROVINCES,
+      payload: data.message,
     });
+  };
+}
+
+export function getAllCities(payload) {
+  console.log('get all cities, ', payload)
+  return async function (dispatch) {
+    try {
+      const {data} = await axios.get(`${api}/ciudades/${payload}`);
+  
+      if(data.success){
+        return dispatch({
+          type: "GET_ALL_CITIES",
+          payload: data.message,
+        });
+
+      }
+  
+      
+    } catch (error) {
+      return console.log(error, 'error en get all cities')
+    }
   };
 }
 export function getAllSpecialties() {
@@ -32,18 +53,25 @@ export function getAllSpecialties() {
     });
   };
 }
-export function filterByCity(ciudadCP, codeEsp) {
-  console.log('ciudad', ciudadCP)
-  console.log('espe', codeEsp)
+export function filterByCity(ciudadID, codeEsp) {
   return async function (dispatch) {
-    var json = await axios.get(
-      `${api}/profesionales?ciudadCP=${ciudadCP}&codeEsp=${codeEsp}`
-    );
- console.log('json', json.data.message)
-    return dispatch({
-      type: "FILTER_BY_CITY",
-      payload: json.data.message,
-    });
+    try {
+      var {data} = await axios.get(
+        `${api}/profesionales?ciudadID=${ciudadID}&codeEsp=${codeEsp}`
+        );
+        console.log('json', data.message)
+        if(data.success){
+          return dispatch({
+            type: "FILTER_BY_CITY",
+            payload: data.message,
+          });
+        } else {
+          console.log('errooooooor filter')
+        }
+      
+    } catch (error) {
+      console.log('catch', error)
+    }
   };
 }
 // export function filterBySpecialties(payload) {

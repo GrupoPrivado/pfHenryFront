@@ -5,7 +5,7 @@ import { getRecetas } from "../../actions/actionRecet";
 
 
 
-function Authorizations() {
+function DashAuthorizations() {
   const dispatch = useDispatch();
   const { user } = useSelector(state => state.auth);
   const { recetas } = useSelector(state => state.recetas);
@@ -40,4 +40,4 @@ function Authorizations() {
   );
 }
 
-export default Authorizations;
+export default DashAuthorizations;

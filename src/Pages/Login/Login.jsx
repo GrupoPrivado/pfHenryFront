@@ -5,9 +5,12 @@ import FormLogin from '../../Components/FormLogin/FormLogin'
 import HappyFamily from "./../../assets/happyFamily.jpeg"
 import NavBar from '../../Components/NavBar/NavBar'
 import { getItem } from '../../actions/actionAuth'
+import {useTitle} from '../../hooks/useTitle'
 function Login() {
 
     const navigate = useNavigate()
+    useTitle('Ingresa a tu ArpyMedical')
+
     useEffect(() => {   
         const userType = getItem('userType')
         if(userType) navigate(`/${userType}`)

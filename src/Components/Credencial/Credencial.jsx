@@ -9,6 +9,9 @@ function Credencial({toggleClass}) {
   const { user, route } = useSelector((state) => state.auth);
   const cancelButtonRef = useRef(null)
 
+
+  // WARNING EN CONSOLA => There are no focusable elements inside the <FocusTrap /> 
+
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" initialFocus={cancelButtonRef} onClose={setOpen}>
@@ -51,17 +54,17 @@ function Credencial({toggleClass}) {
                       Credencial
                     </Dialog.Title>
                     <div className="mt-2">
-                      <p className="text-sm text-gray-500">
+                      <div className="text-sm text-gray-500">
                       
-                        Nombre: <label>{user.nombre}</label>
-                        <hr/>
-                        Apellido: <label>{user.apellido}</label>
-                        <hr/>
-                        DNI: <label>{user.DNI}</label>
-                        <hr/>
-                        Plan: <label>{user.codePlan}</label>
+                        <p>Nombre: <span>{user.nombre}</span></p>
+                        {/* <hr/> */}
+                        <p>Apellido: <span>{user.apellido}</span></p>
+                        {/* <hr/> */}
+                        <p>DNI: <span>{user.DNI}</span></p>
+                        {/* <hr/> */}
+                        <p>Plan: <span>{user.codePlan}</span></p>
                       
-                      </p>
+                      </div>
                     </div>
                   </div>
                 </div>

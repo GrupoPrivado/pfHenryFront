@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import Authorizations from '../../Components/Authorizations/Authorizations'
+import DashAuthorizations from '../../Components/DashAuthorizations/DashAuthorizations'
 import FamilyGroupDash from '../../Components/FamilyGroup/FamilyGroupDash'
 import MedicalHistory from '../../Components/MedicalHistory/MedicalHistory'
 import { TokenMedico } from '../../Components/TokenMedico/TokenMedico'
 import Logo from "./../../assets/bg2.jpg"
-import {Link, useNavigate} from "react-router-dom"
+import {useNavigate} from "react-router-dom"
 import { getGroup } from '../../actions/actionGroup'
 import { getAfiliate, getItem, removeItem } from '../../actions/actionAuth';
 import Credencial from '../../Components/Credencial/Credencial'
@@ -26,7 +26,7 @@ function DashAfil() {
     });
         
     useEffect(() => {
-        dispatch(getAfiliate(getItem('userToken')))
+      dispatch(getAfiliate(getItem('userToken')))        
         if(route !== '') {
             removeItem('userType')
             navigate(`/${route}`)
@@ -39,8 +39,8 @@ function DashAfil() {
     }, [dispatch, user] )
 
     useEffect(()=>{
-        if(user.DNI) dispatch(getRecetas(user.DNI))
-    }, [dispatch, user] )
+        dispatch(getRecetas())
+    }, [dispatch] )
 
     const toggleClass = (e) => {
         //console.log(e.target.getAttribute('name'))
@@ -66,7 +66,7 @@ function DashAfil() {
                         </div>
                         <div className="grid sm:grid-cols-3 gap-4 sm:grid-rows-3 md:grid-rows-2 md:grid-cols-3">
                             <MedicalHistory/> 
-                            <Authorizations/>
+                            <DashAuthorizations/>
                             <FamilyGroupDash/>
                             
                             {/* <Modal/> */}

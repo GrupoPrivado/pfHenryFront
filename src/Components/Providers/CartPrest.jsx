@@ -9,6 +9,7 @@ import {
   filterByCity,
   
 } from "../../actions/actionProviders";
+import { provincias } from "../../utils/constantes";
 
 export default function CartPrest() {
   const dispatch = useDispatch();
@@ -17,59 +18,70 @@ export default function CartPrest() {
   );
 
   const [filter, setfilter] = useState({
+    provincia: '',
     city:'',
     speciality :''
   });
   
   
-  useEffect(() => {
-    dispatch(getAllProviders());
-    dispatch(getAllCities());
-    dispatch(getAllSpecialties());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getAllProviders());
+  //   // dispatch(getAllCities());
+  //   dispatch(getAllSpecialties());
+  // }, [dispatch]);
 
-  async function handleSelectCity (e) {
- const hand = {
-  ...filter,
-  [e.target.name] : e.target.value,
+  async function handleSelectCity(e) {
+    console.log('<<<<< target >>>>',e.target.name, '>>>>>>', e.target.value)
+    const hand = {
+      ...filter,
+      [e.target.name]: e.target.value,
+    };
+    console.log('hand  ', hand)
+    setfilter(hand);
 
-}
-    setfilter(
-      hand
-    )
-      
-    
-     await dispatch(filterByCity(hand.city,hand.speciality));
+    dispatch(filterByCity(hand.city, hand.speciality));
   }
   
   // function handleSelectSpecialties(e) {
-  //   if (e.target.value !== "") {
-      
-  //       dispatch(filterBySpecialties(e.target.value));
-      
+  //   if (e.target.value !== "") {   
+  //       dispatch(filterBySpecialties(e.target.value));  
   //   }
-    
   // }
-  
+
+  const handleChangeProvince = (e) => {
+    const newFilters = {
+      ...filter,
+      provincia: e.target.value
+    }
+    dispatch(getAllCities(newFilters.provincia))
+    setfilter(newFilters)
+  }
+  console.log(cities)
   return (
     <div>
       {/* <NavBarDashboard /> */}
-      <select name="city" id="" onClick={handleSelectCity} >
+      <select name='provincia' onChange={handleChangeProvince}>
+        <option value="">Seleccione su provincia</option>
+        {
+          provincias.map((p) =><option key={p.codeProv} value={p.codeProv} >{p.provincia} </option>)
+        }
+      </select>
+      <select name="city" id="" onChange={handleSelectCity}>
         <option value="">Seleccione su ciudad</option>
         {cities?.map((e) => (
-          <option value={e.CP} key={e._id}>
+          <option value={e._id} >
             {e.localidad}
           </option>
         ))}
       </select>
-      <select name="speciality" id=""  onClick={handleSelectCity}>
+      {/* <select name="speciality" id=""  onClick={handleSelectCity}>
         <option value="">Seleccione especialidad</option>
         {specialties?.map((e) => (
-          <option value={e.codeEsp} key={e._id}>
+          <option value={e.codeEsp} >
             {e.nombre}
           </option>
         ))}
-      </select>
+      </select> */}
       <div>
         {providers?.map((e) => (
           <div key={e._id}>

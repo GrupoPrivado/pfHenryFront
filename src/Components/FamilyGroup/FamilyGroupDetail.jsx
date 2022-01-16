@@ -10,11 +10,11 @@ export default function FamilyGroupDetail() {
         {/* <NavbarDasboard/> */}
 
             {group && group.map(e => (
-                    <CardMemberGroup
+                    <CardMemberGroup key={e._id}
                     name={e.nombre}
                     lastname={e.apellido}
                     dni={e.DNI}
-                    id={e._id}/>
+                    />
             ))}
             <Link to='/afiliado'>
             <button>Volver</button></Link>
