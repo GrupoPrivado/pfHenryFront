@@ -54,12 +54,12 @@ const ABMAffiliates = () => {
         setShowModalUpDown={setShowModalUpDown}
       />
 
-      {/* {showModalAdd && (
+      {showModalAdd && (
         <AddAffiliate
           showModalAdd={showModalAdd}
           setShowModalAdd={setShowModalAdd}
         />
-      )} */}
+      )}
 
       {showModalUpdate && (
         <UpdateAffiliate

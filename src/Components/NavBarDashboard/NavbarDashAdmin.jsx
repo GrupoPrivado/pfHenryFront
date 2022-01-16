@@ -20,7 +20,7 @@ function classNames(...classes) {
 export default function NavbarDashAdmin({ showSidebar, setShowSidebar }) {
   const navigate = useNavigate();
   return (
-    <Disclosure as="nav" className="bg-white	">
+    <Disclosure as="nav" className="bg-white sticky	top-0 z-50">
       {({ open }) => (
         <>
           {/* <svg
