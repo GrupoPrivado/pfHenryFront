@@ -7,8 +7,17 @@ import { getPlanes } from "../../actions/actionPlanes";
 import NavBar from "../../Components/NavBar/NavBar";
 import { useTitle } from "../../hooks/useTitle";
 import { getAllProvinces } from "../../actions/actionProviders";
+import { alertActions } from "../../actions/actionAlerts";
+import SuccessAlert from "../../Components/Alerts/SuccessAlert";
+import ErrorAlert from "../../Components/Alerts/ErrorAlert";
 
 export default function Asociate() {
+  const { type, message } = useSelector((state) => state.alerts);
+  const [activeAlert, setActiveAlert] = useState(false);
+  const [errorAlert, setErrorAlert] = useState(false);
+
+  const [alertMessage, setAlertMessage] = useState("");
+
   const dispatch = useDispatch();
 
   const {provinces, cities} = useSelector(state => state.providers)
@@ -16,9 +25,24 @@ export default function Asociate() {
   useTitle("Asociate a ArpyMedical");
   
   useEffect(() => {
+    dispatch(alertActions.clear());
     dispatch(getPlanes());
     dispatch(getAllProvinces())
-  }, [dispatch]);
+
+    if (type === "alert-success") {
+      setActiveAlert(true);
+      setAlertMessage(message);
+    }
+    if (type === "alert-danger") {
+      setErrorAlert(true);
+      setAlertMessage(message);
+    }
+  }, [dispatch, message, type]);
+
+  setTimeout(() => {
+    setActiveAlert(false);
+    setErrorAlert(false);
+  }, 4000);
 
   console.log(provinces, 'provinciaa')
 
@@ -53,6 +77,8 @@ export default function Asociate() {
 
         <div></div>
       </div>
+      {activeAlert && <SuccessAlert message={alertMessage} />}
+      {errorAlert && <ErrorAlert message={alertMessage} />}
     </div>
   );
 }

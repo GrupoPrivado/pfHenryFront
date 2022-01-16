@@ -55,12 +55,13 @@ export default function FormAsociate({
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
 
     const newState = [input, ...output];
 
     setOutput(newState);
 
-    alert("afiliate create");
+    //alert("afiliate create");
 
     dispatch(postAfiliate(newState));
 
@@ -78,7 +79,7 @@ export default function FormAsociate({
       password: "",
     });
     setErrors(true);
-    navigate("/");
+    //navigate("/");
   };
   function handleSelect(e) {
     if (e.target.value !== "select") {
@@ -215,6 +216,7 @@ export default function FormAsociate({
             className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
             
           >
+            <option value=''>Seleccione una provincia</option>
             {provinces &&
               provinces.map((p) => (
                 <option key={p._id} value={p._id}>
@@ -232,6 +234,8 @@ export default function FormAsociate({
                             className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                             required
                             >
+                                          <option value='-'>Seleccione una ciudad</option>
+
                                 {
                                     cities && cities.map(c => (
                                         <option key={c._id} value={c._id}>{c.localidad}</option>
