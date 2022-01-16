@@ -42,6 +42,7 @@ function EditProfile({user}) {
     const handleChangeProvince = (e) => {
         const newData = {
           ...input,
+          ciudadID: '-',
           provinciaID: e.target.value
         }
         dispatch(getAllCities(newData.provinciaID))
@@ -52,7 +53,7 @@ function EditProfile({user}) {
         e.preventDefault();
             
         dispatch(updateUser(input));
-        alert("Cambios guardados con éxito")
+        //alert("Cambios guardados con éxito")
     }
     return (
             <div className='flex items-center justify-start w-full px-4 py-12 sm:px-6 lg:px-8'>
@@ -145,7 +146,7 @@ function EditProfile({user}) {
                             <select value={input.provinciaID}
                             onChange={handleChangeProvince} 
                             name="provinciaID" 
-                            className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 " 
+                            className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 bg-white" 
                             required
                             >
                                 {/* <option defaultValue={input.provincia} value={input.provincia} >{input.provincia}</option> */}
@@ -161,15 +162,16 @@ function EditProfile({user}) {
                             </select>
                         </div>
                         <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
-                            <label className="text-lg font-semibold" htmlFor="localidad">Localidad </label>
+                            <label className="text-lg font-semibold" htmlFor="ciudadID">Localidad </label>
                             <select 
                             onChange={handleChange} 
                             value={input.ciudadID}
-                            name="localidad" 
-                            className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 " 
+                            name="ciudadID" 
+                            className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 bg-white " 
                             required
                             >
                                 {/* <option defaultValue={input.provincia} value={input.provincia} >{input.provincia}</option> */}
+                                <option selected={input.ciudadID === '-' ? true : false}>Seleccione ciudad</option>
                                 {
                                     cities && cities.map(c => (
                                         <option key={c._id} value={c._id}>{c.localidad}</option>

@@ -62,7 +62,7 @@ function Credencial({toggleClass}) {
                         {/* <hr/> */}
                         <p>DNI: <span>{user.DNI}</span></p>
                         {/* <hr/> */}
-                        <p>Plan: <span>{user.codePlan}</span></p>
+                        <p>Plan: <span>{user.planID.name}</span></p>
                       
                       </div>
                     </div>

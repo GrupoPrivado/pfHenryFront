@@ -26,7 +26,10 @@ function Perfil() {
   const [alertMessage, setAlertMessage] = useState("");
 
   useEffect(() => {
-    dispatch(alertActions.clear());
+    if(!activeAlert || !errorAlert){
+      dispatch(alertActions.clear());
+
+    }
 
     if (type === "alert-success") {
       setActiveAlert(true);
@@ -47,7 +50,7 @@ function Perfil() {
     
     dispatch(getAllProvinces())
     dispatch(getAllCities(user.provinciaID))
-  }, [dispatch, route, navigate, data, message, type, user.provinciaID]);
+  }, [dispatch, route, navigate, data, message, type, user.provinciaID, activeAlert, errorAlert]);
 
   setTimeout(() => {
     setActiveAlert(false);
