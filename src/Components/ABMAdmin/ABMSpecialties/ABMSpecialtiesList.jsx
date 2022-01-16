@@ -47,18 +47,18 @@ const ABMSpecialitiesList = ({
                 </div>
                 <div className="mt-3.5">
                   <div>
-                    <div class="flex justify-between bg-gradient-to-tr from-indigo-600 to-purple-600 rounded-md py-2 px-4 text-white font-bold text-md">
-                      <div className="w-1/4  flex justify-center">
+                    <div class="grid overflow-hidden grid-cols-4 grid-rows-1 gap-0 bg-gradient-to-tr from-indigo-600 to-purple-600 rounded-md py-2 px-4 text-white font-bold text-md">
+                      <div className="  flex justify-center">
                         <span >Codigo </span>
                       </div>
-                      <div className="w-1/4  flex justify-center">
+                      <div className="  flex justify-center">
                         <span>Nombre</span>
                       </div>
-                      <div className="w-1/4  flex justify-center">
+                      <div className="  flex justify-center">
                         <span>Descripcion</span>
                       </div>
 
-                      <div className="w-1/4  flex justify-center">
+                      <div className="  flex justify-center">
                         <span>Editar</span>
                       </div>
                     </div>
@@ -66,18 +66,18 @@ const ABMSpecialitiesList = ({
                       allSpecialities.map((element) => {
                         return (
                           <div key={element._id} className={styles.tabla}>
-                            <div class="flex justify-between  py-1 px-4 items-center border-t text-sm font-normal mt-4 space-x-4">
-                              <div class="w-1/4  flex justify-center">
+                            <div class="grid overflow-hidden grid-cols-4 grid-rows-1 gap-0  py-1 px-4 items-center border-t text-sm font-normal mt-4 space-x-4">
+                              <div class="  flex justify-center">
                                 <span>{element.codeEsp}</span>
                               </div>
-                              <div class="w-1/4  flex justify-center">
+                              <div class="  flex justify-center">
                                 <span>{element.nombre}</span>
                               </div>
-                              <div class="w-1/4  flex justify-center">
+                              <div class="  flex justify-center">
                                 <span>{element.descripcion}</span>
                               </div>
 
-                              <div class="w-1/4  flex justify-around">
+                              <div class="  flex justify-around">
                                 <button
                                   key={"delete" + element._id}
                                   title="Delete"
