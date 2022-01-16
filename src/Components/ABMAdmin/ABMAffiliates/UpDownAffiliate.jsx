@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
 import {
-    upDownAffiliateAct,
+  upDownAffiliateAct,
   getAllAffiliates,
   resetDataUpdate,
 } from "../../../actions/actionAMBAdmin";
@@ -27,22 +27,22 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
   const [errors, setErrors] = useState(false);
 
   let [upDownAffiliateData, setupDowndateAffiliateData] = useState({
-    DNI: "",
+    id: "",
     alta: "",
     activo: "",
-    titularGF: "",
     grupoFamiliar: "",
-    codeGF: "",
+    grupFamID: "",
+    titularGF:"",
   });
 
   useEffect(() => {
     setupDowndateAffiliateData({
-      DNI: updateData.DNI,
+      id: updateData._id,
       alta: updateData.alta,
       activo: updateData.activo,
       titularGF: updateData.titularGF,
-      grupoFamiliar: updateData.grupoFamiliar,
-      codeGF: updateData.codeGF,
+      grupoFamiliar: updateData.grupoFamiliar || false,
+      grupFamID: updateData.grupFamID || false,
     });
   }, [updateData, dispatch]);
 
@@ -62,12 +62,12 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
     let response = await dispatch(upDownAffiliateAct(upDownAffiliateData));
     alert(response.success);
     setupDowndateAffiliateData({
-      DNI: "",
+      id: "",
       alta: "",
       activo: "",
-      titularGF: "",
       grupoFamiliar: "",
-      codeGF: "",
+      grupFamID: "",
+      titularGF:"",
     });
     await dispatch(getAllAffiliates());
     dispatch(resetDataUpdate());
@@ -77,22 +77,20 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
 
   const handleClose = () => {
     setupDowndateAffiliateData({
-      DNI: "",
+      id: "",
       alta: "",
       activo: "",
-      titularGF: "",
       grupoFamiliar: "",
-      codeGF: "",
+      grupFamID: "",
+      titularGF:"",
     });
     dispatch(resetDataUpdate());
     setErrors(true);
     setShowModalUpDown(false);
   };
 
-  const showHideClassName = showModalUpDown ? "displayblock" : "displaynone";
-
   return (
-    <div className={styles[showHideClassName]}>
+    <div>
       <section className={styles.modalmain}>
         <h5>Alta/Baja Afiliado</h5>
         <div className={styles.container}>
@@ -104,46 +102,35 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
               <label>Nombre: {updateData.nombre}</label>
               <label>Apellido: {updateData.apellido}</label>
               <label>DNI: {updateData.DNI}</label>
-              <label>Plan: {updateData.codePlan}</label>
-              <label>Grupo familiar: {updateData.codeGF ? codeGF : "No"}</label>
-              <label>Titular: {updateData.titularGF}</label>
+              <label>
+                Grupo familiar: {updateData.grupFamID ? "Si" : "No"}
+              </label>
+              <label>Titular: {updateData.titularGF ? "Si" : "No"}</label>
             </div>
 
             <div>
               <label>Alta: </label>
-              <select name="alta" onChange={(e) => handleUpdateAffiliate(e)}>
+              <select
+                name="alta"
+                onChange={(e) => handleUpdateAffiliate(e)}
+                value={upDownAffiliateData.alta}
+              >
                 <option value="">Seleccione:</option>
-                <option
-                  value={true}
-                  selected={true === upDownAffiliateData.oldAlta}
-                >
-                  Si
-                </option>
-                <option
-                  value={false}
-                  selected={false === upDownAffiliateData.oldAlta}
-                >
-                  No
-                </option>
+                <option value={true}>Si</option>
+                <option value={false}>No</option>
               </select>
             </div>
 
             <div>
               <label>Activo: </label>
-              <select name="activo" onChange={(e) => handleUpdateAffiliate(e)}>
+              <select
+                name="activo"
+                onChange={(e) => handleUpdateAffiliate(e)}
+                value={upDownAffiliateData.activo}
+              >
                 <option value="">Seleccione:</option>
-                <option
-                  value={true}
-                  selected={true === upDownAffiliateData.oldActivo}
-                >
-                  Si
-                </option>
-                <option
-                  value={false}
-                  selected={false === upDownAffiliateData.oldActivo}
-                >
-                  No
-                </option>
+                <option value={true}>Si</option>
+                <option value={false}>No</option>
               </select>
             </div>
           </form>

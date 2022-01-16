@@ -4,7 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../utils/authUtils";
 import NavBarDashAdmin from "../../Components/NavBarDashboard/NavbarDashAdmin";
 
-// import ABMCities from "../../Components/ABMAdmin/ABMCities/ABMCities";
 import ABMSpecialities from "../../Components/ABMAdmin/ABMSpecialties/ABMSpecialties";
 import ABMAffiliates from "../../Components/ABMAdmin/ABMAffiliates/ABMAffiliates";
 import ABMPharmacies from "../../Components/ABMAdmin/ABMPharmacies/ABMPharmacies";
@@ -27,8 +26,6 @@ function DashAdmin() {
 
   return (
     <div>
-
-      
 
       Dashboard Administrador
       

@@ -3,20 +3,23 @@ import React from "react";
 import { useDispatch } from "react-redux";
 
 import {
-  getAllAffiliates,
   getAffiliateData,
 } from "../../../actions/actionAMBAdmin";
 
 import styles from "./ABMAffiliates.module.css";
 
-const ABMAffiliatesList = ({ allAffiliates, setShowModalUpdate, setShowModalAdd }) => {
+const ABMAffiliatesList = ({ allAffiliates, setShowModalUpdate, setShowModalAdd, setShowModalUpDown }) => {
   const dispatch = useDispatch();
 
   const handleEditAffiliate = async (event) => {
     await dispatch(getAffiliateData(event.target.value));
     setShowModalUpdate(true);
   };
-
+  const handleBajaAltaAffiliate = async (event) => {
+    await dispatch(getAffiliateData(event.target.value));
+    setShowModalUpDown(true);
+  };
+  
   return (
     
 
@@ -60,6 +63,14 @@ const ABMAffiliatesList = ({ allAffiliates, setShowModalUpdate, setShowModalAdd 
                         <div className="w-1/7  flex justify-center">
                           <span>Editar</span>
                         </div>
+
+                        <div>
+                          <span>Plan</span>
+                        </div>
+
+                        <div>
+                          <span>Código Plan</span>
+                        </div>
                       </div>
                       {allAffiliates.length !== 0 &&
         allAffiliates.map((element) => {
@@ -87,6 +98,14 @@ const ABMAffiliatesList = ({ allAffiliates, setShowModalUpdate, setShowModalAdd 
                                 </div>
 
                                 <div class="px-2">
+                                  <span>{element.planID.name}</span>
+                                </div>
+
+                                <div class="px-2">
+                                  <span>{element.planID.codePlan}</span>
+                                </div>
+
+                                <div class="px-2">
                                   
                                   <button
                                     title="Edit"
@@ -95,6 +114,15 @@ const ABMAffiliatesList = ({ allAffiliates, setShowModalUpdate, setShowModalAdd 
                                     onClick={(e) => handleEditAffiliate(e)}
                                   >
                                     Editar
+                                  </button>
+
+                                  <button
+                                    title="bajaalta"
+                                    key={"baja" + element._id}
+                                    value={element._id}
+                                    onClick={(e) => handleBajaAltaAffiliate(e)}
+                                  >
+                                    Baja/Alta
                                   </button>
                                 </div>
                               </div>
