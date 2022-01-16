@@ -6,78 +6,35 @@ import axios from "axios";
 
 /************* Actions Para ABM Ciudades***********/
 
-export function getAllCities() {
-  return async (dispatch) => {
-    const { data } = await axios.get(`${api}/ciudades`);
-    if (data.success) {
-      return dispatch({ type: "GET_CIUDADES", payload: data.message });
-    } else {
-      return dispatch({ type: "ERRORS", payload: data });
+export function getAllCities(payload) {
+  console.log('get all cities, ', payload)
+  return async function (dispatch) {
+    try {
+      const {data} = await axios.get(`${api}/ciudades/${payload}`);
+  
+      if(data.success){
+        return dispatch({
+          type: "GET_ALL_CITIES",
+          payload: data.message,
+        });
+
+      }
+  
+      
+    } catch (error) {
+      return console.log(error, 'error en get all cities')
     }
   };
 }
 
-export function addCity(payload) {
-  return async (dispatch) => {
-    const token = getItem("userToken");
-    const { data } = await axios.post(`${api}/admin/addCity`, payload, {
-      headers: {
-        "x-access-token": token,
-      },
+export function getAllProvinces() {
+  return async function (dispatch) {
+    const {data} = await axios.get(`${api}/provincias`);
+    console.log('data provincias', data.message)
+    return dispatch({
+      type: "GET_ALL_PROVINCES",
+      payload: data.message,
     });
-    return data;
-
-    // if(data.success){
-    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
-    // } else {
-    //     return dispatch({type: "ERRORS", payload: data})
-
-    // }
-  };
-}
-
-export const getCityData = (payload) => {
-  return {
-    type: "CITY_DATA",
-    payload: payload,
-  };
-};
-
-export function updateCity(payload) {
-  return async (dispatch) => {
-    const token = getItem("userToken");
-    const { data } = await axios.put(`${api}/admin/updateCity`, payload, {
-      headers: {
-        "x-access-token": token,
-      },
-    });
-    return data;
-
-    // if(data.success){
-    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
-    // } else {
-    //     return dispatch({type: "ERRORS", payload: data})
-
-    // }
-  };
-}
-
-export function deleteCity(payload) {
-  return async (dispatch) => {
-    const token = getItem("userToken");
-    const { data } = await axios.delete(`${api}/admin/deleteCity/${payload}`, {
-      headers: {
-        "x-access-token": token,
-      },
-    });
-    return data;
-
-    // if(data.success){
-    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
-    // } else {
-    //     return dispatch({type: "ERRORS", payload: data})
-
-    // }
   };
 }
 

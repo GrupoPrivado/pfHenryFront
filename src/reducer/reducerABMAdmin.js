@@ -1,5 +1,6 @@
 const initialState = {
-  allCities: [],
+  cities: [],
+  provinces: [],
   allSpecialities: [],
   allAffiliates: [],
   allPlans: [],
@@ -13,16 +14,15 @@ const initialState = {
 
 export default function reducerABMAdmin(state = initialState, action) {
   switch (action.type) {
-    case "GET_CIUDADES":
-      return { ...state, allCities: action.payload };
-
-    case "CITY_DATA":
-      let citData = state.allCities.filter(
-        (element) => element.CP === parseInt(action.payload)
-      );
+    case "GET_ALL_PROVINCES":
       return {
         ...state,
-        updateData: citData[0],
+        provinces: action.payload
+      }
+    case "GET_ALL_CITIES":
+      return {
+        ...state,
+        cities: action.payload,
       };
 
     case "GET_SPECIALITIES":
@@ -41,7 +41,7 @@ export default function reducerABMAdmin(state = initialState, action) {
       return { ...state, allAffiliates: action.payload };
 
     case "AFFILIATE_DATA":
-      console.log("affiliate_data", action.payload);
+      console.log("reducer data affiliate", action.payload);
       return {
         ...state,
         updateData: action.payload,
