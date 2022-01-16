@@ -32,7 +32,9 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
     activo: false,
     grupoFamiliar: "",
     grupFamID: "",
-    titularGF:"",
+    titularGF: "",
+    subject: "",
+    text: "",
   });
 
   useEffect(() => {
@@ -67,7 +69,9 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
       activo: false,
       grupoFamiliar: "",
       grupFamID: "",
-      titularGF:"",
+      titularGF: "",
+      subject: "",
+      text: "",
     });
     await dispatch(getAllAffiliates());
     dispatch(resetDataUpdate());
@@ -79,10 +83,12 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
     setupDowndateAffiliateData({
       id: "",
       alta: false,
-    activo: false,
+      activo: false,
       grupoFamiliar: "",
       grupFamID: "",
-      titularGF:"",
+      titularGF: "",
+      subject: "",
+      text: "",
     });
     dispatch(resetDataUpdate());
     setErrors(true);
@@ -132,6 +138,30 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
                 <option value={true}>Si</option>
                 <option value={false}>No</option>
               </select>
+            </div>
+
+            <div>
+              <label>Asunto: </label>
+              <input
+                type="text"
+                name="subject"
+                autoComplete="off"
+                value={upDownAffiliateData.subject}
+                onChange={(e) => handleUpdateAffiliate(e)}
+                placeholder="Ingrese el asunto...."
+              />
+            </div>
+
+            <div>
+              <label>Texto: </label>
+              <input
+                type="text"
+                name="text"
+                autoComplete="off"
+                value={upDownAffiliateData.text}
+                onChange={(e) => handleUpdateAffiliate(e)}
+                placeholder="Ingrese el texto...."
+              />
             </div>
           </form>
 
