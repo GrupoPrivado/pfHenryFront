@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { getAfiliate, getItem, removeItem } from '../../actions/actionAuth'
 import {alertActions} from '../../actions/actionAlerts'
 
