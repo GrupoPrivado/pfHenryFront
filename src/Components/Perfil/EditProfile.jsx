@@ -24,8 +24,8 @@ function EditProfile({user}) {
             provinciaID: user.provinciaID,
             ciudadID: user.ciudadID
         })
-        dispatch(getAllProvinces())
-        dispatch(getAllCities(user.provinciaID))
+        // dispatch(getAllProvinces())
+        // dispatch(getAllCities(user.provinciaID))
 
     }, [user, dispatch])
     
@@ -191,8 +191,7 @@ function EditProfile({user}) {
                                 !activityChanged ||
                                 !input.correoElectronico ||
                                 !input.telefono ||
-                                !input.direccion ||
-                                !input.provincia
+                                !input.direccion 
                             }>Guardar Cambios</button>
                         </div>
                     </div>

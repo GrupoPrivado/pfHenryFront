@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { changePassword } from "../../actions/actionAuth";
 import SuccessAlert from "../Alerts/SuccessAlert";
 
-function EditPassword({ error }) {
+function EditPassword({setErrorAlert, setAlertMessage}) {
   const dispatch = useDispatch();
   const [passwords, setPasswords] = useState({
     old: "",
@@ -13,10 +13,20 @@ function EditPassword({ error }) {
   //const [activeAlert, setActiveAlert] = useState(false);
   const handleSubmit = (e) => {
     e.preventDefault(e);
-    console.log("passwords", passwords);
-    dispatch(changePassword(passwords));
+    //console.log("passwords", passwords);
+    if(passwords.newPass === passwords.repeat) {
+      dispatch(changePassword(passwords));
+      setPasswords({
+        old: "",
+        newPass: "",
+        repeat: "",
+      })
+    } else {
+      setErrorAlert(true)
+      setAlertMessage('Las contraseñas deben coincidir')
+    }
     // setTimeout(() => {
-    //   setActiveAlert(true);
+    //   {setActiveAlert}(true);
     // }, 1000);
     // setTimeout(() => {
     //   setActiveAlert(false);

@@ -9,6 +9,7 @@ import EditPassword from "./EditPassword";
 import EditProfile from "./EditProfile";
 import SuccessAlert from "../Alerts/SuccessAlert";
 import ErrorAlert from "../Alerts/ErrorAlert";
+import { getAllCities, getAllProvinces } from "../../actions/actionProviders";
 
 function Perfil() {
   const dispatch = useDispatch();
@@ -17,22 +18,22 @@ function Perfil() {
   const { user, route, data, error } = useSelector((state) => state.auth);
   const { type, message } = useSelector((state) => state.alerts);
 
-  console.log(type, '<TYPE>')
+  console.log(type, "<TYPE>");
 
   const [activeAlert, setActiveAlert] = useState(false);
-  const [errorAlert, setErrorAlert] = useState(false)
+  const [errorAlert, setErrorAlert] = useState(false);
 
-  const [alertMessage, setAlertMessage] = useState('')
+  const [alertMessage, setAlertMessage] = useState("");
 
   useEffect(() => {
     dispatch(alertActions.clear());
-    
-    if (type === 'alert-success') {
-      setActiveAlert(true)
+
+    if (type === "alert-success") {
+      setActiveAlert(true);
       setAlertMessage(message);
     }
-    if (type === 'alert-danger') {
-      setErrorAlert(true)
+    if (type === "alert-danger") {
+      setErrorAlert(true);
       setAlertMessage(message);
     }
 
@@ -43,13 +44,15 @@ function Perfil() {
       removeItem("userType");
       navigate(`/${route}`);
     }
-  }, [dispatch, route, navigate, data, message, type]);
+    
+    dispatch(getAllProvinces())
+    dispatch(getAllCities(user.provinciaID))
+  }, [dispatch, route, navigate, data, message, type, user.provinciaID]);
 
-
-     setTimeout(() => {
-       setActiveAlert(false);
-       setErrorAlert(false);
-     }, 4000);
+  setTimeout(() => {
+    setActiveAlert(false);
+    setErrorAlert(false);
+  }, 4000);
 
   return (
     <div className="mt-4">
@@ -58,7 +61,7 @@ function Perfil() {
       </h1>
       <div className="grid items-center grid-cols-1 grid-rows-1 sm:grid-rows-1 sm:grid-cols-2">
         <EditImage photo={user.urlPhoto} />
-        <EditPassword error={error} />
+        <EditPassword setErrorAlert={setErrorAlert} setAlertMessage={setAlertMessage}/>
       </div>
       <EditProfile user={user} data={data} />
 
