@@ -8,7 +8,7 @@ import { getAllPrescriptions } from "../../../actions/actionAMBAdmin";
 
 import UpdatePrescription from "./UpdatePrescription";
 import ABMPrescriptionsList from "./ABMPrescriptionsList";
-import ABMSearchPrescriptions from "./ABMSearchPrescriptions";
+
 
 const ABMPrescriptions = () => {
   const dispatch = useDispatch();
@@ -24,7 +24,7 @@ const ABMPrescriptions = () => {
   return (
     <div>   
 
-      <ABMSearchPrescriptions />
+      
 
       <ABMPrescriptionsList setShowModalUpdate={setShowModalUpdate}/>
 
