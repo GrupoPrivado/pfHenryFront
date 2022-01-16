@@ -10,17 +10,17 @@ function EditPassword({ error }) {
     newPass: "",
     repeat: "",
   });
-  const [activeAlert, setActiveAlert] = useState(false);
+  //const [activeAlert, setActiveAlert] = useState(false);
   const handleSubmit = (e) => {
     e.preventDefault(e);
     console.log("passwords", passwords);
     dispatch(changePassword(passwords));
-    setTimeout(() => {
-      setActiveAlert(true);
-    }, 1000);
-    setTimeout(() => {
-      setActiveAlert(false);
-    }, 4000);
+    // setTimeout(() => {
+    //   setActiveAlert(true);
+    // }, 1000);
+    // setTimeout(() => {
+    //   setActiveAlert(false);
+    // }, 4000);
 
     //alert("Contraseña cambiada con exito")
   };
@@ -98,7 +98,7 @@ function EditPassword({ error }) {
           </div>
         </form>
       </div>
-      {activeAlert && <SuccessAlert />}
+      {/* {activeAlert && <SuccessAlert />} */}
     </div>
   );
 }

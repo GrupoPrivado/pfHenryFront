@@ -1,5 +1,6 @@
 import axios from "axios";
 import {api} from '../urlHostApi'
+import { alertConstants } from "./actionAlerts";
 const GET_AFILIATE = 'GET_AFILIATE'
 const GET_MEDICAL_TOKEN = 'GET_MEDICAL_TOKEN'
 const NOT_AUTHENTICATED = 'NOT_AUTHENTICATED'
@@ -131,11 +132,11 @@ export const changePassword = (payload) => {
 
       if(data.success){
         console.log('<<< data password >>> ', data)
-        dispatch({type: 'ALERT_SUCCESS', message: 'Contraseña cambiada'})
+        dispatch({type: alertConstants.SUCCESS , message: 'Contraseña actualizada'})
 
         return dispatch({type: GET_AFILIATE, payload: data.message})
       } else {
-        dispatch({type: 'ALERT_ERROR', message: 'ja ja alert'})
+        dispatch({type: alertConstants.ERROR, message: 'Contraseña inválida'})
         return dispatch({type: GET_ERROR, payload: data.message})
 
       }
