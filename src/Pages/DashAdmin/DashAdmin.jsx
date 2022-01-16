@@ -27,8 +27,6 @@ function DashAdmin() {
   return (
     <div>
 
-      <ABMAffiliates/>
-
       Dashboard Administrador
       
     </div>
