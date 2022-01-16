@@ -40,27 +40,27 @@ const ABMAffiliatesList = ({ allAffiliates, setShowModalUpdate, setShowModalAdd,
                   </div>
                   <div className="mt-3.5">
                     <div>
-                      <div class="flex justify-between bg-gradient-to-tr from-indigo-600 to-purple-600 rounded-md py-2 px-4 text-white font-bold text-md">
-                        <div>
+                      <div class=" flex justify-between bg-gradient-to-tr from-indigo-600 to-purple-600 rounded-md py-2 px-4 text-white font-bold text-md">
+                        <div className="w-1/7  flex justify-center">
                           <span>Dni </span>
                         </div>
-                        <div>
+                        <div className="w-1/7  flex justify-center">
                           <span>Nombre </span>
                         </div>
-                        <div>
+                        <div className="w-1/7  flex justify-center">
                           <span>Apellido</span>
                         </div>
-                        <div>
+                        <div className="w-1/7  flex justify-center">
                           <span>Telefono</span>
                         </div>
-                        <div>
+                        <div className="w-1/7  flex justify-center">
                           <span>Activo </span>
                         </div>
-                        <div>
+                        <div className="w-1/7  flex justify-center">
                           <span>Alta </span>
                         </div>
 
-                        <div>
+                        <div className="w-1/7  flex justify-center">
                           <span>Editar</span>
                         </div>
 
@@ -76,24 +76,24 @@ const ABMAffiliatesList = ({ allAffiliates, setShowModalUpdate, setShowModalAdd,
         allAffiliates.map((element) => {
                           return (
                             <div key={element._id} className={styles.tabla}>
-                              <div class="flex justify-between border-t text-sm font-normal mt-4 space-x-4">
-                                <div class="px-2 flex">
+                              <div class="flex justify-between  py-1 px-4 items-center border-t text-sm font-normal mt-4 space-x-4">
+                                <div className="w-1/7  flex justify-center">
                                   <span>{element.DNI}</span>
                                 </div>
-                                <div>
+                                <div className="w-1/7  flex justify-center">
                                   <span>{element.nombre}</span>
                                 </div>
-                                <div>
+                                <div className="w-1/7  flex justify-center">
                                   <span>{element.apellido}</span>
                                 </div>
-                                <div>
+                                <div className="w-1/7  flex justify-center">
                                   <span>{element.telefono}</span>
                                 </div>
-                                <div>
+                                <div className="w-1/7  flex justify-center">
                                   <span>{element.activo ? "Si" : "No"}</span>
                                 </div>
 
-                                <div class="px-2">
+                                <div className="w-1/7  flex justify-center">
                                   <span>{element.alta ? "Si" : "No"}</span>
                                 </div>
 
