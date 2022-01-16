@@ -1,6 +1,8 @@
 import React from "react";
 
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllCities } from "../../../actions/actionAMBAdmin";
 
 import styles from "./addAffiliate.module.css";
 
@@ -20,6 +22,10 @@ const AddAdherent = ({
   showModalAdherent,
   setShowModalAdherent,
 }) => {
+  const dispatch = useDispatch();
+
+  const { cities, provinces } = useSelector((state) => state.ABMAdmin);
+
   const [errors, setErrors] = useState(true);
 
   const showHideClassName = showModalAdherent ? "displayblock" : "displaynone";
@@ -38,15 +44,36 @@ const AddAdherent = ({
     telefono: 0,
     correoElectronico: "",
     direccion: 0,
-    localidad: "",
-    ciudadCP: 0,
-    provincia: "",
+    ciudadID: "",
+    provinciaID: "",
     parentesco: "",
   });
+
+  const handleChangeProvince = (e) => {
+    const newData = {
+      ...inputAdherent,
+      provinciaID: e.target.value,
+    };
+    dispatch(getAllCities(newData.provinciaID));
+    setInputAdherent(newData);
+  };
 
   const handleSubmit = () => {
     alert("Me cree");
     handleAddAdherent(inputAdherent);
+    setInputAdherent({
+      nombre: "",
+      apellido: "",
+      DNI: 0,
+      fechaNacimiento: "",
+      telefono: 0,
+      correoElectronico: "",
+      direccion: 0,
+      localidad: "",
+      ciudadCP: 0,
+      provincia: "",
+      parentesco: "",
+    });
     setShowModalAdherent(false);
   };
   const handleChange = (event) => {
@@ -171,40 +198,44 @@ const AddAdherent = ({
               />
             </div>
 
-            <div>
-              <label>Localidad: </label>
-              <input
-                type="text"
-                name="localidad"
-                autoComplete="off"
-                value={inputAdherent.localidad}
-                onChange={(e) => handleChange(e)}
-                placeholder="Ingrese la Localidad...."
-              />
+            <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
+              <label className="text-lg font-semibold" htmlFor="provincia">
+                Provincia{" "}
+              </label>
+              <select
+                value={inputAdherent.provinciaID}
+                onChange={handleChangeProvince}
+                name="provinciaID"
+                className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
+                required
+              >
+                {provinces &&
+                  provinces.map((p) => (
+                    <option key={p._id} value={p._id}>
+                      {p.nombre}
+                    </option>
+                  ))}
+              </select>
             </div>
 
-            <div>
-              <label>C.P.: </label>
-              <input
-                type="number"
-                name="ciudadCP"
-                autoComplete="off"
-                value={inputAdherent.ciudadCP}
+            <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
+              <label className="text-lg font-semibold" htmlFor="localidad">
+                Localidad{" "}
+              </label>
+              <select
                 onChange={(e) => handleChange(e)}
-                placeholder="Ingrese el Cod. Postal...."
-              />
-            </div>
-
-            <div>
-              <label>Provincia: </label>
-              <input
-                type="text"
-                name="provincia"
-                autoComplete="off"
-                value={inputAdherent.provincia}
-                onChange={(e) => handleChange(e)}
-                placeholder="Ingrese la Provincia...."
-              />
+                value={inputAdherent.ciudadID}
+                name="ciudadID"
+                className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
+                required
+              >
+                {cities &&
+                  cities.map((c) => (
+                    <option key={c._id} value={c._id}>
+                      {c.localidad}
+                    </option>
+                  ))}
+              </select>
             </div>
 
             <select
