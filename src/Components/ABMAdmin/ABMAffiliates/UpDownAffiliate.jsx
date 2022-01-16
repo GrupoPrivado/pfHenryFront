@@ -28,8 +28,8 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
 
   let [upDownAffiliateData, setupDowndateAffiliateData] = useState({
     id: "",
-    alta: "",
-    activo: "",
+    alta: false,
+    activo: false,
     grupoFamiliar: "",
     grupFamID: "",
     titularGF:"",
@@ -63,8 +63,8 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
     alert(response.success);
     setupDowndateAffiliateData({
       id: "",
-      alta: "",
-      activo: "",
+      alta: false,
+      activo: false,
       grupoFamiliar: "",
       grupFamID: "",
       titularGF:"",
@@ -78,8 +78,8 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
   const handleClose = () => {
     setupDowndateAffiliateData({
       id: "",
-      alta: "",
-      activo: "",
+      alta: false,
+    activo: false,
       grupoFamiliar: "",
       grupFamID: "",
       titularGF:"",

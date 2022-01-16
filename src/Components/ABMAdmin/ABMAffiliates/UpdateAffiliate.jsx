@@ -27,7 +27,7 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
   const { updateData, allPlans, cities, provinces } = useSelector(
     (state) => state.ABMAdmin
   );
-  console.log(">>>><Updatedata", updateData);
+
   const [errors, setErrors] = useState(false);
 
   let [updateAffiliateData, setUpdateAffiliateData] = useState({
@@ -218,31 +218,6 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
                   );
                 })}
             </select>
-
-            {/* <div>
-              <label>Alta: </label>
-              <select
-                name="alta"
-                value={updateAffiliateData.alta}
-                onChange={(e) => handleUpdateAffiliate(e)}
-              >
-                <option value="">Seleccione:</option>
-                <option>Si</option>
-                <option>No</option>
-              </select>
-            </div>
-
-            <div>
-              <label>Activo: </label>
-              <select
-                name="activo"
-                onChange={(e) => handleUpdateAffiliate(e)}
-                value={updateAffiliateData.activo}
-              >
-                <option value={true}>Si</option>
-                <option value={false}>No</option>
-              </select>
-            </div> */}
           </form>
 
           {errors ? (
