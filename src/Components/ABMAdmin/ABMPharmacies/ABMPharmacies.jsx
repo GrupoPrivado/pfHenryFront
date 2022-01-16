@@ -31,13 +31,12 @@ const ABMPharmacies = () => {
         allPharmacies={allPharmacies}
         setShowModalUpdate={setShowModalUpdate}
         setShowModalAdd={setShowModalAdd}
-      />
+      /> */}
 
-      <AddPharmacy
-        showModalAdd={showModalAdd}
+     {showModalAdd && <AddPharmacy
         setShowModalAdd={setShowModalAdd}
-      />
-
+      />}
+{/* 
       <UpdatePharmacy
         showModalUpdate={showModalUpdate}
         setShowModalUpdate={setShowModalUpdate}

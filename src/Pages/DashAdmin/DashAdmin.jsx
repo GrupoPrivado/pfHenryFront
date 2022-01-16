@@ -29,7 +29,7 @@ function DashAdmin() {
     <div>
 
       Dashboard Administrador
-      <ABMPharmaciesList />
+    
     </div>
   );
 
