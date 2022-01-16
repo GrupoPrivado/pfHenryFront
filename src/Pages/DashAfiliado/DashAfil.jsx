@@ -12,7 +12,6 @@ import Credencial from '../../Components/Credencial/Credencial'
 import {getRecetas} from '../../actions/actionRecet'
 import Modal from '../../Components/Modal/Modal'
 
-
 function DashAfil() {
     const { user, route } = useSelector(state => state.auth)
     const dispatch = useDispatch();
