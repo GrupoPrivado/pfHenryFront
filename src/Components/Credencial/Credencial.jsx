@@ -49,7 +49,7 @@ function Credencial({toggleClass}) {
                     <img src={logo} alt="Logo" className="top-0 self-center w-full pb-8 "/>
                     <div className="mt-16 pt-14">
                       <h3 className="text-2xl text-white font-normal absolute bottom-20 pb-4 tracking-widest">
-                        DNI {user.DNI}
+                        Nº AFILIADO {user.DNI}
                       </h3>
                       <h3 className="text-white font-normal text-xl absolute bottom-8 pb-4 tracking-widest">
                         NOMBRE {user.nombre} {user.apellido}
