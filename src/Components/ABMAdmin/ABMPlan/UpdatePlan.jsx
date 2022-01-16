@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
 import {
-  updatePharmacy,
-  getAllPharmacies,
+  updatePlan,
+  getAllPlansData,
   resetDataUpdate,
 } from "../../../actions/actionAMBAdmin";
 
-import styles from "./UpdatePharmacy.module.css";
+import styles from "./UpdatePlan.module.css";
 
 const functionErrors = (data) => {
   const arrayKeys = Object.keys(data);
@@ -20,62 +20,65 @@ const functionErrors = (data) => {
   }
 }; //cambiarla en un utils ya que se puede usar en todos los forms
 
-const UpdatePharmacy = ({ setShowModalUpdate, showModalUpdate }) => {
+const UpdatePlan = ({ setShowModalUpdate, showModalUpdate }) => {
   const dispatch = useDispatch();
-
   const { updateData } = useSelector((state) => state.ABMAdmin);
 
   const [errors, setErrors] = useState(false);
 
-  let [updatePharmacyData, setUpdatePharmacyData] = useState({
+  let [updatePlanData, setUpdatePlanData] = useState({
     id: "",
-    direccion: "",
-    telefono: "",
-    mail: "",
+    name: "",
+    precio: "",
+    descripcion: "",
+    planActivo: false,
   });
 
   useEffect(() => {
-    setUpdatePharmacyData({
+    setUpdatePlanData({
       id: updateData._id,
-      direccion:  updateData.direccion,
-      telefono:  updateData.telefono,
-      mail:  updateData.mail,
+      name: updateData.name,
+      precio: updateData.precio,
+      descripcion: updateData.descripcion,
+      planActivo: updateData.planActivo,
     });
   }, [updateData, dispatch]);
 
-  const handleUpdatePharmacy = async (event) => {
-    let updatedPharmacy = {
-      ...updatePharmacyData,
+  const handleUpdatePlan = async (event) => {
+    let updatedPlan = {
+      ...updatePlanData,
       [event.target.name]: event.target.value,
     };
-    setUpdatePharmacyData(updatedPharmacy);
 
-    setErrors(functionErrors(updatedPharmacy));
+    setUpdatePlanData(updatedPlan);
+
+    setErrors(functionErrors(updatedPlan));
   };
 
-  const handleSubmitUpdatePharmacy = async (event) => {
+  const handleSubmitUpdatePlan = async (event) => {
     event.preventDefault();
-    let response = await dispatch(updatePharmacy(updatePharmacyData));
+    let response = await dispatch(updatePlan(updatePlanData));
     alert(response.success);
-    setUpdatePharmacyData({
+    setUpdatePlanData({
       id: "",
-     direccion: "",
-      telefono: "",
-      mail: "",
+      name: "",
+      precio: "",
+      descripcion: "",
+      planActivo: false,
     });
-    await dispatch(getAllPharmacies());
+    await dispatch(getAllPlansData());
     dispatch(resetDataUpdate());
-
     setErrors(true);
     setShowModalUpdate(false);
   };
 
   const handleClose = () => {
-    setUpdatePharmacyData({
+    setUpdatePlanData({
       id: "",
-     direccion: "",
-     telefono: "",
-     mail: "",
+      name: "",
+      precio: "",
+      descripcion: "",
+      planActivo: false,
     });
     dispatch(resetDataUpdate());
     setErrors(true);
@@ -89,66 +92,73 @@ const UpdatePharmacy = ({ setShowModalUpdate, showModalUpdate }) => {
       <section className={styles.modalmain}>
       <div className="flex justify-center">
           <h5 className="text-2xl font-bold text-gray-500">
-            Modificar Farmacia
+            Editar Plan
           </h5>
+          
         </div>
+        <div className="flex justify-center">
+          <h5 className="text-lg font-semibold text-black">
+          {updatePlanData.name}
+          </h5>
+          
+        </div>
+        
         <div className="modal-content py-4 text-left px-6 ">
-          <form onSubmit={(e) => handleSubmitUpdatePharmacy(e)} id="updPharmacy">
-            <div>
-               <label className="text-md text-gray-600">Dirección: </label>
-              <input
-              className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md"
-                  type="text"
-                  name="direccion"
-                autoComplete="off"
-                value={updatePharmacyData.direccion}
-                onChange={(e) => handleUpdatePharmacy(e)}
-                placeholder="Ingrese la Dirección...."
-              />
-            </div>
-
-            <div>
-              <label className="text-md text-gray-600">Teléfono: </label>
-              <input
-
-className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md"type="text"
-                name="telefono"
-                autoComplete="off"
-                value={updatePharmacyData.telefono}
-                onChange={(e) => handleUpdatePharmacy(e)}
-                placeholder="Ingrese el Teléfono...."
-              />
-            </div>
-
-            <div>
-              <label className="text-md text-gray-600">E-mail: </label>
+          <form
+            onSubmit={(e) => handleSubmitUpdatePlan(e)}
+            id="updatePlan"
+          >
+             <div>
+              <label className="text-md text-gray-600">Precio: </label>
               <input
               className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md"
                 type="text"
-                name="mail"
+                name="precio"
                 autoComplete="off"
-                value={updatePharmacyData.mail}
-                onChange={(e) => handleUpdatePharmacy(e)}
-                placeholder="Ingrese el E-mail...."
+                value={updatePlanData.precio}
+                onChange={(e) => handleUpdatePlan(e)}
+                placeholder="Ingrese el precio...."
               />
             </div>
-          
-          <div className="flex justify-between">
-          <div className="flex w-1/3 items-center">
-                <label className="text-md text-gray-600">Activo: </label>
-                <select
-                  id="activa"
-                  name="activa"
-                  // onChange={(e) => handleChange(e)}
-                  defaultValue={0}
-                >
-                  <option value="false">No</option>
-                  <option value="true">Si</option>
-                </select>
-              </div>
-
-          <div className="flex w-2/3 justify-around">
-                {errors ? (
+           
+             <div>
+              <label className="text-md text-gray-600">Descripción: </label>
+              <input
+              className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md"
+                type="text"
+                name="descripcion"
+                autoComplete="off"
+                value={updatePlanData.descripcion}
+                onChange={(e) => handleUpdatePlan(e)}
+                placeholder="Ingrese la Descripcion...."
+              />
+            </div>
+            <div className="flex justify-between mt-8">
+              <div className="flex w-1/3 items-center">
+              <label className="text-md text-gray-600">Activo: </label>
+            <select
+              id="activa"
+              name="planActivo"
+              onChange={(e) => handleUpdatePlan(e)}
+              defaultValue={0}
+            >
+              <option
+                value="false"
+                selected={updatePlanData.planActivo === false}
+              >
+                No
+              </option>
+              <option
+                value="true"
+                selected={updatePlanData.planActivo === true}
+              >
+                Si
+              </option>
+            </select>
+            </div>
+         
+            <div className="flex w-2/3 justify-around">
+            {errors ? (
                   <button
                     className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     type="submit"
@@ -174,13 +184,13 @@ className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md"type="text"
                 >
                   Cerrar
                 </button>
-              </div>
-              </div>
-              </form>
+        </div>
+        </div>
+        </form>
         </div>
       </section>
     </div>
   );
 };
 
-export default UpdatePharmacy;
+export default UpdatePlan;

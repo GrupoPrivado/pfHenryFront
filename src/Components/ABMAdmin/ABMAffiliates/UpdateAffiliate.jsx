@@ -6,6 +6,8 @@ import {
   updateAffiliateAct,
   getAllAffiliates,
   resetDataUpdate,
+  getAllProvinces,
+  getAllCities,
 } from "../../../actions/actionAMBAdmin";
 
 import styles from "./UpdateAffiliate.module.css";
@@ -22,7 +24,9 @@ const functionErrors = (data) => {
 
 const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
   const dispatch = useDispatch();
-  const { updateData, allPlans } = useSelector((state) => state.ABMAdmin);
+  const { updateData, allPlans, cities, provinces } = useSelector(
+    (state) => state.ABMAdmin
+  );
 
   const [errors, setErrors] = useState(false);
 
@@ -30,24 +34,12 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
     id: "",
     telefono: 0,
     correoElectronico: "",
-    direccion: 0,
-    localidad: "",
-    ciudadCP: 0,
-    provincia: "",
-    codePlan: "",
+    direccion: "",
+    ciudadID: "",
+    provinciaID: "",
+    planID: "",
     alta: "",
     activo: "",
-    titularGF: "",
-    codeGF: "",
-    oldTelefono: 0,
-    oldCorreoElectronico: "",
-    oldDireccion: 0,
-    oldLocalidad: "",
-    oldCiudadCP: 0,
-    oldProvincia: "",
-    oldCodePlan: "",
-    oldAlta: "",
-    oldActivo: "",
   });
 
   useEffect(() => {
@@ -56,25 +48,15 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
       telefono: updateData.telefono,
       correoElectronico: updateData.correoElectronico,
       direccion: updateData.direccion,
-      localidad: updateData.localidad,
-      ciudadCP: updateData.ciudadCP,
-      provincia: updateData.provincia,
-      codePlan: updateData.codePlan,
+      ciudadID: updateData.ciudadID._id,
+      provinciaID: updateData.provinciaID._id,
+      planID: updateData.planID._id,
       alta: updateData.alta,
       activo: updateData.activo,
-      titularGF: updateData.titularGF,
-      codeGF: updateData.codeGF,
-      oldTelefono: updateData.telefono,
-      oldCorreoElectronico: updateData.correoElectronico,
-      oldDireccion: updateData.direccion,
-      oldLocalidad: updateData.localidad,
-      oldCiudadCP: updateData.ciudadCP,
-      oldProvincia: updateData.provincia,
-      oldCodePlan: updateData.codePlan,
-      oldAlta: updateData.alta,
-      oldActivo: updateData.activo,
     });
-  }, [updateData, dispatch]);
+    dispatch(getAllProvinces());
+    dispatch(getAllCities(updateData.provinciaID._id));
+  }, [updateData]);
 
   const handleUpdateAffiliate = async (event) => {
     let updatedAffiliate = {
@@ -87,6 +69,15 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
     setErrors(functionErrors(updatedAffiliate));
   };
 
+  const handleChangeProvince = (e) => {
+    const newData = {
+      ...updateAffiliateData,
+      provinciaID: e.target.value,
+    };
+    dispatch(getAllCities(newData.provinciaID));
+    setUpdateAffiliateData(newData);
+  };
+
   const handleSubmitUpdateAffiliate = async (event) => {
     event.preventDefault();
     let response = await dispatch(updateAffiliateAct(updateAffiliateData));
@@ -95,24 +86,12 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
       id: "",
       telefono: 0,
       correoElectronico: "",
-      direccion: 0,
-      localidad: "",
-      ciudadCP: 0,
-      provincia: "",
-      codePlan: "",
+      direccion: "",
+      ciudadID: "",
+      provinciaID: "",
+      planID: "",
       alta: "",
       activo: "",
-      titularGF: "",
-      codeGF: "",
-      oldTelefono: 0,
-      oldCorreoElectronico: "",
-      oldDireccion: 0,
-      oldLocalidad: "",
-      oldCiudadCP: 0,
-      oldProvincia: "",
-      oldCodePlan: "",
-      oldAlta: "",
-      oldActivo: "",
     });
     await dispatch(getAllAffiliates());
     dispatch(resetDataUpdate());
@@ -125,34 +104,20 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
       id: "",
       telefono: 0,
       correoElectronico: "",
-      direccion: 0,
-      localidad: "",
-      ciudadCP: 0,
-      provincia: "",
-      codePlan: "",
+      direccion: "",
+      ciudadID: "",
+      provinciaID: "",
+      planID: "",
       alta: "",
       activo: "",
-      titularGF: "",
-      codeGF: "",
-      oldTelefono: 0,
-      oldCorreoElectronico: "",
-      oldDireccion: 0,
-      oldLocalidad: "",
-      oldCiudadCP: 0,
-      oldProvincia: "",
-      oldCodePlan: "",
-      oldAlta: "",
-      oldActivo: "",
     });
     dispatch(resetDataUpdate());
     setErrors(true);
     setShowModalUpdate(false);
   };
 
-  const showHideClassName = showModalUpdate ? "displayblock" : "displaynone";
-
   return (
-    <div className={styles[showHideClassName]}>
+    <div>
       <section className={styles.modalmain}>
         <h5>Modificar Afiliado</h5>
         <div className={styles.container}>
@@ -197,101 +162,62 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
               />
             </div>
 
-            <div>
-              <label>Localidad: </label>
-              <input
-                type="text"
-                name="localidad"
-                autoComplete="off"
-                value={updateAffiliateData.localidad}
-                onChange={(e) => handleUpdateAffiliate(e)}
-                placeholder="Ingrese la Localidad...."
-              />
+            <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
+              <label className="text-lg font-semibold" htmlFor="provincia">
+                Provincia{" "}
+              </label>
+              <select
+                value={updateAffiliateData.provinciaID}
+                onChange={handleChangeProvince}
+                name="provinciaID"
+                className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
+                required
+              >
+                {provinces &&
+                  provinces.map((p) => (
+                    <option key={p._id} value={p._id}>
+                      {p.nombre}
+                    </option>
+                  ))}
+              </select>
             </div>
 
-            <div>
-              <label>C.P.: </label>
-              <input
-                type="number"
-                name="ciudadCP"
-                autoComplete="off"
-                value={updateAffiliateData.ciudadCP}
+            <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
+              <label className="text-lg font-semibold" htmlFor="localidad">
+                Localidad{" "}
+              </label>
+              <select
                 onChange={(e) => handleUpdateAffiliate(e)}
-                placeholder="Ingrese el Cod. Postal...."
-              />
-            </div>
-
-            <div>
-              <label>Provincia: </label>
-              <input
-                type="text"
-                name="provincia"
-                autoComplete="off"
-                value={updateAffiliateData.provincia}
-                onChange={(e) => handleUpdateAffiliate(e)}
-                placeholder="Ingrese la Provincia...."
-              />
+                value={updateAffiliateData.ciudadID}
+                name="ciudadID"
+                className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
+                required
+              >
+                {cities &&
+                  cities.map((c) => (
+                    <option key={c._id} value={c._id}>
+                      {c.localidad}
+                    </option>
+                  ))}
+              </select>
             </div>
 
             <select
               id="planes"
-              name="odePlan"
+              name="planID"
               onChange={(e) => handleUpdateAffiliate(e)}
+              value={updateAffiliateData.planID}
             >
               <option value="">Seleccione su Plan</option>
               {allPlans &&
                 allPlans.map((element) => {
                   return (
-                    <option
-                      value={element.codePlan}
-                      id={element._id}
-                      selected={
-                        element.codePlan === updateAffiliateData.oldCodePlan
-                      }
-                    >
+                    <option value={element._id} id={element._id}>
                       {element.name}
                     </option>
                   );
                 })}
             </select>
-
-            <div>
-              <label>Alta: </label>
-              <select name="alta" onChange={(e) => handleUpdateAffiliate(e)}>
-                <option value="">Seleccione:</option>
-                <option
-                  value={true}
-                  selected={true === updateAffiliateData.oldAlta}
-                >
-                  Si
-                </option>
-                <option
-                  value={false}
-                  selected={false === updateAffiliateData.oldAlta}
-                >
-                  No
-                </option>
-              </select>
-            </div>
-
-            <div>
-              <label>Activo: </label>
-              <select name="activo" onChange={(e) => handleUpdateAffiliate(e)}>
-                <option value="">Seleccione:</option>
-                <option
-                  value={true}
-                  selected={true === updateAffiliateData.oldActivo}
-                >
-                  Si
-                </option>
-                <option
-                  value={false}
-                  selected={false === updateAffiliateData.oldActivo}
-                >
-                  No
-                </option>
-              </select>
-            </div>
           </form>
 
           {errors ? (

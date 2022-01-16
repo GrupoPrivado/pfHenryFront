@@ -1,59 +1,36 @@
 import React from "react";
 
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 import {
-  getPharmacyData,
-  deletePharmacy,
-  getAllCities,
-  getAllPharmacies,
+  getAllPlansData,
+  getPlanData,
+  deletePlan,
 } from "../../../actions/actionAMBAdmin";
 
-import styles from "./ABMPharmacies.module.css";
+import styles from "./ABMPlans.module.css";
 
-// const pharmacyCity = (allCities, ciudadCP ) =>{
-//   const name = allCities.filter((city) =>
-//     city.CP === ciudadCP
-//   )
-
-//   return name.localidad
-// }
-
-// const pharmacyProv = (allCities, ciudadCP ) =>{
-//   const name = allCities.filter((city) =>
-//     city.CP === ciudadCP
-//   )
-
-//   return name.provincia
-// }
-
-const ABMPharmaciesList = ({
-  allPharmacies,
+const ABMPlansList = ({
+  allPlansData,
   setShowModalUpdate,
   setShowModalAdd,
 }) => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getAllCities());
-  }, [dispatch]);
-
-  const { allCities } = useSelector((state) => state.ABMAdmin);
-
-  const handleEditPharmacy = async (event) => {
-    await dispatch(getPharmacyData(event.target.value));
+  const handleEditPlan = async (event) => {
+    await dispatch(getPlanData(event.target.value));
     setShowModalUpdate(true);
   };
 
-  const handleDeletePharmacy = async (event) => {
-    let response = await dispatch(deletePharmacy(event.target.value));
+  const handleDeletePlan = async (event) => {
+    let response = await dispatch(deletePlan(event.target.value));
 
-    await dispatch(getAllPharmacies());
+    await dispatch(getAllPlansData());
   };
-
+  console.log("<<<<<<<<<<< plans data gggggggg<<<<<<<", allPlansData);
   return (
     
+
       <div className={styles.divScroll}>
         <div class="bg-gray-50 min-h-screen  ">
           <div>
@@ -66,78 +43,61 @@ const ABMPharmaciesList = ({
                       title="Agregar Especialidad"
                       onClick={() => setShowModalAdd(true)}
                     >
-                      Agregar Farmacia
+                      Agregar Plan
                     </button>
                   </div>
                   <div className="mt-3.5">
                     <div>
                       <div class=" flex justify-between bg-gradient-to-tr from-indigo-600 to-purple-600 rounded-md py-2 px-4 text-white font-bold text-md">
                         <div className="w-1/6  flex justify-center">
+                          <span>Código Plan</span>
+                        </div>
+                        <div className="w-1/6  flex justify-center">
                           <span>Nombre </span>
                         </div>
-                        <div className="w-1/6 flex justify-center">
-                          <span> Direccion</span>
-                        </div>
-
-                        <div className="w-1/6 flex justify-center">
-                          <span>Localidad</span>
+                        <div className="w-1/6  flex justify-center">
+                          <span>Precio</span>
                         </div>
                         <div className="w-1/6  flex justify-center">
-                          <span>Provincia</span>
+                          <span>Descripción</span>
+                        </div>
+                        <div className="w-1/6  flex justify-center">
+                          <span>Activo </span>
                         </div>
 
                         <div className="w-1/6  flex justify-center">
-                          <span>Activa </span>
-                        </div>
-
-                        <div className="w-1/6 flex justify-center">
                           <span>Editar</span>
                         </div>
                       </div>
-                      {allPharmacies.length !== 0 &&
-                        allPharmacies.map((element) => {
+                      {allPlansData &&
+                        allPlansData.map((element) => {
                           return (
                             <div key={element._id} className={styles.tabla}>
                               <div class="flex justify-between  py-1 px-4 items-center border-t text-sm font-normal mt-4 space-x-4">
                                 <div class="w-1/6 flex justify-center ">
-                                  <span>{element.nombre}</span>
+                                  <span>{element.codePlan}</span>
                                 </div>
                                 <div class="w-1/6 flex justify-center ">
-                                  <span>{element.direccion}</span>
+                                  <span>{element.name}</span>
                                 </div>
                                 <div class="w-1/6 flex justify-center ">
-                                  <span>{element.apellido}</span>
+                                  <span>{element.precio}</span>
                                 </div>
                                 <div class="w-1/6 flex justify-center ">
-                                <div >
+                                  <span>{element.descripcion}</span>
+                                </div>
+                                <div class="w-1/6 flex justify-center ">
                                   <span>
-                                    {
-                                      allCities.filter(
-                                        (city) => city.CP === element.ciudadCP
-                                      ).nombre
-                                    }
+                                    {element.planActivo ? "Si" : "No"}
                                   </span>
-                                </div >
-                                <div >
-                                  <span>
-                                    {
-                                      allCities.filter(
-                                        (city) => city.CP === element.ciudadCP
-                                      ).provincia
-                                    }
-                                  </span>
-                                </div>
-                                </div>
-                                <div class="w-1/6 flex justify-center ">
-                                  <span>{element.activa ? "Si" : "No"}</span>
                                 </div>
 
-                                <div class="w-1/6 flex justify-around ">
+                                <div class="w-1/6 flex justify-around  ">
                                   <button
                                     key={"delete" + element._id}
                                     title="Delete"
                                     value={element._id}
-                                    onClick={(e) => handleDeletePharmacy(e)}
+                                    onClick={(e) => handleDeletePlan(e)}
                                   >
                                     Eliminar
                                   </button>
@@ -145,7 +105,7 @@ const ABMPharmaciesList = ({
                                     title="Edit"
                                     key={"edit" + element._id}
                                     value={element._id}
-                                    onClick={(e) => handleEditPharmacy(e)}
+                                    onClick={(e) => handleEditPlan(e)}
                                   >
                                     Editar
                                   </button>
@@ -166,4 +126,4 @@ const ABMPharmaciesList = ({
   );
 };
 
-export default ABMPharmaciesList;
+export default ABMPlansList;

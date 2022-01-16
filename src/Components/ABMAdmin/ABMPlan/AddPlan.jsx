@@ -3,12 +3,9 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import {
-  addSpeciality,
-  getAllSpecialities,
-} from "../../../actions/actionAMBAdmin";
+import { addPlan, getAllPlansData } from "../../../actions/actionAMBAdmin";
 
-import styles from "./addSpecialty.module.css";
+import styles from "./addPlan.module.css";
 
 const functionErrors = (data) => {
   const arrayKeys = Object.keys(data);
@@ -21,53 +18,56 @@ const functionErrors = (data) => {
   }
 }; //cambiarla en un utils ya que se puede usar en todos los forms
 
-const AddSpeciality = ({ showModalAdd, setShowModalAdd }) => {
+const AddPlan = ({ showModalAdd, setShowModalAdd }) => {
   const dispatch = useDispatch();
 
   const [errors, setErrors] = useState(true);
 
-  let [inputSpeciality, setInputSpeciality] = useState({
-    codeEsp: "",
-    nombre: "",
+  let [inputPlan, setInputPlan] = useState({
+    name: "",
+    codePlan: "",
+    precio: "",
     descripcion: "",
-    activa: false,
+    planActivo: false,
   });
 
   const showHideClassName = showModalAdd ? "displayblock" : "displaynone";
 
   const handleChange = (event) => {
-    let newSpeciality = {
-      ...inputSpeciality,
+    let newPlan = {
+      ...inputPlan,
       [event.target.name]: event.target.value,
     };
-    setInputSpeciality(newSpeciality);
+    setInputPlan(newPlan);
 
-    setErrors(functionErrors(newSpeciality));
+    setErrors(functionErrors(newPlan));
 
-    newSpeciality = {};
+    newPlan = {};
   };
 
-  const handleSubmitSpeciality = async (event) => {
+  const handleSubmitPlan = async (event) => {
     event.preventDefault();
-    let response = await dispatch(addSpeciality(inputSpeciality));
+    let response = await dispatch(addPlan(inputPlan));
     alert(response.success);
-    setInputSpeciality({
-      codeEsp: "",
-      nombre: "",
+    setInputPlan({
+      name: "",
+      codePlan: "",
+      precio: "",
       descripcion: "",
-      activa: false,
+      planActivo: false,
     });
-    await dispatch(getAllSpecialities());
+    await dispatch(getAllPlansData());
     setErrors(true);
     setShowModalAdd(false);
   };
 
   const handleClose = () => {
-    setInputSpeciality({
-      codeEsp: "",
-      nombre: "",
+    setInputPlan({
+      name: "",
+      codePlan: "",
+      precio: "",
       descripcion: "",
-      activa: false,
+      planActivo: false,
     });
     setErrors(true);
     setShowModalAdd(false);
@@ -78,19 +78,20 @@ const AddSpeciality = ({ showModalAdd, setShowModalAdd }) => {
       <section className={styles.modalmain}>
         <div className="flex justify-center">
           <h5 className="text-2xl font-bold text-gray-500">
-            Agregar Nueva Especialidad
+            Agregar Nuevo Plan
           </h5>
+          <br />
         </div>
         <div className="modal-content py-4 text-left px-6 ">
-          <form onSubmit={(e) => handleSubmitSpeciality(e)} id="addSpeciality">
+          <form onSubmit={(e) => handleSubmitPlan(e)} id="addPlan">
             <div>
-              <label className="text-md text-gray-600">Codigo: ESP-</label>
+              <label className="text-md text-gray-600">Codigo: PLN-</label>
               <input
-                className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md"
+                className="h-2 p-4 mb-2.5 w-full border-2 border-gray-300  rounded-md"
                 type="text"
-                name="codeEsp"
+                name="codePlan"
                 autoComplete="off"
-                value={inputSpeciality.codeEsp}
+                value={inputPlan.codePlan}
                 onChange={(e) => handleChange(e)}
                 placeholder="Ingrese el Codigo...."
               />
@@ -99,34 +100,47 @@ const AddSpeciality = ({ showModalAdd, setShowModalAdd }) => {
             <div>
               <label className="text-md text-gray-600">Nombre: </label>
               <input
-                className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md"
+                className="h-2 p-4 mb-2.5 w-full border-2 border-gray-300  rounded-md"
                 type="text"
-                name="nombre"
+                name="name"
                 autoComplete="off"
-                value={inputSpeciality.nombre}
+                value={inputPlan.nombre}
                 onChange={(e) => handleChange(e)}
                 placeholder="Ingrese el nombre...."
               />
             </div>
 
             <div>
+              <label className="text-md text-gray-600">Precio: </label>
+              <input
+                className="h-2 p-4 mb-2.5 w-full border-2 border-gray-300 rounded-md"
+                type="text"
+                name="precio"
+                autoComplete="off"
+                value={inputPlan.precio}
+                onChange={(e) => handleChange(e)}
+                placeholder="Ingrese el precio...."
+              />
+            </div>
+
+            <div>
               <label className="text-md text-gray-600">Descripción: </label>
               <input
-                className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md"
+                className="h-2 p-4  w-full border-2 border-gray-300 mb-5 rounded-md"
                 type="text"
                 name="descripcion"
                 autoComplete="off"
-                value={inputSpeciality.descripcion}
+                value={inputPlan.descripcion}
                 onChange={(e) => handleChange(e)}
                 placeholder="Ingrese la Descripcion...."
               />
             </div>
-            <div className="flex justify-between">
+            <div className="flex justify-between ">
               <div className="flex w-1/3 items-center">
                 <label className="text-md text-gray-600">Activo: </label>
                 <select
-                  id="activa"
-                  name="activa"
+                  id="activo"
+                  name="planActivo"
                   onChange={(e) => handleChange(e)}
                   defaultValue={0}
                 >
@@ -134,6 +148,7 @@ const AddSpeciality = ({ showModalAdd, setShowModalAdd }) => {
                   <option value="true">Si</option>
                 </select>
               </div>
+
               <div className="flex w-2/3 justify-around">
                 {errors ? (
                   <button
@@ -170,4 +185,4 @@ const AddSpeciality = ({ showModalAdd, setShowModalAdd }) => {
   );
 };
 
-export default AddSpeciality;
+export default AddPlan;
