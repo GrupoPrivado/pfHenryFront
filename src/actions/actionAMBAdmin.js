@@ -209,7 +209,7 @@ export function updateAffiliateAct(payload) {
 export function upDownAffiliateAct(payload) {
   return async (dispatch) => {
     const token = getItem("userToken");
-    const { data } = await axios.put(`${api}}/admin/upDownAffiliate`, payload, {
+    const { data } = await axios.put(`${api}/admin/upDownAffiliate`, payload, {
       headers: {
         "x-access-token": token,
       },
