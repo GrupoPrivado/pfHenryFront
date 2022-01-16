@@ -24,13 +24,14 @@ const ABMAffiliates = () => {
 
   return (
     <div>
-      <button title="Agregar Afiliado" onClick={() => setShowModalAdd(true)}>
+      {/* <button title="Agregar Afiliado" onClick={() => setShowModalAdd(true)}>
         Agregar Afiliado
-      </button>
+      </button> */}
 
       <ABMAffiliatesList
         allAffiliates={allAffiliates}
         setShowModalUpdate={setShowModalUpdate}
+        setShowModalAdd={setShowModalAdd}
       />
 
       <AddAffiliate

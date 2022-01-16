@@ -3,10 +3,7 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import {
-  addPlan,
-  getAllPlansData,
-} from "../../../actions/actionAMBAdmin";
+import { addPlan, getAllPlansData } from "../../../actions/actionAMBAdmin";
 
 import styles from "./addPlan.module.css";
 
@@ -54,10 +51,10 @@ const AddPlan = ({ showModalAdd, setShowModalAdd }) => {
     alert(response.success);
     setInputPlan({
       name: "",
-    codePlan: "",
-    precio: "",
-    descripcion: "",
-    planActivo: false,
+      codePlan: "",
+      precio: "",
+      descripcion: "",
+      planActivo: false,
     });
     await dispatch(getAllPlansData());
     setErrors(true);
@@ -67,10 +64,10 @@ const AddPlan = ({ showModalAdd, setShowModalAdd }) => {
   const handleClose = () => {
     setInputPlan({
       name: "",
-    codePlan: "",
-    precio: "",
-    descripcion: "",
-    planActivo: false,
+      codePlan: "",
+      precio: "",
+      descripcion: "",
+      planActivo: false,
     });
     setErrors(true);
     setShowModalAdd(false);
@@ -79,12 +76,18 @@ const AddPlan = ({ showModalAdd, setShowModalAdd }) => {
   return (
     <div className={styles[showHideClassName]}>
       <section className={styles.modalmain}>
-        <h5>Agregar Nuevo Plan</h5>
-        <div className={styles.container}>
+        <div className="flex justify-center">
+          <h5 className="text-2xl font-bold text-gray-500">
+            Agregar Nuevo Plan
+          </h5>
+          <br />
+        </div>
+        <div className="modal-content py-4 text-left px-6 ">
           <form onSubmit={(e) => handleSubmitPlan(e)} id="addPlan">
             <div>
-              <label>Codigo: PLN-</label>
+              <label className="text-md text-gray-600">Codigo: PLN-</label>
               <input
+                className="h-2 p-4 mb-2.5 w-full border-2 border-gray-300  rounded-md"
                 type="text"
                 name="codePlan"
                 autoComplete="off"
@@ -95,8 +98,9 @@ const AddPlan = ({ showModalAdd, setShowModalAdd }) => {
             </div>
 
             <div>
-              <label>Nombre: </label>
+              <label className="text-md text-gray-600">Nombre: </label>
               <input
+                className="h-2 p-4 mb-2.5 w-full border-2 border-gray-300  rounded-md"
                 type="text"
                 name="name"
                 autoComplete="off"
@@ -107,8 +111,9 @@ const AddPlan = ({ showModalAdd, setShowModalAdd }) => {
             </div>
 
             <div>
-              <label>Precio: </label>
+              <label className="text-md text-gray-600">Precio: </label>
               <input
+                className="h-2 p-4 mb-2.5 w-full border-2 border-gray-300 rounded-md"
                 type="text"
                 name="precio"
                 autoComplete="off"
@@ -119,8 +124,9 @@ const AddPlan = ({ showModalAdd, setShowModalAdd }) => {
             </div>
 
             <div>
-              <label>Descripción: </label>
+              <label className="text-md text-gray-600">Descripción: </label>
               <input
+                className="h-2 p-4  w-full border-2 border-gray-300 mb-5 rounded-md"
                 type="text"
                 name="descripcion"
                 autoComplete="off"
@@ -129,34 +135,50 @@ const AddPlan = ({ showModalAdd, setShowModalAdd }) => {
                 placeholder="Ingrese la Descripcion...."
               />
             </div>
+            <div className="flex justify-between ">
+              <div className="flex w-1/3 items-center">
+                <label className="text-md text-gray-600">Activo: </label>
+                <select
+                  id="activo"
+                  name="planActivo"
+                  onChange={(e) => handleChange(e)}
+                  defaultValue={0}
+                >
+                  <option value="false">No</option>
+                  <option value="true">Si</option>
+                </select>
+              </div>
 
-            <select
-              id="activo"
-              name="planActivo"
-              onChange={(e) => handleChange(e)}
-              defaultValue={0}
-            >
-              <option value="false">No</option>
-              <option value="true">Si</option>
-            </select>
+              <div className="flex w-2/3 justify-around">
+                {errors ? (
+                  <button
+                    className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    type="submit"
+                    key="submitFormButton"
+                    form="addSpeciality"
+                    disabled={errors}
+                  >
+                    Guardar
+                  </button>
+                ) : (
+                  <button
+                    type="submit"
+                    key="submitFormButton"
+                    form="addSpeciality"
+                    className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  >
+                    Guardar
+                  </button>
+                )}
+                <button
+                  onClick={() => handleClose()}
+                  className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                  Cerrar
+                </button>
+              </div>
+            </div>
           </form>
-
-          {errors ? (
-            <button
-              type="submit"
-              key="submitFormButton"
-              form="addPlan"
-              disabled={errors}
-              className="disabledButton"
-            >
-              Cargar
-            </button>
-          ) : (
-            <button type="submit" key="submitFormButton" form="addPlan">
-              Cargar
-            </button>
-          )}
-          <button onClick={() => handleClose()}>Cerrar</button>
         </div>
       </section>
     </div>

@@ -23,13 +23,14 @@ const ABMPharmacies = () => {
 
   return (
     <div>
-      <button title="Agregar Farmacia" onClick={() => setShowModalAdd(true)}>
+      {/* <button title="Agregar Farmacia" onClick={() => setShowModalAdd(true)}>
         Agregar Farmacia
-      </button>
+      </button> */}
 
       <ABMPharmacyList
         allPharmacies={allPharmacies}
         setShowModalUpdate={setShowModalUpdate}
+        setShowModalAdd={setShowModalAdd}
       />
 
       <AddPharmacy
