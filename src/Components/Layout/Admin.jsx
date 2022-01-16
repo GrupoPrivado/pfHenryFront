@@ -10,6 +10,7 @@ import ABMAffiliates from '../ABMAdmin/ABMAffiliates/ABMAffiliates'
 import ABMPharmacies from '../ABMAdmin/ABMPharmacies/ABMPharmacies'
 import ABMProfessionals from "../../Components/ABMAdmin/ABMProfessionals/ABMProfessionals";
 import ABMPlans from '../ABMAdmin/ABMPlan/ABMPlans'
+import ABMPrescriptions from '../ABMAdmin/ABMPrescriptions/ABMPrescriptions'
 
 
 
@@ -27,7 +28,7 @@ const Admin = () => {
                 <Route path='/afiliados' element={<PrivateRouter rol={roles.ADMIN}><ABMAffiliates/></PrivateRouter>}/>
                 <Route path='/prestadores' element={<PrivateRouter rol={roles.ADMIN}><ABMProfessionals/></PrivateRouter>}/>
                 <Route path='/planes' element={<PrivateRouter rol={roles.ADMIN}><ABMPlans/></PrivateRouter>}/>
-                
+                <Route path='/recetas' element={<PrivateRouter rol={roles.ADMIN}><ABMPrescriptions/></PrivateRouter>}/>
 
             </Routes>
 

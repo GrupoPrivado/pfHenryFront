@@ -71,26 +71,26 @@ const ABMPharmaciesList = ({
                   </div>
                   <div className="mt-3.5">
                     <div>
-                      <div class="flex justify-between bg-gradient-to-tr from-indigo-600 to-purple-600 rounded-md py-2 px-4 text-white font-bold text-md">
-                        <div>
+                      <div class=" flex justify-between bg-gradient-to-tr from-indigo-600 to-purple-600 rounded-md py-2 px-4 text-white font-bold text-md">
+                        <div className="w-1/6  flex justify-center">
                           <span>Nombre </span>
                         </div>
-                        <div>
+                        <div className="w-1/6 flex justify-center">
                           <span> Direccion</span>
                         </div>
 
-                        <div>
+                        <div className="w-1/6 flex justify-center">
                           <span>Localidad</span>
                         </div>
-                        <div>
+                        <div className="w-1/6  flex justify-center">
                           <span>Provincia</span>
                         </div>
 
-                        <div>
+                        <div className="w-1/6  flex justify-center">
                           <span>Activa </span>
                         </div>
 
-                        <div>
+                        <div className="w-1/6 flex justify-center">
                           <span>Editar</span>
                         </div>
                       </div>
@@ -98,17 +98,18 @@ const ABMPharmaciesList = ({
                         allPharmacies.map((element) => {
                           return (
                             <div key={element._id} className={styles.tabla}>
-                              <div class="flex justify-between border-t text-sm font-normal mt-4 space-x-4">
-                                <div class="px-2 flex">
+                              <div class="flex justify-between  py-1 px-4 items-center border-t text-sm font-normal mt-4 space-x-4">
+                                <div class="w-1/6 flex justify-center ">
                                   <span>{element.nombre}</span>
                                 </div>
-                                <div>
+                                <div class="w-1/6 flex justify-center ">
                                   <span>{element.direccion}</span>
                                 </div>
-                                <div>
+                                <div class="w-1/6 flex justify-center ">
                                   <span>{element.apellido}</span>
                                 </div>
-                                <div>
+                                <div class="w-1/6 flex justify-center ">
+                                <div >
                                   <span>
                                     {
                                       allCities.filter(
@@ -116,8 +117,8 @@ const ABMPharmaciesList = ({
                                       ).nombre
                                     }
                                   </span>
-                                </div>
-                                <div class="px-2">
+                                </div >
+                                <div >
                                   <span>
                                     {
                                       allCities.filter(
@@ -126,11 +127,12 @@ const ABMPharmaciesList = ({
                                     }
                                   </span>
                                 </div>
-                                <div>
+                                </div>
+                                <div class="w-1/6 flex justify-center ">
                                   <span>{element.activa ? "Si" : "No"}</span>
                                 </div>
 
-                                <div class="px-2">
+                                <div class="w-1/6 flex justify-around ">
                                   <button
                                     key={"delete" + element._id}
                                     title="Delete"
