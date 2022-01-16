@@ -36,10 +36,10 @@ export default function FormAsociate({
     fechaNacimiento: "",
     telefono: "",
     correoElectronico: "",
-    localidad: "",
-    provincia: "",
+    ciudadID: "",
+    provinciaID: "",
     direccion: "",
-    codePlan: "",
+    planID: "",
     password: "",
     parentesco: "titular",
   });
@@ -71,10 +71,10 @@ export default function FormAsociate({
       fechaNacimiento: "",
       telefono: "",
       correoElectronico: "",
-      localidad: "",
-      provincia: "",
+      ciudadID: "",
+      provinciaID: "",
       direccion: "",
-      codePlan: "",
+      planID: "",
       password: "",
     });
     setErrors(true);
@@ -84,7 +84,7 @@ export default function FormAsociate({
     if (e.target.value !== "select") {
       setInput({
         ...input,
-        codePlan: e.target.value,
+        planID: e.target.value,
       });
     }
   }
@@ -96,9 +96,9 @@ export default function FormAsociate({
   const handleChangeProvince = (e) => {
     const newData = {
       ...input,
-      provincia: e.target.value,
+      provinciaID: e.target.value,
     };
-    dispatch(getAllCities(newData.provincia))
+    dispatch(getAllCities(newData.provinciaID))
     setInput(newData);
   };
 
@@ -209,7 +209,7 @@ export default function FormAsociate({
             placeholder="Provincia"
           /> */}
           <select
-            value={input.provincia}
+            value={input.provinciaID}
             onChange={handleChangeProvince}
             name="provincia"
             className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
@@ -227,8 +227,8 @@ export default function FormAsociate({
           <label className="text-sm font-medium rounded-md">Localidad:</label>
           <select 
                             onChange={handleChange} 
-                            value={input.localidad}
-                            name="localidad" 
+                            value={input.ciudadID}
+                            name="ciudadID" 
                             className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                             required
                             >
@@ -265,7 +265,7 @@ export default function FormAsociate({
           <select
             required
             className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-            name=""
+            name="planID"
             id=""
             onChange={(e) => handleSelect(e)}
           >
@@ -273,7 +273,7 @@ export default function FormAsociate({
             {planes?.map((e) => (
               <option
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                value={e.codePlan}
+                value={e._id}
               >
                 {e.name}
               </option>

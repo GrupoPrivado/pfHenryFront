@@ -18,6 +18,8 @@ function DashAfil() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     
+    console.log(user , 'info user')
+    
     const [isActive, setActive] = useState({
         credencial: false,
         token: false,

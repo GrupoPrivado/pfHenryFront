@@ -108,9 +108,12 @@ export const updateUser = (payload) => {
   
       console.log('<<< data action >>> ', data)
       if(data.success){
+        dispatch({type: alertConstants.SUCCESS, message: 'Afiliado actualizado'})
         return dispatch({type: GET_AFILIATE, payload: data.message})
       } else {
-          return ;// dispatch({type: NOT_AUTHENTICATED, payload: data})
+          dispatch({type: alertConstants.ERROR, message: 'Error al actualizar los datos'})
+
+          return// dispatch({type: NOT_AUTHENTICATED, payload: data})
       }
       
     } catch (error) {
@@ -131,9 +134,10 @@ export const changePassword = (payload) => {
           },});
 
       if(data.success){
-        console.log('<<< data password >>> ', data)
-        dispatch({type: alertConstants.SUCCESS , message: 'Contraseña actualizada'})
+        
 
+        dispatch({type: alertConstants.SUCCESS , message: 'Contraseña actualizada'})
+ 
         return dispatch({type: GET_AFILIATE, payload: data.message})
       } else {
         dispatch({type: alertConstants.ERROR, message: 'Contraseña inválida'})
