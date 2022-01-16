@@ -1,6 +1,8 @@
 import axios from "axios";
 import { api } from "../urlHostApi";
 
+export const GET_ALL_PROVINCES = 'GET_ALL_PROVINCES'
+
 export function getAllProviders() {
   return async function (dispatch) {
     var json = await axios.get(`${api}/profesionales`);
@@ -8,6 +10,15 @@ export function getAllProviders() {
     return dispatch({
       type: "GET_ALL_PROVIDERS",
       payload: json.data.message,
+    });
+  };
+}
+export function getAllProvinces() {
+  return async function (dispatch) {
+    const {data} = await axios.get(`${api}/provincias`);
+    return dispatch({
+      type: GET_ALL_PROVINCES,
+      payload: data.message,
     });
   };
 }

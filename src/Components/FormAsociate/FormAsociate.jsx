@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getPlanes } from "../../actions/actionPlanes";
 import { postAfiliate } from "../../actions/actionPlanes";
 import { useNavigate } from "react-router-dom";
+import { getAllCities } from "../../actions/actionProviders";
 
 const functionErrors = (data) => {
   const arrayKeys = Object.keys(data);
@@ -15,7 +16,14 @@ const functionErrors = (data) => {
   }
 };
 
-export default function FormAsociate({ setOutput, output, modal, setModal }) {
+export default function FormAsociate({
+  provinces,
+  cities,
+  setOutput,
+  output,
+  modal,
+  setModal,
+}) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { planes } = useSelector((state) => state.planes);
@@ -85,6 +93,14 @@ export default function FormAsociate({ setOutput, output, modal, setModal }) {
     const newOutputFilter = newOutput.filter((f) => f.nombre !== e.nombre);
     setOutput(newOutputFilter);
   }
+  const handleChangeProvince = (e) => {
+    const newData = {
+      ...input,
+      provincia: e.target.value,
+    };
+    dispatch(getAllCities(newData.provincia))
+    setInput(newData);
+  };
 
   return (
     <div>
@@ -180,21 +196,10 @@ export default function FormAsociate({ setOutput, output, modal, setModal }) {
             placeholder="Domicilio"
           />
         </div>
-        <div className="flex">
-          <label className="text-sm font-medium rounded-md">Localidad:</label>
-          <input
-            required
-            className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-            type="text"
-            value={input.localidad}
-            name="localidad"
-            onChange={(e) => handleChange(e)}
-            placeholder="Localidad"
-          />
-        </div>
+        
         <div className="flex">
           <label className="text-sm font-medium rounded-md">Provincia:</label>
-          <input
+          {/* <input
             required
             className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
             type="text"
@@ -202,7 +207,38 @@ export default function FormAsociate({ setOutput, output, modal, setModal }) {
             name="provincia"
             onChange={(e) => handleChange(e)}
             placeholder="Provincia"
-          />
+          /> */}
+          <select
+            value={input.provincia}
+            onChange={handleChangeProvince}
+            name="provincia"
+            className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            
+          >
+            {provinces &&
+              provinces.map((p) => (
+                <option key={p._id} value={p._id}>
+                  {p.nombre}
+                </option>
+              ))}
+          </select>
+        </div>
+        <div className="flex">
+          <label className="text-sm font-medium rounded-md">Localidad:</label>
+          <select 
+                            onChange={handleChange} 
+                            value={input.localidad}
+                            name="localidad" 
+                            className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                            required
+                            >
+                                {
+                                    cities && cities.map(c => (
+                                        <option key={c._id} value={c._id}>{c.localidad}</option>
+                                    ))
+                                }
+
+                            </select>
         </div>
         <div className="flex">
           <label className="text-sm font-medium rounded-md">
@@ -261,14 +297,16 @@ export default function FormAsociate({ setOutput, output, modal, setModal }) {
         {errors ? (
           <button
             type="submit"
-            
             disabled={errors}
             className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             Enviar
           </button>
         ) : (
-          <button type="submit" className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-700  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+          <button
+            type="submit"
+            className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-700  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
             Enviar
           </button>
         )}

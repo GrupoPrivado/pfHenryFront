@@ -1,23 +1,31 @@
 import React, { useState } from "react";
-
-
+import { useDispatch } from "react-redux";
+import { getAllCities } from "../../actions/actionProviders";
 
 const functionErrors = (data) => {
   const arrayKeys = Object.keys(data);
   const arrayData = arrayKeys.filter((element, index) => data[element] !== "");
-console.log('arraykey', arrayKeys)
-console.log('arraydata',arrayData)
+  console.log("arraykey", arrayKeys);
+  console.log("arraydata", arrayData);
 
-  if (arrayKeys.length === arrayData.length +1) {
+  if (arrayKeys.length === arrayData.length + 1) {
     return false;
   } else {
     return true;
   }
 };
 
-export default function FormAddAsociateGroup({ setOutput, output, modal, setModal }) {
+export default function FormAddAsociateGroup({
+  provinces,
+  cities,
+  setOutput,
+  output,
+  modal,
+  setModal,
+}) {
+  const dispatch = useDispatch()
   const [errors, setErrors] = useState(true);
-  console.log(errors)
+  console.log(errors);
   const [input, setInput] = useState({
     nombre: "",
     apellido: "",
@@ -69,6 +77,15 @@ export default function FormAddAsociateGroup({ setOutput, output, modal, setModa
     setErrors(true);
     setModal(!modal);
   }
+
+  const handleChangeProvince = (e) => {
+    const newData = {
+      ...input,
+      provincia: e.target.value,
+    };
+    dispatch(getAllCities(newData.provincia))
+    setInput(newData);
+  };
 
   return (
     <div>
@@ -162,29 +179,40 @@ export default function FormAddAsociateGroup({ setOutput, output, modal, setModa
           />
         </div>
         <div className="flex">
-          <label className="text-sm font-medium rounded-md">Localidad:</label>
-          <input
-            type="text"
-            value={input.localidad}
-            required
-            name="localidad"
-            onChange={(e) => handleChange(e)}
-            className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-            placeholder="Localidad"
-          />
+          <label className="text-sm font-medium rounded-md">Provincia:</label>
+          <select
+            value={input.provincia}
+            onChange={handleChangeProvince}
+            name="provincia"
+            className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            
+          >
+            {provinces &&
+              provinces.map((p) => (
+                <option key={p._id} value={p._id}>
+                  {p.nombre}
+                </option>
+              ))}
+          </select>
         </div>
         <div className="flex">
-          <label className="text-sm font-medium rounded-md">Provincia:</label>
-          <input
-            required
-            type="text"
-            value={input.provincia}
-            name="provincia"
-            onChange={(e) => handleChange(e)}
-            className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-            placeholder="Provincia"
-          />
+          <label className="text-sm font-medium rounded-md">Localidad:</label>
+          <select 
+                            onChange={handleChange} 
+                            value={input.localidad}
+                            name="localidad" 
+                            className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                            required
+                            >
+                                {
+                                    cities && cities.map(c => (
+                                        <option key={c._id} value={c._id}>{c.localidad}</option>
+                                    ))
+                                }
+
+                            </select>
         </div>
+        
         <div className="flex">
           <label className="text-sm font-medium rounded-md">
             Seleccione su parentesco:
@@ -204,23 +232,26 @@ export default function FormAddAsociateGroup({ setOutput, output, modal, setModa
         </div>
 
         <div className="flex justify-around">
-
-          {errors? (<button
-            type="submit"
-            form="formulario"
-            disabled={errors}
-            onClick={handleSubmit}
-            className="group relative w-28 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
-            Guardar
-          </button>):(<button
-            type="submit"
-            form="formulario"
-            onClick={handleSubmit}
-            className="group relative w-28 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
-            Guardar
-          </button>)}
+          {errors ? (
+            <button
+              type="submit"
+              form="formulario"
+              disabled={errors}
+              onClick={handleSubmit}
+              className="group relative w-28 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              Guardar
+            </button>
+          ) : (
+            <button
+              type="submit"
+              form="formulario"
+              onClick={handleSubmit}
+              className="group relative w-28 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              Guardar
+            </button>
+          )}
           {/* <button
             type="submit"
             form="formulario"
@@ -229,7 +260,10 @@ export default function FormAddAsociateGroup({ setOutput, output, modal, setModa
           >
             Guardar
           </button> */}
-          <button onClick={() => setModal(!modal)} className="group relative w-28 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-500 hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+          <button
+            onClick={() => setModal(!modal)}
+            className="group relative w-28 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-500 hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
             Cancelar
           </button>
         </div>
