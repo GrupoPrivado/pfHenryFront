@@ -1,35 +1,44 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { putProfilePhoto } from "../../actions/actionAuth";
 import { profilePhoto } from "../../utils/constantes";
 import SuccessAlert from "../Alerts/SuccessAlert";
 
-function EditImage() {
-    const { user } = useSelector(state => state.auth)
-
+function EditImage({photo}) {
     const dispatch = useDispatch();
     const [file, setFile] = useState("");
-    const [pathImage, setPathImage] = useState(user.urlPhoto || profilePhoto);
+    const [pathImage, setPathImage] = useState(photo || profilePhoto);
+    //const [pathImage, setPathImage] = useState(user.urlPhoto || profilePhoto);
+    
+    /// alertas 
     const [activeButton, setActiveButton] = useState(false)
     const [activeAlert, setActiveAlert] = useState(false)
 
-    const sendImages = async (file) => {
+    useEffect(() => {
+        if(photo){
+            setPathImage(photo)
+        }
+    }, [photo])
+
+    const sendImages = (file) => {
         const form = new FormData();
         form.append("file", file, "form-data");
-        await dispatch(putProfilePhoto(form));
+        dispatch(putProfilePhoto(form));
     };
     const sendImage = (e) => {
         e.preventDefault();
-        sendImages(file)
-            .then((result) => console.log(result))
-            .catch((error) => console.log(error));
-        setTimeout(() => {
-            setActiveAlert(true)
-        }, 1000);
-        setTimeout(() => {
-            setActiveAlert(false)
-        }, 4000)
-        setActiveButton(false)
+        if(file){
+            sendImages(file)
+                .then((result) => console.log(result))
+                .catch((error) => console.log(error));
+            setTimeout(() => {
+                setActiveAlert(true)
+            }, 1000);
+            setTimeout(() => {
+                setActiveAlert(false)
+            }, 4000)
+            setActiveButton(false)
+        }
     };
 
     const onFileChange = (e) => {

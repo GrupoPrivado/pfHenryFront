@@ -1,23 +1,36 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux"
 import { updateUser } from '../../actions/actionAuth';
+import { filterByCity, getAllCities, getAllProvinces } from '../../actions/actionProviders';
 
 
-function EditProfile() {
+
+function EditProfile({user}) {
+    const { cities, provinces } = useSelector((state) => state.providers);
+    console.log(cities)
     const dispatch = useDispatch();
-    const { user, route } = useSelector(state => state.auth)
     const [input, setInput] = useState ({
-        name: user.nombre,
-        lastName: user.apellido,
-        dateBirth: user.fechaNacimiento,
-        dni: user.DNI,
-        email: user.correoElectronico,
-        tel: user.telefono,
-        address: user.direccion,
-        province: user.provincia,
+        correoElectronico: '',
+        telefono: '',
+        direccion: '',
+        provinciaID: '',
+        ciudadID: '' 
     })
+    useEffect(() => {
+        setInput({
+            correoElectronico: user.correoElectronico,
+            telefono: user.telefono,
+            direccion: user.direccion,
+            provinciaID: user.provinciaID,
+            ciudadID: user.ciudadID
+        })
+        // dispatch(getAllProvinces())
+        // dispatch(getAllCities(user.provinciaID))
+
+    }, [user, dispatch])
+    
+
     const [activityChanged, setActivityChanged] = useState(false);
-    console.log(user)
     const handleChange = (e) => {
         setInput({
             ...input,
@@ -26,25 +39,21 @@ function EditProfile() {
         setActivityChanged(true)
     }
 
-    function handleSelect(e){
-        setInput({
-            ...input,
-            province: e.target.value
-        })
-    }
+    const handleChangeProvince = (e) => {
+        const newData = {
+          ...input,
+          ciudadID: '-',
+          provinciaID: e.target.value
+        }
+        dispatch(getAllCities(newData.provinciaID))
+        setInput(newData)
+      }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const dataUpdated = {
-            telefono: input.tel,
-            correoElectronico: input.email,
-            provincia: input.province,
-            direccion: input.address,
-            DNI: input.dni,
-            localidad: user.localidad,
-        }
-        dispatch(updateUser(dataUpdated));
-        alert("Cambios guardados con éxito")
+            
+        dispatch(updateUser(input));
+        //alert("Cambios guardados con éxito")
     }
     return (
             <div className='flex items-center justify-start w-full px-4 py-12 sm:px-6 lg:px-8'>
@@ -58,7 +67,7 @@ function EditProfile() {
                             <input 
                             name="name" 
                             type="text" 
-                            value={input.name}
+                            value={user.nombre || ''}
                             className="relative block w-full px-3 py-2 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 " 
                             disabled />
                         </div>
@@ -67,7 +76,7 @@ function EditProfile() {
                             <input 
                             name="lastName" 
                             type="text" 
-                            value={input.lastName} 
+                            value={user.apellido || ''} 
                             className="relative block w-full px-3 py-2 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 " 
                             disabled />
                         </div>
@@ -76,7 +85,7 @@ function EditProfile() {
                             <input 
                             name="dateBirth" 
                             type="text" 
-                            value={input.dateBirth}
+                            value={user.fechaNacimiento || ''}
                             className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 " 
                             disabled />
                         </div>
@@ -85,7 +94,7 @@ function EditProfile() {
                             <input 
                             name="dni" 
                             type="dni" 
-                            value={input.dni} 
+                            value={user.DNI || ''} 
                             className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 " 
                             disabled />
                         </div>
@@ -96,10 +105,10 @@ function EditProfile() {
                             <label className="text-lg font-semibold" htmlFor="email">Email </label>
                             <input 
                             onChange={e => handleChange(e)} 
-                            name="email" 
+                            name="correoElectronico" 
                             type="email"
                             autoComplete="email" 
-                            value={input.email} 
+                            value={input.correoElectronico || ''} 
                             placeholder="Tu email"
                             required
                             className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 " 
@@ -110,10 +119,10 @@ function EditProfile() {
                             <label className="text-lg font-semibold" htmlFor="tel">Teléfono </label>
                             <input 
                             onChange={e => handleChange(e)} 
-                            name="tel" 
+                            name="telefono" 
                             type="tel"
-                            autoComplete="tel" 
-                            value={input.tel} 
+                            autoComplete="telefono" 
+                            value={input.telefono || ''} 
                             placeholder="Tu dirección"
                             required
                             className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 " 
@@ -123,30 +132,58 @@ function EditProfile() {
                             <label className="text-lg font-semibold" htmlFor="address">Dirección </label>
                             <input 
                             onChange={e => handleChange(e)} 
-                            name="address" 
+                            name="direccion" 
                             type="text"
                             autoComplete="address" 
-                            value={input.address} 
+                            value={input.direccion || ''} 
                             placeholder="Tu dirección"
                             required 
                             className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 " 
                             />
                         </div>
                         <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
-                            <label className="text-lg font-semibold" htmlFor="province">Provincia </label>
-                            <select 
-                            onChange={e => handleSelect(e)} 
-                            name="province" 
-                            id="province"
-                            className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 " 
+                            <label className="text-lg font-semibold" htmlFor="provincia">Provincia </label>
+                            <select value={input.provinciaID}
+                            onChange={handleChangeProvince} 
+                            name="provinciaID" 
+                            className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 bg-white" 
                             required
                             >
-                                <option value={input.province} selected>{input.province}</option>
+                                {/* <option defaultValue={input.provincia} value={input.provincia} >{input.provincia}</option> */}
+                                {/* <option>{input.provincia || 'Seleccione una provincia'}</option> */}
+                                {
+                                    provinces && provinces.map(p => (
+                                        <option key={p._id} value={p._id}>{p.nombre}</option>
+                                    ))
+                                }
                                 {/* {provinces?.map((province, i) => (
                                     <option value={province.id} key={i}>{province.name}</option>
                                 ))} */}
                             </select>
                         </div>
+                        <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
+                            <label className="text-lg font-semibold" htmlFor="ciudadID">Localidad </label>
+                            <select 
+                            onChange={handleChange} 
+                            value={input.ciudadID}
+                            name="ciudadID" 
+                            className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 bg-white " 
+                            required
+                            >
+                                {/* <option defaultValue={input.provincia} value={input.provincia} >{input.provincia}</option> */}
+                                <option selected={input.ciudadID === '-' ? true : false}>Seleccione ciudad</option>
+                                {
+                                    cities && cities.map(c => (
+                                        <option key={c._id} value={c._id}>{c.localidad}</option>
+                                    ))
+                                }
+                                {/* {provinces?.map((province, i) => (
+                                    <option value={province.id} key={i}>{province.name}</option>
+                                ))} */}
+                            </select>
+                        </div>
+
+                       
                         <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-1 sm:row-span-1">
                             <button 
                             type="submit" 
@@ -154,10 +191,9 @@ function EditProfile() {
                             className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md disabled:bg-gray-500 bg-primary group hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary" 
                             disabled={
                                 !activityChanged ||
-                                !input.email ||
-                                !input.tel ||
-                                !input.address ||
-                                !input.province
+                                !input.correoElectronico ||
+                                !input.telefono ||
+                                !input.direccion 
                             }>Guardar Cambios</button>
                         </div>
                     </div>

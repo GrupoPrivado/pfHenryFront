@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Plan = ({plan}) => {
+const Modal = ({plan}) => {
     return (
         <div className='absolute'>
             <h2>{plan.name}</h2>
@@ -8,4 +8,4 @@ const Plan = ({plan}) => {
     )
 }
 
-export default Plan
+export default Modal

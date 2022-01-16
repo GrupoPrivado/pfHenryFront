@@ -10,6 +10,9 @@ function Credencial({toggleClass}) {
   const { user, route } = useSelector((state) => state.auth);
   const cancelButtonRef = useRef(null)
 
+
+  // WARNING EN CONSOLA => There are no focusable elements inside the <FocusTrap /> 
+
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" initialFocus={cancelButtonRef} onClose={setOpen}>
@@ -42,15 +45,7 @@ function Credencial({toggleClass}) {
             <div className="h-full inline-block align-middle bg-gradient-to-b from-white-rgba to-white-rgba2 rounded-3xl overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full border-t-gray-200 border-t border-l-gray-200 border-l border-solid">
               <div className="px-4 pt-5 pb-5 sm:p-6">
                 <div className="sm:flex  backdrop-filter backdrop-blur-lg">
-                  {/* <div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-                    <svg name='credencial' xmlns="http://www.w3.org/2000/svg" className="h-28 w-28" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-                    </svg>
-                  </div> */}
                   <div className="mt-6 sm:mt-0 sm:ml-4 flex flex-col justify-evenly">
-                    {/* <Dialog.Title as="h3" className="text-3xl leading-6 font-semibold text-white text-right top-0 -right-96 absolute mb-2">
-                      ARPYMEDICAL
-                    </Dialog.Title> */}
                     <img src={logo} alt="Logo" className="top-0 self-center w-full pb-8 "/>
                     <div className="mt-16 pt-14">
                       <h3 className="text-2xl text-white font-normal absolute bottom-20 pb-4 tracking-widest">
@@ -71,37 +66,9 @@ function Credencial({toggleClass}) {
         </div>
       </Dialog>
     </Transition.Root>
-    // <div name='credencial' onClick={toggleClass} className="fixed z-10 inset-0 overflow-y-auto">
-    //   <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-    //     <div className="flex absolute bg-secondary flex-col">
-    //       <label>{user.nombre}</label>
-    //       <label>{user.apellido}</label>
-    //       <label>{user.DNI}</label>
-    //       <label>{user.codePlan}</label>
-    //     </div>
-    //   </div>
-    // </div>
   )
 }
 
+
+
 export default Credencial;
-// import React from "react";
-// import { useSelector } from "react-redux";
-// import { Link } from "react-router-dom";
-
-// function Credencial() {
-//   const { user, route } = useSelector((state) => state.auth);
-
-//   return (
-//     <div className="absolute w-screen h-screen inset-8">
-//       <div className="flex absolute  bg-secondary flex-col">
-//         <label>{user.nombre}</label>
-//         <label>{user.apellido}</label>
-//         <label>{user.DNI}</label>
-//         <label>{user.codePlan}</label>
-//       </div>
-//     </div>
-//   )
-// }
-
-// export default Credencial;

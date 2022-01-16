@@ -1,9 +1,9 @@
 import React from 'react'
-
-function SuccessAlert() {
+// bottom-0 right-0 h-16 w-16
+function SuccessAlert({message}) {
     return (
         <div>
-            <div className="absolute flex flex-row items-center p-5 bg-green-200 border-b-2 border-green-300 rounded bottom-11 right-3 alert">
+            <div className="absolute flex flex-row items-center p-5 bg-green-200 border-b-2 border-green-300 rounded bottom-11 right-3 alert ">
                 <div className="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-green-100 border-2 border-green-500 rounded-full alert-icon">
                     <span className="text-green-500">
                         <svg fill="currentColor" viewBox="0 0 20 20" className="w-6 h-6">
@@ -13,7 +13,7 @@ function SuccessAlert() {
                 </div>
                 <div className="ml-4 alert-content">
                     <div className="text-sm text-green-600 alert-description">
-                        Cambios realizados con éxito!
+                        {message}
                     </div>
                 </div>
             </div>
