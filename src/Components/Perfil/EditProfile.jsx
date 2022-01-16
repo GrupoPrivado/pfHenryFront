@@ -1,30 +1,31 @@
 import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux"
 import { updateUser } from '../../actions/actionAuth';
-import { filterByCity, getAllCities } from '../../actions/actionProviders';
-import { provincias } from '../../utils/constantes';
+import { filterByCity, getAllCities, getAllProvinces } from '../../actions/actionProviders';
+
 
 
 function EditProfile({user}) {
-    const { cities } = useSelector((state) => state.providers);
+    const { cities, provinces } = useSelector((state) => state.providers);
     console.log(cities)
     const dispatch = useDispatch();
     const [input, setInput] = useState ({
         correoElectronico: '',
         telefono: '',
         direccion: '',
-        provincia: '',
-        localidad: '' 
+        provinciaID: '',
+        ciudadID: '' 
     })
     useEffect(() => {
         setInput({
             correoElectronico: user.correoElectronico,
             telefono: user.telefono,
             direccion: user.direccion,
-            provincia: '133' || user.provincia,
-            localidad: '61e0c4a7534c0844d9deda0a' || user.localidad
+            provinciaID: user.provinciaID,
+            ciudadID: user.ciudadID
         })
-        dispatch(getAllCities('133'))
+        dispatch(getAllProvinces())
+        dispatch(getAllCities(user.provinciaID))
 
     }, [user, dispatch])
     
@@ -41,9 +42,9 @@ function EditProfile({user}) {
     const handleChangeProvince = (e) => {
         const newData = {
           ...input,
-          provincia: e.target.value
+          provinciaID: e.target.value
         }
-        dispatch(getAllCities(newData.provincia))
+        dispatch(getAllCities(newData.provinciaID))
         setInput(newData)
       }
 
@@ -141,17 +142,17 @@ function EditProfile({user}) {
                         </div>
                         <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
                             <label className="text-lg font-semibold" htmlFor="provincia">Provincia </label>
-                            <select value={input.provincia}
+                            <select value={input.provinciaID}
                             onChange={handleChangeProvince} 
-                            name="provincia" 
+                            name="provinciaID" 
                             className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 " 
                             required
                             >
                                 {/* <option defaultValue={input.provincia} value={input.provincia} >{input.provincia}</option> */}
                                 {/* <option>{input.provincia || 'Seleccione una provincia'}</option> */}
                                 {
-                                    provincias && provincias.map(p => (
-                                        <option key={p.codeProv} value={p.codeProv}>{p.provincia}</option>
+                                    provinces && provinces.map(p => (
+                                        <option key={p._id} value={p._id}>{p.nombre}</option>
                                     ))
                                 }
                                 {/* {provinces?.map((province, i) => (
@@ -163,7 +164,7 @@ function EditProfile({user}) {
                             <label className="text-lg font-semibold" htmlFor="localidad">Localidad </label>
                             <select 
                             onChange={handleChange} 
-                            value={input.localidad}
+                            value={input.ciudadID}
                             name="localidad" 
                             className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 " 
                             required
