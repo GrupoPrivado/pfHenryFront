@@ -12,6 +12,7 @@ import ABMPlans from "../../Components/ABMAdmin/ABMPlan/ABMPlans";
 import ABMProfessionals from "../../Components/ABMAdmin/ABMProfessionals/ABMProfessionals";
 import ABMPrescriptions from "../../Components/ABMAdmin/ABMPrescriptions/ABMPrescriptions";
 
+
 function DashAdmin() {
 
   
@@ -26,16 +27,11 @@ function DashAdmin() {
 
   return (
     <div>
+
       <ABMPrescriptions />
+
       Dashboard Administrador
-      <button
-        onClick={() => {
-          logout();
-          navigate("/");
-        }}
-      >
-        Cerrar Sesión
-      </button>
+      
     </div>
   );
 

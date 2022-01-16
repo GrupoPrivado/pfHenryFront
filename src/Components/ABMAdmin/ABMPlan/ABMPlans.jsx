@@ -23,11 +23,11 @@ const ABMPlans = () => {
 
   return (
     <div>
-      <button title="Agregar Plan" onClick={() => setShowModalAdd(true)}>
+      {/* <button title="Agregar Plan" onClick={() => setShowModalAdd(true)}>
         Agregar Plan
-      </button>
+      </button> */}
 
-      <ABMPlansList allPlansData={allPlansData} setShowModalUpdate={setShowModalUpdate}/>
+      <ABMPlansList allPlansData={allPlansData} setShowModalUpdate={setShowModalUpdate} setShowModalAdd={setShowModalAdd} />
 
       <AddPlan showModalAdd={showModalAdd} setShowModalAdd={setShowModalAdd} />
 
