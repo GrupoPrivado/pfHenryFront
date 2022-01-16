@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { getAfiliate, getItem, removeItem } from '../../actions/actionAuth'
+import {alertActions} from '../../actions/actionAlerts'
 
 import EditImage from './EditImage'
 import EditPassword from './EditPassword'
@@ -12,7 +13,14 @@ function Perfil() {
     const navigate = useNavigate()
     
     const { user, route, data, error } = useSelector(state => state.auth)
+    const { type, message } = useSelector(state => state.alerts)
+
     useEffect(() => {
+      dispatch(alertActions.clear())
+
+      if(type){
+        alert(message)
+      }
 
       if (!data) {
         dispatch(getAfiliate(getItem()));
@@ -21,7 +29,7 @@ function Perfil() {
         removeItem("userType");
         navigate(`/${route}`);
       }
-    }, [dispatch, route, navigate, data]);
+    }, [dispatch, route, navigate, data, message, type]);
 
 
     return (

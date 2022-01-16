@@ -131,8 +131,11 @@ export const changePassword = (payload) => {
 
       if(data.success){
         console.log('<<< data password >>> ', data)
+        dispatch({type: 'ALERT_SUCCESS', message: 'Contraseña cambiada'})
+
         return dispatch({type: GET_AFILIATE, payload: data.message})
       } else {
+        dispatch({type: 'ALERT_ERROR', message: 'ja ja alert'})
         return dispatch({type: GET_ERROR, payload: data.message})
 
       }
