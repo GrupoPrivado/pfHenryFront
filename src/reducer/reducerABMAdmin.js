@@ -6,6 +6,8 @@ const initialState = {
   allPharmacies: [],
   allProfessionals: [],
   allPlansData: [],
+  prescriptionDNI: [],
+  affiliatePrescriptionData: [],
   updateData: {},
 };
 
@@ -82,6 +84,15 @@ export default function reducerABMAdmin(state = initialState, action) {
       return {
         ...state,
         updateData: profData[0],
+      };
+
+    case "GET_PRESCRPTION_ID":
+      return { ...state, updateData: action.payload };
+    case "GET_PRESCRPTIONS_DNI":
+      return {
+        ...state,
+        prescriptionDNI: action.payload.recetasResult,
+        affiliatePrescriptionData: action.payload.affiliateResult,
       };
 
     case "DATA_RESET":

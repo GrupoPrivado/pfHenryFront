@@ -10,6 +10,7 @@ import ABMAffiliates from "../../Components/ABMAdmin/ABMAffiliates/ABMAffiliates
 import ABMPharmacies from "../../Components/ABMAdmin/ABMPharmacies/ABMPharmacies";
 import ABMPlans from "../../Components/ABMAdmin/ABMPlan/ABMPlans";
 import ABMProfessionals from "../../Components/ABMAdmin/ABMProfessionals/ABMProfessionals";
+import ABMPrescriptions from "../../Components/ABMAdmin/ABMPrescriptions/ABMPrescriptions";
 
 function DashAdmin() {
 
@@ -25,7 +26,7 @@ function DashAdmin() {
 
   return (
     <div>
-      <ABMProfessionals />
+      <ABMPrescriptions />
       Dashboard Administrador
       <button
         onClick={() => {

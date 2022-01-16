@@ -369,7 +369,6 @@ export function deletePharmacy(payload) {
 
 export function getAllPlansData() {
   return async (dispatch) => {
-
     const token = getItem("userToken");
     const { data } = await axios.get(`${api}/admin/getAllPlansData`, {
       headers: {
@@ -412,17 +411,13 @@ export const getPlanData = (data) => {
 
 export function updatePlan(payload) {
   return async (dispatch) => {
-    console.log('updatePlan(payload) ',payload )
+    console.log("updatePlan(payload) ", payload);
     const token = getItem("userToken");
-    const { data } = await axios.put(
-      `${api}/admin/updatePlan`,
-      payload,
-      {
-        headers: {
-          "x-access-token": token,
-        },
-      }
-    );
+    const { data } = await axios.put(`${api}/admin/updatePlan`, payload, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
     return data;
 
     // if(data.success){
@@ -437,14 +432,11 @@ export function updatePlan(payload) {
 export function deletePlan(payload) {
   return async (dispatch) => {
     const token = getItem("userToken");
-    const { data } = await axios.delete(
-      `${api}/admin/deletePlan/${payload}`,
-      {
-        headers: {
-          "x-access-token": token,
-        },
-      }
-    );
+    const { data } = await axios.delete(`${api}/admin/deletePlan/${payload}`, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
     return data;
 
     // if(data.success){
@@ -501,13 +493,17 @@ export const getProfessionalData = (payload) => {
 
 export function updateProfessional(payload) {
   return async (dispatch) => {
-    console.log('<<<<<update>>>>', payload)
+    console.log("<<<<<update>>>>", payload);
     const token = getItem("userToken");
-    const { data } = await axios.put(`${api}/admin/updateProfessional`, payload, {
-      headers: {
-        "x-access-token": token,
-      },
-    });
+    const { data } = await axios.put(
+      `${api}/admin/updateProfessional`,
+      payload,
+      {
+        headers: {
+          "x-access-token": token,
+        },
+      }
+    );
 
     return data;
 
@@ -522,8 +518,71 @@ export function updateProfessional(payload) {
 
 /************* FIN Actions Para ABM Profesionales***********/
 
+/************* Actions Para ABM Prescripciones***********/
 
+export function getPrescriptionById(payload) {
+  return async (dispatch) => {
+    const token = getItem("userToken");
+    const { data } = await axios.get(`${api}/prescriptionByID?id=${payload}`, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
 
+    if (data.success) {
+      return dispatch({ type: "GET_PRESCRPTION_ID", payload: data.message });
+    } else {
+      return dispatch({ type: "ERRORS", payload: data });
+    }
+  };
+}
+
+export function getPrescriptionsByDNI(payload) {
+  return async (dispatch) => {
+    const token = getItem("userToken");
+    const { data } = await axios.get(
+      `${api}/admin/prescriptionByDNI/${payload}`,
+      {
+        headers: {
+          "x-access-token": token,
+        },
+      }
+    );
+
+    if (data.success) {
+      return dispatch({ type: "GET_PRESCRPTIONS_DNI", payload: data.message });
+    } else {
+      return dispatch({ type: "ERRORS", payload: data });
+    }
+  };
+}
+
+export function updatePrescription(payload) {
+  return async (dispatch) => {
+
+    const token = getItem("userToken");
+    const { data } = await axios.put(
+      `${api}/admin/updatePrescription`,
+      payload,
+      {
+        headers: {
+          "x-access-token": token,
+        },
+      }
+    );
+
+    return data;
+
+    // if(data.success){
+    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
+    // } else {
+    //     return dispatch({type: "ERRORS", payload: data})
+
+    // }
+  };
+}
+
+/************* FIN Actions Para ABM Prescripciones***********/
 
 /*************Actions Comunes Para ABM***********/
 export const resetDataUpdate = () => {
