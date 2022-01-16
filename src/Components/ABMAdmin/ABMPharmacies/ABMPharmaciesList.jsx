@@ -12,32 +12,12 @@ import {
 
 import styles from "./ABMPharmacies.module.css";
 
-// const pharmacyCity = (allCities, ciudadCP ) =>{
-//   const name = allCities.filter((city) =>
-//     city.CP === ciudadCP
-//   )
-
-//   return name.localidad
-// }
-
-// const pharmacyProv = (allCities, ciudadCP ) =>{
-//   const name = allCities.filter((city) =>
-//     city.CP === ciudadCP
-//   )
-
-//   return name.provincia
-// }
-
 const ABMPharmaciesList = ({
   allPharmacies,
   setShowModalUpdate,
   setShowModalAdd,
 }) => {
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getAllCities());
-  }, [dispatch]);
 
   const { allCities } = useSelector((state) => state.ABMAdmin);
 
