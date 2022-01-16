@@ -8,6 +8,7 @@ import EditImage from "./EditImage";
 import EditPassword from "./EditPassword";
 import EditProfile from "./EditProfile";
 import SuccessAlert from "../Alerts/SuccessAlert";
+import ErrorAlert from "../Alerts/ErrorAlert";
 
 function Perfil() {
   const dispatch = useDispatch();
@@ -16,17 +17,22 @@ function Perfil() {
   const { user, route, data, error } = useSelector((state) => state.auth);
   const { type, message } = useSelector((state) => state.alerts);
 
-
+  console.log(type, '<TYPE>')
 
   const [activeAlert, setActiveAlert] = useState(false);
+  const [errorAlert, setErrorAlert] = useState(false)
 
   const [alertMessage, setAlertMessage] = useState('')
 
   useEffect(() => {
     dispatch(alertActions.clear());
-
-    if (type) {
+    
+    if (type === 'alert-success') {
       setActiveAlert(true)
+      setAlertMessage(message);
+    }
+    if (type === 'alert-danger') {
+      setErrorAlert(true)
       setAlertMessage(message);
     }
 
@@ -42,6 +48,7 @@ function Perfil() {
 
      setTimeout(() => {
        setActiveAlert(false);
+       setErrorAlert(false);
      }, 4000);
 
   return (
@@ -56,6 +63,7 @@ function Perfil() {
       <EditProfile user={user} data={data} />
 
       {activeAlert && <SuccessAlert message={alertMessage} />}
+      {errorAlert && <ErrorAlert message={alertMessage} />}
     </div>
   );
 }

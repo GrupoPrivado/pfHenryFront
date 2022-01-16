@@ -14,6 +14,7 @@ export default function Asociate() {
   const {provinces, cities} = useSelector(state => state.providers)
 
   useTitle("Asociate a ArpyMedical");
+  
   useEffect(() => {
     dispatch(getPlanes());
     dispatch(getAllProvinces())
