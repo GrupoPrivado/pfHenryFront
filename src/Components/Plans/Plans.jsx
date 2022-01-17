@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react'
 import {useDispatch, useSelector} from "react-redux"
 import { getPlanes } from "../../actions/actionPlanes";
 import {Link} from "react-router-dom"
-import Plan from './Plan';
+import Modal from './Modal';
 
 function Plans() {
     const dispatch = useDispatch()
     const {planes} = useSelector((state) => state.planes)
-    console.log(planes)
+    //console.log(planes)
     
     useEffect(() => {
         dispatch(getPlanes());
@@ -36,7 +36,7 @@ function Plans() {
                         <button name={plan.name} onClick={toggleClass} className='p-2 text-lg bg-white rounded-md'>Conocer más</button>
                     {/* </Link> */}
                     {
-                         active[plan.name] && <Plan plan={plan} />
+                         active[plan.name] && <Modal plan={plan} />
                     }
                 </div>
                 

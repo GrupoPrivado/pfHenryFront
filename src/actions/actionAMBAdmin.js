@@ -7,30 +7,27 @@ import axios from "axios";
 /************* Actions Para ABM Ciudades***********/
 
 export function getAllCities(payload) {
-  console.log('get all cities, ', payload)
+  console.log("get all cities, ", payload);
   return async function (dispatch) {
     try {
-      const {data} = await axios.get(`${api}/ciudades/${payload}`);
-  
-      if(data.success){
+      const { data } = await axios.get(`${api}/ciudades/${payload}`);
+
+      if (data.success) {
         return dispatch({
           type: "GET_ALL_CITIES",
           payload: data.message,
         });
-
       }
-  
-      
     } catch (error) {
-      return console.log(error, 'error en get all cities')
+      return console.log(error, "error en get all cities");
     }
   };
 }
 
 export function getAllProvinces() {
   return async function (dispatch) {
-    const {data} = await axios.get(`${api}/provincias`);
-    console.log('data provincias', data.message)
+    const { data } = await axios.get(`${api}/provincias`);
+    console.log("data provincias", data.message);
     return dispatch({
       type: "GET_ALL_PROVINCES",
       payload: data.message,
@@ -239,9 +236,17 @@ export function getAllPlans() {
 
 /************* Actions Para ABM Farmacias***********/
 
-export function getAllPharmacies() {
+export function getAllPharmacies(payload) {
   return async (dispatch) => {
-    const { data } = await axios.get(`${api}/farmacias`);
+    const token = getItem("userToken");
+    const { data } = await axios.get(
+      `${api}/admin/farmacias?ciudadID=${payload.ciudadID}&provinciaID=${payload.provinciaID}`,
+      {
+        headers: {
+          "x-access-token": token,
+        },
+      }
+    );
     if (data.success) {
       return dispatch({ type: "GET_PHARMACIES", payload: data.message });
     } else {
@@ -249,6 +254,17 @@ export function getAllPharmacies() {
     }
   };
 }
+
+// export function getFilterPharmacy(payload) {
+//   return async (dispatch) => {
+//     const { data } = await axios.get(`${api}/farmaciasFilter?ciudadID=${payload}`);
+//     if (data.success) {
+//       return dispatch({ type: "GET_PHARMACIES", payload: data.message });
+//     } else {
+//       return dispatch({ type: "ERRORS", payload: data });
+//     }
+//   };
+// }
 
 export function addPharmacy(payload) {
   return async (dispatch) => {
@@ -516,7 +532,6 @@ export function getPrescriptionsByDNI(payload) {
 
 export function updatePrescription(payload) {
   return async (dispatch) => {
-
     const token = getItem("userToken");
     const { data } = await axios.put(
       `${api}/admin/updatePrescription`,

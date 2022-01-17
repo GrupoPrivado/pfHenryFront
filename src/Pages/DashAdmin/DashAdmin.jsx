@@ -10,6 +10,7 @@ import ABMPharmacies from "../../Components/ABMAdmin/ABMPharmacies/ABMPharmacies
 import ABMPlans from "../../Components/ABMAdmin/ABMPlan/ABMPlans";
 import ABMProfessionals from "../../Components/ABMAdmin/ABMProfessionals/ABMProfessionals";
 import ABMPrescriptions from "../../Components/ABMAdmin/ABMPrescriptions/ABMPrescriptions";
+import ABMPharmaciesList from "../../Components/ABMAdmin/ABMPharmacies/ABMPharmaciesList";
 
 
 function DashAdmin() {
@@ -28,7 +29,7 @@ function DashAdmin() {
     <div>
 
       Dashboard Administrador
-      
+    
     </div>
   );
 
