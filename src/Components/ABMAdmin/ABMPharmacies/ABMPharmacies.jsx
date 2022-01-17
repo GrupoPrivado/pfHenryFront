@@ -18,14 +18,14 @@ const ABMPharmacies = () => {
   let [showModalUpdate, setShowModalUpdate] = useState(false);
 
   useEffect(() => {
-    dispatch(getAllPharmacies());
-  }, [dispatch]);
+    dispatch(getAllPharmacies({}));
+  },[]);
 
   return (
     <div>
-      {/* <button title="Agregar Farmacia" onClick={() => setShowModalAdd(true)}>
+      <button title="Agregar Farmacia" onClick={() => setShowModalAdd(true)}>
         Agregar Farmacia
-      </button> */}
+      </button>
 
       <ABMPharmacyList
         allPharmacies={allPharmacies}
@@ -33,15 +33,12 @@ const ABMPharmacies = () => {
         setShowModalAdd={setShowModalAdd}
       />
 
-      <AddPharmacy
-        showModalAdd={showModalAdd}
-        setShowModalAdd={setShowModalAdd}
-      />
-
+      {showModalAdd && <AddPharmacy setShowModalAdd={setShowModalAdd} />}
+      {/* 
       <UpdatePharmacy
         showModalUpdate={showModalUpdate}
         setShowModalUpdate={setShowModalUpdate}
-      />
+      /> */}
     </div>
   );
 };

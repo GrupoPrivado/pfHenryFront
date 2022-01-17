@@ -55,7 +55,6 @@ const AddAffiliate = ({ setShowModalAdd }) => {
     dispatch(getAllProvinces());
   },[]);
 
-  // dispatch(getAllCities(updateData.provinciaID._id));
   let [inputAdherent, setInputAdherent] = useState([]);
 
   const handleChange = (event) => {

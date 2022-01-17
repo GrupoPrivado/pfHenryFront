@@ -63,7 +63,7 @@ const UpdatePharmacy = ({ setShowModalUpdate, showModalUpdate }) => {
       telefono: "",
       mail: "",
     });
-    await dispatch(getAllPharmacies());
+    await dispatch(getAllPharmacies({}));
     dispatch(resetDataUpdate());
 
     setErrors(true);
