@@ -142,6 +142,7 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
                 />
               </div>
 
+
               <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
                 <label className="text-lg font-semibold" htmlFor="provincia">
                   Provincia{" "}
@@ -160,6 +161,7 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
                       </option>
                     ))}
                 </select>
+
               </div>
 
               <div className="flex">
@@ -237,6 +239,7 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
               </div>
             </div>
           </form>
+
 
           {errors ? (
             <button

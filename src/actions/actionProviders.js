@@ -2,6 +2,7 @@ import axios from "axios";
 import { api } from "../urlHostApi";
 
 export const GET_ALL_PROVINCES = 'GET_ALL_PROVINCES'
+export const GET_ALL_PHARMACIES = 'GET_ALL_PHARMACIES'
 
 export function getAllProviders() {
   return async function (dispatch) {
@@ -13,6 +14,26 @@ export function getAllProviders() {
     });
   };
 }
+
+
+export const getAllPharmacies = (provinciaID, ciudadID) => {
+  console.log('desde action ', provinciaID, ciudadID) 
+  let url = `${api}/farmacias`
+  if(provinciaID !== ''){
+     url = `${api}/farmacias/${provinciaID}?ciudadID=${ciudadID}`
+  }
+  return async (dispatch) => {
+    const {data} = await axios.get(`${url}`);
+    if(data.success){
+      return dispatch({
+        type: GET_ALL_PHARMACIES,
+        payload: data.message
+      })
+    }
+  } 
+}
+
+
 export function getAllProvinces() {
   return async function (dispatch) {
     const {data} = await axios.get(`${api}/provincias`);

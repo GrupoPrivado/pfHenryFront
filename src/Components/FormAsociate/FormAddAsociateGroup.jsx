@@ -86,9 +86,14 @@ export default function FormAddAsociateGroup({
     dispatch(getAllCities(newData.provinciaID));
     setInput(newData);
   };
-
+//    position: fixed;
+// top: 0;
+// left: 0;
+// width:75%;
+// height: 75%;
+// background: rgba(0, 0, 0, 0.6);
   return (
-    <div>
+    <div className="absolute">
       <form>
         <div className="flex">
           <label className="text-sm font-medium rounded-md"> Nombre:</label>
