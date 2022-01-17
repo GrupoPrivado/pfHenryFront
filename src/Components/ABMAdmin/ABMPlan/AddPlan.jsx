@@ -23,28 +23,6 @@ const AddPlan = ({ showModalAdd, setShowModalAdd }) => {
 
   const [errors, setErrors] = useState(true);
 
-  // const descriptionArr = [
-  //   "Consultas",
-  //   "Emergencia Medica",
-  //   "Odontologia",
-  //   "Estudios",
-  //   "Psicologia",
-  //   "Kinesiologia",
-  //   "Cobertura",
-  //   "Urgencias",
-  //   "Visitas",
-  //   "Consulta Online",
-  //   "Internacion",
-  //   "Asistencia",
-  //   "Ortodoncia",
-  //   "Protesis",
-  //   "Implantes odontologicos",
-  //   "Opticas",
-  //   "Cirugia estética",
-  //   "Reintegros",
-  //   "Blanqueamiento dental",
-  // ];
-
   const [type, setTypeArr] = useState("");
   const [description, setdescriptionArr] = useState("");
 
@@ -84,11 +62,11 @@ const AddPlan = ({ showModalAdd, setShowModalAdd }) => {
   };
 
   const handleDeleteDescr = (event) => {
-    console.log("entre", event.target.value);
+  
     const newDesc = inputPlan.descripcion
     
-    newDesc.splice(event.target);
-    console.log("<<<<newDesc>>>>", newDesc);
+    newDesc.splice(event.target.value,1);
+
     setInputPlan({
       ...inputPlan,
       descripcion: newDesc,
@@ -148,7 +126,7 @@ const AddPlan = ({ showModalAdd, setShowModalAdd }) => {
         <div className="modal-content py-4 text-left px-6 ">
           <form onSubmit={(e) => handleSubmitPlan(e)} id="addPlan">
             <div>
-              <label className="text-md text-gray-600">Codigo: PLN-</label>
+              <label className="text-md text-gray-600">Codigo: </label>
               <input
                 className="h-2 p-4 mb-2.5 w-full border-2 border-gray-300  rounded-md"
                 type="text"
