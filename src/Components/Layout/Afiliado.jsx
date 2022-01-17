@@ -3,7 +3,6 @@ import { Route, Routes } from 'react-router-dom'
 import DashAfil from '../../Pages/DashAfiliado/DashAfil'
 import MiCuenta from '../../Pages/MiCuenta/MiCuenta'
 import { roles } from '../../utils/roles'
-import Authorizations from '../../Pages/Authorizations/Authorizations'
 import Credencial from '../Credencial/Credencial'
 import FamilyGroupDetail from '../FamilyGroup/FamilyGroupDetail'
 import MedicalHistoryDetails from '../MedicalHistory/MedicalHistoryDetails'
@@ -11,6 +10,7 @@ import Perfil from '../Perfil/Perfil'
 import NavBarDashboard from '../NavBarDashboard/NavBarDashboard'
 import PrivateRouter from '../PrivateRouter/PrivateRouter'
 import CartPrest from '../Providers/CartPrest'
+import Authorizations from '../../Pages/Authorizations/Authorizations'
 
 const Afiliado = () => {
   return (
