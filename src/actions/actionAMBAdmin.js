@@ -558,9 +558,10 @@ export function updatePrescription(payload) {
 /************* FIN Actions Para ABM Prescripciones***********/
 
 /*************Actions Comunes Para ABM***********/
-export const resetDataUpdate = () => {
+export const resetDataUpdate = (payload) => {
   return {
     type: "DATA_RESET",
+    payload:payload
   };
 };
 

@@ -28,7 +28,7 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
     (state) => state.ABMAdmin
   );
 
-  const [errors, setErrors] = useState(false);
+  const [errors, setErrors] = useState(true);
 
   let [updateAffiliateData, setUpdateAffiliateData] = useState({
     id: "",
@@ -93,10 +93,10 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
       alta: "",
       activo: "",
     });
-    dispatch(getAllAffiliates());
-    dispatch(resetDataUpdate());
-    setErrors(true);
     setShowModalUpdate(false);
+    dispatch(getAllAffiliates());
+    dispatch(resetDataUpdate({}));
+    setErrors(true);
   };
 
   const handleClose = () => {
@@ -111,9 +111,9 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
       alta: "",
       activo: "",
     });
-    dispatch(resetDataUpdate());
-    setErrors(true);
     setShowModalUpdate(false);
+   dispatch(resetDataUpdate({}));
+    setErrors(true);
   };
 
   return (
@@ -166,7 +166,7 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
                 Provincia{" "}
               </label>
               <select
-                value={updateAffiliateData.provinciaID}
+                value={updateAffiliateData.provinciaID._id}
                 onChange={handleChangeProvince}
                 name="provinciaID"
                 className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
@@ -205,7 +205,7 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
               id="planes"
               name="planID"
               onChange={(e) => handleUpdateAffiliate(e)}
-              value={updateAffiliateData.planID}
+              value={updateAffiliateData.planID._id}
             >
               <option value="">Seleccione su Plan</option>
               {allPlans &&
