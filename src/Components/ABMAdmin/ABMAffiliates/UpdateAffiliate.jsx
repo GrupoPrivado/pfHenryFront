@@ -127,9 +127,10 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
         </div>
         <div className="modal-content py-4 text-left px-6 ">
           <form
-            onSubmit={(e) => handleSubmitUpdateAffiliate(e)}
+
             id="updateAffiliate"
           >
+
             <div className="flex">
               <div>
                 <label className="text-md text-gray-600">Teléfono: </label>
@@ -144,6 +145,7 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
                   placeholder="Ingrese el Teléfono...."
                 />
               </div>
+
 
               <div>
                 <label className="text-md text-gray-600">E-Mail: </label>
@@ -246,6 +248,7 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
               key="submitFormButton"
               form="updateAffiliate"
               disabled={errors}
+
                   >
                     Guardar
                   </button>
@@ -268,6 +271,9 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
             </div>
             
           </form>
+
+            
+
         </div>
       </section>
     </div>

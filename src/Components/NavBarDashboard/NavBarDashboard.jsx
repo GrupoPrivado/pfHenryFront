@@ -6,13 +6,12 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from 'react-redux'
 import Logo from "../../assets/logo.svg"
-
+import { profilePhoto } from '../../utils/constantes';
 
 const userDetails = {
     name: 'Tom Cook',
     email: 'tom@example.com',
-    imageUrl:
-        'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    imageUrl: profilePhoto
 }
 
 function classNames(...classes) {
@@ -27,15 +26,27 @@ const navigationa = [
     { name: 'Historial', href: '/afiliado/historial', current: false },
     { name: 'Cartilla', href: '/afiliado/prestadores', current: false },
 ]
+
+
 export default function NavBarDashboard() {
     const [navigation, setNavigation] = useState([
         { name: 'Dashboard', href: '/afiliado', current: true },
         { name: 'Grupo Familiar', href: '/afiliado/group', current: false },
-        { name: 'Autorizaciones', href: '/afiliado/autorizaciones', current: false },
+        { name: 'Recetas', href: '/afiliado/autorizaciones', current: false },
         { name: 'Historial', href: '/afiliado/historial', current: false },
         { name: 'Cartilla', href: '/afiliado/prestadores', current: false },
     ])
-    
+    const [profile, setProfile] = useState([
+        { name: "Perfil", href: "/afiliado/perfil", current: false }
+    ])
+
+    const profileNavigation = [
+        { name: 'Mi Cuenta', href: '/afiliado/perfil' },
+    ]
+    const logOutNavigation = [
+        { name: 'Cerrar Sesión', href: '/' },
+    ]
+
     const navigate = useNavigate()
     const { user, route } = useSelector(state => state.auth)
 
@@ -49,10 +60,7 @@ export default function NavBarDashboard() {
                                 <div className="flex items-center justify-between h-16">
                                     <div className="flex items-center">
                                         <div className="flex-shrink-0">
-                                            <img
-                                                src={Logo}
-                                                alt="Workflow"
-                                            />
+                                            <img src={Logo} alt="Workflow" />
                                         </div>
                                         <div className="hidden md:block">
                                             <div className="flex items-baseline ml-10 space-x-4">
@@ -62,18 +70,21 @@ export default function NavBarDashboard() {
                                                         to={item.href}
                                                         className={classNames(
                                                             item.current
-                                                                ? 'bg-secondary text-white'
-                                                                : 'text-primary hover:bg-primary hover:text-white',
-                                                            'px-3 py-2 rounded-md text-sm font-medium'
+                                                                ? "bg-secondary text-white"
+                                                                : "text-primary hover:bg-primary hover:text-white",
+                                                            "px-3 py-2 rounded-md text-sm font-medium"
                                                         )}
-                                                        aria-current={item.current ? 'page' : undefined}
-                                                        onClick={() =>{
-                                                            const oldState = navigation
-                                                            const prev = oldState.find((e) => e.current === true)
-                                                            prev.current = !prev.current
+                                                        aria-current={item.current ? "page" : undefined}
+                                                        onClick={() => {
+                                                            const oldState = navigation;
+                                                            const prev = oldState.find(
+                                                                (e) => e.current === true
+                                                            );
+                                                            prev.current = !prev.current;
 
-                                                            oldState[index].current = !oldState[index].current
-                                                            setNavigation([...oldState])
+                                                            oldState[index].current =
+                                                                !oldState[index].current;
+                                                            setNavigation([...oldState]);
                                                         }}
                                                     >
                                                         {item.name}
@@ -93,11 +104,11 @@ export default function NavBarDashboard() {
                                             </button>
 
                                             {/* Profile dropdown */}
-                                            <Menu as="div" className="relative ml-3 z-50">
+                                            <Menu as="div" className="relative z-50 ml-3">
                                                 <div>
                                                     <Menu.Button className="flex items-center max-w-xs text-sm bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                                                         <span className="sr-only">Open user menu</span>
-                                                        <img className="w-8 h-8 rounded-full" src={userDetails.imageUrl} alt="" />
+                                                        <img className="w-8 h-8 rounded-full" src={user.urlPhoto || userDetails.imageUrl} alt="" />
                                                     </Menu.Button>
                                                 </div>
                                                 <Transition
@@ -113,10 +124,11 @@ export default function NavBarDashboard() {
                                                         <Menu.Item>
                                                             {({ active }) => (
                                                                 <a
-                                                                    href="/"
-                                                                    className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                                                    href={profile.href}
+                                                                    className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700 cursor-pointer')}
+                                                                    onClick={() => { navigate('/afiliado/perfil') }}
                                                                 >
-                                                                    Perfil
+                                                                    Mi Cuenta
                                                                 </a>
                                                             )}
                                                         </Menu.Item>
@@ -170,7 +182,9 @@ export default function NavBarDashboard() {
                                 <div className="pt-4 pb-3 border-t border-gray-700">
                                     <div className="flex items-center px-5">
                                         <div className="flex-shrink-0">
-                                            <img className="w-10 h-10 rounded-full" src={userDetails.imageUrl} alt="" />
+                                            <button>
+                                                <img className="w-10 h-10 rounded-full" src={user.urlPhoto || userDetails.imageUrl} alt="" />
+                                            </button>
                                         </div>
                                         <div className="ml-3">
                                             <div className="text-base font-medium leading-none text-white">{user.name}</div>
@@ -184,6 +198,29 @@ export default function NavBarDashboard() {
                                             <BellIcon className="w-6 h-6" aria-hidden="true" />
                                         </button>
                                     </div>
+                                </div>
+                                <div className="px-2 mt-3 space-y-1">
+                                    {profileNavigation.map((item) => (
+                                        <Disclosure.Button
+                                            key={profileNavigation.name}
+                                            as="a"
+                                            href={profileNavigation.href}
+                                            onClick={() => { navigate(profileNavigation.href) }}
+                                            className="block px-3 py-2 text-base font-medium text-gray-500 rounded-md hover:text-white hover:bg-gray-700"
+                                        >
+                                            {profileNavigation.name}
+                                        </Disclosure.Button>
+                                    ))}
+                                    <Disclosure.Button
+                                        key={profileNavigation.name}
+                                        as="a"
+                                        href={profileNavigation.href}
+                                        onClick={() => { navigate(profileNavigation.href) }}
+                                        className="block px-3 py-2 text-base font-medium text-gray-500 rounded-md hover:text-white hover:bg-gray-700"
+                                    >
+                                        {profileNavigation.name}
+                                    </Disclosure.Button>
+
                                 </div>
                             </Disclosure.Panel>
                         </>
