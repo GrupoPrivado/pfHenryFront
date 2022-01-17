@@ -145,7 +145,7 @@ const AddPlan = ({ showModalAdd, setShowModalAdd }) => {
         <div className="modal-content py-4 text-left px-6 ">
           <form onSubmit={(e) => handleSubmitPlan(e)} id="addPlan">
             <div>
-              <label className="text-md text-gray-600">Codigo: PLN-</label>
+              <label className="text-md text-gray-600">Codigo:</label>
               <input
                 className="h-2 p-4 mb-2.5 w-full border-2 border-gray-300  rounded-md"
                 type="text"
