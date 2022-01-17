@@ -93,7 +93,7 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
       alta: "",
       activo: "",
     });
-    await dispatch(getAllAffiliates());
+    dispatch(getAllAffiliates());
     dispatch(resetDataUpdate());
     setErrors(true);
     setShowModalUpdate(false);
