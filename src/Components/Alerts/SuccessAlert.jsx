@@ -1,8 +1,8 @@
 import React from 'react'
-// bottom-0 right-0 h-16 w-16
+
 function SuccessAlert({message}) {
     return (
-        <div>
+        <div className='sticky bottom-0'>
             <div className="absolute flex flex-row items-center p-5 bg-green-200 border-b-2 border-green-300 rounded bottom-11 right-3 alert ">
                 <div className="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-green-100 border-2 border-green-500 rounded-full alert-icon">
                     <span className="text-green-500">
