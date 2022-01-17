@@ -1,10 +1,10 @@
 .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width:50%;
-    height: 50%;
-    background:gray;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width:50%;
+  height: 50%;
+  background:gray;
   }
   
   .modalmain {
@@ -15,7 +15,7 @@
     top:50%;
     left:50%;
     transform: translate(-50%,-50%);
-    border-radius: 2rem;;
+    border-radius: 2rem;
   }
   
   .displayblock {

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import {
   updateSpecialityAct,
   getAllSpecialities,
- resetDataUpdate
+  resetDataUpdate,
 } from "../../../actions/actionAMBAdmin";
 
 import styles from "./UpdateSpeciality.module.css";
@@ -106,15 +106,20 @@ const UpdateSpeciality = ({ setShowModalUpdate, showModalUpdate }) => {
   return (
     <div className={styles[showHideClassName]}>
       <section className={styles.modalmain}>
-        <h5>Modificar Especialidad</h5>
-        <div className={styles.container}>
+        <div className="flex justify-center">
+        <h5 className="text-2xl font-bold text-gray-500">
+          Modificar Especialidad
+        </h5>
+        </div>
+        <div className="modal-content py-4 text-left px-6 ">
           <form
             onSubmit={(e) => handleSubmitUpdateSpeciality(e)}
             id="updateSpeciality"
           >
             <div>
-              <label>Codigo: </label>
+              <label className="text-md text-gray-600">Codigo: </label>
               <input
+                className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md"
                 type="text"
                 name="newCodeEsp"
                 autoComplete="off"
@@ -125,8 +130,9 @@ const UpdateSpeciality = ({ setShowModalUpdate, showModalUpdate }) => {
             </div>
 
             <div>
-              <label>Nombre: </label>
+              <label className="text-md text-gray-600">Nombre: </label>
               <input
+                className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md"
                 type="text"
                 name="newNombre"
                 autoComplete="off"
@@ -137,8 +143,9 @@ const UpdateSpeciality = ({ setShowModalUpdate, showModalUpdate }) => {
             </div>
 
             <div>
-              <label>Descripción: </label>
+              <label className="text-md text-gray-600">Descripción: </label>
               <input
+                className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md"
                 type="text"
                 name="newDescripcion"
                 autoComplete="off"
@@ -148,47 +155,60 @@ const UpdateSpeciality = ({ setShowModalUpdate, showModalUpdate }) => {
               />
             </div>
 
-            <select
-              id="activa"
-              name="newActiva"
-              onChange={(e) => handleUpdateSpeciality(e)}
-              defaultValue={0}
-            >
-              <option
-                value="false"
-                selected={updateSpecialityData.oldActiva === false}
-              >
-                No
-              </option>
-              <option
-                value="true"
-                selected={updateSpecialityData.oldActiva === true}
-              >
-                Si
-              </option>
-            </select>
-          </form>
+            <div className="flex justify-between">
+              <div className="flex w-1/3 items-center">
+                <label className="text-md text-gray-600">Activo: </label>
+                <select
+                  id="activa"
+                  name="newActiva"
+                  onChange={(e) => handleUpdateSpeciality(e)}
+                  defaultValue={0}
+                >
+                  <option
+                    value="false"
+                    selected={updateSpecialityData.oldActiva === false}
+                  >
+                    No
+                  </option>
+                  <option
+                    value="true"
+                    selected={updateSpecialityData.oldActiva === true}
+                  >
+                    Si
+                  </option>
+                </select>
+              </div>
 
-          {errors ? (
-            <button
-              type="submit"
-              key="submitFormButton"
-              form="updateSpeciality"
-              disabled={errors}
-              className="disabledButton"
-            >
-              Cargar
-            </button>
-          ) : (
-            <button
-              type="submit"
-              key="submitFormButton"
-              form="updateSpeciality"
-            >
-              Cargar
-            </button>
-          )}
-          <button onClick={() => handleClose()}>Cerrar</button>
+              <div className="flex w-2/3 justify-around">
+                {errors ? (
+                  <button
+                    className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    type="submit"
+                    key="submitFormButton"
+                    form="addSpeciality"
+                    disabled={errors}
+                  >
+                    Guardar
+                  </button>
+                ) : (
+                  <button
+                    type="submit"
+                    key="submitFormButton"
+                    form="addSpeciality"
+                    className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  >
+                    Guardar
+                  </button>
+                )}
+                <button
+                  onClick={() => handleClose()}
+                  className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                  Cerrar
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
       </section>
     </div>
