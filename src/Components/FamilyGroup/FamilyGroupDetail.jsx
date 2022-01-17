@@ -1,13 +1,6 @@
-<<<<<<< HEAD
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux';
-import NavbarDasboard from '../NavBarDashboard/NavBarDashboard'
-import CardMemberGroup from './CardMemberGroup';
-=======
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import Logo from "./../../assets/bg2.jpg"
->>>>>>> development
 import { Link } from "react-router-dom";
 import Credencial from '../Credencial/Credencial';
 import { getGroup } from '../../actions/actionGroup';
@@ -15,36 +8,12 @@ import  logo  from '../../assets/logo_white_large.png'
 
 export default function FamilyGroupDetail() {
     const { group } = useSelector((state) => state.grupos);
-<<<<<<< HEAD
-    const [isActive, setActive ] = useState(false)
-    const [info, setInfo ] = useState({
-        name: '',
-        lastname: '',
-        dni: ''
-    })
-
-    return (
-        <div>
-        {/* <NavbarDasboard/> */}
-
-            {group && group.map((e) => (<div key={e._id}>
-            
-                <CardMemberGroup 
-                name={e.nombre}
-                lastname={e.apellido}
-                dni={e.DNI}
-                />
-            </div>
-            ))}
-            <Link to='/afiliado'>
-            <button>Volver</button></Link>
-=======
     const { user, route } = useSelector(state => state.auth)
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getGroup(user.grupFamID))
 
-    }, [dispatch])
+    }, [dispatch,user.grupFamID])
     console.log("group: ", group)
 
     const [isActive, setActive] = useState(false);
@@ -92,7 +61,6 @@ export default function FamilyGroupDetail() {
                     ))}
                 </div>
             </div>
->>>>>>> development
         </div>
     )
 }

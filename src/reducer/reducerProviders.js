@@ -1,4 +1,7 @@
-import { GET_ALL_PROVINCES } from "../actions/actionProviders";
+import {
+  GET_ALL_PROVINCES,
+  GET_ALL_PHARMACIES,
+} from "../actions/actionProviders";
 
 const inicialState = {
   allProviders: [],
@@ -6,6 +9,7 @@ const inicialState = {
   cities: [],
   provinces: [],
   specialties: [],
+  pharmacies: [],
 };
 export default function reducerPrestadores(state = inicialState, action) {
   switch (action.type) {
@@ -15,11 +19,16 @@ export default function reducerPrestadores(state = inicialState, action) {
         providers: action.payload,
         allProviders: action.payload,
       };
+    case GET_ALL_PHARMACIES:
+      return {
+        ...state,
+        pharmacies: action.payload,
+      };
     case GET_ALL_PROVINCES:
       return {
         ...state,
-        provinces: action.payload
-      }
+        provinces: action.payload,
+      };
     case "GET_ALL_CITIES":
       return {
         ...state,
