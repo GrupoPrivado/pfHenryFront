@@ -4,10 +4,10 @@ import { getItem } from "./actionAuth";
 import {api} from '../urlHostApi'
 
 
-export function getGroup(codeGroup) {
+export function getGroup(grupFamID) {
   return async function (dispatch) {
     const { data } = await axios.get(
-      `${api}/gruposFamiliares/${codeGroup}`,
+      `${api}/gruposFamiliares/${grupFamID}`,
       {
         headers: {
           "x-access-token": getItem("userToken"),

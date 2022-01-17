@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getPlanes } from "../../actions/actionPlanes";
 import { postAfiliate } from "../../actions/actionPlanes";
 import { useNavigate } from "react-router-dom";
+import { getAllCities } from "../../actions/actionProviders";
 
 const functionErrors = (data) => {
   const arrayKeys = Object.keys(data);
@@ -15,7 +16,14 @@ const functionErrors = (data) => {
   }
 };
 
-export default function FormAsociate({ setOutput, output, modal, setModal }) {
+export default function FormAsociate({
+  provinces,
+  cities,
+  setOutput,
+  output,
+  modal,
+  setModal,
+}) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { planes } = useSelector((state) => state.planes);
@@ -28,10 +36,10 @@ export default function FormAsociate({ setOutput, output, modal, setModal }) {
     fechaNacimiento: "",
     telefono: "",
     correoElectronico: "",
-    localidad: "",
-    provincia: "",
+    ciudadID: "",
+    provinciaID: "",
     direccion: "",
-    codePlan: "",
+    planID: "",
     password: "",
     parentesco: "titular",
   });
@@ -47,12 +55,13 @@ export default function FormAsociate({ setOutput, output, modal, setModal }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
 
     const newState = [input, ...output];
 
     setOutput(newState);
 
-    alert("afiliate create");
+    //alert("afiliate create");
 
     dispatch(postAfiliate(newState));
 
@@ -63,20 +72,20 @@ export default function FormAsociate({ setOutput, output, modal, setModal }) {
       fechaNacimiento: "",
       telefono: "",
       correoElectronico: "",
-      localidad: "",
-      provincia: "",
+      ciudadID: "",
+      provinciaID: "",
       direccion: "",
-      codePlan: "",
+      planID: "",
       password: "",
     });
     setErrors(true);
-    navigate("/");
+    //navigate("/");
   };
   function handleSelect(e) {
     if (e.target.value !== "select") {
       setInput({
         ...input,
-        codePlan: e.target.value,
+        planID: e.target.value,
       });
     }
   }
@@ -85,6 +94,14 @@ export default function FormAsociate({ setOutput, output, modal, setModal }) {
     const newOutputFilter = newOutput.filter((f) => f.nombre !== e.nombre);
     setOutput(newOutputFilter);
   }
+  const handleChangeProvince = (e) => {
+    const newData = {
+      ...input,
+      provinciaID: e.target.value,
+    };
+    dispatch(getAllCities(newData.provinciaID))
+    setInput(newData);
+  };
 
   return (
     <div>
@@ -180,21 +197,10 @@ export default function FormAsociate({ setOutput, output, modal, setModal }) {
             placeholder="Domicilio"
           />
         </div>
-        <div className="flex">
-          <label className="text-sm font-medium rounded-md">Localidad:</label>
-          <input
-            required
-            className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-            type="text"
-            value={input.localidad}
-            name="localidad"
-            onChange={(e) => handleChange(e)}
-            placeholder="Localidad"
-          />
-        </div>
+        
         <div className="flex">
           <label className="text-sm font-medium rounded-md">Provincia:</label>
-          <input
+          {/* <input
             required
             className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
             type="text"
@@ -202,7 +208,41 @@ export default function FormAsociate({ setOutput, output, modal, setModal }) {
             name="provincia"
             onChange={(e) => handleChange(e)}
             placeholder="Provincia"
-          />
+          /> */}
+          <select
+            value={input.provinciaID}
+            onChange={handleChangeProvince}
+            name="provincia"
+            className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            
+          >
+            <option value=''>Seleccione una provincia</option>
+            {provinces &&
+              provinces.map((p) => (
+                <option key={p._id} value={p._id}>
+                  {p.nombre}
+                </option>
+              ))}
+          </select>
+        </div>
+        <div className="flex">
+          <label className="text-sm font-medium rounded-md">Localidad:</label>
+          <select 
+                            onChange={handleChange} 
+                            value={input.ciudadID}
+                            name="ciudadID" 
+                            className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                            required
+                            >
+                                          <option value='-'>Seleccione una ciudad</option>
+
+                                {
+                                    cities && cities.map(c => (
+                                        <option key={c._id} value={c._id}>{c.localidad}</option>
+                                    ))
+                                }
+
+                            </select>
         </div>
         <div className="flex">
           <label className="text-sm font-medium rounded-md">
@@ -229,7 +269,7 @@ export default function FormAsociate({ setOutput, output, modal, setModal }) {
           <select
             required
             className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-            name=""
+            name="planID"
             id=""
             onChange={(e) => handleSelect(e)}
           >
@@ -237,7 +277,7 @@ export default function FormAsociate({ setOutput, output, modal, setModal }) {
             {planes?.map((e) => (
               <option
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                value={e.codePlan}
+                value={e._id}
               >
                 {e.name}
               </option>
@@ -261,14 +301,16 @@ export default function FormAsociate({ setOutput, output, modal, setModal }) {
         {errors ? (
           <button
             type="submit"
-            
             disabled={errors}
             className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             Enviar
           </button>
         ) : (
-          <button type="submit" className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-700  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+          <button
+            type="submit"
+            className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-700  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
             Enviar
           </button>
         )}

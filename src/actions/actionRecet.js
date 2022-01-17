@@ -1,15 +1,18 @@
 import axios from "axios";
 import {api} from '../urlHostApi'
+import { getItem } from "./actionAuth";
 
-export function getRecetas(dni) {
+export function getRecetas() {
     return async function (dispatch) {
-      var json = await axios.get(
-        `${api}/recetas/${dni}`
-      );
+      const token = getItem("userToken");
+      const { data } = await axios.get(`${api}/recetas`,{
+          headers: {
+            "x-access-token": token,
+          },});
   
       return dispatch({
         type: "GET_RECETAS",
-        payload: json.data.message,
+        payload: data.message,
       });
     };
 }
