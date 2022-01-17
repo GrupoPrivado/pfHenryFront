@@ -73,19 +73,22 @@ const AddPlan = ({ showModalAdd, setShowModalAdd }) => {
   const handleAddDescription = (event) => {
     // event.preventDefault();
     const newDesc = [type, description];
-
-    setInputPlan({
-      ...inputPlan,
-      descripcion: [...inputPlan.descripcion, newDesc],
-    });
-    setTypeArr("");
-    setdescriptionArr("");
+    if (type !== "" && description !== "") {
+      setInputPlan({
+        ...inputPlan,
+        descripcion: [...inputPlan.descripcion, newDesc],
+      });
+      setTypeArr("");
+      setdescriptionArr("");
+    }
   };
 
   const handleDeleteDescr = (event) => {
-    const newDesc = inputPlan.descripcion.filter(
-      (element, index) => event.target.value !== index
-    );
+    console.log("entre", event.target.value);
+    const newDesc = inputPlan.descripcion
+    
+    newDesc.splice(event.target);
+    console.log("<<<<newDesc>>>>", newDesc);
     setInputPlan({
       ...inputPlan,
       descripcion: newDesc,
@@ -134,7 +137,7 @@ const AddPlan = ({ showModalAdd, setShowModalAdd }) => {
   };
 
   return (
-    <div className={styles[showHideClassName]}>
+    <div className="relative">
       <section className={styles.modalmain}>
         <div className="flex justify-center">
           <h5 className="text-2xl font-bold text-gray-500">
@@ -252,28 +255,29 @@ const AddPlan = ({ showModalAdd, setShowModalAdd }) => {
               placeholder="Ingrese la Descripcion...."
             />
 
+            <div>
+              {inputPlan.descripcion &&
+                inputPlan.descripcion.map((element, index) => {
+                  return (
+                    <div key={"divDesc" + index}>
+                      <label key={"labelTipo" + index}>{element[0]}: </label>
+                      <label key={"labelDesc" + index}>{element[1]}</label>
+                      <button
+                        value={index}
+                        name={"btnDel" + index}
+                        id={index}
+                        onClick={(e) => handleDeleteDescr(e)}
+                      >
+                        xxxxxxxx
+                      </button>
+                    </div>
+                  );
+                })}
+            </div>
+
             <button name="descripcion" onClick={(e) => handleAddDescription(e)}>
               Agregar
             </button>
-          </div>
-
-          <div>
-            {inputPlan.descripcion &&
-              inputPlan.descripcion.map((element, index) => {
-                <div>
-                  {console.log(element,'<<<<<<',index)}
-                  <label>{element[0]}: </label>
-                  <label>{element[1]}</label>
-                  <button
-                    name="deleteDesc"
-                    value={index}
-                    id={index}
-                    onClick={(e) => handleDeleteDescr(e)}
-                  >
-                    x
-                  </button>
-                </div>;
-              })}
           </div>
         </div>
       </section>
