@@ -27,6 +27,7 @@ export default function FormContact() {
         e.preventDefault();
         let response = await dispatch(sendMail(input));
         console.log('response',response)
+        alert("Su consulta se envió correctamente, le responderemos a la brevedad.")
         navigate("/");
     }
 
