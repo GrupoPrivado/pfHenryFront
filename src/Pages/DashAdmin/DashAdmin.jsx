@@ -26,7 +26,7 @@ function DashAdmin() {
   }, [dispatch, route, navigate]);
 
   return (
-    <div>
+    <div className="h-70vh">
 
       Dashboard Administrador
     
