@@ -1,11 +1,10 @@
 import React from 'react'
+import DashAuthorizations from '../../Components/DashAuthorizations/DashAuthorizations'
 
 const Authorizations = () => {
     return (
         <div>
-            PAGE AUTORIZACIONES 
-
-            PLS NUEVO COMPONENTE
+            <DashAuthorizations/>
         </div>
     )
 }
