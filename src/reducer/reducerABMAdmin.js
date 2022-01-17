@@ -96,7 +96,7 @@ export default function reducerABMAdmin(state = initialState, action) {
       };
 
     case "DATA_RESET":
-      return { ...state, updateData: {} };
+      return { ...state, updateData: action.payload };
 
     default:
       return state;
