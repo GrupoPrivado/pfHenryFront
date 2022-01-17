@@ -34,8 +34,6 @@ const AddPlan = ({ showModalAdd, setShowModalAdd }) => {
     descripcion: [],
   });
 
-  const showHideClassName = showModalAdd ? "displayblock" : "displaynone";
-
   const handleChangeDescription = (event) => {
     if (event.target.name === "type") {
       const newType = event.target.value;
@@ -62,10 +60,9 @@ const AddPlan = ({ showModalAdd, setShowModalAdd }) => {
   };
 
   const handleDeleteDescr = (event) => {
-  
-    const newDesc = inputPlan.descripcion
-    
-    newDesc.splice(event.target.value,1);
+    const newDesc = inputPlan.descripcion;
+
+    newDesc.splice(event.target.value, 1);
 
     setInputPlan({
       ...inputPlan,
@@ -98,8 +95,8 @@ const AddPlan = ({ showModalAdd, setShowModalAdd }) => {
       descripcion: [],
     });
     await dispatch(getAllPlansData());
-    setErrors(true);
     setShowModalAdd(false);
+    setErrors(true);
   };
 
   const handleClose = () => {
@@ -110,8 +107,8 @@ const AddPlan = ({ showModalAdd, setShowModalAdd }) => {
       planActivo: false,
       descripcion: [],
     });
-    setErrors(true);
     setShowModalAdd(false);
+    setErrors(true);
   };
 
   return (
@@ -124,47 +121,49 @@ const AddPlan = ({ showModalAdd, setShowModalAdd }) => {
           <br />
         </div>
         <div className="modal-content py-4 text-left px-6 ">
-          <form onSubmit={(e) => handleSubmitPlan(e)} id="addPlan">
+          <form>
             <div className="flex">
-            <div>
-              <label className="text-md text-gray-600">Codigo: </label>
-              <input
-                className="h-2 p-4 mb-2.5 w-full border-2 border-gray-300  rounded-md"
-                type="text"
-                name="codePlan"
-                autoComplete="off"
-                value={inputPlan.codePlan}
-                onChange={(e) => handleChange(e)}
-                placeholder="Ingrese el Codigo...."
-              />
-            </div>
+              <div>
+                <label className="text-md text-gray-600">Codigo: </label>
+                <input
+                  className="h-2 p-4 mb-2.5 w-full border-2 border-gray-300  rounded-md"
+                  type="text"
+                  name="codePlan"
+                  autoComplete="off"
+                  value={inputPlan.codePlan}
+                  onChange={(e) => handleChange(e)}
+                  placeholder="Ingrese el Codigo...."
+                />
+              </div>
 
-            <div>
-              <label className="text-md text-gray-600">Nombre: </label>
-              <input
-                className="h-2 p-4 mb-2.5 w-full border-2 border-gray-300  rounded-md"
-                type="text"
-                name="name"
-                autoComplete="off"
-                value={inputPlan.nombre}
-                onChange={(e) => handleChange(e)}
-                placeholder="Ingrese el nombre...."
-              />
+              <div>
+                <label className="text-md text-gray-600">Nombre: </label>
+                <input
+                  className="h-2 p-4 mb-2.5 w-full border-2 border-gray-300  rounded-md"
+                  type="text"
+                  name="name"
+                  autoComplete="off"
+                  value={inputPlan.nombre}
+                  onChange={(e) => handleChange(e)}
+                  placeholder="Ingrese el nombre...."
+                />
+              </div>
+              <div>
+                <label className="text-md text-gray-600">Precio: </label>
+                <input
+                  className="h-2 p-4 mb-2.5 w-full border-2 border-gray-300 rounded-md"
+                  type="text"
+                  name="precio"
+                  autoComplete="off"
+                  value={inputPlan.precio}
+                  onChange={(e) => handleChange(e)}
+                  placeholder="Ingrese el precio...."
+                />
+              </div>
             </div>
-            <div>
-              <label className="text-md text-gray-600">Precio: </label>
-              <input
-                className="h-2 p-4 mb-2.5 w-full border-2 border-gray-300 rounded-md"
-                type="text"
-                name="precio"
-                autoComplete="off"
-                value={inputPlan.precio}
-                onChange={(e) => handleChange(e)}
-                placeholder="Ingrese el precio...."
-              />
-            </div>
-            </div>
-            <div>
+          </form>
+
+          <div>
             <label className="text-md text-gray-600">Tipo: </label>
             <input
               className="h-2 p-4  w-full border-2 border-gray-300 mb-2 rounded-md"
@@ -212,55 +211,50 @@ const AddPlan = ({ showModalAdd, setShowModalAdd }) => {
             </button>
           </div>
 
-           
-
-            <div className="flex justify-between ">
-              <div className="flex w-1/3 items-center">
-                <label className="text-md text-gray-600">Activo: </label>
-                <select
-                  id="activo"
-                  name="planActivo"
-                  onChange={(e) => handleChange(e)}
-                  defaultValue={0}
-                >
-                  <option value="false">No</option>
-                  <option value="true">Si</option>
-                </select>
-              </div>
-
-              <div className="flex w-2/3 justify-around">
-                {errors ? (
-                  <button
-                    className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    type="submit"
-                    key="submitFormButton"
-                    form="addPlan"
-                    disabled={errors}
-                  >
-                    Guardar
-                  </button>
-                ) : (
-                  <button
-                    type="submit"
-                    key="submitFormButton"
-                    form="addPlan"
-                    className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  >
-                    Guardar
-                  </button>
-                )}
-                <button
-                  type="button"
-                  onClick={() => handleClose()}
-                  className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
-                  Cerrar
-                </button>
-              </div>
+          <div className="flex justify-between ">
+            <div className="flex w-1/3 items-center">
+              <label className="text-md text-gray-600">Activo: </label>
+              <select
+                id="activo"
+                name="planActivo"
+                onChange={(e) => handleChange(e)}
+                defaultValue={0}
+              >
+                <option value="">Seleccione</option>
+                <option value="false">No</option>
+                <option value="true">Si</option>
+              </select>
             </div>
-          </form>
 
-          
+            <div className="flex w-2/3 justify-around">
+              {errors ? (
+                <button
+                  className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  type="submit"
+                  key="submitFormButton"
+                  form="addPlan"
+                  disabled={errors}
+                >
+                  Guardar
+                </button>
+              ) : (
+                <button
+                  key="submitFormButton"
+                  onClick={(e) => handleSubmitPlan(e)}
+                  className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                  Guardar
+                </button>
+              )}
+              <button
+                type="button"
+                onClick={() => handleClose()}
+                className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                Cerrar
+              </button>
+            </div>
+          </div>
         </div>
       </section>
     </div>
