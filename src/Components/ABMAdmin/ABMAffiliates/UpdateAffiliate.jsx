@@ -115,51 +115,38 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
    dispatch(resetDataUpdate({}));
     setErrors(true);
   };
+  const showHideClassName = showModalUpdate ? "displayblock" : "displaynone";
 
   return (
-    <div>
+    <div className={styles[showHideClassName]}>
       <section className={styles.modalmain}>
-        <h5>Modificar Afiliado</h5>
-        <div className={styles.container}>
+        <div className="flex justify-center">
+          <h5 className="text-2xl font-bold text-gray-500">
+            Modificar Afiliado
+          </h5>
+        </div>
+        <div className="modal-content py-4 text-left px-6 ">
           <form
 
             id="updateAffiliate"
           >
-            <div>
-              <label>Teléfono: </label>
-              <input
-                type="number"
-                name="telefono"
-                autoComplete="off"
-                value={updateAffiliateData.telefono}
-                onChange={(e) => handleUpdateAffiliate(e)}
-                placeholder="Ingrese el Teléfono...."
-              />
-            </div>
 
-            <div>
-              <label>E-Mail: </label>
-              <input
-                type="email"
-                name="correoElectronico"
-                autoComplete="off"
-                value={updateAffiliateData.correoElectronico}
-                onChange={(e) => handleUpdateAffiliate(e)}
-                placeholder="Ingrese el E-Mail...."
-              />
-            </div>
+            <div className="flex">
+              <div>
+                <label className="text-md text-gray-600">Teléfono: </label>
+                <input
+                  className="h-2 p-4 w-full border-2 border-gray-300 mb-5 rounded-md"
+                  type="number"
+                  // pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
+                  name="telefono"
+                  autoComplete="off"
+                  value={updateAffiliateData.telefono}
+                  onChange={(e) => handleUpdateAffiliate(e)}
+                  placeholder="Ingrese el Teléfono...."
+                />
+              </div>
 
-            <div>
-              <label>Domicilio: </label>
-              <input
-                type="test"
-                name="direccion"
-                autoComplete="off"
-                value={updateAffiliateData.direccion}
-                onChange={(e) => handleUpdateAffiliate(e)}
-                placeholder="Ingrese el domocilio...."
-              />
-            </div>
+
 
             <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
               <label className="text-lg font-semibold" htmlFor="provincia">
@@ -179,7 +166,22 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
                     </option>
                   ))}
               </select>
+
             </div>
+            <div className="flex">
+              <div>
+                <label className="text-md text-gray-600">Domicilio: </label>
+                <input
+                  className="h-2 p-4 w-full border-2 border-gray-300 mb-3 rounded-md"
+                  type="test"
+                  name="direccion"
+                  autoComplete="off"
+                  value={updateAffiliateData.direccion}
+                  onChange={(e) => handleUpdateAffiliate(e)}
+                  placeholder="Ingrese el domocilio...."
+                />
+              </div>
+
 
             <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
               <label className="text-lg font-semibold" htmlFor="localidad">
@@ -199,7 +201,29 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
                     </option>
                   ))}
               </select>
+
             </div>
+            <div>
+              <div className="flex">
+                <div className="col-span-3 row-span-1 w-full -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
+                  <label className="text-md text-gray-600" htmlFor="provincia">
+                    Provincia{" "}
+                  </label>
+                  <select
+                    value={updateAffiliateData.provinciaID}
+                    onChange={handleChangeProvince}
+                    name="provinciaID"
+                    className="relative block w-full px-1 py-1 my-2 text-sm font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 uppercase mb-3  "
+                    required
+                  >
+                    {provinces &&
+                      provinces.map((p) => (
+                        <option key={p._id} value={p._id}>
+                          {p.nombre}
+                        </option>
+                      ))}
+                  </select>
+                </div>
 
             <select
               id="planes"
@@ -222,19 +246,36 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
           {errors ? (
             <button
               type="submit"
+
               key="submitFormButton"
               form="updateAffiliate"
               disabled={errors}
-              className="disabledButton"
-            >
-              Cargar
-            </button>
-          ) : (
-            <button onClick={(e) => handleSubmitUpdateAffiliate(e)}>
-              Cargar
-            </button>
-          )}
-          <button onClick={() => handleClose()}>Cerrar</button>
+
+                  >
+                    Guardar
+                  </button>
+                ) : (
+                  <button
+                  type="submit" key="submitFormButton" form="updateAffiliate"
+                    className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  >
+                    Guardar
+                  </button>
+                )}
+                <button
+                  onClick={() => handleClose()}
+                  className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                  Cerrar
+                </button>
+              </div>
+              </div>
+            </div>
+            
+          </form>
+
+            
+
         </div>
       </section>
     </div>

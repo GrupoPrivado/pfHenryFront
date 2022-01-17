@@ -147,8 +147,9 @@ const AddPlan = ({ showModalAdd, setShowModalAdd }) => {
         </div>
         <div className="modal-content py-4 text-left px-6 ">
           <form onSubmit={(e) => handleSubmitPlan(e)} id="addPlan">
+            <div className="flex">
             <div>
-              <label className="text-md text-gray-600">Codigo: PLN-</label>
+              <label className="text-md text-gray-600">Codigo:</label>
               <input
                 className="h-2 p-4 mb-2.5 w-full border-2 border-gray-300  rounded-md"
                 type="text"
@@ -172,7 +173,6 @@ const AddPlan = ({ showModalAdd, setShowModalAdd }) => {
                 placeholder="Ingrese el nombre...."
               />
             </div>
-
             <div>
               <label className="text-md text-gray-600">Precio: </label>
               <input
@@ -185,6 +185,56 @@ const AddPlan = ({ showModalAdd, setShowModalAdd }) => {
                 placeholder="Ingrese el precio...."
               />
             </div>
+            </div>
+            <div>
+            <label className="text-md text-gray-600">Tipo: </label>
+            <input
+              className="h-2 p-4  w-full border-2 border-gray-300 mb-2 rounded-md"
+              type="text"
+              name="type"
+              autoComplete="off"
+              value={type}
+              onChange={(e) => handleChangeDescription(e)}
+              placeholder="Ingrese la Descripcion...."
+            />
+
+            <label className="text-md text-gray-600">Descripción: </label>
+            <input
+              className="h-2 p-4  w-full border-2 border-gray-300 mb-2 rounded-md"
+              type="text"
+              name="description"
+              autoComplete="off"
+              value={description}
+              onChange={(e) => handleChangeDescription(e)}
+              placeholder="Ingrese la Descripcion...."
+            />
+
+            <div>
+              {inputPlan.descripcion &&
+                inputPlan.descripcion.map((element, index) => {
+                  return (
+                    <div key={"divDesc" + index}>
+                      <label key={"labelTipo" + index}>{element[0]}: </label>
+                      <label key={"labelDesc" + index}>{element[1]}</label>
+                      <button
+                        value={index}
+                        name={"btnDel" + index}
+                        id={index}
+                        onClick={(e) => handleDeleteDescr(e)}
+                      >
+                        xxxxxxxx
+                      </button>
+                    </div>
+                  );
+                })}
+            </div>
+
+            <button name="descripcion" onClick={(e) => handleAddDescription(e)}>
+              Agregar
+            </button>
+          </div>
+
+           
 
             <div className="flex justify-between ">
               <div className="flex w-1/3 items-center">
@@ -232,53 +282,7 @@ const AddPlan = ({ showModalAdd, setShowModalAdd }) => {
             </div>
           </form>
 
-          <div>
-            <label className="text-md text-gray-600">Tipo: </label>
-            <input
-              className="h-2 p-4  w-full border-2 border-gray-300 mb-5 rounded-md"
-              type="text"
-              name="type"
-              autoComplete="off"
-              value={type}
-              onChange={(e) => handleChangeDescription(e)}
-              placeholder="Ingrese la Descripcion...."
-            />
-
-            <label className="text-md text-gray-600">Descripción: </label>
-            <input
-              className="h-2 p-4  w-full border-2 border-gray-300 mb-5 rounded-md"
-              type="text"
-              name="description"
-              autoComplete="off"
-              value={description}
-              onChange={(e) => handleChangeDescription(e)}
-              placeholder="Ingrese la Descripcion...."
-            />
-
-            <div>
-              {inputPlan.descripcion &&
-                inputPlan.descripcion.map((element, index) => {
-                  return (
-                    <div key={"divDesc" + index}>
-                      <label key={"labelTipo" + index}>{element[0]}: </label>
-                      <label key={"labelDesc" + index}>{element[1]}</label>
-                      <button
-                        value={index}
-                        name={"btnDel" + index}
-                        id={index}
-                        onClick={(e) => handleDeleteDescr(e)}
-                      >
-                        xxxxxxxx
-                      </button>
-                    </div>
-                  );
-                })}
-            </div>
-
-            <button name="descripcion" onClick={(e) => handleAddDescription(e)}>
-              Agregar
-            </button>
-          </div>
+          
         </div>
       </section>
     </div>
