@@ -28,7 +28,7 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
     (state) => state.ABMAdmin
   );
 
-  const [errors, setErrors] = useState(false);
+  const [errors, setErrors] = useState(true);
 
   let [updateAffiliateData, setUpdateAffiliateData] = useState({
     id: "",
@@ -93,10 +93,10 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
       alta: "",
       activo: "",
     });
-    dispatch(getAllAffiliates());
-    dispatch(resetDataUpdate());
-    setErrors(true);
     setShowModalUpdate(false);
+    dispatch(getAllAffiliates());
+    dispatch(resetDataUpdate({}));
+    setErrors(true);
   };
 
   const handleClose = () => {
@@ -111,9 +111,9 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
       alta: "",
       activo: "",
     });
-    dispatch(resetDataUpdate());
-    setErrors(true);
     setShowModalUpdate(false);
+   dispatch(resetDataUpdate({}));
+    setErrors(true);
   };
   const showHideClassName = showModalUpdate ? "displayblock" : "displaynone";
 
@@ -147,18 +147,26 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
               </div>
 
 
-              <div>
-                <label className="text-md text-gray-600">E-Mail: </label>
-                <input
-                  className="h-2 p-4 w-full border-2 border-gray-300 mb-5 rounded-md"
-                  type="email"
-                  name="correoElectronico"
-                  autoComplete="off"
-                  value={updateAffiliateData.correoElectronico}
-                  onChange={(e) => handleUpdateAffiliate(e)}
-                  placeholder="Ingrese el E-Mail...."
-                />
-              </div>
+
+            <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
+              <label className="text-lg font-semibold" htmlFor="provincia">
+                Provincia{" "}
+              </label>
+              <select
+                value={updateAffiliateData.provinciaID._id}
+                onChange={handleChangeProvince}
+                name="provinciaID"
+                className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
+                required
+              >
+                {provinces &&
+                  provinces.map((p) => (
+                    <option key={p._id} value={p._id}>
+                      {p.nombre}
+                    </option>
+                  ))}
+              </select>
+
             </div>
             <div className="flex">
               <div>
@@ -174,28 +182,26 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
                 />
               </div>
 
-              <div className="flex flex-col">
-                <label className="text-md text-gray-600" htmlFor="localidad">
-                  Plan:
-                </label>
-                <select
-                  className="relative block w-full px-1 py-1  text-sm font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 uppercase mb-3  "
-                  id="planes"
-                  name="planID"
-                  onChange={(e) => handleUpdateAffiliate(e)}
-                  value={updateAffiliateData.planID}
-                >
-                  <option value="">Seleccione su Plan</option>
-                  {allPlans &&
-                    allPlans.map((element) => {
-                      return (
-                        <option value={element._id} id={element._id}>
-                          {element.name}
-                        </option>
-                      );
-                    })}
-                </select>
-              </div>
+
+            <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
+              <label className="text-lg font-semibold" htmlFor="localidad">
+                Localidad{" "}
+              </label>
+              <select
+                onChange={(e) => handleUpdateAffiliate(e)}
+                value={updateAffiliateData.ciudadID._id}
+                name="ciudadID"
+                className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
+                required
+              >
+                {cities &&
+                  cities.map((c) => (
+                    <option key={c._id} value={c._id}>
+                      {c.localidad}
+                    </option>
+                  ))}
+              </select>
+
             </div>
             <div>
               <div className="flex">
@@ -219,32 +225,28 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
                   </select>
                 </div>
 
-                <div className="col-span-3 w-full row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1 ">
-                  <label className="text-md text-gray-600" htmlFor="localidad">
-                    Localidad{" "}
-                  </label>
-                  <select
-                    onChange={(e) => handleUpdateAffiliate(e)}
-                    value={updateAffiliateData.ciudadID}
-                    name="ciudadID"
-                    className="relative block w-full px-1 py-1 my-2 text-sm font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 mb-3  "
-                    required
-                  >
-                    {cities &&
-                      cities.map((c) => (
-                        <option key={c._id} value={c._id}>
-                          {c.localidad}
-                        </option>
-                      ))}
-                  </select>
-                </div>
-              </div>
-<div className='flex justify-center my-10'>
-              <div className="flex w-2/3 justify-around" >
-                {errors ? (
-                  <button
-                    className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    type="submit"
+            <select
+              id="planes"
+              name="planID"
+              onChange={(e) => handleUpdateAffiliate(e)}
+              value={updateAffiliateData.planID._id}
+            >
+              <option value="">Seleccione su Plan</option>
+              {allPlans &&
+                allPlans.map((element) => {
+                  return (
+                    <option value={element._id} id={element._id}>
+                      {element.name}
+                    </option>
+                  );
+                })}
+            </select>
+          </form>
+
+          {errors ? (
+            <button
+              type="submit"
+
               key="submitFormButton"
               form="updateAffiliate"
               disabled={errors}
