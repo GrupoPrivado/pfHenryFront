@@ -3,19 +3,18 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Dialog, Transition } from '@headlessui/react'
 import { ExclamationIcon } from '@heroicons/react/outline'
+import  logo  from '../../assets/logo_white_large.png'
 
-function Credencial({toggleClass}) {
+function Credencial({toggleClass, name, lastname, dni, plan}) {
   const [open, setOpen] = useState(true)
   const { user, route } = useSelector((state) => state.auth);
   const cancelButtonRef = useRef(null)
-
-
   // WARNING EN CONSOLA => There are no focusable elements inside the <FocusTrap /> 
 
   return (
     <Transition.Root show={open} as={Fragment}>
-      <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" initialFocus={cancelButtonRef} onClose={setOpen}>
-        <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+      <Dialog as="div" className="fixed inset-0 z-10 overflow-y-auto" initialFocus={cancelButtonRef} onClose={setOpen}>
+        <div className="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -25,7 +24,7 @@ function Credencial({toggleClass}) {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Dialog.Overlay className="fixed inset-0 bg-gray-800 bg-opacity-75 transition-opacity" />
+            <Dialog.Overlay className="fixed inset-0 transition-opacity bg-gray-900 bg-opacity-75" />
           </Transition.Child>
 
           {/* This element is to trick the browser into centering the modal contents. */}
@@ -41,31 +40,23 @@ function Credencial({toggleClass}) {
             leaveFrom="opacity-80 translate-y-0 sm:scale-100"
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
-            <div className="inline-block align-bottom bg-gradient-to-b from-white-rgba to-white-rgba2 rounded-3xl text-center overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full border-t-gray-200 border-t border-l-gray-200 border-l border-solid">
-              <div className="px-4 pt-5 pb-4 sm:p-6 sm:pb-4 w-20">
-                <div className="sm:flex sm:items-center backdrop-filter backdrop-blur-lg">
-                  <div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-                    <svg name='credencial' xmlns="http://www.w3.org/2000/svg" className="h-28 w-28" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-                    </svg>
-                  </div>
-                  <div className="mt-3 text-center sm:mt-0 sm:ml-4 items-center">
-                    <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900">
-                      Credencial
-                    </Dialog.Title>
-                    <div className="mt-2">
-                      <div className="text-sm text-gray-500">
-                      
-                        <p>Nombre: <span>{user.nombre}</span></p>
-                        {/* <hr/> */}
-                        <p>Apellido: <span>{user.apellido}</span></p>
-                        {/* <hr/> */}
-                        <p>DNI: <span>{user.DNI}</span></p>
-                        {/* <hr/> */}
-                        <p>Plan: <span>{user.planID.name}</span></p>
-                      
-                      </div>
+            <div className="inline-block h-full overflow-hidden align-middle transition-all transform border-t border-l border-solid shadow-xl bg-gradient-to-b from-white-rgba to-white-rgba2 rounded-3xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full border-t-gray-200 border-l-gray-200">
+              <div className="px-4 pt-5 pb-5 sm:p-6">
+                <div className="sm:flex backdrop-filter backdrop-blur-lg">
+                  <div className="flex flex-col mt-6 sm:mt-0 sm:ml-4 justify-evenly">
+                      <img src={logo} alt="Logo" className="top-0 self-center w-full pb-8 "/>
+                    <div className="mt-16 pt-14">
+                      <h3 className="absolute pb-4 text-2xl font-normal tracking-widest text-white bottom-20">
+                        Nº AFILIADO {dni}
+                      </h3>
+                      <h3 className="absolute pb-4 text-xl font-normal tracking-widest text-white bottom-8">
+                        NOMBRE {name} {lastname}
+                      </h3>
+                      <h3 className="absolute bottom-0 pt-6 pb-2 text-xl font-normal tracking-widest text-white">
+                        PLAN {plan}
+                      </h3>
                     </div>
+                    <button name="credencial" onClick={toggleClass} className="self-end p-1 bg-white border-2 rounded-md w-14 text-primary hover:bg-primary border-primary hover:text-white hover:border-2 hover:border-white">Cerrar</button>
                   </div>
                 </div>
               </div>
@@ -74,37 +65,9 @@ function Credencial({toggleClass}) {
         </div>
       </Dialog>
     </Transition.Root>
-    // <div name='credencial' onClick={toggleClass} className="fixed z-10 inset-0 overflow-y-auto">
-    //   <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-    //     <div className="flex absolute bg-secondary flex-col">
-    //       <label>{user.nombre}</label>
-    //       <label>{user.apellido}</label>
-    //       <label>{user.DNI}</label>
-    //       <label>{user.codePlan}</label>
-    //     </div>
-    //   </div>
-    // </div>
   )
 }
 
+
+
 export default Credencial;
-// import React from "react";
-// import { useSelector } from "react-redux";
-// import { Link } from "react-router-dom";
-
-// function Credencial() {
-//   const { user, route } = useSelector((state) => state.auth);
-
-//   return (
-//     <div className="absolute w-screen h-screen inset-8">
-//       <div className="flex absolute  bg-secondary flex-col">
-//         <label>{user.nombre}</label>
-//         <label>{user.apellido}</label>
-//         <label>{user.DNI}</label>
-//         <label>{user.codePlan}</label>
-//       </div>
-//     </div>
-//   )
-// }
-
-// export default Credencial;

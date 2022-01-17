@@ -14,6 +14,7 @@ module.exports = {
         'white-rgba': 'rgba(255, 255, 255, 0.4)0%',
         'white-rgba2': 'rgba(255, 255, 255, 0)100%'
       },
+
       width: {
         "40vw" : "40vw",
         "50vw" : "50vw",
@@ -25,6 +26,7 @@ module.exports = {
       screens: {
         xs: "320px"
       }
+
     },
   },
   plugins: [],
