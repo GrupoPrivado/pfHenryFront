@@ -359,6 +359,7 @@ export function getAllPlansData() {
 export function addPlan(payload) {
   return async (dispatch) => {
     const token = getItem("userToken");
+    console.log('<<<<sipatchaddPlan>>>>', payload)
     const { data } = await axios.post(`${api}/admin/addPlan`, payload, {
       headers: {
         "x-access-token": token,
