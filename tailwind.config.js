@@ -12,6 +12,7 @@ module.exports = {
         secondary: '#009872',
         'black-rgba': 'rgba(0, 0, 0, 0.95)'
       },
+      
     },
   },
   plugins: [],
