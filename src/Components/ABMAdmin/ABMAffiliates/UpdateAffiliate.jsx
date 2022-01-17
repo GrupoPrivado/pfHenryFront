@@ -122,14 +122,13 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
         <h5>Modificar Afiliado</h5>
         <div className={styles.container}>
           <form
-            onSubmit={(e) => handleSubmitUpdateAffiliate(e)}
+
             id="updateAffiliate"
           >
             <div>
               <label>Teléfono: </label>
               <input
                 type="number"
-                // pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
                 name="telefono"
                 autoComplete="off"
                 value={updateAffiliateData.telefono}
@@ -231,7 +230,7 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
               Cargar
             </button>
           ) : (
-            <button type="submit" key="submitFormButton" form="updateAffiliate">
+            <button onClick={(e) => handleSubmitUpdateAffiliate(e)}>
               Cargar
             </button>
           )}
