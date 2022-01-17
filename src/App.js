@@ -17,7 +17,7 @@ function App() {
           <Route path='profesionales/*' element={<Profesionales/>} />
         <Route path='*' element={<div><h1>Recurso no encontrado</h1></div>} />
       </Routes>
-        <Footer />
+        {/* <Footer /> */}
     </Fragment>
   );
   

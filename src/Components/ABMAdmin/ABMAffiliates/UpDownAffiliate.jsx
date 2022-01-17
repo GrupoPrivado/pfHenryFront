@@ -104,8 +104,9 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
             ALTA / BAJA Afiliado
           </h5>
         </div>
-        <div className="modal-content py-4 text-left px-6 mt-10 ">
-          <form className=" flex flex-col gap-10"
+        <div className="modal-content py-4 text-left px-6 mt-1 ">
+          <form
+            className=" flex flex-col gap-4"
             onSubmit={(e) => handleSubmitUpdateAffiliate(e)}
             id="upDownAffiliate"
           >
@@ -156,8 +157,37 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
                 </div>
               </div>
             </div>
-            <div className="flex justify-center mt-3">
+            <div className="flex items-center">
+            <div>
               <div>
+                <label className="text-md text-gray-600">Asunto: </label>
+                <input
+                className="h-2 p-4 w-2/3 border-2 border-gray-300 mb-3 rounded-md"
+                  type="text"
+                  name="subject"
+                  autoComplete="off"
+                  value={upDownAffiliateData.subject}
+                  onChange={(e) => handleUpdateAffiliate(e)}
+                  placeholder="Ingrese el asunto...."
+                />
+              </div>
+              <div>
+                <div>
+                  <label className="text-md text-gray-600">Texto: </label>
+                  <input
+                  className="h-6 p-10 w-2/3 border-2 border-gray-300 mb-3 rounded-md"
+                    type="textarea"
+                    name="text"
+                    autoComplete="off"
+                    value={upDownAffiliateData.text}
+                    onChange={(e) => handleUpdateAffiliate(e)}
+                    placeholder="Ingrese el texto...."
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-col gap-10" > 
+              <div >
                 <label className="text-md text-gray-600">Alta: </label>
                 <select
                   name="alta"
@@ -170,7 +200,7 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
                 </select>
               </div>
 
-              <div>
+              <div >
                 <label className="text-md text-gray-600">Activo: </label>
                 <select
                   name="activo"
@@ -182,8 +212,10 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
                   <option value={false}>No</option>
                 </select>
               </div>
+              
             </div>
-            <div className="flex justify-center mt-3 ">
+            </div>
+            <div className="flex justify-center mt-1 ">
               <div className="flex w-2/3 justify-around">
                 {errors ? (
                   <button
@@ -213,30 +245,6 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
                   Cerrar
                 </button>
               </div>
-            </div>
-
-            <div>
-              <label>Asunto: </label>
-              <input
-                type="text"
-                name="subject"
-                autoComplete="off"
-                value={upDownAffiliateData.subject}
-                onChange={(e) => handleUpdateAffiliate(e)}
-                placeholder="Ingrese el asunto...."
-              />
-            </div>
-
-            <div>
-              <label>Texto: </label>
-              <input
-                type="text"
-                name="text"
-                autoComplete="off"
-                value={upDownAffiliateData.text}
-                onChange={(e) => handleUpdateAffiliate(e)}
-                placeholder="Ingrese el texto...."
-              />
             </div>
           </form>
         </div>

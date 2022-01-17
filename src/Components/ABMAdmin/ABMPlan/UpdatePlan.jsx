@@ -81,7 +81,7 @@ const UpdatePlan = ({ setShowModalUpdate, showModalUpdate }) => {
       planActivo: false,
     });
     dispatch(resetDataUpdate());
-    setErrors(true);
+    setErrors(false);
     setShowModalUpdate(false);
   };
 
