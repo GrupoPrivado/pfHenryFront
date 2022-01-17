@@ -168,6 +168,7 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
               </select>
 
             </div>
+            </div>
             <div className="flex">
               <div>
                 <label className="text-md text-gray-600">Domicilio: </label>
@@ -241,8 +242,7 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
                   );
                 })}
             </select>
-          </form>
-
+         
           {errors ? (
             <button
               type="submit"
