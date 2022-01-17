@@ -74,7 +74,7 @@ const AddPharmacy = ({ setShowModalAdd }) => {
       provinciaID: "",
       activo: false,
     });
-    await dispatch(getAllPharmacies());
+    await dispatch(getAllPharmacies({}));
     setErrors(true);
     setShowModalAdd(false);
   };
