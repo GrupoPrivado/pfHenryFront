@@ -188,7 +188,7 @@ export const getAffiliateData = (payload) => {
 export function updateAffiliateAct(payload) {
   return async (dispatch) => {
     const token = getItem("userToken");
-    const { data } = await axios.put(`${api}}/admin/updateAffiliate`, payload, {
+    const { data } = await axios.put(`${api}/admin/updateAffiliate`, payload, {
       headers: {
         "x-access-token": token,
       },
