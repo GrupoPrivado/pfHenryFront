@@ -428,9 +428,19 @@ export function deletePlan(payload) {
 
 /************* Actions Para ABM Profesionales***********/
 
-export function getAllProfessionals() {
+export function getAllProfessionals(payload) {
   return async (dispatch) => {
-    const { data } = await axios.get(`${api}/profesionales`);
+    const token = getItem("userToken");
+    console.log('<<<<<<<<<', payload, '>>>>>>>>>>>>>')
+    const { data } = await axios.get(
+      `${api}/admin/professionals?ciudadID=${payload.ciudadID}&provinciaID=${payload.provinciaID}`,
+      {
+        headers: {
+          "x-access-token": token,
+        },
+      }
+    );
+    console.log('response add prof', data)
     if (data.success) {
       return dispatch({ type: "GET_PROFESSIONALS", payload: data.message });
     } else {
@@ -481,6 +491,44 @@ export function updateProfessional(payload) {
       }
     );
 
+    return data;
+
+    // if(data.success){
+    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
+    // } else {
+    //     return dispatch({type: "ERRORS", payload: data})
+
+    // }
+  };
+}
+
+export function upDownProfessionalAct(payload) {
+  return async (dispatch) => {
+    const token = getItem("userToken");
+    const { data } = await axios.put(`${api}/admin/upDownProfessional`, payload, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
+    console.log('<<<<<<<<<<<<',data,'>>>>>>>>>>>>>>>>>DATA')
+    return data;
+
+    // if(data.success){
+    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
+    // } else {
+    //     return dispatch({type: "ERRORS", payload: data})
+    // }
+  };
+}
+
+export function deleteProfessional(payload) {
+  return async (dispatch) => {
+    const token = getItem("userToken");
+    const { data } = await axios.delete(`${api}/admin/deleteProfessional/${payload}`, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
     return data;
 
     // if(data.success){

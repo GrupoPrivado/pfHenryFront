@@ -26,13 +26,13 @@ const ABMPharmaciesList = ({
     dispatch(getAllProvinces());
   }, []);
 
-  const [filter, setFilter] = useState({ provinciaID: "" });
+  const [filter, setFilter] = useState({ provinciaID: undefined });
 
   const handleChangeProvince = (e) => {
     dispatch(getAllCities(e.target.value));
     if (e.target.value !== "")
       dispatch(getAllPharmacies({ provinciaID: e.target.value }));
-    else dispatch(getAllPharmacies({ provinciaID: e.target.value }));
+    else dispatch(getAllPharmacies({ provinciaID: undefined }));
 
     setFilter({ provinciaID: e.target.value });
   };
