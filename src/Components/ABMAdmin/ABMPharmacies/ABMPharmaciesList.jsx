@@ -141,7 +141,7 @@ const ABMPharmaciesList = ({
                       className=" block w-full  my-2 text-lg font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 appearance-none rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
                       required
                     >
-                      <option value="">Seleccione </option>
+                      <option value="">Todas</option>
                       <option value="Si">Si</option>
                       <option value="No">No</option>
                     </select>
