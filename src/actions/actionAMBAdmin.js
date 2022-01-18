@@ -614,5 +614,12 @@ export const resetDataUpdate = (payload) => {
     payload:payload
   };
 };
+export const filterActiv = (payload) => {
+  console.log('actionfilter', payload)
+  return {
+    type: "FILTER_ACTIV",
+    payload:payload,
+  };
+};
 
 /*************FIN Actions Comunes Para ABM***********/

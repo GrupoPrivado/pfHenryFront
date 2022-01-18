@@ -153,7 +153,7 @@ const AddPharmacy = ({ setShowModalAdd }) => {
               />
             </div>
             <div className="flex">
-              <div>
+              <div className="w-1/2">
                 <label className="text-md text-gray-600">Teléfono: </label>
                 <input
                   className="h-2 p-4 w-full border-2 border-gray-300 mb-1 rounded-md"
@@ -165,62 +165,63 @@ const AddPharmacy = ({ setShowModalAdd }) => {
                   placeholder="Ingrese el Teléfono...."
                 />
               </div>
-
-              <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
-                <label className="text-lg font-semibold" htmlFor="provincia">
-                  Provincia{" "}
-                </label>
-                <select
-                  value={inputPharmacy.provinciaID}
-                  onChange={handleChangeProvince}
-                  name="provinciaID"
-                  className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
-                  required
-                >
-                  <option>Seleccione Provincia</option>
-                  {provinces &&
-                    provinces.map((p) => (
-                      <option key={p._id} value={p._id}>
-                        {p.nombre}
-                      </option>
-                    ))}
-                </select>
-              </div>
-
-              <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
-                <label className="text-lg font-semibold" htmlFor="localidad">
-                  Localidad{" "}
-                </label>
-                <select
+              <div className="w-1/2">
+                <label className="text-md text-gray-600">E-mail: </label>
+                <input
+                  className="h-2 p-4 w-full border-2 border-gray-300 mb-5 rounded-md"
+                  type="mail"
+                  name="mail"
+                  autoComplete="off"
+                  value={inputPharmacy.mail}
                   onChange={(e) => handleChange(e)}
-                  value={inputPharmacy.ciudadID}
-                  name="ciudadID"
-                  className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
-                  required
-                >
-                  <option>Seleccione Localidad</option>
-                  {cities &&
-                    cities.map((c) => (
-                      <option key={c._id} value={c._id}>
-                        {c.localidad}
-                      </option>
-                    ))}
-                </select>
+                  placeholder="Ingrese el E-mail...."
+                />
               </div>
-            </div>
+              </div>
+              <div className="flex">
+                <div className="w-1/2">
+                  <label className="text-md text-gray-600" htmlFor="provincia">
+                    Provincia:{" "}
+                  </label>
+                  <select
+                    value={inputPharmacy.provinciaID}
+                    onChange={handleChangeProvince}
+                    name="provinciaID"
+                    className=" h-1/2 w-full  border-2 border-gray-300 mb-5 rounded-md"
+                    required
+                  >
+                    <option>Seleccione Provincia</option>
+                    {provinces &&
+                      provinces.map((p) => (
+                        <option key={p._id} value={p._id}>
+                          {p.nombre}
+                        </option>
+                      ))}
+                  </select>
+                </div>
+
+                <div className="w-1/2">
+                  <label className="text-md text-gray-600" htmlFor="localidad">
+                    Localidad:{" "}
+                  </label>
+                  <select
+                    onChange={(e) => handleChange(e)}
+                    value={inputPharmacy.ciudadID}
+                    name="ciudadID"
+                    className=" h-1/2 w-full  border-2 border-gray-300 mb-5 rounded-md"
+                    required
+                  >
+                    <option>Seleccione Localidad</option>
+                    {cities &&
+                      cities.map((c) => (
+                        <option key={c._id} value={c._id}>
+                          {c.localidad}
+                        </option>
+                      ))}
+                  </select>
+                </div>
+              </div>
             
-            <div>
-              <label className="text-md text-gray-600">E-mail: </label>
-              <input
-                className="h-2 p-4 w-full border-2 border-gray-300 mb-5 rounded-md"
-                type="mail"
-                name="mail"
-                autoComplete="off"
-                value={inputPharmacy.mail}
-                onChange={(e) => handleChange(e)}
-                placeholder="Ingrese el E-mail...."
-              />
-            </div>
 
             <div className="flex justify-between">
               <div className="flex w-1/3 items-center">

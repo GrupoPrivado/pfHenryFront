@@ -136,7 +136,7 @@ const UpdatePharmacy = ({ setShowModalUpdate, showModalUpdate }) => {
                 placeholder="Ingrese el E-mail...."
               />
             </div>
-
+            
             <div className="flex justify-between">
               <div className="flex w-1/3 items-center">
                 <label className="text-md text-gray-600">Activo: </label>
@@ -152,8 +152,8 @@ const UpdatePharmacy = ({ setShowModalUpdate, showModalUpdate }) => {
                   <option value="true">Si</option>
                 </select>
               </div>
-            </div>
-          </form>
+            
+          
           <div className="flex w-2/3 justify-around">
             {errors ? (
               <button
@@ -178,7 +178,10 @@ const UpdatePharmacy = ({ setShowModalUpdate, showModalUpdate }) => {
               Cerrar
             </button>
           </div>
+          </div>
+          </form>
         </div>
+        
       </section>
     </div>
   );
