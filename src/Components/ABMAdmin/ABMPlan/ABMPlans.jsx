@@ -33,17 +33,19 @@ const ABMPlans = () => {
         setShowModalAdd={setShowModalAdd}
       />
 
-      { showModalAdd && (
+      {showModalAdd && (
         <AddPlan
           showModalAdd={showModalAdd}
           setShowModalAdd={setShowModalAdd}
         />
       )}
 
-      <UpdatePlan
-        showModalUpdate={showModalUpdate}
-        setShowModalUpdate={setShowModalUpdate}
-      />
+      {showModalUpdate && (
+        <UpdatePlan
+          showModalUpdate={showModalUpdate}
+          setShowModalUpdate={setShowModalUpdate}
+        />
+      )}
     </div>
   );
 };

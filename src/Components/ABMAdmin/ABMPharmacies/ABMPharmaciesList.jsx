@@ -26,13 +26,22 @@ const ABMPharmaciesList = ({
     dispatch(getAllProvinces());
   }, []);
 
+  const [filter, setFilter] = useState({ provinciaID: "" });
+
   const handleChangeProvince = (e) => {
     dispatch(getAllCities(e.target.value));
-    dispatch(getAllPharmacies({provinciaID:e.target.value}));
+    if (e.target.value !== "")
+      dispatch(getAllPharmacies({ provinciaID: e.target.value }));
+    else dispatch(getAllPharmacies({ provinciaID: e.target.value }));
+
+    setFilter({ provinciaID: e.target.value });
   };
 
   const handleChangeCity = (e) => {
-    dispatch(getAllPharmacies({ciudadID:e.target.value}));
+    console.log(e.target.value);
+    if (e.target.value !== "")
+      dispatch(getAllPharmacies({ ciudadID: e.target.value }));
+    else dispatch(getAllPharmacies(filter));
   };
 
   const handleEditPharmacy = async (event) => {
@@ -73,6 +82,7 @@ const ABMPharmaciesList = ({
                     className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
                     required
                   >
+                    <option value="">Seleccione Provincia</option>
                     {provinces &&
                       provinces.map((p) => (
                         <option key={p._id} value={p._id}>
@@ -92,6 +102,7 @@ const ABMPharmaciesList = ({
                     className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
                     required
                   >
+                    <option value="">Seleccione Localidad</option>
                     {cities &&
                       cities.map((c) => (
                         <option key={c._id} value={c._id}>
@@ -138,13 +149,18 @@ const ABMPharmaciesList = ({
                                 <span>{element.direccion}</span>
                               </div>
                               <div class="w-1/6 flex justify-center ">
+                                <span>{element.ciudadID.localidad}</span>
+                              </div>
+                              <div class="w-1/6 flex justify-center ">
+                                <span>{element.provinciaID.nombre}</span>
+                              </div>
+                              <div class="w-1/6 flex justify-center ">
                                 <span>{element.apellido}</span>
                               </div>
                               <div class="w-1/6 flex justify-center "></div>
                               <div class="w-1/6 flex justify-center ">
-                                <span>{element.activa ? "Si" : "No"}</span>
+                                <span>{element.activo ? "Si" : "No"}</span>
                               </div>
-
                               <div class="w-1/6 flex justify-around ">
                                 <button
                                   key={"delete" + element._id}

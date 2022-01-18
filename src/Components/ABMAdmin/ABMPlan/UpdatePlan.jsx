@@ -42,7 +42,7 @@ const UpdatePlan = ({ setShowModalUpdate, showModalUpdate }) => {
       descripcion: updateData.descripcion,
       planActivo: updateData.planActivo,
     });
-    functionErrors(updatePlanData)
+    functionErrors(updatePlanData);
   }, [updateData, dispatch]);
 
   const [type, setTypeArr] = useState("");
@@ -57,6 +57,8 @@ const UpdatePlan = ({ setShowModalUpdate, showModalUpdate }) => {
       ...updatePlanData,
       descripcion: newDesc,
     });
+
+    setErrors(functionErrors(updatePlanData));
   };
 
   const handleChangeDescription = (event) => {
@@ -81,6 +83,7 @@ const UpdatePlan = ({ setShowModalUpdate, showModalUpdate }) => {
       });
       setTypeArr("");
       setdescriptionArr("");
+      setErrors(functionErrors(updatePlanData));
     }
   };
 
@@ -125,10 +128,8 @@ const UpdatePlan = ({ setShowModalUpdate, showModalUpdate }) => {
     setErrors(false);
   };
 
-  const showHideClassName = showModalUpdate ? "displayblock" : "displaynone";
-
   return (
-    <div className={styles[showHideClassName]}>
+    <div>
       <section className={styles.modalmain}>
         <div className="flex justify-center">
           <h5 className="text-2xl font-bold text-gray-500">Editar Plan</h5>
@@ -170,29 +171,15 @@ const UpdatePlan = ({ setShowModalUpdate, showModalUpdate }) => {
               <div className="flex w-1/3 items-center">
                 <label className="text-md text-gray-600">Activo: </label>
                 <select
-                  id="activa"
+                  id="activo"
                   name="planActivo"
                   onChange={(e) => handleUpdatePlan(e)}
+                  value={updatePlanData.planActivo}
                   defaultValue={0}
                 >
-                  <option
-                    value=""
-                    selected={updatePlanData.planActivo === false}
-                  >
-                    Seleccione
-                  </option>
-                  <option
-                    value="false"
-                    selected={updatePlanData.planActivo === false}
-                  >
-                    No
-                  </option>
-                  <option
-                    value="true"
-                    selected={updatePlanData.planActivo === true}
-                  >
-                    Si
-                  </option>
+                  <option value="">Seleccione</option>
+                  <option value="false">No</option>
+                  <option value="true">Si</option>
                 </select>
               </div>
             </div>

@@ -239,6 +239,7 @@ export function getAllPlans() {
 export function getAllPharmacies(payload) {
   return async (dispatch) => {
     const token = getItem("userToken");
+    console.log('<<<<<<<<<', payload, '>>>>>>>>>>>>>')
     const { data } = await axios.get(
       `${api}/admin/farmacias?ciudadID=${payload.ciudadID}&provinciaID=${payload.provinciaID}`,
       {
