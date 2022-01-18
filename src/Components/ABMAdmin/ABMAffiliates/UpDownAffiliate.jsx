@@ -35,6 +35,7 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
     titularGF: "",
     subject: "",
     text: "",
+    DNI:""
   });
 
   useEffect(() => {
@@ -45,6 +46,7 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
       titularGF: updateData.titularGF,
       grupoFamiliar: updateData.grupoFamiliar || false,
       grupFamID: updateData.grupFamID || false,
+      DNI:updateData.DNI
     });
   }, [updateData, dispatch]);
 
@@ -72,11 +74,12 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
       titularGF: "",
       subject: "",
       text: "",
+      DNI:""
     });
-    await dispatch(getAllAffiliates());
+    setShowModalUpDown(false);
+    dispatch(getAllAffiliates());
     dispatch(resetDataUpdate());
     setErrors(true);
-    setShowModalUpDown(false);
   };
 
   const handleClose = () => {
@@ -89,10 +92,11 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
       titularGF: "",
       subject: "",
       text: "",
+      DNI:""
     });
+    setShowModalUpDown(false);
     dispatch(resetDataUpdate());
     setErrors(true);
-    setShowModalUpDown(false);
   };
   const showHideClassName = showModalUpDown ? "displayblock" : "displaynone";
 

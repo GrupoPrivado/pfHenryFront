@@ -49,6 +49,7 @@ const AddAffiliate = ({ setShowModalAdd }) => {
     password: "",
     alta: "",
     activo: "",
+    parentesco:"titular"
   });
 
   useEffect(() => {
@@ -113,10 +114,11 @@ const AddAffiliate = ({ setShowModalAdd }) => {
       password: "",
       alta: "",
       activo: "",
+      parentesco:"titular"
     });
-    await dispatch(getAllAffiliates());
-    setErrors(true);
     setShowModalAdd(false);
+    dispatch(getAllAffiliates());
+    setErrors(true);
   };
 
   const handleClose = () => {
@@ -134,9 +136,10 @@ const AddAffiliate = ({ setShowModalAdd }) => {
       password: "",
       alta: "",
       activo: "",
+      parentesco:"titular"
     });
-    setErrors(true);
     setShowModalAdd(false);
+    setErrors(true);
   };
 
   return (
@@ -144,7 +147,7 @@ const AddAffiliate = ({ setShowModalAdd }) => {
       <section className={styles.modalmain}>
         <h5>Agregar Nuevo Afiliado</h5>
         <div className={styles.container}>
-          <form onSubmit={(e) => handleSubmitAffiliate(e)} id="addAffiliate">
+          <form>
             <div>
               <label>Nombre: </label>
               <input
@@ -240,6 +243,7 @@ const AddAffiliate = ({ setShowModalAdd }) => {
                 className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
                 required
               >
+                <option>Seleccione Provincia</option>
                 {provinces &&
                   provinces.map((p) => (
                     <option key={p._id} value={p._id}>
@@ -260,6 +264,7 @@ const AddAffiliate = ({ setShowModalAdd }) => {
                 className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
                 required
               >
+                <option>Seleccione Localidad</option>
                 {cities &&
                   cities.map((c) => (
                     <option key={c._id} value={c._id}>
@@ -327,16 +332,14 @@ const AddAffiliate = ({ setShowModalAdd }) => {
 
           {errors ? (
             <button
-              type="submit"
-              key="submitFormButton"
-              form="addAffiliate"
+        
               disabled={errors}
               className="disabledButton"
             >
               Cargar
             </button>
           ) : (
-            <button type="submit" key="submitFormButton" form="addAffiliate">
+            <button onClick={handleSubmitAffiliate}>
               Cargar
             </button>
           )}
@@ -347,11 +350,10 @@ const AddAffiliate = ({ setShowModalAdd }) => {
         </div>
       </section>
 
-      <AddAdherent
-        handleAddAdherent={handleAddAdherent}
+      {handleAddAdherent && <AddAdherent
         showModalAdherent={showModalAdherent}
         setShowModalAdherent={setShowModalAdherent}
-      />
+      />}
     </div>
   );
 };
