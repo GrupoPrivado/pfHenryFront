@@ -3,7 +3,12 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { addPharmacy, getAllCities, getAllPharmacies, getAllProvinces } from "../../../actions/actionAMBAdmin";
+import {
+  addPharmacy,
+  getAllCities,
+  getAllPharmacies,
+  getAllProvinces,
+} from "../../../actions/actionAMBAdmin";
 
 import styles from "./addPharmacy.module.css";
 
@@ -36,7 +41,7 @@ const AddPharmacy = ({ setShowModalAdd }) => {
     numHabilitacion: 0,
     ciudadID: "",
     provinciaID: "",
-    activo: false,
+    activo: "",
   });
 
   const handleChange = (event) => {
@@ -72,9 +77,9 @@ const AddPharmacy = ({ setShowModalAdd }) => {
       numHabilitacion: 0,
       ciudadID: "",
       provinciaID: "",
-      activo: false,
+      activo: "",
     });
-    await dispatch(getAllPharmacies({}));
+    dispatch(getAllPharmacies({}));
     setErrors(true);
     setShowModalAdd(false);
   };
@@ -88,7 +93,7 @@ const AddPharmacy = ({ setShowModalAdd }) => {
       numHabilitacion: 0,
       ciudadID: "",
       provinciaID: "",
-      activo: false,
+      activo: "",
     });
     setErrors(true);
     setShowModalAdd(false);
@@ -104,7 +109,7 @@ const AddPharmacy = ({ setShowModalAdd }) => {
         </div>
 
         <div className="modal-content py-4 text-left px-6 ">
-          <form onSubmit={(e) => handleSubmitPharmacy(e)} id="addPharmacy">
+          <form>
             <div className="flex">
               <div className=" w-1/2">
                 <label className="text-md text-gray-600">Nombre: </label>
@@ -172,6 +177,7 @@ const AddPharmacy = ({ setShowModalAdd }) => {
                   className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
                   required
                 >
+                  <option>Seleccione Provincia</option>
                   {provinces &&
                     provinces.map((p) => (
                       <option key={p._id} value={p._id}>
@@ -192,6 +198,7 @@ const AddPharmacy = ({ setShowModalAdd }) => {
                   className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
                   required
                 >
+                  <option>Seleccione Localidad</option>
                   {cities &&
                     cities.map((c) => (
                       <option key={c._id} value={c._id}>
@@ -205,7 +212,7 @@ const AddPharmacy = ({ setShowModalAdd }) => {
               <label className="text-md text-gray-600">E-mail: </label>
               <input
                 className="h-2 p-4 w-full border-2 border-gray-300 mb-5 rounded-md"
-                type="text"
+                type="mail"
                 name="mail"
                 autoComplete="off"
                 value={inputPharmacy.mail}
@@ -218,11 +225,12 @@ const AddPharmacy = ({ setShowModalAdd }) => {
               <div className="flex w-1/3 items-center">
                 <label className="text-md text-gray-600">Activo: </label>
                 <select
-                  id="activa"
-                  name="activa"
+                  id="activo"
+                  name="activo"
                   onChange={(e) => handleChange(e)}
                   defaultValue={0}
                 >
+                  <option value="">Seleccione</option>
                   <option value="false">No</option>
                   <option value="true">Si</option>
                 </select>
@@ -240,9 +248,8 @@ const AddPharmacy = ({ setShowModalAdd }) => {
                   </button>
                 ) : (
                   <button
-                    type="submit"
                     key="submitFormButton"
-                    form="addPharmacy"
+                    onClick={handleSubmitPharmacy}
                     className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   >
                     Guardar

@@ -30,7 +30,7 @@ const AddPlan = ({ showModalAdd, setShowModalAdd }) => {
     name: "",
     codePlan: "",
     precio: "",
-    planActivo: false,
+    planActivo: '',
     descripcion: [],
   });
 
@@ -91,7 +91,7 @@ const AddPlan = ({ showModalAdd, setShowModalAdd }) => {
       name: "",
       codePlan: "",
       precio: "",
-      planActivo: false,
+      planActivo: '',
       descripcion: [],
     });
     await dispatch(getAllPlansData());
@@ -104,7 +104,7 @@ const AddPlan = ({ showModalAdd, setShowModalAdd }) => {
       name: "",
       codePlan: "",
       precio: "",
-      planActivo: false,
+      planActivo: '',
       descripcion: [],
     });
     setShowModalAdd(false);
