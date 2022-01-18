@@ -19,7 +19,6 @@ const functionErrors = (data) => {
 
 const AddAdherent = ({
   handleAddAdherent,
-  showModalAdherent,
   setShowModalAdherent,
 }) => {
   const dispatch = useDispatch();
@@ -27,8 +26,6 @@ const AddAdherent = ({
   const { cities, provinces } = useSelector((state) => state.ABMAdmin);
 
   const [errors, setErrors] = useState(true);
-
-  const showHideClassName = showModalAdherent ? "displayblock" : "displaynone";
 
   const arrParentesco = [
     { display: "Hijo/a", value: "hijo" },
@@ -76,6 +73,7 @@ const AddAdherent = ({
     });
     setShowModalAdherent(false);
   };
+
   const handleChange = (event) => {
     let newAdherent = {
       ...inputAdherent,
@@ -107,7 +105,7 @@ const AddAdherent = ({
   };
 
   return (
-    <div className={styles[showHideClassName]}>
+    <div>
       <section className={styles.modalmain}>
         <h5>Agregar Nuevo Adherente</h5>
         <div className={styles.container}>
@@ -209,6 +207,7 @@ const AddAdherent = ({
                 className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
                 required
               >
+                <option>Seleccione Provincia</option>
                 {provinces &&
                   provinces.map((p) => (
                     <option key={p._id} value={p._id}>
@@ -229,6 +228,7 @@ const AddAdherent = ({
                 className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
                 required
               >
+                <option>Seleccione Localidad</option>
                 {cities &&
                   cities.map((c) => (
                     <option key={c._id} value={c._id}>

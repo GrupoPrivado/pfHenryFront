@@ -211,6 +211,7 @@ export function upDownAffiliateAct(payload) {
         "x-access-token": token,
       },
     });
+    console.log('<<<<<<<<<<<<',data,'>>>>>>>>>>>>>>>>>DATA')
     return data;
 
     // if(data.success){
