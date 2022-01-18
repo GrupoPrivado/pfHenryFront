@@ -23,16 +23,18 @@ const ABMSpecialities = () => {
 
   return (
     <div>
-      
-
-      <ABMSpecialitiesList showModalAdd={showModalAdd} setShowModalAdd={setShowModalAdd} allSpecialities={allSpecialities} setShowModalUpdate={setShowModalUpdate}/>
-
-      <AddSpeciality showModalAdd={showModalAdd} setShowModalAdd={setShowModalAdd} />
-
-      <UpdateSpeciality
-        showModalUpdate={showModalUpdate}
+      <ABMSpecialitiesList
+        showModalAdd={showModalAdd}
+        setShowModalAdd={setShowModalAdd}
+        allSpecialities={allSpecialities}
         setShowModalUpdate={setShowModalUpdate}
       />
+
+      {showModalAdd && <AddSpeciality setShowModalAdd={setShowModalAdd} />}
+
+      {showModalUpdate && (
+        <UpdateSpeciality setShowModalUpdate={setShowModalUpdate} />
+      )}
     </div>
   );
 };
