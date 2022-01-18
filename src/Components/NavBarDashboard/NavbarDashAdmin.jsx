@@ -35,7 +35,7 @@ export default function NavbarDashAdmin({ showSidebar, setShowSidebar }) {
       <rect y="30" width="100" height="10"></rect>
       <rect y="60" width="100" height="10"></rect>
     </svg> */}
-          <div className="px-0 mx-auto max-w-7xl sm:px-6 lg:px-4 z-50">
+          <div className="mx-auto sm:px-6 lg:px-4 z-50">
             <div className="relative flex items-center justify-between h-16 ">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
