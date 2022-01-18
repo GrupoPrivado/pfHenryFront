@@ -11,7 +11,7 @@ import {
   getAllProfessionals,
 } from "../../../actions/actionAMBAdmin";
 
-import styles from "./AddProfessional.module.css";
+import styles from "./AddEmployee.module.css";
 
 const functionErrors = (data) => {
   const arrayKeys = Object.keys(data);
@@ -83,9 +83,9 @@ const AddEmployee = ({ setShowModalAdd }) => {
               <label>Nombre: </label>
               <input
                 type="text"
-                name="nombre"
+                name="name"
                 autoComplete="off"
-                value={inputProfessional.nombre}
+                value={inputEmployeeData.name}
                 onChange={(e) => handleChange(e)}
                 placeholder="Ingrese el nombre...."
               />
@@ -95,35 +95,23 @@ const AddEmployee = ({ setShowModalAdd }) => {
               <label>Apellido: </label>
               <input
                 type="text"
-                name="apellido"
+                name="lastName"
                 autoComplete="off"
-                value={inputProfessional.apellido}
+                value={inputEmployeeData.lastName}
                 onChange={(e) => handleChange(e)}
                 placeholder="Ingrese el apellido...."
               />
             </div>
 
             <div>
-              <label>DNI: </label>
+              <label>Legajo: </label>
               <input
                 type="number"
-                name="DNI"
+                name="legajo"
                 autoComplete="off"
-                value={inputProfessional.DNI}
+                value={inputEmployeeData.legajo}
                 onChange={(e) => handleChange(e)}
-                placeholder="Ingrese el DNI...."
-              />
-            </div>
-
-            <div>
-              <label>Matrícula: </label>
-              <input
-                type="number"
-                name="matricula"
-                autoComplete="off"
-                value={inputProfessional.matricula}
-                onChange={(e) => handleChange(e)}
-                placeholder="Ingrese la Matrícula...."
+                placeholder="Ingrese el legajo...."
               />
             </div>
 
@@ -133,7 +121,7 @@ const AddEmployee = ({ setShowModalAdd }) => {
                 type="number"
                 name="telefono"
                 autoComplete="off"
-                value={inputProfessional.telefono}
+                value={inputEmployeeData.telefono}
                 onChange={(e) => handleChange(e)}
                 placeholder="Ingrese el Teléfono...."
               />
@@ -145,72 +133,10 @@ const AddEmployee = ({ setShowModalAdd }) => {
                 type="text"
                 name="mail"
                 autoComplete="off"
-                value={inputProfessional.mail}
+                value={inputEmployeeData.email}
                 onChange={(e) => handleChange(e)}
                 placeholder="Ingrese el e-mail...."
               />
-            </div>
-
-            <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
-              <label className="text-lg font-semibold" htmlFor="provincia">
-                Provincia{" "}
-              </label>
-              <select
-                value={inputProfessional.provinciaID}
-                onChange={handleChangeProvince}
-                name="provinciaID"
-                className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
-                required
-              >
-                <option>Seleccione Provincia</option>
-                {provinces &&
-                  provinces.map((p) => (
-                    <option key={p._id} value={p._id}>
-                      {p.nombre}
-                    </option>
-                  ))}
-              </select>
-            </div>
-
-            <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
-              <label className="text-lg font-semibold" htmlFor="localidad">
-                Localidad{" "}
-              </label>
-              <select
-                onChange={(e) => handleChange(e)}
-                value={inputProfessional.ciudadID}
-                name="ciudadID"
-                className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
-                required
-              >
-                <option>Seleccione Localidad</option>
-                {cities &&
-                  cities.map((c) => (
-                    <option key={c._id} value={c._id}>
-                      {c.localidad}
-                    </option>
-                  ))}
-              </select>
-            </div>
-
-            <div>
-              <select
-                id="especialities"
-                name="especID"
-                onChange={(e) => handleChange(e)}
-              >
-                <option value="">Seleccione la Especialidad</option>
-                {allSpecialities &&
-                  allSpecialities.map((element) => {
-                    if (element.activa) {
-                      return (
-                        <option value={element._id} id={element._id}>
-                          {element.nombre}
-                        </option>
-                      );
-                    }
-                  })}
-              </select>
             </div>
 
             <div>
@@ -226,7 +152,7 @@ const AddEmployee = ({ setShowModalAdd }) => {
           {errors ? (
             <button disabled={errors}>Cargar</button>
           ) : (
-            <button onClick={(e) => handleSubmitProfessional(e)}>Cargar</button>
+            <button onClick={(e) => handleSubmitEmployee(e)}>Cargar</button>
           )}
           <button onClick={() => handleClose()}>Cerrar</button>
         </div>

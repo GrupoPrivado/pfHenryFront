@@ -3,11 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
 import {
-  updateProfessional,
-  getAllProfessionals,
+  getAllEmployees,
   resetDataUpdate,
-  getAllProvinces,
-  getAllCities,
+  updateEmployee
 } from "../../../actions/actionAMBAdmin";
 
 import styles from "./UpdateProfessional.module.css";
@@ -24,77 +22,50 @@ const functionErrors = (data) => {
 
 const UpdateEmployee = ({ setShowModalUpdate }) => {
   const dispatch = useDispatch();
-  const { updateData, cities, provinces } = useSelector(
-    (state) => state.ABMAdmin
-  );
+  const { updateData } = useSelector((state) => state.ABMAdmin);
 
   const [errors, setErrors] = useState(false);
 
-  let [updateProfessionalData, setUpdateProfessionalData] = useState({
+  const inputEmployeeData = {
     _id: "",
     telefono: "",
     mail: "",
-    ciudadID: "",
-    provinciaID: "",
-  });
+  };
+
+  let [updateEmployeeData, setUpdateEmployeeData] = useState(inputEmployeeData);
 
   useEffect(() => {
-    setUpdateProfessionalData({
+    setUpdateEmployeeData({
       _id: updateData._id,
       telefono: updateData.telefono,
       mail: updateData.mail,
-      ciudadID: updateData.ciudadID._id,
-      provinciaID: updateData.provinciaID._id,
     });
-    dispatch(getAllProvinces());
-    dispatch(getAllCities(updateData.provinciaID._id));
-  }, [updateData, dispatch]);
+  }, [updateData]);
 
-  const handleUpdateProfessional = async (event) => {
-    let updatedProfessional = {
-      ...updateProfessionalData,
+  const handleUpdateEmployee = async (event) => {
+    let updatedEmployee = {
+      ...updateEmployeeData,
       [event.target.name]: event.target.value,
     };
 
-    setUpdateProfessionalData(updatedProfessional);
+    setUpdateEmployeeData(updatedEmployee);
 
-    setErrors(functionErrors(updatedProfessional));
+    setErrors(functionErrors(updatedEmployee));
   };
 
-  const handleChangeProvince = (e) => {
-    const newData = {
-      ...updateProfessionalData,
-      provinciaID: e.target.value,
-    };
-    dispatch(getAllCities(newData.provinciaID));
-    setUpdateProfessionalData(newData);
-  };
-
-  const handleSubmitUpdateProfessional = async (event) => {
+  const handleSubmitUpdateEmployee = async (event) => {
     event.preventDefault();
-    let response = await dispatch(updateProfessional(updateProfessionalData));
+    let response = await dispatch(updateEmployee(updateEmployeeData));
     alert(response.success);
-    setUpdateProfessionalData({
-      _id: "",
-      telefono: "",
-      mail: "",
-      ciudadID: "",
-      provinciaID: "",
-    });
+    setUpdateEmployeeData(inputEmployeeData);
     setShowModalUpdate(false);
-    dispatch(getAllProfessionals());
+    dispatch(getAllEmployees());
     dispatch(resetDataUpdate());
     setErrors(true);
   };
 
   const handleClose = () => {
-    setUpdateProfessionalData({
-      _id: "",
-      telefono: "",
-      mail: "",
-      ciudadID: "",
-      provinciaID: "",
-    });
+    setUpdateEmployeeData(inputEmployeeData);
     setShowModalUpdate(false);
     dispatch(resetDataUpdate());
     setErrors(true);
@@ -103,7 +74,7 @@ const UpdateEmployee = ({ setShowModalUpdate }) => {
   return (
     <div>
       <section className={styles.modalmain}>
-        <h5>Modificar Profesional</h5>
+        <h5>Modificar Empleado</h5>
         <div className={styles.container}>
           <form>
             <div>
@@ -112,8 +83,8 @@ const UpdateEmployee = ({ setShowModalUpdate }) => {
                 type="number"
                 name="telefono"
                 autoComplete="off"
-                value={updateProfessionalData.telefono}
-                onChange={(e) => handleUpdateProfessional(e)}
+                value={updateEmployeeData.telefono}
+                onChange={(e) => handleUpdateEmployee(e)}
                 placeholder="Ingrese el Teléfono...."
               />
             </div>
@@ -124,56 +95,11 @@ const UpdateEmployee = ({ setShowModalUpdate }) => {
                 type="email"
                 name="mail"
                 autoComplete="off"
-                value={updateProfessionalData.mail}
-                onChange={(e) => handleUpdateProfessional(e)}
+                value={updateEmployeeData.mail}
+                onChange={(e) => handleUpdateEmployee(e)}
                 placeholder="Ingrese el E-Mail...."
               />
             </div>
-
-            <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
-              <label className="text-lg font-semibold" htmlFor="localidad">
-                Localidad{" "}
-              </label>
-              <select
-                onChange={handleUpdateProfessional}
-                value={updateProfessionalData.ciudadID}
-                name="ciudadID"
-                className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
-                defaultValue={updateProfessionalData.ciudadID}
-              >
-                <option>Seleccione Localidad</option>
-                {cities &&
-                  cities.map((c) => (
-                    <option key={c._id} value={c._id}>
-                      {c.localidad}
-                    </option>
-                  ))}
-              </select>
-            </div>
-
-            <div className="col-span-3 row-span-1 w-full -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
-              <label className="text-md text-gray-600" htmlFor="provincia">
-                Provincia{" "}
-              </label>
-              <select
-                value={updateProfessionalData.provinciaID}
-                onChange={handleChangeProvince}
-                name="provinciaID"
-                className="relative block w-full px-1 py-1 my-2 text-sm font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 uppercase mb-3  "
-                required
-                defaultValue={updateProfessionalData.provinciaID}
-              >
-                <option>Seleccione Provincia</option>
-                {provinces &&
-                  provinces.map((p) => (
-                    <option key={p._id} value={p._id}>
-                      {p.nombre}
-                    </option>
-                  ))}
-              </select>
-            </div>
-
-           
           </form>
 
           {errors ? (
@@ -181,7 +107,7 @@ const UpdateEmployee = ({ setShowModalUpdate }) => {
               Cargar
             </button>
           ) : (
-            <button onClick={handleSubmitUpdateProfessional}>Cargar</button>
+            <button onClick={handleSubmitUpdateEmployee}>Cargar</button>
           )}
           <button onClick={() => handleClose()}>Cerrar</button>
         </div>

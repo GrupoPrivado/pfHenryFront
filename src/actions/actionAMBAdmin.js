@@ -657,7 +657,7 @@ export const getEmployeeData = (payload) => {
   };
 };
 
-export function updateEmployee(payload) {
+export function UpdateEmployee(payload) {
   return async (dispatch) => {
 
     const token = getItem("userToken");
