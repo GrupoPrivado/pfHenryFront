@@ -84,12 +84,12 @@ const UpdateSpeciality = ({ setShowModalUpdate }) => {
   return (
     <div>
       <section className={styles.modalmain}>
-        <div className="flex justify-center">
+        <div className="flex justify-center h-10%">
           <h5 className="text-2xl font-bold text-gray-500">
             Modificar Especialidad
           </h5>
         </div>
-        <div className="modal-content py-4 text-left px-6 ">
+        <div className="modal-content py-4 text-left px-6 h-90%">
           <form>
             <div>
               <label className="text-md text-gray-600">Nombre: </label>
@@ -117,7 +117,7 @@ const UpdateSpeciality = ({ setShowModalUpdate }) => {
               />
             </div>
 
-            <div className="flex justify-between">
+            <div className="flex justify-between items-end mt-8">
               <div className="flex w-1/3 items-center">
                 <label className="text-md text-gray-600">Activo: </label>
                 <select
@@ -133,7 +133,7 @@ const UpdateSpeciality = ({ setShowModalUpdate }) => {
                 </select>
               </div>
 
-              <div className="flex w-2/3 justify-around">
+              <div className="flex w-2/3 justify-around  ">
                 {errors ? (
                   <button
                     className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"

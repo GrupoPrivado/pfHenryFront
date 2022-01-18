@@ -71,12 +71,12 @@ const AddSpeciality = ({ setShowModalAdd }) => {
   return (
     <div>
       <section className={styles.modalmain}>
-        <div className="flex justify-center">
+        <div className="flex justify-center h-10%">
           <h5 className="text-2xl font-bold text-gray-500">
             Agregar Nueva Especialidad
           </h5>
         </div>
-        <div className="modal-content py-4 text-left px-6 ">
+        <div className="modal-content py-4 text-left px-6 h-90% ">
           <form onSubmit={(e) => handleSubmitSpeciality(e)} id="addSpeciality">
             <div>
               <label className="text-md text-gray-600">Nombre: </label>
@@ -103,7 +103,7 @@ const AddSpeciality = ({ setShowModalAdd }) => {
                 placeholder="Ingrese la Descripcion...."
               />
             </div>
-            <div className="flex justify-between">
+            <div className="flex justify-between mt-8">
               <div className="flex w-1/3 items-center">
                 <label className="text-md text-gray-600">Activo: </label>
                 <select
