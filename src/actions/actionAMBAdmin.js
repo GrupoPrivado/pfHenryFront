@@ -188,7 +188,7 @@ export const getAffiliateData = (payload) => {
 export function updateAffiliateAct(payload) {
   return async (dispatch) => {
     const token = getItem("userToken");
-    const { data } = await axios.put(`${api}}/admin/updateAffiliate`, payload, {
+    const { data } = await axios.put(`${api}/admin/updateAffiliate`, payload, {
       headers: {
         "x-access-token": token,
       },
@@ -359,6 +359,7 @@ export function getAllPlansData() {
 export function addPlan(payload) {
   return async (dispatch) => {
     const token = getItem("userToken");
+    console.log('<<<<sipatchaddPlan>>>>', payload)
     const { data } = await axios.post(`${api}/admin/addPlan`, payload, {
       headers: {
         "x-access-token": token,
@@ -557,9 +558,10 @@ export function updatePrescription(payload) {
 /************* FIN Actions Para ABM Prescripciones***********/
 
 /*************Actions Comunes Para ABM***********/
-export const resetDataUpdate = () => {
+export const resetDataUpdate = (payload) => {
   return {
     type: "DATA_RESET",
+    payload:payload
   };
 };
 

@@ -86,7 +86,12 @@ export default function FormAddAsociateGroup({
     dispatch(getAllCities(newData.provinciaID));
     setInput(newData);
   };
-
+//    position: fixed;
+// top: 0;
+// left: 0;
+// width:75%;
+// height: 75%;
+// background: rgba(0, 0, 0, 0.6);
   return (
     <div className='flex items-center justify-center w-full px-4 py-6 sm:px-6 lg:px-8'>
       <div className="fixed flex justify-center items-center inset-0 transition-opacity bg-gray-900 bg-opacity-90">

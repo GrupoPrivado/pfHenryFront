@@ -27,9 +27,18 @@ const ABMPlans = () => {
         Agregar Plan
       </button> */}
 
-      <ABMPlansList allPlansData={allPlansData} setShowModalUpdate={setShowModalUpdate} setShowModalAdd={setShowModalAdd} />
+      <ABMPlansList
+        allPlansData={allPlansData}
+        setShowModalUpdate={setShowModalUpdate}
+        setShowModalAdd={setShowModalAdd}
+      />
 
-      <AddPlan showModalAdd={showModalAdd} setShowModalAdd={setShowModalAdd} />
+      { showModalAdd && (
+        <AddPlan
+          showModalAdd={showModalAdd}
+          setShowModalAdd={setShowModalAdd}
+        />
+      )}
 
       <UpdatePlan
         showModalUpdate={showModalUpdate}

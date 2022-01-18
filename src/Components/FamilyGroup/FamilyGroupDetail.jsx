@@ -13,7 +13,7 @@ export default function FamilyGroupDetail() {
     useEffect(() => {
         dispatch(getGroup(user.grupFamID))
 
-    }, [dispatch])
+    }, [dispatch,user.grupFamID])
     console.log("group: ", group)
 
     const [isActive, setActive] = useState(false);

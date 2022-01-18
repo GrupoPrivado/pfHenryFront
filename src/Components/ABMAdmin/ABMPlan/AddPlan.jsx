@@ -23,15 +23,77 @@ const AddPlan = ({ showModalAdd, setShowModalAdd }) => {
 
   const [errors, setErrors] = useState(true);
 
+  // const descriptionArr = [
+  //   "Consultas",
+  //   "Emergencia Medica",
+  //   "Odontologia",
+  //   "Estudios",
+  //   "Psicologia",
+  //   "Kinesiologia",
+  //   "Cobertura",
+  //   "Urgencias",
+  //   "Visitas",
+  //   "Consulta Online",
+  //   "Internacion",
+  //   "Asistencia",
+  //   "Ortodoncia",
+  //   "Protesis",
+  //   "Implantes odontologicos",
+  //   "Opticas",
+  //   "Cirugia estética",
+  //   "Reintegros",
+  //   "Blanqueamiento dental",
+  // ];
+
+  const [type, setTypeArr] = useState("");
+  const [description, setdescriptionArr] = useState("");
+
   let [inputPlan, setInputPlan] = useState({
     name: "",
     codePlan: "",
     precio: "",
-    descripcion: "",
     planActivo: false,
+    descripcion: [],
   });
 
   const showHideClassName = showModalAdd ? "displayblock" : "displaynone";
+
+  const handleChangeDescription = (event) => {
+    if (event.target.name === "type") {
+      const newType = event.target.value;
+      setTypeArr(newType);
+    }
+
+    if (event.target.name === "description") {
+      const newDescription = event.target.value;
+      setdescriptionArr(newDescription);
+    }
+  };
+
+  const handleAddDescription = (event) => {
+    // event.preventDefault();
+    const newDesc = [type, description];
+    if (type !== "" && description !== "") {
+      setInputPlan({
+        ...inputPlan,
+        descripcion: [...inputPlan.descripcion, newDesc],
+      });
+      setTypeArr("");
+      setdescriptionArr("");
+    }
+  };
+
+  const handleDeleteDescr = (event) => {
+    console.log("entre", event.target.value);
+    const newDesc = inputPlan.descripcion
+    
+    newDesc.splice(event.target);
+    console.log("<<<<newDesc>>>>", newDesc);
+    setInputPlan({
+      ...inputPlan,
+      descripcion: newDesc,
+    });
+  };
 
   const handleChange = (event) => {
     let newPlan = {
@@ -46,6 +108,7 @@ const AddPlan = ({ showModalAdd, setShowModalAdd }) => {
   };
 
   const handleSubmitPlan = async (event) => {
+    console.log("<<<entre>>><");
     event.preventDefault();
     let response = await dispatch(addPlan(inputPlan));
     alert(response.success);
@@ -53,8 +116,8 @@ const AddPlan = ({ showModalAdd, setShowModalAdd }) => {
       name: "",
       codePlan: "",
       precio: "",
-      descripcion: "",
       planActivo: false,
+      descripcion: [],
     });
     await dispatch(getAllPlansData());
     setErrors(true);
@@ -66,15 +129,15 @@ const AddPlan = ({ showModalAdd, setShowModalAdd }) => {
       name: "",
       codePlan: "",
       precio: "",
-      descripcion: "",
       planActivo: false,
+      descripcion: [],
     });
     setErrors(true);
     setShowModalAdd(false);
   };
 
   return (
-    <div className={styles[showHideClassName]}>
+    <div className="relative">
       <section className={styles.modalmain}>
         <div className="flex justify-center">
           <h5 className="text-2xl font-bold text-gray-500">
@@ -84,8 +147,9 @@ const AddPlan = ({ showModalAdd, setShowModalAdd }) => {
         </div>
         <div className="modal-content py-4 text-left px-6 ">
           <form onSubmit={(e) => handleSubmitPlan(e)} id="addPlan">
+            <div className="flex">
             <div>
-              <label className="text-md text-gray-600">Codigo: PLN-</label>
+              <label className="text-md text-gray-600">Codigo:</label>
               <input
                 className="h-2 p-4 mb-2.5 w-full border-2 border-gray-300  rounded-md"
                 type="text"
@@ -109,7 +173,6 @@ const AddPlan = ({ showModalAdd, setShowModalAdd }) => {
                 placeholder="Ingrese el nombre...."
               />
             </div>
-
             <div>
               <label className="text-md text-gray-600">Precio: </label>
               <input
@@ -122,19 +185,57 @@ const AddPlan = ({ showModalAdd, setShowModalAdd }) => {
                 placeholder="Ingrese el precio...."
               />
             </div>
+            </div>
+            <div>
+            <label className="text-md text-gray-600">Tipo: </label>
+            <input
+              className="h-2 p-4  w-full border-2 border-gray-300 mb-2 rounded-md"
+              type="text"
+              name="type"
+              autoComplete="off"
+              value={type}
+              onChange={(e) => handleChangeDescription(e)}
+              placeholder="Ingrese la Descripcion...."
+            />
+
+            <label className="text-md text-gray-600">Descripción: </label>
+            <input
+              className="h-2 p-4  w-full border-2 border-gray-300 mb-2 rounded-md"
+              type="text"
+              name="description"
+              autoComplete="off"
+              value={description}
+              onChange={(e) => handleChangeDescription(e)}
+              placeholder="Ingrese la Descripcion...."
+            />
 
             <div>
-              <label className="text-md text-gray-600">Descripción: </label>
-              <input
-                className="h-2 p-4  w-full border-2 border-gray-300 mb-5 rounded-md"
-                type="text"
-                name="descripcion"
-                autoComplete="off"
-                value={inputPlan.descripcion}
-                onChange={(e) => handleChange(e)}
-                placeholder="Ingrese la Descripcion...."
-              />
+              {inputPlan.descripcion &&
+                inputPlan.descripcion.map((element, index) => {
+                  return (
+                    <div key={"divDesc" + index}>
+                      <label key={"labelTipo" + index}>{element[0]}: </label>
+                      <label key={"labelDesc" + index}>{element[1]}</label>
+                      <button
+                        value={index}
+                        name={"btnDel" + index}
+                        id={index}
+                        onClick={(e) => handleDeleteDescr(e)}
+                      >
+                        xxxxxxxx
+                      </button>
+                    </div>
+                  );
+                })}
             </div>
+
+            <button name="descripcion" onClick={(e) => handleAddDescription(e)}>
+              Agregar
+            </button>
+          </div>
+
+           
+
             <div className="flex justify-between ">
               <div className="flex w-1/3 items-center">
                 <label className="text-md text-gray-600">Activo: </label>
@@ -155,7 +256,7 @@ const AddPlan = ({ showModalAdd, setShowModalAdd }) => {
                     className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     type="submit"
                     key="submitFormButton"
-                    form="addSpeciality"
+                    form="addPlan"
                     disabled={errors}
                   >
                     Guardar
@@ -164,13 +265,14 @@ const AddPlan = ({ showModalAdd, setShowModalAdd }) => {
                   <button
                     type="submit"
                     key="submitFormButton"
-                    form="addSpeciality"
+                    form="addPlan"
                     className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   >
                     Guardar
                   </button>
                 )}
                 <button
+                  type="button"
                   onClick={() => handleClose()}
                   className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
@@ -179,6 +281,8 @@ const AddPlan = ({ showModalAdd, setShowModalAdd }) => {
               </div>
             </div>
           </form>
+
+          
         </div>
       </section>
     </div>

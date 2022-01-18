@@ -23,6 +23,15 @@ module.exports = {
         "80vw" : "80vw",
         "90vw" : "90vw"
       },
+      height: {
+        "40vh" : "40vh",
+        "50vh" : "50vh",
+        "60vh" : "60vh",
+        "70vh" : "70vh",
+        "80vh" : "80vh",
+        "90vh" : "90vh"
+      },
+      
       screens: {
         xs: "320px"
       }
