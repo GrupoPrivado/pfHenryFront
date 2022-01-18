@@ -21,19 +21,16 @@ const functionErrors = (data) => {
   }
 }; //cambiarla en un utils ya que se puede usar en todos los forms
 
-const AddSpeciality = ({ showModalAdd, setShowModalAdd }) => {
+const AddSpeciality = ({ setShowModalAdd }) => {
   const dispatch = useDispatch();
 
   const [errors, setErrors] = useState(true);
 
   let [inputSpeciality, setInputSpeciality] = useState({
-    codeEsp: "",
     nombre: "",
     descripcion: "",
-    activa: false,
+    activa: "",
   });
-
-  const showHideClassName = showModalAdd ? "displayblock" : "displaynone";
 
   const handleChange = (event) => {
     let newSpeciality = {
@@ -52,29 +49,27 @@ const AddSpeciality = ({ showModalAdd, setShowModalAdd }) => {
     let response = await dispatch(addSpeciality(inputSpeciality));
     alert(response.success);
     setInputSpeciality({
-      codeEsp: "",
       nombre: "",
       descripcion: "",
-      activa: false,
+      activa: "",
     });
-    await dispatch(getAllSpecialities());
-    setErrors(true);
     setShowModalAdd(false);
+    dispatch(getAllSpecialities());
+    setErrors(true);
   };
 
   const handleClose = () => {
     setInputSpeciality({
-      codeEsp: "",
       nombre: "",
       descripcion: "",
-      activa: false,
+      activa: "",
     });
-    setErrors(true);
     setShowModalAdd(false);
+    setErrors(true);
   };
 
   return (
-    <div className={styles[showHideClassName]}>
+    <div>
       <section className={styles.modalmain}>
         <div className="flex justify-center">
           <h5 className="text-2xl font-bold text-gray-500">
@@ -83,19 +78,6 @@ const AddSpeciality = ({ showModalAdd, setShowModalAdd }) => {
         </div>
         <div className="modal-content py-4 text-left px-6 ">
           <form onSubmit={(e) => handleSubmitSpeciality(e)} id="addSpeciality">
-            <div>
-              <label className="text-md text-gray-600">Codigo: ESP-</label>
-              <input
-                className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md"
-                type="text"
-                name="codeEsp"
-                autoComplete="off"
-                value={inputSpeciality.codeEsp}
-                onChange={(e) => handleChange(e)}
-                placeholder="Ingrese el Codigo...."
-              />
-            </div>
-
             <div>
               <label className="text-md text-gray-600">Nombre: </label>
               <input
@@ -130,6 +112,7 @@ const AddSpeciality = ({ showModalAdd, setShowModalAdd }) => {
                   onChange={(e) => handleChange(e)}
                   defaultValue={0}
                 >
+                  <option value="">Seleccione</option>
                   <option value="false">No</option>
                   <option value="true">Si</option>
                 </select>

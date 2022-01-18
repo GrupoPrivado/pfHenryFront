@@ -160,10 +160,10 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
                   </label>
                   <select
                     onChange={handleUpdateAffiliate}
-                    value={updateAffiliateData.ciudadID._id}
+                    value={updateAffiliateData.ciudadID}
                     name="ciudadID"
                     className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
-                    defaultValue={0}
+                    defaultValue={updateAffiliateData.ciudadID}
                   >
                     <option>Seleccione Localidad</option>
                     {cities &&
@@ -187,7 +187,7 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
                     name="provinciaID"
                     className="relative block w-full px-1 py-1 my-2 text-sm font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 uppercase mb-3  "
                     required
-                    defaultValue={0}
+                    defaultValue={updateAffiliateData.provinciaID}
                   >
                     <option>Seleccione Provincia</option>
                     {provinces &&
@@ -203,8 +203,8 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
                   id="planes"
                   name="planID"
                   onChange={handleUpdateAffiliate}
-                  value={updateAffiliateData.planID._id}
-                  defaultValue={0}
+                  value={updateAffiliateData.planID}
+                  defaultValue={updateAffiliateData.planID}
                 >
                   <option value="">Seleccione su Plan</option>
                   {allPlans &&
