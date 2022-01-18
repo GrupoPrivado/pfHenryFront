@@ -208,6 +208,7 @@ const AddPharmacy = ({ setShowModalAdd }) => {
                 </select>
               </div>
             </div>
+            
             <div>
               <label className="text-md text-gray-600">E-mail: </label>
               <input
