@@ -100,77 +100,79 @@ export default function SideBar({ showSidebar, setShowSidebar }) {
                     </li>
                   </Link>
                   <Link to="/administrador/prestadores">
-                  <li onClick={() => setShowSidebar(!showSidebar)}>
-                    <div class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6">
-                      <span class="inline-flex justify-center items-center ml-4">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-5 w-5"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                          />
-                        </svg>
-                      </span>
-                      <span class="ml-2 text-sm tracking-wide truncate">
-                        Prestadores
-                      </span>
-                    </div>
-                  </li>
+                    <li onClick={() => setShowSidebar(!showSidebar)}>
+                      <div class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6">
+                        <span class="inline-flex justify-center items-center ml-4">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-5 w-5"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                            />
+                          </svg>
+                        </span>
+                        <span class="ml-2 text-sm tracking-wide truncate">
+                          Prestadores
+                        </span>
+                      </div>
+                    </li>
                   </Link>
-                  <li onClick={() => setShowSidebar(!showSidebar)}>
-                    <div class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6">
-                      <span class="inline-flex justify-center items-center ml-4">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-5 w-5"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"
-                          />
-                        </svg>
-                      </span>
-                      <span class="ml-2 text-sm tracking-wide truncate">
-                        Empleados
-                      </span>
-                    </div>
-                  </li>
+                  <Link to="/administrador/empleados">
+                    <li onClick={() => setShowSidebar(!showSidebar)}>
+                      <div class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6">
+                        <span class="inline-flex justify-center items-center ml-4">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-5 w-5"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"
+                            />
+                          </svg>
+                        </span>
+                        <span class="ml-2 text-sm tracking-wide truncate">
+                          Empleados
+                        </span>
+                      </div>
+                    </li>
+                  </Link>
                   <Link to="/administrador/recetas">
-                  <li onClick={() => setShowSidebar(!showSidebar)}>
-                    <div class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6">
-                      <span class="inline-flex justify-center items-center ml-4">
-                        <svg
-                          class="w-5 h-5"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
-                          ></path>
-                        </svg>
-                      </span>
-                      <span class="ml-2 text-sm tracking-wide truncate">
-                        Recetas
-                      </span>
-                    </div>
-                  </li>
+                    <li onClick={() => setShowSidebar(!showSidebar)}>
+                      <div class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6">
+                        <span class="inline-flex justify-center items-center ml-4">
+                          <svg
+                            class="w-5 h-5"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
+                            ></path>
+                          </svg>
+                        </span>
+                        <span class="ml-2 text-sm tracking-wide truncate">
+                          Recetas
+                        </span>
+                      </div>
+                    </li>
                   </Link>
                   <Link to="/administrador/especialidades">
                     <li onClick={() => setShowSidebar(!showSidebar)}>
@@ -223,29 +225,29 @@ export default function SideBar({ showSidebar, setShowSidebar }) {
                     </li>
                   </Link>
                   <Link to="/administrador/planes">
-                  <li onClick={() => setShowSidebar(!showSidebar)}>
-                    <div class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6">
-                      <span class="inline-flex justify-center items-center ml-4">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-5 w-5"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
-                          />
-                        </svg>
-                      </span>
-                      <span class="ml-2 text-sm tracking-wide truncate">
-                        Planes
-                      </span>
-                    </div>
-                  </li>
+                    <li onClick={() => setShowSidebar(!showSidebar)}>
+                      <div class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6">
+                        <span class="inline-flex justify-center items-center ml-4">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-5 w-5"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                            />
+                          </svg>
+                        </span>
+                        <span class="ml-2 text-sm tracking-wide truncate">
+                          Planes
+                        </span>
+                      </div>
+                    </li>
                   </Link>
 
                   {/* <li>

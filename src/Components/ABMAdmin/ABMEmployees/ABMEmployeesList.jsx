@@ -82,10 +82,10 @@ const ABMEmployeesList = ({
                                 <span>{element.legajo}</span>
                               </div>
                               <div>
-                                <span>{element.nombre}</span>
+                                <span>{element.name}</span>
                               </div>
                               <div>
-                                <span>{element.apellido}</span>
+                                <span>{element.lastName}</span>
                               </div>
                               <div class="px-2">
                                 <span>{element.telefono}</span>

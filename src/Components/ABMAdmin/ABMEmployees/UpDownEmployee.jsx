@@ -40,7 +40,7 @@ const UpDownEmployee = ({ setShowModalUpDown }) => {
   useEffect(() => {
     setUpDowndateEmployeeData({
       id: updateData._id,
-      mail: updateData.email,
+      email: updateData.email,
       activo: updateData.activo,
     });
   }, [updateData]);

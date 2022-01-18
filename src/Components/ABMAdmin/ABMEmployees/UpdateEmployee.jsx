@@ -29,7 +29,7 @@ const UpdateEmployee = ({ setShowModalUpdate }) => {
   const inputEmployeeData = {
     _id: "",
     telefono: "",
-    mail: "",
+    email: "",
   };
 
   let [updateEmployeeData, setUpdateEmployeeData] = useState(inputEmployeeData);
@@ -38,7 +38,7 @@ const UpdateEmployee = ({ setShowModalUpdate }) => {
     setUpdateEmployeeData({
       _id: updateData._id,
       telefono: updateData.telefono,
-      mail: updateData.mail,
+      email: updateData.email,
     });
   }, [updateData]);
 
@@ -93,9 +93,9 @@ const UpdateEmployee = ({ setShowModalUpdate }) => {
               <label>E-Mail: </label>
               <input
                 type="email"
-                name="mail"
+                name="email"
                 autoComplete="off"
-                value={updateEmployeeData.mail}
+                value={updateEmployeeData.email}
                 onChange={(e) => handleUpdateEmployee(e)}
                 placeholder="Ingrese el E-Mail...."
               />

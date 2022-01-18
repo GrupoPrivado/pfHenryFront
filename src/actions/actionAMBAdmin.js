@@ -621,6 +621,7 @@ export function getAllEmployees(payload) {
         },
       }
     );
+    console.log('employees data',data)
     if (data.success) {
       return dispatch({ type: "GET_EMPLOYEES", payload: data.message });
     } else {

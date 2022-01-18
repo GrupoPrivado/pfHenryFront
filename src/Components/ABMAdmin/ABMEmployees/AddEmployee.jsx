@@ -1,15 +1,9 @@
 import React from "react";
 
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 
-import {
-  addEmployee,
-  addProfessional,
-  getAllCities,
-  getAllEmployees,
-  getAllProfessionals,
-} from "../../../actions/actionAMBAdmin";
+import { addEmployee, getAllEmployees } from "../../../actions/actionAMBAdmin";
 
 import styles from "./AddEmployee.module.css";
 
@@ -85,7 +79,7 @@ const AddEmployee = ({ setShowModalAdd }) => {
                 type="text"
                 name="name"
                 autoComplete="off"
-                value={inputEmployeeData.name}
+                value={inputEmployee.name}
                 onChange={(e) => handleChange(e)}
                 placeholder="Ingrese el nombre...."
               />
@@ -97,7 +91,7 @@ const AddEmployee = ({ setShowModalAdd }) => {
                 type="text"
                 name="lastName"
                 autoComplete="off"
-                value={inputEmployeeData.lastName}
+                value={inputEmployee.lastName}
                 onChange={(e) => handleChange(e)}
                 placeholder="Ingrese el apellido...."
               />
@@ -109,7 +103,7 @@ const AddEmployee = ({ setShowModalAdd }) => {
                 type="number"
                 name="legajo"
                 autoComplete="off"
-                value={inputEmployeeData.legajo}
+                value={inputEmployee.legajo}
                 onChange={(e) => handleChange(e)}
                 placeholder="Ingrese el legajo...."
               />
@@ -121,7 +115,7 @@ const AddEmployee = ({ setShowModalAdd }) => {
                 type="number"
                 name="telefono"
                 autoComplete="off"
-                value={inputEmployeeData.telefono}
+                value={inputEmployee.telefono}
                 onChange={(e) => handleChange(e)}
                 placeholder="Ingrese el Teléfono...."
               />
@@ -131,9 +125,9 @@ const AddEmployee = ({ setShowModalAdd }) => {
               <label>E-mail: </label>
               <input
                 type="text"
-                name="mail"
+                name="email"
                 autoComplete="off"
-                value={inputEmployeeData.email}
+                value={inputEmployee.email}
                 onChange={(e) => handleChange(e)}
                 placeholder="Ingrese el e-mail...."
               />
