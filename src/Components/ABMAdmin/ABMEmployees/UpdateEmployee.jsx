@@ -8,7 +8,7 @@ import {
   updateEmployee
 } from "../../../actions/actionAMBAdmin";
 
-import styles from "./UpdateProfessional.module.css";
+import styles from "./UpdateEmployee.module.css";
 
 const functionErrors = (data) => {
   const arrayKeys = Object.keys(data);
