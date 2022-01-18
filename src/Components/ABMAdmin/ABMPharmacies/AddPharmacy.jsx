@@ -98,17 +98,17 @@ const AddPharmacy = ({ setShowModalAdd }) => {
     setErrors(true);
     setShowModalAdd(false);
   };
-
+  const showHideClassName = setShowModalAdd ? "displayblock" : "displaynone";
   return (
-    <div>
+    <div assName={styles[showHideClassName]}>
       <section className={styles.modalmain}>
-        <div className="flex justify-center">
+        <div className="flex justify-center h-10%">
           <h5 className="text-2xl font-bold text-gray-500">
             Agregar Nueva Farmacia
           </h5>
         </div>
 
-        <div className="modal-content py-4 text-left px-6 ">
+        <div className="modal-content py-4 text-left px-6 h-90% ">
           <form>
             <div className="flex">
               <div className=" w-1/2">

@@ -6,6 +6,7 @@ import {
   getAllSpecialities,
   getSpecialityData,
   deleteSpeciality,
+  updateSpecialityAct,
 } from "../../../actions/actionAMBAdmin";
 
 import styles from "./ABMSpecialties.module.css";
@@ -53,6 +54,9 @@ const ABMSpecialitiesList = ({
                       <div className="  flex justify-center">
                         <span>Descripcion</span>
                       </div>
+                      <div className="  flex justify-center">
+                        <span>Activa</span>
+                      </div>
 
                       <div className="  flex justify-center">
                         <span>Editar</span>
@@ -68,6 +72,9 @@ const ABMSpecialitiesList = ({
                               </div>
                               <div class="  flex justify-center">
                                 <span>{element.descripcion}</span>
+                              </div>
+                              <div class=" flex justify-center ">
+                                <span>{element.activa ? "Si" : "No"}</span>
                               </div>
 
                               <div class="  flex justify-around">
