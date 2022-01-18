@@ -12,7 +12,7 @@ function CarouselSlide() {
                     <h1 className='text-5xl font-semibold text-primary'>Cuidá tu salud y <br/> la de tu familia</h1>
                     <h2 className='text-3xl text-primary'>Elegí el mejor plan médico</h2>
                     <Link to="/contact">
-                        <button className='w-64 h-12 my-5 text-2xl font-semibold text-white rounded-md bg-secondary'>Cotizá tu PLAN ahora</button>
+                        <button className='w-64 h-12 my-5 text-2xl font-semibold text-white rounded-md bg-secondary'>Conocé más</button>
                     </Link>
                 </div>
             </div>
