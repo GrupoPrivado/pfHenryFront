@@ -607,6 +607,121 @@ export function updatePrescription(payload) {
 
 /************* FIN Actions Para ABM Prescripciones***********/
 
+/************* Actions Para ABM Empleados***********/
+
+export function getAllEmployees(payload) {
+  return async (dispatch) => {
+    const token = getItem("userToken");
+
+    const { data } = await axios.get(
+      `${api}/admin/employees`,
+      {
+        headers: {
+          "x-access-token": token,
+        },
+      }
+    );
+    if (data.success) {
+      return dispatch({ type: "GET_EMPLOYEES", payload: data.message });
+    } else {
+      return dispatch({ type: "ERRORS", payload: data });
+    }
+  };
+}
+
+export function addEmployee(payload) {
+  return async (dispatch) => {
+    const token = getItem("userToken");
+    const { data } = await axios.post(`${api}/admin/addEmployee`, payload, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
+    return data;
+
+    // const response = await axios.post(`${api}/admin/addPharmacy`, data);
+    // return response.data.message;
+    // if(data.success){
+    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
+    // } else {
+    //     return dispatch({type: "ERRORS", payload: data})
+
+    // }
+  };
+}
+
+export const getEmployeeData = (payload) => {
+  return {
+    type: "EMPLOYEE_DATA",
+    payload: payload,
+  };
+};
+
+export function updateEmployee(payload) {
+  return async (dispatch) => {
+
+    const token = getItem("userToken");
+    const { data } = await axios.put(
+      `${api}/admin/updateEmployee`,
+      payload,
+      {
+        headers: {
+          "x-access-token": token,
+        },
+      }
+    );
+
+    return data;
+
+    // if(data.success){
+    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
+    // } else {
+    //     return dispatch({type: "ERRORS", payload: data})
+
+    // }
+  };
+}
+
+export function upDownEmployeeAct(payload) {
+  return async (dispatch) => {
+    const token = getItem("userToken");
+    const { data } = await axios.put(`${api}/admin/upDownEmployee`, payload, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
+  
+    return data;
+
+    // if(data.success){
+    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
+    // } else {
+    //     return dispatch({type: "ERRORS", payload: data})
+    // }
+  };
+}
+
+export function deleteEmployee(payload) {
+  return async (dispatch) => {
+    const token = getItem("userToken");
+    const { data } = await axios.delete(`${api}/admin/deleteEmployee/${payload}`, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
+    return data;
+
+    // if(data.success){
+    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
+    // } else {
+    //     return dispatch({type: "ERRORS", payload: data})
+
+    // }
+  };
+}
+
+/************* FIN Actions Para ABM Empleados***********/
+
 /*************Actions Comunes Para ABM***********/
 export const resetDataUpdate = (payload) => {
   return {
