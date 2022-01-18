@@ -40,7 +40,7 @@ const UpdateSpeciality = ({ setShowModalUpdate }) => {
       descripcion: updateData.descripcion,
       activa: updateData.activa,
     });
-  }, [updateData, dispatch]);
+  }, [updateData]);
 
   const handleUpdateSpeciality = async (event) => {
     let updatedSpeciality = {
@@ -124,7 +124,7 @@ const UpdateSpeciality = ({ setShowModalUpdate }) => {
                   id="activa"
                   name="activa"
                   onChange={(e) => handleUpdateSpeciality(e)}
-                  defaultValue={updateSpecialityData.activa}
+                  // defaultValue={updateSpecialityData.activa}
                   value={updateSpecialityData.activa}
                 >
                   <option value="">Seleccione</option>
