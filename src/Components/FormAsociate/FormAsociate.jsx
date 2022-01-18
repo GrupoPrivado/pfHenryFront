@@ -108,13 +108,13 @@ export default function FormAsociate({
       <div className="w-full max-w-md space-y-8">
         <form className="mt-8 space-y-6 " onSubmit={handleSubmit}>
           <input type="hidden" name="remember" defaultValue="true" />
-          <div className="grid items-center grid-cols-3 grid-rows-5 gap-4 -space-y-px rounded-md shadow-sm w-90vw sm:grid-cols-4 sm:grid-rows-2">
+          <div className="grid items-center -z-0 grid-cols-3 grid-rows-5 gap-4 -space-y-px rounded-md shadow-sm w-90vw sm:grid-cols-4 sm:grid-rows-2">
             <h3 className='col-span-4 row-span-1 text-2xl font-bold text-left text-primary'>Formulario de registro</h3>
             <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
               <label htmlFor="nombre" className="text-lg font-semibold">Nombre</label>
               <input
                 required
-                className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className="relative -z-0 block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 type="text"
                 value={input.nombre}
                 name="nombre"
@@ -242,18 +242,6 @@ export default function FormAsociate({
             </div>
 
             <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
-              <label htmlFor="direccion" className="text-lg font-semibold">Miembro familiar</label>
-              <button
-                required
-                className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                value={input.direccion}
-                onClick={() => setModal(!modal)}
-              >
-                Agregar
-              </button>
-            </div>
-
-            <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
               <label htmlFor="planID" className="text-lg font-semibold">Plan</label>
               <select
                 required
@@ -288,60 +276,53 @@ export default function FormAsociate({
               />
             </div>
 
-            <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-1 sm:row-span-1">
+          </div>
+          
+        </form>
+
+        <div>
+            <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
+                <label className="text-lg font-semibold">Miembro familiar</label>
+                <button
+                  required
+                  className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  onClick={() => setModal(!modal)}
+                >
+                  Agregar
+                </button>
+            </div>
+
+            <div>
+              <ul>
+                {output?.map((e) => (
+                      <div className="flex my-4 justify-between items-center">
+                        <li value={e.name} className="text-lg py-3 pr-3 font-semibold">{e.nombre} {e.apellido}</li>
+                        <button 
+                        className="group relative w-10 h-9 flex justify-center p-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-500 hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        onClick={() => handleDelete(e)}
+                        >
+                          x
+                        </button>
+                      {/* <label htmlFor="" value={e.name}>
+                        {e.nombre}
+                      </label> */}
+                      {/* <label htmlFor="" value={e.apellido}>
+                        {e.apellido}
+                      </label> */}
+                      </div>
+                ))}
+              </ul>
+            </div>
+          </div>
+        <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-1 sm:row-span-1">
               <button
-                type="submit"
+                onClick={handleSubmit}
                 value="Enviar"
                 className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md disabled:bg-gray-500 bg-primary group hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                 disabled={
                   errors
                 }>Enviar</button>
             </div>
-
-          </div>
-
-
-
-          {/* <div>
-            {output?.map((e) => (
-              <div className="flex">
-                <label htmlFor="" value={e.name}>
-                  {e.nombre}
-                </label>
-                <label htmlFor="" value={e.apellido}>
-                  {e.apellido}
-                </label>
-                <button onClick={() => handleDelete(e)}>x</button>
-              </div>
-            ))}
-          </div> */}
-
-
-          {/* {errors ? (
-            <button
-              type="submit"
-              disabled={errors}
-              className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-400 border border-transparent rounded-md group focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              Enviar
-            </button>
-          ) : (
-            <button
-              type="submit"
-              className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-700 border border-transparent rounded-md group focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              Enviar
-            </button>
-          )} */}
-          {/* <div>
-          <button
-            type="submit"
-            className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md group hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
-            Enviar
-          </button>
-        </div> */}
-        </form>
       </div>
     </div>
   );
