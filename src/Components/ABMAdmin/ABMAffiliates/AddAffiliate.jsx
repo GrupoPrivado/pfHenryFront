@@ -350,8 +350,8 @@ const AddAffiliate = ({ setShowModalAdd }) => {
         </div>
       </section>
 
-      {handleAddAdherent && <AddAdherent
-        showModalAdherent={showModalAdherent}
+      {showModalAdherent && <AddAdherent
+        
         setShowModalAdherent={setShowModalAdherent}
       />}
     </div>

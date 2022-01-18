@@ -8,6 +8,7 @@ import {
   deletePlan,
 } from "../../../actions/actionAMBAdmin";
 
+
 import styles from "./ABMPlans.module.css";
 
 const ABMPlansList = ({
@@ -101,7 +102,8 @@ const ABMPlansList = ({
                                   >
                                     Eliminar
                                   </button>
-                                  <button
+                                  <button 
+                                  
                                     title="Edit"
                                     key={"edit" + element._id}
                                     value={element._id}
