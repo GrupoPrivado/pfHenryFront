@@ -81,6 +81,9 @@ export default function FormAsociate({
         navigate("/login")
       }, 3500);
     }
+    if(error){
+      setOutput([])
+    }
   }, [error, navigate, setOutput]);
   
 

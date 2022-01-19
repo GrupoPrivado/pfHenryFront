@@ -28,16 +28,12 @@ export function getPlanes() {
 
 
 export const postAfiliate = (payload) => {
-<<<<<<< HEAD
-  console.log(payload,'afiliado')
-=======
   console.log(payload, "payload form")
->>>>>>> Dash
   return async (dispatch) => {
     const {data} = await axios.post(`${api}/addPreCarga`, payload);
     console.log(data)
     if(data.success){
-      dispatch({type: alertConstants.SUCCESS , message: 'Registro exitoso'})
+      dispatch({type: alertConstants.SUCCESS , message: 'Registro exitoso', error: false})
     } else {
       dispatch({type: alertConstants.ERROR, message: data.message, error:true})   
     }

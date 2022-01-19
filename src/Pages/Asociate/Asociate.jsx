@@ -15,17 +15,17 @@ export default function Asociate() {
   const { type, message, error } = useSelector((state) => state.alerts);
   const [activeAlert, setActiveAlert] = useState(false);
   const [errorAlert, setErrorAlert] = useState(false);
+  console.log(error, 'error dentro de asociate')
 
   const [alertMessage, setAlertMessage] = useState("");
 
   const dispatch = useDispatch();
 
   const {provinces, cities} = useSelector(state => state.providers)
-
   useTitle("Asociate a ArpyMedical");
   
   useEffect(() => {
-    dispatch(alertActions.clear());
+    if(error === false)dispatch(alertActions.clear());
     dispatch(getPlanes());
     dispatch(getAllProvinces())
 
@@ -37,12 +37,16 @@ export default function Asociate() {
       setErrorAlert(true);
       setAlertMessage(message);
     }
+
   }, [dispatch, message, type]);
+
+
 
   setTimeout(() => {
     setActiveAlert(false);
     setErrorAlert(false);
   }, 4000);
+
 
   const [output, setOutput] = useState([]);
   //const [family, setFamily] = useState([])
