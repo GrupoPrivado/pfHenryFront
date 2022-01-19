@@ -45,7 +45,7 @@ export const validate = (input) => {
     if (input.telefono.length < 8 || input.telefono.length > 11) {
         errores.telefono = "Ingrese un teléfono válido";
     }
-    if (input.fechaNacimiento > date) {
+    if (input.fechaNacimiento.length <= 0 || input.fechaNacimiento > date) {
         errores.fechaNacimiento = "La fecha debe ser menor al día de hoy";
     }
     if (input.nombre.length < 3) {
