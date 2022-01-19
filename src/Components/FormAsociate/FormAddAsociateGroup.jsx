@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getAllCities } from "../../actions/actionProviders";
+import { validate } from "../../utils/constantes";
+import date from "./../../utils/date.js"
 
 const functionErrors = (data) => {
   const arrayKeys = Object.keys(data);
@@ -25,6 +27,7 @@ export default function FormAddAsociateGroup({
 }) {
   const dispatch = useDispatch();
   const [errors, setErrors] = useState(true);
+  const [errores, setErrores] = useState({})
   console.log(errors);
   const [input, setInput] = useState({
     nombre: "",
@@ -48,34 +51,32 @@ export default function FormAddAsociateGroup({
     setInput(newInp);
     setErrors(functionErrors(newInp));
   }
-  // function handleSelect(e) {
-  //   if (e.target.value !== "") {
-  //     setInput({
-  //       ...input,
-  //       parentesco: e.target.value,
-  //     });
-  //   }
-  // }
+
   function handleSubmit(e) {
     e.preventDefault();
-    alert("afiliate create");
-    setOutput([...output, input]);
+    const validateError = validate(input)
+    setErrores(validateError)
+    console.log(validateError, "Validate")
+    if (Object.entries(validateError).length <= 0) {
+      console.log(Object.entries(validateError).length)
+      const newState = [input, ...output];
 
-    setInput({
-      nombre: "",
-      apellido: "",
-      DNI: "",
-      fechaNacimiento: "",
-      telefono: "",
-      correoElectronico: "",
-      ciudadID: "",
-      provinciaID: "",
-      direccion: "",
-      parentesco: "",
-      planID: "",
-    });
-    setErrors(true);
-    setModal(!modal);
+      setOutput(newState);
+      setInput({
+        nombre: "",
+        apellido: "",
+        DNI: "",
+        fechaNacimiento: "",
+        telefono: "",
+        correoElectronico: "",
+        ciudadID: "",
+        provinciaID: "",
+        direccion: "",
+        planID: "",
+      });
+      setModal(!modal);
+    }
+
   }
 
   const handleChangeProvince = (e) => {
@@ -86,20 +87,15 @@ export default function FormAddAsociateGroup({
     dispatch(getAllCities(newData.provinciaID));
     setInput(newData);
   };
-//    position: fixed;
-// top: 0;
-// left: 0;
-// width:75%;
-// height: 75%;
-// background: rgba(0, 0, 0, 0.6);
+
   return (
     <div className='flex items-center justify-center w-full px-4 py-6 sm:px-6 lg:px-8'>
-      <div className="fixed flex justify-center items-center inset-0 transition-opacity bg-gray-900 bg-opacity-90">
-        <span className="hidden flex justify-center sm:inline-block sm:align-middle sm:h-screen items-center" aria-hidden="true">
+      <div className="fixed inset-0 flex items-center justify-center transition-opacity bg-gray-900 bg-opacity-90">
+        <span className="flex items-center justify-center sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
           &#8203;
         </span>
-        <div className="p-4 flex justify-center items-center z-10 inline-block w-50vw overflow-hidden  transition-all transform border-t border-l border-solid shadow-xl bg-gradient-to-b from-white-rgba to-white-rgba2 rounded-3xl sm:my-8 sm:align-middle border-t-gray-200 border-l-gray-200">
-          <div className=" space-y-8 ">
+        <div className="z-10 flex items-center justify-center p-4 overflow-hidden transition-all transform border-t border-l border-solid shadow-xl w-50vw bg-gradient-to-b from-white-rgba to-white-rgba2 rounded-3xl sm:my-8 sm:align-middle border-t-gray-200 border-l-gray-200">
+          <div className="space-y-8 ">
             {/* no modificar */}
             <form className="mt-2 space-y-6 ">
               <input type="hidden" name="remember" defaultValue="true" />
@@ -116,6 +112,9 @@ export default function FormAddAsociateGroup({
                     onChange={(e) => handleChange(e)}
                     placeholder="Tu nombre"
                   />
+                  {errores.nombre && (
+                    <p className="absolute text-red-700">{errores.nombre}</p>
+                  )}
                 </div>
                 <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
                   <label htmlFor="apellido" className="text-lg font-semibold">Apellido</label>
@@ -128,6 +127,9 @@ export default function FormAddAsociateGroup({
                     onChange={(e) => handleChange(e)}
                     placeholder="Tu apellido"
                   />
+                  {errores.apellido && (
+                    <p className="absolute text-red-700">{errores.apellido}</p>
+                  )}
                 </div>
                 <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
                   <label htmlFor="DNI" className="text-lg font-semibold">DNI</label>
@@ -140,6 +142,9 @@ export default function FormAddAsociateGroup({
                     onChange={(e) => handleChange(e)}
                     placeholder="Tu DNI"
                   />
+                  {errores.DNI && (
+                    <p className="absolute text-red-700">{errores.DNI}</p>
+                  )}
                 </div>
                 <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
                   <label htmlFor="fechaNacimiento" className="text-lg font-semibold">Fecha de Nacimiento</label>
@@ -149,9 +154,13 @@ export default function FormAddAsociateGroup({
                     type="date"
                     value={input.fechaNacimiento}
                     name="fechaNacimiento"
+                    max={date}
                     onChange={(e) => handleChange(e)}
                     placeholder="Fecha de Nacimiento"
                   />
+                  {errores.fechaNacimiento && (
+                    <p className="absolute text-red-700">{errores.fechaNacimiento}</p>
+                  )}
                 </div>
                 <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
                   <label htmlFor="telefono" className="text-lg font-semibold">Teléfono</label>
@@ -164,6 +173,9 @@ export default function FormAddAsociateGroup({
                     onChange={(e) => handleChange(e)}
                     placeholder="Tu teléfono"
                   />
+                  {errores.telefono && (
+                    <p className="absolute text-red-700">{errores.telefono}</p>
+                  )}
                 </div>
                 <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
                   <label htmlFor="correoElectronico" className="text-lg font-semibold">Email</label>
@@ -176,6 +188,9 @@ export default function FormAddAsociateGroup({
                     onChange={(e) => handleChange(e)}
                     placeholder="Tu e-mail"
                   />
+                  {errores.correoElectronico && (
+                    <p className="absolute text-red-700">{errores.correoElectronico}</p>
+                  )}
                 </div>
                 <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
                   <label htmlFor="direccion" className="text-lg font-semibold">Domicilio</label>
@@ -188,6 +203,9 @@ export default function FormAddAsociateGroup({
                     onChange={(e) => handleChange(e)}
                     placeholder="Tu domicilio"
                   />
+                  {errores.direccion && (
+                    <p className="absolute text-red-700">{errores.direccion}</p>
+                  )}
                 </div>
                 <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
                   <label htmlFor="provincia" className="text-lg font-semibold">Provincia</label>
@@ -208,6 +226,9 @@ export default function FormAddAsociateGroup({
                         </option>
                       ))}
                   </select>
+                  {errores.provinciaID && (
+                    <p className="absolute text-red-700">{errores.provinciaID}</p>
+                  )}
                 </div>
 
                 <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
@@ -228,12 +249,15 @@ export default function FormAddAsociateGroup({
                       ))
                     }
                   </select>
+                  {errores.ciudadID && (
+                    <p className="absolute text-red-700">{errores.ciudadID}</p>
+                  )}
                 </div>
 
                 <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
                   <label htmlFor="parentesco" className="text-lg font-semibold">Seleccionar parentesco</label>
                   <select
-                    
+
                     className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                     type="text"
                     value={input.parentesco}
@@ -246,6 +270,9 @@ export default function FormAddAsociateGroup({
                     <option value="conyugue">Conyugue</option>
                     <option value="familiar">Familiar a cargo</option>
                   </select>
+                  {errores.parentesco && (
+                    <p className="absolute text-red-700">{errores.parentesco}</p>
+                  )}
                 </div>
               </div>
 
@@ -254,9 +281,9 @@ export default function FormAddAsociateGroup({
                   <button
                     type="submit"
                     form="formulario"
-                    disabled={errors}
+                    
                     onClick={handleSubmit}
-                    className="group relative w-28 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    className="relative flex justify-center px-4 py-2 text-sm font-medium text-white bg-blue-400 border border-transparent rounded-md group w-28 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   >
                     Guardar
                   </button>
@@ -265,14 +292,14 @@ export default function FormAddAsociateGroup({
                     type="submit"
                     form="formulario"
                     onClick={handleSubmit}
-                    className="group relative w-28 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    className="relative flex justify-center px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md group w-28 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   >
                     Guardar
                   </button>
                 )}
                 <button
                   onClick={() => setModal(!modal)}
-                  className="group relative w-28 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-500 hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  className="relative flex justify-center px-4 py-2 text-sm font-medium text-white bg-red-500 border border-transparent rounded-md group w-28 hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
                   Cancelar
                 </button>
