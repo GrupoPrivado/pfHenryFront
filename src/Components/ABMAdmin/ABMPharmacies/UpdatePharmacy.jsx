@@ -27,19 +27,24 @@ const UpdatePharmacy = ({ setShowModalUpdate, showModalUpdate }) => {
 
   const [errors, setErrors] = useState(false);
 
-  let [updatePharmacyData, setUpdatePharmacyData] = useState({
+  const updatePharmacyDataStruct = {
     id: "",
     direccion: "",
     telefono: "",
     mail: "",
-  });
+    activo: "",
+  };
+
+  const [updatePharmacyData, setUpdatePharmacyData] =
+    useState(updatePharmacyDataStruct);
 
   useEffect(() => {
     setUpdatePharmacyData({
       id: updateData._id,
-      direccion:  updateData.direccion,
-      telefono:  updateData.telefono,
-      mail:  updateData.mail,
+      direccion: updateData.direccion,
+      telefono: updateData.telefono,
+      mail: updateData.mail,
+      activo: updateData.activo,
     });
   }, [updateData, dispatch]);
 
@@ -57,29 +62,19 @@ const UpdatePharmacy = ({ setShowModalUpdate, showModalUpdate }) => {
     event.preventDefault();
     let response = await dispatch(updatePharmacy(updatePharmacyData));
     alert(response.success);
-    setUpdatePharmacyData({
-      id: "",
-     direccion: "",
-      telefono: "",
-      mail: "",
-    });
-    await dispatch(getAllPharmacies({}));
+    setUpdatePharmacyData(updatePharmacyDataStruct);
+    setShowModalUpdate(false);
+    dispatch(getAllPharmacies({})); //Dejarle el objeto vacio sino no actualiza, es por los query que necesita la ruta para devolver el listado
     dispatch(resetDataUpdate());
 
     setErrors(true);
-    setShowModalUpdate(false);
   };
 
   const handleClose = () => {
-    setUpdatePharmacyData({
-      id: "",
-     direccion: "",
-     telefono: "",
-     mail: "",
-    });
+    setUpdatePharmacyData(updatePharmacyDataStruct);
+    setShowModalUpdate(false);
     dispatch(resetDataUpdate());
     setErrors(true);
-    setShowModalUpdate(false);
   };
 
   const showHideClassName = showModalUpdate ? "displayblock" : "displaynone";
@@ -87,19 +82,19 @@ const UpdatePharmacy = ({ setShowModalUpdate, showModalUpdate }) => {
   return (
     <div className={styles[showHideClassName]}>
       <section className={styles.modalmain}>
-      <div className="flex justify-center">
+        <div className="flex justify-center">
           <h5 className="text-2xl font-bold text-gray-500">
             Modificar Farmacia
           </h5>
         </div>
         <div className="modal-content py-4 text-left px-6 ">
-          <form onSubmit={(e) => handleSubmitUpdatePharmacy(e)} id="updPharmacy">
+          <form>
             <div>
-               <label className="text-md text-gray-600">Dirección: </label>
+              <label className="text-md text-gray-600">Dirección: </label>
               <input
-              className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md"
-                  type="text"
-                  name="direccion"
+                className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md"
+                type="text"
+                name="direccion"
                 autoComplete="off"
                 value={updatePharmacyData.direccion}
                 onChange={(e) => handleUpdatePharmacy(e)}
@@ -110,8 +105,8 @@ const UpdatePharmacy = ({ setShowModalUpdate, showModalUpdate }) => {
             <div>
               <label className="text-md text-gray-600">Teléfono: </label>
               <input
-
-className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md"type="text"
+                className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md"
+                type="text"
                 name="telefono"
                 autoComplete="off"
                 value={updatePharmacyData.telefono}
@@ -123,7 +118,7 @@ className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md"type="text"
             <div>
               <label className="text-md text-gray-600">E-mail: </label>
               <input
-              className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md"
+                className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md"
                 type="text"
                 name="mail"
                 autoComplete="off"
@@ -132,37 +127,35 @@ className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md"type="text"
                 placeholder="Ingrese el E-mail...."
               />
             </div>
-          
-          <div className="flex justify-between">
-          <div className="flex w-1/3 items-center">
+
+            <div className="flex justify-between">
+              <div className="flex w-1/3 items-center">
                 <label className="text-md text-gray-600">Activo: </label>
                 <select
                   id="activa"
-                  name="activa"
-                  // onChange={(e) => handleChange(e)}
+                  name="activo"
+                  onChange={(e) => handleUpdatePharmacy(e)}
+                  value={updatePharmacyData.activo}
                   defaultValue={0}
                 >
+                  <option value="">Seleccione</option>
                   <option value="false">No</option>
                   <option value="true">Si</option>
                 </select>
               </div>
 
-          <div className="flex w-2/3 justify-around">
+              <div className="flex w-2/3 justify-around">
                 {errors ? (
                   <button
                     className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    type="submit"
-                    key="submitFormButton"
-                    form="addSpeciality"
                     disabled={errors}
                   >
                     Guardar
                   </button>
                 ) : (
                   <button
-                    type="submit"
+                    onClick={handleSubmitUpdatePharmacy}
                     key="submitFormButton"
-                    form="addSpeciality"
                     className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   >
                     Guardar
@@ -175,8 +168,8 @@ className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md"type="text"
                   Cerrar
                 </button>
               </div>
-              </div>
-              </form>
+            </div>
+          </form>
         </div>
       </section>
     </div>

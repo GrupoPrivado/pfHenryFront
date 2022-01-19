@@ -5,8 +5,10 @@ const initialState = {
   allAffiliates: [],
   allPlans: [],
   allPharmacies: [],
+  pharmacies: [],
   allProfessionals: [],
   allPlansData: [],
+  allEmployees: [],
   prescriptionDNI: [],
   affiliatePrescriptionData: [],
   updateData: {},
@@ -17,8 +19,8 @@ export default function reducerABMAdmin(state = initialState, action) {
     case "GET_ALL_PROVINCES":
       return {
         ...state,
-        provinces: action.payload
-      }
+        provinces: action.payload,
+      };
     case "GET_ALL_CITIES":
       return {
         ...state,
@@ -51,7 +53,11 @@ export default function reducerABMAdmin(state = initialState, action) {
       return { ...state, allPlans: action.payload };
 
     case "GET_PHARMACIES":
-      return { ...state, allPharmacies: action.payload };
+      return {
+        ...state,
+        allPharmacies: action.payload,
+        pharmacies: action.payload,
+      };
 
     case "PHARMACY_DATA":
       let pharmData = state.allPharmacies.filter(
@@ -86,18 +92,51 @@ export default function reducerABMAdmin(state = initialState, action) {
         updateData: profData[0],
       };
 
-    case "GET_PRESCRPTION_ID":
+    case "GET_PRESCRPTION_ID": //En caso de sacar la action sacar este case 
       return { ...state, updateData: action.payload };
+
     case "GET_PRESCRPTIONS_DNI":
       return {
         ...state,
-        prescriptionDNI: action.payload.recetasResult,
-        affiliatePrescriptionData: action.payload.affiliateResult,
+        prescriptionDNI: action.payload,
+        affiliatePrescriptionData: action.payload[0].afiliadoID,
+      };
+
+      case "PRESCRIPTION_DATA":
+        let prescData = state.prescriptionDNI.filter(
+          (element) => element._id === action.payload
+        );
+        return {
+          ...state,
+          updateData: prescData[0],
+        };
+
+    case "GET_EMPLOYEES":
+      return { ...state, allEmployees: action.payload };
+
+    case "EMPLOYEE_DATA":
+      let emploData = state.allEmployees.filter(
+        (element) => element._id === action.payload
+      );
+      return {
+        ...state,
+        updateData: emploData[0],
       };
 
     case "DATA_RESET":
       return { ...state, updateData: action.payload };
 
+    case "FILTER_ACTIV":
+      let filterActiv = undefined;
+      if (action.payload !== "") {
+        filterActiv =
+          action.payload === "Si"
+            ? state.pharmacies.filter((element) => element.activo === true)
+            : state.pharmacies.filter((element) => element.activo !== true);
+      } else {
+        filterActiv = state.pharmacies;
+      }
+      return { ...state, allPharmacies: filterActiv };
     default:
       return state;
   }

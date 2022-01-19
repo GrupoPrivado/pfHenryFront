@@ -1,11 +1,9 @@
 import React from "react";
-import ABMSearchPrescriptions from "./ABMSearchPrescriptions";
+// import ABMSearchPrescriptions from "./ABMSearchPrescriptions";
 import { useDispatch, useSelector } from "react-redux";
 
-import {
-  getPrescriptionsByDNI,
-  getPrescriptionById,
-} from "../../../actions/actionAMBAdmin";
+import { getPrescriptionData, updatePrescription } from "../../../actions/actionAMBAdmin";
+import ABMPrescriptionsListAffData from "./ABMPrescriptionListAffData";
 
 import styles from "./ABMPrescriptions.module.css";
 
@@ -17,14 +15,12 @@ const ABMPrescriptionsList = ({ setShowModalUpdate }) => {
   );
 
   const handleEditPrescription = async (event) => {
-    await dispatch(getPrescriptionById(event.target.value));
+    await dispatch(getPrescriptionData(event.target.value));
     setShowModalUpdate(true);
   };
 
   return (
     <div>
-      
-
       <div className={styles.divScroll}>
         <div class="bg-gray-50 min-h-screen  ">
           <div>
@@ -32,24 +28,15 @@ const ABMPrescriptionsList = ({ setShowModalUpdate }) => {
               <div class="bg-white p-6 rounded-md">
                 <div>
                   <div className="flex ">
-                  <div className=" flex flex-col w-1/3">
-                    <label className="text-md text-gray-600">Nombre: <span className="text-sm uppercase text-black"> {affiliatePrescriptionData.nonmbre} </span></label>
-                    <label className="text-md text-gray-600">
-                      Apellido: <span className="text-sm uppercase text-black"> {affiliatePrescriptionData.apellido}</span>
-                    </label>
-                  </div>
-                  <div className=" flex flex-col w-1/3">
-                    <label className="text-md text-gray-600">DNI: <span className="text-sm uppercase text-black">{affiliatePrescriptionData.DNI}</span></label>
-                    <label className="text-md text-gray-600">
-                      E-mail:<span className="text-sm uppercase text-black"> {affiliatePrescriptionData.correoElectronico}</span>
-                    </label>
-                    <label className="text-md text-gray-600">
-                      Activo: <span className="text-sm uppercase text-black"> {affiliatePrescriptionData.activo ? "Si" : "No"}</span>
-                    </label>
-                  </div>
-                  <div className=" flex justify-end w-1/3">
-                    <ABMSearchPrescriptions />
-                  </div>
+                    {prescriptionDNI.length > 0 && (
+                      <ABMPrescriptionsListAffData
+                        affiliatePrescriptionData={affiliatePrescriptionData}
+                      />
+                    )}
+
+                    <div className=" flex justify-end w-1/3">
+                      {/* <ABMSearchPrescriptions /> */}
+                    </div>
                   </div>
                   <div className="mt-3.5">
                     <div>
@@ -61,6 +48,10 @@ const ABMPrescriptionsList = ({ setShowModalUpdate }) => {
                           <span>Autorizada</span>
                         </div>
                         <div>
+                          <span>Profesional</span>
+                        </div>
+
+                        <div>
                           <span>Realizada</span>
                         </div>
 
@@ -68,7 +59,7 @@ const ABMPrescriptionsList = ({ setShowModalUpdate }) => {
                           <span>Editar</span>
                         </div>
                       </div>
-                      {prescriptionDNI &&
+                      {prescriptionDNI?.length !== 0 &&
                         prescriptionDNI.map((element) => {
                           return (
                             <div key={element._id} className={styles.tabla}>
@@ -79,6 +70,13 @@ const ABMPrescriptionsList = ({ setShowModalUpdate }) => {
                                 <div>
                                   <span>{element.status}</span>
                                 </div>
+                                <div>
+                                  <span>
+                                    {element.profesionalID.nombre +
+                                      " " +
+                                      element.profesionalID.apellido}
+                                  </span>
+                                </div>
                                 <div class="px-2">
                                   <span>
                                     {element.planActivo ? "Si" : "No"}
@@ -86,15 +84,6 @@ const ABMPrescriptionsList = ({ setShowModalUpdate }) => {
                                 </div>
 
                                 <div class="px-2">
-                                  {/* // <button
-                                //   key={"delete" + element._id}
-                                //   title="Delete"
-                                //   value={element._id}
-                                //   onClick={(e) => handleDeleteSpeciality(e)}
-                                //   className="pr-3 "
-                                // >
-                                //   Eliminar
-                                // </button> */}
                                   <button
                                     title="Edit"
                                     key={"edit" + element._id}

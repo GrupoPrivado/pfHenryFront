@@ -35,25 +35,28 @@ const AddAffiliate = ({ setShowModalAdd }) => {
 
   const [errors, setErrors] = useState(true);
 
-  let [inputAffiliate, setInputAffiliate] = useState({
+  const inputAffiliateStruct = {
     nombre: "",
     apellido: "",
-    DNI: 0,
+    DNI: "",
     fechaNacimiento: "",
-    telefono: 0,
+    telefono: "",
     correoElectronico: "",
     ciudadID: "",
     provinciaID: "",
-    direccion: 0,
+    direccion: "",
     planID: "",
     password: "",
     alta: "",
     activo: "",
-  });
+    parentesco: "titular",
+  };
+
+  const [inputAffiliate, setInputAffiliate] = useState(inputAffiliateStruct);
 
   useEffect(() => {
     dispatch(getAllProvinces());
-  },[]);
+  }, []);
 
   let [inputAdherent, setInputAdherent] = useState([]);
 
@@ -99,44 +102,16 @@ const AddAffiliate = ({ setShowModalAdd }) => {
 
     let response = await dispatch(addAffiliate(outputAffiliate));
     alert(response.success);
-    setInputAffiliate({
-      nombre: "",
-      apellido: "",
-      DNI: 0,
-      fechaNacimiento: "",
-      telefono: 0,
-      correoElectronico: "",
-      ciudadID: "",
-      provinciaID: "",
-      direccion: 0,
-      planID: "",
-      password: "",
-      alta: "",
-      activo: "",
-    });
-    await dispatch(getAllAffiliates());
-    setErrors(true);
+    setInputAffiliate(inputAffiliateStruct);
     setShowModalAdd(false);
+    dispatch(getAllAffiliates());
+    setErrors(true);
   };
 
   const handleClose = () => {
-    setInputAffiliate({
-      nombre: "",
-      apellido: "",
-      DNI: 0,
-      fechaNacimiento: "",
-      telefono: 0,
-      correoElectronico: "",
-      ciudadID: "",
-      provinciaID: "",
-      direccion: 0,
-      planID: "",
-      password: "",
-      alta: "",
-      activo: "",
-    });
-    setErrors(true);
+    setInputAffiliate(inputAffiliateStruct);
     setShowModalAdd(false);
+    setErrors(true);
   };
 
   return (
@@ -144,7 +119,7 @@ const AddAffiliate = ({ setShowModalAdd }) => {
       <section className={styles.modalmain}>
         <h5>Agregar Nuevo Afiliado</h5>
         <div className={styles.container}>
-          <form onSubmit={(e) => handleSubmitAffiliate(e)} id="addAffiliate">
+          <form>
             <div>
               <label>Nombre: </label>
               <input
@@ -240,6 +215,7 @@ const AddAffiliate = ({ setShowModalAdd }) => {
                 className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
                 required
               >
+                <option>Seleccione Provincia</option>
                 {provinces &&
                   provinces.map((p) => (
                     <option key={p._id} value={p._id}>
@@ -260,6 +236,7 @@ const AddAffiliate = ({ setShowModalAdd }) => {
                 className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
                 required
               >
+                <option>Seleccione Localidad</option>
                 {cities &&
                   cities.map((c) => (
                     <option key={c._id} value={c._id}>
@@ -326,19 +303,11 @@ const AddAffiliate = ({ setShowModalAdd }) => {
           </div>
 
           {errors ? (
-            <button
-              type="submit"
-              key="submitFormButton"
-              form="addAffiliate"
-              disabled={errors}
-              className="disabledButton"
-            >
+            <button disabled={errors} className="disabledButton">
               Cargar
             </button>
           ) : (
-            <button type="submit" key="submitFormButton" form="addAffiliate">
-              Cargar
-            </button>
+            <button onClick={handleSubmitAffiliate}>Cargar</button>
           )}
           <button onClick={() => setShowModalAdherent(true)}>
             Agregar Adherente
@@ -347,11 +316,9 @@ const AddAffiliate = ({ setShowModalAdd }) => {
         </div>
       </section>
 
-      <AddAdherent
-        handleAddAdherent={handleAddAdherent}
-        showModalAdherent={showModalAdherent}
-        setShowModalAdherent={setShowModalAdherent}
-      />
+      {showModalAdherent && (
+        <AddAdherent setShowModalAdherent={setShowModalAdherent} />
+      )}
     </div>
   );
 };

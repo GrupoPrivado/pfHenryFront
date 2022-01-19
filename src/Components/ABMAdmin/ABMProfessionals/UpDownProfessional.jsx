@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
 import {
-  upDownAffiliateAct,
-  getAllAffiliates,
+  upDownProfessionalAct,
+  getAllProfessionals,
   resetDataUpdate,
 } from "../../../actions/actionAMBAdmin";
 
-import styles from "./UpDownAffiliate.module.css";
+import styles from "./UpDownProfessional.module.css";
 
 const functionErrors = (data) => {
   const arrayKeys = Object.keys(data);
@@ -20,76 +20,67 @@ const functionErrors = (data) => {
   }
 }; //cambiarla en un utils ya que se puede usar en todos los forms
 
-const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
+const UpDownProfessional = ({ setShowModalUpDown }) => {
   const dispatch = useDispatch();
   const { updateData } = useSelector((state) => state.ABMAdmin);
 
   const [errors, setErrors] = useState(false);
 
-  const upDownAffiliateStruct = {
+  const upDownProfessionalDataStruct = {
     id: "",
-    alta: "",
     activo: "",
-    grupoFamiliar: "",
-    grupFamID: "",
-    titularGF: "",
     subject: "",
     text: "",
-    DNI: "",
   };
 
-  const [upDownAffiliateData, setupDowndateAffiliateData] = useState(
-    upDownAffiliateStruct
+  const [upDownProfessionalData, setupDowndateProfessionalData] = useState(
+    upDownProfessionalDataStruct
   );
 
   useEffect(() => {
-    setupDowndateAffiliateData({
+    setupDowndateProfessionalData({
       id: updateData._id,
-      alta: updateData.alta,
       activo: updateData.activo,
-      titularGF: updateData.titularGF,
-      grupoFamiliar: updateData.grupoFamiliar || false,
-      grupFamID: updateData.grupFamID || false,
-      DNI: updateData.DNI,
     });
   }, [updateData, dispatch]);
 
-  const handleUpdateAffiliate = async (event) => {
-    let updatedAffiliate = {
-      ...upDownAffiliateData,
+  const handleUpdateProfessional = async (event) => {
+    let updatedProfessional = {
+      ...upDownProfessionalData,
       [event.target.name]: event.target.value,
     };
 
-    setupDowndateAffiliateData(updatedAffiliate);
+    setupDowndateProfessionalData(updatedProfessional);
 
-    setErrors(functionErrors(updatedAffiliate));
+    setErrors(functionErrors(updatedProfessional));
   };
 
-  const handleSubmitUpdateAffiliate = async (event) => {
+  const handleSubmitUpdateProfessional = async (event) => {
     event.preventDefault();
-    let response = await dispatch(upDownAffiliateAct(upDownAffiliateData));
+    let response = await dispatch(
+      upDownProfessionalAct(upDownProfessionalData)
+    );
     alert(response.success);
-    setupDowndateAffiliateData(upDownAffiliateStruct);
+    setupDowndateProfessionalData(upDownProfessionalDataStruct);
     setShowModalUpDown(false);
-    dispatch(getAllAffiliates());
+    dispatch(getAllProfessionals());
     dispatch(resetDataUpdate());
     setErrors(true);
   };
 
   const handleClose = () => {
-    setupDowndateAffiliateData(upDownAffiliateStruct);
+    setupDowndateProfessionalData(upDownProfessionalDataStruct);
     setShowModalUpDown(false);
     dispatch(resetDataUpdate());
     setErrors(true);
   };
-  const showHideClassName = showModalUpDown ? "displayblock" : "displaynone";
 
   return (
-    <div className={styles[showHideClassName]}>
+    <div>
       <section className={styles.modalmain}>
         <div className="flex justify-center">
           <h5 className="text-2xl font-bold text-gray-500">
-            ALTA / BAJA Afiliado
+            ALTA / BAJA Profesional
           </h5>
         </div>
         <div className="modal-content py-4 text-left px-6 mt-1 ">
@@ -120,22 +111,11 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
                     </span>
                   </label>
                 </div>
-              </div>
-              <div lassName="flex flex-col justify-center">
                 <div>
                   <label className="text-md text-gray-600">
-                    Grupo familiar:{" "}
-                    <span className="text-sm uppercase text-black">
-                      {updateData.grupFamID ? "Si" : "No"}
-                    </span>
-                  </label>
-                </div>
-                <div>
-                  <label className="text-md text-gray-600">
-                    Titular:
-                    <span className="text-sm uppercase text-black">
-                      {" "}
-                      {updateData.titularGF ? "Si" : "No"}
+                    Matricula:{" "}
+                    <span className="text-xl uppercase text-black">
+                      {updateData.matricula}
                     </span>
                   </label>
                 </div>
@@ -150,8 +130,8 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
                     type="text"
                     name="subject"
                     autoComplete="off"
-                    value={upDownAffiliateData.subject}
-                    onChange={(e) => handleUpdateAffiliate(e)}
+                    value={upDownProfessionalData.subject}
+                    onChange={(e) => handleUpdateProfessional(e)}
                     placeholder="Ingrese el asunto...."
                   />
                 </div>
@@ -163,8 +143,8 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
                       type="textarea"
                       name="text"
                       autoComplete="off"
-                      value={upDownAffiliateData.text}
-                      onChange={(e) => handleUpdateAffiliate(e)}
+                      value={upDownProfessionalData.text}
+                      onChange={(e) => handleUpdateProfessional(e)}
                       placeholder="Ingrese el texto...."
                     />
                   </div>
@@ -172,24 +152,11 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
               </div>
               <div className="flex flex-col gap-10">
                 <div>
-                  <label className="text-md text-gray-600">Alta: </label>
-                  <select
-                    name="alta"
-                    onChange={(e) => handleUpdateAffiliate(e)}
-                    value={upDownAffiliateData.alta}
-                  >
-                    <option value="">Seleccione:</option>
-                    <option value={true}>Si</option>
-                    <option value={false}>No</option>
-                  </select>
-                </div>
-
-                <div>
                   <label className="text-md text-gray-600">Activo: </label>
                   <select
                     name="activo"
-                    onChange={(e) => handleUpdateAffiliate(e)}
-                    value={upDownAffiliateData.activo}
+                    onChange={(e) => handleUpdateProfessional(e)}
+                    value={upDownProfessionalData.activo}
                   >
                     <option value="">Seleccione:</option>
                     <option value={true}>Si</option>
@@ -210,7 +177,7 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
                   </button>
                 ) : (
                   <button
-                    onClick={handleSubmitUpdateAffiliate}
+                    onClick={handleSubmitUpdateProfessional}
                     className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   >
                     Guardar
@@ -231,4 +198,4 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
   );
 };
 
-export default UpDownAffiliate;
+export default UpDownProfessional;
