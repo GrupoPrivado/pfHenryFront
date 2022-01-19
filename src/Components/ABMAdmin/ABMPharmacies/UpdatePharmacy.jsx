@@ -27,7 +27,7 @@ const UpdatePharmacy = ({ setShowModalUpdate, showModalUpdate }) => {
 
   const [errors, setErrors] = useState(false);
 
-  const updatePharmacyData = {
+  const updatePharmacyDataStruct = {
     id: "",
     direccion: "",
     telefono: "",
@@ -36,7 +36,7 @@ const UpdatePharmacy = ({ setShowModalUpdate, showModalUpdate }) => {
   };
 
   const [updatePharmacyData, setUpdatePharmacyData] =
-    useState(updatePharmacyData);
+    useState(updatePharmacyDataStruct);
 
   useEffect(() => {
     setUpdatePharmacyData({
@@ -53,7 +53,7 @@ const UpdatePharmacy = ({ setShowModalUpdate, showModalUpdate }) => {
       ...updatePharmacyData,
       [event.target.name]: event.target.value,
     };
-    setUpdatePharmacyData(updatedPharmacy);
+    setUpdatePharmacyData(updatePharmacyDataStruct);
 
     setErrors(functionErrors(updatedPharmacy));
   };
@@ -62,7 +62,7 @@ const UpdatePharmacy = ({ setShowModalUpdate, showModalUpdate }) => {
     event.preventDefault();
     let response = await dispatch(updatePharmacy(updatePharmacyData));
     alert(response.success);
-    setUpdatePharmacyData(updatePharmacyData);
+    setUpdatePharmacyData(updatePharmacyDataStruct);
     setShowModalUpdate(false);
     dispatch(getAllPharmacies({})); //Dejarle el objeto vacio sino no actualiza, es por los query que necesita la ruta para devolver el listado
     dispatch(resetDataUpdate());
