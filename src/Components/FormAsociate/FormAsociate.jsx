@@ -85,10 +85,10 @@ export default function FormAsociate({
         planID: "",
         password: "",
       });
+      setTimeout(() => {
+        navigate("/login")
+      }, 3500);
     }
-    setTimeout(() => {
-      navigate("/login")
-    }, 3500);
     
     // setErrors(true);
   };

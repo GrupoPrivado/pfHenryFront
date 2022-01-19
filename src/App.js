@@ -14,7 +14,7 @@ function App() {
           <Route path='/*' element={<Guest />} />
           <Route path='afiliado/*' element={<Afiliado/>} />
           <Route path='administrador/*' element={<Admin/>} />
-          <Route path='profesionales/*' element={<Profesionales/>} />
+          <Route path='profesional/*' element={<Profesionales/>} />
         <Route path='*' element={<div><h1>Recurso no encontrado</h1></div>} />
       </Routes>
         {/* <Footer /> */}

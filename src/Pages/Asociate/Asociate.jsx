@@ -73,7 +73,7 @@ export default function Asociate() {
         )}
 
       {activeAlert && <SuccessAlert message={alertMessage} />}
-      {errorAlert && <ErrorAlert message="Verifique los datos ingresados" />}
+      {errorAlert && <ErrorAlert message={alertMessage} />}
     </div>
   );
 }

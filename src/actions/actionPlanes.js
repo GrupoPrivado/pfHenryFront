@@ -27,8 +27,10 @@ export function getPlanes() {
 
 
 export const postAfiliate = (payload) => {
+  console.log(payload,'afiliado')
   return async (dispatch) => {
     const {data} = await axios.post(`${api}/addPreCarga`, payload);
+    console.log(data)
     if(data.success){
       dispatch({type: alertConstants.SUCCESS , message: 'Registro exitoso'})
     } else {

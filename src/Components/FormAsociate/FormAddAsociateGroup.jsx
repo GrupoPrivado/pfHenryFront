@@ -7,8 +7,7 @@ import date from "./../../utils/date.js"
 const functionErrors = (data) => {
   const arrayKeys = Object.keys(data);
   const arrayData = arrayKeys.filter((element, index) => data[element] !== "");
-  console.log("arraykey", arrayKeys);
-  console.log("arraydata", arrayData);
+
 
   if (arrayKeys.length === arrayData.length + 1) {
     return false;
