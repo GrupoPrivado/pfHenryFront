@@ -31,18 +31,20 @@ const AddPharmacy = ({ setShowModalAdd }) => {
     dispatch(getAllProvinces());
   }, []);
 
-  const [errors, setErrors] = useState(true);
-
-  let [inputPharmacy, setInputPharmacy] = useState({
+  const inputPharmacyStruct = {
     nombre: "",
     direccion: "",
     telefono: "",
     mail: "",
-    numHabilitacion: 0,
+    numHabilitacion: "",
     ciudadID: "",
     provinciaID: "",
     activo: "",
-  });
+  };
+
+  const [errors, setErrors] = useState(true);
+
+  const [inputPharmacy, setInputPharmacy] = useState(inputPharmacyStruct);
 
   const handleChange = (event) => {
     let newPharmacy = {
@@ -69,32 +71,14 @@ const AddPharmacy = ({ setShowModalAdd }) => {
     event.preventDefault();
     let response = await dispatch(addPharmacy(inputPharmacy));
     alert(response.success);
-    setInputPharmacy({
-      nombre: "",
-      direccion: "",
-      telefono: "",
-      mail: "",
-      numHabilitacion: 0,
-      ciudadID: "",
-      provinciaID: "",
-      activo: "",
-    });
+    setInputPharmacy(inputPharmacyStruct);
     dispatch(getAllPharmacies({}));
     setErrors(true);
     setShowModalAdd(false);
   };
 
   const handleClose = () => {
-    setInputPharmacy({
-      nombre: "",
-      direccion: "",
-      telefono: "",
-      mail: "",
-      numHabilitacion: 0,
-      ciudadID: "",
-      provinciaID: "",
-      activo: "",
-    });
+    setInputPharmacy(inputPharmacyStruct);
     setErrors(true);
     setShowModalAdd(false);
   };
@@ -177,51 +161,50 @@ const AddPharmacy = ({ setShowModalAdd }) => {
                   placeholder="Ingrese el E-mail...."
                 />
               </div>
+            </div>
+            <div className="flex">
+              <div className="w-1/2">
+                <label className="text-md text-gray-600" htmlFor="provincia">
+                  Provincia:{" "}
+                </label>
+                <select
+                  value={inputPharmacy.provinciaID}
+                  onChange={handleChangeProvince}
+                  name="provinciaID"
+                  className=" h-1/2 w-full  border-2 border-gray-300 mb-5 rounded-md"
+                  required
+                >
+                  <option>Seleccione Provincia</option>
+                  {provinces &&
+                    provinces.map((p) => (
+                      <option key={p._id} value={p._id}>
+                        {p.nombre}
+                      </option>
+                    ))}
+                </select>
               </div>
-              <div className="flex">
-                <div className="w-1/2">
-                  <label className="text-md text-gray-600" htmlFor="provincia">
-                    Provincia:{" "}
-                  </label>
-                  <select
-                    value={inputPharmacy.provinciaID}
-                    onChange={handleChangeProvince}
-                    name="provinciaID"
-                    className=" h-1/2 w-full  border-2 border-gray-300 mb-5 rounded-md"
-                    required
-                  >
-                    <option>Seleccione Provincia</option>
-                    {provinces &&
-                      provinces.map((p) => (
-                        <option key={p._id} value={p._id}>
-                          {p.nombre}
-                        </option>
-                      ))}
-                  </select>
-                </div>
 
-                <div className="w-1/2">
-                  <label className="text-md text-gray-600" htmlFor="localidad">
-                    Localidad:{" "}
-                  </label>
-                  <select
-                    onChange={(e) => handleChange(e)}
-                    value={inputPharmacy.ciudadID}
-                    name="ciudadID"
-                    className=" h-1/2 w-full  border-2 border-gray-300 mb-5 rounded-md"
-                    required
-                  >
-                    <option>Seleccione Localidad</option>
-                    {cities &&
-                      cities.map((c) => (
-                        <option key={c._id} value={c._id}>
-                          {c.localidad}
-                        </option>
-                      ))}
-                  </select>
-                </div>
+              <div className="w-1/2">
+                <label className="text-md text-gray-600" htmlFor="localidad">
+                  Localidad:{" "}
+                </label>
+                <select
+                  onChange={(e) => handleChange(e)}
+                  value={inputPharmacy.ciudadID}
+                  name="ciudadID"
+                  className=" h-1/2 w-full  border-2 border-gray-300 mb-5 rounded-md"
+                  required
+                >
+                  <option>Seleccione Localidad</option>
+                  {cities &&
+                    cities.map((c) => (
+                      <option key={c._id} value={c._id}>
+                        {c.localidad}
+                      </option>
+                    ))}
+                </select>
               </div>
-            
+            </div>
 
             <div className="flex justify-between">
               <div className="flex w-1/3 items-center">

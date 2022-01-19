@@ -26,12 +26,16 @@ const UpDownProfessional = ({ setShowModalUpDown }) => {
 
   const [errors, setErrors] = useState(false);
 
-  let [upDownProfessionalData, setupDowndateProfessionalData] = useState({
+  const upDownProfessionalDataStruct = {
     id: "",
     activo: "",
     subject: "",
     text: "",
-  });
+  };
+
+  const [upDownProfessionalData, setupDowndateProfessionalData] = useState(
+    upDownProfessionalDataStruct
+  );
 
   useEffect(() => {
     setupDowndateProfessionalData({
@@ -57,12 +61,7 @@ const UpDownProfessional = ({ setShowModalUpDown }) => {
       upDownProfessionalAct(upDownProfessionalData)
     );
     alert(response.success);
-    setupDowndateProfessionalData({
-      id: "",
-      activo: "",
-      subject: "",
-      text: "",
-    });
+    setupDowndateProfessionalData(upDownProfessionalDataStruct);
     setShowModalUpDown(false);
     dispatch(getAllProfessionals());
     dispatch(resetDataUpdate());
@@ -70,12 +69,7 @@ const UpDownProfessional = ({ setShowModalUpDown }) => {
   };
 
   const handleClose = () => {
-    setupDowndateProfessionalData({
-      id: "",
-      activo: "",
-      subject: "",
-      text: "",
-    });
+    setupDowndateProfessionalData(upDownProfessionalDataStruct);
     setShowModalUpDown(false);
     dispatch(resetDataUpdate());
     setErrors(true);

@@ -30,13 +30,17 @@ const UpdateProfessional = ({ setShowModalUpdate }) => {
 
   const [errors, setErrors] = useState(false);
 
-  let [updateProfessionalData, setUpdateProfessionalData] = useState({
+  const updateProfessionalDataStruct = {
     _id: "",
     telefono: "",
     mail: "",
     ciudadID: "",
     provinciaID: "",
-  });
+  };
+
+  const [updateProfessionalData, setUpdateProfessionalData] = useState(
+    updateProfessionalDataStruct
+  );
 
   useEffect(() => {
     setUpdateProfessionalData({
@@ -74,13 +78,7 @@ const UpdateProfessional = ({ setShowModalUpdate }) => {
     event.preventDefault();
     let response = await dispatch(updateProfessional(updateProfessionalData));
     alert(response.success);
-    setUpdateProfessionalData({
-      _id: "",
-      telefono: "",
-      mail: "",
-      ciudadID: "",
-      provinciaID: "",
-    });
+    setUpdateProfessionalData(updateProfessionalDataStruct);
     setShowModalUpdate(false);
     dispatch(getAllProfessionals());
     dispatch(resetDataUpdate());
@@ -88,13 +86,7 @@ const UpdateProfessional = ({ setShowModalUpdate }) => {
   };
 
   const handleClose = () => {
-    setUpdateProfessionalData({
-      _id: "",
-      telefono: "",
-      mail: "",
-      ciudadID: "",
-      provinciaID: "",
-    });
+    setUpdateProfessionalData(updateProfessionalDataStruct);
     setShowModalUpdate(false);
     dispatch(resetDataUpdate());
     setErrors(true);
@@ -172,8 +164,6 @@ const UpdateProfessional = ({ setShowModalUpdate }) => {
                   ))}
               </select>
             </div>
-
-           
           </form>
 
           {errors ? (

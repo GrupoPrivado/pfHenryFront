@@ -27,13 +27,16 @@ const UpdatePharmacy = ({ setShowModalUpdate, showModalUpdate }) => {
 
   const [errors, setErrors] = useState(false);
 
-  let [updatePharmacyData, setUpdatePharmacyData] = useState({
+  const updatePharmacyData = {
     id: "",
     direccion: "",
     telefono: "",
     mail: "",
     activo: "",
-  });
+  };
+
+  const [updatePharmacyData, setUpdatePharmacyData] =
+    useState(updatePharmacyData);
 
   useEffect(() => {
     setUpdatePharmacyData({
@@ -59,13 +62,7 @@ const UpdatePharmacy = ({ setShowModalUpdate, showModalUpdate }) => {
     event.preventDefault();
     let response = await dispatch(updatePharmacy(updatePharmacyData));
     alert(response.success);
-    setUpdatePharmacyData({
-      id: "",
-      direccion: "",
-      telefono: "",
-      mail: "",
-      activo: "",
-    });
+    setUpdatePharmacyData(updatePharmacyData);
     setShowModalUpdate(false);
     dispatch(getAllPharmacies({})); //Dejarle el objeto vacio sino no actualiza, es por los query que necesita la ruta para devolver el listado
     dispatch(resetDataUpdate());
@@ -74,13 +71,7 @@ const UpdatePharmacy = ({ setShowModalUpdate, showModalUpdate }) => {
   };
 
   const handleClose = () => {
-    setUpdatePharmacyData({
-      id: "",
-      direccion: "",
-      telefono: "",
-      mail: "",
-      activo: "",
-    });
+    setUpdatePharmacyData(updatePharmacyData);
     setShowModalUpdate(false);
     dispatch(resetDataUpdate());
     setErrors(true);
@@ -136,7 +127,7 @@ const UpdatePharmacy = ({ setShowModalUpdate, showModalUpdate }) => {
                 placeholder="Ingrese el E-mail...."
               />
             </div>
-            
+
             <div className="flex justify-between">
               <div className="flex w-1/3 items-center">
                 <label className="text-md text-gray-600">Activo: </label>
@@ -152,36 +143,34 @@ const UpdatePharmacy = ({ setShowModalUpdate, showModalUpdate }) => {
                   <option value="true">Si</option>
                 </select>
               </div>
-            
-          
-          <div className="flex w-2/3 justify-around">
-            {errors ? (
-              <button
-                className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                disabled={errors}
-              >
-                Guardar
-              </button>
-            ) : (
-              <button
-                onClick={handleSubmitUpdatePharmacy}
-                key="submitFormButton"
-                className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              >
-                Guardar
-              </button>
-            )}
-            <button
-              onClick={() => handleClose()}
-              className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              Cerrar
-            </button>
-          </div>
-          </div>
+
+              <div className="flex w-2/3 justify-around">
+                {errors ? (
+                  <button
+                    className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    disabled={errors}
+                  >
+                    Guardar
+                  </button>
+                ) : (
+                  <button
+                    onClick={handleSubmitUpdatePharmacy}
+                    key="submitFormButton"
+                    className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  >
+                    Guardar
+                  </button>
+                )}
+                <button
+                  onClick={() => handleClose()}
+                  className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                  Cerrar
+                </button>
+              </div>
+            </div>
           </form>
         </div>
-        
       </section>
     </div>
   );

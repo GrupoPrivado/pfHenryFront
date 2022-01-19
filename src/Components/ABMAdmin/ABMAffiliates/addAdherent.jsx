@@ -17,10 +17,7 @@ const functionErrors = (data) => {
   }
 }; //cambiarla en un utils ya que se puede usar en todos los forms
 
-const AddAdherent = ({
-  handleAddAdherent,
-  setShowModalAdherent,
-}) => {
+const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
   const dispatch = useDispatch();
 
   const { cities, provinces } = useSelector((state) => state.ABMAdmin);
@@ -33,18 +30,20 @@ const AddAdherent = ({
     { display: "Familiar a cargo", value: "famCargo" },
   ];
 
-  let [inputAdherent, setInputAdherent] = useState({
+  const inputAdherentStruct = {
     nombre: "",
     apellido: "",
-    DNI: 0,
+    DNI: "",
     fechaNacimiento: "",
-    telefono: 0,
+    telefono: "",
     correoElectronico: "",
-    direccion: 0,
+    direccion: "",
     ciudadID: "",
     provinciaID: "",
     parentesco: "",
-  });
+  };
+
+  let [inputAdherent, setInputAdherent] = useState(inputAdherentStruct);
 
   const handleChangeProvince = (e) => {
     const newData = {
@@ -57,21 +56,9 @@ const AddAdherent = ({
 
   const handleSubmit = () => {
     alert("Me cree");
-    handleAddAdherent(inputAdherent);
-    setInputAdherent({
-      nombre: "",
-      apellido: "",
-      DNI: 0,
-      fechaNacimiento: "",
-      telefono: 0,
-      correoElectronico: "",
-      direccion: 0,
-      localidad: "",
-      ciudadCP: 0,
-      provincia: "",
-      parentesco: "",
-    });
     setShowModalAdherent(false);
+    handleAddAdherent(inputAdherent);
+    setInputAdherent(inputAdherentStruct);
   };
 
   const handleChange = (event) => {
@@ -87,19 +74,7 @@ const AddAdherent = ({
   };
 
   const handleClose = () => {
-    setInputAdherent({
-      nombre: "",
-      apellido: "",
-      DNI: 0,
-      fechaNacimiento: "",
-      telefono: 0,
-      correoElectronico: "",
-      direccion: 0,
-      localidad: "",
-      ciudadCP: 0,
-      provincia: "",
-      parentesco: "",
-    });
+    setInputAdherent(inputAdherentStruct);
     setErrors(true);
     setShowModalAdherent(false);
   };

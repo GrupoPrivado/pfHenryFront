@@ -26,13 +26,15 @@ const UpdatePlan = ({ setShowModalUpdate, showModalUpdate }) => {
 
   const [errors, setErrors] = useState(false);
 
-  let [updatePlanData, setUpdatePlanData] = useState({
+  const updatePlanStruct = {
     id: "",
     name: "",
     precio: "",
     descripcion: "",
-    planActivo: false,
-  });
+    planActivo: "",
+  };
+
+  const [updatePlanData, setUpdatePlanData] = useState(updatePlanStruct);
 
   useEffect(() => {
     setUpdatePlanData({
@@ -102,13 +104,7 @@ const UpdatePlan = ({ setShowModalUpdate, showModalUpdate }) => {
     event.preventDefault();
     let response = await dispatch(updatePlan(updatePlanData));
     alert(response.success);
-    setUpdatePlanData({
-      id: "",
-      name: "",
-      precio: "",
-      descripcion: "",
-      planActivo: false,
-    });
+    setUpdatePlanData(updatePlanStruct);
     setShowModalUpdate(false);
     dispatch(getAllPlansData());
     dispatch(resetDataUpdate({}));
@@ -116,13 +112,7 @@ const UpdatePlan = ({ setShowModalUpdate, showModalUpdate }) => {
   };
 
   const handleClose = () => {
-    setUpdatePlanData({
-      id: "",
-      name: "",
-      precio: "",
-      descripcion: "",
-      planActivo: false,
-    });
+    setUpdatePlanData(updatePlanStruct);
     setShowModalUpdate(false);
     dispatch(resetDataUpdate({}));
     setErrors(false);
@@ -132,14 +122,14 @@ const UpdatePlan = ({ setShowModalUpdate, showModalUpdate }) => {
     <div>
       <section className={styles.modalmain}>
         <div className="flex justify-center h-10%">
-        <div className="flex justify-center items-center">
-          <h5 className="text-2xl font-bold text-gray-500">Editar Plan: </h5>
-        </div>
-        <div className="flex justify-center items-center  mx-1.5">
-          <h5 className="text-2xl font-semibold text-black uppercase">
-            {updatePlanData.name}
-          </h5>
-        </div>
+          <div className="flex justify-center items-center">
+            <h5 className="text-2xl font-bold text-gray-500">Editar Plan: </h5>
+          </div>
+          <div className="flex justify-center items-center  mx-1.5">
+            <h5 className="text-2xl font-semibold text-black uppercase">
+              {updatePlanData.name}
+            </h5>
+          </div>
         </div>
 
         <div className="modal-content py-4 text-left px-6 h-90%">
@@ -185,7 +175,9 @@ const UpdatePlan = ({ setShowModalUpdate, showModalUpdate }) => {
                 />
               </div>
               <div className="h-2/3">
-                <label className=" h-1/3 text-md text-gray-600">Descripción: </label>
+                <label className=" h-1/3 text-md text-gray-600">
+                  Descripción:{" "}
+                </label>
                 <input
                   className="h-2/3 p-4  w-full border-2 border-gray-300 mb-2 rounded-md"
                   type="text"
@@ -200,7 +192,7 @@ const UpdatePlan = ({ setShowModalUpdate, showModalUpdate }) => {
             <div className="w-1/2">
               <div className="h-1/3 flex  justify-center items-center">
                 <button
-                className="group relative w-2/3 h-6 flex items-center justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-400 focus:outline-none focus:ring-2 focus:ring-offset-2 "
+                  className="group relative w-2/3 h-6 flex items-center justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-400 focus:outline-none focus:ring-2 focus:ring-offset-2 "
                   name="descripcion"
                   onClick={(e) => handleAddDescription(e)}
                 >
@@ -212,16 +204,26 @@ const UpdatePlan = ({ setShowModalUpdate, showModalUpdate }) => {
                   updatePlanData.descripcion.map((element, index) => {
                     return (
                       <div key={"divDesc" + index}>
-                        <label className="text-md text-gray-600" key={"labelTipo" + index}>{element[0]}: </label>
-                        <label className="text-md text-black" key={"labelDesc" + index}>{element[1]}</label>
+                        <label
+                          className="text-md text-gray-600"
+                          key={"labelTipo" + index}
+                        >
+                          {element[0]}:{" "}
+                        </label>
+                        <label
+                          className="text-md text-black"
+                          key={"labelDesc" + index}
+                        >
+                          {element[1]}
+                        </label>
                         <button
-                        className="text-red-600"
+                          className="text-red-600"
                           value={index}
                           name={"btnDel" + index}
                           id={index}
                           onClick={(e) => handleDeleteDescr(e)}
                         >
-                         <svg
+                          <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="h-3 w-3 "
                             viewBox="0 0 20 20"
@@ -241,48 +243,46 @@ const UpdatePlan = ({ setShowModalUpdate, showModalUpdate }) => {
             </div>
           </div>
 
-          <div  className="flex justify-between items-end  mt-4">
-            
-              <div className="flex w-1/3 items-center">
-                <label className="text-md text-gray-600">Activo: </label>
-                <select
-                  id="activo"
-                  name="planActivo"
-                  onChange={(e) => handleUpdatePlan(e)}
-                  value={updatePlanData.planActivo}
-                  defaultValue={0}
+          <div className="flex justify-between items-end  mt-4">
+            <div className="flex w-1/3 items-center">
+              <label className="text-md text-gray-600">Activo: </label>
+              <select
+                id="activo"
+                name="planActivo"
+                onChange={(e) => handleUpdatePlan(e)}
+                value={updatePlanData.planActivo}
+                defaultValue={0}
+              >
+                <option value="">Seleccione</option>
+                <option value="false">No</option>
+                <option value="true">Si</option>
+              </select>
+            </div>
+            <div className="flex w-2/3 justify-around mt-4">
+              {errors ? (
+                <button
+                  className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  disabled={errors}
                 >
-                  <option value="">Seleccione</option>
-                  <option value="false">No</option>
-                  <option value="true">Si</option>
-                </select>
-              </div>
-              <div className="flex w-2/3 justify-around mt-4">
-            {errors ? (
+                  Guardar
+                </button>
+              ) : (
+                <button
+                  key="submitFormButton"
+                  onClick={(e) => handleSubmitUpdatePlan(e)}
+                  className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                  Guardar
+                </button>
+              )}
               <button
-                className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                disabled={errors}
+                onClick={() => handleClose()}
+                className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
-                Guardar
+                Cerrar
               </button>
-            ) : (
-              <button
-                key="submitFormButton"
-                onClick={(e) => handleSubmitUpdatePlan(e)}
-                className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              >
-                Guardar
-              </button>
-            )}
-            <button
-              onClick={() => handleClose()}
-              className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              Cerrar
-            </button>
+            </div>
           </div>
-          </div>
-          
         </div>
       </section>
     </div>

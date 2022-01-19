@@ -33,7 +33,7 @@ const AddEmployee = ({ setShowModalAdd }) => {
     activo: "",
   };
 
-  let [inputEmployee, setInputEmployee] = useState(inputEmployeeData);
+  const [inputEmployee, setInputEmployee] = useState(inputEmployeeData);
 
   const handleChange = (event) => {
     let newEmployee = {

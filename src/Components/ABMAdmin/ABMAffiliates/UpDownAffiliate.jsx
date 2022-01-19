@@ -26,17 +26,21 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
 
   const [errors, setErrors] = useState(false);
 
-  let [upDownAffiliateData, setupDowndateAffiliateData] = useState({
+  const upDownAffiliateStruct = {
     id: "",
-    alta: false,
-    activo: false,
+    alta: "",
+    activo: "",
     grupoFamiliar: "",
     grupFamID: "",
     titularGF: "",
     subject: "",
     text: "",
     DNI: "",
-  });
+  };
+
+  const [upDownAffiliateData, setupDowndateAffiliateData] = useState(
+    upDownAffiliateStruct
+  );
 
   useEffect(() => {
     setupDowndateAffiliateData({
@@ -65,17 +69,7 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
     event.preventDefault();
     let response = await dispatch(upDownAffiliateAct(upDownAffiliateData));
     alert(response.success);
-    setupDowndateAffiliateData({
-      id: "",
-      alta: false,
-      activo: false,
-      grupoFamiliar: "",
-      grupFamID: "",
-      titularGF: "",
-      subject: "",
-      text: "",
-      DNI: "",
-    });
+    setupDowndateAffiliateData(upDownAffiliateStruct);
     setShowModalUpDown(false);
     dispatch(getAllAffiliates());
     dispatch(resetDataUpdate());
@@ -83,17 +77,7 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
   };
 
   const handleClose = () => {
-    setupDowndateAffiliateData({
-      id: "",
-      alta: false,
-      activo: false,
-      grupoFamiliar: "",
-      grupFamID: "",
-      titularGF: "",
-      subject: "",
-      text: "",
-      DNI: "",
-    });
+    setupDowndateAffiliateData(upDownAffiliateStruct);
     setShowModalUpDown(false);
     dispatch(resetDataUpdate());
     setErrors(true);
