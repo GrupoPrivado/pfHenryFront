@@ -53,7 +53,7 @@ const UpdatePharmacy = ({ setShowModalUpdate, showModalUpdate }) => {
       ...updatePharmacyData,
       [event.target.name]: event.target.value,
     };
-    setUpdatePharmacyData(updatedPharmacy);
+    setUpdatePharmacyData(updatePharmacyDataStruct);
 
     setErrors(functionErrors(updatedPharmacy));
   };
