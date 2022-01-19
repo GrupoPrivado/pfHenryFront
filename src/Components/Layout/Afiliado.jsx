@@ -7,6 +7,7 @@ import Credencial from '../Credencial/Credencial'
 import FamilyGroupDetail from '../FamilyGroup/FamilyGroupDetail'
 import MedicalHistoryDetails from '../MedicalHistory/MedicalHistoryDetails'
 import Perfil from '../Perfil/Perfil'
+import Footer from '../Footer/Footer'
 import NavBarDashboard from '../NavBarDashboard/NavBarDashboard'
 import PrivateRouter from '../PrivateRouter/PrivateRouter'
 import CartPrest from '../Providers/CartPrest'
@@ -36,6 +37,7 @@ const Afiliado = () => {
 
         <Route path='*' element={<div><h1>Recurso no encontrado</h1></div>} />
       </Routes>
+      <Footer /> 
     </div>
   );
 };
