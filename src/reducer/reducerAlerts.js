@@ -25,3 +25,7 @@ export function reducerAlerts(state = inicialState, action) {
       return state
   }
 }
+
+// clear return {    type: '',
+    // message: '',
+    // error: '',}

@@ -62,29 +62,29 @@ export default function FormAsociate({
   }
 
   useEffect(() => {
-    if(error === false) {
-      setOutput([]);
-      setInput({
-        nombre: "",
-        apellido: "",
-        DNI: "",
-        fechaNacimiento: "",
-        telefono: "",
-        correoElectronico: "",
-        ciudadID: "",
-        provinciaID: "",
-        direccion: "",
-        planID: "",
-        password: "",
-      });
-      setTimeout(() => {
-        navigate("/login")
-      }, 3500);
-    }
+    // if(error === false) {
+    //   setOutput([]);
+    //   setInput({
+    //     nombre: "",
+    //     apellido: "",
+    //     DNI: "",
+    //     fechaNacimiento: "",
+    //     telefono: "",
+    //     correoElectronico: "",
+    //     ciudadID: "",
+    //     provinciaID: "",
+    //     direccion: "",
+    //     planID: "",
+    //     password: "",
+    //   });
+    //   setTimeout(() => {
+    //     navigate("/login")
+    //   }, 3500);
+    // }
     if(error){
       setOutput([])
     }
-  }, [error, navigate, setOutput]);
+  }, [error,  setOutput]);
   
 
   const handleSubmit = (e) => {

@@ -10,6 +10,7 @@ import { getAllProvinces } from "../../actions/actionProviders";
 import { alertActions } from "../../actions/actionAlerts";
 import SuccessAlert from "../../Components/Alerts/SuccessAlert";
 import ErrorAlert from "../../Components/Alerts/ErrorAlert";
+import { useNavigate } from "react-router-dom";
 
 export default function Asociate() {
   const { type, message, error } = useSelector((state) => state.alerts);
@@ -18,17 +19,16 @@ export default function Asociate() {
   console.log(error, 'error dentro de asociate')
 
   const [alertMessage, setAlertMessage] = useState("");
-
+  const navigate = useNavigate()
   const dispatch = useDispatch();
 
   const {provinces, cities} = useSelector(state => state.providers)
   useTitle("Asociate a ArpyMedical");
   
   useEffect(() => {
-    if(error === false)dispatch(alertActions.clear());
     dispatch(getPlanes());
     dispatch(getAllProvinces())
-
+    
     if (type === "alert-success") {
       setActiveAlert(true);
       setAlertMessage(message);
@@ -37,15 +37,20 @@ export default function Asociate() {
       setErrorAlert(true);
       setAlertMessage(message);
     }
+    if(error === false) {
+       dispatch(alertActions.clear());
+       navigate('/login')
+    } 
 
-  }, [dispatch, message, type]);
+  }, [dispatch, error, message, type]);
 
 
 
   setTimeout(() => {
     setActiveAlert(false);
     setErrorAlert(false);
-  }, 4000);
+    //navigate('/login')
+  }, 4000)
 
 
   const [output, setOutput] = useState([]);
