@@ -5,6 +5,8 @@ import { getPlanes } from "../../actions/actionPlanes";
 import { postAfiliate } from "../../actions/actionPlanes";
 import { useNavigate } from "react-router-dom";
 import { getAllCities } from "../../actions/actionProviders";
+import date from "./../../utils/date.js"
+import { validate } from "../../utils/constantes";
 
 const functionErrors = (data) => {
   const arrayKeys = Object.keys(data);
@@ -28,6 +30,7 @@ export default function FormAsociate({
   const navigate = useNavigate();
   const { planes } = useSelector((state) => state.planes);
   const [errors, setErrors] = useState(true);
+  const [errores, setErrores] = useState({})
 
   const [input, setInput] = useState({
     nombre: "",
@@ -51,35 +54,43 @@ export default function FormAsociate({
     };
     setInput(newInp);
     setErrors(functionErrors(newInp));
+    // setErrores(validate({
+    //   ...input,
+    //   [e.target.name]:e.target.value
+    // }))
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const validateError = validate(input)
+    setErrores(validateError)
+    console.log(validateError, "Validate")
+    if (Object.entries(validateError).length <= 0) {
+      console.log(Object.entries(validateError).length)
+      const newState = [input, ...output];
 
-
-    const newState = [input, ...output];
-
-    setOutput(newState);
-
-    //alert("afiliate create");
-
-    dispatch(postAfiliate(newState));
-
-    setInput({
-      nombre: "",
-      apellido: "",
-      DNI: "",
-      fechaNacimiento: "",
-      telefono: "",
-      correoElectronico: "",
-      ciudadID: "",
-      provinciaID: "",
-      direccion: "",
-      planID: "",
-      password: "",
-    });
-    setErrors(true);
-    //navigate("/");
+      setOutput(newState);
+      dispatch(postAfiliate(newState));
+      setOutput([]);
+      setInput({
+        nombre: "",
+        apellido: "",
+        DNI: "",
+        fechaNacimiento: "",
+        telefono: "",
+        correoElectronico: "",
+        ciudadID: "",
+        provinciaID: "",
+        direccion: "",
+        planID: "",
+        password: "",
+      });
+    }
+    setTimeout(() => {
+      navigate("/login")
+    }, 3500);
+    
+    // setErrors(true);
   };
   function handleSelect(e) {
     if (e.target.value !== "select") {
@@ -108,19 +119,22 @@ export default function FormAsociate({
       <div className="w-full max-w-md space-y-8">
         <form className="mt-8 space-y-6 " onSubmit={handleSubmit}>
           <input type="hidden" name="remember" defaultValue="true" />
-          <div className="grid items-center -z-0 grid-cols-3 grid-rows-5 gap-4 -space-y-px rounded-md shadow-sm w-90vw sm:grid-cols-4 sm:grid-rows-2">
+          <div className="grid items-center grid-cols-3 grid-rows-5 gap-4 -space-y-px rounded-md shadow-sm -z-0 w-90vw sm:grid-cols-4 sm:grid-rows-2">
             <h3 className='col-span-4 row-span-1 text-2xl font-bold text-left text-primary'>Formulario de registro</h3>
             <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
               <label htmlFor="nombre" className="text-lg font-semibold">Nombre</label>
               <input
                 required
-                className="relative -z-0 block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none -z-0 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 type="text"
                 value={input.nombre}
                 name="nombre"
                 onChange={(e) => handleChange(e)}
                 placeholder="Tu nombre"
               />
+              {errores.nombre && (
+                <p className="absolute text-red-700">{errores.nombre}</p>
+              )}
             </div>
             <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
               <label htmlFor="apellido" className="text-lg font-semibold">Apellido</label>
@@ -133,6 +147,9 @@ export default function FormAsociate({
                 onChange={(e) => handleChange(e)}
                 placeholder="Tu apellido"
               />
+              {errores.apellido && (
+                <p className="absolute text-red-700">{errores.apellido}</p>
+              )}
             </div>
 
             <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
@@ -146,6 +163,9 @@ export default function FormAsociate({
                 onChange={(e) => handleChange(e)}
                 placeholder="Tu DNI"
               />
+              {errores.DNI && (
+                <p className="absolute text-red-700">{errores.DNI}</p>
+              )}
             </div>
 
             <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
@@ -156,9 +176,13 @@ export default function FormAsociate({
                 type="date"
                 value={input.fechaNacimiento}
                 name="fechaNacimiento"
+                max={date}
                 onChange={(e) => handleChange(e)}
                 placeholder="Fecha de Nacimiento"
               />
+              {errores.fechaNacimiento && (
+                <p className="absolute text-red-700">{errores.fechaNacimiento}</p>
+              )}
             </div>
 
             <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
@@ -172,6 +196,9 @@ export default function FormAsociate({
                 onChange={(e) => handleChange(e)}
                 placeholder="Tu teléfono"
               />
+              {errores.telefono && (
+                <p className="absolute text-red-700">{errores.telefono}</p>
+              )}
             </div>
 
             <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
@@ -185,6 +212,9 @@ export default function FormAsociate({
                 onChange={(e) => handleChange(e)}
                 placeholder="Tu e-mail"
               />
+              {errores.correoElectronico && (
+                <p className="absolute text-red-700">{errores.correoElectronico}</p>
+              )}
             </div>
 
             <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
@@ -198,6 +228,9 @@ export default function FormAsociate({
                 onChange={(e) => handleChange(e)}
                 placeholder="Tu domicilio"
               />
+              {errores.direccion && (
+                <p className="absolute text-red-700">{errores.direccion}</p>
+              )}
             </div>
 
             <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
@@ -219,6 +252,9 @@ export default function FormAsociate({
                     </option>
                   ))}
               </select>
+              {errores.provinciaID && (
+                <p className="absolute text-red-700">{errores.provinciaID}</p>
+              )}
             </div>
 
             <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
@@ -239,6 +275,9 @@ export default function FormAsociate({
                   ))
                 }
               </select>
+              {errores.ciudadID && (
+                <p className="absolute text-red-700">{errores.ciudadID}</p>
+              )}
             </div>
 
             <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
@@ -262,6 +301,9 @@ export default function FormAsociate({
                   </option>
                 ))}
               </select>
+              {errores.planID && (
+                <p className="absolute text-red-700">{errores.planID}</p>
+              )}
             </div>
 
             <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
@@ -274,56 +316,60 @@ export default function FormAsociate({
                 onChange={(e) => handleChange(e)}
                 placeholder="Contraseña"
               />
+              {errores.password && (
+                <p className="absolute text-red-700">{errores.password}</p>
+              )}
             </div>
 
           </div>
-          
+
         </form>
 
         <div>
-            <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
-                <label className="text-lg font-semibold">Miembro familiar</label>
-                <button
-                  required
-                  className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                  onClick={() => setModal(!modal)}
-                >
-                  Agregar
-                </button>
-            </div>
+          <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
+            <label className="text-lg font-semibold">Miembro familiar</label>
+            <button
+              required
+              className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              onClick={() => setModal(!modal)}
+            >
+              Agregar
+            </button>
+          </div>
 
-            <div>
-              <ul>
-                {output?.map((e) => (
-                      <div className="flex my-4 justify-between items-center">
-                        <li value={e.name} className="text-lg py-3 pr-3 font-semibold">{e.nombre} {e.apellido}</li>
-                        <button 
-                        className="group relative w-10 h-9 flex justify-center p-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-500 hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                        onClick={() => handleDelete(e)}
-                        >
-                          x
-                        </button>
-                      {/* <label htmlFor="" value={e.name}>
+          <div>
+            <ul>
+              {output?.map((e) => (
+                <div className="flex items-center justify-between my-4">
+                  <li value={e.name} className="py-3 pr-3 text-lg font-semibold">{e.nombre} {e.apellido}</li>
+                  <button
+                    className="relative flex justify-center w-10 p-2 text-sm font-medium text-white bg-red-500 border border-transparent rounded-md group h-9 hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    onClick={() => handleDelete(e)}
+                  >
+                    x
+                  </button>
+                  {/* <label htmlFor="" value={e.name}>
                         {e.nombre}
                       </label> */}
-                      {/* <label htmlFor="" value={e.apellido}>
+                  {/* <label htmlFor="" value={e.apellido}>
                         {e.apellido}
                       </label> */}
-                      </div>
-                ))}
-              </ul>
-            </div>
+                </div>
+              ))}
+            </ul>
           </div>
+        </div>
         <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-1 sm:row-span-1">
-              <button
-                onClick={handleSubmit}
-                value="Enviar"
-                className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md disabled:bg-gray-500 bg-primary group hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
-                disabled={
-                  errors
-                }>Enviar</button>
-            </div>
+          <button
+            onClick={handleSubmit}
+            value="Enviar"
+            className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md disabled:bg-gray-500 bg-primary group hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+          >Enviar</button>
+        </div>
       </div>
     </div>
   );
 }
+// disabled={
+//   errors
+// }
