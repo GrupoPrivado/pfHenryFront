@@ -44,8 +44,6 @@ export default function Asociate() {
     setErrorAlert(false);
   }, 4000);
 
-  console.log(provinces, 'provinciaa')
-
   const [output, setOutput] = useState([]);
   //const [family, setFamily] = useState([])
 
@@ -74,10 +72,8 @@ export default function Asociate() {
           />
         )}
 
-        <div></div>
-     
       {activeAlert && <SuccessAlert message={alertMessage} />}
-      {errorAlert && <ErrorAlert message={alertMessage} />}
+      {errorAlert && <ErrorAlert message="Verifique los datos ingresados" />}
     </div>
   );
 }
