@@ -25,6 +25,7 @@ export default function FormAsociate({
   output,
   modal,
   setModal,
+  error,
 }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -60,17 +61,8 @@ export default function FormAsociate({
     // }))
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const validateError = validate(input)
-    setErrores(validateError)
-    console.log(validateError, "Validate")
-    if (Object.entries(validateError).length <= 0) {
-      console.log(Object.entries(validateError).length)
-      const newState = [input, ...output];
-
-      setOutput(newState);
-      dispatch(postAfiliate(newState));
+  useEffect(() => {
+    if(error === false) {
       setOutput([]);
       setInput({
         nombre: "",
@@ -85,12 +77,43 @@ export default function FormAsociate({
         planID: "",
         password: "",
       });
+      setTimeout(() => {
+        navigate("/login")
+      }, 3500);
     }
-    setTimeout(() => {
-      navigate("/login")
-    }, 3500);
+  }, [error]);
+  
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const validateError = validate(input)
+    setErrores(validateError)
+    console.log(validateError, "Validate")
+    if (Object.entries(validateError).length <= 0) {
+      console.log(Object.entries(validateError).length)
+      const newState = [input, ...output];
+
+      setOutput(newState);
+      dispatch(postAfiliate(newState));
+      // setOutput([]);
+      // setInput({
+      //   nombre: "",
+      //   apellido: "",
+      //   DNI: "",
+      //   fechaNacimiento: "",
+      //   telefono: "",
+      //   correoElectronico: "",
+      //   ciudadID: "",
+      //   provinciaID: "",
+      //   direccion: "",
+      //   planID: "",
+      //   password: "",
+      // });
+      // setTimeout(() => {
+      //   navigate("/login")
+      // }, 3500);
+    }
     
-    // setErrors(true);
   };
   function handleSelect(e) {
     if (e.target.value !== "select") {

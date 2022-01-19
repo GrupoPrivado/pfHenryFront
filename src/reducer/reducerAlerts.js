@@ -1,7 +1,8 @@
 import { alertConstants } from '../actions/actionAlerts';
 const inicialState = {
     type: '',
-    message: ''
+    message: '',
+    error: false,
 };
 
 export function reducerAlerts(state = inicialState, action) {
@@ -9,7 +10,8 @@ export function reducerAlerts(state = inicialState, action) {
     case alertConstants.SUCCESS:
       return {
         type: 'alert-success',
-        message: action.message
+        message: action.message,
+        error: false,
       };
     case alertConstants.ERROR:
       return {
