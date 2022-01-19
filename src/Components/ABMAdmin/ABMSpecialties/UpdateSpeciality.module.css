@@ -2,19 +2,20 @@
     position: fixed;
     top: 0;
     left: 0;
-    width:75%;
-    height: 75%;
-    background: rgba(0, 0, 0, 0.6);
+    width:50%;
+    height: 50%;
+    background:gray;
   }
   
   .modalmain {
     position:fixed;
     background: white;
-    width: 50%;
-    height:65%;
+    width: 40%;
+    height:64%;
     top:50%;
     left:50%;
     transform: translate(-50%,-50%);
+    border-radius: 2rem;;
   }
   
   .displayblock {

@@ -1,45 +1,38 @@
-import React, {useEffect} from 'react'
-import {useSelector, useDispatch} from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom';
-import { logout } from '../../utils/authUtils';
-import NavBarDashAdmin from '../../Components/NavBarDashboard/NavbarDashAdmin'
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { logout } from "../../utils/authUtils";
+import NavBarDashAdmin from "../../Components/NavBarDashboard/NavbarDashAdmin";
 
-import ABMCities from '../../Components/ABMAdmin/ABMCities/ABMCities';
-import ABMSpecialities from '../../Components/ABMAdmin/ABMSpecialties/ABMSpecialties';
-import ABMAffiliates from '../../Components/ABMAdmin/ABMAffiliates/ABMAffiliates';
+import ABMSpecialities from "../../Components/ABMAdmin/ABMSpecialties/ABMSpecialties";
+import ABMAffiliates from "../../Components/ABMAdmin/ABMAffiliates/ABMAffiliates";
+import ABMPharmacies from "../../Components/ABMAdmin/ABMPharmacies/ABMPharmacies";
+import ABMPlans from "../../Components/ABMAdmin/ABMPlan/ABMPlans";
+import ABMProfessionals from "../../Components/ABMAdmin/ABMProfessionals/ABMProfessionals";
+import ABMPrescriptions from "../../Components/ABMAdmin/ABMPrescriptions/ABMPrescriptions";
+import ABMPharmaciesList from "../../Components/ABMAdmin/ABMPharmacies/ABMPharmaciesList";
+
 
 function DashAdmin() {
-    const dispatch = useDispatch();
-    const navigate = useNavigate()
-    
-    const {route} = useSelector(state => state.auth)
 
-
-    useEffect(() => {
-        if(route !== '') navigate(`/${route}`)
-    }, [dispatch, route, navigate])
   
-    return (
-        <div>
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-            <NavBarDashAdmin/>
-            
-            ABM 
-            <ABMCities/>
+  const { route } = useSelector((state) => state.auth);
 
-            <ABMSpecialities/>
-            
-            <ABMAffiliates/>
+  useEffect(() => {
+    if (route !== "") navigate(`/${route}`);
+  }, [dispatch, route, navigate]);
 
-           
-        
+  return (
+    <div className="h-70vh">
 
-            Dashboard Administrador  
-            <button onClick={() => { logout(); navigate('/') }}>Cerrar Sesión</button>
+      Dashboard Administrador
+    
+    </div>
+  );
 
-
-        </div> 
-    )
 }
 
-export default DashAdmin
+export default DashAdmin;

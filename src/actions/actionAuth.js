@@ -1,11 +1,13 @@
 import axios from "axios";
 import {api} from '../urlHostApi'
+import { alertConstants } from "./actionAlerts";
 const GET_AFILIATE = 'GET_AFILIATE'
 const GET_MEDICAL_TOKEN = 'GET_MEDICAL_TOKEN'
 const NOT_AUTHENTICATED = 'NOT_AUTHENTICATED'
+const GET_ERROR = 'GET_ERROR'
 
 
-export { GET_AFILIATE, GET_MEDICAL_TOKEN, NOT_AUTHENTICATED}
+export { GET_AFILIATE, GET_MEDICAL_TOKEN, NOT_AUTHENTICATED, GET_ERROR}
 
 
 export const getItem = (item) => localStorage.getItem(item)
@@ -29,10 +31,11 @@ export const postAfiliate = (payload) => {
 // token por header => authorization => x - access - token
 export const getAfiliate = (payload) => {
     return async (dispatch) => {
+      const token = getItem("userToken");
       try {
           const {data} = await axios.get(`${api}/afiliados`, {
                   headers:{
-                      'x-access-token' : payload
+                      'x-access-token' : token
                   }
           });
           //console.log(data)
@@ -80,7 +83,7 @@ export const getNewMedicalToken = () => {
   
       console.log('<<< data action >>> ', data)
       if (data.success) {
-        return dispatch({ type: GET_MEDICAL_TOKEN, payload: data.message });
+        return dispatch({ type: GET_AFILIATE, payload: data.message });
       } else {
         return {error: true}
       }
@@ -91,6 +94,8 @@ export const getNewMedicalToken = () => {
     }
   };
 };
+
+
   
 export const updateUser = (payload) => {
   return async (dispatch) => {
@@ -103,9 +108,12 @@ export const updateUser = (payload) => {
   
       console.log('<<< data action >>> ', data)
       if(data.success){
+        dispatch({type: alertConstants.SUCCESS, message: 'Afiliado actualizado'})
         return dispatch({type: GET_AFILIATE, payload: data.message})
       } else {
-          return ;// dispatch({type: NOT_AUTHENTICATED, payload: data})
+          dispatch({type: alertConstants.ERROR, message: 'Error al actualizar los datos'})
+
+          return// dispatch({type: NOT_AUTHENTICATED, payload: data})
       }
       
     } catch (error) {
@@ -114,4 +122,57 @@ export const updateUser = (payload) => {
     }
   };
 };
-//if success false =>  si back responde "sin privilegios" => desencadenar => NOT_AUTHENTICATED => ...state, user: {}, route: '' 
+
+export const changePassword = (payload) => {
+  console.log('<<< data payload password >>> ', payload)
+  return async (dispatch) => {
+    try {
+      const token = getItem("userToken");
+      const { data } = await axios.put(`${api}/afiliados/password`,payload,{
+          headers: {
+            "x-access-token": token,
+          },});
+
+      if(data.success){
+        
+
+        dispatch({type: alertConstants.SUCCESS , message: 'Contraseña actualizada'})
+ 
+        return dispatch({type: GET_AFILIATE, payload: data.message})
+      } else {
+        dispatch({type: alertConstants.ERROR, message: 'Contraseña inválida'})
+        return dispatch({type: GET_ERROR, payload: data.message})
+
+      }
+      
+    } catch (error) {
+      console.error(error) 
+      return {error: error.message} 
+    }
+  };
+};
+
+
+export const putProfilePhoto = (payload) => {
+  console.log('<<< data action profile photo >>> ', payload)
+  return async (dispatch) => {
+    try {
+      const token = getItem("userToken");
+      const { data } = await axios.put(`${api}/afiliados/profile`,payload,{
+          headers: {
+            "x-access-token": token,
+          },});
+  
+      if(data.success){
+        return dispatch({type: GET_AFILIATE, payload: data.message})
+      } else {
+          return dispatch({type: GET_ERROR, payload: data.message})
+
+      }
+      
+    } catch (error) {
+      console.error(error) 
+      return {error: error.message} 
+    }
+  };
+};

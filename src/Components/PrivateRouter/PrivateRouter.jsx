@@ -4,7 +4,7 @@ import AccesoDenegado from '../../Pages/AccesoDenegado/AccesoDenegado';
 
 const PrivateRouter = ({rol , children}) => { 
     
-    const isAuthenticated = verifyRole(rol);      
+    const isAuthenticated = verifyRole(rol);     
     if (isAuthenticated) {
         return children
     }    

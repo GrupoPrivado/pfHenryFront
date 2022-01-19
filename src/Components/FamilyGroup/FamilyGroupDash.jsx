@@ -29,7 +29,7 @@ export default function FamilyGroupDash() {
         <div className='flex flex-col justify-around px-2.5 w-full font-normal text-white shrink-0'>
           {group.length ? (
             group.map((e) => 
-            <li className='flex justify-between text-left' key={e.id}>
+            <li key={e._id} className='flex justify-between text-left'>
               <p>{e.nombre}</p>
               <p>{e.apellido}</p>
             </li>
