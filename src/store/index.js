@@ -8,6 +8,7 @@ import reducerProviders from "../reducer/reducerProviders";
 import reducerRecetas from "../reducer/reducerRecetas";
 import reducerABMAdmin from "../reducer/reducerABMAdmin"
 import { reducerAlerts } from "../reducer/reducerAlerts";
+import reducerFacturas from "../reducer/reducerFacturas";
 
 
 const reducers= combineReducers({
@@ -17,8 +18,8 @@ const reducers= combineReducers({
     providers: reducerProviders,
     recetas: reducerRecetas,
     ABMAdmin: reducerABMAdmin,
-    alerts: reducerAlerts
-    
+    alerts: reducerAlerts,
+    facturas: reducerFacturas,
     
 })
 export const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)))
