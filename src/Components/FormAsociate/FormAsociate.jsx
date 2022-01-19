@@ -25,6 +25,7 @@ export default function FormAsociate({
   output,
   modal,
   setModal,
+  error,
 }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -60,6 +61,32 @@ export default function FormAsociate({
     // }))
   }
 
+  useEffect(() => {
+    // if(error === false) {
+    //   setOutput([]);
+    //   setInput({
+    //     nombre: "",
+    //     apellido: "",
+    //     DNI: "",
+    //     fechaNacimiento: "",
+    //     telefono: "",
+    //     correoElectronico: "",
+    //     ciudadID: "",
+    //     provinciaID: "",
+    //     direccion: "",
+    //     planID: "",
+    //     password: "",
+    //   });
+    //   setTimeout(() => {
+    //     navigate("/login")
+    //   }, 3500);
+    // }
+    if(error){
+      setOutput([])
+    }
+  }, [error,  setOutput]);
+  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const validateError = validate(input)
@@ -71,26 +98,25 @@ export default function FormAsociate({
 
       setOutput(newState);
       dispatch(postAfiliate(newState));
-      setOutput([]);
-      setInput({
-        nombre: "",
-        apellido: "",
-        DNI: "",
-        fechaNacimiento: "",
-        telefono: "",
-        correoElectronico: "",
-        ciudadID: "",
-        provinciaID: "",
-        direccion: "",
-        planID: "",
-        password: "",
-      });
+      // setOutput([]);
+      // setInput({
+      //   nombre: "",
+      //   apellido: "",
+      //   DNI: "",
+      //   fechaNacimiento: "",
+      //   telefono: "",
+      //   correoElectronico: "",
+      //   ciudadID: "",
+      //   provinciaID: "",
+      //   direccion: "",
+      //   planID: "",
+      //   password: "",
+      // });
+      // setTimeout(() => {
+      //   navigate("/login")
+      // }, 3500);
     }
-    setTimeout(() => {
-      navigate("/login")
-    }, 3500);
     
-    // setErrors(true);
   };
   function handleSelect(e) {
     if (e.target.value !== "select") {
