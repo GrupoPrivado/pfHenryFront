@@ -8,8 +8,6 @@ function Contact() {
 
     return (
         <div>
-            
-            <h1 className='text-3xl font-bold m-4 text-center'>Contacto</h1>
             <FormContact/>
         </div>
     )
