@@ -183,7 +183,6 @@ function EditProfile({user}) {
                             </select>
                         </div>
 
-                       
                         <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-1 sm:row-span-1">
                             <button 
                             type="submit" 
