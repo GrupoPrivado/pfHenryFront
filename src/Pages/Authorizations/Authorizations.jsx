@@ -4,7 +4,6 @@ import Logo from "./../../assets/bg2.jpg"
 
 const Authorizations = () => {
     const { recetas } = useSelector(state => state.recetas);
-
     const recipes = {
         recipe: [
             {
