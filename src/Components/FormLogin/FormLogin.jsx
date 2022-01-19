@@ -1,14 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LockClosedIcon } from "@heroicons/react/solid";
 import Logo from "../../assets/logo.svg"
 import { getUserToken } from "../../utils/authUtils";
 
-function FormLogin() {
+function FormLogin({tipoUsuario}) {
     const [input, setInput] = useState({
         dni: "",
         password: "",
+        tipoUsuario: ''
     });
+
+    useEffect(() => {
+        setInput({
+            ...input,
+            tipoUsuario: tipoUsuario
+        })
+    }, [tipoUsuario])
 
     const navigate = useNavigate();
 
@@ -34,13 +42,7 @@ function FormLogin() {
     return (
         <div className={styles.contenedor}>
             <div className="w-full max-w-md space-y-8">
-                <div>
-                    <img
-                        className={styles.img}
-                        src={Logo}
-                        alt="Workflow"
-                    />
-                </div>
+
                 <form className="mt-8 space-y-6 " action="#" method="POST" onSubmit={(e) => handleSubmit(e)}>
                     <input type="hidden" name="remember" defaultValue="true" />
                     <div className="-space-y-px rounded-md shadow-sm">
