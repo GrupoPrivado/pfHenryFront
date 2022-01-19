@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 import FormLogin from '../../Components/FormLogin/FormLogin'
 //import Logo from "./../../assets/logo.svg"
@@ -6,10 +6,18 @@ import HappyFamily from "./../../assets/happyFamily.jpeg"
 import NavBar from '../../Components/NavBar/NavBar'
 import { getItem } from '../../actions/actionAuth'
 import {useTitle} from '../../hooks/useTitle'
+import Logo from "../../assets/logo.svg"
+
 function Login() {
 
     const navigate = useNavigate()
     useTitle('Ingresa a tu ArpyMedical')
+
+    const [tipoUsuario, setTipoUsuario] = useState('afiliado')
+
+    const handleSelectUsuario = (e) => {
+        setTipoUsuario(e.target.value)
+    }
 
     useEffect(() => {   
         const userType = getItem('userType')
@@ -24,7 +32,19 @@ function Login() {
                 </div>
                 <div className='w-1/2 h-screen flex flex-column items-center justify-center'>
                     <div>
-                        <FormLogin/>
+                    <div>
+                    <img
+                        className="mx-auto h-12 w-auto"
+                        src={Logo}
+                        alt="Workflow"
+                    />
+                </div>
+                        <select value={tipoUsuario} onChange={handleSelectUsuario}>
+                            <option value='afiliado'>Afiliado</option>
+                            <option value='profesional'>Profesional</option>
+                            <option value='administrador'>Administrador</option>
+                        </select>
+                        <FormLogin tipoUsuario={tipoUsuario}/>
                     </div>
                 </div>
             </div>

@@ -2,6 +2,7 @@ import React from 'react'
 import Logo from "./../../assets/bg2.jpg"
 
 function MedicalHistoryDetails() {
+
     const history = {
         consult: [
             {
