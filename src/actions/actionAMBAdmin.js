@@ -543,7 +543,7 @@ export function deleteProfessional(payload) {
 /************* FIN Actions Para ABM Profesionales***********/
 
 /************* Actions Para ABM Prescripciones***********/
-
+//Ver si esta se saca xq la busqueda es por DNI y ya trae todos los datos
 export function getPrescriptionById(payload) {
   return async (dispatch) => {
     const token = getItem("userToken");
@@ -572,7 +572,7 @@ export function getPrescriptionsByDNI(payload) {
         },
       }
     );
-
+console.log('data',data)
     if (data.success) {
       return dispatch({ type: "GET_PRESCRPTIONS_DNI", payload: data.message });
     } else {
@@ -580,6 +580,14 @@ export function getPrescriptionsByDNI(payload) {
     }
   };
 }
+
+export const getPrescriptionData = (payload) => {
+  return {
+    type: "PRESCRIPTION_DATA",
+    payload: payload,
+  };
+};
+
 
 export function updatePrescription(payload) {
   return async (dispatch) => {

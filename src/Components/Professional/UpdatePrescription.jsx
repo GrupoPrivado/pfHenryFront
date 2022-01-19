@@ -27,33 +27,30 @@ const UpdatePrescription = ({ setShowModalUpdate, showModalUpdate }) => {
     (state) => state.ABMAdmin
   );
 
-  const inputPrescription = {
-    id: "",
-    tipoReceta: "",
-    status: "",
-    motivoNoAuto: "",
-    realizada: "",
-    correoElectronico: "",
-  };
-
-  const statusPrescriptionOpc = ["Autorizada", "Rechazada", "Pendiente"];
+  const statusPrescription = ["Autorizada", "Rechazada", "Pendiente"];
   const typePrescription = ["Farmacia", "Estudio"];
 
   const [errors, setErrors] = useState(false);
 
-  let [updatePrescriptionData, setUpdatePrescriptionData] =
-    useState(inputPrescription);
+  let [updatePrescriptionData, setUpdatePrescriptionData] = useState({
+    id: updateData._id,
+    tipoReceta: "",
+    status: "",
+    motivoNoAuto: "N/C",
+    realizada: false,
+    correoElectronico: affiliatePrescriptionData.correoElectronico,
+  });
 
-  useEffect(() => {
-    setUpdatePrescriptionData({
-      id: updateData._id,
-      tipoReceta: updateData.tipoReceta,
-      status: "",
-      motivoNoAuto: "N/C",
-      realizada: false,
-      correoElectronico: updateData.afiliadoID.correoElectronico,
-    });
-  }, []);
+  // useEffect(() => {
+  //   setUpdatePlanData({
+  //     id: updateData._id,
+  //     tipoReceta: updateData.,
+  //     autorizada: "",
+  //     motivoNoAuto: "",
+  //     realizada: false,
+  //     correoElectronico: affiliatePrescriptionData.correoElectronico,
+  //   });
+  // }, );
 
   const handleUpdatePrescription = async (event) => {
     let updatedPlanPrescription = {
@@ -70,18 +67,30 @@ const UpdatePrescription = ({ setShowModalUpdate, showModalUpdate }) => {
     event.preventDefault();
     let response = await dispatch(updatePrescription(updatePrescriptionData));
     alert(response.success);
-    setUpdatePrescriptionData(inputPrescription);
-    setShowModalUpdate(false);
+    setUpdatePrescriptionData({
+      id: "",
+      tipoReceta: "",
+      status: "",
+      motivoNoAuto: "",
+      realizada: false,
+    });
     dispatch(resetDataUpdate());
-    dispatch(getPrescriptionsByDNI(updateData.afiliadoID.DNI));
+    await dispatch(getPrescriptionsByDNI(affiliatePrescriptionData.nameDNI));
     setErrors(true);
+    setShowModalUpdate(false);
   };
 
   const handleClose = () => {
-    setUpdatePrescriptionData(setUpdatePrescriptionData(inputPrescription));
-    setShowModalUpdate(false);
+    setUpdatePrescriptionData({
+      id: "",
+      tipoReceta: "",
+      status: "",
+      motivoNoAuto: "",
+      realizada: false,
+    });
     dispatch(resetDataUpdate());
     setErrors(true);
+    setShowModalUpdate(false);
   };
 
   return (
@@ -89,12 +98,29 @@ const UpdatePrescription = ({ setShowModalUpdate, showModalUpdate }) => {
       <section className={styles.modalmain}>
         <h4>Modificar Receta</h4>
         <h5>
-          {updateData.afiliadoID.nombre + " " + updateData.afiliadoID.apellido}
+          {affiliatePrescriptionData.name +
+            " " +
+            affiliatePrescriptionData.apellido}
         </h5>
-
-        <label>Tipo de receta: {updateData.tipoReceta}</label>
         <div className={styles.container}>
-          <form>
+          <form
+            onSubmit={(e) => handleSubmitUpdatePrescription(e)}
+            id="updatePrescription"
+          >
+            <div>
+              <label>Tipo de receta: </label>
+              <select
+                id="tipoReceta"
+                name="tipoReceta"
+                onChange={(e) => handleUpdatePrescription(e)}
+                defaultValue={0}
+              >
+                <option value="">Elija el tipo de receta</option>
+                {typePrescription.map((prescr) => {
+                  <option value={prescr}>{prescr}</option>;
+                })}
+              </select>
+            </div>
             <div>
               <label>Estado: </label>
               <select
@@ -103,8 +129,8 @@ const UpdatePrescription = ({ setShowModalUpdate, showModalUpdate }) => {
                 onChange={(e) => handleUpdatePrescription(e)}
               >
                 <option value="">Elija el estado de lareceta</option>
-                {statusPrescriptionOpc.map((stat) => {
-                 return <option value={stat}>{stat}</option>;
+                {statusPrescription.map((stat) => {
+                  <option value={stat}>{stat}</option>;
                 })}
               </select>
             </div>
@@ -124,7 +150,9 @@ const UpdatePrescription = ({ setShowModalUpdate, showModalUpdate }) => {
 
           {errors ? (
             <button
-              key="submitFormButton1"
+              type="submit"
+              key="submitFormButton"
+              form="updatePlan"
               disabled={errors}
               className="disabledButton"
             >
@@ -132,8 +160,9 @@ const UpdatePrescription = ({ setShowModalUpdate, showModalUpdate }) => {
             </button>
           ) : (
             <button
+              type="submit"
               key="submitFormButton"
-              onClick={handleSubmitUpdatePrescription}
+              form="updatePrescription"
             >
               Cargar
             </button>
