@@ -26,12 +26,16 @@ const UpdateSpeciality = ({ setShowModalUpdate }) => {
 
   const [errors, setErrors] = useState(false);
 
-  let [updateSpecialityData, setUpdateSpecialityData] = useState({
+  const updateSpecialityDataStruct = {
     id: "",
     nombre: "",
     descripcion: "",
     activa: "",
-  });
+  };
+
+  const [updateSpecialityData, setUpdateSpecialityData] = useState(
+    updateSpecialityDataStruct
+  );
 
   useEffect(() => {
     setUpdateSpecialityData({
@@ -57,12 +61,7 @@ const UpdateSpeciality = ({ setShowModalUpdate }) => {
     event.preventDefault();
     let response = await dispatch(updateSpecialityAct(updateSpecialityData));
     alert(response.success);
-    setUpdateSpecialityData({
-      id: "",
-      nombre: "",
-      descripcion: "",
-      activa: "",
-    });
+    setUpdateSpecialityData(updateSpecialityDataStruct);
     setShowModalUpdate(false);
     dispatch(getAllSpecialities());
     dispatch(resetDataUpdate());
@@ -70,12 +69,7 @@ const UpdateSpeciality = ({ setShowModalUpdate }) => {
   };
 
   const handleClose = () => {
-    setUpdateSpecialityData({
-      id: "",
-      nombre: "",
-      descripcion: "",
-      activa: "",
-    });
+    setUpdateSpecialityData(updateSpecialityDataStruct);
     setShowModalUpdate(false);
     dispatch(resetDataUpdate());
     setErrors(true);

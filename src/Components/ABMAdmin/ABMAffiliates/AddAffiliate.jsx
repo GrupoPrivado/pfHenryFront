@@ -35,26 +35,28 @@ const AddAffiliate = ({ setShowModalAdd }) => {
 
   const [errors, setErrors] = useState(true);
 
-  let [inputAffiliate, setInputAffiliate] = useState({
+  const inputAffiliateStruct = {
     nombre: "",
     apellido: "",
-    DNI: 0,
+    DNI: "",
     fechaNacimiento: "",
-    telefono: 0,
+    telefono: "",
     correoElectronico: "",
     ciudadID: "",
     provinciaID: "",
-    direccion: 0,
+    direccion: "",
     planID: "",
     password: "",
     alta: "",
     activo: "",
-    parentesco:"titular"
-  });
+    parentesco: "titular",
+  };
+
+  const [inputAffiliate, setInputAffiliate] = useState(inputAffiliateStruct);
 
   useEffect(() => {
     dispatch(getAllProvinces());
-  },[]);
+  }, []);
 
   let [inputAdherent, setInputAdherent] = useState([]);
 
@@ -100,44 +102,14 @@ const AddAffiliate = ({ setShowModalAdd }) => {
 
     let response = await dispatch(addAffiliate(outputAffiliate));
     alert(response.success);
-    setInputAffiliate({
-      nombre: "",
-      apellido: "",
-      DNI: 0,
-      fechaNacimiento: "",
-      telefono: 0,
-      correoElectronico: "",
-      ciudadID: "",
-      provinciaID: "",
-      direccion: 0,
-      planID: "",
-      password: "",
-      alta: "",
-      activo: "",
-      parentesco:"titular"
-    });
+    setInputAffiliate(inputAffiliateStruct);
     setShowModalAdd(false);
     dispatch(getAllAffiliates());
     setErrors(true);
   };
 
   const handleClose = () => {
-    setInputAffiliate({
-      nombre: "",
-      apellido: "",
-      DNI: 0,
-      fechaNacimiento: "",
-      telefono: 0,
-      correoElectronico: "",
-      ciudadID: "",
-      provinciaID: "",
-      direccion: 0,
-      planID: "",
-      password: "",
-      alta: "",
-      activo: "",
-      parentesco:"titular"
-    });
+    setInputAffiliate(inputAffiliateStruct);
     setShowModalAdd(false);
     setErrors(true);
   };
@@ -331,17 +303,11 @@ const AddAffiliate = ({ setShowModalAdd }) => {
           </div>
 
           {errors ? (
-            <button
-        
-              disabled={errors}
-              className="disabledButton"
-            >
+            <button disabled={errors} className="disabledButton">
               Cargar
             </button>
           ) : (
-            <button onClick={handleSubmitAffiliate}>
-              Cargar
-            </button>
+            <button onClick={handleSubmitAffiliate}>Cargar</button>
           )}
           <button onClick={() => setShowModalAdherent(true)}>
             Agregar Adherente
@@ -350,10 +316,9 @@ const AddAffiliate = ({ setShowModalAdd }) => {
         </div>
       </section>
 
-      {showModalAdherent && <AddAdherent
-
-        setShowModalAdherent={setShowModalAdherent}
-      />}
+      {showModalAdherent && (
+        <AddAdherent setShowModalAdherent={setShowModalAdherent} />
+      )}
     </div>
   );
 };

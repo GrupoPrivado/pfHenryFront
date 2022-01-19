@@ -34,7 +34,7 @@ const UpDownEmployee = ({ setShowModalUpDown }) => {
     text: "",
   };
 
-  let [upDownEmployeeData, setUpDowndateEmployeeData] =
+  const [upDownEmployeeData, setUpDowndateEmployeeData] =
     useState(upDownDataInput);
 
   useEffect(() => {

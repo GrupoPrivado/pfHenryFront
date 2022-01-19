@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import {
   getAllEmployees,
   resetDataUpdate,
-  updateEmployee
+  updateEmployee,
 } from "../../../actions/actionAMBAdmin";
 
 import styles from "./UpdateEmployee.module.css";
@@ -32,7 +32,8 @@ const UpdateEmployee = ({ setShowModalUpdate }) => {
     email: "",
   };
 
-  let [updateEmployeeData, setUpdateEmployeeData] = useState(inputEmployeeData);
+  const [updateEmployeeData, setUpdateEmployeeData] =
+    useState(inputEmployeeData);
 
   useEffect(() => {
     setUpdateEmployeeData({

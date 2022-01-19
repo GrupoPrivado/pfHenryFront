@@ -18,7 +18,7 @@ const functionErrors = (data) => {
   }
 }; //cambiarla en un utils ya que se puede usar en todos los forms
 
-const AddPlan = ({ showModalAdd, setShowModalAdd }) => {
+const AddPlan = ({ setShowModalAdd }) => {
   const dispatch = useDispatch();
 
   const [errors, setErrors] = useState(true);
@@ -26,13 +26,15 @@ const AddPlan = ({ showModalAdd, setShowModalAdd }) => {
   const [type, setTypeArr] = useState("");
   const [description, setdescriptionArr] = useState("");
 
-  let [inputPlan, setInputPlan] = useState({
+  const inputPlanStruct = {
     name: "",
     codePlan: "",
     precio: "",
     planActivo: "",
     descripcion: [],
-  });
+  };
+
+  const [inputPlan, setInputPlan] = useState(inputPlanStruct);
 
   const handleChangeDescription = (event) => {
     if (event.target.name === "type") {
@@ -87,26 +89,14 @@ const AddPlan = ({ showModalAdd, setShowModalAdd }) => {
     event.preventDefault();
     let response = await dispatch(addPlan(inputPlan));
     alert(response.success);
-    setInputPlan({
-      name: "",
-      codePlan: "",
-      precio: "",
-      planActivo: "",
-      descripcion: [],
-    });
+    setInputPlan(inputPlanStruct);
     await dispatch(getAllPlansData());
     setShowModalAdd(false);
     setErrors(true);
   };
 
   const handleClose = () => {
-    setInputPlan({
-      name: "",
-      codePlan: "",
-      precio: "",
-      planActivo: "",
-      descripcion: [],
-    });
+    setInputPlan(inputPlanStruct);
     setShowModalAdd(false);
     setErrors(true);
   };
@@ -165,7 +155,7 @@ const AddPlan = ({ showModalAdd, setShowModalAdd }) => {
 
           <div className="flex ">
             <div className="w-1/2">
-              <div  >
+              <div>
                 <label className="text-md text-gray-600">Tipo: </label>
                 <input
                   className="h-2 p-4  w-full border-2 border-gray-300  rounded-md"
@@ -178,7 +168,9 @@ const AddPlan = ({ showModalAdd, setShowModalAdd }) => {
                 />
               </div>
               <div className="h-2/3">
-                <label className=" h-1/3 text-md text-gray-600">Descripción: </label>
+                <label className=" h-1/3 text-md text-gray-600">
+                  Descripción:{" "}
+                </label>
                 <input
                   className="h-2/3 p-4  w-full border-2 border-gray-300 mb-2 rounded-md"
                   type="text"

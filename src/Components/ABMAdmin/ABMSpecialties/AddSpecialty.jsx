@@ -26,11 +26,13 @@ const AddSpeciality = ({ setShowModalAdd }) => {
 
   const [errors, setErrors] = useState(true);
 
-  let [inputSpeciality, setInputSpeciality] = useState({
+  const inputSpecialityStruct = {
     nombre: "",
     descripcion: "",
     activa: "",
-  });
+  };
+
+  const [inputSpeciality, setInputSpeciality] = useState(inputSpecialityStruct);
 
   const handleChange = (event) => {
     let newSpeciality = {
@@ -48,22 +50,14 @@ const AddSpeciality = ({ setShowModalAdd }) => {
     event.preventDefault();
     let response = await dispatch(addSpeciality(inputSpeciality));
     alert(response.success);
-    setInputSpeciality({
-      nombre: "",
-      descripcion: "",
-      activa: "",
-    });
+    setInputSpeciality(inputSpecialityStruct);
     setShowModalAdd(false);
     dispatch(getAllSpecialities());
     setErrors(true);
   };
 
   const handleClose = () => {
-    setInputSpeciality({
-      nombre: "",
-      descripcion: "",
-      activa: "",
-    });
+    setInputSpeciality(inputSpecialityStruct);
     setShowModalAdd(false);
     setErrors(true);
   };

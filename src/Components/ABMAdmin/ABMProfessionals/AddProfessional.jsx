@@ -36,7 +36,7 @@ const AddProfessional = ({ setShowModalAdd }) => {
 
   const [errors, setErrors] = useState(true);
 
-  let [inputProfessional, setInputProfessional] = useState({
+  const inputProfessionalStruct = {
     nombre: "",
     apellido: "",
     DNI: "",
@@ -49,7 +49,9 @@ const AddProfessional = ({ setShowModalAdd }) => {
     tipoUsuario: "profesional",
     password: "",
     activo: "",
-  });
+  }
+
+  const [inputProfessional, setInputProfessional] = useState(inputProfessionalStruct);
 
   const handleChangeProvince = (e) => {
     const newData = {
@@ -80,40 +82,14 @@ const AddProfessional = ({ setShowModalAdd }) => {
 
     let response = await dispatch(addProfessional(inputProfessional));
     alert(response.success);
-    setInputProfessional({
-      nombre: "",
-      apellido: "",
-      DNI: "",
-      telefono: "",
-      mail: "",
-      ciudadID: "",
-      provinciaID: "",
-      matricula: "",
-      especID: "",
-      tipoUsuario: "profesional",
-      password: "",
-      activo: "",
-    });
+    setInputProfessional(inputProfessionalStruct);
     setShowModalAdd(false);
     dispatch(getAllProfessionals());
     setErrors(true);
   };
 
   const handleClose = () => {
-    setInputProfessional({
-      nombre: "",
-      apellido: "",
-      DNI: "",
-      telefono: "",
-      mail: "",
-      ciudadID: "",
-      provinciaID: "",
-      matricula: "",
-      especID: "",
-      tipoUsuario: "profesional",
-      password: "",
-      activo: "",
-    });
+    setInputProfessional(inputProfessionalStruct);
     setShowModalAdd(false);
     setErrors(true);
   };

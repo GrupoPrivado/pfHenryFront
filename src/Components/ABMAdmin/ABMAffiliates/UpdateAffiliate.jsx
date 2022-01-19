@@ -30,9 +30,9 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
 
   const [errors, setErrors] = useState(true);
 
-  let [updateAffiliateData, setUpdateAffiliateData] = useState({
+  const updateAffiliateStruct = {
     id: "",
-    telefono: 0,
+    telefono: "",
     correoElectronico: "",
     direccion: "",
     ciudadID: "",
@@ -40,7 +40,11 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
     planID: "",
     alta: "",
     activo: "",
-  });
+  };
+
+  const [updateAffiliateData, setUpdateAffiliateData] = useState(
+    updateAffiliateStruct
+  );
 
   useEffect(() => {
     setUpdateAffiliateData({
@@ -82,17 +86,7 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
     event.preventDefault();
     let response = await dispatch(updateAffiliateAct(updateAffiliateData));
     alert(response.success);
-    setUpdateAffiliateData({
-      id: "",
-      telefono: 0,
-      correoElectronico: "",
-      direccion: "",
-      ciudadID: "",
-      provinciaID: "",
-      planID: "",
-      alta: "",
-      activo: "",
-    });
+    setUpdateAffiliateData(updateAffiliateStruct);
     setShowModalUpdate(false);
     dispatch(getAllAffiliates());
     dispatch(resetDataUpdate({}));
@@ -100,17 +94,7 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
   };
 
   const handleClose = () => {
-    setUpdateAffiliateData({
-      id: "",
-      telefono: 0,
-      correoElectronico: "",
-      direccion: "",
-      ciudadID: "",
-      provinciaID: "",
-      planID: "",
-      alta: "",
-      activo: "",
-    });
+    setUpdateAffiliateData(updateAffiliateStruct);
     setShowModalUpdate(false);
     dispatch(resetDataUpdate({}));
     setErrors(true);
