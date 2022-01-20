@@ -72,3 +72,24 @@ export const validate = (input) => {
     console.log(errores)
     return errores;
 };
+
+export const validateContact = (input) => {
+    console.log(input)
+    let errores = {};
+    if(
+        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(input.mail)
+    ) {
+        errores.mail = "Ingrese un mail válido";
+    }
+    if (input.name.length < 3) {
+        errores.name = "Escriba un nombre válido";
+    }
+    if (input.lastName.length < 2) {
+        errores.lastName = "Escriba un apellido válido";
+    }
+    if(input.message.lenght < 10){
+        errores.message = 'Escriba una consulta válida'
+    }
+    console.log(errores)
+    return errores;
+}
