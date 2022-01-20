@@ -4,50 +4,49 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
-  getAllProfessionals,
-  getAllSpecialities,
+  getAllEmployees,
 } from "../../../actions/actionAMBAdmin";
 
-import AddProfessional from "./AddProfessional";
-import UpdateProfessional from "./UpdateProfessional";
-import ProfessionalsList from "./ABMProfessionalsList";
-import UpDownProfessional from "./UpDownProfessional";
+import ABMEmployeesList from "./ABMEmployeesList";
+import AddEmployee from "./AddEmployee";
+import UpdateEmployee from "./UpdateEmployee";
+import UpDownEmployee from "./UpDownEmployee";
 
-const ABMProfessionals = () => {
+const ABMEmployees = () => {
   const dispatch = useDispatch();
 
-  const { allProfessionals } = useSelector((state) => state.ABMAdmin);
+  const { allEmployees } = useSelector((state) => state.ABMAdmin);
   
   let [showModalAdd, setShowModalAdd] = useState(false);
   let [showModalUpdate, setShowModalUpdate] = useState(false);
   let [showModalUpDown, setShowModalUpDown] = useState(false);
 
   useEffect(() => {
-    dispatch(getAllSpecialities());
-    dispatch(getAllProfessionals({}));
+    dispatch(getAllEmployees());
+
   }, [dispatch]);
 
   return (
     <div>
       <button title="Agregar Profesional" onClick={() => setShowModalAdd(true)}>
-        Agregar Profesional
+        Agregar Emploeado
       </button>
 
-      <ProfessionalsList
-        allProfessionals={allProfessionals}
+      <ABMEmployeesList
+        allEmployees={allEmployees}
         setShowModalUpdate={setShowModalUpdate}
         setShowModalAdd={setShowModalAdd}
         setShowModalUpDown={setShowModalUpDown}
       />
 
-      {showModalAdd && <AddProfessional setShowModalAdd={setShowModalAdd} />}
+      {showModalAdd && <AddEmployee setShowModalAdd={setShowModalAdd} />}
 
-       {showModalUpdate && <UpdateProfessional
+       {showModalUpdate && <UpdateEmployee
         setShowModalUpdate={setShowModalUpdate}
       />} 
 
   {showModalUpDown && (
-        <UpDownProfessional
+        <UpDownEmployee
           setShowModalUpDown={setShowModalUpDown}
         />
       )}
@@ -55,4 +54,4 @@ const ABMProfessionals = () => {
   );
 };
 
-export default ABMProfessionals;
+export default ABMEmployees;

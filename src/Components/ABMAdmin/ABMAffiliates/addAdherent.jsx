@@ -17,18 +17,12 @@ const functionErrors = (data) => {
   }
 }; //cambiarla en un utils ya que se puede usar en todos los forms
 
-const AddAdherent = ({
-  handleAddAdherent,
-  showModalAdherent,
-  setShowModalAdherent,
-}) => {
+const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
   const dispatch = useDispatch();
 
   const { cities, provinces } = useSelector((state) => state.ABMAdmin);
 
   const [errors, setErrors] = useState(true);
-
-  const showHideClassName = showModalAdherent ? "displayblock" : "displaynone";
 
   const arrParentesco = [
     { display: "Hijo/a", value: "hijo" },
@@ -36,18 +30,20 @@ const AddAdherent = ({
     { display: "Familiar a cargo", value: "famCargo" },
   ];
 
-  let [inputAdherent, setInputAdherent] = useState({
+  const inputAdherentStruct = {
     nombre: "",
     apellido: "",
-    DNI: 0,
+    DNI: "",
     fechaNacimiento: "",
-    telefono: 0,
+    telefono: "",
     correoElectronico: "",
-    direccion: 0,
+    direccion: "",
     ciudadID: "",
     provinciaID: "",
     parentesco: "",
-  });
+  };
+
+  let [inputAdherent, setInputAdherent] = useState(inputAdherentStruct);
 
   const handleChangeProvince = (e) => {
     const newData = {
@@ -60,22 +56,11 @@ const AddAdherent = ({
 
   const handleSubmit = () => {
     alert("Me cree");
-    handleAddAdherent(inputAdherent);
-    setInputAdherent({
-      nombre: "",
-      apellido: "",
-      DNI: 0,
-      fechaNacimiento: "",
-      telefono: 0,
-      correoElectronico: "",
-      direccion: 0,
-      localidad: "",
-      ciudadCP: 0,
-      provincia: "",
-      parentesco: "",
-    });
     setShowModalAdherent(false);
+    handleAddAdherent(inputAdherent);
+    setInputAdherent(inputAdherentStruct);
   };
+
   const handleChange = (event) => {
     let newAdherent = {
       ...inputAdherent,
@@ -89,25 +74,13 @@ const AddAdherent = ({
   };
 
   const handleClose = () => {
-    setInputAdherent({
-      nombre: "",
-      apellido: "",
-      DNI: 0,
-      fechaNacimiento: "",
-      telefono: 0,
-      correoElectronico: "",
-      direccion: 0,
-      localidad: "",
-      ciudadCP: 0,
-      provincia: "",
-      parentesco: "",
-    });
+    setInputAdherent(inputAdherentStruct);
     setErrors(true);
     setShowModalAdherent(false);
   };
 
   return (
-    <div className={styles[showHideClassName]}>
+    <div>
       <section className={styles.modalmain}>
         <h5>Agregar Nuevo Adherente</h5>
         <div className={styles.container}>
@@ -209,6 +182,7 @@ const AddAdherent = ({
                 className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
                 required
               >
+                <option>Seleccione Provincia</option>
                 {provinces &&
                   provinces.map((p) => (
                     <option key={p._id} value={p._id}>
@@ -229,6 +203,7 @@ const AddAdherent = ({
                 className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
                 required
               >
+                <option>Seleccione Localidad</option>
                 {cities &&
                   cities.map((c) => (
                     <option key={c._id} value={c._id}>

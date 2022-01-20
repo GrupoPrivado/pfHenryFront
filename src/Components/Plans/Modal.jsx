@@ -7,7 +7,7 @@ const Modal = ({plan}) => {
             <h2>{plan.name}</h2>
             {
                 plan.descripcion && plan.descripcion.map((desc, index) => (
-                    <div key={index}> <p> <span>{desc[0]}:</span> {desc[1]} </p> </div>
+                    <div key={index}> <p> <span>{desc[0]}</span> {desc[1]} </p> </div>
                 ))
             }
         </div>
