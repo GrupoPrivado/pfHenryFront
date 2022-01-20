@@ -11,6 +11,10 @@ import ABMPlans from "../../Components/ABMAdmin/ABMPlan/ABMPlans";
 import ABMProfessionals from "../../Components/ABMAdmin/ABMProfessionals/ABMProfessionals";
 import ABMPrescriptions from "../../Components/ABMAdmin/ABMPrescriptions/ABMPrescriptions";
 import ABMPharmaciesList from "../../Components/ABMAdmin/ABMPharmacies/ABMPharmaciesList";
+import AMBDashGral from "../../Components/ABMAdmin/AMBDashAdmin/AMBDashGral";
+import  CityDash  from "../../Components/ABMAdmin/AMBDashAdmin/CityDash";
+import { PlansDash } from "../../Components/ABMAdmin/AMBDashAdmin/PlansDash";
+import { AfiliateEvolution } from "../../Components/ABMAdmin/AMBDashAdmin/AfiliateEvolution";
 
 
 function DashAdmin() {
@@ -26,10 +30,16 @@ function DashAdmin() {
   }, [dispatch, route, navigate]);
 
   return (
-    <div className="h-70vh">
+    <div className="h-70vh w-full grid overflow-hidden grid-cols-3 grid-rows-2 gap-0">
+      <div > 
+         <CityDash/>
+      </div>
+      <div ><PlansDash/></div>
+      <div><AfiliateEvolution/></div>
 
-      Dashboard Administrador
-    
+
+
+   
     </div>
   );
 
