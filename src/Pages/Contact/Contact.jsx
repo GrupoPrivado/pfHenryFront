@@ -7,7 +7,7 @@ function Contact() {
     useTitle('Contacto')
 
     return (
-        <div>
+        <div className='min-h-[67vh]'>
             <FormContact/>
         </div>
     )

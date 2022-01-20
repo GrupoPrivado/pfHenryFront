@@ -16,7 +16,6 @@ export default function Asociate() {
   const { type, message, error } = useSelector((state) => state.alerts);
   const [activeAlert, setActiveAlert] = useState(false);
   const [errorAlert, setErrorAlert] = useState(false);
-  console.log(error, 'error dentro de asociate')
 
   const [alertMessage, setAlertMessage] = useState("");
   const navigate = useNavigate()
@@ -44,18 +43,7 @@ useEffect(() => {
 
 }, [dispatch]);
 
-
-
-  // setTimeout(() => {
-  //   setActiveAlert(false);
-  //   setErrorAlert(false);
-  //   //navigate('/login')
-  // }, 4000)
-
-
   const [output, setOutput] = useState([]);
-  //const [family, setFamily] = useState([])
-
   const [modal, setModal] = useState(false);
 
   return (

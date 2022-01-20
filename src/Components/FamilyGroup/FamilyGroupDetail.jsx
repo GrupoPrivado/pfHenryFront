@@ -5,15 +5,22 @@ import { Link } from "react-router-dom";
 import Credencial from '../Credencial/Credencial';
 import { getGroup } from '../../actions/actionGroup';
 import  logo  from '../../assets/logo_white_large.png'
+import { getAfiliate } from '../../actions/actionAuth';
 
 export default function FamilyGroupDetail() {
     const { group } = useSelector((state) => state.grupos);
     const { user, route } = useSelector(state => state.auth)
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(getGroup(user.grupFamID))
+        if(!user.data){
+            dispatch(getAfiliate())
+        }
+        if(user.grupFamID){
+            dispatch(getGroup(user.grupFamID))
 
-    }, [dispatch,user.grupFamID])
+        }
+
+    }, [dispatch,user.grupFamID, user.data])
     console.log("group: ", group)
 
     const [isActive, setActive] = useState(false);
@@ -32,7 +39,7 @@ export default function FamilyGroupDetail() {
                     </div>
                     {/* end header */}
                     {group && group.map((member) => (
-                        <div className="relative inline-block h-full overflow-hidden align-middle transition-all transform border-t border-l border-solid shadow-xl bg-gradient-to-b from-white-rgba to-white-rgba2 rounded-3xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full border-t-gray-200 border-l-gray-200">
+                        <div key={member._id} className="relative inline-block h-full overflow-hidden align-middle transition-all transform border-t border-l border-solid shadow-xl bg-gradient-to-b from-white-rgba to-white-rgba2 rounded-3xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full border-t-gray-200 border-l-gray-200">
                             <div className="px-4 pt-5 pb-5 sm:p-6">
                                 <div className="sm:flex backdrop-filter ">
                                     <div className="flex flex-col mt-6 sm:mt-0 sm:ml-4 justify-evenly">
