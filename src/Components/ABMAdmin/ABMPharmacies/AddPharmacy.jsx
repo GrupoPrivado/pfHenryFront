@@ -84,7 +84,7 @@ const AddPharmacy = ({ setShowModalAdd }) => {
   };
   const showHideClassName = setShowModalAdd ? "displayblock" : "displaynone";
   return (
-    <div assName={styles[showHideClassName]}>
+    <div className={styles[showHideClassName]}>
       <section className={styles.modalmain}>
         <div className="flex justify-center h-10%">
           <h5 className="text-2xl font-bold text-gray-500">
@@ -210,6 +210,7 @@ const AddPharmacy = ({ setShowModalAdd }) => {
               <div className="flex w-1/3 items-center">
                 <label className="text-md text-gray-600">Activo: </label>
                 <select
+                className="border-2 p-1 border-gray-300 mb-3 rounded-md"
                   id="activo"
                   name="activo"
                   onChange={(e) => handleChange(e)}
