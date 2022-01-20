@@ -25,32 +25,32 @@ export default function Asociate() {
   const {provinces, cities} = useSelector(state => state.providers)
   useTitle("Asociate a ArpyMedical");
   
-  useEffect(() => {
-    dispatch(getPlanes());
-    dispatch(getAllProvinces())
+useEffect(() => {
+  dispatch(getPlanes());
+  dispatch(getAllProvinces())
     
-    if (type === "alert-success") {
-      setActiveAlert(true);
-      setAlertMessage(message);
-    }
-    if (type === "alert-danger") {
-      setErrorAlert(true);
-      setAlertMessage(message);
-    }
-    if(error === false) {
-       dispatch(alertActions.clear());
-       navigate('/login')
-    } 
+  // if (type === "alert-success") {
+  //   setActiveAlert(true);
+  //   setAlertMessage(message);
+  // }
+  // if (type === "alert-danger") {
+  //   setErrorAlert(true);
+  //   setAlertMessage(message);
+  // }
+  // if(error === false) {
+  //    dispatch(alertActions.clear());
+  //    navigate('/login')
+  // } 
 
-  }, [dispatch, error, message, type]);
+}, [dispatch]);
 
 
 
-  setTimeout(() => {
-    setActiveAlert(false);
-    setErrorAlert(false);
-    //navigate('/login')
-  }, 4000)
+  // setTimeout(() => {
+  //   setActiveAlert(false);
+  //   setErrorAlert(false);
+  //   //navigate('/login')
+  // }, 4000)
 
 
   const [output, setOutput] = useState([]);
@@ -60,8 +60,12 @@ export default function Asociate() {
 
   return (
     <div>
+ 
         <div className="relative">
           <FormAsociate
+            setAlertMessage={setAlertMessage}
+            setActiveAlert={setActiveAlert}
+            setErrorAlert={setErrorAlert}
             provinces={provinces}
             cities={cities}
             setOutput={setOutput}

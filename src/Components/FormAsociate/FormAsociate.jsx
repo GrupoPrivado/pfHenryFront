@@ -19,6 +19,9 @@ const functionErrors = (data) => {
 };
 
 export default function FormAsociate({
+  setAlertMessage,
+  setActiveAlert,
+  setErrorAlert,
   provinces,
   cities,
   setOutput,
@@ -87,7 +90,7 @@ export default function FormAsociate({
   }, [error,  setOutput]);
   
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const validateError = validate(input)
     setErrores(validateError)
@@ -97,7 +100,23 @@ export default function FormAsociate({
       const newState = [input, ...output];
 
       setOutput(newState);
-      dispatch(postAfiliate(newState));
+      const result = await postAfiliate(newState);
+      if(result.success){
+        setActiveAlert(true)
+        setAlertMessage('Registro Exitoso')
+        setTimeout(() => {
+          setActiveAlert(false)
+          navigate('/login')
+        }, 5000);
+      } else {
+        setErrorAlert(true)
+        console.log(result.data)
+        setAlertMessage('error en el registro')
+        //setOutput([ ])
+        setTimeout(() => {
+          setErrorAlert(false)
+        }, 5000);
+      }
       // setOutput([]);
       // setInput({
       //   nombre: "",

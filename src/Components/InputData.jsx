@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-export const Inputdata = ({name, title, value, onChange, placeholder, type}) => {
+const InputData = ({name, title, value, onChange, placeholder, type}) => {
     return (
       <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
       <label htmlFor="DNI" className="text-lg font-semibold">{title}</label>
@@ -17,4 +17,6 @@ export const Inputdata = ({name, title, value, onChange, placeholder, type}) => 
     </div>
     )
   }
+
+  export default InputData
   
