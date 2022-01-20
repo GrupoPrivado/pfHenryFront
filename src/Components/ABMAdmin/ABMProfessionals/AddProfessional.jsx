@@ -97,12 +97,19 @@ const AddProfessional = ({ setShowModalAdd }) => {
   return (
     <div>
       <section className={styles.modalmain}>
-        <h5>Agregar Nuevo Profesional</h5>
-        <div className={styles.container}>
+      <div className="flex justify-center h-10%">
+          <h5 className="text-2xl font-bold text-gray-500">
+            Agregar Nuevo Profesional
+          </h5>
+        </div>
+        
+        <div cclassName="modal-content py-4 text-left px-6 h-90% ">
           <form>
-            <div>
-              <label>Nombre: </label>
+          <div className="flex">
+            <div className="w-1/2">
+              <label className="text-md text-gray-600">Nombre: </label>
               <input
+              className="h-2 p-4 w-full border-2 border-gray-300 mb-1 rounded-md"
                 type="text"
                 name="nombre"
                 autoComplete="off"
@@ -112,9 +119,10 @@ const AddProfessional = ({ setShowModalAdd }) => {
               />
             </div>
 
-            <div>
-              <label>Apellido: </label>
+            <div className="w-1/2">
+              <label className="text-md text-gray-600">Apellido: </label>
               <input
+              className="h-2 p-4 w-full border-2 border-gray-300 mb-1 rounded-md"
                 type="text"
                 name="apellido"
                 autoComplete="off"
@@ -123,10 +131,12 @@ const AddProfessional = ({ setShowModalAdd }) => {
                 placeholder="Ingrese el apellido...."
               />
             </div>
-
-            <div>
-              <label>DNI: </label>
+ </div>
+ <div className="flex">
+            <div className="w-1/2">
+              <label className="text-md text-gray-600">DNI: </label>
               <input
+              className="h-2 p-4 w-full border-2 border-gray-300 mb-1 rounded-md"
                 type="number"
                 name="DNI"
                 autoComplete="off"
@@ -136,9 +146,10 @@ const AddProfessional = ({ setShowModalAdd }) => {
               />
             </div>
 
-            <div>
-              <label>Matrícula: </label>
+            <div className="w-1/2">
+              <label className="text-md text-gray-600">Matrícula: </label>
               <input
+              className="h-2 p-4 w-full border-2 border-gray-300 mb-1 rounded-md"
                 type="number"
                 name="matricula"
                 autoComplete="off"
@@ -147,10 +158,12 @@ const AddProfessional = ({ setShowModalAdd }) => {
                 placeholder="Ingrese la Matrícula...."
               />
             </div>
-
-            <div>
-              <label>Teléfono: </label>
+</div>
+<div className="flex">
+            <div className="w-1/2">
+              <label className="text-md text-gray-600">Teléfono: </label>
               <input
+              className="h-2 p-4 w-full border-2 border-gray-300 mb-1 rounded-md"
                 type="number"
                 name="telefono"
                 autoComplete="off"
@@ -160,9 +173,10 @@ const AddProfessional = ({ setShowModalAdd }) => {
               />
             </div>
 
-            <div>
-              <label>E-mail: </label>
+            <div className="w-1/2">
+              <label className="text-md text-gray-600">E-mail: </label>
               <input
+              className="h-2 p-4 w-full border-2 border-gray-300 mb-1 rounded-md"
                 type="text"
                 name="mail"
                 autoComplete="off"
@@ -171,16 +185,17 @@ const AddProfessional = ({ setShowModalAdd }) => {
                 placeholder="Ingrese el e-mail...."
               />
             </div>
-
-            <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
-              <label className="text-lg font-semibold" htmlFor="provincia">
+</div>
+<div className="flex">
+            <div className=" w-1/2">
+              <label className="text-md text-gray-600" htmlFor="provincia">
                 Provincia{" "}
               </label>
               <select
                 value={inputProfessional.provinciaID}
                 onChange={handleChangeProvince}
                 name="provinciaID"
-                className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
+                className=" h-1/2 w-full  border-2 border-gray-300 mb-5 rounded-md"
                 required
               >
                 <option>Seleccione Provincia</option>
@@ -193,15 +208,15 @@ const AddProfessional = ({ setShowModalAdd }) => {
               </select>
             </div>
 
-            <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
-              <label className="text-lg font-semibold" htmlFor="localidad">
+            <div className="w-1/2">
+              <label className="text-md text-gray-600" htmlFor="localidad">
                 Localidad{" "}
               </label>
               <select
                 onChange={(e) => handleChange(e)}
                 value={inputProfessional.ciudadID}
                 name="ciudadID"
-                className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
+                className=" h-1/2 w-full  border-2 border-gray-300 mb-5 rounded-md"
                 required
               >
                 <option>Seleccione Localidad</option>
@@ -213,9 +228,11 @@ const AddProfessional = ({ setShowModalAdd }) => {
                   ))}
               </select>
             </div>
-
-            <div>
+</div>
+<div className="flex w-full ">
+            <div className="w-1/2">
               <select
+              className=" h-1/2 w-full  border-2 border-gray-300 mb-5 rounded-md"
                 id="especialities"
                 name="especID"
                 onChange={(e) => handleChange(e)}
@@ -234,22 +251,28 @@ const AddProfessional = ({ setShowModalAdd }) => {
               </select>
             </div>
 
-            <div>
-              <label>Activo: </label>
-              <select name="activo" onChange={(e) => handleChange(e)}>
-                <option value="">Seleccione:</option>
+            <div className="flex w-1/2">
+              <label className="text-md text-gray-600">Activo: </label>
+              <select className=" h-1/2 w-full  border-2 border-gray-300 mb-5 rounded-md"
+              name="activo" onChange={(e) => handleChange(e)}>
+                <option value="">Seleccione</option>
                 <option value={true}>Si</option>
                 <option value={false}>No</option>
               </select>
             </div>
+            </div>
           </form>
+          <div className="flex w-full justify-around">
 
           {errors ? (
-            <button disabled={errors}>Cargar</button>
+            <button 
+            className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+             disabled={errors}>Guardar</button>
           ) : (
-            <button onClick={(e) => handleSubmitProfessional(e)}>Cargar</button>
+            <button className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" onClick={(e) => handleSubmitProfessional(e)}>Guardar</button>
           )}
-          <button onClick={() => handleClose()}>Cerrar</button>
+          <button className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" onClick={() => handleClose()}>Cerrar</button>
+        </div>
         </div>
       </section>
     </div>

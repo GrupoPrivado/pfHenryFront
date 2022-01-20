@@ -141,7 +141,7 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
                 </div>
               </div>
             </div>
-            <div className="flex items-center">
+            <div className="flex items-center mt-3">
               <div>
                 <div>
                   <label className="text-md text-gray-600">Asunto: </label>
@@ -198,7 +198,7 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
                 </div>
               </div>
             </div>
-            <div className="flex justify-center mt-1 ">
+            <div className="flex justify-center mt-6 ">
               <div className="flex w-2/3 justify-around">
                 {errors ? (
                   <button

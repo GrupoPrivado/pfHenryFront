@@ -92,10 +92,10 @@ const ABMPharmaciesList = ({
                     <select
                       onChange={handleChangeProvince}
                       name="provinciaID"
-                      className=" block w-full  my-2 text-lg font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 appearance-none rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
+                      className=" uppercase block w-full  my-2 text-lg font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 appearance-none rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
                       required
                     >
-                      <option value="">Seleccione Provincia</option>
+                      <option  value="">Seleccione Provincia</option>
                       {provinces &&
                         provinces.map((p) => (
                           <option key={p._id} value={p._id}>
@@ -116,7 +116,7 @@ const ABMPharmaciesList = ({
                     <select
                       onChange={(e) => handleChangeCity(e)}
                       name="ciudadID"
-                      className=" block w-full text-lg  my-2  font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 appearance-none rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
+                      className=" uppercase block w-full text-lg  my-2  font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 appearance-none rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
                       required
                     >
                       <option value="">Seleccione Localidad</option>
@@ -186,7 +186,7 @@ const ABMPharmaciesList = ({
                               <div class=" flex justify-center ">
                                 <span>{element.ciudadID.localidad}</span>
                               </div>
-                              <div class=" flex justify-center ">
+                              <div class=" flex justify-center uppercase ">
                                 <span>{element.provinciaID.nombre}</span>
                               </div>
 

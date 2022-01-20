@@ -78,16 +78,16 @@ const UpDownProfessional = ({ setShowModalUpDown }) => {
   return (
     <div>
       <section className={styles.modalmain}>
-        <div className="flex justify-center">
+        <div className="flex  justify-center">
           <h5 className="text-2xl font-bold text-gray-500">
             ALTA / BAJA Profesional
           </h5>
         </div>
         <div className="modal-content py-4 text-left px-6 mt-1 ">
           <form>
-            <div className="flex justify-around ">
-              <div lassName="flex flex-col mt-3">
-                <div>
+            <div className="flex flex-col  ">
+              <div className="flex w-full mt-3">
+                <div className="w-1/2 ">
                   <label className="text-md text-gray-600">
                     Nombre:{" "}
                     <span className="text-xl uppercase text-black">
@@ -95,7 +95,7 @@ const UpDownProfessional = ({ setShowModalUpDown }) => {
                     </span>
                   </label>
                 </div>
-                <div>
+                <div className="w-1/2 ">
                   <label className="text-md text-gray-600">
                     Apellido:{" "}
                     <span className="text-xl uppercase text-black">
@@ -103,7 +103,9 @@ const UpDownProfessional = ({ setShowModalUpDown }) => {
                     </span>
                   </label>
                 </div>
-                <div>
+              </div>
+              <div className="flex  w-full  mt-3">
+                <div className="w-1/2 ">
                   <label className="text-md text-gray-600">
                     DNI:{" "}
                     <span className="text-xl uppercase text-black">
@@ -111,7 +113,7 @@ const UpDownProfessional = ({ setShowModalUpDown }) => {
                     </span>
                   </label>
                 </div>
-                <div>
+                <div className="w-1/2 ">
                   <label className="text-md text-gray-600">
                     Matricula:{" "}
                     <span className="text-xl uppercase text-black">
@@ -121,7 +123,7 @@ const UpDownProfessional = ({ setShowModalUpDown }) => {
                 </div>
               </div>
             </div>
-            <div className="flex items-center">
+            <div className="flex items-center mt-5">
               <div>
                 <div>
                   <label className="text-md text-gray-600">Asunto: </label>
@@ -165,7 +167,7 @@ const UpDownProfessional = ({ setShowModalUpDown }) => {
                 </div>
               </div>
             </div>
-            <div className="flex justify-center mt-1 ">
+            <div className="flex justify-center mt-4 ">
               <div className="flex w-2/3 justify-around">
                 {errors ? (
                   <button
