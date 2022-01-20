@@ -14,7 +14,7 @@ const functionErrors = (data) => {
     }
   };
 
-export default function FormContact() {
+export default function     FormContact() {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -60,10 +60,10 @@ export default function FormContact() {
     }
 
     return (
-        <div className='flex items-center justify-start w-full px-4 py-12 sm:px-6 lg:px-8'>
-            <div className="w-full max-w-md space-y-8">
+        <div className='w-full px-4 py-12 sm:px-6 lg:px-8'>
+            <div className="w-70vw max-w-md space-y-8 m-auto ">
                 <form className="mt-8 space-y-6 " onSubmit={(e) => handleSubmit(e)}>
-                    <div className="grid items-center grid-cols-3 grid-rows-5 gap-4 -space-y-px rounded-md shadow-sm -z-0 w-90vw sm:grid-cols-4 sm:grid-rows-2">
+                    <div className="grid items-center grid-cols-2 grid-rows-5 gap-4 -space-y-px rounded-md shadow-sm -z-0 w-full sm:grid-cols-4 sm:grid-rows-2">
                         <h3 className='col-span-4 row-span-1 text-2xl font-bold text-left text-primary'>Contacto</h3>
                             <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
                                 <label className='text-lg font-semibold'>Nombre: </label>
@@ -119,7 +119,7 @@ export default function FormContact() {
                                 <label
                                 className='text-lg font-semibold'>Consulta: </label>
                                 <textarea type="text" 
-                                className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm h-40"
                                 required
                                 value={input.message}
                                 onChange={(e) => handleChange(e)}
