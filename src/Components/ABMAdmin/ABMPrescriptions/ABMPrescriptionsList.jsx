@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { getPrescriptionData, updatePrescription } from "../../../actions/actionAMBAdmin";
 import ABMPrescriptionsListAffData from "./ABMPrescriptionListAffData";
-
+import ABMPrescriptionsSearch from "./ABMPrescriptionsSearch";
 import styles from "./ABMPrescriptions.module.css";
 
 const ABMPrescriptionsList = ({ setShowModalUpdate }) => {
@@ -27,6 +27,9 @@ const ABMPrescriptionsList = ({ setShowModalUpdate }) => {
             <div class="p-4">
               <div class="bg-white p-6 rounded-md">
                 <div>
+                <div className=" flex justify-end w-1/3">
+                    <ABMPrescriptionsSearch />
+                  </div>
                   <div className="flex ">
                     {prescriptionDNI.length > 0 && (
                       <ABMPrescriptionsListAffData

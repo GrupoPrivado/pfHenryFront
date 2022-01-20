@@ -71,16 +71,21 @@ const UpdateEmployee = ({ setShowModalUpdate }) => {
     dispatch(resetDataUpdate());
     setErrors(true);
   };
-
+  const showHideClassName = setShowModalUpdate? "displayblock" : "displaynone";
   return (
-    <div>
+    <div className={styles[showHideClassName]}>
       <section className={styles.modalmain}>
-        <h5>Modificar Empleado</h5>
-        <div className={styles.container}>
+      <div className="flex justify-center h-10%">
+          <h5 className="text-2xl font-bold text-gray-500">
+            Editar Empleado
+          </h5>
+        </div>
+        <div className="modal-content py-4 text-left px-6 h-90% ">
           <form>
-            <div>
-              <label>Teléfono: </label>
+            <div className="mt-5">
+              <label className="text-md text-gray-600">Teléfono: </label>
               <input
+              className="h-2 p-4 w-full border-2 border-gray-300 mb-1 rounded-md"
                 type="number"
                 name="telefono"
                 autoComplete="off"
@@ -90,9 +95,10 @@ const UpdateEmployee = ({ setShowModalUpdate }) => {
               />
             </div>
 
-            <div>
-              <label>E-Mail: </label>
+            <div className="mt-5">
+              <label className="text-md text-gray-600">E-Mail: </label>
               <input
+              className="h-2 p-4 w-full border-2 border-gray-300 mb-1 rounded-md"
                 type="email"
                 name="email"
                 autoComplete="off"
@@ -101,16 +107,20 @@ const UpdateEmployee = ({ setShowModalUpdate }) => {
                 placeholder="Ingrese el E-Mail...."
               />
             </div>
-          </form>
-
+          
+          <div className="flex w-full justify-around mt-10">
           {errors ? (
-            <button disabled={errors} className="disabledButton">
-              Cargar
+            <button  
+            lassName="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400  focus:outline-none focus:ring-2 focus:ring-offset-2 "
+            disabled={errors} className="disabledButton">
+              Guardar
             </button>
           ) : (
-            <button onClick={handleSubmitUpdateEmployee}>Cargar</button>
+            <button className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600  focus:outline-none focus:ring-2 focus:ring-offset-2 " onClick={handleSubmitUpdateEmployee}>Cargar</button>
           )}
-          <button onClick={() => handleClose()}>Cerrar</button>
+          <button  className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" onClick={() => handleClose()}>Cerrar</button>
+        </div>
+        </form>
         </div>
       </section>
     </div>

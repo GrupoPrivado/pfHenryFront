@@ -28,6 +28,7 @@ const UpdatePharmacy = ({ setShowModalUpdate, showModalUpdate }) => {
   const [errors, setErrors] = useState(false);
 
   const updatePharmacyDataStruct = {
+
     id: "",
     direccion: "",
     telefono: "",
@@ -71,7 +72,9 @@ const UpdatePharmacy = ({ setShowModalUpdate, showModalUpdate }) => {
   };
 
   const handleClose = () => {
+
     setUpdatePharmacyData(updatePharmacyDataStruct);
+
     setShowModalUpdate(false);
     dispatch(resetDataUpdate());
     setErrors(true);
