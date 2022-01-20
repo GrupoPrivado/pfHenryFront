@@ -48,7 +48,7 @@ const UpdatePrescription = ({ setShowModalUpdate, showModalUpdate }) => {
     setUpdatePrescriptionData({
       id: updateData._id,
       tipoReceta: updateData.tipoReceta,
-      status: "",
+      status: updateData.status,
       motivoNoAuto: "N/C",
       realizada: false,
       correoElectronico: updateData.afiliadoID.correoElectronico,
@@ -100,6 +100,7 @@ const UpdatePrescription = ({ setShowModalUpdate, showModalUpdate }) => {
               <select
                 id="status"
                 name="status"
+                value={updatePrescriptionData.status}
                 onChange={(e) => handleUpdatePrescription(e)}
               >
                 <option value="">Elija el estado de lareceta</option>

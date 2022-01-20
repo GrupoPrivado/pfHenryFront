@@ -27,7 +27,8 @@ const UpdatePharmacy = ({ setShowModalUpdate, showModalUpdate }) => {
 
   const [errors, setErrors] = useState(false);
 
-  const updatePharmacyDataStruct  = {
+  const updatePharmacyDataStruct = {
+
     id: "",
     direccion: "",
     telefono: "",
@@ -53,7 +54,7 @@ const UpdatePharmacy = ({ setShowModalUpdate, showModalUpdate }) => {
       ...updatePharmacyData,
       [event.target.name]: event.target.value,
     };
-    setUpdatePharmacyData(updatedPharmacy);
+    setUpdatePharmacyData(updatePharmacyDataStruct);
 
     setErrors(functionErrors(updatedPharmacy));
   };
@@ -71,7 +72,9 @@ const UpdatePharmacy = ({ setShowModalUpdate, showModalUpdate }) => {
   };
 
   const handleClose = () => {
-    setUpdatePharmacyData(updatePharmacyDataStruct );
+
+    setUpdatePharmacyData(updatePharmacyDataStruct);
+
     setShowModalUpdate(false);
     dispatch(resetDataUpdate());
     setErrors(true);
