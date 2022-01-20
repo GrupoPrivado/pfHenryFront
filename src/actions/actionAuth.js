@@ -15,7 +15,7 @@ export const removeItem = (item) => localStorage.removeItem(item)
 
 
 export const postAfiliate = (payload) => {
-  //console.log('Llega >>>>>>>>', payload)
+  console.log('Llega >>>>>>>>', payload)
   return async function (dispatch) {
     try {
       const {data} = await axios.post(`${api}/addPreCarga`, payload);

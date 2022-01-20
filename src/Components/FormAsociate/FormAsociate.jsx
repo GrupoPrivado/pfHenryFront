@@ -5,6 +5,8 @@ import { getPlanes } from "../../actions/actionPlanes";
 import { postAfiliate } from "../../actions/actionPlanes";
 import { useNavigate } from "react-router-dom";
 import { getAllCities } from "../../actions/actionProviders";
+import date from "./../../utils/date.js";
+import { validate } from "../../utils/constantes";
 
 const functionErrors = (data) => {
   const arrayKeys = Object.keys(data);
@@ -17,17 +19,22 @@ const functionErrors = (data) => {
 };
 
 export default function FormAsociate({
+  setAlertMessage,
+  setActiveAlert,
+  setErrorAlert,
   provinces,
   cities,
   setOutput,
   output,
   modal,
   setModal,
+  error,
 }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { planes } = useSelector((state) => state.planes);
   const [errors, setErrors] = useState(true);
+  const [errores, setErrores] = useState({});
 
   const [input, setInput] = useState({
     nombre: "",
@@ -53,33 +60,40 @@ export default function FormAsociate({
     setErrors(functionErrors(newInp));
   }
 
-  const handleSubmit = (e) => {
+  // useEffect(() => {
+  //   if(error){
+  //     setOutput([])
+  //   }
+  // }, [error,  setOutput]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const validateError = validate(input);
+    setErrores(validateError);
+    console.log(validateError, "Validate");
+    if (Object.entries(validateError).length <= 0) {
+      console.log(Object.entries(validateError).length);
+      const newState = [input, ...output];
 
-
-    const newState = [input, ...output];
-
-    setOutput(newState);
-
-    //alert("afiliate create");
-
-    dispatch(postAfiliate(newState));
-
-    setInput({
-      nombre: "",
-      apellido: "",
-      DNI: "",
-      fechaNacimiento: "",
-      telefono: "",
-      correoElectronico: "",
-      ciudadID: "",
-      provinciaID: "",
-      direccion: "",
-      planID: "",
-      password: "",
-    });
-    setErrors(true);
-    //navigate("/");
+      setOutput(newState);
+      const result = await postAfiliate(newState);
+      if (result.success) {
+        setActiveAlert(true);
+        setAlertMessage("Registro Exitoso");
+        setTimeout(() => {
+          setActiveAlert(false);
+          navigate("/login");
+        }, 5000);
+      } else {
+        setErrorAlert(true);
+        console.log(result.data);
+        setAlertMessage("error en el registro");
+        setOutput([]);
+        setTimeout(() => {
+          setErrorAlert(false);
+        }, 5000);
+      }
+    }
   };
   function handleSelect(e) {
     if (e.target.value !== "select") {
@@ -99,31 +113,40 @@ export default function FormAsociate({
       ...input,
       provinciaID: e.target.value,
     };
-    dispatch(getAllCities(newData.provinciaID))
+    dispatch(getAllCities(newData.provinciaID));
     setInput(newData);
   };
 
   return (
-    <div className='flex items-center justify-start w-full px-4 py-12 sm:px-6 lg:px-8'>
+    <div className="flex items-center justify-start w-full px-4 py-12 sm:px-6 lg:px-8">
       <div className="w-full max-w-md space-y-8">
         <form className="mt-8 space-y-6 " onSubmit={handleSubmit}>
           <input type="hidden" name="remember" defaultValue="true" />
-          <div className="grid items-center -z-0 grid-cols-3 grid-rows-5 gap-4 -space-y-px rounded-md shadow-sm w-90vw sm:grid-cols-4 sm:grid-rows-2">
-            <h3 className='col-span-4 row-span-1 text-2xl font-bold text-left text-primary'>Formulario de registro</h3>
+          <div className="grid items-center grid-cols-3 grid-rows-5 gap-4 -space-y-px rounded-md shadow-sm -z-0 w-90vw sm:grid-cols-4 sm:grid-rows-2">
+            <h3 className="col-span-4 row-span-1 text-2xl font-bold text-left text-primary">
+              Formulario de registro
+            </h3>
             <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
-              <label htmlFor="nombre" className="text-lg font-semibold">Nombre</label>
+              <label htmlFor="nombre" className="text-lg font-semibold">
+                Nombre
+              </label>
               <input
                 required
-                className="relative -z-0 block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none -z-0 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 type="text"
                 value={input.nombre}
                 name="nombre"
                 onChange={(e) => handleChange(e)}
                 placeholder="Tu nombre"
               />
+              {errores.nombre && (
+                <p className="absolute text-red-700">{errores.nombre}</p>
+              )}
             </div>
             <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
-              <label htmlFor="apellido" className="text-lg font-semibold">Apellido</label>
+              <label htmlFor="apellido" className="text-lg font-semibold">
+                Apellido
+              </label>
               <input
                 required
                 className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
@@ -133,10 +156,15 @@ export default function FormAsociate({
                 onChange={(e) => handleChange(e)}
                 placeholder="Tu apellido"
               />
+              {errores.apellido && (
+                <p className="absolute text-red-700">{errores.apellido}</p>
+              )}
             </div>
 
             <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
-              <label htmlFor="DNI" className="text-lg font-semibold">DNI</label>
+              <label htmlFor="DNI" className="text-lg font-semibold">
+                DNI
+              </label>
               <input
                 required
                 className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
@@ -146,23 +174,39 @@ export default function FormAsociate({
                 onChange={(e) => handleChange(e)}
                 placeholder="Tu DNI"
               />
+              {errores.DNI && (
+                <p className="absolute text-red-700">{errores.DNI}</p>
+              )}
             </div>
 
             <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
-              <label htmlFor="fechaNacimiento" className="text-lg font-semibold">Fecha de Nacimiento</label>
+              <label
+                htmlFor="fechaNacimiento"
+                className="text-lg font-semibold"
+              >
+                Fecha de Nacimiento
+              </label>
               <input
                 required
                 className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 type="date"
                 value={input.fechaNacimiento}
                 name="fechaNacimiento"
+                max={date}
                 onChange={(e) => handleChange(e)}
                 placeholder="Fecha de Nacimiento"
               />
+              {errores.fechaNacimiento && (
+                <p className="absolute text-red-700">
+                  {errores.fechaNacimiento}
+                </p>
+              )}
             </div>
 
             <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
-              <label htmlFor="telefono" className="text-lg font-semibold">Teléfono</label>
+              <label htmlFor="telefono" className="text-lg font-semibold">
+                Teléfono
+              </label>
               <input
                 required
                 className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
@@ -172,10 +216,18 @@ export default function FormAsociate({
                 onChange={(e) => handleChange(e)}
                 placeholder="Tu teléfono"
               />
+              {errores.telefono && (
+                <p className="absolute text-red-700">{errores.telefono}</p>
+              )}
             </div>
 
             <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
-              <label htmlFor="correoElectronico" className="text-lg font-semibold">Email</label>
+              <label
+                htmlFor="correoElectronico"
+                className="text-lg font-semibold"
+              >
+                Email
+              </label>
               <input
                 required
                 className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
@@ -185,10 +237,17 @@ export default function FormAsociate({
                 onChange={(e) => handleChange(e)}
                 placeholder="Tu e-mail"
               />
+              {errores.correoElectronico && (
+                <p className="absolute text-red-700">
+                  {errores.correoElectronico}
+                </p>
+              )}
             </div>
 
             <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
-              <label htmlFor="direccion" className="text-lg font-semibold">Domicilio</label>
+              <label htmlFor="direccion" className="text-lg font-semibold">
+                Domicilio
+              </label>
               <input
                 required
                 className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
@@ -198,10 +257,15 @@ export default function FormAsociate({
                 onChange={(e) => handleChange(e)}
                 placeholder="Tu domicilio"
               />
+              {errores.direccion && (
+                <p className="absolute text-red-700">{errores.direccion}</p>
+              )}
             </div>
 
             <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
-              <label htmlFor="provincia" className="text-lg font-semibold">Provincia</label>
+              <label htmlFor="provincia" className="text-lg font-semibold">
+                Provincia
+              </label>
               <select
                 required
                 className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
@@ -211,7 +275,9 @@ export default function FormAsociate({
                 onChange={handleChangeProvince}
                 placeholder="Seleccionar provincia"
               >
-                <option selected disabled value=''>Seleccionar provincia</option>
+                <option disabled value="">
+                  Seleccionar provincia
+                </option>
                 {provinces &&
                   provinces.map((p) => (
                     <option key={p._id} value={p._id}>
@@ -219,10 +285,15 @@ export default function FormAsociate({
                     </option>
                   ))}
               </select>
+              {errores.provinciaID && (
+                <p className="absolute text-red-700">{errores.provinciaID}</p>
+              )}
             </div>
 
             <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
-              <label htmlFor="ciudadID" className="text-lg font-semibold">Localidad</label>
+              <label htmlFor="ciudadID" className="text-lg font-semibold">
+                Localidad
+              </label>
               <select
                 required
                 className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
@@ -232,17 +303,25 @@ export default function FormAsociate({
                 onChange={handleChange}
                 placeholder="Seleccionar localidad"
               >
-                <option selected disabled value=''>Seleccionar localidad</option>
-                {
-                  cities && cities.map(c => (
-                    <option key={c._id} value={c._id}>{c.localidad}</option>
-                  ))
-                }
+                <option disabled value="">
+                  Seleccionar localidad
+                </option>
+                {cities &&
+                  cities.map((c) => (
+                    <option key={c._id} value={c._id}>
+                      {c.localidad}
+                    </option>
+                  ))}
               </select>
+              {errores.ciudadID && (
+                <p className="absolute text-red-700">{errores.ciudadID}</p>
+              )}
             </div>
 
             <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
-              <label htmlFor="planID" className="text-lg font-semibold">Plan</label>
+              <label htmlFor="planID" className="text-lg font-semibold">
+                Plan
+              </label>
               <select
                 required
                 className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
@@ -252,9 +331,12 @@ export default function FormAsociate({
                 onChange={(e) => handleSelect(e)}
                 placeholder="Seleccionar plan"
               >
-                <option selected disabled value=''>Seleccionar plan</option>
+                <option disabled value="">
+                  Seleccionar plan
+                </option>
                 {planes?.map((e) => (
                   <option
+                    key={e._id}
                     className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                     value={e._id}
                   >
@@ -262,10 +344,15 @@ export default function FormAsociate({
                   </option>
                 ))}
               </select>
+              {errores.planID && (
+                <p className="absolute text-red-700">{errores.planID}</p>
+              )}
             </div>
 
             <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
-              <label htmlFor="password" className="text-lg font-semibold">Contraseña</label>
+              <label htmlFor="password" className="text-lg font-semibold">
+                Contraseña
+              </label>
               <input
                 required
                 className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
@@ -274,56 +361,65 @@ export default function FormAsociate({
                 onChange={(e) => handleChange(e)}
                 placeholder="Contraseña"
               />
+              {errores.password && (
+                <p className="absolute text-red-700">{errores.password}</p>
+              )}
             </div>
-
           </div>
-          
         </form>
 
         <div>
-            <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
-                <label className="text-lg font-semibold">Miembro familiar</label>
-                <button
-                  required
-                  className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                  onClick={() => setModal(!modal)}
-                >
-                  Agregar
-                </button>
-            </div>
+          <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
+            <label className="text-lg font-semibold">Miembro familiar</label>
+            <button
+              required
+              className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              onClick={() => setModal(!modal)}
+            >
+              Agregar
+            </button>
+          </div>
 
-            <div>
-              <ul>
-                {output?.map((e) => (
-                      <div className="flex my-4 justify-between items-center">
-                        <li value={e.name} className="text-lg py-3 pr-3 font-semibold">{e.nombre} {e.apellido}</li>
-                        <button 
-                        className="group relative w-10 h-9 flex justify-center p-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-500 hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                        onClick={() => handleDelete(e)}
-                        >
-                          x
-                        </button>
-                      {/* <label htmlFor="" value={e.name}>
+          <div>
+            <ul>
+              {output?.map((e, index) => (
+                <div key={index} className="flex items-center justify-between my-4">
+                  <li
+                    value={e.name}
+                    className="py-3 pr-3 text-lg font-semibold"
+                  >
+                    {e.nombre} {e.apellido}
+                  </li>
+                  <button
+                    className="relative flex justify-center w-10 p-2 text-sm font-medium text-white bg-red-500 border border-transparent rounded-md group h-9 hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    onClick={() => handleDelete(e)}
+                  >
+                    x
+                  </button>
+                  {/* <label htmlFor="" value={e.name}>
                         {e.nombre}
                       </label> */}
-                      {/* <label htmlFor="" value={e.apellido}>
+                  {/* <label htmlFor="" value={e.apellido}>
                         {e.apellido}
                       </label> */}
-                      </div>
-                ))}
-              </ul>
-            </div>
+                </div>
+              ))}
+            </ul>
           </div>
+        </div>
         <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-1 sm:row-span-1">
-              <button
-                onClick={handleSubmit}
-                value="Enviar"
-                className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md disabled:bg-gray-500 bg-primary group hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
-                disabled={
-                  errors
-                }>Enviar</button>
-            </div>
+          <button
+            onClick={handleSubmit}
+            value="Enviar"
+            className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md disabled:bg-gray-500 bg-primary group hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+          >
+            Enviar
+          </button>
+        </div>
       </div>
     </div>
   );
 }
+// disabled={
+//   errors
+// }

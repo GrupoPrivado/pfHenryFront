@@ -10,7 +10,7 @@ import {
   getAllPharmacies,
   getAllProvinces,
 } from "../../actions/actionProviders";
-import Pharmacies from "./Pharmacies";
+import Pharmacies from "../../Pages/PharmaciesPage/Pharmacies";
 import { User } from "heroicons-react";
 import { getAfiliate, getItem } from "../../actions/actionAuth";
 
@@ -91,7 +91,7 @@ export default function CartPrest() {
         </select>
         </div>
       </div>
-      <Pharmacies pharmacies={pharmacies} />
+      <div><h2> Cartilla médica </h2></div>
     </div>
   );
 }
