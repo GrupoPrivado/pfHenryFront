@@ -18,8 +18,9 @@ const ABMPrescriptionsSearch = () => {
     if (dniAffiliateSearch !== "" && dniAffiliateSearch >= 8)
       dispatch(getPrescriptionsByDNI(dniAffiliateSearch));
     else alert("El formato del DNI no es correcto");
+    setDniAffiliateSearch('')
   };
-console.log(dniAffiliateSearch)
+
   return (
     <div>
       <div class="max-w-md mx-auto">
