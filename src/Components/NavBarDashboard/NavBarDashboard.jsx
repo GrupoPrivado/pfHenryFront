@@ -35,6 +35,7 @@ export default function NavBarDashboard() {
         { name: 'Recetas', href: '/afiliado/autorizaciones', current: false },
         { name: 'Historial', href: '/afiliado/historial', current: false },
         { name: 'Cartilla', href: '/afiliado/prestadores', current: false },
+        { name: 'Farmacias', href: '/afiliado/farmacias', current: false },
     ])
     const [profile, setProfile] = useState([
         { name: "Perfil", href: "/afiliado/perfil", current: false }
