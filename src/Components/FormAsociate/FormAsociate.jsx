@@ -382,8 +382,8 @@ export default function FormAsociate({
 
           <div>
             <ul>
-              {output?.map((e) => (
-                <div className="flex items-center justify-between my-4">
+              {output?.map((e, index) => (
+                <div key={index} className="flex items-center justify-between my-4">
                   <li
                     value={e.name}
                     className="py-3 pr-3 text-lg font-semibold"
