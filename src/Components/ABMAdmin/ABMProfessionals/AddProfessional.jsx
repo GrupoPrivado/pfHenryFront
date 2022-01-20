@@ -5,7 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 
 import {
   addProfessional,
+  getAllCities,
   getAllProfessionals,
+  getAllProvinces,
 } from "../../../actions/actionAMBAdmin";
 
 import styles from "./AddProfessional.module.css";
@@ -21,30 +23,44 @@ const functionErrors = (data) => {
   }
 }; //cambiarla en un utils ya que se puede usar en todos los forms
 
-const AddProfessional = ({ showModalAdd, setShowModalAdd }) => {
+const AddProfessional = ({ setShowModalAdd }) => {
   const dispatch = useDispatch();
 
-  const { allSpecialities } = useSelector((state) => state.ABMAdmin);
-  //Ver rutas para obtener las ciudades
+  const { allSpecialities, cities, provinces } = useSelector(
+    (state) => state.ABMAdmin
+  );
+
+  useEffect(() => {
+    dispatch(getAllProvinces());
+  }, []);
 
   const [errors, setErrors] = useState(true);
 
-  let [inputProfessional, setInputProfessional] = useState({
+  const inputProfessionalStruct = {
     nombre: "",
     apellido: "",
-    DNI: 0,
-    telefono: 0,
+    DNI: "",
+    telefono: "",
     mail: "",
-    ciudadID: "61e0c45d534c0844d9debf93",
-    codeProv: "111",
-    matricula: 0,
-    codeEsp: "",
+    ciudadID: "",
+    provinciaID: "",
+    matricula: "",
+    especID: "",
     tipoUsuario: "profesional",
     password: "",
-    activo: false,
-  });
+    activo: "",
+  }
 
-  const showHideClassName = showModalAdd ? "displayblock" : "displaynone";
+  const [inputProfessional, setInputProfessional] = useState(inputProfessionalStruct);
+
+  const handleChangeProvince = (e) => {
+    const newData = {
+      ...inputProfessional,
+      provinciaID: e.target.value,
+    };
+    dispatch(getAllCities(newData.provinciaID));
+    setInputProfessional(newData);
+  };
 
   const handleChange = (event) => {
     let newProfessional = {
@@ -66,53 +82,24 @@ const AddProfessional = ({ showModalAdd, setShowModalAdd }) => {
 
     let response = await dispatch(addProfessional(inputProfessional));
     alert(response.success);
-    setInputProfessional({
-      nombre: "",
-      apellido: "",
-      DNI: 0,
-      telefono: 0,
-      mail: "",
-      ciudadID: "",
-      codeProv: "",
-      matricula: 0,
-      codeEsp: "",
-      tipoUsuario: "profesional",
-      password: "",
-      activo: false,
-    });
-    await dispatch(getAllProfessionals());
-    setErrors(true);
+    setInputProfessional(inputProfessionalStruct);
     setShowModalAdd(false);
+    dispatch(getAllProfessionals());
+    setErrors(true);
   };
 
   const handleClose = () => {
-    setInputProfessional({
-      nombre: "",
-      apellido: "",
-      DNI: 0,
-      telefono: 0,
-      mail: "",
-      ciudadID: "",
-      codeProv: "",
-      matricula: 0,
-      codeEsp: "",
-      tipoUsuario: "profesional",
-      password: "",
-      activo: false,
-    });
-    setErrors(true);
+    setInputProfessional(inputProfessionalStruct);
     setShowModalAdd(false);
+    setErrors(true);
   };
 
   return (
-    <div className={styles[showHideClassName]}>
+    <div>
       <section className={styles.modalmain}>
         <h5>Agregar Nuevo Profesional</h5>
         <div className={styles.container}>
-          <form
-            onSubmit={(e) => handleSubmitProfessional(e)}
-            id="addProfessional"
-          >
+          <form>
             <div>
               <label>Nombre: </label>
               <input
@@ -185,11 +172,52 @@ const AddProfessional = ({ showModalAdd, setShowModalAdd }) => {
               />
             </div>
 
-            {/* Colocar los selectores de ciudades y sacar el hardcodeo */}
+            <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
+              <label className="text-lg font-semibold" htmlFor="provincia">
+                Provincia{" "}
+              </label>
+              <select
+                value={inputProfessional.provinciaID}
+                onChange={handleChangeProvince}
+                name="provinciaID"
+                className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
+                required
+              >
+                <option>Seleccione Provincia</option>
+                {provinces &&
+                  provinces.map((p) => (
+                    <option key={p._id} value={p._id}>
+                      {p.nombre}
+                    </option>
+                  ))}
+              </select>
+            </div>
+
+            <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
+              <label className="text-lg font-semibold" htmlFor="localidad">
+                Localidad{" "}
+              </label>
+              <select
+                onChange={(e) => handleChange(e)}
+                value={inputProfessional.ciudadID}
+                name="ciudadID"
+                className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
+                required
+              >
+                <option>Seleccione Localidad</option>
+                {cities &&
+                  cities.map((c) => (
+                    <option key={c._id} value={c._id}>
+                      {c.localidad}
+                    </option>
+                  ))}
+              </select>
+            </div>
+
             <div>
               <select
                 id="especialities"
-                name="codeEsp"
+                name="especID"
                 onChange={(e) => handleChange(e)}
               >
                 <option value="">Seleccione la Especialidad</option>
@@ -197,7 +225,7 @@ const AddProfessional = ({ showModalAdd, setShowModalAdd }) => {
                   allSpecialities.map((element) => {
                     if (element.activa) {
                       return (
-                        <option value={element.codeEsp} id={element._id}>
+                        <option value={element._id} id={element._id}>
                           {element.nombre}
                         </option>
                       );
@@ -217,19 +245,9 @@ const AddProfessional = ({ showModalAdd, setShowModalAdd }) => {
           </form>
 
           {errors ? (
-            <button
-              type="submit"
-              key="submitFormButton"
-              form="addProfessional"
-              disabled={errors}
-              className="disabledButton"
-            >
-              Cargar
-            </button>
+            <button disabled={errors}>Cargar</button>
           ) : (
-            <button type="submit" key="submitFormButton" form="addProfessional">
-              Cargar
-            </button>
+            <button onClick={(e) => handleSubmitProfessional(e)}>Cargar</button>
           )}
           <button onClick={() => handleClose()}>Cerrar</button>
         </div>

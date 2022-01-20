@@ -20,37 +20,31 @@ const functionErrors = (data) => {
   }
 }; //cambiarla en un utils ya que se puede usar en todos los forms
 
-const UpdateSpeciality = ({ setShowModalUpdate, showModalUpdate }) => {
+const UpdateSpeciality = ({ setShowModalUpdate }) => {
   const dispatch = useDispatch();
   const { updateData } = useSelector((state) => state.ABMAdmin);
 
   const [errors, setErrors] = useState(false);
 
-  let [updateSpecialityData, setUpdateSpecialityData] = useState({
+  const updateSpecialityDataStruct = {
     id: "",
-    newCodeEsp: "",
-    newNombre: "",
-    newDescripcion: "",
-    newActiva: false,
-    oldCodeEsp: "",
-    oldNombre: "",
-    oldDescripcion: "",
-    oldActiva: false,
-  });
+    nombre: "",
+    descripcion: "",
+    activa: "",
+  };
+
+  const [updateSpecialityData, setUpdateSpecialityData] = useState(
+    updateSpecialityDataStruct
+  );
 
   useEffect(() => {
     setUpdateSpecialityData({
       id: updateData._id,
-      newCodeEsp: updateData.codeEsp,
-      newNombre: updateData.nombre,
-      newDescripcion: updateData.descripcion,
-      newActiva: updateData.activa,
-      oldCodeEsp: updateData.codeEsp,
-      oldNombre: updateData.nombre,
-      oldDescripcion: updateData.descripcion,
-      oldActiva: updateData.activa,
+      nombre: updateData.nombre,
+      descripcion: updateData.descripcion,
+      activa: updateData.activa,
     });
-  }, [updateData, dispatch]);
+  }, [updateData]);
 
   const handleUpdateSpeciality = async (event) => {
     let updatedSpeciality = {
@@ -67,76 +61,38 @@ const UpdateSpeciality = ({ setShowModalUpdate, showModalUpdate }) => {
     event.preventDefault();
     let response = await dispatch(updateSpecialityAct(updateSpecialityData));
     alert(response.success);
-    setUpdateSpecialityData({
-      id: "",
-      newCodeEsp: "",
-      newNombre: "",
-      newDescripcion: "",
-      newActiva: false,
-      oldCodeEsp: "",
-      oldNombre: "",
-      oldDescripcion: "",
-      oldActiva: false,
-    });
-    await dispatch(getAllSpecialities());
+    setUpdateSpecialityData(updateSpecialityDataStruct);
+    setShowModalUpdate(false);
+    dispatch(getAllSpecialities());
     dispatch(resetDataUpdate());
     setErrors(true);
-    setShowModalUpdate(false);
   };
 
   const handleClose = () => {
-    setUpdateSpecialityData({
-      id: "",
-      newCodeEsp: "",
-      newNombre: "",
-      newDescripcion: "",
-      newActiva: false,
-      oldCodeEsp: "",
-      oldNombre: "",
-      oldDescripcion: "",
-      oldActiva: false,
-    });
+    setUpdateSpecialityData(updateSpecialityDataStruct);
+    setShowModalUpdate(false);
     dispatch(resetDataUpdate());
     setErrors(true);
-    setShowModalUpdate(false);
   };
 
-  const showHideClassName = showModalUpdate ? "displayblock" : "displaynone";
-
   return (
-    <div className={styles[showHideClassName]}>
+    <div>
       <section className={styles.modalmain}>
-        <div className="flex justify-center">
-        <h5 className="text-2xl font-bold text-gray-500">
-          Modificar Especialidad
-        </h5>
+        <div className="flex justify-center h-10%">
+          <h5 className="text-2xl font-bold text-gray-500">
+            Modificar Especialidad
+          </h5>
         </div>
-        <div className="modal-content py-4 text-left px-6 ">
-          <form
-            onSubmit={(e) => handleSubmitUpdateSpeciality(e)}
-            id="updateSpeciality"
-          >
-            <div>
-              <label className="text-md text-gray-600">Codigo: </label>
-              <input
-                className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md"
-                type="text"
-                name="newCodeEsp"
-                autoComplete="off"
-                value={updateSpecialityData.newCodeEsp}
-                onChange={(e) => handleUpdateSpeciality(e)}
-                placeholder="Ingrese el Codódigo...."
-              />
-            </div>
-
+        <div className="modal-content py-4 text-left px-6 h-90%">
+          <form>
             <div>
               <label className="text-md text-gray-600">Nombre: </label>
               <input
                 className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md"
                 type="text"
-                name="newNombre"
+                name="nombre"
                 autoComplete="off"
-                value={updateSpecialityData.newNombre}
+                value={updateSpecialityData.nombre}
                 onChange={(e) => handleUpdateSpeciality(e)}
                 placeholder="Ingrese el nombre...."
               />
@@ -147,54 +103,42 @@ const UpdateSpeciality = ({ setShowModalUpdate, showModalUpdate }) => {
               <input
                 className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md"
                 type="text"
-                name="newDescripcion"
+                name="descripcion"
                 autoComplete="off"
-                value={updateSpecialityData.newDescripcion}
+                value={updateSpecialityData.descripcion}
                 onChange={(e) => handleUpdateSpeciality(e)}
                 placeholder="Ingrese la Descripcion...."
               />
             </div>
 
-            <div className="flex justify-between">
+            <div className="flex justify-between items-end mt-8">
               <div className="flex w-1/3 items-center">
                 <label className="text-md text-gray-600">Activo: </label>
                 <select
                   id="activa"
-                  name="newActiva"
+                  name="activa"
                   onChange={(e) => handleUpdateSpeciality(e)}
-                  defaultValue={0}
+                  // defaultValue={updateSpecialityData.activa}
+                  value={updateSpecialityData.activa}
                 >
-                  <option
-                    value="false"
-                    selected={updateSpecialityData.oldActiva === false}
-                  >
-                    No
-                  </option>
-                  <option
-                    value="true"
-                    selected={updateSpecialityData.oldActiva === true}
-                  >
-                    Si
-                  </option>
+                  <option value="">Seleccione</option>
+                  <option value="false">No</option>
+                  <option value="true">Si</option>
                 </select>
               </div>
 
-              <div className="flex w-2/3 justify-around">
+              <div className="flex w-2/3 justify-around  ">
                 {errors ? (
                   <button
                     className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    type="submit"
-                    key="submitFormButton"
-                    form="addSpeciality"
                     disabled={errors}
                   >
                     Guardar
                   </button>
                 ) : (
                   <button
-                    type="submit"
+                    onClick={handleSubmitUpdateSpeciality}
                     key="submitFormButton"
-                    form="addSpeciality"
                     className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   >
                     Guardar

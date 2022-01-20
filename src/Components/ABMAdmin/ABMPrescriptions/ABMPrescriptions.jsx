@@ -5,10 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { getAllPrescriptions } from "../../../actions/actionAMBAdmin";
 
-
 import UpdatePrescription from "./UpdatePrescription";
 import ABMPrescriptionsList from "./ABMPrescriptionsList";
-
+import ABMPrescriptionsSearch from "./ABMPrescriptionsSearch";
 
 const ABMPrescriptions = () => {
   const dispatch = useDispatch();
@@ -22,16 +21,14 @@ const ABMPrescriptions = () => {
   // }, [dispatch]);
 
   return (
-    <div>   
+    <div>
+      {/* <ABMPrescriptionsSearch /> */}
 
-      
+      <ABMPrescriptionsList setShowModalUpdate={setShowModalUpdate} />
 
-      <ABMPrescriptionsList setShowModalUpdate={setShowModalUpdate}/>
-
-      <UpdatePrescription
-        showModalUpdate={showModalUpdate}
-        setShowModalUpdate={setShowModalUpdate}
-      />
+      {showModalUpdate && (
+        <UpdatePrescription setShowModalUpdate={setShowModalUpdate} />
+      )}
     </div>
   );
 };
