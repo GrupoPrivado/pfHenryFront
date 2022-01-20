@@ -45,7 +45,6 @@ export function getAllProvinces() {
 }
 
 export function getAllCities(payload) {
-  console.log('get all cities, ', payload)
   return async function (dispatch) {
     try {
       const {data} = await axios.get(`${api}/ciudades/${payload}`);

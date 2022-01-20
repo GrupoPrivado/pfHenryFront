@@ -27,7 +27,6 @@ export default function FormAddAsociateGroup({
   const dispatch = useDispatch();
   const [errors, setErrors] = useState(true);
   const [errores, setErrores] = useState({})
-  console.log(errors);
   const [input, setInput] = useState({
     nombre: "",
     apellido: "",
@@ -217,7 +216,7 @@ export default function FormAddAsociateGroup({
                     onChange={handleChangeProvince}
                     placeholder="Seleccionar provincia"
                   >
-                    <option selected disabled value=''>Seleccionar provincia</option>
+                    <option disabled value=''>Seleccionar provincia</option>
                     {provinces &&
                       provinces.map((p) => (
                         <option key={p._id} value={p._id}>
@@ -241,7 +240,7 @@ export default function FormAddAsociateGroup({
                     onChange={handleChange}
                     placeholder="Seleccionar localidad"
                   >
-                    <option selected disabled value=''>Seleccionar localidad</option>
+                    <option disabled value=''>Seleccionar localidad</option>
                     {
                       cities && cities.map(c => (
                         <option key={c._id} value={c._id}>{c.localidad}</option>
