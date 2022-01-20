@@ -10,7 +10,7 @@ import EditProfile from "./EditProfile";
 import SuccessAlert from "../Alerts/SuccessAlert";
 import ErrorAlert from "../Alerts/ErrorAlert";
 import { getAllCities, getAllProvinces } from "../../actions/actionProviders";
-import Facturas from '../Facturas/Facturas';
+
 
 function Perfil() {
   const dispatch = useDispatch();
@@ -59,8 +59,8 @@ function Perfil() {
   }, 4000);
 
   return (
-    <div className="mt-4">
-      <h1 className="col-span-4 row-span-1 mb-10 ml-8 text-4xl font-bold text-left text-primary">
+    <div className="mt-12">
+      <h1 className="col-span-4 row-span-1 mb-10 ml-8 text-4xl font-bold  text-primary text-center">
         Mi Cuenta
       </h1>
       <div className="grid items-center grid-cols-1 grid-rows-1 sm:grid-rows-1 sm:grid-cols-2">
@@ -68,7 +68,6 @@ function Perfil() {
         <EditPassword setErrorAlert={setErrorAlert} setAlertMessage={setAlertMessage}/>
       </div>
       <EditProfile user={user} data={data} />
-      <Facturas />
       {activeAlert && <SuccessAlert message={alertMessage} />}
       {errorAlert && <ErrorAlert message={alertMessage} />}
     </div>

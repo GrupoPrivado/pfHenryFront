@@ -1,6 +1,7 @@
 import React, { useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux"
 import { getFacturas } from '../../actions/actionFacturas';
+import { getItem } from "../../actions/actionAuth";
 
 function Facturas() {
     const dispatch = useDispatch();
@@ -10,18 +11,13 @@ function Facturas() {
 
     useEffect(() => {
         dispatch(getFacturas());
-    }, [dispatch]);
+    }, []);
 
-    const facturasPrueba = [{ 
-        numFactura: 12,
-        nombre: "matias", 
-        plan: "Oro",
-        monto: "13050"} ]
+        const token = getItem('userToken');
 
     return (
-        <div className='flex items-center justify-start w-full px-4 py-12 sm:px-6 lg:px-8'>
-            <div className="grid items-center grid-cols-3 grid-rows-5 gap-4 -space-y-px rounded-md shadow-sm w-90vw sm:grid-cols-4 sm:grid-rows-2">
-            <h3 className='col-span-4 row-span-1 text-2xl font-bold text-left text-primary'>Mis Facturas</h3>
+            <div className="grid items-end grid-cols-1 grid-rows-1 gap-4  rounded-md shadow-sm w-90vw sm:grid-cols-1 sm:grid-rows-1">
+            <h3 className='col-span-5 row-span-1 text-2xl font-bold text-left text-primary mt-5'>Mis Facturas</h3>
             <table className="bg-white text-gray-900 shadow-none w-90vw mx-auto mt-10">
                 <thead>
                     <tr>
@@ -41,19 +37,20 @@ function Facturas() {
                             <td className="px-2 py-3">{f.planID.name}</td>
                             <td className="px-2 py-3">${f.precio}</td>
                             <td className="px-2 py-3">
-                                <form action="http://localhost:3001/api/mercadopago" method="POST">
+                                {f.status === "approved" ? <span>Pagado</span> : 
+                                <form action="https://arpymedical.herokuapp.com/api/mercadopago" method="POST">
+                                    <input type="hidden" name="token" value={token} />
                                     <input type="hidden" name="description" value={f.numFactura} />
                                     <input type="hidden" name="codePlan" value={f.planID.name} />
                                     <input type="hidden" name="precio" value={f.precio} />
                                     <input type="submit" value="Pagar" target="_blank" className="px-3 py-2 rounded-md text-sm font-medium bg-secondary text-white cursor-pointer"/>
-                                </form>
+                                </form>}
                             </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
             </div>
-        </div> 
     );
 }
 
