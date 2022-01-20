@@ -60,6 +60,7 @@ useEffect(() => {
 
   return (
     <div>
+ 
         <div className="relative">
           <FormAsociate
             setAlertMessage={setAlertMessage}

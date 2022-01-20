@@ -110,8 +110,9 @@ export default function FormAsociate({
         }, 5000);
       } else {
         setErrorAlert(true)
-        setAlertMessage(result.data)
-        setOutput([ ])
+        console.log(result.data)
+        setAlertMessage('error en el registro')
+        //setOutput([ ])
         setTimeout(() => {
           setErrorAlert(false)
         }, 5000);
