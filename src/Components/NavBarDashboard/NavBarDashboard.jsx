@@ -164,9 +164,9 @@ export default function NavBarDashboard() {
 
                             <Disclosure.Panel className="md:hidden">
                                 <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                                    {navigation.map((item) => (
+                                    {navigation.map((item, index) => (
                                         <Disclosure.Button
-                                            key={item.name}
+                                            key={index}
                                             as="a"
                                             href={item.href}
                                             className={classNames(
@@ -200,9 +200,9 @@ export default function NavBarDashboard() {
                                     </div>
                                 </div>
                                 <div className="px-2 mt-3 space-y-1">
-                                    {profileNavigation.map((item) => (
+                                    {profileNavigation.map((item, index) => (
                                         <Disclosure.Button
-                                            key={profileNavigation.name}
+                                            key={index}
                                             as="a"
                                             href={profileNavigation.href}
                                             onClick={() => { navigate(profileNavigation.href) }}
