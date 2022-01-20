@@ -88,8 +88,8 @@ const GeneracionRecetas = ({
         />
       </div>
 
-      <button onClick={handleSendInfo}>Crear</button>
-      <button onClick={handleClose}>Cerrar</button>
+      <button onClick={handleSendInfo} name="crearReceta">Crear</button>
+      <button onClick={handleClose} name="close">Cerrar</button>
     </div>
   );
 };

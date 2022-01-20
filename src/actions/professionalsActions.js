@@ -64,3 +64,41 @@ export function postRecetaMedica(payload) {
     // }
   };
 }
+
+export function putConsultaMedica(payload) {
+  return async (dispatch) => {
+    const token = getItem("userToken");
+    const { data } = await axios.put(`${api}/profesionales`, payload, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
+    return data;
+
+    // if(data.success){
+    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
+    // } else {
+    //     return dispatch({type: "ERRORS", payload: data})
+
+    // }
+  };
+}
+
+export function getClinicHistory(payload) {
+  return async function (dispatch) {
+    const token = getItem("userToken");
+    const { data } = await axios.get(`${api}/profesionales/historiaMedica/${payload}`, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
+    if (data.success) {
+      return dispatch({
+        type: "GET_MEDICAL_HISTORY",
+        payload: data.message,
+      });
+    } else {
+      return dispatch({ type: "ERRORS", payload: data });
+    }
+  };
+}

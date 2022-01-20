@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getconsultaMedica } from "../../actions/professionalsActions";
+import { Link } from "react-router-dom";
+import {
+  getconsultaMedica,
+  putConsultaMedica,
+} from "../../actions/professionalsActions";
 import AffiliateData from "./AffiliateData";
 import GeneracionRecetas from "./GeneracionRecetas";
 import ProfessionalData from "./ProfessionalData";
@@ -35,15 +39,12 @@ const IndexProfessional = () => {
 
   /****** Variables y funciones para llenar consulta medica Func 2******/
 
-  const inputdataStruct = {
-    afiliadoID: "",
-    especID: "",
-    profesionalID: "",
+  const inputDataStruct = {
     diagnostico: "",
-    fechaConsulta: "",
+    token: "",
   };
 
-  const [inputData, setInputData] = useState(inputdataStruct);
+  const [inputData, setInputData] = useState(inputDataStruct);
 
   const handleChangeDiag = (event) => {
     const data = {
@@ -52,6 +53,14 @@ const IndexProfessional = () => {
     };
 
     setInputData(data);
+  };
+
+  const handleUpdate = () => {
+    const dataSend = {...inputData, token: dataAffiliate.token }
+    setInputData(dataSend);
+    dispatch(putConsultaMedica(dataSend));
+    setDataAffiliate(dataAffiliateStruct)
+    setInputData(inputDataStruct)
   };
 
   /****** Fin Variables y funciones para llenar consulta medica Func 2******/
@@ -99,9 +108,13 @@ const IndexProfessional = () => {
       {/*Fin Busqueda Consulta Medica */}
 
       {/* Botonera */}
-      <button>Historial Medico</button>
+      <Link to="/profesional/historiaclinica">
+        <button>Historial Medico</button>
+      </Link>
 
-      <button name="recetasModal" onClick={() => setRecetasModal(true)}>Generar Receta</button>
+      <button name="recetasModal" onClick={() => setRecetasModal(true)}>
+        Generar Receta
+      </button>
       {/* Fin Botonera */}
 
       {/* Generar Receta */}
@@ -142,6 +155,8 @@ const IndexProfessional = () => {
           placeholder="Ingrese el Diagnostico...."
         />
       </div>
+
+      <button onClick={handleUpdate} name="guardar"> Guardar</button>
       {/* Fin Diagnostico */}
     </div>
   );

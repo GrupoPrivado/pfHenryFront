@@ -1,6 +1,7 @@
 const initialState = {
   professionalData: {},
   consultaMedicaData: {},
+  clinicHistory:[]
 };
 
 export default function reducerProfessional(state = initialState, action) {
@@ -11,6 +12,9 @@ export default function reducerProfessional(state = initialState, action) {
 
     case "GET_PROFESSIONALDATA":
       return { ...state, professionalData: action.payload };
+
+      case "GET_MEDICAL_HISTORY":
+      return { ...state, clinicHistory: action.payload };
 
     default:
       return state;
