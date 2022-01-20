@@ -1,15 +1,15 @@
+import {GET_RECIPES} from "./../actions/actionRecet"
 const inicialState = {
-    recetas:[]
+  recipes: [],
   };
-  export default function reducerRecetas(state = inicialState, action) {
-    switch (action.type) {
-      case "GET_RECETAS":
+  export default function reducerRecetas(state = inicialState, {type, payload}) {
+    switch (type) {
+      case GET_RECIPES:
         return {
           ...state,
-          recetas: action.payload,
+          recipes: payload,
         };
       
-  
       default:
         return state;
     }

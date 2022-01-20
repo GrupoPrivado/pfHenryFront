@@ -1,20 +1,20 @@
 import axios from "axios";
 import {api} from '../urlHostApi'
 import { getItem } from "./actionAuth";
-export const GET_RECIPES = "GET_RECIPES"
+export const GET_CONSULTS = "GET_CONSULTS"
 
-export function getRecetas(payload) {
+export function getHistorial(payload) {
     return async function (dispatch) {
       const token = getItem("userToken");
       try {
-        const {data} = await axios.get(`${api}/recetas`, {
+        const {data} = await axios.get(`${api}/consultasMedicas`, {
                 headers:{
                     'x-access-token' : token
                 }
         });
-        console.log(data, "data recipes")
+        console.log(data, "data HISTORIAL CONSULTAS")
         if(data.success){
-            return dispatch({type: GET_RECIPES, payload: data.message})
+            return dispatch({type: GET_CONSULTS, payload: data.message})
         } else {
             return {error: true}
         }

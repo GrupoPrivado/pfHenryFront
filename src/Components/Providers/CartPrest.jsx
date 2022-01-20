@@ -13,6 +13,9 @@ import {
 import Pharmacies from "../../Pages/PharmaciesPage/Pharmacies";
 import { User } from "heroicons-react";
 import { getAfiliate, getItem } from "../../actions/actionAuth";
+import Logo from "./../../assets/bg2.jpg"
+import CartillaMedica from "./CartillaMedica";
+
 
 export default function CartPrest() {
   const dispatch = useDispatch();
@@ -58,15 +61,16 @@ export default function CartPrest() {
   };
 
   return (
-    <div className="h-70vh">
+    <div className="flex flex-col w-full bg-cover start min-h-70vh contenair" style={{ backgroundImage: `url(${Logo})` }}>
+      <h3 className='mt-3 ml-3 text-4xl font-bold text-left text-white'>Cartilla Médica</h3>
       <div className="flex justify-center gap-6 ">
         <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
-        <label className="text-lg font-semibold">Seleccione una Provincia:</label>
+        <label className="text-lg font-semibold text-white">Seleccione una Provincia:</label>
         <select
           name="provincia"
           value={filter.provinciaID}
           onChange={handleChangeProvince}
-          className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 bg-white"
+          className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 bg-white border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10"
         >
           <option value="">Todas</option>
           {provinces &&
@@ -80,8 +84,8 @@ export default function CartPrest() {
         </div>
         <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
 
-        <label className="text-lg font-semibold">Seleccione una Ciudad:</label>
-        <select name="ciudadID" onChange={handleSelectCity} className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 bg-white">
+        <label className="text-lg font-semibold text-white">Seleccione una Ciudad:</label>
+        <select name="ciudadID" onChange={handleSelectCity} className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 bg-white border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10">
           <option value="">Todas</option>
           {cities?.map((e) => (
             <option key={e._id} value={e._id}>
@@ -91,7 +95,7 @@ export default function CartPrest() {
         </select>
         </div>
       </div>
-      <div><h2> Cartilla médica </h2></div>
+      <CartillaMedica/>
     </div>
   );
 }

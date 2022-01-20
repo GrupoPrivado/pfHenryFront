@@ -1,82 +1,58 @@
-import React from 'react'
-import { useSelector } from "react-redux"
+import React, {useEffect} from 'react'
+import { useSelector, useDispatch } from "react-redux"
 import Logo from "./../../assets/bg2.jpg"
+import { getRecetas } from "../../actions/actionRecet";
+import CardReceta from './CardReceta';
 
 const Authorizations = () => {
-    const { recetas } = useSelector(state => state.recetas);
-    const recipes = {
-        recipe: [
-            {
-                numReceta: "0001",
-                tipoReceta: "Farmacia",
-                descripcion: "Ibuprofeno 400mg"
-            },
-            {
-                numReceta: "0002",
-                tipoReceta: "Farmacia",
-                descripcion: "Amoxicilina + Clavulanico 500mg"
-            },
-            {
-                numReceta: "0003",
-                tipoReceta: "Farmacia",
-                descripcion: "Diclofenac + Dexametasona"
-            },
-            {
-                numReceta: "0004",
-                tipoReceta: "Farmacia",
-                descripcion: "Buscapina Intramuscular"
-            },
-            {
-                numReceta: "0005",
-                tipoReceta: "Farmacia",
-                descripcion: "Ketorolac"
-            },
-        ]
-    }
+    const dispatch = useDispatch();
+    const { recipes } = useSelector(state => state.recetas);
+    console.log(recipes, "RECIPESSS")
+    console.log(recipes[0].profesionalID, "Prof ID")
+    useEffect(() => {
+        dispatch(getRecetas())
+    }, [dispatch])
     return (
-        <div>
-            <div className="flex items-center justify-center w-full min-h-screen bg-cover contenair" style={{ backgroundImage: `url(${Logo})` }}>
-                {/* card */}
-                <div className="w-1/2 p-5 bg-white bg-opacity-40 rounded-xl backdrop-filter backdrop-blur-lg">
-                    <div className="flex justify-between font-semibold header-card">
-                        <p>Recetas</p>
-                    </div>
-                    {/* end header */}
-                    {recipes.recipe.length ? recipes.recipe.map((recipes, index) => (
-                        <div key={index} className="flex flex-col mt-5 divide-y card-content gap-y-3">
-                            <div className="flex items-center justify-between card-content-profil">
-                                <div className="flex items-center gap-x-2">
-                                    <div className="text-s card-name-user">
-                                        <h3 className="font-semibold">{recipes.numReceta}</h3>
-                                        <div className="flex items-center gap-x-1">
-                                            <span className="w-3 h-3 bg-green-500 rounded-full" />
-                                            <span>{recipes.tipoReceta}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="card-action">
-                                    <button className="flex items-center px-2 py-1 text-white bg-gray-500 text-s hover:bg-gray-600">
-                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" /></svg>
-                                        <span>{recipes.descripcion}</span>
-                                    </button>
-                                </div>
+        <div className="flex flex-col w-full bg-cover start min-h-70vh contenair" style={{ backgroundImage: `url(${Logo})` }}>
+            <h3 className='mt-3 ml-3 text-4xl font-bold text-left text-white'>Recetas y Autorizaciones</h3>
+            <table className="mx-auto mt-10 text-gray-900 bg-white shadow-none w-80vw bg-opacity-40 rounded-xl backdrop-filter backdrop-blur-lg">
+                <thead>
+                    <tr>
+                        <th className="p-2 text-white bg-primary bg-opacity-40 backdrop-filter backdrop-blur-lg">Receta Nº</th>
+                        <th className="p-2 text-white bg-primary bg-opacity-40 backdrop-filter backdrop-blur-lg">Tipo de Receta</th>
+                        <th className="p-2 text-white bg-primary bg-opacity-40 backdrop-filter backdrop-blur-lg">Estado</th>
+                        <th className="p-2 text-white bg-primary bg-opacity-40 backdrop-filter backdrop-blur-lg">Ver receta</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {recipes ?
+                        recipes.map((recipe, index) => (
+                            <div>
+                                <tr key={index} className="text-center text-blue-900 bg-white shadow-none bg-opacity-40 backdrop-filter backdrop-blur-lg">
+                                    <td className="p-2">{recipe.numReceta}</td>
+                                    <td className="p-2">{recipe.tipoReceta}</td>
+                                    <td className="p-2">{recipe.status}</td>
+                                    <td className="flex justify-center p-2">
+                                        <button className="flex items-center w-3/5 px-2 py-1 text-white bg-gray-500 text-s hover:bg-gray-600">
+                                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" /></svg>
+                                            <span>{recipe.descripcion}</span>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <CardReceta 
+                                numReceta={recipe.numReceta}
+                                tipo={recipe.tipoReceta}
+                                nombre={recipe.profesionalID.nombre}
+                                apellido={recipe.profesionalID.apellido}
+                                matricula={recipe.profesionalID.matricula}
+                                especialidad={recipe.profesionalID.especID.nombre}
+                                descripcion={recipe.descripcion}
+                                />
                             </div>
-                        </div>
-                    )) : <div className="flex flex-col mt-5 divide-y card-content gap-y-3">
-                        <div className="flex items-center justify-between card-content-profil">
-                            <div className="flex items-center gap-x-2">
-                                <div className="text-s card-name-user">
-                                    <div className="flex items-center gap-x-1">
-                                        <span className="w-3 h-3 bg-green-500 rounded-full" />
-                                        <span>Sin Recetas</span>
-                                    </div>
-                                    {/* <h3 className="font-semibold">Sin Recetas</h3> */}
-                                </div>
-                            </div>
-                        </div>
-                    </div>}
-                </div>
-            </div>
+                        )) : <tr className="text-center text-blue-900 bg-white shadow-none bg-opacity-40 backdrop-filter backdrop-blur-lg"><td className="p-2">Sin consultas</td></tr>}
+                        
+                </tbody>
+            </table>
         </div>
     )
 }
