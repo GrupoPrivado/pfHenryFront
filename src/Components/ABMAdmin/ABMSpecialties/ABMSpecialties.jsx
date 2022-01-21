@@ -39,8 +39,6 @@ const ABMSpecialities = () => {
       setErrorAlert(true);
       setAlertMessage(message);
     }
-
-    dispatch(getAllSpecialities());
   }, [message, type, activeAlert, errorAlert]);
 
   let [showModalAdd, setShowModalAdd] = useState(false);
@@ -48,7 +46,7 @@ const ABMSpecialities = () => {
 
   useEffect(() => {
     dispatch(getAllSpecialities());
-  }, []);
+  }, [allSpecialities]);
 
   /********* Funciones para borrar un elemento*********/
   const [deleteState, setDeleteState] = useState("");
@@ -57,6 +55,7 @@ const ABMSpecialities = () => {
   const deleteSpecialityFunc = (value) => {
     dispatch(deleteSpeciality(value));
     dispatch(getAllSpecialities());
+    console.log('pase')
     setDeleteState("");
     setConfirmDeleteState(true);
   };
