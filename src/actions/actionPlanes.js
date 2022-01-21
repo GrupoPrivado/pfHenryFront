@@ -15,7 +15,7 @@ export function getPlanes() {
       
     };
   }
-
+  
 // export function postAfiliate(payload) {
 //   return async function (dispatch) {
 //     var json = await axios.post(

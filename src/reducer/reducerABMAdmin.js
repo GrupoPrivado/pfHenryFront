@@ -12,6 +12,7 @@ const initialState = {
   prescriptionDNI: [],
   affiliatePrescriptionData: [],
   updateData: {},
+  viewPlan: [],
 };
 
 export default function reducerABMAdmin(state = initialState, action) {
@@ -125,6 +126,14 @@ export default function reducerABMAdmin(state = initialState, action) {
 
     case "DATA_RESET":
       return { ...state, updateData: action.payload };
+
+    case "GET_PLANES_VIEW":
+      let plan = state.allPlansData.filter((e) => e._id === action.payload);
+      
+      return {
+        ...state,
+        viewPlan: plan,
+      };
 
     case "FILTER_ACTIV":
       let filterActiv = undefined;

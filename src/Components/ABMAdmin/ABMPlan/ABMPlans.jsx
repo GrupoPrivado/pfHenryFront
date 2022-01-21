@@ -42,6 +42,7 @@ const ABMPlans = () => {
 
   let [showModalAdd, setShowModalAdd] = useState(false);
   let [showModalUpdate, setShowModalUpdate] = useState(false);
+  let [showModalView, setShowModalView] = useState(false);
 
   useEffect(() => {
     dispatch(getAllPlansData());

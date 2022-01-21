@@ -384,7 +384,13 @@ export function getAllPlansData() {
     }
   };
 }
-
+export const getViewData = (data) => {
+  
+  return {
+    type: "GET_PLANES_VIEW",
+    payload: data,
+  };
+};
 export function addPlan(payload) {
   return async (dispatch) => {
     try {

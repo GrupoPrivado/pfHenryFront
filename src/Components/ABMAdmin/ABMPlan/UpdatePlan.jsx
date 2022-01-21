@@ -173,7 +173,7 @@ const UpdatePlan = ({setShowModalUpdate}) => {
               </div>
             </div>
             <div className="w-1/2">
-              <div className="h-1/3 flex  justify-center items-center">
+              <div className="h-20% flex  justify-center items-center">
                 <button
                   className="group relative w-2/3 h-6 flex items-center justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-400 focus:outline-none focus:ring-2 focus:ring-offset-2 "
                   name="descripcion"
@@ -229,7 +229,7 @@ const UpdatePlan = ({setShowModalUpdate}) => {
             </div>
           </div>
 
-          <div className="flex justify-between items-end  mt-4">
+          <div className="flex justify-between items-end  ">
             <div className="flex w-1/3 items-center">
               <label className="text-md text-gray-600">Activo: </label>
               <select
@@ -245,6 +245,7 @@ const UpdatePlan = ({setShowModalUpdate}) => {
                 <option value="true">Si</option>
               </select>
             </div>
+<<<<<<< HEAD
             <p className="absolute text-red-700">{errores.planActivo}</p>
             <div className="flex w-2/3 justify-around mt-4">
               <button
@@ -255,6 +256,25 @@ const UpdatePlan = ({setShowModalUpdate}) => {
               >
                 Guardar
               </button>
+=======
+            <div className="flex w-2/3 justify-around ">
+              {errors ? (
+                <button
+                  className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  disabled={errors}
+                >
+                  Guardar
+                </button>
+              ) : (
+                <button
+                  key="submitFormButton"
+                  onClick={(e) => handleSubmitUpdatePlan(e)}
+                  className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                  Guardar
+                </button>
+              )}
+>>>>>>> ABM-Admin
               <button
                 onClick={() => handleClose()}
                 className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
