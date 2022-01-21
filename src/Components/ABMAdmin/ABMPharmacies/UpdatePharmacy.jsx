@@ -28,6 +28,7 @@ const UpdatePharmacy = ({ setShowModalUpdate, showModalUpdate }) => {
   const [errors, setErrors] = useState(false);
 
   const updatePharmacyDataStruct = {
+
     id: "",
     direccion: "",
     telefono: "",
@@ -53,7 +54,7 @@ const UpdatePharmacy = ({ setShowModalUpdate, showModalUpdate }) => {
       ...updatePharmacyData,
       [event.target.name]: event.target.value,
     };
-    setUpdatePharmacyData(updatedPharmacy);
+    setUpdatePharmacyData(updatePharmacyDataStruct);
 
     setErrors(functionErrors(updatedPharmacy));
   };
@@ -71,7 +72,9 @@ const UpdatePharmacy = ({ setShowModalUpdate, showModalUpdate }) => {
   };
 
   const handleClose = () => {
+
     setUpdatePharmacyData(updatePharmacyDataStruct);
+
     setShowModalUpdate(false);
     dispatch(resetDataUpdate());
     setErrors(true);
@@ -129,9 +132,10 @@ const UpdatePharmacy = ({ setShowModalUpdate, showModalUpdate }) => {
             </div>
 
             <div className="flex justify-between">
-              <div className="flex w-1/3 items-center">
+              <div className="flex w-1/3 ">
                 <label className="text-md text-gray-600">Activo: </label>
                 <select
+                className=" h-1/2 w-full  border-2 border-gray-300 mb-5 rounded-md"
                   id="activa"
                   name="activo"
                   onChange={(e) => handleUpdatePharmacy(e)}

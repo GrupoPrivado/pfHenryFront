@@ -22,7 +22,7 @@ const ABMPrescriptions = () => {
 
   return (
     <div>
-      <ABMPrescriptionsSearch />
+      {/* <ABMPrescriptionsSearch /> */}
 
       <ABMPrescriptionsList setShowModalUpdate={setShowModalUpdate} />
 

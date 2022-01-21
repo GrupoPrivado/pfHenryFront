@@ -84,9 +84,9 @@ const UpDownEmployee = ({ setShowModalUpDown }) => {
         </div>
         <div className="modal-content py-4 text-left px-6 mt-1 ">
           <form>
-            <div className="flex justify-around ">
-              <div lassName="flex flex-col mt-3">
-                <div>
+            <div className="flex  mb-10">
+              
+                <div className="w-1/3">
                   <label className="text-md text-gray-600">
                     Nombre:{" "}
                     <span className="text-xl uppercase text-black">
@@ -94,7 +94,7 @@ const UpDownEmployee = ({ setShowModalUpDown }) => {
                     </span>
                   </label>
                 </div>
-                <div>
+                <div className="w-1/3">
                   <label className="text-md text-gray-600">
                     Apellido:{" "}
                     <span className="text-xl uppercase text-black">
@@ -102,7 +102,7 @@ const UpDownEmployee = ({ setShowModalUpDown }) => {
                     </span>
                   </label>
                 </div>
-                <div>
+                <div className="w-1/3">
                   <label className="text-md text-gray-600">
                     Legajo:{" "}
                     <span className="text-xl uppercase text-black">
@@ -110,9 +110,9 @@ const UpDownEmployee = ({ setShowModalUpDown }) => {
                     </span>
                   </label>
                 </div>
-              </div>
+              
             </div>
-            <div className="flex items-center">
+            <div className="flex items-center  mt-8">
               <div>
                 <div>
                   <label className="text-md text-gray-600">Asunto: </label>
@@ -128,9 +128,9 @@ const UpDownEmployee = ({ setShowModalUpDown }) => {
                 </div>
                 <div>
                   <div>
-                    <label className="text-md text-gray-600">Texto: </label>
+                    <label className=" w-1/3 text-md text-gray-600">Texto: </label>
                     <input
-                      className="h-6 p-10 w-2/3 border-2 border-gray-300 mb-3 rounded-md"
+                      className="h-6 p-10 w-2/3 border-2 border-gray-300  rounded-md"
                       type="textarea"
                       name="text"
                       autoComplete="off"
@@ -156,8 +156,8 @@ const UpDownEmployee = ({ setShowModalUpDown }) => {
                 </div>
               </div>
             </div>
-            <div className="flex justify-center mt-1 "></div>
-          </form>
+            <div className="flex justify-center mt-10 ">
+          
           <div className="flex w-2/3 justify-around">
             {errors ? (
               <button
@@ -182,6 +182,8 @@ const UpDownEmployee = ({ setShowModalUpDown }) => {
               Cerrar
             </button>
           </div>
+          </div>
+          </form>
         </div>
       </section>
     </div>

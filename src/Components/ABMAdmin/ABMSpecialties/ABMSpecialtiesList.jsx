@@ -6,7 +6,6 @@ import {
   getAllSpecialities,
   getSpecialityData,
   deleteSpeciality,
-  updateSpecialityAct,
 } from "../../../actions/actionAMBAdmin";
 
 import styles from "./ABMSpecialties.module.css";

@@ -53,51 +53,54 @@ const ABMEmployeesList = ({
 
                 <div className="mt-3.5">
                   <div>
-                    <div class="flex justify-between bg-gradient-to-tr from-indigo-600 to-purple-600 rounded-md py-2 px-4 text-white font-bold text-md">
-                      <div>
+                    <div class="grid overflow-hidden grid-cols-7 grid-rows-1 gap-0 bg-gradient-to-tr from-indigo-600 to-purple-600 rounded-md py-2 px-4 text-white font-bold text-md">
+                      <div className=" flex justify-center">
                         <span>Legajo</span>
                       </div>
-                      <div>
-                        <span>Nombre </span>
+                      <div className=" flex justify-center">
+                        <span className=" flex justify-center">Nombre </span>
                       </div>
                       <div>
-                        <span>Apellido</span>
+                        <span className=" flex justify-center">Apellido</span>
                       </div>
                       <div>
-                        <span>Teléfono</span>
+                        <span className=" flex justify-center">Teléfono</span>
                       </div>
-                      <div>
+                      <div className=" flex justify-center">
                         <span>Email</span>
                       </div>
-                      <div>
+                      <div className=" flex justify-center">
                         <span>Activo </span>
+                      </div>
+                      <div className=" flex justify-center">
+                        <span>Editar </span>
                       </div>
                     </div>
                     {allEmployees.length !== 0 &&
                       allEmployees.map((element) => {
                         return (
                           <div key={element._id} className={styles.tabla}>
-                            <div class="flex justify-between border-t text-sm font-normal mt-4 space-x-4">
-                              <div>
+                            <div class="grid overflow-hidden grid-cols-7 justify-between  py-1 px-4 items-center border-t text-sm font-normal mt-4 space-x-4">
+                              <div class=" flex justify-center ">
                                 <span>{element.legajo}</span>
                               </div>
-                              <div>
+                              <div class=" flex justify-center ">
                                 <span>{element.name}</span>
                               </div>
-                              <div>
+                              <div class=" flex justify-center ">
                                 <span>{element.lastName}</span>
                               </div>
-                              <div class="px-2">
+                              <div class=" flex justify-center ">
                                 <span>{element.telefono}</span>
                               </div>
-                              <div class="px-2">
+                              <div class=" flex justify-center ">
                                 <span>{element.email}</span>
                               </div>
-                              <div>
+                              <div class=" flex justify-center ">
                                 <span>{element.activo ? "Si" : "No"}</span>
                               </div>
 
-                              <div class="px-2">
+                              <div class=" flex justify-around ">
                                 <button
                                   title="Edit"
                                   key={"edit" + element._id}

@@ -247,6 +247,7 @@ const UpdatePlan = ({ setShowModalUpdate, showModalUpdate }) => {
             <div className="flex w-1/3 items-center">
               <label className="text-md text-gray-600">Activo: </label>
               <select
+              className=" h-1/2 w-full  border-2 border-gray-300 mb-5 rounded-md"
                 id="activo"
                 name="planActivo"
                 onChange={(e) => handleUpdatePlan(e)}

@@ -78,174 +78,201 @@ const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
     setErrors(true);
     setShowModalAdherent(false);
   };
-
+  const showHideClassName = setShowModalAdherent
+    ? "displayblock"
+    : "displaynone";
   return (
-    <div>
+    <div className={styles[showHideClassName]}>
       <section className={styles.modalmain}>
-        <h5>Agregar Nuevo Adherente</h5>
-        <div className={styles.container}>
+        <div className="flex justify-center h-10%">
+          <h5 className="text-2xl font-bold text-gray-500">
+            Agregar Adherente
+          </h5>
+        </div>
+        <div className="modal-content py-4 text-left px-6 h-90% ">
           {/* <form onSubmit={handleSubmit} id="addAdhernt"> */}
           <form>
-            <div>
-              <label>Nombre: </label>
-              <input
-                type="text"
-                name="nombre"
-                autoComplete="off"
-                value={inputAdherent.nombre}
-                onChange={(e) => handleChange(e)}
-                placeholder="Ingrese el nombre...."
-              />
-            </div>
+            <div className="flex">
+              <div className="w-1/3">
+                <label className="text-md text-gray-600">Nombre: </label>
+                <input
+                  className="h-2 p-4 w-full border-2 border-gray-300 mb-1 rounded-md"
+                  type="text"
+                  name="nombre"
+                  autoComplete="off"
+                  value={inputAdherent.nombre}
+                  onChange={(e) => handleChange(e)}
+                  placeholder="Ingrese el nombre...."
+                />
+              </div>
 
-            <div>
-              <label>Apellido: </label>
-              <input
-                type="text"
-                name="apellido"
-                autoComplete="off"
-                value={inputAdherent.apellido}
-                onChange={(e) => handleChange(e)}
-                placeholder="Ingrese el apellido...."
-              />
-            </div>
+              <div className="w-1/3">
+                <label className="text-md text-gray-600">Apellido: </label>
+                <input
+                  className="h-2 p-4 w-full border-2 border-gray-300 mb-1 rounded-md"
+                  type="text"
+                  name="apellido"
+                  autoComplete="off"
+                  value={inputAdherent.apellido}
+                  onChange={(e) => handleChange(e)}
+                  placeholder="Ingrese el apellido...."
+                />
+              </div>
 
-            <div>
-              <label>DNI: </label>
-              <input
-                type="number"
-                name="DNI"
-                autoComplete="off"
-                value={inputAdherent.DNI}
-                onChange={(e) => handleChange(e)}
-                placeholder="Ingrese el DNI...."
-              />
+              <div className="w-1/3">
+                <label className="text-md text-gray-600">DNI: </label>
+                <input
+                  className="h-2 p-4 w-full border-2 border-gray-300 mb-1 rounded-md"
+                  type="number"
+                  name="DNI"
+                  autoComplete="off"
+                  value={inputAdherent.DNI}
+                  onChange={(e) => handleChange(e)}
+                  placeholder="Ingrese el DNI...."
+                />
+              </div>
             </div>
+            <div className="flex">
+              <div className="w-1/2">
+                <label className="text-md text-gray-600">
+                  Fecha de Nacimiento:{" "}
+                </label>
+                <input
+                  className="h-2 p-4 w-full border-2 border-gray-300 mb-1 rounded-md"
+                  type="date"
+                  name="fechaNacimiento"
+                  autoComplete="off"
+                  value={inputAdherent.fechaNacimiento}
+                  onChange={(e) => handleChange(e)}
+                  placeholder="Ingrese Fecha Nacimiento...."
+                />
+              </div>
 
-            <div>
-              <label>Fehca de Nacimiento: </label>
-              <input
-                type="date"
-                name="fechaNacimiento"
-                autoComplete="off"
-                value={inputAdherent.fechaNacimiento}
-                onChange={(e) => handleChange(e)}
-                placeholder="Ingrese Fecha Nacimiento...."
-              />
+              <div className="w-1/2">
+                <label className="text-md text-gray-600">Teléfono: </label>
+                <input
+                  className="h-2 p-4 w-full border-2 border-gray-300 mb-1 rounded-md"
+                  type="tel"
+                  pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
+                  name="telefono"
+                  autoComplete="off"
+                  value={inputAdherent.telefono}
+                  onChange={(e) => handleChange(e)}
+                  placeholder="Ingrese el Teléfono...."
+                />
+              </div>
             </div>
+            <div className="flex">
+              <div className="w-1/2">
+                <label className="text-md text-gray-600">E-Mail: </label>
+                <input
+                  className="h-2 p-4 w-full border-2 border-gray-300 mb-1 rounded-md"
+                  type="email"
+                  name="correoElectronico"
+                  autoComplete="off"
+                  value={inputAdherent.correoElectronico}
+                  onChange={(e) => handleChange(e)}
+                  placeholder="Ingrese el E-Mail...."
+                />
+              </div>
 
-            <div>
-              <label>Teléfono: </label>
-              <input
-                type="tel"
-                pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
-                name="telefono"
-                autoComplete="off"
-                value={inputAdherent.telefono}
-                onChange={(e) => handleChange(e)}
-                placeholder="Ingrese el Teléfono...."
-              />
+              <div className="w-1/2">
+                <label className="text-md text-gray-600">Domicilio: </label>
+                <input
+                  className="h-2 p-4 w-full border-2 border-gray-300 mb-1 rounded-md"
+                  type="test"
+                  name="direccion"
+                  autoComplete="off"
+                  value={inputAdherent.direccion}
+                  onChange={(e) => handleChange(e)}
+                  placeholder="Ingrese el domocilio...."
+                />
+              </div>
             </div>
+            <div className="flex">
+              <div className="w-1/2">
+                <label className="text-md text-gray-600" htmlFor="provincia">
+                  Provincia{" "}
+                </label>
+                <select
+                  value={inputAdherent.provinciaID}
+                  onChange={handleChangeProvince}
+                  name="provinciaID"
+                  className=" h-1/2 w-full  border-2 border-gray-300 mb-5 rounded-md"
+                  required
+                >
+                  <option>Seleccione Provincia</option>
+                  {provinces &&
+                    provinces.map((p) => (
+                      <option key={p._id} value={p._id}>
+                        {p.nombre}
+                      </option>
+                    ))}
+                </select>
+              </div>
 
-            <div>
-              <label>E-Mail: </label>
-              <input
-                type="email"
-                name="correoElectronico"
-                autoComplete="off"
-                value={inputAdherent.correoElectronico}
-                onChange={(e) => handleChange(e)}
-                placeholder="Ingrese el E-Mail...."
-              />
+              <div className="w-1/2">
+                <label className="text-md text-gray-600" htmlFor="localidad">
+                  Localidad{" "}
+                </label>
+                <select
+                  onChange={(e) => handleChange(e)}
+                  value={inputAdherent.ciudadID}
+                  name="ciudadID"
+                  className=" h-1/2 w-full  border-2 border-gray-300 mb-5 rounded-md"
+                  required
+                >
+                  <option>Seleccione Localidad</option>
+                  {cities &&
+                    cities.map((c) => (
+                      <option key={c._id} value={c._id}>
+                        {c.localidad}
+                      </option>
+                    ))}
+                </select>
+              </div>
             </div>
+            <div className="flex justify-between items-end  mt-4">
+              <div lassName="flex w-1/2 items-center">
+              <label className="text-md text-gray-600">Parentesco </label>
+                <select
 
-            <div>
-              <label>Domicilio: </label>
-              <input
-                type="test"
-                name="direccion"
-                autoComplete="off"
-                value={inputAdherent.direccion}
-                onChange={(e) => handleChange(e)}
-                placeholder="Ingrese el domocilio...."
-              />
+className="border-2 p-1 border-gray-300 mb-3 rounded-md"id="parentesco"
+                  name="parentesco"
+                  onChange={(e) => handleChange(e)}
+                  defaultValue={0}
+                >
+                  <option value="">Seleccione</option>
+                  {arrParentesco.map((element) => {
+                    return (
+                      <option value={element.value} id={element.value}>
+                        {element.display}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
+              <div className=" flex justify-around  w-1/2">
+              {errors ? (
+                <button
+                  type="submit"
+                  key="submitFormButton"
+                  form="addAdhernt"
+                  disabled={errors}
+                  className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                  Guardar
+                </button>
+              ) : (
+                <button className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" key="submitFormButton" onClick={handleSubmit}>
+                  Guardar
+                </button>
+              )}
+              <button className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              onClick={() => handleClose()}>Cerrar</button>
             </div>
-
-            <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
-              <label className="text-lg font-semibold" htmlFor="provincia">
-                Provincia{" "}
-              </label>
-              <select
-                value={inputAdherent.provinciaID}
-                onChange={handleChangeProvince}
-                name="provinciaID"
-                className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
-                required
-              >
-                <option>Seleccione Provincia</option>
-                {provinces &&
-                  provinces.map((p) => (
-                    <option key={p._id} value={p._id}>
-                      {p.nombre}
-                    </option>
-                  ))}
-              </select>
             </div>
-
-            <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
-              <label className="text-lg font-semibold" htmlFor="localidad">
-                Localidad{" "}
-              </label>
-              <select
-                onChange={(e) => handleChange(e)}
-                value={inputAdherent.ciudadID}
-                name="ciudadID"
-                className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
-                required
-              >
-                <option>Seleccione Localidad</option>
-                {cities &&
-                  cities.map((c) => (
-                    <option key={c._id} value={c._id}>
-                      {c.localidad}
-                    </option>
-                  ))}
-              </select>
-            </div>
-
-            <select
-              id="parentesco"
-              name="parentesco"
-              onChange={(e) => handleChange(e)}
-              defaultValue={0}
-            >
-              <option value="">Parentesco</option>
-              {arrParentesco.map((element) => {
-                return (
-                  <option value={element.value} id={element.value}>
-                    {element.display}
-                  </option>
-                );
-              })}
-            </select>
           </form>
-
-          {errors ? (
-            <button
-              type="submit"
-              key="submitFormButton"
-              form="addAdhernt"
-              disabled={errors}
-              className="disabledButton"
-            >
-              Cargar
-            </button>
-          ) : (
-            <button key="submitFormButton" onClick={handleSubmit}>
-              Cargar
-            </button>
-          )}
-          <button onClick={() => handleClose()}>Cerrar</button>
         </div>
       </section>
     </div>
