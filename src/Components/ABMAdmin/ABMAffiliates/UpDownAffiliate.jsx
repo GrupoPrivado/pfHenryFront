@@ -26,16 +26,21 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
 
   const [errors, setErrors] = useState(false);
 
-  let [upDownAffiliateData, setupDowndateAffiliateData] = useState({
+  const upDownAffiliateStruct = {
     id: "",
-    alta: false,
-    activo: false,
+    alta: "",
+    activo: "",
     grupoFamiliar: "",
     grupFamID: "",
     titularGF: "",
     subject: "",
     text: "",
-  });
+    DNI: "",
+  };
+
+  const [upDownAffiliateData, setupDowndateAffiliateData] = useState(
+    upDownAffiliateStruct
+  );
 
   useEffect(() => {
     setupDowndateAffiliateData({
@@ -45,6 +50,7 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
       titularGF: updateData.titularGF,
       grupoFamiliar: updateData.grupoFamiliar || false,
       grupFamID: updateData.grupFamID || false,
+      DNI: updateData.DNI,
     });
   }, [updateData, dispatch]);
 
@@ -63,36 +69,18 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
     event.preventDefault();
     let response = await dispatch(upDownAffiliateAct(upDownAffiliateData));
     alert(response.success);
-    setupDowndateAffiliateData({
-      id: "",
-      alta: false,
-      activo: false,
-      grupoFamiliar: "",
-      grupFamID: "",
-      titularGF: "",
-      subject: "",
-      text: "",
-    });
-    await dispatch(getAllAffiliates());
+    setupDowndateAffiliateData(upDownAffiliateStruct);
+    setShowModalUpDown(false);
+    dispatch(getAllAffiliates());
     dispatch(resetDataUpdate());
     setErrors(true);
-    setShowModalUpDown(false);
   };
 
   const handleClose = () => {
-    setupDowndateAffiliateData({
-      id: "",
-      alta: false,
-      activo: false,
-      grupoFamiliar: "",
-      grupFamID: "",
-      titularGF: "",
-      subject: "",
-      text: "",
-    });
+    setupDowndateAffiliateData(upDownAffiliateStruct);
+    setShowModalUpDown(false);
     dispatch(resetDataUpdate());
     setErrors(true);
-    setShowModalUpDown(false);
   };
   const showHideClassName = showModalUpDown ? "displayblock" : "displaynone";
 
@@ -105,11 +93,7 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
           </h5>
         </div>
         <div className="modal-content py-4 text-left px-6 mt-1 ">
-          <form
-            className=" flex flex-col gap-4"
-            onSubmit={(e) => handleSubmitUpdateAffiliate(e)}
-            id="upDownAffiliate"
-          >
+          <form>
             <div className="flex justify-around ">
               <div lassName="flex flex-col mt-3">
                 <div>
@@ -158,71 +142,67 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
               </div>
             </div>
             <div className="flex items-center">
-            <div>
-              <div>
-                <label className="text-md text-gray-600">Asunto: </label>
-                <input
-                className="h-2 p-4 w-2/3 border-2 border-gray-300 mb-3 rounded-md"
-                  type="text"
-                  name="subject"
-                  autoComplete="off"
-                  value={upDownAffiliateData.subject}
-                  onChange={(e) => handleUpdateAffiliate(e)}
-                  placeholder="Ingrese el asunto...."
-                />
-              </div>
               <div>
                 <div>
-                  <label className="text-md text-gray-600">Texto: </label>
+                  <label className="text-md text-gray-600">Asunto: </label>
                   <input
-                  className="h-6 p-10 w-2/3 border-2 border-gray-300 mb-3 rounded-md"
-                    type="textarea"
-                    name="text"
+                    className="h-2 p-4 w-2/3 border-2 border-gray-300 mb-3 rounded-md"
+                    type="text"
+                    name="subject"
                     autoComplete="off"
-                    value={upDownAffiliateData.text}
+                    value={upDownAffiliateData.subject}
                     onChange={(e) => handleUpdateAffiliate(e)}
-                    placeholder="Ingrese el texto...."
+                    placeholder="Ingrese el asunto...."
                   />
                 </div>
+                <div>
+                  <div>
+                    <label className="text-md text-gray-600">Texto: </label>
+                    <input
+                      className="h-6 p-10 w-2/3 border-2 border-gray-300 mb-3 rounded-md"
+                      type="textarea"
+                      name="text"
+                      autoComplete="off"
+                      value={upDownAffiliateData.text}
+                      onChange={(e) => handleUpdateAffiliate(e)}
+                      placeholder="Ingrese el texto...."
+                    />
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="flex flex-col gap-10" > 
-              <div >
-                <label className="text-md text-gray-600">Alta: </label>
-                <select
-                  name="alta"
-                  onChange={(e) => handleUpdateAffiliate(e)}
-                  value={upDownAffiliateData.alta}
-                >
-                  <option value="">Seleccione:</option>
-                  <option value={true}>Si</option>
-                  <option value={false}>No</option>
-                </select>
-              </div>
+              <div className="flex flex-col gap-10">
+                <div>
+                  <label className="text-md text-gray-600">Alta: </label>
+                  <select
+                    name="alta"
+                    onChange={(e) => handleUpdateAffiliate(e)}
+                    value={upDownAffiliateData.alta}
+                  >
+                    <option value="">Seleccione:</option>
+                    <option value={true}>Si</option>
+                    <option value={false}>No</option>
+                  </select>
+                </div>
 
-              <div >
-                <label className="text-md text-gray-600">Activo: </label>
-                <select
-                  name="activo"
-                  onChange={(e) => handleUpdateAffiliate(e)}
-                  value={upDownAffiliateData.activo}
-                >
-                  <option value="">Seleccione:</option>
-                  <option value={true}>Si</option>
-                  <option value={false}>No</option>
-                </select>
+                <div>
+                  <label className="text-md text-gray-600">Activo: </label>
+                  <select
+                    name="activo"
+                    onChange={(e) => handleUpdateAffiliate(e)}
+                    value={upDownAffiliateData.activo}
+                  >
+                    <option value="">Seleccione:</option>
+                    <option value={true}>Si</option>
+                    <option value={false}>No</option>
+                  </select>
+                </div>
               </div>
-              
-            </div>
             </div>
             <div className="flex justify-center mt-1 ">
               <div className="flex w-2/3 justify-around">
                 {errors ? (
                   <button
                     className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    type="submit"
-                    key="submitFormButton"
-                    form="upDownAffiliate"
                     disabled={errors}
                     className="disabledButton"
                   >
@@ -230,9 +210,7 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
                   </button>
                 ) : (
                   <button
-                    type="submit"
-                    key="submitFormButton"
-                    form="upDownAffiliate"
+                    onClick={handleSubmitUpdateAffiliate}
                     className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   >
                     Guardar

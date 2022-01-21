@@ -101,11 +101,11 @@ const ABMAffiliatesList = ({ allAffiliates, setShowModalUpdate, setShowModalAdd,
                                 </div>
 
                                 <div className="  flex justify-center">
-                                  <span>{element.planID.name}</span>
+                                  <span>{element.planID?.name}</span>
                                 </div>
 
                                 <div className="  flex justify-center">
-                                  <span>{element.planID.codePlan}</span>
+                                  <span>{element.planID?.codePlan}</span>
                                 </div>
 
                                 <div className="  flex justify-around">

@@ -2,12 +2,12 @@ import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from "react-redux"
 import { updateUser } from '../../actions/actionAuth';
 import { filterByCity, getAllCities, getAllProvinces } from '../../actions/actionProviders';
+import Facturas from '../Facturas/Facturas';
 
 
 
 function EditProfile({user}) {
     const { cities, provinces } = useSelector((state) => state.providers);
-    console.log(cities)
     const dispatch = useDispatch();
     const [input, setInput] = useState ({
         correoElectronico: '',
@@ -27,7 +27,7 @@ function EditProfile({user}) {
         // dispatch(getAllProvinces())
         // dispatch(getAllCities(user.provinciaID))
 
-    }, [user, dispatch])
+    }, [user])
     
 
     const [activityChanged, setActivityChanged] = useState(false);
@@ -56,8 +56,8 @@ function EditProfile({user}) {
         //alert("Cambios guardados con éxito")
     }
     return (
-            <div className='flex items-center justify-start w-full px-4 py-12 sm:px-6 lg:px-8'>
-            <div className="w-full max-w-md space-y-8">
+            <div className='flex items-center justify-center w-100vw px-4 py-12 sm:px-6 lg:px-2'>
+            <div className="w-full flex items-center justify-center flex-wrap space-y-8">
                 <form className="mt-8 space-y-6 " onSubmit={e => handleSubmit(e)}>
                 <input type="hidden" name="remember" defaultValue="true" />
                 <div className="grid items-center grid-cols-3 grid-rows-5 gap-4 -space-y-px rounded-md shadow-sm w-90vw sm:grid-cols-4 sm:grid-rows-2">
@@ -171,7 +171,7 @@ function EditProfile({user}) {
                             required
                             >
                                 {/* <option defaultValue={input.provincia} value={input.provincia} >{input.provincia}</option> */}
-                                <option selected={input.ciudadID === '-' ? true : false}>Seleccione ciudad</option>
+                                <option>Seleccione ciudad</option>
                                 {
                                     cities && cities.map(c => (
                                         <option key={c._id} value={c._id}>{c.localidad}</option>
@@ -197,6 +197,7 @@ function EditProfile({user}) {
                         </div>
                     </div>
                 </form>
+                <Facturas />
             </div>
         </div>
     )

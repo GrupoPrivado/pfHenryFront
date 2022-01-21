@@ -14,7 +14,7 @@ const functionErrors = (data) => {
     }
   };
 
-export default function     FormContact() {
+export default function FormContact({setActiveAlert, setErrorAlert}) {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -46,17 +46,25 @@ export default function     FormContact() {
         console.log(validateErrors, 'Validate')
         if(Object.entries(validateErrors).length <= 0){
             let response = await dispatch(sendMail(input));
-            setInput({
-                name: "",
-                lastName: "",
-                phone: "",
-                mail:"",
-                message:""
-            })
-            console.log('response',response)
-            navigate("/");
-        } 
-        
+            setActiveAlert(true)
+            setTimeout(() => {
+                setActiveAlert(false)
+                navigate("/");                
+            }, 5000);
+            // setInput({
+            //     name: "",
+            //     lastName: "",
+            //     phone: "",
+            //     mail:"",
+            //     message:""
+            // })
+          
+        } else {
+            setErrorAlert(true)
+            setTimeout(() => {
+                setErrorAlert(false)
+            }, 5000);
+        }   
     }
 
     return (
@@ -69,7 +77,7 @@ export default function     FormContact() {
                                 <label className='text-lg font-semibold'>Nombre: </label>
                                 <input type="text" 
                                 className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none -z-0 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                required 
+                                 
                                 value={input.name}
                                 onChange={(e) => handleChange(e)} name="name"/>
                                 {errores.name && (
@@ -82,7 +90,7 @@ export default function     FormContact() {
                                 className='text-lg font-semibold'>Apellido: </label>
                                 <input type="text" 
                                 className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                required
+                                
                                 value={input.lastName}
                                 onChange={(e) => handleChange(e)}
                                 name='lastName'/>
@@ -106,7 +114,7 @@ export default function     FormContact() {
                                 className='text-lg font-semibold'>Mail: </label>
                                 <input type="text" 
                                 className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                required
+                                
                                 value={input.mail}
                                 onChange={(e) => handleChange(e)}
                                 name='mail'/>
@@ -120,7 +128,7 @@ export default function     FormContact() {
                                 className='text-lg font-semibold'>Consulta: </label>
                                 <textarea type="text" 
                                 className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm h-40"
-                                required
+                                
                                 value={input.message}
                                 onChange={(e) => handleChange(e)}
                                 name='message'/>

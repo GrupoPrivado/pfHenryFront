@@ -9,6 +9,7 @@ import {
   filterByCity,
   getAllPharmacies,
   getAllProvinces,
+  deleteCities,
 } from "../../actions/actionProviders";
 import Pharmacies from "../../Pages/PharmaciesPage/Pharmacies";
 import { User } from "heroicons-react";
@@ -35,28 +36,33 @@ export default function CartPrest() {
 
   useEffect(() => {
     dispatch(getAllProvinces());
-    // dispatch(getAllCities(filter.provinciaID));
+  }, [])
+
+  useEffect(() => {
+    //dispatch(getAllCities(filter.provinciaID));
     dispatch(getAllPharmacies(filter.provinciaID, filter.ciudadID));
-  }, [dispatch, filter.ciudadID, filter.provinciaID]);
+  }, [filter.ciudadID, filter.provinciaID]);
+
 
   const handleSelectCity = (e) => {
-    console.log("<<<<< target >>>>", e.target.name, ">>>>>>", e.target.value);
     const newData = {
       ...filter,
       [e.target.name]: e.target.value,
     };
-    console.log("hand  ", newData);
-    setfilter(newData);
-
-    dispatch(getAllPharmacies());
+    setfilter(newData)
   };
 
   const handleChangeProvince = (e) => {
+    const newProvince = e.target.value
     const newFilters = {
-      ciudadID: '',
+      ciudadID: "",
       provinciaID: e.target.value,
     };
-    dispatch(getAllCities(newFilters.provinciaID));
+     if(newProvince !== ''){
+      dispatch(getAllCities(newFilters.provinciaID));   
+     } else {
+       dispatch(deleteCities())
+     }
     setfilter(newFilters);
   };
 

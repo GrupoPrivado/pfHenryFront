@@ -28,7 +28,6 @@ export default function FormAsociate({
   output,
   modal,
   setModal,
-  error,
 }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -60,12 +59,6 @@ export default function FormAsociate({
     setErrors(functionErrors(newInp));
   }
 
-  // useEffect(() => {
-  //   if(error){
-  //     setOutput([])
-  //   }
-  // }, [error,  setOutput]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const validateError = validate(input);
@@ -86,8 +79,7 @@ export default function FormAsociate({
         }, 5000);
       } else {
         setErrorAlert(true);
-        console.log(result.data);
-        setAlertMessage("error en el registro");
+        setAlertMessage(result.data);
         setOutput([]);
         setTimeout(() => {
           setErrorAlert(false);
