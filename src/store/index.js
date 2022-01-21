@@ -9,6 +9,7 @@ import reducerRecetas from "../reducer/reducerRecetas";
 import reducerABMAdmin from "../reducer/reducerABMAdmin"
 import reducerProffesionals from '../reducer/reducerProfessionals'
 import { reducerAlerts } from "../reducer/reducerAlerts";
+import reducerFacturas from "../reducer/reducerFacturas";
 
 
 const reducers= combineReducers({
@@ -19,6 +20,7 @@ const reducers= combineReducers({
     recetas: reducerRecetas,
     ABMAdmin: reducerABMAdmin,
     alerts: reducerAlerts,
+    facturas: reducerFacturas,
     professionals: reducerProffesionals
     
 })
