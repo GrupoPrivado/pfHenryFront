@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  deleteCities,
   getAllCities,
   getAllPharmacies,
   getAllProvinces,
@@ -23,12 +24,16 @@ const PharmaciesPage = () => {
     provinciaID: "",
     ciudadID: "",
   });
-
   useEffect(() => {
     dispatch(getAllProvinces());
-    dispatch(getAllCities(filter.provinciaID));
+
+  }, [])
+
+  useEffect(() => {
+    //dispatch(getAllCities(filter.provinciaID));
     dispatch(getAllPharmacies(filter.provinciaID, filter.ciudadID));
   }, [filter.ciudadID, filter.provinciaID]);
+
 
   const handleSelectCity = (e) => {
     console.log("<<<<< target >>>>", e.target.name, ">>>>>>", e.target.value);
@@ -48,10 +53,11 @@ const PharmaciesPage = () => {
       ciudadID: "",
       provinciaID: e.target.value,
     };
-    if(newProvince !== ''){
-      dispatch(getAllCities(newFilters.provinciaID));
-      
-    } 
+     if(newProvince !== ''){
+      dispatch(getAllCities(newFilters.provinciaID));   
+     } else {
+       dispatch(deleteCities())
+     }
     setfilter(newFilters);
   };
   return (
