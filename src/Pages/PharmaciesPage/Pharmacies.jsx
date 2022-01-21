@@ -15,7 +15,7 @@ const Pharmacies = ({ pharmacies }) => {
         </tr>
       </thead>
       <tbody>
-        {pharmacies &&
+        {typeof pharmacies === 'object' ?
           pharmacies.map((p) => (
             <tr key={p._id} className="bg-blue-100 text-blue-900 text-center">
               <td className="p-2">{p.nombre}</td>
@@ -25,7 +25,7 @@ const Pharmacies = ({ pharmacies }) => {
               <td className="p-2">{p.provinciaID.nombre}</td>
               <td className="p-2">{p.ciudadID.localidad}</td>
             </tr>
-          ))}
+          )) : <tr><td>No se encontraron farmacias</td></tr>}
       </tbody>
     </table>
   );

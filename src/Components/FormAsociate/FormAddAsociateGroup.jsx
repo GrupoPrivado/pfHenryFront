@@ -7,8 +7,7 @@ import date from "./../../utils/date.js"
 const functionErrors = (data) => {
   const arrayKeys = Object.keys(data);
   const arrayData = arrayKeys.filter((element, index) => data[element] !== "");
-  console.log("arraykey", arrayKeys);
-  console.log("arraydata", arrayData);
+
 
   if (arrayKeys.length === arrayData.length + 1) {
     return false;
@@ -28,7 +27,6 @@ export default function FormAddAsociateGroup({
   const dispatch = useDispatch();
   const [errors, setErrors] = useState(true);
   const [errores, setErrores] = useState({})
-  console.log(errors);
   const [input, setInput] = useState({
     nombre: "",
     apellido: "",
@@ -218,7 +216,7 @@ export default function FormAddAsociateGroup({
                     onChange={handleChangeProvince}
                     placeholder="Seleccionar provincia"
                   >
-                    <option selected disabled value=''>Seleccionar provincia</option>
+                    <option disabled value=''>Seleccionar provincia</option>
                     {provinces &&
                       provinces.map((p) => (
                         <option key={p._id} value={p._id}>
@@ -242,7 +240,7 @@ export default function FormAddAsociateGroup({
                     onChange={handleChange}
                     placeholder="Seleccionar localidad"
                   >
-                    <option selected disabled value=''>Seleccionar localidad</option>
+                    <option disabled value=''>Seleccionar localidad</option>
                     {
                       cities && cities.map(c => (
                         <option key={c._id} value={c._id}>{c.localidad}</option>
@@ -279,8 +277,8 @@ export default function FormAddAsociateGroup({
               <div className="flex justify-around">
                 {errors ? (
                   <button
-                    type="submit"
-                    form="formulario"
+                    // type="submit"
+                    // form="formulario"
                     
                     onClick={handleSubmit}
                     className="relative flex justify-center px-4 py-2 text-sm font-medium text-white bg-blue-400 border border-transparent rounded-md group w-28 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -289,8 +287,8 @@ export default function FormAddAsociateGroup({
                   </button>
                 ) : (
                   <button
-                    type="submit"
-                    form="formulario"
+                    // type="submit"
+                    // form="formulario"
                     onClick={handleSubmit}
                     className="relative flex justify-center px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md group w-28 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   >

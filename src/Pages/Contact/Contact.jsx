@@ -7,9 +7,7 @@ function Contact() {
     useTitle('Contacto')
 
     return (
-        <div>
-            
-            <h1 className='text-3xl font-bold m-4 text-center'>Contacto</h1>
+        <div className='min-h-[67vh]'>
             <FormContact/>
         </div>
     )

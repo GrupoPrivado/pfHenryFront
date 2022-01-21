@@ -23,13 +23,15 @@ export const getAllPharmacies = (provinciaID, ciudadID) => {
      url = `${api}/farmacias/${provinciaID}?ciudadID=${ciudadID}`
   }
   return async (dispatch) => {
+   
     const {data} = await axios.get(`${url}`);
-    if(data.success){
-      return dispatch({
-        type: GET_ALL_PHARMACIES,
-        payload: data.message
-      })
-    }
+    console.log(data, '< farmacias >')
+
+    return dispatch({
+      type: GET_ALL_PHARMACIES,
+      payload: data.message
+    })
+
   } 
 }
 
@@ -45,7 +47,6 @@ export function getAllProvinces() {
 }
 
 export function getAllCities(payload) {
-  console.log('get all cities, ', payload)
   return async function (dispatch) {
     try {
       const {data} = await axios.get(`${api}/ciudades/${payload}`);

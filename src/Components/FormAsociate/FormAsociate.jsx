@@ -5,7 +5,7 @@ import { getPlanes } from "../../actions/actionPlanes";
 import { postAfiliate } from "../../actions/actionPlanes";
 import { useNavigate } from "react-router-dom";
 import { getAllCities } from "../../actions/actionProviders";
-import date from "./../../utils/date.js"
+import date from "./../../utils/date.js";
 import { validate } from "../../utils/constantes";
 
 const functionErrors = (data) => {
@@ -19,18 +19,22 @@ const functionErrors = (data) => {
 };
 
 export default function FormAsociate({
+  setAlertMessage,
+  setActiveAlert,
+  setErrorAlert,
   provinces,
   cities,
   setOutput,
   output,
   modal,
   setModal,
+  error,
 }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { planes } = useSelector((state) => state.planes);
   const [errors, setErrors] = useState(true);
-  const [errores, setErrores] = useState({})
+  const [errores, setErrores] = useState({});
 
   const [input, setInput] = useState({
     nombre: "",
@@ -54,43 +58,42 @@ export default function FormAsociate({
     };
     setInput(newInp);
     setErrors(functionErrors(newInp));
-    // setErrores(validate({
-    //   ...input,
-    //   [e.target.name]:e.target.value
-    // }))
   }
 
-  const handleSubmit = (e) => {
+  // useEffect(() => {
+  //   if(error){
+  //     setOutput([])
+  //   }
+  // }, [error,  setOutput]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const validateError = validate(input)
-    setErrores(validateError)
-    console.log(validateError, "Validate")
+    const validateError = validate(input);
+    setErrores(validateError);
+    console.log(validateError, "Validate");
     if (Object.entries(validateError).length <= 0) {
-      console.log(Object.entries(validateError).length)
+      console.log(Object.entries(validateError).length);
       const newState = [input, ...output];
 
       setOutput(newState);
-      dispatch(postAfiliate(newState));
-      setOutput([]);
-      setInput({
-        nombre: "",
-        apellido: "",
-        DNI: "",
-        fechaNacimiento: "",
-        telefono: "",
-        correoElectronico: "",
-        ciudadID: "",
-        provinciaID: "",
-        direccion: "",
-        planID: "",
-        password: "",
-      });
+      const result = await postAfiliate(newState);
+      if (result.success) {
+        setActiveAlert(true);
+        setAlertMessage("Registro Exitoso");
+        setTimeout(() => {
+          setActiveAlert(false);
+          navigate("/login");
+        }, 5000);
+      } else {
+        setErrorAlert(true);
+        console.log(result.data);
+        setAlertMessage("error en el registro");
+        setOutput([]);
+        setTimeout(() => {
+          setErrorAlert(false);
+        }, 5000);
+      }
     }
-    setTimeout(() => {
-      navigate("/login")
-    }, 3500);
-    
-    // setErrors(true);
   };
   function handleSelect(e) {
     if (e.target.value !== "select") {
@@ -110,19 +113,23 @@ export default function FormAsociate({
       ...input,
       provinciaID: e.target.value,
     };
-    dispatch(getAllCities(newData.provinciaID))
+    dispatch(getAllCities(newData.provinciaID));
     setInput(newData);
   };
 
   return (
-    <div className='flex items-center justify-start w-full px-4 py-12 sm:px-6 lg:px-8'>
+    <div className="flex items-center justify-start w-full px-4 py-12 sm:px-6 lg:px-8">
       <div className="w-full max-w-md space-y-8">
         <form className="mt-8 space-y-6 " onSubmit={handleSubmit}>
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="grid items-center grid-cols-3 grid-rows-5 gap-4 -space-y-px rounded-md shadow-sm -z-0 w-90vw sm:grid-cols-4 sm:grid-rows-2">
-            <h3 className='col-span-4 row-span-1 text-2xl font-bold text-left text-primary'>Formulario de registro</h3>
+            <h3 className="col-span-4 row-span-1 text-2xl font-bold text-left text-primary">
+              Formulario de registro
+            </h3>
             <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
-              <label htmlFor="nombre" className="text-lg font-semibold">Nombre</label>
+              <label htmlFor="nombre" className="text-lg font-semibold">
+                Nombre
+              </label>
               <input
                 required
                 className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none -z-0 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
@@ -137,7 +144,9 @@ export default function FormAsociate({
               )}
             </div>
             <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
-              <label htmlFor="apellido" className="text-lg font-semibold">Apellido</label>
+              <label htmlFor="apellido" className="text-lg font-semibold">
+                Apellido
+              </label>
               <input
                 required
                 className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
@@ -153,7 +162,9 @@ export default function FormAsociate({
             </div>
 
             <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
-              <label htmlFor="DNI" className="text-lg font-semibold">DNI</label>
+              <label htmlFor="DNI" className="text-lg font-semibold">
+                DNI
+              </label>
               <input
                 required
                 className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
@@ -169,7 +180,12 @@ export default function FormAsociate({
             </div>
 
             <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
-              <label htmlFor="fechaNacimiento" className="text-lg font-semibold">Fecha de Nacimiento</label>
+              <label
+                htmlFor="fechaNacimiento"
+                className="text-lg font-semibold"
+              >
+                Fecha de Nacimiento
+              </label>
               <input
                 required
                 className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
@@ -181,12 +197,16 @@ export default function FormAsociate({
                 placeholder="Fecha de Nacimiento"
               />
               {errores.fechaNacimiento && (
-                <p className="absolute text-red-700">{errores.fechaNacimiento}</p>
+                <p className="absolute text-red-700">
+                  {errores.fechaNacimiento}
+                </p>
               )}
             </div>
 
             <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
-              <label htmlFor="telefono" className="text-lg font-semibold">Teléfono</label>
+              <label htmlFor="telefono" className="text-lg font-semibold">
+                Teléfono
+              </label>
               <input
                 required
                 className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
@@ -202,7 +222,12 @@ export default function FormAsociate({
             </div>
 
             <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
-              <label htmlFor="correoElectronico" className="text-lg font-semibold">Email</label>
+              <label
+                htmlFor="correoElectronico"
+                className="text-lg font-semibold"
+              >
+                Email
+              </label>
               <input
                 required
                 className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
@@ -213,12 +238,16 @@ export default function FormAsociate({
                 placeholder="Tu e-mail"
               />
               {errores.correoElectronico && (
-                <p className="absolute text-red-700">{errores.correoElectronico}</p>
+                <p className="absolute text-red-700">
+                  {errores.correoElectronico}
+                </p>
               )}
             </div>
 
             <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
-              <label htmlFor="direccion" className="text-lg font-semibold">Domicilio</label>
+              <label htmlFor="direccion" className="text-lg font-semibold">
+                Domicilio
+              </label>
               <input
                 required
                 className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
@@ -234,7 +263,9 @@ export default function FormAsociate({
             </div>
 
             <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
-              <label htmlFor="provincia" className="text-lg font-semibold">Provincia</label>
+              <label htmlFor="provincia" className="text-lg font-semibold">
+                Provincia
+              </label>
               <select
                 required
                 className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
@@ -244,7 +275,9 @@ export default function FormAsociate({
                 onChange={handleChangeProvince}
                 placeholder="Seleccionar provincia"
               >
-                <option selected disabled value=''>Seleccionar provincia</option>
+                <option disabled value="">
+                  Seleccionar provincia
+                </option>
                 {provinces &&
                   provinces.map((p) => (
                     <option key={p._id} value={p._id}>
@@ -258,7 +291,9 @@ export default function FormAsociate({
             </div>
 
             <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
-              <label htmlFor="ciudadID" className="text-lg font-semibold">Localidad</label>
+              <label htmlFor="ciudadID" className="text-lg font-semibold">
+                Localidad
+              </label>
               <select
                 required
                 className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
@@ -268,12 +303,15 @@ export default function FormAsociate({
                 onChange={handleChange}
                 placeholder="Seleccionar localidad"
               >
-                <option selected disabled value=''>Seleccionar localidad</option>
-                {
-                  cities && cities.map(c => (
-                    <option key={c._id} value={c._id}>{c.localidad}</option>
-                  ))
-                }
+                <option disabled value="">
+                  Seleccionar localidad
+                </option>
+                {cities &&
+                  cities.map((c) => (
+                    <option key={c._id} value={c._id}>
+                      {c.localidad}
+                    </option>
+                  ))}
               </select>
               {errores.ciudadID && (
                 <p className="absolute text-red-700">{errores.ciudadID}</p>
@@ -281,7 +319,9 @@ export default function FormAsociate({
             </div>
 
             <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
-              <label htmlFor="planID" className="text-lg font-semibold">Plan</label>
+              <label htmlFor="planID" className="text-lg font-semibold">
+                Plan
+              </label>
               <select
                 required
                 className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
@@ -291,9 +331,12 @@ export default function FormAsociate({
                 onChange={(e) => handleSelect(e)}
                 placeholder="Seleccionar plan"
               >
-                <option selected disabled value=''>Seleccionar plan</option>
+                <option disabled value="">
+                  Seleccionar plan
+                </option>
                 {planes?.map((e) => (
                   <option
+                    key={e._id}
                     className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                     value={e._id}
                   >
@@ -307,7 +350,9 @@ export default function FormAsociate({
             </div>
 
             <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
-              <label htmlFor="password" className="text-lg font-semibold">Contraseña</label>
+              <label htmlFor="password" className="text-lg font-semibold">
+                Contraseña
+              </label>
               <input
                 required
                 className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
@@ -320,9 +365,7 @@ export default function FormAsociate({
                 <p className="absolute text-red-700">{errores.password}</p>
               )}
             </div>
-
           </div>
-
         </form>
 
         <div>
@@ -339,9 +382,14 @@ export default function FormAsociate({
 
           <div>
             <ul>
-              {output?.map((e) => (
-                <div className="flex items-center justify-between my-4">
-                  <li value={e.name} className="py-3 pr-3 text-lg font-semibold">{e.nombre} {e.apellido}</li>
+              {output?.map((e, index) => (
+                <div key={index} className="flex items-center justify-between my-4">
+                  <li
+                    value={e.name}
+                    className="py-3 pr-3 text-lg font-semibold"
+                  >
+                    {e.nombre} {e.apellido}
+                  </li>
                   <button
                     className="relative flex justify-center w-10 p-2 text-sm font-medium text-white bg-red-500 border border-transparent rounded-md group h-9 hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     onClick={() => handleDelete(e)}
@@ -364,7 +412,9 @@ export default function FormAsociate({
             onClick={handleSubmit}
             value="Enviar"
             className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md disabled:bg-gray-500 bg-primary group hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
-          >Enviar</button>
+          >
+            Enviar
+          </button>
         </div>
       </div>
     </div>

@@ -1,7 +1,8 @@
 import { alertConstants } from '../actions/actionAlerts';
 const inicialState = {
     type: '',
-    message: ''
+    message: '',
+    error: '',
 };
 
 export function reducerAlerts(state = inicialState, action) {
@@ -9,12 +10,14 @@ export function reducerAlerts(state = inicialState, action) {
     case alertConstants.SUCCESS:
       return {
         type: 'alert-success',
-        message: action.message
+        message: action.message,
+        error: action.error,
       };
     case alertConstants.ERROR:
       return {
         type: 'alert-danger',
-        message: action.message
+        message: action.message,
+        error: action.error
       };
     case alertConstants.CLEAR:
       return {};
@@ -22,3 +25,7 @@ export function reducerAlerts(state = inicialState, action) {
       return state
   }
 }
+
+// clear return {    type: '',
+    // message: '',
+    // error: '',}
