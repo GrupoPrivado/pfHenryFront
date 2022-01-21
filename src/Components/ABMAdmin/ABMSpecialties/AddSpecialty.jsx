@@ -98,10 +98,11 @@ const AddSpeciality = ({ setShowModalAdd }) => {
               />
             </div>
             <div className="flex justify-between mt-8">
-              <div className="flex w-1/3 items-center">
+              <div className="flex w-1/3 ">
                 <label className="text-md text-gray-600">Activo: </label>
                 <select
-                  id="activa"
+
+className=" h-1/2 w-full  border-2 border-gray-300 mb-5 rounded-md"id="activa"
                   name="activa"
                   onChange={(e) => handleChange(e)}
                   defaultValue={0}

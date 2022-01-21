@@ -95,12 +95,17 @@ const UpdateProfessional = ({ setShowModalUpdate }) => {
   return (
     <div>
       <section className={styles.modalmain}>
-        <h5>Modificar Profesional</h5>
-        <div className={styles.container}>
+      <div className="flex justify-center h-10%">
+          <h5 className="text-2xl font-bold text-gray-500">
+            Modificar Profesional
+          </h5>
+        </div>
+        <div className="modal-content py-4 text-left px-6 h-90% ">
           <form>
             <div>
-              <label>Teléfono: </label>
+              <label className="text-md text-gray-600">Teléfono: </label>
               <input
+              className="h-2 p-4 w-full border-2 border-gray-300 mb-1 rounded-md"
                 type="number"
                 name="telefono"
                 autoComplete="off"
@@ -111,8 +116,9 @@ const UpdateProfessional = ({ setShowModalUpdate }) => {
             </div>
 
             <div>
-              <label>E-Mail: </label>
+              <label className="text-md text-gray-600">E-Mail: </label>
               <input
+              className="h-2 p-4 w-full border-2 border-gray-300 mb-1 rounded-md"
                 type="email"
                 name="mail"
                 autoComplete="off"
@@ -123,14 +129,14 @@ const UpdateProfessional = ({ setShowModalUpdate }) => {
             </div>
 
             <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
-              <label className="text-lg font-semibold" htmlFor="localidad">
+              <label className="text-md text-gray-600" htmlFor="localidad">
                 Localidad{" "}
               </label>
               <select
                 onChange={handleUpdateProfessional}
                 value={updateProfessionalData.ciudadID}
                 name="ciudadID"
-                className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
+                className=" h-1/2 w-full  border-2 border-gray-300 mb-5 rounded-md"
                 defaultValue={updateProfessionalData.ciudadID}
               >
                 <option>Seleccione Localidad</option>
@@ -143,7 +149,7 @@ const UpdateProfessional = ({ setShowModalUpdate }) => {
               </select>
             </div>
 
-            <div className="col-span-3 row-span-1 w-full -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
+            <div >
               <label className="text-md text-gray-600" htmlFor="provincia">
                 Provincia{" "}
               </label>
@@ -151,7 +157,7 @@ const UpdateProfessional = ({ setShowModalUpdate }) => {
                 value={updateProfessionalData.provinciaID}
                 onChange={handleChangeProvince}
                 name="provinciaID"
-                className="relative block w-full px-1 py-1 my-2 text-sm font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 uppercase mb-3  "
+                className=" h-1/2 w-full  border-2 border-gray-300 mb-5 rounded-md uppercase"
                 required
                 defaultValue={updateProfessionalData.provinciaID}
               >
@@ -165,15 +171,16 @@ const UpdateProfessional = ({ setShowModalUpdate }) => {
               </select>
             </div>
           </form>
-
+          <div className="flex w-full justify-around">
           {errors ? (
-            <button disabled={errors} className="disabledButton">
-              Cargar
+            <button  className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"disabled={errors} >
+             Guardar
             </button>
           ) : (
-            <button onClick={handleSubmitUpdateProfessional}>Cargar</button>
+            <button className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" onClick={handleSubmitUpdateProfessional}>Guardar</button>
           )}
-          <button onClick={() => handleClose()}>Cerrar</button>
+          <button  className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" onClick={() => handleClose()}>Cerrar</button>
+        </div>
         </div>
       </section>
     </div>
