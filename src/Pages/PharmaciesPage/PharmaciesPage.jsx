@@ -26,9 +26,9 @@ const PharmaciesPage = () => {
 
   useEffect(() => {
     dispatch(getAllProvinces());
-    // dispatch(getAllCities(filter.provinciaID));
+    dispatch(getAllCities(filter.provinciaID));
     dispatch(getAllPharmacies(filter.provinciaID, filter.ciudadID));
-  }, [dispatch, filter.ciudadID, filter.provinciaID]);
+  }, [filter.ciudadID, filter.provinciaID]);
 
   const handleSelectCity = (e) => {
     console.log("<<<<< target >>>>", e.target.name, ">>>>>>", e.target.value);
@@ -39,15 +39,19 @@ const PharmaciesPage = () => {
     console.log("hand  ", newData);
     setfilter(newData);
 
-    dispatch(getAllPharmacies());
+    //dispatch(getAllPharmacies());
   };
 
   const handleChangeProvince = (e) => {
+    const newProvince = e.target.value
     const newFilters = {
       ciudadID: "",
       provinciaID: e.target.value,
     };
-    dispatch(getAllCities(newFilters.provinciaID));
+    if(newProvince !== ''){
+      dispatch(getAllCities(newFilters.provinciaID));
+      
+    } 
     setfilter(newFilters);
   };
   return (
