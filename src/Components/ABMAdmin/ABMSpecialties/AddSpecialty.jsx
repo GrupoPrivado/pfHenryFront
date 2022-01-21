@@ -9,10 +9,10 @@ import {
 } from "../../../actions/actionAMBAdmin";
 
 import styles from "./addSpecialty.module.css";
-
+import { enableBtn, disableBtn } from "../../../utils/ABMStyles";
 import {
-  functionErrorsBtn,
   validateAddEspeciality,
+  functionErrorsBtn,
 } from "../../../utils/adminFormsControllers";
 
 const AddSpeciality = ({ setShowModalAdd }) => {
@@ -122,26 +122,16 @@ const AddSpeciality = ({ setShowModalAdd }) => {
                 )}
               </div>
               <div className="flex w-2/3 justify-around">
-                {errors ? (
-                  <button
-                    className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    type="submit"
-                    key="submitFormButton"
-                    form="addSpeciality"
-                    disabled={errors}
-                  >
-                    Guardar
-                  </button>
-                ) : (
-                  <button
-                    type="submit"
-                    key="submitFormButton"
-                    form="addSpeciality"
-                    className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  >
-                    Guardar
-                  </button>
-                )}
+                <button
+                  type="submit"
+                  key="submitFormButton"
+                  form="addSpeciality"
+                  className={errors ? disableBtn : enableBtn}
+                  disabled={errors}
+                >
+                  Guardar
+                </button>
+
                 <button
                   onClick={() => handleClose()}
                   className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
