@@ -30,7 +30,7 @@ function DashAdmin() {
   }, [dispatch, route, navigate]);
 
   return (
-    <div className="h-70vh w-full grid overflow-hidden grid-cols-3 grid-rows-2 gap-0">
+    <div className="h-90vh w-full grid overflow-hidden grid-cols-3 grid-rows-2 gap-0">
       <div > 
          <CityDash/>
       </div>

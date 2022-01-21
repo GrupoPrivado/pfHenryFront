@@ -190,7 +190,7 @@ const UpdatePlan = ({ setShowModalUpdate, showModalUpdate }) => {
               </div>
             </div>
             <div className="w-1/2">
-              <div className="h-1/3 flex  justify-center items-center">
+              <div className="h-20% flex  justify-center items-center">
                 <button
                   className="group relative w-2/3 h-6 flex items-center justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-400 focus:outline-none focus:ring-2 focus:ring-offset-2 "
                   name="descripcion"
@@ -199,11 +199,12 @@ const UpdatePlan = ({ setShowModalUpdate, showModalUpdate }) => {
                   Cargar descripcion
                 </button>
               </div>
-              <div className="h-2/3 border  flex  border-gray-300 m rounded-md">
+              <div className="h-80% border overflow-y-scroll flex  border-gray-300  rounded-md">
                 {updatePlanData.descripcion &&
                   updatePlanData.descripcion.map((element, index) => {
                     return (
-                      <div key={"divDesc" + index}>
+                      <div  className='grid overflow-hidden auto-cols-auto auto-rows-auto gap-0'key={"divDesc" + index}>
+                        <div className="flex">
                         <label
                           className="text-md text-gray-600"
                           key={"labelTipo" + index}
@@ -236,6 +237,7 @@ const UpdatePlan = ({ setShowModalUpdate, showModalUpdate }) => {
                             />
                           </svg>
                         </button>
+                        </div>
                       </div>
                     );
                   })}
@@ -243,7 +245,7 @@ const UpdatePlan = ({ setShowModalUpdate, showModalUpdate }) => {
             </div>
           </div>
 
-          <div className="flex justify-between items-end  mt-4">
+          <div className="flex justify-between items-end  ">
             <div className="flex w-1/3 items-center">
               <label className="text-md text-gray-600">Activo: </label>
               <select
@@ -259,7 +261,7 @@ const UpdatePlan = ({ setShowModalUpdate, showModalUpdate }) => {
                 <option value="true">Si</option>
               </select>
             </div>
-            <div className="flex w-2/3 justify-around mt-4">
+            <div className="flex w-2/3 justify-around ">
               {errors ? (
                 <button
                   className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
