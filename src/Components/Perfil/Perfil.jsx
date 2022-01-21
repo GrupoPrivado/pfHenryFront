@@ -10,6 +10,9 @@ import EditProfile from "./EditProfile";
 import SuccessAlert from "../Alerts/SuccessAlert";
 import ErrorAlert from "../Alerts/ErrorAlert";
 import { getAllCities, getAllProvinces } from "../../actions/actionProviders";
+import {alertSweet} from '../Alerts/alertSweet'
+
+
 
 function Perfil() {
   const dispatch = useDispatch();
@@ -28,15 +31,14 @@ function Perfil() {
     if (!data) {
       dispatch(getAfiliate(getItem()));
     }
-    if(provinces.length === 0) dispatch(getAllProvinces())
+    if (provinces.length === 0) dispatch(getAllProvinces());
 
-    if(user.provinciaID) dispatch(getAllCities(user.provinciaID))
-  }, [user.provinciaID])
+    if (user.provinciaID) dispatch(getAllCities(user.provinciaID));
+  }, [user.provinciaID]);
 
   useEffect(() => {
-    if(!activeAlert || !errorAlert){
+    if (!activeAlert || !errorAlert) {
       dispatch(alertActions.clear());
-
     }
 
     if (type === "alert-success") {
@@ -55,17 +57,9 @@ function Perfil() {
       removeItem("userType");
       navigate(`/${route}`);
     }
-    
-    //dispatch(getAllProvinces())
-    //dispatch(getAllCities(user.provinciaID))
+
   }, [route, message, type, activeAlert, errorAlert]);
 
-
-
-  setTimeout(() => {
-    setActiveAlert(false);
-    setErrorAlert(false);
-  }, 4000);
 
   return (
     <div className="mt-4">
@@ -74,12 +68,16 @@ function Perfil() {
       </h1>
       <div className="grid items-center grid-cols-1 grid-rows-1 sm:grid-rows-1 sm:grid-cols-2">
         <EditImage photo={user.urlPhoto} />
-        <EditPassword setErrorAlert={setErrorAlert} setAlertMessage={setAlertMessage}/>
+        <EditPassword
+          setErrorAlert={setErrorAlert}
+          setAlertMessage={setAlertMessage}
+        />
       </div>
       <EditProfile user={user} data={data} />
 
-      {activeAlert && <SuccessAlert message={alertMessage} />}
-      {errorAlert && <ErrorAlert message={alertMessage} />}
+      {activeAlert && alertSweet('success', alertMessage, false, false, setActiveAlert, !activeAlert , () => {}, false, 2500)}
+      {errorAlert && alertSweet('error', alertMessage, false, false, setErrorAlert, !errorAlert , () => {},  false, 2500)}
+
     </div>
   );
 }

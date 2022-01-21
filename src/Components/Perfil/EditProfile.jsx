@@ -7,7 +7,6 @@ import { filterByCity, getAllCities, getAllProvinces } from '../../actions/actio
 
 function EditProfile({user}) {
     const { cities, provinces } = useSelector((state) => state.providers);
-    console.log(cities)
     const dispatch = useDispatch();
     const [input, setInput] = useState ({
         correoElectronico: '',
@@ -171,7 +170,7 @@ function EditProfile({user}) {
                             required
                             >
                                 {/* <option defaultValue={input.provincia} value={input.provincia} >{input.provincia}</option> */}
-                                <option selected={input.ciudadID === '-' ? true : false}>Seleccione ciudad</option>
+                                <option>Seleccione ciudad</option>
                                 {
                                     cities && cities.map(c => (
                                         <option key={c._id} value={c._id}>{c.localidad}</option>
