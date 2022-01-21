@@ -18,6 +18,16 @@ export const getUserToken = async(user) => {
     }
     
 }
+
+export const recoverPassword = async (input) => {
+    try {
+        const {data} = await axios.post(`${api}/login/recoverPassword`, input)
+        console.log(data)
+        return data
+    } catch (error) {
+        return console.log(error)
+    }
+}
                         
 export const verifyRole = (autorizado) => {
     const userToken = localStorage.getItem('userToken');

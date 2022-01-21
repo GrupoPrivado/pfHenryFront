@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  deleteCities,
   getAllCities,
   getAllPharmacies,
   getAllProvinces,
@@ -23,12 +24,15 @@ const PharmaciesPage = () => {
     provinciaID: "",
     ciudadID: "",
   });
-
   useEffect(() => {
     dispatch(getAllProvinces());
-    // dispatch(getAllCities(filter.provinciaID));
+  }, [])
+
+  useEffect(() => {
+    //dispatch(getAllCities(filter.provinciaID));
     dispatch(getAllPharmacies(filter.provinciaID, filter.ciudadID));
-  }, [dispatch, filter.ciudadID, filter.provinciaID]);
+  }, [filter.ciudadID, filter.provinciaID]);
+
 
   const handleSelectCity = (e) => {
     console.log("<<<<< target >>>>", e.target.name, ">>>>>>", e.target.value);
@@ -39,19 +43,24 @@ const PharmaciesPage = () => {
     console.log("hand  ", newData);
     setfilter(newData);
 
-    dispatch(getAllPharmacies());
+    //dispatch(getAllPharmacies());
   };
 
   const handleChangeProvince = (e) => {
+    const newProvince = e.target.value
     const newFilters = {
       ciudadID: "",
       provinciaID: e.target.value,
     };
-    dispatch(getAllCities(newFilters.provinciaID));
+     if(newProvince !== ''){
+      dispatch(getAllCities(newFilters.provinciaID));   
+     } else {
+       dispatch(deleteCities())
+     }
     setfilter(newFilters);
   };
   return (
-    <div className="h-70vh">
+    <div className="min-h-[70vh]">
       <div className="flex justify-center gap-6 ">
         <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
           <label className="text-lg font-semibold">

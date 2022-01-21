@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LockClosedIcon } from "@heroicons/react/solid";
 import Logo from "../../assets/logo.svg";
-import { getUserToken } from "../../utils/authUtils";
+import { getUserToken, recoverPassword } from "../../utils/authUtils";
 
-function FormLogin({ setForm, activeForm, handleChangeAlerts }) {
+function RecoverPassword({setForm, activeForm, handleChangeAlerts}) {
   const [input, setInput] = useState({
-    dni: "",
-    password: "",
+    DNI: "",
+    correoElectronico: "",
     tipoUsuario: "afiliado",
   });
 
@@ -22,18 +22,19 @@ function FormLogin({ setForm, activeForm, handleChangeAlerts }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const result = await getUserToken(input);
-    if (result.error) {
-      handleChangeAlerts("error", result.error, true);
-      setTimeout(() => {
-        handleChangeAlerts("error", "", false);
-      }, 5000);
-      return;
+    const result = await recoverPassword(input);
+    console.log(result)
+    if(result.success){
+        handleChangeAlerts('success', result.message, true)
+        setTimeout(() => {
+            //handleChangeAlerts('success', '', false)
+            navigate('/')
+        }, 4000);
     } else {
-      handleChangeAlerts("success", "Iniciando sesión...", true);
-      setTimeout(() => {
-        navigate(`/${result.url}`);
-      }, 1000);
+        handleChangeAlerts('error', result.message, true)
+        setTimeout(() => {
+            handleChangeAlerts('error', '', false)
+        }, 5000);
     }
   };
 
@@ -49,12 +50,7 @@ function FormLogin({ setForm, activeForm, handleChangeAlerts }) {
         <div>
           <img className="mx-auto h-12 w-auto" src={Logo} alt="Workflow" />
         </div>
-        <form
-          className="mt-8 space-y-6 "
-          action="#"
-          method="POST"
-          onSubmit={(e) => handleSubmit(e)}
-        >
+        <form className="mt-8 space-y-6 ">
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="-space-y-px rounded-md shadow-sm">
             <select
@@ -73,49 +69,44 @@ function FormLogin({ setForm, activeForm, handleChangeAlerts }) {
               </label>
               <input
                 id="dni"
-                name="dni"
+                name="DNI"
                 type="dni"
                 autoComplete="dni"
-                required
+                
                 className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="DNI"
                 onChange={(e) => handleChange(e)}
-                value={input.dni}
+                value={input.DNI}
               />
             </div>
             <div>
-              <label htmlFor="password" className="sr-only">
+              <label htmlFor="correoElectronico" className="sr-only">
                 Contraseña
               </label>
               <input
-                id="password"
-                name="password"
-                type="password"
-                autoComplete="current-password"
-                required
+                id="correoElectronico"
+                name="correoElectronico"
+                type="text"
+
+                
                 className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder="Contraseña"
+                placeholder="Correo Electrónico"
                 onChange={(e) => handleChange(e)}
-                value={input.password}
+                value={input.correoElectronico}
               />
             </div>
           </div>
 
           <div className="flex items-center justify-between">
             <div className="text-sm">
-              <button
-                type="button"
-                className="font-medium text-indigo-600 hover:text-indigo-500"
-                onClick={() => setForm(!activeForm)}
-              >
-                Olvide mi contraseña
-              </button>
+              <button type="button" className="font-medium text-indigo-600 hover:text-indigo-500" onClick={() => setForm(!activeForm)}>...volver al inicio de sesión </button>
             </div>
           </div>
 
           <div>
             <button
-              type="submit"
+            type="submit"
+              onClick={handleSubmit}
               className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md group hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               <span className="absolute inset-y-0 left-0 flex items-center pl-3">
@@ -124,7 +115,7 @@ function FormLogin({ setForm, activeForm, handleChangeAlerts }) {
                   aria-hidden="true"
                 />
               </span>
-              Ingresar
+              Recuperar Contraseña
             </button>
           </div>
         </form>
@@ -133,4 +124,4 @@ function FormLogin({ setForm, activeForm, handleChangeAlerts }) {
   );
 }
 
-export default FormLogin;
+export default RecoverPassword;

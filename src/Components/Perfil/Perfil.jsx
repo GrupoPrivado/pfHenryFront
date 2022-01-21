@@ -10,26 +10,36 @@ import EditProfile from "./EditProfile";
 import SuccessAlert from "../Alerts/SuccessAlert";
 import ErrorAlert from "../Alerts/ErrorAlert";
 import { getAllCities, getAllProvinces } from "../../actions/actionProviders";
+import {alertSweet} from '../Alerts/alertSweet'
+
+
 
 
 function Perfil() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { user, route, data, error } = useSelector((state) => state.auth);
+  const { user, route, data } = useSelector((state) => state.auth);
   const { type, message } = useSelector((state) => state.alerts);
-
-  console.log(type, "<TYPE>");
 
   const [activeAlert, setActiveAlert] = useState(false);
   const [errorAlert, setErrorAlert] = useState(false);
+  const { cities, provinces } = useSelector((state) => state.providers);
 
   const [alertMessage, setAlertMessage] = useState("");
 
   useEffect(() => {
-    if(!activeAlert || !errorAlert){
-      dispatch(alertActions.clear());
+    if (!data) {
+      dispatch(getAfiliate(getItem()));
+    }
+    if (provinces.length === 0) dispatch(getAllProvinces());
 
+    if (user.provinciaID) dispatch(getAllCities(user.provinciaID));
+  }, [user.provinciaID]);
+
+  useEffect(() => {
+    if (!activeAlert || !errorAlert) {
+      dispatch(alertActions.clear());
     }
 
     if (type === "alert-success") {
@@ -41,22 +51,16 @@ function Perfil() {
       setAlertMessage(message);
     }
 
-    if (!data) {
-      dispatch(getAfiliate(getItem()));
-    }
+    // if (!data) {
+    //   dispatch(getAfiliate(getItem()));
+    // }
     if (route !== "") {
       removeItem("userType");
       navigate(`/${route}`);
     }
-    
-    dispatch(getAllProvinces())
-    dispatch(getAllCities(user.provinciaID))
-  }, [dispatch, route, navigate, data, message, type, user.provinciaID, activeAlert, errorAlert]);
 
-  setTimeout(() => {
-    setActiveAlert(false);
-    setErrorAlert(false);
-  }, 4000);
+  }, [route, message, type, activeAlert, errorAlert]);
+
 
   return (
     <div className="mt-12">
@@ -65,11 +69,16 @@ function Perfil() {
       </h1>
       <div className="grid items-center grid-cols-1 grid-rows-1 sm:grid-rows-1 sm:grid-cols-2">
         <EditImage photo={user.urlPhoto} />
-        <EditPassword setErrorAlert={setErrorAlert} setAlertMessage={setAlertMessage}/>
+        <EditPassword
+          setErrorAlert={setErrorAlert}
+          setAlertMessage={setAlertMessage}
+        />
       </div>
       <EditProfile user={user} data={data} />
-      {activeAlert && <SuccessAlert message={alertMessage} />}
-      {errorAlert && <ErrorAlert message={alertMessage} />}
+
+      {activeAlert && alertSweet('success', alertMessage, false, false, setActiveAlert, !activeAlert , () => {}, false, 2500)}
+      {errorAlert && alertSweet('error', alertMessage, false, false, setErrorAlert, !errorAlert , () => {},  false, 2500)}
+
     </div>
   );
 }

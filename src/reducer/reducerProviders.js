@@ -46,6 +46,11 @@ export default function reducerPrestadores(state = inicialState, action) {
         ...state,
         providers: action.payload,
       };
+    case "RESET_CITIES":
+      return {
+        ...state,
+        cities: []
+      }
     // case "FILTER_BY_SPECIALTIES":
     // return {
     //   ...state,

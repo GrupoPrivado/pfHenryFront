@@ -13,12 +13,11 @@ import ErrorAlert from "../../Components/Alerts/ErrorAlert";
 import { useNavigate } from "react-router-dom";
 
 export default function Asociate() {
-  const { type, message, error } = useSelector((state) => state.alerts);
   const [activeAlert, setActiveAlert] = useState(false);
   const [errorAlert, setErrorAlert] = useState(false);
 
   const [alertMessage, setAlertMessage] = useState("");
-  const navigate = useNavigate()
+
   const dispatch = useDispatch();
 
   const {provinces, cities} = useSelector(state => state.providers)
@@ -27,20 +26,6 @@ export default function Asociate() {
 useEffect(() => {
   dispatch(getPlanes());
   dispatch(getAllProvinces())
-    
-  // if (type === "alert-success") {
-  //   setActiveAlert(true);
-  //   setAlertMessage(message);
-  // }
-  // if (type === "alert-danger") {
-  //   setErrorAlert(true);
-  //   setAlertMessage(message);
-  // }
-  // if(error === false) {
-  //    dispatch(alertActions.clear());
-  //    navigate('/login')
-  // } 
-
 }, [dispatch]);
 
   const [output, setOutput] = useState([]);
@@ -60,7 +45,6 @@ useEffect(() => {
             output={output}
             modal={modal}
             setModal={setModal}
-            error={error}
           />
         </div>
         {modal && (
