@@ -61,7 +61,7 @@ const PharmaciesPage = () => {
     setfilter(newFilters);
   };
   return (
-    <div className="h-70vh">
+    <div className="min-h-[70vh]">
       <div className="flex justify-center gap-6 ">
         <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
           <label className="text-lg font-semibold">
