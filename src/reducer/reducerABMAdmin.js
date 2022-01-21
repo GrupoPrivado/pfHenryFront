@@ -12,6 +12,7 @@ const initialState = {
   prescriptionDNI: [],
   affiliatePrescriptionData: [],
   updateData: {},
+  viewPlan: [],
 };
 
 export default function reducerABMAdmin(state = initialState, action) {
@@ -92,7 +93,7 @@ export default function reducerABMAdmin(state = initialState, action) {
         updateData: profData[0],
       };
 
-    case "GET_PRESCRPTION_ID": //En caso de sacar la action sacar este case 
+    case "GET_PRESCRPTION_ID": //En caso de sacar la action sacar este case
       return { ...state, updateData: action.payload };
 
     case "GET_PRESCRPTIONS_DNI":
@@ -102,14 +103,14 @@ export default function reducerABMAdmin(state = initialState, action) {
         affiliatePrescriptionData: action.payload[0].afiliadoID,
       };
 
-      case "PRESCRIPTION_DATA":
-        let prescData = state.prescriptionDNI.filter(
-          (element) => element._id === action.payload
-        );
-        return {
-          ...state,
-          updateData: prescData[0],
-        };
+    case "PRESCRIPTION_DATA":
+      let prescData = state.prescriptionDNI.filter(
+        (element) => element._id === action.payload
+      );
+      return {
+        ...state,
+        updateData: prescData[0],
+      };
 
     case "GET_EMPLOYEES":
       return { ...state, allEmployees: action.payload };
@@ -125,6 +126,14 @@ export default function reducerABMAdmin(state = initialState, action) {
 
     case "DATA_RESET":
       return { ...state, updateData: action.payload };
+
+    case "GET_PLANES_VIEW":
+      let plan = state.allPlansData.filter((e) => e._id === action.payload);
+      
+      return {
+        ...state,
+        viewPlan: plan,
+      };
 
     case "FILTER_ACTIV":
       let filterActiv = undefined;

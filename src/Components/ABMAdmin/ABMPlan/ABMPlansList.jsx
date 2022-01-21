@@ -6,6 +6,8 @@ import {
   getAllPlansData,
   getPlanData,
   deletePlan,
+  getViewData
+
 } from "../../../actions/actionAMBAdmin";
 
 
@@ -15,6 +17,7 @@ const ABMPlansList = ({
   allPlansData,
   setShowModalUpdate,
   setShowModalAdd,
+  setShowModalView,
 }) => {
   const dispatch = useDispatch();
 
@@ -22,13 +25,18 @@ const ABMPlansList = ({
     await dispatch(getPlanData(event.target.value));
     setShowModalUpdate(true);
   };
+  const handleViewPlan = async (event) => {
+    await dispatch(getViewData(event.target.value));
+    setShowModalView(true);
+    console.log(setShowModalView)
+  };
 
   const handleDeletePlan = async (event) => {
     let response = await dispatch(deletePlan(event.target.value));
 
     await dispatch(getAllPlansData());
   };
-  console.log("<<<<<<<<<<< plans data gggggggg<<<<<<<", allPlansData);
+  
   return (
     
 
@@ -84,8 +92,14 @@ const ABMPlansList = ({
                                 <div class=" flex justify-center ">
                                   <span>{element.precio}</span>
                                 </div>
-                                <div class=" flex justify-center ">
-                                  <span>{element.descripcion}</span>
+                                <div class="  flex justify-center ">
+                                  {/* <span>{element.descripcion[0]}</span>
+                                  <span>{element.descripcion[1]}</span> */}
+                                  <button key={ element._id}
+                                    
+                                    value={element._id}
+                                    onClick={(e) => handleViewPlan(e)}>Ver descripcion</button>
+
                                 </div>
                                 <div class=" flex justify-center ">
                                   <span>
