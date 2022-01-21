@@ -60,7 +60,7 @@ const GeneracionRecetas = ({
       </div>
 
       <div>
-        <label>Selecciones el tipo de receta: </label>
+        <label>Seleccione el tipo de receta: </label>
         <select
           id="recetaType"
           name="tipoReceta"
@@ -75,7 +75,7 @@ const GeneracionRecetas = ({
       </div>
 
       <div>
-        <label>Reecta: </label>
+        <label>Receta: </label>
         <textarea
           rows="4"
           cols="50"
