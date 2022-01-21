@@ -1,7 +1,6 @@
 import React from "react";
 
 const Pharmacies = ({ pharmacies }) => {
-    console.log(pharmacies)
   return (
     <table className="bg-white text-gray-900 shadow-none w-80vw mx-auto mt-10">
       <thead>

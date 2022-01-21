@@ -1,7 +1,6 @@
 import React from 'react'
 
 const Modal = ({plan}) => {
-    console.log(plan)
     return (
         <div className='absolute bg-white'>
             <h2>{plan.name}</h2>

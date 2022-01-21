@@ -18,8 +18,6 @@ function Perfil() {
   const { user, route, data, error } = useSelector((state) => state.auth);
   const { type, message } = useSelector((state) => state.alerts);
 
-  console.log(type, "<TYPE>");
-
   const [activeAlert, setActiveAlert] = useState(false);
   const [errorAlert, setErrorAlert] = useState(false);
 

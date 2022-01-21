@@ -8,7 +8,7 @@ import axios from "axios";
 /************* Actions Para ABM Ciudades***********/
 
 export function getAllCities(payload) {
-  console.log("get all cities, ", payload);
+
   return async function (dispatch) {
     try {
       const { data } = await axios.get(`${api}/ciudades/${payload}`);
@@ -28,7 +28,6 @@ export function getAllCities(payload) {
 export function getAllProvinces() {
   return async function (dispatch) {
     const { data } = await axios.get(`${api}/provincias`);
-    console.log("data provincias", data.message);
     return dispatch({
       type: "GET_ALL_PROVINCES",
       payload: data.message,
@@ -236,7 +235,6 @@ export function upDownAffiliateAct(payload) {
         "x-access-token": token,
       },
     });
-    console.log("<<<<<<<<<<<<", data, ">>>>>>>>>>>>>>>>>DATA");
     return data;
 
     // if(data.success){
@@ -265,7 +263,6 @@ export function getAllPlans() {
 export function getAllPharmacies(payload) {
   return async (dispatch) => {
     const token = getItem("userToken");
-    console.log("<<<<<<<<<", payload, ">>>>>>>>>>>>>");
     const { data } = await axios.get(
       `${api}/admin/farmacias?ciudadID=${payload.ciudadID}&provinciaID=${payload.provinciaID}`,
       {
@@ -481,7 +478,6 @@ export function deletePlan(payload) {
 export function getAllProfessionals(payload) {
   return async (dispatch) => {
     const token = getItem("userToken");
-    console.log("<<<<<<<<<", payload, ">>>>>>>>>>>>>");
     const { data } = await axios.get(
       `${api}/admin/professionals?ciudadID=${payload.ciudadID}&provinciaID=${payload.provinciaID}`,
       {
@@ -490,7 +486,6 @@ export function getAllProfessionals(payload) {
         },
       }
     );
-    console.log("response add prof", data);
     if (data.success) {
       return dispatch({ type: "GET_PROFESSIONALS", payload: data.message });
     } else {
@@ -529,7 +524,6 @@ export const getProfessionalData = (payload) => {
 
 export function updateProfessional(payload) {
   return async (dispatch) => {
-    console.log("<<<<<update>>>>", payload);
     const token = getItem("userToken");
     const { data } = await axios.put(
       `${api}/admin/updateProfessional`,
@@ -564,7 +558,7 @@ export function upDownProfessionalAct(payload) {
         },
       }
     );
-    console.log("<<<<<<<<<<<<", data, ">>>>>>>>>>>>>>>>>DATA");
+  
     return data;
 
     // if(data.success){
@@ -629,7 +623,7 @@ export function getPrescriptionsByDNI(payload) {
         },
       }
     );
-    console.log("data", data);
+
     if (data.success) {
       return dispatch({ type: "GET_PRESCRPTIONS_DNI", payload: data.message });
     } else {
@@ -682,7 +676,6 @@ export function getAllEmployees(payload) {
         "x-access-token": token,
       },
     });
-    console.log("employees data", data);
     if (data.success) {
       return dispatch({ type: "GET_EMPLOYEES", payload: data.message });
     } else {
@@ -791,7 +784,6 @@ export const resetDataUpdate = (payload) => {
 };
 
 export const filterActiv = (payload) => {
-  console.log("actionfilter", payload);
   return {
     type: "FILTER_ACTIV",
     payload: payload,

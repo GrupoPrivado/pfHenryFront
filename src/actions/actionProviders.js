@@ -17,7 +17,6 @@ export function getAllProviders() {
 
 
 export const getAllPharmacies = (provinciaID, ciudadID) => {
-  console.log('desde action ', provinciaID, ciudadID) 
   let url = `${api}/farmacias`
   if(provinciaID !== ''){
      url = `${api}/farmacias/${provinciaID}?ciudadID=${ciudadID}`
@@ -25,7 +24,6 @@ export const getAllPharmacies = (provinciaID, ciudadID) => {
   return async (dispatch) => {
    
     const {data} = await axios.get(`${url}`);
-    console.log(data, '< farmacias >')
 
     return dispatch({
       type: GET_ALL_PHARMACIES,
@@ -81,14 +79,11 @@ export function filterByCity(ciudadID, codeEsp) {
       var {data} = await axios.get(
         `${api}/profesionales?ciudadID=${ciudadID}&codeEsp=${codeEsp}`
         );
-        console.log('json', data.message)
         if(data.success){
           return dispatch({
             type: "FILTER_BY_CITY",
             payload: data.message,
           });
-        } else {
-          console.log('errooooooor filter')
         }
       
     } catch (error) {
@@ -97,7 +92,6 @@ export function filterByCity(ciudadID, codeEsp) {
   };
 }
 // export function filterBySpecialties(payload) {
-//   console.log('special',payload)
 //   return {
 //     type: "FILTER_BY_SPECIALTIES",
 //     payload,

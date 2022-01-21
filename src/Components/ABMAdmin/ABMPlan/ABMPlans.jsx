@@ -59,7 +59,6 @@ const ABMPlans = () => {
   };
 
   /********* Fin Funciones para borrar un elemento*********/
-console.log('updatePlan', showModalUpdate)
   return (
     <div>
       <ABMPlansList

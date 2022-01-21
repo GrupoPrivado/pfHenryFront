@@ -42,7 +42,6 @@ function DashContainer() {
     }, [dispatch, user] )
 
     const toggleClass = (e) => {
-        //console.log(e.target.getAttribute('name'))
         const name = e.target.getAttribute('name')
         const modal = isActive[name]
         setActive({

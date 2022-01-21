@@ -9,7 +9,7 @@ const GeneracionRecetas = ({
   setRecetasModal,
 }) => {
   const dispatch = useDispatch();
-    console.log('affiliateData', )
+
   const tipoReceta = ["Farmacia", "Estudio"];
 
   const inputRecetaStruct = {

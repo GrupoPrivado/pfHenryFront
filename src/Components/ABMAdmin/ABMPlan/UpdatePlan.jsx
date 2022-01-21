@@ -100,7 +100,6 @@ const UpdatePlan = ({setShowModalUpdate}) => {
     if (Object.entries(validateError).length <= 0) {
       dispatch(updatePlan(updatePlanData));
       setShowModalUpdate(false);
-      console.log('paseLPM')
       setUpdatePlanData(updatePlanStruct);
       setErrors(true);
       dispatch(resetDataUpdate());

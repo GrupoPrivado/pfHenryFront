@@ -9,7 +9,6 @@ export function getRecetas() {
           headers: {
             "x-access-token": token,
           },});
-  console.log('getRecetas<<<<<<<<<<', data)
       return dispatch({
         type: "GET_RECETAS",
         payload: data.message,
@@ -24,7 +23,6 @@ export function getConsultas() {
         headers: {
           "x-access-token": token,
         },});
-console.log('consultas medicas<<<<<<<<<<', data)
 return data
 // return dispatch({
     //   type: "GET_RECETAS",
