@@ -20,8 +20,18 @@ function Perfil() {
 
   const [activeAlert, setActiveAlert] = useState(false);
   const [errorAlert, setErrorAlert] = useState(false);
+  const { cities, provinces } = useSelector((state) => state.providers);
 
   const [alertMessage, setAlertMessage] = useState("");
+
+  useEffect(() => {
+    if (!data) {
+      dispatch(getAfiliate(getItem()));
+    }
+    if(provinces.length === 0) dispatch(getAllProvinces())
+
+    if(user.provinciaID) dispatch(getAllCities(user.provinciaID))
+  }, [user.provinciaID])
 
   useEffect(() => {
     if(!activeAlert || !errorAlert){
@@ -38,17 +48,19 @@ function Perfil() {
       setAlertMessage(message);
     }
 
-    if (!data) {
-      dispatch(getAfiliate(getItem()));
-    }
+    // if (!data) {
+    //   dispatch(getAfiliate(getItem()));
+    // }
     if (route !== "") {
       removeItem("userType");
       navigate(`/${route}`);
     }
     
-    dispatch(getAllProvinces())
-    dispatch(getAllCities(user.provinciaID))
-  }, [dispatch, route, navigate, data, message, type, user.provinciaID, activeAlert, errorAlert]);
+    //dispatch(getAllProvinces())
+    //dispatch(getAllCities(user.provinciaID))
+  }, [route, message, type, activeAlert, errorAlert]);
+
+
 
   setTimeout(() => {
     setActiveAlert(false);

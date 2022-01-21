@@ -27,7 +27,7 @@ function EditProfile({user}) {
         // dispatch(getAllProvinces())
         // dispatch(getAllCities(user.provinciaID))
 
-    }, [user, dispatch])
+    }, [user])
     
 
     const [activityChanged, setActivityChanged] = useState(false);
