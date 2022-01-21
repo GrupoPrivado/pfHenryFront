@@ -10,21 +10,16 @@ import {
 
 import styles from "./addSpecialty.module.css";
 
-const functionErrors = (data) => {
-  const arrayKeys = Object.keys(data);
-  const arrayData = arrayKeys.filter((element, index) => data[element] !== "");
-
-  if (arrayKeys.length === arrayData.length) {
-    return false;
-  } else {
-    return true;
-  }
-}; //cambiarla en un utils ya que se puede usar en todos los forms
+import {
+  functionErrorsBtn,
+  validateAddEspeciality,
+} from "../../../utils/adminFormsControllers";
 
 const AddSpeciality = ({ setShowModalAdd }) => {
   const dispatch = useDispatch();
 
   const [errors, setErrors] = useState(true);
+  const [errores, setErrores] = useState({});
 
   const inputSpecialityStruct = {
     nombre: "",
@@ -41,19 +36,25 @@ const AddSpeciality = ({ setShowModalAdd }) => {
     };
     setInputSpeciality(newSpeciality);
 
-    setErrors(functionErrors(newSpeciality));
+    setErrors(functionErrorsBtn(newSpeciality));
 
     newSpeciality = {};
   };
 
   const handleSubmitSpeciality = async (event) => {
     event.preventDefault();
-    let response = await dispatch(addSpeciality(inputSpeciality));
-    alert(response.success);
-    setInputSpeciality(inputSpecialityStruct);
-    setShowModalAdd(false);
-    dispatch(getAllSpecialities());
-    setErrors(true);
+
+    const validateError = validateAddEspeciality(inputSpeciality);
+    setErrores(validateError);
+    console.log(validateError);
+    if (Object.entries(validateError).length <= 0) {
+      dispatch(addSpeciality(inputSpeciality));
+      //alert(response.success);
+      setInputSpeciality(inputSpecialityStruct);
+      setShowModalAdd(false);
+      //dispatch(getAllSpecialities());
+      setErrors(true);
+    }
   };
 
   const handleClose = () => {
@@ -84,6 +85,9 @@ const AddSpeciality = ({ setShowModalAdd }) => {
                 placeholder="Ingrese el nombre...."
               />
             </div>
+            {errores.nombre && (
+              <p className="absolute text-red-700">{errores.nombre}</p>
+            )}
 
             <div>
               <label className="text-md text-gray-600">Descripción: </label>
@@ -96,6 +100,9 @@ const AddSpeciality = ({ setShowModalAdd }) => {
                 onChange={(e) => handleChange(e)}
                 placeholder="Ingrese la Descripcion...."
               />
+              {errores.nombre && (
+                <p className="absolute text-red-700">{errores.descripcion}</p>
+              )}
             </div>
             <div className="flex justify-between mt-8">
               <div className="flex w-1/3 items-center">
@@ -110,6 +117,9 @@ const AddSpeciality = ({ setShowModalAdd }) => {
                   <option value="false">No</option>
                   <option value="true">Si</option>
                 </select>
+                {errores.nombre && (
+                  <p className="absolute text-red-700">{errores.activa}</p>
+                )}
               </div>
               <div className="flex w-2/3 justify-around">
                 {errors ? (
