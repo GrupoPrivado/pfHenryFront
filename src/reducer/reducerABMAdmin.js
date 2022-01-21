@@ -44,7 +44,7 @@ export default function reducerABMAdmin(state = initialState, action) {
       return { ...state, allAffiliates: action.payload };
 
     case "AFFILIATE_DATA":
-      console.log("reducer data affiliate", action.payload);
+
       return {
         ...state,
         updateData: action.payload,
@@ -146,6 +146,7 @@ export default function reducerABMAdmin(state = initialState, action) {
         filterActiv = state.pharmacies;
       }
       return { ...state, allPharmacies: filterActiv };
+      
     default:
       return state;
   }

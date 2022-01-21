@@ -70,9 +70,9 @@ export default function FormAsociate({
     e.preventDefault();
     const validateError = validate(input);
     setErrores(validateError);
-    console.log(validateError, "Validate");
+
     if (Object.entries(validateError).length <= 0) {
-      console.log(Object.entries(validateError).length);
+
       const newState = [input, ...output];
 
       setOutput(newState);
@@ -86,7 +86,6 @@ export default function FormAsociate({
         }, 5000);
       } else {
         setErrorAlert(true);
-        console.log(result.data);
         setAlertMessage("error en el registro");
         setOutput([]);
         setTimeout(() => {

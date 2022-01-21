@@ -9,22 +9,18 @@ import {
 } from "../../../actions/actionAMBAdmin";
 
 import styles from "./UpdateSpeciality.module.css";
-
-const functionErrors = (data) => {
-  const arrayKeys = Object.keys(data);
-  const arrayData = arrayKeys.filter((element, index) => data[element] !== "");
-  if (arrayKeys.length === arrayData.length) {
-    return false;
-  } else {
-    return true;
-  }
-}; //cambiarla en un utils ya que se puede usar en todos los forms
+import {
+  functionErrorsBtn,
+  validateEspeciality,
+} from "../../../utils/adminFormsControllers";
+import { enableBtn, disableBtn } from "../../../utils/ABMStyles";
 
 const UpdateSpeciality = ({ setShowModalUpdate }) => {
   const dispatch = useDispatch();
   const { updateData } = useSelector((state) => state.ABMAdmin);
 
   const [errors, setErrors] = useState(false);
+  const [errores, setErrores] = useState({});
 
   const updateSpecialityDataStruct = {
     id: "",
@@ -54,18 +50,21 @@ const UpdateSpeciality = ({ setShowModalUpdate }) => {
 
     setUpdateSpecialityData(updatedSpeciality);
 
-    setErrors(functionErrors(updatedSpeciality));
+    setErrors(functionErrorsBtn(updatedSpeciality));
   };
 
   const handleSubmitUpdateSpeciality = async (event) => {
     event.preventDefault();
-    let response = await dispatch(updateSpecialityAct(updateSpecialityData));
-    alert(response.success);
-    setUpdateSpecialityData(updateSpecialityDataStruct);
-    setShowModalUpdate(false);
-    dispatch(getAllSpecialities());
-    dispatch(resetDataUpdate());
-    setErrors(true);
+    const validateError = validateEspeciality(updateSpecialityData);
+    setErrores(validateError);
+
+    if (Object.entries(validateError).length <= 0) {
+      dispatch(updateSpecialityAct(updateSpecialityData));
+      setUpdateSpecialityData(updateSpecialityDataStruct);
+      setShowModalUpdate(false);
+      setErrors(true);
+      dispatch(resetDataUpdate());
+    }
   };
 
   const handleClose = () => {
@@ -96,6 +95,7 @@ const UpdateSpeciality = ({ setShowModalUpdate }) => {
                 onChange={(e) => handleUpdateSpeciality(e)}
                 placeholder="Ingrese el nombre...."
               />
+              <p className="absolute text-red-700">{errores.nombre}</p>
             </div>
 
             <div>
@@ -109,6 +109,7 @@ const UpdateSpeciality = ({ setShowModalUpdate }) => {
                 onChange={(e) => handleUpdateSpeciality(e)}
                 placeholder="Ingrese la Descripcion...."
               />
+              <p className="absolute text-red-700">{errores.descripcion}</p>
             </div>
 
             <div className="flex justify-between items-end mt-8">
@@ -119,32 +120,25 @@ const UpdateSpeciality = ({ setShowModalUpdate }) => {
                   id="activa"
                   name="activa"
                   onChange={(e) => handleUpdateSpeciality(e)}
-                  // defaultValue={updateSpecialityData.activa}
                   value={updateSpecialityData.activa}
                 >
                   <option value="">Seleccione</option>
                   <option value="false">No</option>
                   <option value="true">Si</option>
                 </select>
+                <p className="absolute text-red-700">{errores.activa}</p>
               </div>
 
               <div className="flex w-2/3 justify-around  ">
-                {errors ? (
-                  <button
-                    className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    disabled={errors}
-                  >
-                    Guardar
-                  </button>
-                ) : (
-                  <button
-                    onClick={handleSubmitUpdateSpeciality}
-                    key="submitFormButton"
-                    className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  >
-                    Guardar
-                  </button>
-                )}
+                <button
+                  onClick={handleSubmitUpdateSpeciality}
+                  key="submitFormButton"
+                  className={errors ? disableBtn : enableBtn}
+                  disabled={errors}
+                >
+                  Guardar
+                </button>
+
                 <button
                   onClick={() => handleClose()}
                   className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"

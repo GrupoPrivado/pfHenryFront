@@ -9,7 +9,7 @@ import {useNavigate} from "react-router-dom"
 import { getGroup } from '../../actions/actionGroup'
 import { getAfiliate, getItem, removeItem } from '../../actions/actionAuth';
 import Credencial from '../../Components/Credencial/Credencial'
-import {getRecetas} from '../../actions/actionRecet'
+import {getConsultas, getRecetas} from '../../actions/actionRecet'
 import Modal from '../../Components/Modal/Modal'
 
 function DashAfil() {
@@ -39,10 +39,11 @@ function DashAfil() {
 
     useEffect(()=>{
         dispatch(getRecetas())
-    }, [dispatch] )
+        dispatch(getConsultas())
+    }, [] )
 
     const toggleClass = (e) => {
-        //console.log(e.target.getAttribute('name'))
+    
         const name = e.target.getAttribute('name')
         const modal = isActive[name]
         setActive({

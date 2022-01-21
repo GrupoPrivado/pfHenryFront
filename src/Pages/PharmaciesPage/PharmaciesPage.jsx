@@ -31,12 +31,12 @@ const PharmaciesPage = () => {
   }, [dispatch, filter.ciudadID, filter.provinciaID]);
 
   const handleSelectCity = (e) => {
-    console.log("<<<<< target >>>>", e.target.name, ">>>>>>", e.target.value);
+
     const newData = {
       ...filter,
       [e.target.name]: e.target.value,
     };
-    console.log("hand  ", newData);
+
     setfilter(newData);
 
     dispatch(getAllPharmacies());

@@ -39,7 +39,6 @@ const ABMPharmaciesList = ({
   };
 
   const handleChangeCity = (e) => {
-    console.log(e.target.value);
     if (e.target.value !== "")
       dispatch(getAllPharmacies({ ciudadID: e.target.value }));
     else dispatch(getAllPharmacies(filter));
