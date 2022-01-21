@@ -4,7 +4,7 @@ import { LockClosedIcon } from "@heroicons/react/solid";
 import Logo from "../../assets/logo.svg";
 import { getUserToken } from "../../utils/authUtils";
 
-function FormLogin({setForm, activeForm}) {
+function FormLogin({ setForm, activeForm, handleChangeAlerts }) {
   const [input, setInput] = useState({
     dni: "",
     password: "",
@@ -23,8 +23,18 @@ function FormLogin({setForm, activeForm}) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const result = await getUserToken(input);
-    if (result.error) return alert(result.error);
-    navigate(`/${result.url}`);
+    if (result.error) {
+      handleChangeAlerts("error", result.error, true);
+      setTimeout(() => {
+        handleChangeAlerts("error", "", false);
+      }, 5000);
+      return;
+    } else {
+      handleChangeAlerts("success", "Iniciando sesión...", true);
+      setTimeout(() => {
+        navigate(`/${result.url}`);
+      }, 2000);
+    }
   };
 
   const styles = {
@@ -32,15 +42,6 @@ function FormLogin({setForm, activeForm}) {
       "min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8",
     img: "mx-auto h-12 w-auto",
   };
-
-  //const [tipoUsuario, setTipoUsuario] = useState("afiliado");
-
-  // const handleSelectUsuario = (e) => {
-  //   setInput({
-  //       ...input,
-  //       tipoUsuario: e.target.value
-  //   })
-  // };
 
   return (
     <div className={styles.contenedor}>
@@ -102,7 +103,13 @@ function FormLogin({setForm, activeForm}) {
 
           <div className="flex items-center justify-between">
             <div className="text-sm">
-              <button type="button" className="font-medium text-indigo-600 hover:text-indigo-500" onClick={() => setForm(!activeForm)}>Olvide mi contraseña</button>
+              <button
+                type="button"
+                className="font-medium text-indigo-600 hover:text-indigo-500"
+                onClick={() => setForm(!activeForm)}
+              >
+                Olvide mi contraseña
+              </button>
             </div>
           </div>
 

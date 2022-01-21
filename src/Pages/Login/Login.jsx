@@ -53,7 +53,7 @@ function Login() {
         <div className="w-1/2 flex flex-column items-center justify-center">
           <div>
             {
-              activeForm ? <RecoverPassword setForm={setForm} activeForm={activeForm} handleChangeAlerts={handleChangeAlerts} /> : <FormLogin setForm={setForm} activeForm={activeForm}/>
+              activeForm ? <RecoverPassword setForm={setForm} activeForm={activeForm} handleChangeAlerts={handleChangeAlerts} /> : <FormLogin setForm={setForm} activeForm={activeForm} handleChangeAlerts={handleChangeAlerts}/>
             }
 
 
