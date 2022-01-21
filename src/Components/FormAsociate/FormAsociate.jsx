@@ -28,7 +28,6 @@ export default function FormAsociate({
   output,
   modal,
   setModal,
-  error,
 }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -59,12 +58,6 @@ export default function FormAsociate({
     setInput(newInp);
     setErrors(functionErrors(newInp));
   }
-
-  // useEffect(() => {
-  //   if(error){
-  //     setOutput([])
-  //   }
-  // }, [error,  setOutput]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
