@@ -26,7 +26,6 @@ const PharmaciesPage = () => {
   });
   useEffect(() => {
     dispatch(getAllProvinces());
-
   }, [])
 
   useEffect(() => {
