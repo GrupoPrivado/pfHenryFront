@@ -10,6 +10,7 @@ import Logo from "../../assets/logo.svg";
 import RecoverPassword from "../../Components/FormLogin/RecoverPassword";
 import SuccessAlert from "../../Components/Alerts/SuccessAlert";
 import ErrorAlert from "../../Components/Alerts/ErrorAlert";
+import {alertSweet} from '../../Components/Alerts/alertSweet'
 
 function Login() {
   const [activeForm, setForm] = useState(false)
@@ -61,8 +62,8 @@ function Login() {
           </div>
         </div>
       </div>
-      {activeAlert && <SuccessAlert message={alertMessage}/>}
-      {errorAlert && <ErrorAlert message={alertMessage} />}
+      {activeAlert && alertSweet('success', alertMessage, false, false, setActiveAlert, !activeAlert , () => {}, false, 2500)}
+            {errorAlert && alertSweet('error', alertMessage, false, false, setErrorAlert, !errorAlert , () => {},  false, 3000)}
     </div>
   );
 }

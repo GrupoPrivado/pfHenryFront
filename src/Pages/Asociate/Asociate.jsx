@@ -34,7 +34,7 @@ useEffect(() => {
   return (
     <div>
  
-        <div className="relative">
+        
           <FormAsociate
             setAlertMessage={setAlertMessage}
             setActiveAlert={setActiveAlert}
@@ -46,7 +46,7 @@ useEffect(() => {
             modal={modal}
             setModal={setModal}
           />
-        </div>
+        
         {modal && (
           <FormAddAsociateGroup
             provinces={provinces}
