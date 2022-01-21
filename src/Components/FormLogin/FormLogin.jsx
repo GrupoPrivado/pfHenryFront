@@ -33,7 +33,7 @@ function FormLogin({ setForm, activeForm, handleChangeAlerts }) {
       handleChangeAlerts("success", "Iniciando sesión...", true);
       setTimeout(() => {
         navigate(`/${result.url}`);
-      }, 2000);
+      }, 1000);
     }
   };
 

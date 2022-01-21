@@ -164,6 +164,7 @@ export const putProfilePhoto = (payload) => {
           },});
   
       if(data.success){
+        dispatch({type: alertConstants.SUCCESS , message: 'Foto actualizada'})
         return dispatch({type: GET_AFILIATE, payload: data.message})
       } else {
           return dispatch({type: GET_ERROR, payload: data.message})
