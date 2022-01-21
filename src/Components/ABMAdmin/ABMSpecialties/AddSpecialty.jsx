@@ -3,16 +3,13 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import {
-  addSpeciality,
-  getAllSpecialities,
-} from "../../../actions/actionAMBAdmin";
+import { addSpeciality } from "../../../actions/actionAMBAdmin";
 
 import styles from "./addSpecialty.module.css";
 import { enableBtn, disableBtn } from "../../../utils/ABMStyles";
 import {
-  validateAddEspeciality,
   functionErrorsBtn,
+  validateEspeciality,
 } from "../../../utils/adminFormsControllers";
 
 const AddSpeciality = ({ setShowModalAdd }) => {
@@ -44,15 +41,12 @@ const AddSpeciality = ({ setShowModalAdd }) => {
   const handleSubmitSpeciality = async (event) => {
     event.preventDefault();
 
-    const validateError = validateAddEspeciality(inputSpeciality);
+    const validateError = validateEspeciality(inputSpeciality);
     setErrores(validateError);
-    console.log(validateError);
     if (Object.entries(validateError).length <= 0) {
       dispatch(addSpeciality(inputSpeciality));
-      //alert(response.success);
       setInputSpeciality(inputSpecialityStruct);
       setShowModalAdd(false);
-      //dispatch(getAllSpecialities());
       setErrors(true);
     }
   };

@@ -95,24 +95,35 @@ export const getSpecialityData = (data) => {
 
 export function updateSpecialityAct(payload) {
   return async (dispatch) => {
-    const token = getItem("userToken");
-    const { data } = await axios.put(
-      `${api}/admin/updateEspeciality`,
-      payload,
-      {
-        headers: {
-          "x-access-token": token,
-        },
+    try {
+      const token = getItem("userToken");
+      const { data } = await axios.put(
+        `${api}/admin/updateEspeciality`,
+        payload,
+        {
+          headers: {
+            "x-access-token": token,
+          },
+        }
+      );
+      if (data.success) {
+        dispatch({
+          type: alertConstants.SUCCESS,
+          message: "Especialidad Modificada",
+        });
+        return getAllSpecialities();
+      } else {
+        dispatch({
+          type: alertConstants.ERROR,
+          message: "Error al Moficiar la especialidad",
+        });
+
+        return; // dispatch({type: NOT_AUTHENTICATED, payload: data})
       }
-    );
-    return data;
-
-    // if(data.success){
-    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
-    // } else {
-    //     return dispatch({type: "ERRORS", payload: data})
-
-    // }
+    } catch (error) {
+      console.error(error);
+      return { error: error.message };
+    }
   };
 }
 

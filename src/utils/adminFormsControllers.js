@@ -9,7 +9,7 @@ export const functionErrorsBtn = (data) => {
   }
 };
 
-export const validateAddEspeciality = (input) => {
+export const validateEspeciality = (input) => {
   let errores = {};
   console.log(input)
   if (input.nombre && input.nombre.length < 5) {
