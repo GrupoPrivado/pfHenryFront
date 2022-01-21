@@ -48,7 +48,7 @@ const UpdatePrescription = ({ setShowModalUpdate, showModalUpdate }) => {
     setUpdatePrescriptionData({
       id: updateData._id,
       tipoReceta: updateData.tipoReceta,
-      status: "",
+      status: updateData.status,
       motivoNoAuto: "N/C",
       realizada: false,
       correoElectronico: updateData.afiliadoID.correoElectronico,
@@ -87,24 +87,44 @@ const UpdatePrescription = ({ setShowModalUpdate, showModalUpdate }) => {
   return (
     <div>
       <section className={styles.modalmain}>
-        <h4>Modificar Receta</h4>
-        <h5>
-          {updateData.afiliadoID.nombre + " " + updateData.afiliadoID.apellido}
-        </h5>
-
-        <label>Tipo de receta: {updateData.tipoReceta}</label>
-        <div className={styles.container}>
+        <div className="flex flex-col items-center h-20%">
+          <div>
+            <h5 className="text-2xl font-bold text-gray-500">
+              Modificar Receta
+            </h5>
+          </div>
+          <div className="flex w-full mt-5">
+            <div className="w-1/2 flex justify-center">
+            <h5 className="text-xl font-semibold text-black uppercase">
+              {updateData.afiliadoID.nombre +
+                " " +
+                updateData.afiliadoID.apellido}
+            </h5>
+            </div>
+            <div className="w-1/2 flex justify-center">
+              <label className="text-md text-gray-600">
+                Tipo de receta:{" "}
+                <span className="text-md text-black">
+                  {updateData.tipoReceta}
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div className="modal-content py-4 text-left px-6 h-80%">
           <form>
             <div>
-              <label>Estado: </label>
+              <label className="text-md text-gray-600">Estado: </label>
               <select
+              className=" h-1/2  p-1 w-full  border-2 border-gray-300 mb-5 rounded-md"
                 id="status"
                 name="status"
+                value={updatePrescriptionData.status}
                 onChange={(e) => handleUpdatePrescription(e)}
               >
                 <option value="">Elija el estado de lareceta</option>
                 {statusPrescriptionOpc.map((stat) => {
-                 return <option value={stat}>{stat}</option>;
+                  return <option value={stat}>{stat}</option>;
                 })}
               </select>
             </div>
@@ -112,6 +132,8 @@ const UpdatePrescription = ({ setShowModalUpdate, showModalUpdate }) => {
             <div>
               <label>Motivo no autorización: </label>
               <input
+              className="h-2 p-4  w-full border-2 border-gray-300 mb-2 rounded-md"
+                  
                 type="text"
                 name="motivoNoAuto"
                 autoComplete="off"
@@ -121,24 +143,27 @@ const UpdatePrescription = ({ setShowModalUpdate, showModalUpdate }) => {
               />
             </div>
           </form>
-
+          <div className="  mt-10 flex justify-around w-full">
           {errors ? (
             <button
+            className="group relative w-15 h-10 flex justify-center py-2 px-3 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               key="submitFormButton1"
               disabled={errors}
               className="disabledButton"
             >
-              Cargar
+              Guardar
             </button>
           ) : (
             <button
+            className="group relative w-15 h-10 flex justify-center py-2 px-3 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               key="submitFormButton"
               onClick={handleSubmitUpdatePrescription}
             >
-              Cargar
+              Guardar
             </button>
           )}
-          <button onClick={() => handleClose()}>Cerrar</button>
+          <button className="group relative w-15 h-10 flex justify-center py-2 px-3 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 " onClick={() => handleClose()}>Cerrar</button>
+        </div>
         </div>
       </section>
     </div>

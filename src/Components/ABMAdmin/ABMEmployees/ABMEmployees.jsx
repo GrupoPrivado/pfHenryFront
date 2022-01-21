@@ -28,9 +28,9 @@ const ABMEmployees = () => {
 
   return (
     <div>
-      <button title="Agregar Profesional" onClick={() => setShowModalAdd(true)}>
+      {/* <button title="Agregar Profesional" onClick={() => setShowModalAdd(true)}>
         Agregar Emploeado
-      </button>
+      </button> */}
 
       <ABMEmployeesList
         allEmployees={allEmployees}
@@ -39,9 +39,10 @@ const ABMEmployees = () => {
         setShowModalUpDown={setShowModalUpDown}
       />
 
-      {showModalAdd && <AddEmployee setShowModalAdd={setShowModalAdd} />}
+      {showModalAdd && <AddEmployee  showModalAdd={showModalAdd} setShowModalAdd={setShowModalAdd} />}
 
        {showModalUpdate && <UpdateEmployee
+       showModalAdd={showModalAdd}
         setShowModalUpdate={setShowModalUpdate}
       />} 
 
