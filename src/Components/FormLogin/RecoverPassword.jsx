@@ -99,7 +99,7 @@ function RecoverPassword({setForm, activeForm, handleChangeAlerts}) {
 
           <div className="flex items-center justify-between">
             <div className="text-sm">
-              <button type="button" className="font-medium text-indigo-600 hover:text-indigo-500" onClick={() => setForm(!activeForm)}>volver al inicio de sesión </button>
+              <button type="button" className="font-medium text-indigo-600 hover:text-indigo-500" onClick={() => setForm(!activeForm)}>...volver al inicio de sesión </button>
             </div>
           </div>
 
