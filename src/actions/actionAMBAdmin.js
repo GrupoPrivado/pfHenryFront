@@ -70,14 +70,11 @@ export function addSpeciality(payload) {
           type: alertConstants.SUCCESS,
           message: "Especialidad agregada",
         });
-        return getAllSpecialities();
       } else {
         dispatch({
           type: alertConstants.ERROR,
           message: "Error al agregar la especialidad",
         });
-
-        return; // dispatch({type: NOT_AUTHENTICATED, payload: data})
       }
     } catch (error) {
       console.error(error);
@@ -372,37 +369,52 @@ export function deletePharmacy(payload) {
 
 export function getAllPlansData() {
   return async (dispatch) => {
-    const token = getItem("userToken");
-    const { data } = await axios.get(`${api}/admin/getAllPlansData`, {
-      headers: {
-        "x-access-token": token,
-      },
-    });
-    if (data.success) {
-      return dispatch({ type: "GET_ALL_PLANS_DATA", payload: data.message });
-    } else {
-      return dispatch({ type: "ERRORS", payload: data });
+    try {
+      const token = getItem("userToken");
+      const { data } = await axios.get(`${api}/admin/getAllPlansData`, {
+        headers: {
+          "x-access-token": token,
+        },
+      });
+      if (data.success) {
+        return dispatch({ type: "GET_ALL_PLANS_DATA", payload: data.message });
+      } else {
+        return dispatch({ type: "ERRORS", payload: data });
+      }
+    } catch (error) {
+      console.error(error);
+      return { error: error.message };
     }
   };
 }
 
 export function addPlan(payload) {
   return async (dispatch) => {
-    const token = getItem("userToken");
-    console.log("<<<<sipatchaddPlan>>>>", payload);
-    const { data } = await axios.post(`${api}/admin/addPlan`, payload, {
-      headers: {
-        "x-access-token": token,
-      },
-    });
-    return data;
+    try {
+      const token = getItem("userToken");
+      const { data } = await axios.post(`${api}/admin/addPlan`, payload, {
+        headers: {
+          "x-access-token": token,
+        },
+      });
 
-    // if(data.success){
-    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
-    // } else {
-    //     return dispatch({type: "ERRORS", payload: data})
+      if (data.success) {
+        dispatch({
+          type: alertConstants.SUCCESS,
+          message: "Plan Cargado",
+        });
+      } else {
+        dispatch({
+          type: alertConstants.ERROR,
+          message: "Error al agregar el plan",
+        });
 
-    // }
+        return; // dispatch({type: NOT_AUTHENTICATED, payload: data})
+      }
+    } catch (error) {
+      console.error(error);
+      return { error: error.message };
+    }
   };
 }
 
@@ -415,21 +427,31 @@ export const getPlanData = (data) => {
 
 export function updatePlan(payload) {
   return async (dispatch) => {
-    console.log("updatePlan(payload) ", payload);
-    const token = getItem("userToken");
-    const { data } = await axios.put(`${api}/admin/updatePlan`, payload, {
-      headers: {
-        "x-access-token": token,
-      },
-    });
-    return data;
+    try {
+      const token = getItem("userToken");
+      const { data } = await axios.put(`${api}/admin/updatePlan`, payload, {
+        headers: {
+          "x-access-token": token,
+        },
+      });
 
-    // if(data.success){
-    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
-    // } else {
-    //     return dispatch({type: "ERRORS", payload: data})
+      if (data.success) {
+        dispatch({
+          type: alertConstants.SUCCESS,
+          message: "Plan Modificado",
+        });
+      } else {
+        dispatch({
+          type: alertConstants.ERROR,
+          message: "Error al Moficiar el Plan",
+        });
 
-    // }
+        return; // dispatch({type: NOT_AUTHENTICATED, payload: data})
+      }
+    } catch (error) {
+      console.error(error);
+      return { error: error.message };
+    }
   };
 }
 
@@ -767,6 +789,7 @@ export const resetDataUpdate = (payload) => {
     payload: payload,
   };
 };
+
 export const filterActiv = (payload) => {
   console.log("actionfilter", payload);
   return {

@@ -66,7 +66,7 @@ const AddSpeciality = ({ setShowModalAdd }) => {
           </h5>
         </div>
         <div className="modal-content py-4 text-left px-6 h-90% ">
-          <form onSubmit={(e) => handleSubmitSpeciality(e)} id="addSpeciality">
+          <form>
             <div>
               <label className="text-md text-gray-600">Nombre: </label>
               <input
@@ -118,10 +118,9 @@ const AddSpeciality = ({ setShowModalAdd }) => {
               <div className="flex w-2/3 justify-around">
                 <button
                   type="submit"
-                  key="submitFormButton"
-                  form="addSpeciality"
                   className={errors ? disableBtn : enableBtn}
                   disabled={errors}
+                  onClick={handleSubmitSpeciality}
                 >
                   Guardar
                 </button>

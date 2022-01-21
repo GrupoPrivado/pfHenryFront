@@ -6,22 +6,18 @@ import { useDispatch } from "react-redux";
 import { addPlan, getAllPlansData } from "../../../actions/actionAMBAdmin";
 
 import styles from "./addPlan.module.css";
+import { enableBtn, disableBtn } from "../../../utils/ABMStyles";
 
-const functionErrors = (data) => {
-  const arrayKeys = Object.keys(data);
-  const arrayData = arrayKeys.filter((element, index) => data[element] !== "");
-
-  if (arrayKeys.length === arrayData.length) {
-    return false;
-  } else {
-    return true;
-  }
-}; //cambiarla en un utils ya que se puede usar en todos los forms
+import {
+  functionErrorsBtn,
+  validatePlan,
+} from "../../../utils/adminFormsControllers";
 
 const AddPlan = ({ setShowModalAdd }) => {
   const dispatch = useDispatch();
 
   const [errors, setErrors] = useState(true);
+  const [errores, setErrores] = useState({});
 
   const [type, setTypeArr] = useState("");
   const [description, setdescriptionArr] = useState("");
@@ -79,20 +75,22 @@ const AddPlan = ({ setShowModalAdd }) => {
     };
     setInputPlan(newPlan);
 
-    setErrors(functionErrors(newPlan));
+    setErrors(functionErrorsBtn(newPlan));
 
     newPlan = {};
   };
 
-  const handleSubmitPlan = async (event) => {
-    console.log("<<<entre>>><");
-    event.preventDefault();
-    let response = await dispatch(addPlan(inputPlan));
-    alert(response.success);
-    setInputPlan(inputPlanStruct);
-    await dispatch(getAllPlansData());
-    setShowModalAdd(false);
-    setErrors(true);
+  const handleSubmitPlan = async () => {
+    // event.preventDefault();
+
+    const validateError = validatePlan(inputPlan);
+    setErrores(validateError);
+    if (Object.entries(validateError).length <= 0) {
+      dispatch(addPlan(inputPlan));
+      setInputPlan(inputPlanStruct);
+      setShowModalAdd(false);
+      setErrors(true);
+    }
   };
 
   const handleClose = () => {
@@ -100,7 +98,6 @@ const AddPlan = ({ setShowModalAdd }) => {
     setShowModalAdd(false);
     setErrors(true);
   };
-
   return (
     <div className="relative">
       <section className={styles.modalmain}>
@@ -125,7 +122,7 @@ const AddPlan = ({ setShowModalAdd }) => {
                   placeholder="Ingrese el Codigo...."
                 />
               </div>
-
+              <p className="absolute text-red-700">{errores.codePlan}</p>
               <div>
                 <label className="text-md text-gray-600">Nombre: </label>
                 <input
@@ -137,18 +134,20 @@ const AddPlan = ({ setShowModalAdd }) => {
                   onChange={(e) => handleChange(e)}
                   placeholder="Ingrese el nombre...."
                 />
+                <p className="absolute text-red-700">{errores.name}</p>
               </div>
               <div>
                 <label className="text-md text-gray-600">Precio: </label>
                 <input
                   className="h-2 p-4 mb-2.5 w-full border-2 border-gray-300 rounded-md"
-                  type="text"
+                  type="number"
                   name="precio"
                   autoComplete="off"
                   value={inputPlan.precio}
                   onChange={(e) => handleChange(e)}
                   placeholder="Ingrese el precio...."
                 />
+                <p className="absolute text-red-700">{errores.precio}</p>
               </div>
             </div>
           </form>
@@ -171,9 +170,10 @@ const AddPlan = ({ setShowModalAdd }) => {
                 <label className=" h-1/3 text-md text-gray-600">
                   Descripción:{" "}
                 </label>
-                <input
-                  className="h-2/3 p-4  w-full border-2 border-gray-300 mb-2 rounded-md"
-                  type="text"
+                <textarea
+                  className="h-2/3 p-4  w-full border-2 border-gray-300 mb-2 rounded-md resize-none"
+                  rows="8"
+                  cols="50"
                   name="description"
                   autoComplete="off"
                   value={description}
@@ -232,6 +232,7 @@ const AddPlan = ({ setShowModalAdd }) => {
                       </div>
                     );
                   })}
+                <p className="absolute text-red-700">{errores.planActivo}</p>
               </div>
             </div>
           </div>
@@ -249,28 +250,19 @@ const AddPlan = ({ setShowModalAdd }) => {
                 <option value="false">No</option>
                 <option value="true">Si</option>
               </select>
+              <p className="absolute text-red-700">{errores.planActivo}</p>
             </div>
 
             <div className="flex w-2/3 justify-around mt-4">
-              {errors ? (
-                <button
-                  className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  type="submit"
-                  key="submitFormButton"
-                  form="addPlan"
-                  disabled={errors}
-                >
-                  Guardar
-                </button>
-              ) : (
-                <button
-                  key="submitFormButton"
-                  onClick={(e) => handleSubmitPlan(e)}
-                  className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
-                  Guardar
-                </button>
-              )}
+              <button
+                key="submitFormButton"
+                onClick={ handleSubmitPlan}
+                className={errors ? disableBtn : enableBtn}
+                disabled={errors}
+              >
+                Guardar
+              </button>
+
               <button
                 type="button"
                 onClick={() => handleClose()}
