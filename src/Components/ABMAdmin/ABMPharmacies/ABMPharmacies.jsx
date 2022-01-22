@@ -41,7 +41,7 @@ const ABMPharmacies = () => {
       setAlertMessage(message);
     }
 
-    dispatch(getAllPharmacies());
+    dispatch(getAllPharmacies({}));
   }, [message, type, activeAlert, errorAlert]);
 
   let [showModalAdd, setShowModalAdd] = useState(false);
@@ -53,12 +53,16 @@ const ABMPharmacies = () => {
 
   const deletePharmacyFunc = async (value) => {
     dispatch(deletePharmacy(value));
-    dispatch(getAllPharmacies());
+    dispatch(getAllPharmacies({}));
     setDeleteState("");
     setConfirmDeleteState(true);
   };
 
   /********* Fin Funciones para borrar un elemento*********/
+
+  useEffect(() => {
+    dispatch(getAllPharmacies({}));
+  }, []);
 
   return (
     <div>
@@ -73,7 +77,6 @@ const ABMPharmacies = () => {
 
       {showModalUpdate && (
         <UpdatePharmacy
-          showModalUpdate={showModalUpdate}
           setShowModalUpdate={setShowModalUpdate}
         />
       )}

@@ -39,7 +39,7 @@ const UpdatePlan = ({ setShowModalUpdate }) => {
       planActivo: updateData.planActivo,
     });
     functionErrorsBtn(updatePlanData);
-  }, [updateData, dispatch]);
+  }, [updateData]);
 
   const [type, setTypeArr] = useState("");
   const [description, setdescriptionArr] = useState("");
