@@ -5,11 +5,10 @@ import { useEffect, useState } from "react";
 
 import {
   getPharmacyData,
-  deletePharmacy,
   getAllCities,
   getAllPharmacies,
   getAllProvinces,
-  filterActiv
+  filterActiv,
 } from "../../../actions/actionAMBAdmin";
 
 import styles from "./ABMPharmacies.module.css";
@@ -18,6 +17,7 @@ const ABMPharmaciesList = ({
   allPharmacies,
   setShowModalUpdate,
   setShowModalAdd,
+  setDeleteState,
 }) => {
   const dispatch = useDispatch();
 
@@ -44,24 +44,14 @@ const ABMPharmaciesList = ({
     else dispatch(getAllPharmacies(filter));
   };
   const handleChangeActiv = (e) => {
-        if(e.target.value !== ""){
-      
-      dispatch(filterActiv(e.target.value))}
-      
-      
-    else if(e.target.value === "") dispatch(getAllPharmacies())
-    
+    if (e.target.value !== "") {
+      dispatch(filterActiv(e.target.value));
+    } else if (e.target.value === "") dispatch(getAllPharmacies());
   };
 
   const handleEditPharmacy = async (event) => {
     await dispatch(getPharmacyData(event.target.value));
     setShowModalUpdate(true);
-  };
-
-  const handleDeletePharmacy = async (event) => {
-    let response = await dispatch(deletePharmacy(event.target.value));
-
-    await dispatch(getAllPharmacies({}));
   };
 
   return (
@@ -86,7 +76,7 @@ const ABMPharmaciesList = ({
                       className="text-lg font-semibold text-indigo-800"
                       htmlFor="provincia"
                     >
-                     Filtra por Provincia{" "}
+                      Filtra por Provincia{" "}
                     </label>
                     <select
                       onChange={handleChangeProvince}
@@ -94,7 +84,7 @@ const ABMPharmaciesList = ({
                       className=" uppercase block w-full  my-2 text-lg font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 appearance-none rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
                       required
                     >
-                      <option  value="">Seleccione Provincia</option>
+                      <option value="">Seleccione Provincia</option>
                       {provinces &&
                         provinces.map((p) => (
                           <option key={p._id} value={p._id}>
@@ -103,14 +93,13 @@ const ABMPharmaciesList = ({
                         ))}
                     </select>
                   </div>
-                  
 
-                  <div  className="px-4">
+                  <div className="px-4">
                     <label
                       className="text-lg font-semibold text-indigo-800"
                       htmlFor="localidad"
                     >
-                     Filtra por Localidad{" "}
+                      Filtra por Localidad{" "}
                     </label>
                     <select
                       onChange={(e) => handleChangeCity(e)}
@@ -132,7 +121,7 @@ const ABMPharmaciesList = ({
                       className="text-lg font-semibold text-indigo-800"
                       htmlFor="activo"
                     >
-                     Filtra por Activa{" "}
+                      Filtra por Activa{" "}
                     </label>
                     <select
                       onChange={handleChangeActiv}
@@ -197,7 +186,9 @@ const ABMPharmaciesList = ({
                                   key={"delete" + element._id}
                                   title="Delete"
                                   value={element._id}
-                                  onClick={(e) => handleDeletePharmacy(e)}
+                                  onClick={(e) =>
+                                    setDeleteState(e.target.value)
+                                  }
                                 >
                                   Eliminar
                                 </button>

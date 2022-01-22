@@ -8,6 +8,7 @@ import { deletePlan, getAllPlansData } from "../../../actions/actionAMBAdmin";
 import AddPlan from "./AddPlan";
 import UpdatePlan from "./UpdatePlan";
 import ABMPlansList from "./ABMPlansList";
+
 import { alertActions } from "../../../actions/actionAlerts";
 import { alertSweet } from "../../Alerts/alertSweet";
 import ViewPlans from './ViewPlans'
@@ -44,10 +45,6 @@ const ABMPlans = () => {
   let [showModalAdd, setShowModalAdd] = useState(false);
   let [showModalUpdate, setShowModalUpdate] = useState(false);
   let [showModalView, setShowModalView] = useState(false);
-
-  useEffect(() => {
-    dispatch(getAllPlansData());
-  }, []);
 
   /********* Funciones para borrar un elemento*********/
   const [deleteState, setDeleteState] = useState("");

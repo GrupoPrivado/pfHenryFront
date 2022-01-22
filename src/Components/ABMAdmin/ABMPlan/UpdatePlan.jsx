@@ -12,7 +12,7 @@ import {
 import styles from "./UpdatePlan.module.css";
 import { enableBtn, disableBtn } from "../../../utils/ABMStyles";
 
-const UpdatePlan = ({setShowModalUpdate}) => {
+const UpdatePlan = ({ setShowModalUpdate }) => {
   const dispatch = useDispatch();
   const { updateData } = useSelector((state) => state.ABMAdmin);
 
@@ -70,7 +70,6 @@ const UpdatePlan = ({setShowModalUpdate}) => {
   };
 
   const handleAddDescription = (event) => {
-    // event.preventDefault();
     const newDesc = [type, description];
     if (type !== "" && description !== "") {
       setUpdatePlanData({
@@ -140,7 +139,9 @@ const UpdatePlan = ({setShowModalUpdate}) => {
               onChange={(e) => handleUpdatePlan(e)}
               placeholder="Ingrese el precio...."
             />
-            <p className="absolute text-red-700">{errores.precio}</p>
+            {errores.precio && (
+              <p className="absolute text-red-700">{errores.precio}</p>
+            )}
           </div>
 
           <div className="flex ">
@@ -233,7 +234,11 @@ const UpdatePlan = ({setShowModalUpdate}) => {
                         </div>
                       );
                     })}
-                  <p className="absolute text-red-700">{errores.descripcion}</p>
+                  {errores.descripcion && (
+                    <p className="absolute text-red-700">
+                      {errores.descripcion}
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
@@ -255,7 +260,9 @@ const UpdatePlan = ({setShowModalUpdate}) => {
                 <option value="true">Si</option>
               </select>
             </div>
-            <p className="absolute text-red-700">{errores.planActivo}</p>
+            {errores.planActivo && (
+              <p className="absolute text-red-700">{errores.planActivo}</p>
+            )}
             <div className="flex w-2/3 justify-around mt-4">
               <button
                 key="submitFormButton"
