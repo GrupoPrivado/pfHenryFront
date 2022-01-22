@@ -3,12 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 //import { Link } from "react-router-dom";
 import { getPlanes } from "../../actions/actionPlanes";
 //import { postAfiliate } from "../../actions/actionPlanes";
-import { deleteFamiliar, editFamiliar, postAfiliate } from "../../actions/actionRegister";
+import { deleteFamiliar, editFamiliar, findFamiliar, postAfiliate } from "../../actions/actionRegister";
 import { useNavigate } from "react-router-dom";
 import { getAllCities } from "../../actions/actionProviders";
 import date from "./../../utils/date.js";
 import { validate } from "../../utils/constantes";
 import InputData from '../InputData'
+import EditFamiliar from "./EditFamiliar";
 
 const functionErrors = (data) => {
   const arrayKeys = Object.keys(data);
@@ -21,6 +22,7 @@ const functionErrors = (data) => {
 };
 
 export default function FormAsociate({
+  setEditModal,
   setAlertMessage,
   setActiveAlert,
   setErrorAlert,
@@ -37,7 +39,6 @@ export default function FormAsociate({
   const { familiarData } = useSelector((state) => state.associate);
   const [errors, setErrors] = useState(true);
   const [errores, setErrores] = useState({});
-  const [editModal, setEditModal] = useState(false)
 
   const [input, setInput] = useState({
     nombre: "",
@@ -109,7 +110,7 @@ export default function FormAsociate({
   }
 
   const handleEdit = (e) => {
-    dispatch(editFamiliar(e.target.value))
+    dispatch(findFamiliar(e.target.value))
     setEditModal(true)
   }
 
@@ -425,22 +426,10 @@ export default function FormAsociate({
           </button>
         </div>
       </div>
-      {editModal && <EditFamiliar /> }
+
     </div>
   );
 }
 // disabled={
 //   errors
 // }
-
-const EditFamiliar = () => {
-  const dispatch = useDispatch()
-
-  const {member} = useSelector(state => state.associate)
-  console.log('data del familiar elegido', member)
-  return (
-    <div className="bg-black w-20 h-20 text-gray-50">
-      <InputData />
-    </div>
-  )
-}

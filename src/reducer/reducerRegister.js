@@ -1,4 +1,4 @@
-import { SET_FAMILIES, ADD_FAMILIAR, DELETE_FAMILIAR, EDIT_FAMILIAR  } from "../actions/actionRegister";
+import { SET_FAMILIES, ADD_FAMILIAR, DELETE_FAMILIAR, FIND_FAMILIAR, EDIT_FAMILIAR  } from "../actions/actionRegister";
 const testData = [
     {
         "idAf": 3693,
@@ -69,7 +69,7 @@ export default function reducerAuth(state = inicialState, {type, payload}) {
             ...state,
             familiarData: newFamiliarData
         }
-    case EDIT_FAMILIAR:
+    case FIND_FAMILIAR:
         // const index = state.familiarData.findIndex(f => f.idAf === payload.id)
         // const data = state.familiarData
         // data[index] = payload
@@ -79,6 +79,14 @@ export default function reducerAuth(state = inicialState, {type, payload}) {
         return {
             ...state,
             member: member
+        }
+    case EDIT_FAMILIAR:
+        const index = state.familiarData.findIndex(f => f.idAf === Number(payload.idAf))
+        state.familiarData[index] = payload
+
+        return {
+            ...state,
+            member: [...state.familiarData]
         }
 
     default:

@@ -12,10 +12,12 @@ import SuccessAlert from "../../Components/Alerts/SuccessAlert";
 import ErrorAlert from "../../Components/Alerts/ErrorAlert";
 import { useNavigate } from "react-router-dom";
 import {alertSweet  } from '../../Components/Alerts/alertSweet'
+import EditFamiliar from "../../Components/FormAsociate/EditFamiliar";
 
 export default function Asociate() {
   const [activeAlert, setActiveAlert] = useState(false);
   const [errorAlert, setErrorAlert] = useState(false);
+  const [editModal, setEditModal] = useState(false)
 
   const [alertMessage, setAlertMessage] = useState("");
 
@@ -46,6 +48,7 @@ useEffect(() => {
             output={output}
             modal={modal}
             setModal={setModal}
+            setEditModal={setEditModal}
           />
         
         {modal && (
@@ -58,6 +61,7 @@ useEffect(() => {
             setModal={setModal}
           />
         )}
+              {editModal && <EditFamiliar provinces={provinces} cities={cities} setEditModal={setEditModal} /> }
 
 {activeAlert && alertSweet('success', alertMessage, false, false, setActiveAlert, !activeAlert , () => {}, false, 2500)}
             {errorAlert && alertSweet('error', alertMessage, false, false, setErrorAlert, !errorAlert , () => {},  false, 3000)}
