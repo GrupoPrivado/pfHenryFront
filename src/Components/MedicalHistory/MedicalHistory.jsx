@@ -23,7 +23,7 @@ return (
                 {consultas ? consultas.map((el) => (
                     <li className='flex justify-between text-left sm:px-10 md:px-0' key={el.professionalName}>
                         <p>{el.fechaConsulta}</p>
-                        <p>{el.especID.nombre}</p>
+                        {/* <p>{el.especID.nombre}</p> */}
                     </li>
                 )) : (<div>
                     <h3 className='text-center'>Sin Recetas</h3>
