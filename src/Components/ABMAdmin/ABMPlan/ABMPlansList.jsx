@@ -11,6 +11,7 @@ const ABMPlansList = ({
   setShowModalUpdate,
   setShowModalAdd,
   setDeleteState,
+  setShowModalView,
 }) => {
   const dispatch = useDispatch();
 
@@ -20,8 +21,7 @@ const ABMPlansList = ({
   };
   const handleViewPlan = async (event) => {
     await dispatch(getViewData(event.target.value));
-    // setShowModalView(true);
-    // console.log(setShowModalView)
+    setShowModalView(true);
   };
 
   return (
@@ -55,7 +55,9 @@ const ABMPlansList = ({
                       <div className="  flex justify-center">
                         <span>Activo </span>
                       </div>
-
+                      <div className="w flex justify-center">
+                        <span>Detalles</span>
+                      </div>
                       <div className="w flex justify-center">
                         <span>Editar</span>
                       </div>
@@ -76,6 +78,15 @@ const ABMPlansList = ({
                               </div>
                               <div class=" flex justify-center ">
                                 <span>{element.planActivo ? "Si" : "No"}</span>
+                              </div>
+                              <div class=" flex justify-center ">
+                                <button
+                                  key={element._id}
+                                  value={element._id}
+                                  onClick={(e) => handleViewPlan(e)}
+                                >
+                                  Ver descripcion
+                                </button>
                               </div>
 
                               <div class=" flex justify-around  ">
