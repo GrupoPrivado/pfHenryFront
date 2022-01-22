@@ -3,7 +3,7 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { addPlan, getAllPlansData } from "../../../actions/actionAMBAdmin";
+import { addPlan } from "../../../actions/actionAMBAdmin";
 
 import styles from "./addPlan.module.css";
 import { enableBtn, disableBtn } from "../../../utils/ABMStyles";
@@ -80,9 +80,7 @@ const AddPlan = ({ setShowModalAdd }) => {
     newPlan = {};
   };
 
-  const handleSubmitPlan = async () => {
-    // event.preventDefault();
-
+  const handleSubmitPlan = () => {
     const validateError = validatePlan(inputPlan);
     setErrores(validateError);
     if (Object.entries(validateError).length <= 0) {
@@ -122,7 +120,10 @@ const AddPlan = ({ setShowModalAdd }) => {
                   placeholder="Ingrese el Codigo...."
                 />
               </div>
-              <p className="absolute text-red-700">{errores.codePlan}</p>
+              {errores.codePlan && (
+                <p className="absolute text-red-700">{errores.codePlan}</p>
+              )}
+
               <div>
                 <label className="text-md text-gray-600">Nombre: </label>
                 <input
@@ -134,7 +135,9 @@ const AddPlan = ({ setShowModalAdd }) => {
                   onChange={(e) => handleChange(e)}
                   placeholder="Ingrese el nombre...."
                 />
-                <p className="absolute text-red-700">{errores.name}</p>
+                {errores.name && (
+                  <p className="absolute text-red-700">{errores.name}</p>
+                )}
               </div>
               <div>
                 <label className="text-md text-gray-600">Precio: </label>
@@ -147,7 +150,9 @@ const AddPlan = ({ setShowModalAdd }) => {
                   onChange={(e) => handleChange(e)}
                   placeholder="Ingrese el precio...."
                 />
-                <p className="absolute text-red-700">{errores.precio}</p>
+                {errores.precio && (
+                  <p className="absolute text-red-700">{errores.precio}</p>
+                )}
               </div>
             </div>
           </form>
@@ -232,7 +237,9 @@ const AddPlan = ({ setShowModalAdd }) => {
                       </div>
                     );
                   })}
-                <p className="absolute text-red-700">{errores.planActivo}</p>
+                {errores.descripcion && (
+                  <p className="absolute text-red-700">{errores.descripcion}</p>
+                )}
               </div>
             </div>
           </div>
@@ -250,13 +257,15 @@ const AddPlan = ({ setShowModalAdd }) => {
                 <option value="false">No</option>
                 <option value="true">Si</option>
               </select>
-              <p className="absolute text-red-700">{errores.planActivo}</p>
+              {errores.planActivo && (
+                <p className="absolute text-red-700">{errores.planActivo}</p>
+              )}
             </div>
 
             <div className="flex w-2/3 justify-around mt-4">
               <button
                 key="submitFormButton"
-                onClick={ handleSubmitPlan}
+                onClick={handleSubmitPlan}
                 className={errors ? disableBtn : enableBtn}
                 disabled={errors}
               >

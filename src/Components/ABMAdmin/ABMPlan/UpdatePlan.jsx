@@ -10,17 +10,9 @@ import {
 
 import styles from "./UpdatePlan.module.css";
 
-const functionErrors = (data) => {
-  const arrayKeys = Object.keys(data);
-  const arrayData = arrayKeys.filter((element, index) => data[element] !== "");
-  if (arrayKeys.length === arrayData.length) {
-    return false;
-  } else {
-    return true;
-  }
-}; //cambiarla en un utils ya que se puede usar en todos los forms
 
-const UpdatePlan = ({ setShowModalUpdate, showModalUpdate }) => {
+const UpdatePlan = ({ setShowModalUpdate }) => {
+
   const dispatch = useDispatch();
   const { updateData } = useSelector((state) => state.ABMAdmin);
 
@@ -35,7 +27,7 @@ const UpdatePlan = ({ setShowModalUpdate, showModalUpdate }) => {
   };
 
   const [updatePlanData, setUpdatePlanData] = useState(updatePlanStruct);
-  const [showModalView, setShowModalViewUpdate] = useState(false)
+  const [showModalView, setShowModalViewUpdate] = useState(false);
 
   useEffect(() => {
     setUpdatePlanData({
@@ -45,8 +37,10 @@ const UpdatePlan = ({ setShowModalUpdate, showModalUpdate }) => {
       descripcion: updateData.descripcion,
       planActivo: updateData.planActivo,
     });
-    functionErrors(updatePlanData);
-  }, [updateData, dispatch]);
+
+    functionErrorsBtn(updatePlanData);
+  }, [updateData]);
+
 
   const [type, setTypeArr] = useState("");
   const [description, setdescriptionArr] = useState("");
@@ -77,7 +71,6 @@ const UpdatePlan = ({ setShowModalUpdate, showModalUpdate }) => {
   };
 
   const handleAddDescription = (event) => {
-    // event.preventDefault();
     const newDesc = [type, description];
     if (type !== "" && description !== "") {
       setUpdatePlanData({
@@ -134,19 +127,25 @@ const UpdatePlan = ({ setShowModalUpdate, showModalUpdate }) => {
         </div>
 
         <div className="modal-content py-4 text-left px-6 h-90%">
-          <form id="updatePlan">
-            <div>
-              <label className="text-md text-gray-600">Precio: </label>
-              <input
-                className="h-2 p-4 w-full border-2 border-gray-300 mb-2 rounded-md"
-                type="text"
-                name="precio"
-                autoComplete="off"
-                value={updatePlanData.precio}
-                onChange={(e) => handleUpdatePlan(e)}
-                placeholder="Ingrese el precio...."
-              />
-            </div>
+
+          <form>
+
+          <div>
+            <label className="text-md text-gray-600">Precio: </label>
+            <input
+              className="h-2 p-4 w-full border-2 border-gray-300 mb-2 rounded-md"
+              type="text"
+              name="precio"
+              autoComplete="off"
+              value={updatePlanData.precio}
+              onChange={(e) => handleUpdatePlan(e)}
+              placeholder="Ingrese el precio...."
+            />
+            {errores.precio && (
+              <p className="absolute text-red-700">{errores.precio}</p>
+            )}
+          </div>
+
 
             {/* <div>
               <label className="text-md text-gray-600">Descripción: </label>
@@ -205,8 +204,12 @@ const UpdatePlan = ({ setShowModalUpdate, showModalUpdate }) => {
                 {updatePlanData.descripcion &&
                   updatePlanData.descripcion.map((element, index) => {
                     return (
-                      <div  className='grid overflow-hidden auto-cols-auto auto-rows-auto gap-0'key={"divDesc" + index}>
+                      <div
+                        className="grid overflow-hidden auto-cols-auto auto-rows-auto gap-0"
+                        key={"divDesc" + index}
+                      >
                         <div className="flex">
+
                         <label
                           className="text-md text-gray-600"
                           key={"labelTipo" + index}
@@ -231,6 +234,7 @@ const UpdatePlan = ({ setShowModalUpdate, showModalUpdate }) => {
                             className="h-3 w-3 "
                             viewBox="0 0 20 20"
                             fill="currentColor"
+
                           >
                             <path
                               fillRule="evenodd"
@@ -243,9 +247,16 @@ const UpdatePlan = ({ setShowModalUpdate, showModalUpdate }) => {
                       </div>
                     );
                   })}
+
+                {errores.descripcion && (
+                  <p className="absolute text-red-700">{errores.descripcion}</p>
+                )}
+
               </div>
             </div>
           </div>
+        </div>
+
 
           <div className="flex justify-between items-end  ">
             <div className="flex w-1/3 items-center">
@@ -263,30 +274,29 @@ const UpdatePlan = ({ setShowModalUpdate, showModalUpdate }) => {
                 <option value="true">Si</option>
               </select>
             </div>
+  {errores.planActivo && (
+            <p className="absolute text-red-700">{errores.planActivo}</p>
+          )}
             <div className="flex w-2/3 justify-around ">
-              {errors ? (
-                <button
-                  className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  disabled={errors}
-                >
-                  Guardar
-                </button>
-              ) : (
-                <button
-                  key="submitFormButton"
-                  onClick={(e) => handleSubmitUpdatePlan(e)}
-                  className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
-                  Guardar
-                </button>
-              )}
-              <button
-                onClick={() => handleClose()}
-                className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              >
-                Cerrar
-              </button>
-            </div>
+              
+
+       
+          <div className="flex w-2/3 justify-around mt-4">
+            <button
+              key="submitFormButton"
+              onClick={handleSubmitUpdatePlan}
+              className={errors ? disableBtn : enableBtn}
+              disabled={errors}
+            >
+              Guardar
+            </button>
+            <button
+              onClick={() => handleClose()}
+              className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              Cerrar
+            </button>
+
           </div>
         </div>
       </section>

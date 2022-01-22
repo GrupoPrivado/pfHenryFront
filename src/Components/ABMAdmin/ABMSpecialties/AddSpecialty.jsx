@@ -85,9 +85,10 @@ const AddSpeciality = ({ setShowModalAdd }) => {
 
             <div>
               <label className="text-md text-gray-600">Descripción: </label>
-              <input
-                className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md"
-                type="text"
+              <textarea
+                className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md resize-none"
+                rows="8"
+                cols="50"
                 name="descripcion"
                 autoComplete="off"
                 value={inputSpeciality.descripcion}
@@ -102,8 +103,8 @@ const AddSpeciality = ({ setShowModalAdd }) => {
               <div className="flex w-1/3 ">
                 <label className="text-md text-gray-600">Activo: </label>
                 <select
-
-className=" h-1/2 w-full  border-2 border-gray-300 mb-5 rounded-md"id="activa"
+                  className=" h-1/2 w-full  border-2 border-gray-300 mb-5 rounded-md"
+                  id="activa"
                   name="activa"
                   onChange={(e) => handleChange(e)}
                   defaultValue={0}

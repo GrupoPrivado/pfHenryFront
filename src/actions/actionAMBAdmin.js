@@ -8,7 +8,6 @@ import axios from "axios";
 /************* Actions Para ABM Ciudades***********/
 
 export function getAllCities(payload) {
-
   return async function (dispatch) {
     try {
       const { data } = await axios.get(`${api}/ciudades/${payload}`);
@@ -292,22 +291,31 @@ export function getAllPharmacies(payload) {
 
 export function addPharmacy(payload) {
   return async (dispatch) => {
-    const token = getItem("userToken");
-    const { data } = await axios.post(`${api}/admin/addPharmacy`, payload, {
-      headers: {
-        "x-access-token": token,
-      },
-    });
-    return data;
+    try {
+      const token = getItem("userToken");
+      const { data } = await axios.post(`${api}/admin/addPharmacy`, payload, {
+        headers: {
+          "x-access-token": token,
+        },
+      });
 
-    // const response = await axios.post(`${api}/admin/addPharmacy`, data);
-    // return response.data.message;
-    // if(data.success){
-    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
-    // } else {
-    //     return dispatch({type: "ERRORS", payload: data})
+      if (data.success) {
+        dispatch({
+          type: alertConstants.SUCCESS,
+          message: "Farmacia Cargada",
+        });
+      } else {
+        dispatch({
+          type: alertConstants.ERROR,
+          message: "Error al agregar la farmacia",
+        });
 
-    // }
+        return; // dispatch({type: NOT_AUTHENTICATED, payload: data})
+      }
+    } catch (error) {
+      console.error(error);
+      return { error: error.message };
+    }
   };
 }
 
@@ -384,13 +392,14 @@ export function getAllPlansData() {
     }
   };
 }
+
 export const getViewData = (data) => {
-  
   return {
     type: "GET_PLANES_VIEW",
     payload: data,
   };
 };
+
 export function addPlan(payload) {
   return async (dispatch) => {
     try {
@@ -564,7 +573,7 @@ export function upDownProfessionalAct(payload) {
         },
       }
     );
-  
+
     return data;
 
     // if(data.success){
