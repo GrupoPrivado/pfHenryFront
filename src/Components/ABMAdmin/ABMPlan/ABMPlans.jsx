@@ -10,6 +10,7 @@ import UpdatePlan from "./UpdatePlan";
 import ABMPlansList from "./ABMPlansList";
 import { alertActions } from "../../../actions/actionAlerts";
 import { alertSweet } from "../../Alerts/alertSweet";
+import ViewPlans from './ViewPlans'
 
 const ABMPlans = () => {
   const dispatch = useDispatch();
@@ -20,7 +21,7 @@ const ABMPlans = () => {
 
   const [activeAlert, setActiveAlert] = useState(false);
   const [errorAlert, setErrorAlert] = useState(false);
-
+   
   const [alertMessage, setAlertMessage] = useState("");
 
   useEffect(() => {
@@ -67,12 +68,20 @@ const ABMPlans = () => {
         setShowModalUpdate={setShowModalUpdate}
         setShowModalAdd={setShowModalAdd}
         setDeleteState={setDeleteState}
+        showModalView={showModalView}
+        setShowModalView={setShowModalView}
       />
 
       {showModalAdd && (
         <AddPlan
           showModalAdd={showModalAdd}
           setShowModalAdd={setShowModalAdd}
+        />
+      )}
+      {showModalView && (
+        <ViewPlans
+          showModalView={showModalView}
+          setShowModalView={setShowModalView}
         />
       )}
 
