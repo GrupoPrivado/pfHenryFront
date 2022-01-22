@@ -124,23 +124,34 @@ export function updateSpecialityAct(payload) {
 
 export function deleteSpeciality(payload) {
   return async (dispatch) => {
-    const token = getItem("userToken");
-    const { data } = await axios.delete(
-      `${api}/admin/deleteEspeciality/${payload}`,
-      {
-        headers: {
-          "x-access-token": token,
-        },
+    try {
+      const token = getItem("userToken");
+      const { data } = await axios.delete(
+        `${api}/admin/deleteEspeciality/${payload}`,
+        {
+          headers: {
+            "x-access-token": token,
+          },
+        }
+      );
+      if (data.success) {
+        dispatch({
+          type: alertConstants.SUCCESS,
+          message: "Especialidad borada con éxito",
+        });
+        return getAllSpecialities();
+      } else {
+        dispatch({
+          type: alertConstants.ERROR,
+          message: "Error al borrar la especialidad",
+        });
+
+        return; // dispatch({type: NOT_AUTHENTICATED, payload: data})
       }
-    );
-    return data;
-
-    // if(data.success){
-    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
-    // } else {
-    //     return dispatch({type: "ERRORS", payload: data})
-
-    // }
+    } catch (error) {
+      console.error(error);
+      return { error: error.message };
+    }
   };
 }
 
@@ -328,26 +339,38 @@ export const getPharmacyData = (payload) => {
 
 export function updatePharmacy(payload) {
   return async (dispatch) => {
-    const token = getItem("userToken");
-    const { data } = await axios.put(`${api}/admin/updatePharmacy`, payload, {
-      headers: {
-        "x-access-token": token,
-      },
-    });
+    try {
+      const token = getItem("userToken");
+      const { data } = await axios.put(`${api}/admin/updatePharmacy`, payload, {
+        headers: {
+          "x-access-token": token,
+        },
+      });
 
-    return data;
+      if (data.success) {
+        dispatch({
+          type: alertConstants.SUCCESS,
+          message: "Farmacia Modificada",
+        });
+        return getAllSpecialities();
+      } else {
+        dispatch({
+          type: alertConstants.ERROR,
+          message: "Error al moficiar la farmacia",
+        });
 
-    // if(data.success){
-    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
-    // } else {
-    //     return dispatch({type: "ERRORS", payload: data})
-
-    // }
+        return; // dispatch({type: NOT_AUTHENTICATED, payload: data})
+      }
+    } catch (error) {
+      console.error(error);
+      return { error: error.message };
+    }
   };
 }
 
 export function deletePharmacy(payload) {
   return async (dispatch) => {
+    try{
     const token = getItem("userToken");
     const { data } = await axios.delete(
       `${api}/admin/deletePharmacy/${payload}`,
@@ -357,14 +380,25 @@ export function deletePharmacy(payload) {
         },
       }
     );
-    return data;
+   
+    if (data.success) {
+      dispatch({
+        type: alertConstants.SUCCESS,
+        message: "Farmacia borrada con éxito",
+      });
+      return getAllSpecialities();
+    } else {
+      dispatch({
+        type: alertConstants.ERROR,
+        message: "Error al borrar la farmacia",
+      });
 
-    // if(data.success){
-    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
-    // } else {
-    //     return dispatch({type: "ERRORS", payload: data})
-
-    // }
+      return; // dispatch({type: NOT_AUTHENTICATED, payload: data})
+    }
+  } catch (error) {
+    console.error(error);
+    return { error: error.message };
+  }
   };
 }
 
@@ -469,20 +503,31 @@ export function updatePlan(payload) {
 
 export function deletePlan(payload) {
   return async (dispatch) => {
+    try{
     const token = getItem("userToken");
     const { data } = await axios.delete(`${api}/admin/deletePlan/${payload}`, {
       headers: {
         "x-access-token": token,
       },
     });
-    return data;
+    if (data.success) {
+      dispatch({
+        type: alertConstants.SUCCESS,
+        message: "Plan borrado con éxito",
+      });
+      return getAllSpecialities();
+    } else {
+      dispatch({
+        type: alertConstants.ERROR,
+        message: "Error al borrar el plan",
+      });
 
-    // if(data.success){
-    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
-    // } else {
-    //     return dispatch({type: "ERRORS", payload: data})
-
-    // }
+      return; // dispatch({type: NOT_AUTHENTICATED, payload: data})
+    }
+  } catch (error) {
+    console.error(error);
+    return { error: error.message };
+  }
   };
 }
 
