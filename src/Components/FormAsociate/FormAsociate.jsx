@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 //import { Link } from "react-router-dom";
 import { getPlanes } from "../../actions/actionPlanes";
-import { postAfiliate } from "../../actions/actionPlanes";
+//import { postAfiliate } from "../../actions/actionPlanes";
+import { deleteFamiliar, editFamiliar, postAfiliate } from "../../actions/actionRegister";
 import { useNavigate } from "react-router-dom";
 import { getAllCities } from "../../actions/actionProviders";
 import date from "./../../utils/date.js";
 import { validate } from "../../utils/constantes";
+import InputData from '../InputData'
 
 const functionErrors = (data) => {
   const arrayKeys = Object.keys(data);
@@ -32,8 +34,10 @@ export default function FormAsociate({
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { planes } = useSelector((state) => state.planes);
+  const { familiarData } = useSelector((state) => state.associate);
   const [errors, setErrors] = useState(true);
   const [errores, setErrores] = useState({});
+  const [editModal, setEditModal] = useState(false)
 
   const [input, setInput] = useState({
     nombre: "",
@@ -49,6 +53,7 @@ export default function FormAsociate({
     password: "",
     parentesco: "titular",
   });
+
 
   function handleChange(e) {
     const newInp = {
@@ -76,14 +81,14 @@ export default function FormAsociate({
         setTimeout(() => {
           setActiveAlert(false);
           navigate("/login");
-        }, 5000);
+        }, 2800);
       } else {
         setErrorAlert(true);
         setAlertMessage(result.data);
         setOutput([]);
-        setTimeout(() => {
-          setErrorAlert(false);
-        }, 5000);
+        // setTimeout(() => {
+        //   setErrorAlert(false);
+        // }, 5000);
       }
     }
   };
@@ -96,10 +101,18 @@ export default function FormAsociate({
     }
   }
   function handleDelete(e) {
-    const newOutput = [...output];
-    const newOutputFilter = newOutput.filter((f) => f.nombre !== e.nombre);
-    setOutput(newOutputFilter);
+    console.log(e.target.value, 'valueeee')
+    dispatch(deleteFamiliar(e.target.value))
+    // const newOutput = [...output];
+    // const newOutputFilter = newOutput.filter((f) => f.nombre !== e.nombre);
+    // setOutput(newOutputFilter);
   }
+
+  const handleEdit = (e) => {
+    dispatch(editFamiliar(e.target.value))
+    setEditModal(true)
+  }
+
   const handleChangeProvince = (e) => {
     const newData = {
       ...input,
@@ -374,7 +387,7 @@ export default function FormAsociate({
 
           <div>
             <ul>
-              {output?.map((e, index) => (
+              {familiarData?.map((e, index) => (
                 <div key={index} className="flex items-center justify-between my-4">
                   <li
                     value={e.name}
@@ -382,9 +395,12 @@ export default function FormAsociate({
                   >
                     {e.nombre} {e.apellido}
                   </li>
-                  <button
+                  <button value={e.idAf} className="relative flex justify-center w-10 p-2 text-sm font-medium text-white bg-red-500 border border-transparent rounded-md group h-9 hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" onClick={handleEdit}>
+                      edit (poner icon)
+                  </button>
+                  <button value={e.idAf}
                     className="relative flex justify-center w-10 p-2 text-sm font-medium text-white bg-red-500 border border-transparent rounded-md group h-9 hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    onClick={() => handleDelete(e)}
+                    onClick={handleDelete}
                   >
                     x
                   </button>
@@ -409,9 +425,22 @@ export default function FormAsociate({
           </button>
         </div>
       </div>
+      {editModal && <EditFamiliar /> }
     </div>
   );
 }
 // disabled={
 //   errors
 // }
+
+const EditFamiliar = () => {
+  const dispatch = useDispatch()
+
+  const {member} = useSelector(state => state.associate)
+  console.log('data del familiar elegido', member)
+  return (
+    <div className="bg-black w-20 h-20 text-gray-50">
+      <InputData />
+    </div>
+  )
+}

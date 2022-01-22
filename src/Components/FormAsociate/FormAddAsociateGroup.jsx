@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getAllCities } from "../../actions/actionProviders";
+import { addFamiliar } from "../../actions/actionRegister";
 import { validate } from "../../utils/constantes";
 import date from "./../../utils/date.js"
 
@@ -24,10 +25,13 @@ export default function FormAddAsociateGroup({
   modal,
   setModal,
 }) {
+  const randomNumber = (min, max) => Math.floor(Math.random() * (max-min) + min);
+
   const dispatch = useDispatch();
   const [errors, setErrors] = useState(true);
   const [errores, setErrores] = useState({})
   const [input, setInput] = useState({
+    idAf: randomNumber(3000,4000),
     nombre: "",
     apellido: "",
     DNI: "",
@@ -60,18 +64,23 @@ export default function FormAddAsociateGroup({
       const newState = [input, ...output];
 
       setOutput(newState);
-      setInput({
-        nombre: "",
-        apellido: "",
-        DNI: "",
-        fechaNacimiento: "",
-        telefono: "",
-        correoElectronico: "",
-        ciudadID: "",
-        provinciaID: "",
-        direccion: "",
-        planID: "",
-      });
+
+      //
+      dispatch(addFamiliar(input))
+      //
+
+      // setInput({
+      //   nombre: "",
+      //   apellido: "",
+      //   DNI: "",
+      //   fechaNacimiento: "",
+      //   telefono: "",
+      //   correoElectronico: "",
+      //   ciudadID: "",
+      //   provinciaID: "",
+      //   direccion: "",
+      //   planID: "",
+      // });
       setModal(!modal);
     }
 

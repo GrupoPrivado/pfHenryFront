@@ -11,6 +11,7 @@ import { alertActions } from "../../actions/actionAlerts";
 import SuccessAlert from "../../Components/Alerts/SuccessAlert";
 import ErrorAlert from "../../Components/Alerts/ErrorAlert";
 import { useNavigate } from "react-router-dom";
+import {alertSweet  } from '../../Components/Alerts/alertSweet'
 
 export default function Asociate() {
   const [activeAlert, setActiveAlert] = useState(false);
@@ -58,8 +59,8 @@ useEffect(() => {
           />
         )}
 
-      {activeAlert && <SuccessAlert message={alertMessage} />}
-      {errorAlert && <ErrorAlert message={alertMessage} />}
+{activeAlert && alertSweet('success', alertMessage, false, false, setActiveAlert, !activeAlert , () => {}, false, 2500)}
+            {errorAlert && alertSweet('error', alertMessage, false, false, setErrorAlert, !errorAlert , () => {},  false, 3000)}
     </div>
   );
 }
