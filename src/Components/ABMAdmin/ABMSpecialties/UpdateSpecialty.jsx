@@ -102,9 +102,10 @@ const UpdateSpeciality = ({ setShowModalUpdate }) => {
 
             <div>
               <label className="text-md text-gray-600">Descripción: </label>
-              <input
-                className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md"
-                type="text"
+              <textarea
+                className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md resize-none"
+                rows="8"
+                cols="50"
                 name="descripcion"
                 autoComplete="off"
                 value={updateSpecialityData.descripcion}

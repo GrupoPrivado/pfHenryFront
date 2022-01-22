@@ -20,7 +20,7 @@ export const validateEspeciality = (input) => {
     errores.descripcion = "La descripcion debe tener minimo 5 caracteres";
   }
 
-  if (input.activa === "true") {
+  if (input.activa === "") {
     errores.activa = "Debe seleccionar si la especialidad esta activa o no";
   }
 
