@@ -2,15 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FormAsociate from "../../Components/FormAsociate/FormAsociate";
 import FormAddAsociateGroup from "../../Components/FormAsociate/FormAddAsociateGroup";
-//import { postAfiliate } from "../../actions/actionPlanes";
 import { getPlanes } from "../../actions/actionPlanes";
-import NavBar from "../../Components/NavBar/NavBar";
 import { useTitle } from "../../hooks/useTitle";
 import { getAllProvinces } from "../../actions/actionProviders";
 import { alertActions } from "../../actions/actionAlerts";
-import SuccessAlert from "../../Components/Alerts/SuccessAlert";
-import ErrorAlert from "../../Components/Alerts/ErrorAlert";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {alertSweet  } from '../../Components/Alerts/alertSweet'
 import EditFamiliar from "../../Components/FormAsociate/EditFamiliar";
 
@@ -28,7 +24,6 @@ export default function Asociate() {
     if (!activeAlert || !errorAlert) {
       dispatch(alertActions.clear());
     }
-
     if (type === "alert-success") {
       setActiveAlert(true);
       setAlertMessage('Registro exitoso');
@@ -36,13 +31,11 @@ export default function Asociate() {
         navigate('/login')
         
       }, 2800);
-
     }
     if (type === "alert-danger") {
       setErrorAlert(true);
       setAlertMessage(message);
     }
-
   }, [message, type]);
 
   const {provinces, cities} = useSelector(state => state.providers)
@@ -53,7 +46,6 @@ useEffect(() => {
   dispatch(getAllProvinces())
 }, [dispatch]);
 
-  const [output, setOutput] = useState([]);
   const [modal, setModal] = useState(false);
 
   return (
@@ -61,8 +53,6 @@ useEffect(() => {
           <FormAsociate
             provinces={provinces}
             cities={cities}
-            setOutput={setOutput}
-            output={output}
             modal={modal}
             setModal={setModal}
             setEditModal={setEditModal}
@@ -72,16 +62,14 @@ useEffect(() => {
           <FormAddAsociateGroup
             provinces={provinces}
             cities={cities}
-            setOutput={setOutput}
-            output={output}
             modal={modal}
             setModal={setModal}
           />
         )}
-              {editModal && <EditFamiliar provinces={provinces} cities={cities} setEditModal={setEditModal} /> }
+      {editModal && <EditFamiliar provinces={provinces} cities={cities} setEditModal={setEditModal} /> }
 
-{activeAlert && alertSweet('success', alertMessage, false, false, setActiveAlert, !activeAlert , () => {}, false, 2500)}
-            {errorAlert && alertSweet('error', alertMessage, false, false, setErrorAlert, !errorAlert , () => {},  false, 3000)}
+      {activeAlert && alertSweet('success', alertMessage, false, false, setActiveAlert, !activeAlert , () => {}, false, 2500)}
+      {errorAlert && alertSweet('error', alertMessage, false, false, setErrorAlert, !errorAlert , () => {},  false, 2800)}
     </div>
   );
 }

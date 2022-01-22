@@ -1,53 +1,8 @@
-import { SET_FAMILIES, ADD_FAMILIAR, DELETE_FAMILIAR, FIND_FAMILIAR, EDIT_FAMILIAR  } from "../actions/actionRegister";
-const testData = [
-    {
-        "idAf": 3693,
-        "nombre": "Mono",
-        "apellido": "dsasaddas",
-        "DNI": "556587653",
-        "fechaNacimiento": "2022-01-13",
-        "telefono": "3545435455",
-        "correoElectronico": "aamonoa@gmail.com",
-        "ciudadID": "61e358951425ae77d29485d6",
-        "provinciaID": "61e34717be8bff00f69c5895",
-        "planID": "61d97553bf5102142d41d0be",
-        "direccion": "rewtrgdfh",
-        
-        "parentesco": "hijo/a"
-    },
-    {
-        "idAf": 3233,
-        "nombre": "Albert",
-        "apellido": "dsasaddas",
-        "DNI": "356547653",
-        "fechaNacimiento": "2022-01-13",
-        "telefono": "3545435455",
-        "correoElectronico": "albeert@gmail.com",
-        "ciudadID": "61e358951425ae77d29485d6",
-        "provinciaID": "61e34717be8bff00f69c5895",
-        "direccion": "rewtrgdfh",
-        "planID": "61d97553bf5102142d41d0be",
-        "parentesco": "hijo/a"
-    },
-    {
-        "idAf": 3003,
-        "nombre": "Thomas",
-        "apellido": "dsasaddas",
-        "DNI": "126547653",
-        "fechaNacimiento": "2022-01-13",
-        "telefono": "3545435455",
-        "correoElectronico": "thomas@gaa.com",
-        "ciudadID": "61e358951425ae77d29485d6",
-        "provinciaID": "61e34717be8bff00f69c5895",
-        "direccion": "rewtrgdfh",
-        "planID": "61d97553bf5102142d41d0be",
-        "parentesco": "hijo/a"
-    },
-]
+import { SET_FAMILIES, ADD_FAMILIAR, DELETE_FAMILIAR, FIND_FAMILIAR, EDIT_FAMILIAR, DELETE_ALL_DATA  } from "../actions/actionRegister";
+
 const inicialState = {
-    titularData: {},
     familiarData: [],
-    member:{}
+    member: {}
 };
 
 export default function reducerAuth(state = inicialState, {type, payload}) {
@@ -61,7 +16,7 @@ export default function reducerAuth(state = inicialState, {type, payload}) {
     case ADD_FAMILIAR:
         return {
             ...state,
-            familiarData: [...state.familiarData, ...testData, payload]
+            familiarData: [...state.familiarData, payload]
         }
 
     case DELETE_FAMILIAR:
@@ -71,12 +26,7 @@ export default function reducerAuth(state = inicialState, {type, payload}) {
             familiarData: newFamiliarData
         }
     case FIND_FAMILIAR:
-        // const index = state.familiarData.findIndex(f => f.idAf === payload.id)
-        // const data = state.familiarData
-        // data[index] = payload
-
         const member = state.familiarData.find(f => f.idAf === Number(payload))
-
         return {
             ...state,
             member: member
@@ -84,10 +34,14 @@ export default function reducerAuth(state = inicialState, {type, payload}) {
     case EDIT_FAMILIAR:
         const index = state.familiarData.findIndex(f => f.idAf === Number(payload.idAf))
         state.familiarData[index] = payload
-
         return {
             ...state,
             member: [...state.familiarData]
+        }
+    case DELETE_ALL_DATA: 
+        return {
+            familiarData: [],
+            member: {}
         }
 
     default:

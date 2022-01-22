@@ -1,40 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-//import { Link } from "react-router-dom";
-import { getPlanes } from "../../actions/actionPlanes";
-//import { postAfiliate } from "../../actions/actionPlanes";
-import { deleteFamiliar, editFamiliar, findFamiliar, registerFamilies } from "../../actions/actionRegister";
-import { useNavigate } from "react-router-dom";
+import { deleteFamiliar, findFamiliar, registerFamilies } from "../../actions/actionRegister";
 import { getAllCities } from "../../actions/actionProviders";
 import date from "./../../utils/date.js";
 import { validate } from "../../utils/constantes";
-import InputData from '../InputData'
-import EditFamiliar from "./EditFamiliar";
 
-const functionErrors = (data) => {
-  const arrayKeys = Object.keys(data);
-  const arrayData = arrayKeys.filter((element, index) => data[element] !== "");
-  if (arrayKeys.length === arrayData.length) {
-    return false;
-  } else {
-    return true;
-  }
-};
 
 export default function FormAsociate({
   setEditModal,
   provinces,
   cities,
-  setOutput,
-  output,
   modal,
   setModal,
 }) {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { planes } = useSelector((state) => state.planes);
   const { familiarData } = useSelector((state) => state.associate);
-  const [errors, setErrors] = useState(true);
   const [errores, setErrores] = useState({});
 
   const [input, setInput] = useState({
@@ -59,7 +40,6 @@ export default function FormAsociate({
       [e.target.name]: e.target.value,
     };
     setInput(newInp);
-    setErrors(functionErrors(newInp));
   }
 
   const handleSubmit = async (e) => {
@@ -69,23 +49,6 @@ export default function FormAsociate({
     if (Object.entries(validateError).length <= 0) {
       const newState = [input, ...familiarData];
       dispatch(registerFamilies(newState))
-      //setOutput(newState);
-      // const result = await registerFamilies(newState);
-      // if (result.success) {
-      //   setActiveAlert(true);
-      //   setAlertMessage("Registro Exitoso");
-      //   setTimeout(() => {
-      //     setActiveAlert(false);
-      //     navigate("/login");
-      //   }, 2800);
-      // } else {
-      //   setErrorAlert(true);
-      //   setAlertMessage(result.data);
-      //   setOutput([]);
-      //   // setTimeout(() => {
-      //   //   setErrorAlert(false);
-      //   // }, 5000);
-      // }
     }
   };
   function handleSelect(e) {
@@ -98,9 +61,6 @@ export default function FormAsociate({
   }
   function handleDelete(e) {
     dispatch(deleteFamiliar(e.target.value))
-    // const newOutput = [...output];
-    // const newOutputFilter = newOutput.filter((f) => f.nombre !== e.nombre);
-    // setOutput(newOutputFilter);
   }
 
   const handleEdit = (e) => {
@@ -399,12 +359,6 @@ export default function FormAsociate({
                   >
                     x
                   </button>
-                  {/* <label htmlFor="" value={e.name}>
-                        {e.nombre}
-                      </label> */}
-                  {/* <label htmlFor="" value={e.apellido}>
-                        {e.apellido}
-                      </label> */}
                 </div>
               ))}
             </ul>

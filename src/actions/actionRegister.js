@@ -6,6 +6,7 @@ const ADD_FAMILIAR = "ADD_FAMILIAR";
 const DELETE_FAMILIAR = "DELETE_FAMILIAR";
 const EDIT_FAMILIAR = "EDIT_FAMILIAR";
 const FIND_FAMILIAR = "FIND_FAMILIAR";
+const DELETE_ALL_DATA = "DELETE_ALL_DATA";
 
 export {
   SET_FAMILIES,
@@ -13,6 +14,7 @@ export {
   FIND_FAMILIAR,
   DELETE_FAMILIAR,
   EDIT_FAMILIAR,
+  DELETE_ALL_DATA,
 };
 
 export const addFamiliar = (payload) => (dispatch) => {
@@ -33,6 +35,7 @@ export const registerFamilies = (payload) => {
     try {
         const { data } = await axios.post(`${api}/addPreCarga`, payload);
       if (data.success) {
+        dispatch({ type: DELETE_ALL_DATA});
         return dispatch({ type: alertConstants.SUCCESS, message: data.message });
       } else {
         return dispatch({type: alertConstants.ERROR, message: data.message });
