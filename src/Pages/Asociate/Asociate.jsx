@@ -57,9 +57,7 @@ useEffect(() => {
   const [modal, setModal] = useState(false);
 
   return (
-    <div>
- 
-        
+    <div>      
           <FormAsociate
             provinces={provinces}
             cities={cities}
