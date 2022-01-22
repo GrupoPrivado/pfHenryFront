@@ -35,6 +35,7 @@ const UpdatePlan = ({ setShowModalUpdate, showModalUpdate }) => {
   };
 
   const [updatePlanData, setUpdatePlanData] = useState(updatePlanStruct);
+  const [showModalView, setShowModalViewUpdate] = useState(false)
 
   useEffect(() => {
     setUpdatePlanData({
@@ -200,6 +201,7 @@ const UpdatePlan = ({ setShowModalUpdate, showModalUpdate }) => {
                 </button>
               </div>
               <div className="h-80% border overflow-y-scroll flex  border-gray-300  rounded-md">
+                <button>Ver descripcion </button>
                 {updatePlanData.descripcion &&
                   updatePlanData.descripcion.map((element, index) => {
                     return (

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import styles from "./ViewPlans.module.css";
 
-const ViewPlans = ({ setShowModalView }) => {
+const ViewPlansUpdate = ({ setShowModalViewUpdate }) => {
   const dispatch = useDispatch();
   const { viewPlan } = useSelector((state) => state.ABMAdmin);
   console.log(viewPlan[0].descripcion);
@@ -45,4 +45,4 @@ const ViewPlans = ({ setShowModalView }) => {
   );
 };
 
-export default ViewPlans;
+export default ViewPlansUpdate;
