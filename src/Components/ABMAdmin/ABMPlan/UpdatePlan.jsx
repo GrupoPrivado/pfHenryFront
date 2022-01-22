@@ -28,6 +28,7 @@ const UpdatePlan = ({setShowModalUpdate}) => {
   };
 
   const [updatePlanData, setUpdatePlanData] = useState(updatePlanStruct);
+  const [showModalView, setShowModalViewUpdate] = useState(false)
 
   useEffect(() => {
     setUpdatePlanData({
@@ -182,30 +183,39 @@ const UpdatePlan = ({setShowModalUpdate}) => {
                   Cargar descripcion
                 </button>
               </div>
-              <div className="h-48 border justify-center flex flex-row">
-                <div className=" border border-gray-300 m rounded-md overflow-y-scroll">
-                  {updatePlanData.descripcion &&
-                    updatePlanData.descripcion.map((element, index) => {
-                      return (
-                        <div key={"divDesc" + index}>
-                          <label
-                            className="text-md text-gray-600"
-                            key={"labelTipo" + index}
-                          >
-                            {element[0]}:{" "}
-                          </label>
-                          <label
-                            className="text-md text-black"
-                            key={"labelDesc" + index}
-                          >
-                            {element[1]}
-                          </label>
-                          <button
-                            className="text-red-600"
-                            value={index}
-                            name={"btnDel" + index}
-                            id={index}
-                            onClick={(e) => handleDeleteDescr(e)}
+
+              <div className="h-80% border overflow-y-scroll flex  border-gray-300  rounded-md">
+                <button>Ver descripcion </button>
+                {updatePlanData.descripcion &&
+                  updatePlanData.descripcion.map((element, index) => {
+                    return (
+                      <div  className='grid overflow-hidden auto-cols-auto auto-rows-auto gap-0'key={"divDesc" + index}>
+                        <div className="flex">
+                        <label
+                          className="text-md text-gray-600"
+                          key={"labelTipo" + index}
+                        >
+                          {element[0]}:{" "}
+                        </label>
+                        <label
+                          className="text-md text-black"
+                          key={"labelDesc" + index}
+                        >
+                          {element[1]}
+                        </label>
+                        <button
+                          className="text-red-600"
+                          value={index}
+                          name={"btnDel" + index}
+                          id={index}
+                          onClick={(e) => handleDeleteDescr(e)}
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-3 w-3 "
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+
                           >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"

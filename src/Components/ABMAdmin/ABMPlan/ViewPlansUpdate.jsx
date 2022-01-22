@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import styles from "./ViewPlans.module.css";
 
-const ViewPlans = ({ setShowModalView }) => {
+const ViewPlansUpdate = ({ setShowModalViewUpdate }) => {
   const dispatch = useDispatch();
   const { viewPlan } = useSelector((state) => state.ABMAdmin);
   console.log(viewPlan[0].descripcion);
@@ -21,7 +21,6 @@ const ViewPlans = ({ setShowModalView }) => {
           return (
             <div>
               <div>
-
                 <span class="inline-flex bg-indigo-600 text-white rounded-full h-6 px-3 justify-center items-center">
                   {e[0]}
                 </span>
@@ -46,4 +45,4 @@ const ViewPlans = ({ setShowModalView }) => {
   );
 };
 
-export default ViewPlans;
+export default ViewPlansUpdate;
