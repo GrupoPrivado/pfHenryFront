@@ -49,18 +49,17 @@ export const validatePlan = (input) => {
     errores.planActivo = "Debe seleccionar si la especialidad esta activa o no";
   }
 
-  if (input.descripcion && input.descripcion.length <= 0) {
+  if (input.descripcion.length <= 0) {
     errores.descripcion = "Dentener al menos una descripcion";
   }
-console.log(errores)
-console.log(input)
+
   return errores;
 };
 
 export const validateUpdatePlan = (input) => {
   let errores = {};
 
-  if (input.precio && typeof parseInt(input.precio) !== "number") {
+  if (typeof parseInt(input.precio) !== "number" && parseInt(input.precio) <= 0) {
     errores.precio = "Debe ingresar un valor válido";
   }
 
@@ -68,7 +67,7 @@ export const validateUpdatePlan = (input) => {
     errores.planActivo = "Debe seleccionar si la especialidad esta activa o no";
   }
 
-  if (input.descripcion && input.descripcion.length <= 0) {
+  if (input.descripcion.length <= 0) {
     errores.descripcion = "Dentener al menos una descripcion";
   }
 
