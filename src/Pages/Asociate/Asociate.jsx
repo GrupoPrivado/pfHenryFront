@@ -10,7 +10,7 @@ import { getAllProvinces } from "../../actions/actionProviders";
 import { alertActions } from "../../actions/actionAlerts";
 import SuccessAlert from "../../Components/Alerts/SuccessAlert";
 import ErrorAlert from "../../Components/Alerts/ErrorAlert";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import {alertSweet  } from '../../Components/Alerts/alertSweet'
 import EditFamiliar from "../../Components/FormAsociate/EditFamiliar";
 
@@ -23,7 +23,7 @@ export default function Asociate() {
   const [alertMessage, setAlertMessage] = useState("");
 
   const dispatch = useDispatch();
-  console.log('message recibdo', message)
+  const navigate = useNavigate()
   useEffect(() => {
     if (!activeAlert || !errorAlert) {
       dispatch(alertActions.clear());
@@ -31,7 +31,12 @@ export default function Asociate() {
 
     if (type === "alert-success") {
       setActiveAlert(true);
-      setAlertMessage(message);
+      setAlertMessage('Registro exitoso');
+      setTimeout(() => {
+        navigate('/login')
+        
+      }, 2800);
+
     }
     if (type === "alert-danger") {
       setErrorAlert(true);
