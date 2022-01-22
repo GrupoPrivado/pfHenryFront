@@ -1,17 +1,23 @@
+import {GET_PROFESSIONAL} from "./../actions/professionalsActions"
 const initialState = {
   professionalData: {},
   consultaMedicaData: {},
+  profesionales:[]
 };
 
-export default function reducerProfessional(state = initialState, action) {
-  switch (action.type) {
-    
+export default function reducerProfessional(state = initialState, {type, payload}) {
+  switch (type) {
     case "GET_CONSULTA_MEDICA":
-      return { ...state, consultaMedicaData: action.payload };
+      return { ...state, consultaMedicaData: payload };
 
     case "GET_PROFESSIONALDATA":
-      return { ...state, professionalData: action.payload };
-
+      return { ...state, professionalData: payload };
+    
+      case GET_PROFESSIONAL:
+        return{
+          ...state,
+          profesionales: payload
+        }
     default:
       return state;
   }

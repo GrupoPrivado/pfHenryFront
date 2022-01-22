@@ -115,7 +115,7 @@ export default function FormAsociate({
         <form className="mt-8 space-y-6 " onSubmit={handleSubmit}>
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="grid items-center grid-cols-3 grid-rows-5 gap-4 -space-y-px rounded-md shadow-sm -z-0 w-90vw sm:grid-cols-4 sm:grid-rows-2">
-            <h3 className="col-span-4 row-span-1 text-2xl font-bold text-left text-primary">
+            <h3 className="col-span-4 row-span-1 text-4xl font-bold text-left text-primary">
               Formulario de registro
             </h3>
             <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
