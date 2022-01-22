@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 export default function SideBar({ showSidebar, setShowSidebar }) {
-  // console.log(option)
 
   // function handleClick(e){
 

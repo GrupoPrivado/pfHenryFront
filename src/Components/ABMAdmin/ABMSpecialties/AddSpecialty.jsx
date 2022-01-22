@@ -3,28 +3,20 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import {
-  addSpeciality,
-  getAllSpecialities,
-} from "../../../actions/actionAMBAdmin";
+import { addSpeciality } from "../../../actions/actionAMBAdmin";
 
 import styles from "./addSpecialty.module.css";
-
-const functionErrors = (data) => {
-  const arrayKeys = Object.keys(data);
-  const arrayData = arrayKeys.filter((element, index) => data[element] !== "");
-
-  if (arrayKeys.length === arrayData.length) {
-    return false;
-  } else {
-    return true;
-  }
-}; //cambiarla en un utils ya que se puede usar en todos los forms
+import { enableBtn, disableBtn } from "../../../utils/ABMStyles";
+import {
+  functionErrorsBtn,
+  validateEspeciality,
+} from "../../../utils/adminFormsControllers";
 
 const AddSpeciality = ({ setShowModalAdd }) => {
   const dispatch = useDispatch();
 
   const [errors, setErrors] = useState(true);
+  const [errores, setErrores] = useState({});
 
   const inputSpecialityStruct = {
     nombre: "",
@@ -41,19 +33,22 @@ const AddSpeciality = ({ setShowModalAdd }) => {
     };
     setInputSpeciality(newSpeciality);
 
-    setErrors(functionErrors(newSpeciality));
+    setErrors(functionErrorsBtn(newSpeciality));
 
     newSpeciality = {};
   };
 
   const handleSubmitSpeciality = async (event) => {
     event.preventDefault();
-    let response = await dispatch(addSpeciality(inputSpeciality));
-    alert(response.success);
-    setInputSpeciality(inputSpecialityStruct);
-    setShowModalAdd(false);
-    dispatch(getAllSpecialities());
-    setErrors(true);
+
+    const validateError = validateEspeciality(inputSpeciality);
+    setErrores(validateError);
+    if (Object.entries(validateError).length <= 0) {
+      dispatch(addSpeciality(inputSpeciality));
+      setInputSpeciality(inputSpecialityStruct);
+      setShowModalAdd(false);
+      setErrors(true);
+    }
   };
 
   const handleClose = () => {
@@ -63,7 +58,7 @@ const AddSpeciality = ({ setShowModalAdd }) => {
   };
 
   return (
-    <div>
+    <div className={styles.modal}>
       <section className={styles.modalmain}>
         <div className="flex justify-center h-10%">
           <h5 className="text-2xl font-bold text-gray-500">
@@ -71,7 +66,7 @@ const AddSpeciality = ({ setShowModalAdd }) => {
           </h5>
         </div>
         <div className="modal-content py-4 text-left px-6 h-90% ">
-          <form onSubmit={(e) => handleSubmitSpeciality(e)} id="addSpeciality">
+          <form>
             <div>
               <label className="text-md text-gray-600">Nombre: </label>
               <input
@@ -84,6 +79,9 @@ const AddSpeciality = ({ setShowModalAdd }) => {
                 placeholder="Ingrese el nombre...."
               />
             </div>
+            {errores.nombre && (
+              <p className="absolute text-red-700">{errores.nombre}</p>
+            )}
 
             <div>
               <label className="text-md text-gray-600">Descripción: </label>
@@ -96,6 +94,9 @@ const AddSpeciality = ({ setShowModalAdd }) => {
                 onChange={(e) => handleChange(e)}
                 placeholder="Ingrese la Descripcion...."
               />
+              {errores.nombre && (
+                <p className="absolute text-red-700">{errores.descripcion}</p>
+              )}
             </div>
             <div className="flex justify-between mt-8">
               <div className="flex w-1/3 ">
@@ -111,28 +112,20 @@ className=" h-1/2 w-full  border-2 border-gray-300 mb-5 rounded-md"id="activa"
                   <option value="false">No</option>
                   <option value="true">Si</option>
                 </select>
+                {errores.nombre && (
+                  <p className="absolute text-red-700">{errores.activa}</p>
+                )}
               </div>
               <div className="flex w-2/3 justify-around">
-                {errors ? (
-                  <button
-                    className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    type="submit"
-                    key="submitFormButton"
-                    form="addSpeciality"
-                    disabled={errors}
-                  >
-                    Guardar
-                  </button>
-                ) : (
-                  <button
-                    type="submit"
-                    key="submitFormButton"
-                    form="addSpeciality"
-                    className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  >
-                    Guardar
-                  </button>
-                )}
+                <button
+                  type="submit"
+                  className={errors ? disableBtn : enableBtn}
+                  disabled={errors}
+                  onClick={handleSubmitSpeciality}
+                >
+                  Guardar
+                </button>
+
                 <button
                   onClick={() => handleClose()}
                   className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"

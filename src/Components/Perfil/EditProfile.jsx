@@ -7,7 +7,7 @@ import { filterByCity, getAllCities, getAllProvinces } from '../../actions/actio
 
 function EditProfile({user}) {
     const { cities, provinces } = useSelector((state) => state.providers);
-    console.log(cities)
+
     const dispatch = useDispatch();
     const [input, setInput] = useState ({
         correoElectronico: '',

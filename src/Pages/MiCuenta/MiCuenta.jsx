@@ -38,7 +38,7 @@ import { putProfilePhoto } from '../../actions/actionAuth';
 
                  setFile(file)
              }
-             else {console.log('error')}
+           
          }
      }
      return (

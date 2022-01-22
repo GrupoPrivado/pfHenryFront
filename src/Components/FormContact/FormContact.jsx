@@ -43,7 +43,7 @@ export default function     FormContact() {
         e.preventDefault();
         const validateErrors = validateContact(input)
         setErrores(validateErrors)
-        console.log(validateErrors, 'Validate')
+
         if(Object.entries(validateErrors).length <= 0){
             let response = await dispatch(sendMail(input));
             setInput({
@@ -53,7 +53,6 @@ export default function     FormContact() {
                 mail:"",
                 message:""
             })
-            console.log('response',response)
             navigate("/");
         } 
         

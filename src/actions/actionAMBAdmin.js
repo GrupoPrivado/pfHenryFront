@@ -1,13 +1,14 @@
 import { api } from "../urlHostApi";
 
 import { getItem } from "./actionAuth";
+import { alertConstants } from "./actionAlerts";
 
 import axios from "axios";
 
 /************* Actions Para ABM Ciudades***********/
 
 export function getAllCities(payload) {
-  console.log("get all cities, ", payload);
+
   return async function (dispatch) {
     try {
       const { data } = await axios.get(`${api}/ciudades/${payload}`);
@@ -27,7 +28,6 @@ export function getAllCities(payload) {
 export function getAllProvinces() {
   return async function (dispatch) {
     const { data } = await axios.get(`${api}/provincias`);
-    console.log("data provincias", data.message);
     return dispatch({
       type: "GET_ALL_PROVINCES",
       payload: data.message,
@@ -52,20 +52,33 @@ export function getAllSpecialities() {
 
 export function addSpeciality(payload) {
   return async (dispatch) => {
-    const token = getItem("userToken");
-    const { data } = await axios.post(`${api}/admin/addEspeciality`, payload, {
-      headers: {
-        "x-access-token": token,
-      },
-    });
-    return data;
+    try {
+      const token = getItem("userToken");
+      const { data } = await axios.post(
+        `${api}/admin/addEspeciality`,
+        payload,
+        {
+          headers: {
+            "x-access-token": token,
+          },
+        }
+      );
 
-    // if(data.success){
-    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
-    // } else {
-    //     return dispatch({type: "ERRORS", payload: data})
-
-    // }
+      if (data.success) {
+        dispatch({
+          type: alertConstants.SUCCESS,
+          message: "Especialidad agregada",
+        });
+      } else {
+        dispatch({
+          type: alertConstants.ERROR,
+          message: "Error al agregar la especialidad",
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      return { error: error.message };
+    }
   };
 }
 
@@ -78,24 +91,35 @@ export const getSpecialityData = (data) => {
 
 export function updateSpecialityAct(payload) {
   return async (dispatch) => {
-    const token = getItem("userToken");
-    const { data } = await axios.put(
-      `${api}/admin/updateEspeciality`,
-      payload,
-      {
-        headers: {
-          "x-access-token": token,
-        },
+    try {
+      const token = getItem("userToken");
+      const { data } = await axios.put(
+        `${api}/admin/updateEspeciality`,
+        payload,
+        {
+          headers: {
+            "x-access-token": token,
+          },
+        }
+      );
+      if (data.success) {
+        dispatch({
+          type: alertConstants.SUCCESS,
+          message: "Especialidad Modificada",
+        });
+        return getAllSpecialities();
+      } else {
+        dispatch({
+          type: alertConstants.ERROR,
+          message: "Error al Moficiar la especialidad",
+        });
+
+        return; // dispatch({type: NOT_AUTHENTICATED, payload: data})
       }
-    );
-    return data;
-
-    // if(data.success){
-    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
-    // } else {
-    //     return dispatch({type: "ERRORS", payload: data})
-
-    // }
+    } catch (error) {
+      console.error(error);
+      return { error: error.message };
+    }
   };
 }
 
@@ -211,7 +235,6 @@ export function upDownAffiliateAct(payload) {
         "x-access-token": token,
       },
     });
-    console.log('<<<<<<<<<<<<',data,'>>>>>>>>>>>>>>>>>DATA')
     return data;
 
     // if(data.success){
@@ -240,7 +263,6 @@ export function getAllPlans() {
 export function getAllPharmacies(payload) {
   return async (dispatch) => {
     const token = getItem("userToken");
-    console.log('<<<<<<<<<', payload, '>>>>>>>>>>>>>')
     const { data } = await axios.get(
       `${api}/admin/farmacias?ciudadID=${payload.ciudadID}&provinciaID=${payload.provinciaID}`,
       {
@@ -344,16 +366,21 @@ export function deletePharmacy(payload) {
 
 export function getAllPlansData() {
   return async (dispatch) => {
-    const token = getItem("userToken");
-    const { data } = await axios.get(`${api}/admin/getAllPlansData`, {
-      headers: {
-        "x-access-token": token,
-      },
-    });
-    if (data.success) {
-      return dispatch({ type: "GET_ALL_PLANS_DATA", payload: data.message });
-    } else {
-      return dispatch({ type: "ERRORS", payload: data });
+    try {
+      const token = getItem("userToken");
+      const { data } = await axios.get(`${api}/admin/getAllPlansData`, {
+        headers: {
+          "x-access-token": token,
+        },
+      });
+      if (data.success) {
+        return dispatch({ type: "GET_ALL_PLANS_DATA", payload: data.message });
+      } else {
+        return dispatch({ type: "ERRORS", payload: data });
+      }
+    } catch (error) {
+      console.error(error);
+      return { error: error.message };
     }
   };
 }
@@ -366,21 +393,31 @@ export const getViewData = (data) => {
 };
 export function addPlan(payload) {
   return async (dispatch) => {
-    const token = getItem("userToken");
-    console.log('<<<<sipatchaddPlan>>>>', payload)
-    const { data } = await axios.post(`${api}/admin/addPlan`, payload, {
-      headers: {
-        "x-access-token": token,
-      },
-    });
-    return data;
+    try {
+      const token = getItem("userToken");
+      const { data } = await axios.post(`${api}/admin/addPlan`, payload, {
+        headers: {
+          "x-access-token": token,
+        },
+      });
 
-    // if(data.success){
-    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
-    // } else {
-    //     return dispatch({type: "ERRORS", payload: data})
+      if (data.success) {
+        dispatch({
+          type: alertConstants.SUCCESS,
+          message: "Plan Cargado",
+        });
+      } else {
+        dispatch({
+          type: alertConstants.ERROR,
+          message: "Error al agregar el plan",
+        });
 
-    // }
+        return; // dispatch({type: NOT_AUTHENTICATED, payload: data})
+      }
+    } catch (error) {
+      console.error(error);
+      return { error: error.message };
+    }
   };
 }
 
@@ -393,21 +430,31 @@ export const getPlanData = (data) => {
 
 export function updatePlan(payload) {
   return async (dispatch) => {
-    console.log("updatePlan(payload) ", payload);
-    const token = getItem("userToken");
-    const { data } = await axios.put(`${api}/admin/updatePlan`, payload, {
-      headers: {
-        "x-access-token": token,
-      },
-    });
-    return data;
+    try {
+      const token = getItem("userToken");
+      const { data } = await axios.put(`${api}/admin/updatePlan`, payload, {
+        headers: {
+          "x-access-token": token,
+        },
+      });
 
-    // if(data.success){
-    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
-    // } else {
-    //     return dispatch({type: "ERRORS", payload: data})
+      if (data.success) {
+        dispatch({
+          type: alertConstants.SUCCESS,
+          message: "Plan Modificado",
+        });
+      } else {
+        dispatch({
+          type: alertConstants.ERROR,
+          message: "Error al Moficiar el Plan",
+        });
 
-    // }
+        return; // dispatch({type: NOT_AUTHENTICATED, payload: data})
+      }
+    } catch (error) {
+      console.error(error);
+      return { error: error.message };
+    }
   };
 }
 
@@ -437,7 +484,6 @@ export function deletePlan(payload) {
 export function getAllProfessionals(payload) {
   return async (dispatch) => {
     const token = getItem("userToken");
-    console.log('<<<<<<<<<', payload, '>>>>>>>>>>>>>')
     const { data } = await axios.get(
       `${api}/admin/professionals?ciudadID=${payload.ciudadID}&provinciaID=${payload.provinciaID}`,
       {
@@ -446,7 +492,6 @@ export function getAllProfessionals(payload) {
         },
       }
     );
-    console.log('response add prof', data)
     if (data.success) {
       return dispatch({ type: "GET_PROFESSIONALS", payload: data.message });
     } else {
@@ -485,7 +530,6 @@ export const getProfessionalData = (payload) => {
 
 export function updateProfessional(payload) {
   return async (dispatch) => {
-    console.log("<<<<<update>>>>", payload);
     const token = getItem("userToken");
     const { data } = await axios.put(
       `${api}/admin/updateProfessional`,
@@ -511,12 +555,16 @@ export function updateProfessional(payload) {
 export function upDownProfessionalAct(payload) {
   return async (dispatch) => {
     const token = getItem("userToken");
-    const { data } = await axios.put(`${api}/admin/upDownProfessional`, payload, {
-      headers: {
-        "x-access-token": token,
-      },
-    });
-    console.log('<<<<<<<<<<<<',data,'>>>>>>>>>>>>>>>>>DATA')
+    const { data } = await axios.put(
+      `${api}/admin/upDownProfessional`,
+      payload,
+      {
+        headers: {
+          "x-access-token": token,
+        },
+      }
+    );
+  
     return data;
 
     // if(data.success){
@@ -530,11 +578,14 @@ export function upDownProfessionalAct(payload) {
 export function deleteProfessional(payload) {
   return async (dispatch) => {
     const token = getItem("userToken");
-    const { data } = await axios.delete(`${api}/admin/deleteProfessional/${payload}`, {
-      headers: {
-        "x-access-token": token,
-      },
-    });
+    const { data } = await axios.delete(
+      `${api}/admin/deleteProfessional/${payload}`,
+      {
+        headers: {
+          "x-access-token": token,
+        },
+      }
+    );
     return data;
 
     // if(data.success){
@@ -578,7 +629,7 @@ export function getPrescriptionsByDNI(payload) {
         },
       }
     );
-console.log('data',data)
+
     if (data.success) {
       return dispatch({ type: "GET_PRESCRPTIONS_DNI", payload: data.message });
     } else {
@@ -593,7 +644,6 @@ export const getPrescriptionData = (payload) => {
     payload: payload,
   };
 };
-
 
 export function updatePrescription(payload) {
   return async (dispatch) => {
@@ -627,15 +677,11 @@ export function getAllEmployees(payload) {
   return async (dispatch) => {
     const token = getItem("userToken");
 
-    const { data } = await axios.get(
-      `${api}/admin/employees`,
-      {
-        headers: {
-          "x-access-token": token,
-        },
-      }
-    );
-    console.log('employees data',data)
+    const { data } = await axios.get(`${api}/admin/employees`, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
     if (data.success) {
       return dispatch({ type: "GET_EMPLOYEES", payload: data.message });
     } else {
@@ -674,17 +720,12 @@ export const getEmployeeData = (payload) => {
 
 export function updateEmployee(payload) {
   return async (dispatch) => {
-
     const token = getItem("userToken");
-    const { data } = await axios.put(
-      `${api}/admin/updateEmployee`,
-      payload,
-      {
-        headers: {
-          "x-access-token": token,
-        },
-      }
-    );
+    const { data } = await axios.put(`${api}/admin/updateEmployee`, payload, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
 
     return data;
 
@@ -705,7 +746,7 @@ export function upDownEmployeeAct(payload) {
         "x-access-token": token,
       },
     });
-  
+
     return data;
 
     // if(data.success){
@@ -719,11 +760,14 @@ export function upDownEmployeeAct(payload) {
 export function deleteEmployee(payload) {
   return async (dispatch) => {
     const token = getItem("userToken");
-    const { data } = await axios.delete(`${api}/admin/deleteEmployee/${payload}`, {
-      headers: {
-        "x-access-token": token,
-      },
-    });
+    const { data } = await axios.delete(
+      `${api}/admin/deleteEmployee/${payload}`,
+      {
+        headers: {
+          "x-access-token": token,
+        },
+      }
+    );
     return data;
 
     // if(data.success){
@@ -741,14 +785,14 @@ export function deleteEmployee(payload) {
 export const resetDataUpdate = (payload) => {
   return {
     type: "DATA_RESET",
-    payload:payload
+    payload: payload,
   };
 };
+
 export const filterActiv = (payload) => {
-  console.log('actionfilter', payload)
   return {
     type: "FILTER_ACTIV",
-    payload:payload,
+    payload: payload,
   };
 };
 

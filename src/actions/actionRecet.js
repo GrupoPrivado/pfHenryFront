@@ -9,10 +9,24 @@ export function getRecetas() {
           headers: {
             "x-access-token": token,
           },});
-  
       return dispatch({
         type: "GET_RECETAS",
         payload: data.message,
       });
     };
+}
+
+export function getConsultas() {
+  return async function (dispatch) {
+    const token = getItem("userToken");
+    const { data } = await axios.get(`${api}/consultasMedicas`,{
+        headers: {
+          "x-access-token": token,
+        },});
+return data
+// return dispatch({
+    //   type: "GET_RECETAS",
+    //   payload: data.message,
+    // });
+  };
 }
