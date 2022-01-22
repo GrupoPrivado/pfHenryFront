@@ -6,7 +6,7 @@ import {
   getAllPharmacies,
   getAllProvinces,
 } from "../../actions/actionProviders";
-import Pharmacies from "../PharmaciesPage/Pharmacies";
+import Pharmacies from "./Pharmacies";
 import Logo from "./../../assets/bg2.jpg"
 
 

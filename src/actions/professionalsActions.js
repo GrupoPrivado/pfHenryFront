@@ -3,6 +3,7 @@ import { api } from "../urlHostApi";
 import { getItem } from "./actionAuth";
 
 import axios from "axios";
+export const GET_PROFESSIONAL = "GET_PROFESSIONAL"
 
 export function getconsultaMedica(payload) {
   return async function (dispatch) {
@@ -19,6 +20,25 @@ export function getconsultaMedica(payload) {
     if (data.success) {
       return dispatch({
         type: "GET_CONSULTA_MEDICA",
+        payload: data.message,
+      });
+    } else {
+      return dispatch({ type: "ERRORS", payload: data });
+    }
+  };
+}
+
+export function getProfessional() {
+  return async function (dispatch) {
+    const token = getItem("userToken");
+    const { data } = await axios.get(`${api}/profesionales`, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
+    if (data.success) {
+      return dispatch({
+        type: GET_PROFESSIONAL,
         payload: data.message,
       });
     } else {
