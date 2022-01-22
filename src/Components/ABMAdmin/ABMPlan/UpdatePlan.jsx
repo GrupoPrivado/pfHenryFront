@@ -28,7 +28,7 @@ const UpdatePlan = ({ setShowModalUpdate }) => {
   };
 
   const [updatePlanData, setUpdatePlanData] = useState(updatePlanStruct);
-  const [showModalView, setShowModalViewUpdate] = useState(false)
+  const [showModalView, setShowModalViewUpdate] = useState(false);
 
   useEffect(() => {
     setUpdatePlanData({
@@ -190,33 +190,29 @@ const UpdatePlan = ({ setShowModalUpdate }) => {
                 {updatePlanData.descripcion &&
                   updatePlanData.descripcion.map((element, index) => {
                     return (
-                      <div  className='grid overflow-hidden auto-cols-auto auto-rows-auto gap-0'key={"divDesc" + index}>
+                      <div
+                        className="grid overflow-hidden auto-cols-auto auto-rows-auto gap-0"
+                        key={"divDesc" + index}
+                      >
                         <div className="flex">
-                        <label
-                          className="text-md text-gray-600"
-                          key={"labelTipo" + index}
-                        >
-                          {element[0]}:{" "}
-                        </label>
-                        <label
-                          className="text-md text-black"
-                          key={"labelDesc" + index}
-                        >
-                          {element[1]}
-                        </label>
-                        <button
-                          className="text-red-600"
-                          value={index}
-                          name={"btnDel" + index}
-                          id={index}
-                          onClick={(e) => handleDeleteDescr(e)}
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-3 w-3 "
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-
+                          <label
+                            className="text-md text-gray-600"
+                            key={"labelTipo" + index}
+                          >
+                            {element[0]}:{" "}
+                          </label>
+                          <label
+                            className="text-md text-black"
+                            key={"labelDesc" + index}
+                          >
+                            {element[1]}
+                          </label>
+                          <button
+                            className="text-red-600"
+                            value={index}
+                            name={"btnDel" + index}
+                            id={index}
+                            onClick={(e) => handleDeleteDescr(e)}
                           >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -232,53 +228,51 @@ const UpdatePlan = ({ setShowModalUpdate }) => {
                             </svg>
                           </button>
                         </div>
-                      );
-                    })}
-                  {errores.descripcion && (
-                    <p className="absolute text-red-700">
-                      {errores.descripcion}
-                    </p>
-                  )}
-                </div>
+                      </div>
+                    );
+                  })}
+                {errores.descripcion && (
+                  <p className="absolute text-red-700">{errores.descripcion}</p>
+                )}
               </div>
             </div>
           </div>
+        </div>
 
-          <div className="flex justify-between items-end  ">
-            <div className="flex w-1/3 items-center">
-              <label className="text-md text-gray-600">Activo: </label>
-              <select
-                className=" h-1/2 w-full  border-2 border-gray-300 mb-5 rounded-md"
-                id="activo"
-                name="planActivo"
-                onChange={(e) => handleUpdatePlan(e)}
-                value={updatePlanData.planActivo}
-                defaultValue={0}
-              >
-                <option value="">Seleccione</option>
-                <option value="false">No</option>
-                <option value="true">Si</option>
-              </select>
-            </div>
-            {errores.planActivo && (
-              <p className="absolute text-red-700">{errores.planActivo}</p>
-            )}
-            <div className="flex w-2/3 justify-around mt-4">
-              <button
-                key="submitFormButton"
-                onClick={handleSubmitUpdatePlan}
-                className={errors ? disableBtn : enableBtn}
-                disabled={errors}
-              >
-                Guardar
-              </button>
-              <button
-                onClick={() => handleClose()}
-                className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              >
-                Cerrar
-              </button>
-            </div>
+        <div className="flex justify-between items-end  ">
+          <div className="flex w-1/3 items-center">
+            <label className="text-md text-gray-600">Activo: </label>
+            <select
+              className=" h-1/2 w-full  border-2 border-gray-300 mb-5 rounded-md"
+              id="activo"
+              name="planActivo"
+              onChange={(e) => handleUpdatePlan(e)}
+              value={updatePlanData.planActivo}
+              defaultValue={0}
+            >
+              <option value="">Seleccione</option>
+              <option value="false">No</option>
+              <option value="true">Si</option>
+            </select>
+          </div>
+          {errores.planActivo && (
+            <p className="absolute text-red-700">{errores.planActivo}</p>
+          )}
+          <div className="flex w-2/3 justify-around mt-4">
+            <button
+              key="submitFormButton"
+              onClick={handleSubmitUpdatePlan}
+              className={errors ? disableBtn : enableBtn}
+              disabled={errors}
+            >
+              Guardar
+            </button>
+            <button
+              onClick={() => handleClose()}
+              className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              Cerrar
+            </button>
           </div>
         </div>
       </section>
