@@ -23,7 +23,6 @@ function RecoverPassword({setForm, activeForm, handleChangeAlerts}) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const result = await recoverPassword(input);
-    console.log(result)
     if(result.success){
         handleChangeAlerts('success', result.message, true)
         setTimeout(() => {

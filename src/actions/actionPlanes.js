@@ -30,14 +30,12 @@ export function getPlanes() {
 export const postAfiliate = async (payload) => {
     try {
       const {data} = await axios.post(`${api}/addPreCarga`, payload);
-      console.log(data)
       if(data.success){
         return { success: true, data: data.message }
       } else {
         return { success: false, data: data.message }
       }
     } catch (error) {
-      console.log(error, 'error post afiliate')
       return {success: false, data: error}
     }
   

@@ -10,9 +10,11 @@ import reducerABMAdmin from "../reducer/reducerABMAdmin"
 import reducerProffesionals from '../reducer/reducerProfessionals'
 import { reducerAlerts } from "../reducer/reducerAlerts";
 import reducerFacturas from "../reducer/reducerFacturas";
+import reducerRegister from "../reducer/reducerRegister";
 
 
 const reducers= combineReducers({
+    associate: reducerRegister,
     grupos : reducerGroup,
     planes : reducerPlanes,
     auth: reducerAuth,

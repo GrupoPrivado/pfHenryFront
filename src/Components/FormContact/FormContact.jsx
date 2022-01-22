@@ -43,7 +43,6 @@ export default function FormContact({setActiveAlert, setErrorAlert}) {
         e.preventDefault();
         const validateErrors = validateContact(input)
         setErrores(validateErrors)
-        console.log(validateErrors, 'Validate')
         if(Object.entries(validateErrors).length <= 0){
             let response = await dispatch(sendMail(input));
             setActiveAlert(true)
