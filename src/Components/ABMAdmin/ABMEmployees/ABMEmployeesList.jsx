@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 import { useDispatch } from "react-redux";
 
@@ -33,6 +33,10 @@ const ABMEmployeesList = ({
     await dispatch(getEmployeeData(event.target.value));
     setShowModalUpdate(true);
   };
+  useEffect(() => {
+    dispatch(getAllEmployees());
+
+  }, [dispatch]);
 
   return (
     <div className={styles.divScroll}>
