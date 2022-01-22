@@ -39,9 +39,9 @@ export const data = {
       label: '# of Votes',
       data: [12, 19, 3,],
       backgroundColor: [
-        'rgba(241, 196, 15 , 0.5)',
-        'rgba(171, 178, 185, 0.5)',
-        'rgba(211, 84, 0, 0.5)',
+        'rgba(241, 196, 15 , 1)',
+        'rgba(171, 178, 185, 1)',
+        'rgba(211, 84, 0, 1)',
         
       ],
       borderColor: [

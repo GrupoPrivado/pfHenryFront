@@ -14,7 +14,7 @@ export default function SideBar({ showSidebar, setShowSidebar }) {
   return (
     <div>
       {showSidebar && (
-        <div className="fixed translate-x-full">
+        <div className="fixed translate-x-full h-80vh">
           {/* {showSidebar ?  "translate-x-0 " : "translate-x-full"(
     <button
       className="flex text-4xl text-white items-center cursor-pointer fixed right-10 top-6 z-50"

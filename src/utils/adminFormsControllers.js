@@ -117,6 +117,8 @@ export const validateUpdateEmployee = (input) => {
   ) {
     errores.telefono = "El código debe tener entre 3 y 14 caracteres";
 
+  }
+}
 
 export const validatePharmacy = (input) => {
   let errores = {};

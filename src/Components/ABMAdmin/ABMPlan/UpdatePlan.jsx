@@ -38,7 +38,7 @@ const UpdatePlan = ({ setShowModalUpdate }) => {
       planActivo: updateData.planActivo,
     });
 
-    functionErrorsBtn(updatePlanData);
+    // functionErrorsBtn(updatePlanData);
   }, [updateData]);
 
 
@@ -55,7 +55,7 @@ const UpdatePlan = ({ setShowModalUpdate }) => {
       descripcion: newDesc,
     });
 
-    setErrors(functionErrors(updatePlanData));
+    // setErrors(functionErrors(updatePlanData));
   };
 
   const handleChangeDescription = (event) => {
@@ -79,7 +79,7 @@ const UpdatePlan = ({ setShowModalUpdate }) => {
       });
       setTypeArr("");
       setdescriptionArr("");
-      setErrors(functionErrors(updatePlanData));
+      // setErrors(functionErrors(updatePlanData));
     }
   };
 
@@ -91,7 +91,7 @@ const UpdatePlan = ({ setShowModalUpdate }) => {
 
     setUpdatePlanData(updatedPlan);
 
-    setErrors(functionErrors(updatedPlan));
+    // setErrors(functionErrors(updatedPlan));
   };
 
   const handleSubmitUpdatePlan = async (event) => {
@@ -114,7 +114,7 @@ const UpdatePlan = ({ setShowModalUpdate }) => {
 
   return (
     <div>
-      <section className={styles.modalmain}>
+      {/* <section className={styles.modalmain}>
         <div className="flex justify-center h-10%">
           <div className="flex justify-center items-center">
             <h5 className="text-2xl font-bold text-gray-500">Editar Plan: </h5>
@@ -144,7 +144,7 @@ const UpdatePlan = ({ setShowModalUpdate }) => {
             {errores.precio && (
               <p className="absolute text-red-700">{errores.precio}</p>
             )}
-          </div>
+          </div> */}
 
 
             {/* <div>
@@ -159,7 +159,7 @@ const UpdatePlan = ({ setShowModalUpdate }) => {
                 placeholder="Ingrese la Descripcion...."
               />
             </div> */}
-          </form>
+          {/* </form>
           <div className="flex ">
             <div className="w-1/2">
               <div>
@@ -296,10 +296,10 @@ const UpdatePlan = ({ setShowModalUpdate }) => {
             >
               Cerrar
             </button>
-
+</div>
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };

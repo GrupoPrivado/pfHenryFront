@@ -51,7 +51,7 @@ export default function CityDash() {
         {
           label: "Asociados por provincia",
           data: [188, 55, 56,445,74 , 200, 23],
-          backgroundColor: "rgba(169, 110, 247 , 0.8)",
+          backgroundColor: "rgba(169, 110, 247 )",
         },
         // {
         //   label: "Dataset 2",
