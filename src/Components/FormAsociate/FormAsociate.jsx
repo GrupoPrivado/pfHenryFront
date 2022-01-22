@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 //import { Link } from "react-router-dom";
 import { getPlanes } from "../../actions/actionPlanes";
 //import { postAfiliate } from "../../actions/actionPlanes";
-import { deleteFamiliar, editFamiliar, findFamiliar, postAfiliate } from "../../actions/actionRegister";
+import { deleteFamiliar, editFamiliar, findFamiliar, registerFamilies } from "../../actions/actionRegister";
 import { useNavigate } from "react-router-dom";
 import { getAllCities } from "../../actions/actionProviders";
 import date from "./../../utils/date.js";
@@ -23,9 +23,6 @@ const functionErrors = (data) => {
 
 export default function FormAsociate({
   setEditModal,
-  setAlertMessage,
-  setActiveAlert,
-  setErrorAlert,
   provinces,
   cities,
   setOutput,
@@ -71,26 +68,26 @@ export default function FormAsociate({
     setErrores(validateError);
     console.log(validateError, "Validate");
     if (Object.entries(validateError).length <= 0) {
-      console.log(Object.entries(validateError).length);
-      const newState = [input, ...output];
-
-      setOutput(newState);
-      const result = await postAfiliate(newState);
-      if (result.success) {
-        setActiveAlert(true);
-        setAlertMessage("Registro Exitoso");
-        setTimeout(() => {
-          setActiveAlert(false);
-          navigate("/login");
-        }, 2800);
-      } else {
-        setErrorAlert(true);
-        setAlertMessage(result.data);
-        setOutput([]);
-        // setTimeout(() => {
-        //   setErrorAlert(false);
-        // }, 5000);
-      }
+      const newState = [input, ...familiarData];
+      console.log(newState, 'nuevo estado submit')
+      dispatch(registerFamilies(newState))
+      //setOutput(newState);
+      // const result = await registerFamilies(newState);
+      // if (result.success) {
+      //   setActiveAlert(true);
+      //   setAlertMessage("Registro Exitoso");
+      //   setTimeout(() => {
+      //     setActiveAlert(false);
+      //     navigate("/login");
+      //   }, 2800);
+      // } else {
+      //   setErrorAlert(true);
+      //   setAlertMessage(result.data);
+      //   setOutput([]);
+      //   // setTimeout(() => {
+      //   //   setErrorAlert(false);
+      //   // }, 5000);
+      // }
     }
   };
   function handleSelect(e) {

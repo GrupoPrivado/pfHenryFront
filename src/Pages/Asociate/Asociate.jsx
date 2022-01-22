@@ -18,10 +18,27 @@ export default function Asociate() {
   const [activeAlert, setActiveAlert] = useState(false);
   const [errorAlert, setErrorAlert] = useState(false);
   const [editModal, setEditModal] = useState(false)
+  const { type, message } = useSelector((state) => state.alerts);
 
   const [alertMessage, setAlertMessage] = useState("");
 
   const dispatch = useDispatch();
+  console.log('message recibdo', message)
+  useEffect(() => {
+    if (!activeAlert || !errorAlert) {
+      dispatch(alertActions.clear());
+    }
+
+    if (type === "alert-success") {
+      setActiveAlert(true);
+      setAlertMessage(message);
+    }
+    if (type === "alert-danger") {
+      setErrorAlert(true);
+      setAlertMessage(message);
+    }
+
+  }, [message, type]);
 
   const {provinces, cities} = useSelector(state => state.providers)
   useTitle("Asociate a ArpyMedical");
@@ -39,9 +56,6 @@ useEffect(() => {
  
         
           <FormAsociate
-            setAlertMessage={setAlertMessage}
-            setActiveAlert={setActiveAlert}
-            setErrorAlert={setErrorAlert}
             provinces={provinces}
             cities={cities}
             setOutput={setOutput}
