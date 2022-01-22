@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 
 import {
   updateProfessional,
-  getAllProfessionals,
   resetDataUpdate,
   getAllProvinces,
   getAllCities,
@@ -14,7 +13,6 @@ import styles from "./UpdateProfessional.module.css";
 
 import {
   functionErrorsBtn,
-  validateEspeciality,
   validateProfesionalUpdate,
 } from "../../../utils/adminFormsControllers";
 import { enableBtn, disableBtn } from "../../../utils/ABMStyles";

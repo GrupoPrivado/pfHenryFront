@@ -7,7 +7,6 @@ import {
   getProfessionalData,
   getAllCities,
   getAllProvinces,
-  deleteProfessional,
 } from "../../../actions/actionAMBAdmin";
 
 import styles from "./ABMProfessionals.module.css";
@@ -33,6 +32,7 @@ const ABMAffiliatesList = ({
   };
 
   const handleEditProfessional = async (event) => {
+    console.log('event update', event.target.value)
     await dispatch(getProfessionalData(event.target.value));
     setShowModalUpdate(true);
   };
@@ -195,7 +195,7 @@ const ABMAffiliatesList = ({
                                 title="Edit"
                                 key={"edit" + element._id}
                                 value={element._id}
-                                onClick={(e)=>setDeleteState(e.target.value)}
+                                onClick={(e)=>handleEditProfessional(e.target.value)}
                               >
                                 Editar
                               </button>

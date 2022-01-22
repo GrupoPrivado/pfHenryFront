@@ -629,7 +629,7 @@ export function updateProfessional(payload) {
       if (data.success) {
         dispatch({
           type: alertConstants.SUCCESS,
-          message: "Profesional micado",
+          message: "Profesional modificado",
         });
       } else {
         dispatch({
