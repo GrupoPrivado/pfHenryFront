@@ -12,15 +12,15 @@ export const functionErrorsBtn = (data) => {
 export const validateEspeciality = (input) => {
   let errores = {};
 
-  if (input.nombre && input.nombre.length < 5) {
+  if (input.nombre.length < 5) {
     errores.nombre = "El nombre debe tener minimo 5 caracteres";
   }
 
-  if (input.descripcion && input.descripcion.length < 5) {
+  if (input.descripcion.length < 5) {
     errores.descripcion = "La descripcion debe tener minimo 5 caracteres";
   }
 
-  if (input.activa === "") {
+  if (input.activa === "true") {
     errores.activa = "Debe seleccionar si la especialidad esta activa o no";
   }
 

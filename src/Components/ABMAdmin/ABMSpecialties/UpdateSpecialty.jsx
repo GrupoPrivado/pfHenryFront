@@ -95,7 +95,9 @@ const UpdateSpeciality = ({ setShowModalUpdate }) => {
                 onChange={(e) => handleUpdateSpeciality(e)}
                 placeholder="Ingrese el nombre...."
               />
-              <p className="absolute text-red-700">{errores.nombre}</p>
+              {errores.nombre && (
+                <p className="absolute text-red-700">{errores.nombre}</p>
+              )}
             </div>
 
             <div>
@@ -109,14 +111,16 @@ const UpdateSpeciality = ({ setShowModalUpdate }) => {
                 onChange={(e) => handleUpdateSpeciality(e)}
                 placeholder="Ingrese la Descripcion...."
               />
-              <p className="absolute text-red-700">{errores.descripcion}</p>
+              {errores.nombre && (
+                <p className="absolute text-red-700">{errores.descripcion}</p>
+              )}
             </div>
 
             <div className="flex justify-between items-end mt-8">
               <div className="flex w-1/3  ">
                 <label className="text-md text-gray-600">Activo: </label>
                 <select
-                className=" h-1/2 w-full  border-2 border-gray-300 mb-5 rounded-md"
+                  className=" h-1/2 w-full  border-2 border-gray-300 mb-5 rounded-md"
                   id="activa"
                   name="activa"
                   onChange={(e) => handleUpdateSpeciality(e)}
@@ -126,7 +130,9 @@ const UpdateSpeciality = ({ setShowModalUpdate }) => {
                   <option value="false">No</option>
                   <option value="true">Si</option>
                 </select>
-                <p className="absolute text-red-700">{errores.activa}</p>
+                {errores.nombre && (
+                  <p className="absolute text-red-700">{errores.activa}</p>
+                )}
               </div>
 
               <div className="flex w-2/3 justify-around  ">
