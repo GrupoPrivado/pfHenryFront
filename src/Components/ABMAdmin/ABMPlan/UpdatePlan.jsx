@@ -2,22 +2,21 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
-import { updatePlan, resetDataUpdate } from "../../../actions/actionAMBAdmin";
-
 import {
-  functionErrorsBtn,
-  validateUpdatePlan,
-} from "../../../utils/adminFormsControllers";
+  updatePlan,
+  getAllPlansData,
+  resetDataUpdate,
+} from "../../../actions/actionAMBAdmin";
 
 import styles from "./UpdatePlan.module.css";
-import { enableBtn, disableBtn } from "../../../utils/ABMStyles";
+
 
 const UpdatePlan = ({ setShowModalUpdate }) => {
+
   const dispatch = useDispatch();
   const { updateData } = useSelector((state) => state.ABMAdmin);
 
   const [errors, setErrors] = useState(false);
-  const [errores, setErrores] = useState({});
 
   const updatePlanStruct = {
     id: "",
@@ -38,8 +37,10 @@ const UpdatePlan = ({ setShowModalUpdate }) => {
       descripcion: updateData.descripcion,
       planActivo: updateData.planActivo,
     });
+
     functionErrorsBtn(updatePlanData);
   }, [updateData]);
+
 
   const [type, setTypeArr] = useState("");
   const [description, setdescriptionArr] = useState("");
@@ -54,7 +55,7 @@ const UpdatePlan = ({ setShowModalUpdate }) => {
       descripcion: newDesc,
     });
 
-    setErrors(functionErrorsBtn(updatePlanData));
+    setErrors(functionErrors(updatePlanData));
   };
 
   const handleChangeDescription = (event) => {
@@ -78,7 +79,7 @@ const UpdatePlan = ({ setShowModalUpdate }) => {
       });
       setTypeArr("");
       setdescriptionArr("");
-      setErrors(functionErrorsBtn(updatePlanData));
+      setErrors(functionErrors(updatePlanData));
     }
   };
 
@@ -90,20 +91,18 @@ const UpdatePlan = ({ setShowModalUpdate }) => {
 
     setUpdatePlanData(updatedPlan);
 
-    setErrors(functionErrorsBtn(updatedPlan));
+    setErrors(functionErrors(updatedPlan));
   };
 
-  const handleSubmitUpdatePlan = async () => {
-    const validateError = validateUpdatePlan(updatePlanData);
-    setErrores(validateError);
-
-    if (Object.entries(validateError).length <= 0) {
-      dispatch(updatePlan(updatePlanData));
-      setShowModalUpdate(false);
-      setUpdatePlanData(updatePlanStruct);
-      setErrors(true);
-      dispatch(resetDataUpdate());
-    }
+  const handleSubmitUpdatePlan = async (event) => {
+    event.preventDefault();
+    let response = await dispatch(updatePlan(updatePlanData));
+    alert(response.success);
+    setUpdatePlanData(updatePlanStruct);
+    setShowModalUpdate(false);
+    dispatch(getAllPlansData());
+    dispatch(resetDataUpdate({}));
+    setErrors(true);
   };
 
   const handleClose = () => {
@@ -128,6 +127,9 @@ const UpdatePlan = ({ setShowModalUpdate }) => {
         </div>
 
         <div className="modal-content py-4 text-left px-6 h-90%">
+
+          <form>
+
           <div>
             <label className="text-md text-gray-600">Precio: </label>
             <input
@@ -144,6 +146,20 @@ const UpdatePlan = ({ setShowModalUpdate }) => {
             )}
           </div>
 
+
+            {/* <div>
+              <label className="text-md text-gray-600">Descripción: </label>
+              <input
+                className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md"
+                type="text"
+                name="descripcion"
+                autoComplete="off"
+                value={updatePlanData.descripcion}
+                onChange={(e) => handleUpdatePlan(e)}
+                placeholder="Ingrese la Descripcion...."
+              />
+            </div> */}
+          </form>
           <div className="flex ">
             <div className="w-1/2">
               <div>
@@ -162,10 +178,9 @@ const UpdatePlan = ({ setShowModalUpdate }) => {
                 <label className=" h-1/3 text-md text-gray-600">
                   Descripción:{" "}
                 </label>
-                <textarea
-                  className="h-2/3 p-4  w-full border-2 border-gray-300 mb-2 rounded-md resize-none"
-                  rows="8"
-                  cols="50"
+                <input
+                  className="h-2/3 p-4  w-full border-2 border-gray-300 mb-2 rounded-md"
+                  type="text"
                   name="description"
                   autoComplete="off"
                   value={description}
@@ -184,7 +199,6 @@ const UpdatePlan = ({ setShowModalUpdate }) => {
                   Cargar descripcion
                 </button>
               </div>
-
               <div className="h-80% border overflow-y-scroll flex  border-gray-300  rounded-md">
                 <button>Ver descripcion </button>
                 {updatePlanData.descripcion &&
@@ -195,69 +209,78 @@ const UpdatePlan = ({ setShowModalUpdate }) => {
                         key={"divDesc" + index}
                       >
                         <div className="flex">
-                          <label
-                            className="text-md text-gray-600"
-                            key={"labelTipo" + index}
+
+                        <label
+                          className="text-md text-gray-600"
+                          key={"labelTipo" + index}
+                        >
+                          {element[0]}:{" "}
+                        </label>
+                        <label
+                          className="text-md text-black"
+                          key={"labelDesc" + index}
+                        >
+                          {element[1]}
+                        </label>
+                        <button
+                          className="text-red-600"
+                          value={index}
+                          name={"btnDel" + index}
+                          id={index}
+                          onClick={(e) => handleDeleteDescr(e)}
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-3 w-3 "
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+
                           >
-                            {element[0]}:{" "}
-                          </label>
-                          <label
-                            className="text-md text-black"
-                            key={"labelDesc" + index}
-                          >
-                            {element[1]}
-                          </label>
-                          <button
-                            className="text-red-600"
-                            value={index}
-                            name={"btnDel" + index}
-                            id={index}
-                            onClick={(e) => handleDeleteDescr(e)}
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="h-3 w-3 "
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                          </button>
+                            <path
+                              fillRule="evenodd"
+                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </button>
                         </div>
                       </div>
                     );
                   })}
+
                 {errores.descripcion && (
                   <p className="absolute text-red-700">{errores.descripcion}</p>
                 )}
+
               </div>
             </div>
           </div>
         </div>
 
-        <div className="flex justify-between items-end  ">
-          <div className="flex w-1/3 items-center">
-            <label className="text-md text-gray-600">Activo: </label>
-            <select
+
+          <div className="flex justify-between items-end  ">
+            <div className="flex w-1/3 items-center">
+              <label className="text-md text-gray-600">Activo: </label>
+              <select
               className=" h-1/2 w-full  border-2 border-gray-300 mb-5 rounded-md"
-              id="activo"
-              name="planActivo"
-              onChange={(e) => handleUpdatePlan(e)}
-              value={updatePlanData.planActivo}
-              defaultValue={0}
-            >
-              <option value="">Seleccione</option>
-              <option value="false">No</option>
-              <option value="true">Si</option>
-            </select>
-          </div>
-          {errores.planActivo && (
+                id="activo"
+                name="planActivo"
+                onChange={(e) => handleUpdatePlan(e)}
+                value={updatePlanData.planActivo}
+                defaultValue={0}
+              >
+                <option value="">Seleccione</option>
+                <option value="false">No</option>
+                <option value="true">Si</option>
+              </select>
+            </div>
+  {errores.planActivo && (
             <p className="absolute text-red-700">{errores.planActivo}</p>
           )}
+            <div className="flex w-2/3 justify-around ">
+              
+
+       
           <div className="flex w-2/3 justify-around mt-4">
             <button
               key="submitFormButton"
@@ -273,6 +296,7 @@ const UpdatePlan = ({ setShowModalUpdate }) => {
             >
               Cerrar
             </button>
+
           </div>
         </div>
       </section>
