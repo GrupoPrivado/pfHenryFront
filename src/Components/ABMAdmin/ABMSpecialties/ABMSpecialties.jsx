@@ -39,6 +39,7 @@ const ABMSpecialities = () => {
       setErrorAlert(true);
       setAlertMessage(message);
     }
+    dispatch(getAllSpecialities());
   }, [message, type, activeAlert, errorAlert]);
 
   let [showModalAdd, setShowModalAdd] = useState(false);
@@ -55,7 +56,6 @@ const ABMSpecialities = () => {
   const deleteSpecialityFunc = (value) => {
     dispatch(deleteSpeciality(value));
     dispatch(getAllSpecialities());
-    console.log('pase')
     setDeleteState("");
     setConfirmDeleteState(true);
   };
