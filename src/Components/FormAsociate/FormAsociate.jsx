@@ -66,10 +66,8 @@ export default function FormAsociate({
     e.preventDefault();
     const validateError = validate(input);
     setErrores(validateError);
-    console.log(validateError, "Validate");
     if (Object.entries(validateError).length <= 0) {
       const newState = [input, ...familiarData];
-      console.log(newState, 'nuevo estado submit')
       dispatch(registerFamilies(newState))
       //setOutput(newState);
       // const result = await registerFamilies(newState);
@@ -99,7 +97,6 @@ export default function FormAsociate({
     }
   }
   function handleDelete(e) {
-    console.log(e.target.value, 'valueeee')
     dispatch(deleteFamiliar(e.target.value))
     // const newOutput = [...output];
     // const newOutputFilter = newOutput.filter((f) => f.nombre !== e.nombre);

@@ -32,14 +32,12 @@ export const registerFamilies = (payload) => {
   return async function(dispatch){
     try {
         const { data } = await axios.post(`${api}/addPreCarga`, payload);
-        console.log('response ', data)
       if (data.success) {
         return dispatch({ type: alertConstants.SUCCESS, message: data.message });
       } else {
         return dispatch({type: alertConstants.ERROR, message: data.message });
       }
     } catch (error) {
-      console.log(error, "error post afiliate");
       return dispatch({ success: false, message: error });
     }
   };

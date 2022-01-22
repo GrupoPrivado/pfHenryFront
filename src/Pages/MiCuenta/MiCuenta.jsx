@@ -22,8 +22,6 @@ import { putProfilePhoto } from '../../actions/actionAuth';
      const sendImage = (e) => {
          e.preventDefault();
          sendImages(file)
-         .then((result) => console.log(result))
-         .catch((error) => console.log(error))
      }
      
      const onFileChange = (e) => {

@@ -34,7 +34,6 @@ const EditFamiliar = ({provinces, cities, setEditModal}) => {
         e.preventDefault();
         const validateError = validate(input)
         setErrores(validateError)
-        console.log(validateError, "Validate")
         if (Object.entries(validateError).length <= 0) {
           dispatch(editFamiliar(input))
           setEditModal(false);

@@ -6,7 +6,6 @@ import axios from "axios";
 
 export function getconsultaMedica(payload) {
   return async function (dispatch) {
-    console.log("<<<<<<<", payload, ">>>>>>>>>");
     const token = getItem("userToken");
     const { data } = await axios.get(
       `${api}/profesionales/consultaMedica?DNI=${payload.DNI}&token=${payload.token}`,

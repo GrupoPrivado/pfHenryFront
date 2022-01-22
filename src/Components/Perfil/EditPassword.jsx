@@ -10,10 +10,8 @@ function EditPassword({setErrorAlert, setAlertMessage}) {
     newPass: "",
     repeat: "",
   });
-  //const [activeAlert, setActiveAlert] = useState(false);
   const handleSubmit = (e) => {
     e.preventDefault(e);
-    //console.log("passwords", passwords);
     if(passwords.newPass === passwords.repeat) {
       dispatch(changePassword(passwords));
       setPasswords({
