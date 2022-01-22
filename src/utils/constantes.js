@@ -64,3 +64,38 @@ export const validateContact = (input) => {
     }
     return errores;
 }
+
+export const validatePassword = (passwords) => {
+    console.log(passwords)
+    let errors = {};
+    if (passwords.newPass && passwords.newPass.length < 8) {
+        errors.passwordNew = "La contraseña debe tener minimo 8 caracteres";
+    }
+    if (passwords.repeat && passwords.repeat.length < 8) {
+        errors.passwordRepeated = "La contraseña debe tener minimo 8 caracteres";
+    }
+    return errors
+}
+
+export const validateContactDetails = (input) => {
+    let errores = {};
+
+    if (
+        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(input.correoElectronico)
+    ) {
+        errores.correoElectronico = "Ingrese un mail válido";
+    }
+    if (input.telefono.length < 8 || input.telefono.length > 11) {
+        errores.telefono = "Ingrese un teléfono válido";
+    }
+    if (input.direccion.length < 4) {
+        errores.direccion = "Escriba una dirección válida";
+    }
+    if (input.provinciaID.length <= 0) {
+        errores.provinciaID = "Debe seleccionar una provincia";
+    }
+    if (input.ciudadID.length <= 0) {
+        errores.ciudadID = "Debe seleccionar una localidad";
+    }
+    return errores;
+}

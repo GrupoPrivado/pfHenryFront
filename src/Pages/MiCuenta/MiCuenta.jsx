@@ -1,11 +1,11 @@
 import axios from 'axios';
- import React, {useState} from 'react'
- import {useDispatch} from 'react-redux'
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { putProfilePhoto } from '../../actions/actionAuth';
- import { api } from '../../urlHostApi';
+import { api } from '../../urlHostApi';
 
- const MiCuenta = () => {
-    const dispatch = useDispatch() 
+const MiCuenta = () => {
+    const dispatch = useDispatch()
     const [file, setFile] = useState('')
     const [pathImage, setPathImage] = useState('')
 

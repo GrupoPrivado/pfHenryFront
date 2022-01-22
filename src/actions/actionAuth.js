@@ -5,6 +5,7 @@ const GET_AFILIATE = 'GET_AFILIATE'
 const GET_MEDICAL_TOKEN = 'GET_MEDICAL_TOKEN'
 const NOT_AUTHENTICATED = 'NOT_AUTHENTICATED'
 const GET_ERROR = 'GET_ERROR'
+// const GET_RECIPES = "GET_RECIPES"
 
 
 export { GET_AFILIATE, GET_MEDICAL_TOKEN, NOT_AUTHENTICATED, GET_ERROR}
@@ -48,6 +49,28 @@ export const getAfiliate = (payload) => {
       }
     }
 }
+
+// export const getRecipes = (payload) => {
+//   return async (dispatch) => {
+//     const token = getItem("userToken");
+//     try {
+//         const {data} = await axios.get(`${api}/recetas`, {
+//                 headers:{
+//                     'x-access-token' : token
+//                 }
+//         });
+//         console.log(data, "data recipes")
+//         if(data.success){
+//             return dispatch({type: GET_RECIPES, payload: data.message})
+//         } else {
+//             return {error: true}
+//         }
+//     } catch (error) {
+//       console.error(error) 
+//       return {error: error.message} 
+//     }
+//   }
+// }
 
 export const getMedicalToken = () => {
   return async (dispatch) => {
