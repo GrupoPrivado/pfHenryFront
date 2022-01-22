@@ -2,9 +2,7 @@ import React from "react";
 
 import { useDispatch } from "react-redux";
 
-import {
-  getPlanData,
-} from "../../../actions/actionAMBAdmin";
+import { getPlanData, getViewData } from "../../../actions/actionAMBAdmin";
 
 import styles from "./ABMPlans.module.css";
 
@@ -12,7 +10,7 @@ const ABMPlansList = ({
   allPlansData,
   setShowModalUpdate,
   setShowModalAdd,
-  setDeleteState
+  setDeleteState,
 }) => {
   const dispatch = useDispatch();
 
@@ -22,19 +20,10 @@ const ABMPlansList = ({
   };
   const handleViewPlan = async (event) => {
     await dispatch(getViewData(event.target.value));
-    setShowModalView(true);
-    console.log(setShowModalView)
+    // setShowModalView(true);
+    // console.log(setShowModalView)
   };
 
-<<<<<<< HEAD
-=======
-  const handleDeletePlan = async (event) => {
-    let response = await dispatch(deletePlan(event.target.value));
-
-    await dispatch(getAllPlansData());
-  };
-  
->>>>>>> ABM-Admin
   return (
     <div className={styles.divScroll}>
       <div class="bg-gray-50 min-h-screen  ">
@@ -70,7 +59,6 @@ const ABMPlansList = ({
                       <div className="w flex justify-center">
                         <span>Editar</span>
                       </div>
-<<<<<<< HEAD
                     </div>
                     {allPlansData &&
                       allPlansData.map((element) => {
@@ -89,43 +77,15 @@ const ABMPlansList = ({
                               <div class=" flex justify-center ">
                                 <span>{element.planActivo ? "Si" : "No"}</span>
                               </div>
-=======
-                      {allPlansData &&
-                        allPlansData.map((element) => {
-                          return (
-                            <div key={element._id} className={styles.tabla}>
-                              <div class="grid overflow-hidden grid-cols-6 grid-rows-1 gap-0  py-1 px-4 items-center border-t text-sm font-normal mt-4 space-x-4">
-                                <div class=" flex justify-center ">
-                                  <span>{element.codePlan}</span>
-                                </div>
-                                <div class=" flex justify-center ">
-                                  <span>{element.name}</span>
-                                </div>
-                                <div class=" flex justify-center ">
-                                  <span>{element.precio}</span>
-                                </div>
-                                <div class="  flex justify-center ">
-                                  {/* <span>{element.descripcion[0]}</span>
-                                  <span>{element.descripcion[1]}</span> */}
-                                  <button key={ element._id}
-                                    
-                                    value={element._id}
-                                    onClick={(e) => handleViewPlan(e)}>Ver descripcion</button>
-
-                                </div>
-                                <div class=" flex justify-center ">
-                                  <span>
-                                    {element.planActivo ? "Si" : "No"}
-                                  </span>
-                                </div>
->>>>>>> ABM-Admin
 
                               <div class=" flex justify-around  ">
                                 <button
                                   key={"delete" + element._id}
                                   title="Delete"
                                   value={element._id}
-                                  onClick={(e)=>setDeleteState(e.target.value)}
+                                  onClick={(e) =>
+                                    setDeleteState(e.target.value)
+                                  }
                                 >
                                   Eliminar
                                 </button>
