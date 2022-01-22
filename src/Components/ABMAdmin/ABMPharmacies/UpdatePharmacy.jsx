@@ -46,24 +46,26 @@ const UpdatePharmacy = ({ setShowModalUpdate }) => {
   }, [updateData]);
 
   const handleUpdatePharmacy = async (event) => {
+   
     let updatedPharmacy = {
       ...updatePharmacyData,
       [event.target.name]: event.target.value,
     };
-    setUpdatePharmacyData(updatePharmacyDataStruct);
+    setUpdatePharmacyData(updatedPharmacy);
 
     setErrors(functionErrorsBtn(updatedPharmacy));
   };
 
   const handleSubmitUpdatePharmacy = async (event) => {
+    event.preventDefault()
     const validateError = validateUpdatePharmacy(updatePharmacyData);
     setErrores(validateError);
 
     if (Object.entries(validateError).length <= 0) {
       dispatch(updatePharmacy(updatePharmacyData));
       setShowModalUpdate(false);
-      setUpdatePharmacyData(updatePharmacyDataStruct);
-      setErrors(true);
+      //setUpdatePharmacyData(updatePharmacyDataStruct);
+      //setErrors(true);
       dispatch(resetDataUpdate());
     }
   };
@@ -103,7 +105,7 @@ const UpdatePharmacy = ({ setShowModalUpdate }) => {
             <label className="text-md text-gray-600">Teléfono: </label>
             <input
               className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md"
-              type="text"
+              type="number"
               name="telefono"
               autoComplete="off"
               value={updatePharmacyData.telefono}
@@ -120,7 +122,7 @@ const UpdatePharmacy = ({ setShowModalUpdate }) => {
             <label className="text-md text-gray-600">E-mail: </label>
             <input
               className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md"
-              type="text"
+              type="mail"
               name="mail"
               autoComplete="off"
               value={updatePharmacyData.mail}

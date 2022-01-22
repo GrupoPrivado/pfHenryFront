@@ -135,17 +135,17 @@ export default function reducerABMAdmin(state = initialState, action) {
         viewPlan: plan,
       };
 
-    case "FILTER_ACTIV":
-      let filterActiv = undefined;
-      if (action.payload !== "") {
-        filterActiv =
-          action.payload === "Si"
-            ? state.pharmacies.filter((element) => element.activo === true)
-            : state.pharmacies.filter((element) => element.activo !== true);
-      } else {
-        filterActiv = state.pharmacies;
-      }
-      return { ...state, allPharmacies: filterActiv };
+    // case "FILTER_ACTIV":
+    //   let filterActiv = undefined;
+    //   if (action.payload !== "") {
+    //     filterActiv =
+    //       action.payload === "Si"
+    //         ? state.pharmacies.filter((element) => element.activo === true)
+    //         : state.pharmacies.filter((element) => element.activo !== true);
+    //   } else {
+    //     filterActiv = state.pharmacies;
+    //   }
+    //   return { ...state, allPharmacies: filterActiv };
       
     default:
       return state;

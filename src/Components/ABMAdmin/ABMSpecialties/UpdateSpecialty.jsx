@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 
 import {
   updateSpecialityAct,
-  getAllSpecialities,
   resetDataUpdate,
 } from "../../../actions/actionAMBAdmin";
 
@@ -42,7 +41,7 @@ const UpdateSpeciality = ({ setShowModalUpdate }) => {
     });
   }, [updateData]);
 
-  const handleUpdateSpeciality = async (event) => {
+  const handleUpdateSpeciality =  (event) => {
     let updatedSpeciality = {
       ...updateSpecialityData,
       [event.target.name]: event.target.value,
@@ -53,8 +52,7 @@ const UpdateSpeciality = ({ setShowModalUpdate }) => {
     setErrors(functionErrorsBtn(updatedSpeciality));
   };
 
-  const handleSubmitUpdateSpeciality = async (event) => {
-    event.preventDefault();
+  const handleSubmitUpdateSpeciality =  () => {
     const validateError = validateEspeciality(updateSpecialityData);
     setErrores(validateError);
 
@@ -112,7 +110,7 @@ const UpdateSpeciality = ({ setShowModalUpdate }) => {
                 onChange={(e) => handleUpdateSpeciality(e)}
                 placeholder="Ingrese la Descripcion...."
               />
-              {errores.nombre && (
+              {errores.descripcion && (
                 <p className="absolute text-red-700">{errores.descripcion}</p>
               )}
             </div>
@@ -131,7 +129,7 @@ const UpdateSpeciality = ({ setShowModalUpdate }) => {
                   <option value="false">No</option>
                   <option value="true">Si</option>
                 </select>
-                {errores.nombre && (
+                {errores.activa && (
                   <p className="absolute text-red-700">{errores.activa}</p>
                 )}
               </div>

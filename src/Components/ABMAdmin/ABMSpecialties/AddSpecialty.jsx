@@ -58,7 +58,7 @@ const AddSpeciality = ({ setShowModalAdd }) => {
   };
 
   return (
-    <div className={styles.modal}>
+    <div>
       <section className={styles.modalmain}>
         <div className="flex justify-center h-10%">
           <h5 className="text-2xl font-bold text-gray-500">
@@ -95,7 +95,7 @@ const AddSpeciality = ({ setShowModalAdd }) => {
                 onChange={(e) => handleChange(e)}
                 placeholder="Ingrese la Descripcion...."
               />
-              {errores.nombre && (
+              {errores.descripcion && (
                 <p className="absolute text-red-700">{errores.descripcion}</p>
               )}
             </div>
@@ -113,13 +113,13 @@ const AddSpeciality = ({ setShowModalAdd }) => {
                   <option value="false">No</option>
                   <option value="true">Si</option>
                 </select>
-                {errores.nombre && (
+                {errores.activa && (
                   <p className="absolute text-red-700">{errores.activa}</p>
                 )}
               </div>
               <div className="flex w-2/3 justify-around">
                 <button
-                  type="submit"
+                  key="submitFormButton"
                   className={errors ? disableBtn : enableBtn}
                   disabled={errors}
                   onClick={handleSubmitSpeciality}
@@ -128,6 +128,7 @@ const AddSpeciality = ({ setShowModalAdd }) => {
                 </button>
 
                 <button
+                  type="button"
                   onClick={() => handleClose()}
                   className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
