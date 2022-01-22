@@ -80,7 +80,7 @@ const AddPlan = ({ setShowModalAdd }) => {
     newPlan = {};
   };
 
-  const handleSubmitPlan = async () => {
+  const handleSubmitPlan = () => {
     const validateError = validatePlan(inputPlan);
     setErrores(validateError);
     if (Object.entries(validateError).length <= 0) {

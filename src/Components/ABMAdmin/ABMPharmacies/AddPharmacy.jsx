@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addPharmacy,
   getAllCities,
-  getAllPharmacies,
   getAllProvinces,
 } from "../../../actions/actionAMBAdmin";
 
@@ -65,26 +64,25 @@ const AddPharmacy = ({ setShowModalAdd }) => {
     setInputPharmacy(newData);
   };
 
-  const handleSubmitPharmacy = async (event) => {
-
+  const handleSubmitPharmacy = () => {
     const validateError = validatePharmacy(inputPharmacy);
     setErrores(validateError);
     if (Object.entries(validateError).length <= 0) {
-      dispatch(addPharmacy(inputPharmacy))
-      setInputPharmacy(inputPharmacyStruct);
       setShowModalAdd(false);
+      dispatch(addPharmacy(inputPharmacy));
+      setInputPharmacy(inputPharmacyStruct);
       setErrors(true);
     }
   };
 
   const handleClose = () => {
+    setShowModalAdd(false);
     setInputPharmacy(inputPharmacyStruct);
     setErrors(true);
-    setShowModalAdd(false);
   };
-  const showHideClassName = setShowModalAdd ? "displayblock" : "displaynone";
+
   return (
-    <div className={styles[showHideClassName]}>
+    <div>
       <section className={styles.modalmain}>
         <div className="flex justify-center h-10%">
           <h5 className="text-2xl font-bold text-gray-500">
@@ -107,7 +105,9 @@ const AddPharmacy = ({ setShowModalAdd }) => {
                   placeholder="Ingrese el Nombre...."
                 />
               </div>
-              <p className="absolute text-red-700">{errores.nombre}</p>
+              {errores.nombre && (
+                <p className="absolute text-red-700">{errores.nombre}</p>
+              )}
 
               <div className=" w-1/2">
                 <label className="text-md text-gray-600">
@@ -122,7 +122,11 @@ const AddPharmacy = ({ setShowModalAdd }) => {
                   onChange={(e) => handleChange(e)}
                   placeholder="Ingrese el Nro. Habilit....."
                 />
-                 <p className="absolute text-red-700">{errores.numHabilitacion}</p>
+                {errores.numHabilitacion && (
+                  <p className="absolute text-red-700">
+                    {errores.numHabilitacion}
+                  </p>
+                )}
               </div>
             </div>
 
@@ -137,22 +141,26 @@ const AddPharmacy = ({ setShowModalAdd }) => {
                 onChange={(e) => handleChange(e)}
                 placeholder="Ingrese la Dirección...."
               />
-               <p className="absolute text-red-700">{errores.direccion}</p>
+              {errores.direccion && (
+                <p className="absolute text-red-700">{errores.direccion}</p>
+              )}
             </div>
-            
+
             <div className="flex">
               <div className="w-1/2">
                 <label className="text-md text-gray-600">Teléfono: </label>
                 <input
                   className="h-2 p-4 w-full border-2 border-gray-300 mb-1 rounded-md"
-                  type="text"
+                  type="number"
                   name="telefono"
                   autoComplete="off"
                   value={inputPharmacy.telefono}
                   onChange={(e) => handleChange(e)}
                   placeholder="Ingrese el Teléfono...."
                 />
-                <p className="absolute text-red-700">{errores.telefono}</p>
+                {errores.telefono && (
+                  <p className="absolute text-red-700">{errores.telefono}</p>
+                )}
               </div>
               <div className="w-1/2">
                 <label className="text-md text-gray-600">E-mail: </label>
@@ -165,7 +173,9 @@ const AddPharmacy = ({ setShowModalAdd }) => {
                   onChange={(e) => handleChange(e)}
                   placeholder="Ingrese el E-mail...."
                 />
-                <p className="absolute text-red-700">{errores.mail}</p>
+                {errores.mail && (
+                  <p className="absolute text-red-700">{errores.mail}</p>
+                )}
               </div>
             </div>
             <div className="flex">
@@ -188,7 +198,9 @@ const AddPharmacy = ({ setShowModalAdd }) => {
                       </option>
                     ))}
                 </select>
-                <p className="absolute text-red-700">{errores.provinciaID}</p>
+                {errores.provinciaID && (
+                  <p className="absolute text-red-700">{errores.provinciaID}</p>
+                )}
               </div>
 
               <div className="w-1/2">
@@ -210,7 +222,9 @@ const AddPharmacy = ({ setShowModalAdd }) => {
                       </option>
                     ))}
                 </select>
-                <p className="absolute text-red-700">{errores.ciudadID}</p>
+                {errores.ciudadID && (
+                  <p className="absolute text-red-700">{errores.ciudadID}</p>
+                )}
               </div>
             </div>
 
@@ -218,7 +232,7 @@ const AddPharmacy = ({ setShowModalAdd }) => {
               <div className="flex w-1/3 items-center">
                 <label className="text-md text-gray-600">Activo: </label>
                 <select
-                className="border-2 p-1 border-gray-300 mb-3 rounded-md"
+                  className="border-2 p-1 border-gray-300 mb-3 rounded-md"
                   id="activo"
                   name="activo"
                   onChange={(e) => handleChange(e)}
@@ -228,18 +242,23 @@ const AddPharmacy = ({ setShowModalAdd }) => {
                   <option value="false">No</option>
                   <option value="true">Si</option>
                 </select>
-                <p className="absolute text-red-700">{errores.activo}</p>
+                {errores.activo && (
+                  <p className="absolute text-red-700">{errores.activo}</p>
+                )}
               </div>
               <div className="flex w-2/3 justify-around">
-              <button
-                key="submitFormButton"
-                onClick={ handleSubmitPharmacy}
-                className={errors ? disableBtn : enableBtn}
-                disabled={errors}
-              >
-                Guardar
-              </button>
                 <button
+                  key="submitFormButton"
+                  name="guardar"
+                  onClick={handleSubmitPharmacy}
+                  className={errors ? disableBtn : enableBtn}
+                  disabled={errors}
+                >
+                  Guardar
+                </button>
+                <button
+                  key="closeBtn"
+                  name="closeBtn"
                   onClick={() => handleClose()}
                   className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >

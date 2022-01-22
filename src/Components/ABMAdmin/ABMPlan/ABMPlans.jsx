@@ -58,6 +58,11 @@ const ABMPlans = () => {
   };
 
   /********* Fin Funciones para borrar un elemento*********/
+  
+  useEffect(() => {
+    dispatch(getAllPlansData());
+  }, [allPlansData]);
+
   return (
     <div>
       <ABMPlansList
