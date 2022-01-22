@@ -348,7 +348,7 @@ export default function FormAsociate({
                     value={e.name}
                     className="py-3 pr-3 text-lg font-semibold"
                   >
-                    {e.nombre} {e.apellido}
+                    {e.nombre}   {e.apellido}
                   </li>
                   <button value={e.idAf} className="relative flex justify-center w-10 p-2 text-sm font-medium text-white bg-red-500 border border-transparent rounded-md group h-9 hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" onClick={handleEdit}>
                       edit (poner icon)

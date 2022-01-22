@@ -20,8 +20,6 @@ const functionErrors = (data) => {
 export default function FormAddAsociateGroup({
   provinces,
   cities,
-  setOutput,
-  output,
   modal,
   setModal,
 }) {
@@ -59,29 +57,9 @@ export default function FormAddAsociateGroup({
     const validateError = validate(input)
     setErrores(validateError)
     if (Object.entries(validateError).length <= 0) {
-      const newState = [input, ...output];
-
-      setOutput(newState);
-
-      //
       dispatch(addFamiliar(input))
-      //
-
-      // setInput({
-      //   nombre: "",
-      //   apellido: "",
-      //   DNI: "",
-      //   fechaNacimiento: "",
-      //   telefono: "",
-      //   correoElectronico: "",
-      //   ciudadID: "",
-      //   provinciaID: "",
-      //   direccion: "",
-      //   planID: "",
-      // });
       setModal(!modal);
     }
-
   }
 
   const handleChangeProvince = (e) => {
