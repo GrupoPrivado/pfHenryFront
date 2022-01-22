@@ -3,7 +3,6 @@ import React from "react";
 import styles from "./ABMPrescriptions.module.css";
 
 const ABMPrescriptionsListAffData = ({ affiliatePrescriptionData }) => {
-  //const { prescriptionDNI } = useSelector((state) => state.ABMAdmin);
 
   return (
     

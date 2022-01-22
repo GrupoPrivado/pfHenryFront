@@ -139,3 +139,73 @@ export const validateUpdatePharmacy = (input) => {
 
   return errores;
 };
+
+export const validateProfessional = (input) => {
+  let errores = {};
+
+  if (input.nombre.length < 3) {
+    errores.nombre = "El nombre debe tener minimo 3 caracteres";
+  }
+
+  if (input.apellido.length < 3) {
+    errores.apellido = "El apellido debe tener minimo 3 caracteres";
+  }
+
+  if (input.DNI.length < 8) {
+    errores.DNI = "DNI mínimo 8 caracteres";
+  }
+  if (
+    typeof parseInt(input.matricula) !== "number" ||
+    parseInt(input.matricula) <= 0
+  ) {
+    errores.matricula = "Debe ingresar un valor válido";
+  }
+
+  if (input.telefono.length < 8 || input.telefono.length > 11) {
+    errores.telefono = "Ingrese un teléfono válido";
+  }
+
+  if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(input.mail)) {
+    errores.mail = "Ingrese un mail válido";
+  }
+
+  if (input.provinciaID === "") {
+    errores.direccion = "Ingrese una provincia";
+  }
+
+  if (input.ciudadID === "") {
+    errores.direccion = "Ingrese una localidad";
+  }
+
+  if (input.activa === "") {
+    errores.activa = "Debe seleccionar si la especialidad esta activa o no";
+  }
+
+  if (input.especID === "") {
+    errores.nombre = "Debe seleccionar una especialidad";
+  }
+
+  return errores;
+};
+
+export const validateProfesionalUpdate = (input) => {
+  let errores = {};
+
+  if (input.telefono.length < 8 || input.telefono.length > 11) {
+    errores.telefono = "Ingrese un teléfono válido";
+  }
+
+  if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(input.mail)) {
+    errores.mail = "Ingrese un mail válido";
+  }
+
+  if (input.provinciaID === "") {
+    errores.direccion = "Ingrese una provincia";
+  }
+
+  if (input.ciudadID === "") {
+    errores.direccion = "Ingrese una localidad";
+  }
+
+  return errores;
+};

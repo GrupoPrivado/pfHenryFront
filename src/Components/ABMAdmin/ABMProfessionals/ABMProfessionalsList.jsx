@@ -16,7 +16,8 @@ const ABMAffiliatesList = ({
   allProfessionals,
   setShowModalUpdate,
   setShowModalAdd,
-  setShowModalUpDown
+  setShowModalUpDown,
+  setDeleteState,
 }) => {
   const dispatch = useDispatch();
 
@@ -29,12 +30,6 @@ const ABMAffiliatesList = ({
   const handleBajaAltaProfessional = async (event) => {
     await dispatch(getProfessionalData(event.target.value));
     setShowModalUpDown(true);
-  };
-
-  const handleDeleteProfessional = async (event) => {
-    let response = await dispatch(deleteProfessional(event.target.value));
-
-    await dispatch(getAllProfessionals({}));
   };
 
   const handleEditProfessional = async (event) => {
@@ -78,45 +73,54 @@ const ABMAffiliatesList = ({
 
                 <div className="grid overflow-hidden grid-cols-2 grid-rows-1 gap-0">
                   <div className="px-4">
-                  <label className="text-lg font-semibold text-indigo-800" htmlFor="provincia">
-                    Provincia{" "}
-                  </label>
-                  <select
-                    onChange={handleChangeProvince}
-                    name="provinciaID"
-                    className=" uppercase block w-full  my-2 text-lg font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 appearance-none rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
-                    required
-                  >
-                    <option  value="">Seleccione Provincia</option>
-                    {provinces &&
-                      provinces.map((p) => (
-                        <option className='uppercase' key={p._id} value={p._id}>
-                          {p.nombre}
-                        </option>
-                      ))}
-                  </select>
-                
-                </div>
+                    <label
+                      className="text-lg font-semibold text-indigo-800"
+                      htmlFor="provincia"
+                    >
+                      Provincia{" "}
+                    </label>
+                    <select
+                      onChange={handleChangeProvince}
+                      name="provinciaID"
+                      className=" uppercase block w-full  my-2 text-lg font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 appearance-none rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
+                      required
+                    >
+                      <option value="">Seleccione Provincia</option>
+                      {provinces &&
+                        provinces.map((p) => (
+                          <option
+                            className="uppercase"
+                            key={p._id}
+                            value={p._id}
+                          >
+                            {p.nombre}
+                          </option>
+                        ))}
+                    </select>
+                  </div>
 
-                <div className="px-4">
-                  <label className="text-lg font-semibold text-indigo-800" htmlFor="localidad">
-                    Localidad{" "}
-                  </label>
-                  <select
-                    onChange={(e) => handleChangeCity(e)}
-                    name="ciudadID"
-                    className=" uppercase block w-full  my-2 text-lg font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 appearance-none rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
-                    required
-                  >
-                    <option value="">Seleccione Localidad</option>
-                    {cities &&
-                      cities.map((c) => (
-                        <option key={c._id} value={c._id}>
-                          {c.localidad}
-                        </option>
-                      ))}
-                  </select>
-                </div>
+                  <div className="px-4">
+                    <label
+                      className="text-lg font-semibold text-indigo-800"
+                      htmlFor="localidad"
+                    >
+                      Localidad{" "}
+                    </label>
+                    <select
+                      onChange={(e) => handleChangeCity(e)}
+                      name="ciudadID"
+                      className=" uppercase block w-full  my-2 text-lg font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 appearance-none rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
+                      required
+                    >
+                      <option value="">Seleccione Localidad</option>
+                      {cities &&
+                        cities.map((c) => (
+                          <option key={c._id} value={c._id}>
+                            {c.localidad}
+                          </option>
+                        ))}
+                    </select>
+                  </div>
                 </div>
 
                 <div className="mt-3.5">
@@ -128,7 +132,7 @@ const ABMAffiliatesList = ({
                       <div className=" flex justify-center">
                         <span>Nombre </span>
                       </div>
-                      
+
                       <div className=" flex justify-center">
                         <span>Localidad</span>
                       </div>
@@ -138,7 +142,7 @@ const ABMAffiliatesList = ({
                       <div className=" flex justify-center">
                         <span>Especialidad</span>
                       </div>
-                      
+
                       <div className=" flex justify-center">
                         <span>E-mail </span>
                       </div>
@@ -154,65 +158,69 @@ const ABMAffiliatesList = ({
                     {allProfessionals.length !== 0 &&
                       allProfessionals.map((element) => {
                         return (
-                          <div key={element._id} className="grid overflow-hidden grid-cols-8 grid-rows-1 gap-0 justify-between  py-1 px-4 items-center border-t text-sm font-normal mt-4 space-x-4">
-                              <div className=" flex justify-center ">
-                                <span>{element.matricula}</span>
-                              </div>
-                              <div className=" flex justify-center ">
-                                <span>{element.nombre }</span>  
-                                <span>{element.apellido}</span>
-                              </div>
-                             
-                              <div className=" flex justify-center ">
-                                <span >{element.ciudadID.localidad}</span>
-                              </div>
-                              <div class=" flex justify-center ">
-                                <span className='uppercase'>{element.provinciaID.nombre}</span>
-                              </div>
-                              <div className=" flex justify-center ">
-                                <span>{element.especID.nombre}</span>
-                              </div>
-                              
-                              <div className=" flex justify-center ">
-                                <span>{element.mail}</span>
-                              </div>
-                              <div className=" flex justify-center ">
-                                <span>{element.activo ? "Si" : "No"}</span>
-                              </div>
-
-                              <div className=" flex justify-around ">
-                                <button
-                                className='ml-1'
-                                  title="Edit"
-                                  key={"edit" + element._id}
-                                  value={element._id}
-                                  onClick={(e) => handleEditProfessional(e)}
-                                >
-                                  Editar
-                                </button>
-
-                                <button
-                                className='ml-1'
-                                  title="bajaalta"
-                                  key={"baja" + element._id}
-                                  value={element._id}
-                                  onClick={(e) => handleBajaAltaProfessional(e)}
-                                >
-                                  Baja/Alta
-                                </button>
-
-                                <button
-                                className='ml-1'
-                                  key={"delete" + element._id}
-                                  title="Delete"
-                                  value={element._id}
-                                  onClick={(e) => handleDeleteProfessional(e)}
-                                >
-                                  Eliminar
-                                </button>
-                              </div>
+                          <div
+                            key={element._id}
+                            className="grid overflow-hidden grid-cols-8 grid-rows-1 gap-0 justify-between  py-1 px-4 items-center border-t text-sm font-normal mt-4 space-x-4"
+                          >
+                            <div className=" flex justify-center ">
+                              <span>{element.matricula}</span>
                             </div>
-                          
+                            <div className=" flex justify-center ">
+                              <span>{element.nombre}</span>
+                              <span>{element.apellido}</span>
+                            </div>
+
+                            <div className=" flex justify-center ">
+                              <span>{element.ciudadID.localidad}</span>
+                            </div>
+                            <div class=" flex justify-center ">
+                              <span className="uppercase">
+                                {element.provinciaID.nombre}
+                              </span>
+                            </div>
+                            <div className=" flex justify-center ">
+                              <span>{element.especID.nombre}</span>
+                            </div>
+
+                            <div className=" flex justify-center ">
+                              <span>{element.mail}</span>
+                            </div>
+                            <div className=" flex justify-center ">
+                              <span>{element.activo ? "Si" : "No"}</span>
+                            </div>
+
+                            <div className=" flex justify-around ">
+                              <button
+                                className="ml-1"
+                                title="Edit"
+                                key={"edit" + element._id}
+                                value={element._id}
+                                onClick={(e)=>setDeleteState(e.target.value)}
+                              >
+                                Editar
+                              </button>
+
+                              <button
+                                className="ml-1"
+                                title="bajaalta"
+                                key={"baja" + element._id}
+                                value={element._id}
+                                onClick={(e) => handleBajaAltaProfessional(e)}
+                              >
+                                Baja/Alta
+                              </button>
+
+                              <button
+                                className="ml-1"
+                                key={"delete" + element._id}
+                                title="Delete"
+                                value={element._id}
+                                onClick={(e) => setDeleteState(e.target.value)}
+                              >
+                                Eliminar
+                              </button>
+                            </div>
+                          </div>
                         );
                       })}
                   </div>
