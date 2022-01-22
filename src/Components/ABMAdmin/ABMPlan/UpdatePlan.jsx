@@ -69,7 +69,7 @@ const UpdatePlan = ({setShowModalUpdate}) => {
   };
 
   const handleAddDescription = (event) => {
-    // event.preventDefault();
+
     const newDesc = [type, description];
     if (type !== "" && description !== "") {
       setUpdatePlanData({
@@ -94,6 +94,7 @@ const UpdatePlan = ({setShowModalUpdate}) => {
   };
 
   const handleSubmitUpdatePlan = async () => {
+    
     const validateError = validateUpdatePlan(updatePlanData);
     setErrores(validateError);
 

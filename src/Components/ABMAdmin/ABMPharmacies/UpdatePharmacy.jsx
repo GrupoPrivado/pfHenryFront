@@ -4,31 +4,26 @@ import { useEffect, useState } from "react";
 
 import {
   updatePharmacy,
-  getAllPharmacies,
   resetDataUpdate,
 } from "../../../actions/actionAMBAdmin";
 
+import {
+  functionErrorsBtn,
+  validateUpdatePharmacy,
+} from "../../../utils/adminFormsControllers";
+
 import styles from "./UpdatePharmacy.module.css";
+import { enableBtn, disableBtn } from "../../../utils/ABMStyles";
 
-const functionErrors = (data) => {
-  const arrayKeys = Object.keys(data);
-  const arrayData = arrayKeys.filter((element, index) => data[element] !== "");
-  if (arrayKeys.length === arrayData.length) {
-    return false;
-  } else {
-    return true;
-  }
-}; //cambiarla en un utils ya que se puede usar en todos los forms
-
-const UpdatePharmacy = ({ setShowModalUpdate, showModalUpdate }) => {
+const UpdatePharmacy = ({ setShowModalUpdate }) => {
   const dispatch = useDispatch();
 
   const { updateData } = useSelector((state) => state.ABMAdmin);
 
   const [errors, setErrors] = useState(false);
+  const [errores, setErrores] = useState({});
 
   const updatePharmacyDataStruct = {
-
     id: "",
     direccion: "",
     telefono: "",
@@ -36,8 +31,9 @@ const UpdatePharmacy = ({ setShowModalUpdate, showModalUpdate }) => {
     activo: "",
   };
 
-  const [updatePharmacyData, setUpdatePharmacyData] =
-    useState(updatePharmacyDataStruct);
+  const [updatePharmacyData, setUpdatePharmacyData] = useState(
+    updatePharmacyDataStruct
+  );
 
   useEffect(() => {
     setUpdatePharmacyData({
@@ -56,23 +52,23 @@ const UpdatePharmacy = ({ setShowModalUpdate, showModalUpdate }) => {
     };
     setUpdatePharmacyData(updatePharmacyDataStruct);
 
-    setErrors(functionErrors(updatedPharmacy));
+    setErrors(functionErrorsBtn(updatedPharmacy));
   };
 
   const handleSubmitUpdatePharmacy = async (event) => {
-    event.preventDefault();
-    let response = await dispatch(updatePharmacy(updatePharmacyData));
-    alert(response.success);
-    setUpdatePharmacyData(updatePharmacyDataStruct);
-    setShowModalUpdate(false);
-    dispatch(getAllPharmacies({})); //Dejarle el objeto vacio sino no actualiza, es por los query que necesita la ruta para devolver el listado
-    dispatch(resetDataUpdate());
+    const validateError = validateUpdatePharmacy(updatePharmacyData);
+    setErrores(validateError);
 
-    setErrors(true);
+    if (Object.entries(validateError).length <= 0) {
+      dispatch(updatePharmacy(updatePharmacyData));
+      setShowModalUpdate(false);
+      setUpdatePharmacyData(updatePharmacyDataStruct);
+      setErrors(true);
+      dispatch(resetDataUpdate());
+    }
   };
 
   const handleClose = () => {
-
     setUpdatePharmacyData(updatePharmacyDataStruct);
 
     setShowModalUpdate(false);
@@ -80,10 +76,7 @@ const UpdatePharmacy = ({ setShowModalUpdate, showModalUpdate }) => {
     setErrors(true);
   };
 
-  const showHideClassName = showModalUpdate ? "displayblock" : "displaynone";
-
   return (
-    <div className={styles[showHideClassName]}>
       <section className={styles.modalmain}>
         <div className="flex justify-center">
           <h5 className="text-2xl font-bold text-gray-500">
@@ -135,7 +128,7 @@ const UpdatePharmacy = ({ setShowModalUpdate, showModalUpdate }) => {
               <div className="flex w-1/3 ">
                 <label className="text-md text-gray-600">Activo: </label>
                 <select
-                className=" h-1/2 w-full  border-2 border-gray-300 mb-5 rounded-md"
+                  className=" h-1/2 w-full  border-2 border-gray-300 mb-5 rounded-md"
                   id="activa"
                   name="activo"
                   onChange={(e) => handleUpdatePharmacy(e)}
@@ -176,7 +169,7 @@ const UpdatePharmacy = ({ setShowModalUpdate, showModalUpdate }) => {
           </form>
         </div>
       </section>
-    </div>
+
   );
 };
 

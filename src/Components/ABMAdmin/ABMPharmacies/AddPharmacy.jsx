@@ -12,15 +12,12 @@ import {
 
 import styles from "./addPharmacy.module.css";
 
-const functionErrors = (data) => {
-  const arrayKeys = Object.keys(data);
-  const arrayData = arrayKeys.filter((element, index) => data[element] !== "");
-  if (arrayKeys.length === arrayData.length) {
-    return false;
-  } else {
-    return true;
-  }
-}; //cambiarla en un utils ya que se puede usar en todos los forms
+import { enableBtn, disableBtn } from "../../../utils/ABMStyles";
+
+import {
+  functionErrorsBtn,
+  validatePharmacy,
+} from "../../../utils/adminFormsControllers";
 
 const AddPharmacy = ({ setShowModalAdd }) => {
   const dispatch = useDispatch();
@@ -43,6 +40,7 @@ const AddPharmacy = ({ setShowModalAdd }) => {
   };
 
   const [errors, setErrors] = useState(true);
+  const [errores, setErrores] = useState({});
 
   const [inputPharmacy, setInputPharmacy] = useState(inputPharmacyStruct);
 
@@ -53,7 +51,7 @@ const AddPharmacy = ({ setShowModalAdd }) => {
     };
     setInputPharmacy(newPharmacy);
 
-    setErrors(functionErrors(newPharmacy));
+    setErrors(functionErrorsBtn(newPharmacy));
 
     newPharmacy = {};
   };
@@ -68,13 +66,15 @@ const AddPharmacy = ({ setShowModalAdd }) => {
   };
 
   const handleSubmitPharmacy = async (event) => {
-    event.preventDefault();
-    let response = await dispatch(addPharmacy(inputPharmacy));
-    alert(response.success);
-    setInputPharmacy(inputPharmacyStruct);
-    dispatch(getAllPharmacies({}));
-    setErrors(true);
-    setShowModalAdd(false);
+
+    const validateError = validatePharmacy(inputPharmacy);
+    setErrores(validateError);
+    if (Object.entries(validateError).length <= 0) {
+      dispatch(addPharmacy(inputPharmacy))
+      setInputPharmacy(inputPharmacyStruct);
+      setShowModalAdd(false);
+      setErrors(true);
+    }
   };
 
   const handleClose = () => {
@@ -107,6 +107,7 @@ const AddPharmacy = ({ setShowModalAdd }) => {
                   placeholder="Ingrese el Nombre...."
                 />
               </div>
+              <p className="absolute text-red-700">{errores.nombre}</p>
 
               <div className=" w-1/2">
                 <label className="text-md text-gray-600">
@@ -121,6 +122,7 @@ const AddPharmacy = ({ setShowModalAdd }) => {
                   onChange={(e) => handleChange(e)}
                   placeholder="Ingrese el Nro. Habilit....."
                 />
+                 <p className="absolute text-red-700">{errores.numHabilitacion}</p>
               </div>
             </div>
 
@@ -135,7 +137,9 @@ const AddPharmacy = ({ setShowModalAdd }) => {
                 onChange={(e) => handleChange(e)}
                 placeholder="Ingrese la Dirección...."
               />
+               <p className="absolute text-red-700">{errores.direccion}</p>
             </div>
+            
             <div className="flex">
               <div className="w-1/2">
                 <label className="text-md text-gray-600">Teléfono: </label>
@@ -148,6 +152,7 @@ const AddPharmacy = ({ setShowModalAdd }) => {
                   onChange={(e) => handleChange(e)}
                   placeholder="Ingrese el Teléfono...."
                 />
+                <p className="absolute text-red-700">{errores.telefono}</p>
               </div>
               <div className="w-1/2">
                 <label className="text-md text-gray-600">E-mail: </label>
@@ -160,6 +165,7 @@ const AddPharmacy = ({ setShowModalAdd }) => {
                   onChange={(e) => handleChange(e)}
                   placeholder="Ingrese el E-mail...."
                 />
+                <p className="absolute text-red-700">{errores.mail}</p>
               </div>
             </div>
             <div className="flex">
@@ -182,6 +188,7 @@ const AddPharmacy = ({ setShowModalAdd }) => {
                       </option>
                     ))}
                 </select>
+                <p className="absolute text-red-700">{errores.provinciaID}</p>
               </div>
 
               <div className="w-1/2">
@@ -203,6 +210,7 @@ const AddPharmacy = ({ setShowModalAdd }) => {
                       </option>
                     ))}
                 </select>
+                <p className="absolute text-red-700">{errores.ciudadID}</p>
               </div>
             </div>
 
@@ -220,27 +228,17 @@ const AddPharmacy = ({ setShowModalAdd }) => {
                   <option value="false">No</option>
                   <option value="true">Si</option>
                 </select>
+                <p className="absolute text-red-700">{errores.activo}</p>
               </div>
               <div className="flex w-2/3 justify-around">
-                {errors ? (
-                  <button
-                    className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    type="submit"
-                    key="submitFormButton"
-                    form="addSpeciality"
-                    disabled={errors}
-                  >
-                    Guardar
-                  </button>
-                ) : (
-                  <button
-                    key="submitFormButton"
-                    onClick={handleSubmitPharmacy}
-                    className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  >
-                    Guardar
-                  </button>
-                )}
+              <button
+                key="submitFormButton"
+                onClick={ handleSubmitPharmacy}
+                className={errors ? disableBtn : enableBtn}
+                disabled={errors}
+              >
+                Guardar
+              </button>
                 <button
                   onClick={() => handleClose()}
                   className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
