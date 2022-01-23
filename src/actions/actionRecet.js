@@ -27,6 +27,7 @@ export function getRecetas(payload) {
 }
 
 export function getRecetaDetail(id){
+    console.log(id, 'id en action')
     return async function(dispatch){
         const token = getItem("userToken");
         try {

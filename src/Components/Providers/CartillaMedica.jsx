@@ -32,8 +32,8 @@ function CartillaMedica() {
                                 <td className="p-2">{prof.especID.nombre}</td>
                                 <td className="p-2">{prof.mail}</td>
                                 <td className="p-2">{prof.telefono}</td>
-                                <td className="flex justify-center p-2">{prof.provinciaID}</td>
-                                <td className="flex justify-center p-2">{prof.ciudadID}</td>
+                                <td className="p-2">{prof.provinciaID.nombre}</td>
+                                <td className="p-2">{prof.ciudadID.localidad}</td>
                             </tr>
                         )) : <tr className="text-center text-blue-900 bg-white shadow-none bg-opacity-40 backdrop-filter backdrop-blur-lg"><td className="p-2">Sin profesionales activos</td></tr>}
                 </tbody>
