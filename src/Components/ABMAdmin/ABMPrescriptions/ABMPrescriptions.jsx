@@ -7,7 +7,6 @@ import { getAllPrescriptions } from "../../../actions/actionAMBAdmin";
 
 import UpdatePrescription from "./UpdatePrescription";
 import ABMPrescriptionsList from "./ABMPrescriptionsList";
-import ABMPrescriptionsSearch from "./ABMPrescriptionsSearch";
 import { alertActions } from "../../../actions/actionAlerts";
 import { alertSweet } from "../../Alerts/alertSweet";
 
