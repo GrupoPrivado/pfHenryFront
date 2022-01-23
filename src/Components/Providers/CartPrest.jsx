@@ -45,22 +45,11 @@ export default function CartPrest() {
 
 
   const handleSelectCity = (e) => {
-<<<<<<< HEAD
-
-=======
->>>>>>> development
     const newData = {
       ...filter,
       [e.target.name]: e.target.value,
     };
-<<<<<<< HEAD
-
-    setfilter(newData);
-
-    dispatch(getAllPharmacies());
-=======
     setfilter(newData)
->>>>>>> development
   };
 
   const handleChangeProvince = (e) => {

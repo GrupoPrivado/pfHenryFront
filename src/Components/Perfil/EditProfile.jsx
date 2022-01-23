@@ -8,10 +8,6 @@ import { validateContactDetails } from "../../utils/constantes";
 function EditProfile({ user }) {
     const [errors, setErrors] = useState({});
     const { cities, provinces } = useSelector((state) => state.providers);
-<<<<<<< HEAD
-
-=======
->>>>>>> development
     const dispatch = useDispatch();
     const [input, setInput] = useState({
         correoElectronico: '',

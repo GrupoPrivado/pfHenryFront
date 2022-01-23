@@ -15,15 +15,10 @@ function EditPassword({ setErrorAlert, setAlertMessage, modal, setModal }) {
  
   const handleSubmit = (e) => {
     e.preventDefault(e);
-<<<<<<< HEAD
-
-    if(passwords.newPass === passwords.repeat) {
-=======
     const validateError = validatePassword(passwords);
     setErrors(validateError);
     console.log(Object.entries(validateError), "validate errors passwords")
     if (passwords.newPass === passwords.repeat && Object.entries(validateError).length <= 0) {
->>>>>>> development
       dispatch(changePassword(passwords));
       setPasswords({
         old: "",

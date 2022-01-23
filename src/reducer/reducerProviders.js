@@ -46,9 +46,6 @@ export default function reducerPrestadores(state = inicialState, action) {
         ...state,
         providers: action.payload,
       };
-<<<<<<< HEAD
-   
-=======
     case "RESET_CITIES":
       return {
         ...state,
@@ -59,7 +56,6 @@ export default function reducerPrestadores(state = inicialState, action) {
     //   ...state,
     //   providers: action.payload,
     // };
->>>>>>> development
 
     default:
       return state;

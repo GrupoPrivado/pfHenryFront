@@ -10,57 +10,6 @@ const MiCuenta = () => {
     const [pathImage, setPathImage] = useState('')
 
 
-<<<<<<< HEAD
-     const sendImages = async (file) => {
-         const form = new FormData();
-         form.append('file', file, 'form-data');
-
-         await dispatch(putProfilePhoto(form))
-
-         //return axios.post(`${api}/afiliados/profile`, form)
-     }
-
-     const sendImage = (e) => {
-         e.preventDefault();
-         sendImages(file)
-         .then((result) => console.log(result))
-         .catch((error) => console.log(error))
-     }
-     
-     const onFileChange = (e) => {
-         if(e.target.files && e.target.files.length > 0){
-             const file = e.target.files[0];
-             if(file.type.includes('image')){
-                 const reader = new FileReader();
-                 reader.readAsDataURL(file)
-                 reader.onload = function load() {
-                     setPathImage(reader.result)
-                 }
-
-                 setFile(file)
-             }
-           
-         }
-     }
-     return (
-       <div>
-           <form onSubmit={sendImage}>
-               <input 
-                 type='file'
-                 onChange={onFileChange}
-               />
-
-                 <button type='submit'>enviar</button>
-                 {
-                     pathImage && <img src={pathImage} alt='profile'/>
-                 }
-           </form>
-       </div>
-     );
- }
-
- export default MiCuenta
-=======
     const sendImages = async (file) => {
         const form = new FormData();
         form.append('file', file, 'form-data');
@@ -110,5 +59,4 @@ const MiCuenta = () => {
 }
 
 export default MiCuenta
->>>>>>> development
 
