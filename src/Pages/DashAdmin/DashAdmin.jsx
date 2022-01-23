@@ -1,21 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { logout } from "../../utils/authUtils";
-import NavBarDashAdmin from "../../Components/NavBarDashboard/NavbarDashAdmin";
 
-import ABMSpecialities from "../../Components/ABMAdmin/ABMSpecialties/ABMSpecialties";
-import ABMAffiliates from "../../Components/ABMAdmin/ABMAffiliates/ABMAffiliates";
-import ABMPharmacies from "../../Components/ABMAdmin/ABMPharmacies/ABMPharmacies";
-import ABMPlans from "../../Components/ABMAdmin/ABMPlan/ABMPlans";
-import ABMProfessionals from "../../Components/ABMAdmin/ABMProfessionals/ABMProfessionals";
-import ABMPrescriptions from "../../Components/ABMAdmin/ABMPrescriptions/ABMPrescriptions";
-import ABMPharmaciesList from "../../Components/ABMAdmin/ABMPharmacies/ABMPharmaciesList";
-import AMBDashGral from "../../Components/ABMAdmin/AMBDashAdmin/AMBDashGral";
-import  CityDash  from "../../Components/ABMAdmin/AMBDashAdmin/CityDash";
+
+
+import CityDash from "../../Components/ABMAdmin/AMBDashAdmin/CityDash";
 import { PlansDash } from "../../Components/ABMAdmin/AMBDashAdmin/PlansDash";
 import { AfiliateEvolution } from "../../Components/ABMAdmin/AMBDashAdmin/AfiliateEvolution";
-
+import { PrescriptionStatus } from "../../Components/ABMAdmin/AMBDashAdmin/PrescriptionStatus";
+import { CashFlow } from "../../Components/ABMAdmin/AMBDashAdmin/CashFlow";
+import { Profesionals } from "../../Components/ABMAdmin/AMBDashAdmin/Profesionals";
 
 function DashAdmin() {
 
@@ -30,17 +24,30 @@ function DashAdmin() {
   }, [dispatch, route, navigate]);
 
   return (
-    <div className="h-90vh w-full grid overflow-hidden grid-cols-3 grid-rows-2 gap-0">
-      <div > 
-         <CityDash/>
+    <div className="h-90vh bg- w-full grid overflow-hidden grid-cols-3 grid-rows-2 gap-0">
+      <div className="shadow-xl rounded-xl m-2 p-4 bg-clip-padding backdrop-filter  bg-opacity-60 border border-gray-200">
+        <Profesionals />
       </div>
-      <div ><PlansDash/></div>
-      <div><AfiliateEvolution/></div>
+      <div className="shadow-xl rounded-xl  m-2 p-4 bg-clip-padding backdrop-filter  bg-opacity-60 border border-gray-200">
+        <PlansDash />
+      </div>
+      <div className="shadow-xl rounded-xl m-2 p-4 bg-clip-padding backdrop-filter  bg-opacity-60 border border-gray-200">
+        <AfiliateEvolution />
+      </div>
+      <div className="shadow-xl rounded-xl m-2 p-4 bg-clip-padding backdrop-filter  bg-opacity-60 border border-gray-200">
+        <CityDash />
+      </div>
 
+      <div className="shadow-xl rounded-xl m-2 p-4 bg-clip-padding backdrop-filter  bg-opacity-60 border border-gray-200">
+        <CashFlow />
+      </div>
 
-
-   
+      <div className="shadow-xl rounded-xl m-2 p-4 bg-clip-padding backdrop-filter  bg-opacity-60 border border-gray-200">
+        <PrescriptionStatus />
+      </div>
     </div>
+    
+    
   );
 
 }

@@ -68,6 +68,4 @@ export default function CityDash() {
      </div>
  )
 }
-// export function CityDash() {
-//   return <Bar options={options} data={data} />;
-// }
+
