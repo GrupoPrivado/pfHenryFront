@@ -30,9 +30,7 @@ export const validateEspeciality = (input) => {
 export const validatePlan = (input) => {
   let errores = {};
 
-
   if (input.codePlan.length < 3 || input.codePlan.length > 5) {
-
     errores.codePlan = "El código debe tener entre 3 y 5 caracteres";
   }
 
@@ -40,12 +38,10 @@ export const validatePlan = (input) => {
     errores.name = "El nombre debe tener minimo 5 caracteres";
   }
 
-
   if (
     typeof parseInt(input.precio) !== "number" ||
     parseInt(input.precio) <= 0
   ) {
-
     errores.precio = "Debe ingresar un valor válido";
   }
 
@@ -53,9 +49,7 @@ export const validatePlan = (input) => {
     errores.planActivo = "Debe seleccionar si la especialidad esta activa o no";
   }
 
-
   if (input.descripcion.length <= 0) {
-
     errores.descripcion = "Dentener al menos una descripcion";
   }
 
@@ -65,12 +59,10 @@ export const validatePlan = (input) => {
 export const validateUpdatePlan = (input) => {
   let errores = {};
 
-
   if (
     typeof parseInt(input.precio) !== "number" ||
     parseInt(input.precio) <= 0
   ) {
-
     errores.precio = "Debe ingresar un valor válido";
   }
 
@@ -78,50 +70,12 @@ export const validateUpdatePlan = (input) => {
     errores.planActivo = "Debe seleccionar si la especialidad esta activa o no";
   }
 
-
   if (input.descripcion.length <= 0) {
-
     errores.descripcion = "Dentener al menos una descripcion";
   }
 
   return errores;
 };
-
-export const validateAddEmployee = (input) => {
-  let errores = {};
-
-  if (input.name && input.name.length < 5) {
-    errores.name = "El nombre debe tener minimo 5 caracteres";
-  }
-  if (input.lastName && input.lastName.length < 5) {
-    errores.lastName = "El apellido debe tener minimo 5 caracteres";
-  }
-
-  if (input.activo === "") {
-    errores.activo = "Debe seleccionar si la especialidad esta activa o no";
-  }
-
-  if (input.legajo && input.legajo.length > 5) {
-    errores.legajo = "El legajo debe tener menos de 5 caracteres";
-  }
-  if (
-    input.telefono &&
-    (input.telefono.length < 3 || input.telefono.length > 14)
-  ) {
-    errores.telefono = "El telefono debe tener entre 3 y 14 caracteres";
-  }
-
-  return errores;
-};
-export const validateUpdateEmployee = (input) => {
-  let errores = {};
-
-  if (
-    input.telefono &&
-    (input.telefono.length < 3 || input.telefono.length > 14)
-  ) {
-    errores.telefono = "El código debe tener entre 3 y 14 caracteres";
-
 
 export const validatePharmacy = (input) => {
   let errores = {};
@@ -181,7 +135,76 @@ export const validateUpdatePharmacy = (input) => {
 
   if (input.activo === "") {
     errores.activo = "Debe seleccionar si la especialidad esta activa o no";
+  }
 
+  return errores;
+};
+
+export const validateProfessional = (input) => {
+  let errores = {};
+
+  if (input.nombre.length < 3) {
+    errores.nombre = "El nombre debe tener minimo 3 caracteres";
+  }
+
+  if (input.apellido.length < 3) {
+    errores.apellido = "El apellido debe tener minimo 3 caracteres";
+  }
+
+  if (input.DNI.length < 8) {
+    errores.DNI = "DNI mínimo 8 caracteres";
+  }
+  if (
+    typeof parseInt(input.matricula) !== "number" ||
+    parseInt(input.matricula) <= 0
+  ) {
+    errores.matricula = "Debe ingresar un valor válido";
+  }
+
+  if (input.telefono.length < 8 || input.telefono.length > 11) {
+    errores.telefono = "Ingrese un teléfono válido";
+  }
+
+  if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(input.mail)) {
+    errores.mail = "Ingrese un mail válido";
+  }
+
+  if (input.provinciaID === "") {
+    errores.direccion = "Ingrese una provincia";
+  }
+
+  if (input.ciudadID === "") {
+    errores.direccion = "Ingrese una localidad";
+  }
+
+  if (input.activa === "") {
+    errores.activa = "Debe seleccionar si la especialidad esta activa o no";
+  }
+
+  if (input.especID === "") {
+    errores.nombre = "Debe seleccionar una especialidad";
+  }
+
+  return errores;
+};
+
+export const validateProfesionalUpdate = (input) => {
+  let errores = {};
+
+  if (input.telefono.length < 8 || input.telefono.length > 11) {
+    errores.telefono = "Ingrese un teléfono válido";
+  }
+
+  if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(input.mail)) {
+    errores.mail = "Ingrese un mail válido";
+  }
+
+  if (input.provinciaID === "") {
+    errores.direccion = "Ingrese una provincia";
+  }
+
+  if (input.ciudadID === "") {
+    errores.direccion = "Ingrese una localidad";
   }
 
   return errores;

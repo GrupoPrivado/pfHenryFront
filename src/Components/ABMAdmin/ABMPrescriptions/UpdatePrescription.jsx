@@ -95,17 +95,25 @@ const UpdatePrescription = ({ setShowModalUpdate, showModalUpdate }) => {
           </div>
           <div className="flex w-full mt-5">
             <div className="w-1/2 flex justify-center">
-            <h5 className="text-xl font-semibold text-black uppercase">
-              {updateData.afiliadoID.nombre +
-                " " +
-                updateData.afiliadoID.apellido}
-            </h5>
+              <h5 className="text-xl font-semibold text-black uppercase">
+                {updateData.afiliadoID.nombre +
+                  " " +
+                  updateData.afiliadoID.apellido}
+              </h5>
             </div>
             <div className="w-1/2 flex justify-center">
               <label className="text-md text-gray-600">
                 Tipo de receta:{" "}
                 <span className="text-md text-black">
                   {updateData.tipoReceta}
+                </span>
+              </label>
+            </div>
+            <div className="w-1/2 flex justify-center">
+              <label className="text-md text-gray-600">
+                Descripción:{" "}
+                <span className="text-md text-black">
+                  {updateData.descripcion}
                 </span>
               </label>
             </div>
@@ -116,7 +124,7 @@ const UpdatePrescription = ({ setShowModalUpdate, showModalUpdate }) => {
             <div>
               <label className="text-md text-gray-600">Estado: </label>
               <select
-              className=" h-1/2  p-1 w-full  border-2 border-gray-300 mb-5 rounded-md"
+                className=" h-1/2  p-1 w-full  border-2 border-gray-300 mb-5 rounded-md"
                 id="status"
                 name="status"
                 value={updatePrescriptionData.status}
@@ -128,12 +136,24 @@ const UpdatePrescription = ({ setShowModalUpdate, showModalUpdate }) => {
                 })}
               </select>
             </div>
+            <label className="text-md text-gray-600">Realizada: </label>
+            <select
+              className=" h-1/2 w-full  border-2 border-gray-300 mb-5 rounded-md"
+              id="activo"
+              name="realizada"
+              onChange={(e) => handleUpdatePrescription(e)}
+              value={updatePrescriptionData.realizada}
+              defaultValue={0}
+            >
+              <option value="">Seleccione</option>
+              <option value="false">No</option>
+              <option value="true">Si</option>
+            </select>
 
             <div>
               <label>Motivo no autorización: </label>
               <input
-              className="h-2 p-4  w-full border-2 border-gray-300 mb-2 rounded-md"
-                  
+                className="h-2 p-4  w-full border-2 border-gray-300 mb-2 rounded-md"
                 type="text"
                 name="motivoNoAuto"
                 autoComplete="off"
@@ -144,26 +164,31 @@ const UpdatePrescription = ({ setShowModalUpdate, showModalUpdate }) => {
             </div>
           </form>
           <div className="  mt-10 flex justify-around w-full">
-          {errors ? (
+            {errors ? (
+              <button
+                className="group relative w-15 h-10 flex justify-center py-2 px-3 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                key="submitFormButton1"
+                disabled={errors}
+                className="disabledButton"
+              >
+                Guardar
+              </button>
+            ) : (
+              <button
+                className="group relative w-15 h-10 flex justify-center py-2 px-3 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                key="submitFormButton"
+                onClick={handleSubmitUpdatePrescription}
+              >
+                Guardar
+              </button>
+            )}
             <button
-            className="group relative w-15 h-10 flex justify-center py-2 px-3 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              key="submitFormButton1"
-              disabled={errors}
-              className="disabledButton"
+              className="group relative w-15 h-10 flex justify-center py-2 px-3 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 "
+              onClick={() => handleClose()}
             >
-              Guardar
+              Cerrar
             </button>
-          ) : (
-            <button
-            className="group relative w-15 h-10 flex justify-center py-2 px-3 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              key="submitFormButton"
-              onClick={handleSubmitUpdatePrescription}
-            >
-              Guardar
-            </button>
-          )}
-          <button className="group relative w-15 h-10 flex justify-center py-2 px-3 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 " onClick={() => handleClose()}>Cerrar</button>
-        </div>
+          </div>
         </div>
       </section>
     </div>
