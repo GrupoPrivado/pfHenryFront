@@ -207,7 +207,6 @@ export function addAffiliate(payload) {
           "x-access-token": token,
         },
       });
-
       if (data.success) {
         dispatch({
           type: alertConstants.SUCCESS,

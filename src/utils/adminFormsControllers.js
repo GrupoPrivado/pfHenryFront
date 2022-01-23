@@ -1,3 +1,5 @@
+import date from "./date.js";
+
 export const functionErrorsBtn = (data) => {
   const arrayKeys = Object.keys(data);
   const arrayData = arrayKeys.filter((element, index) => data[element] !== "");
@@ -205,6 +207,54 @@ export const validateProfesionalUpdate = (input) => {
 
   if (input.ciudadID === "") {
     errores.direccion = "Ingrese una localidad";
+  }
+
+  return errores;
+};
+
+export const validateAffiliate = (input) => {
+  let errores = {};
+  if (
+    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(input.correoElectronico)
+  ) {
+    errores.correoElectronico = "Ingrese un mail válido";
+  }
+  if (input.DNI.length < 8) {
+    errores.DNI = "DNI mínimo 8 caracteres";
+  }
+  if (input.telefono.length < 8 || input.telefono.length > 11) {
+    errores.telefono = "Ingrese un teléfono válido";
+  }
+  if (input.fechaNacimiento.length <= 0 || input.fechaNacimiento > date) {
+    errores.fechaNacimiento = "La fecha debe ser menor al día de hoy";
+  }
+  if (input.nombre.length < 3) {
+    errores.nombre = "Escriba un nombre válido";
+  }
+  if (input.apellido.length < 2) {
+    errores.apellido = "Escriba un apellido válido";
+  }
+  if (input.direccion.length < 4) {
+    errores.direccion = "Escriba una dirección válida";
+  }
+  if (input.provinciaID.length <= 0) {
+    errores.provinciaID = "Debe seleccionar una provincia";
+  }
+  if (input.ciudadID.length <= 0) {
+    errores.ciudadID = "Debe seleccionar una localidad";
+  }
+  if (input.parentesco.length <= 0) {
+    errores.parentesco = "Debe seleccionar un parentesco";
+  }
+  if (input.planID && input.planID.length === 0) {
+    errores.planID = "Debe seleccionar un plan";
+  }
+
+  if (input.alta === "") {
+    errores.direccion = "Ingrese una opción";
+  }
+  if (input.activo === "") {
+    errores.direccion = "Ingrese una opción";
   }
 
   return errores;
