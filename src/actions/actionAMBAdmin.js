@@ -550,41 +550,58 @@ export function deletePlan(payload) {
 
 export function getAllProfessionals(payload) {
   return async (dispatch) => {
-    const token = getItem("userToken");
-    const { data } = await axios.get(
-      `${api}/admin/professionals?ciudadID=${payload.ciudadID}&provinciaID=${payload.provinciaID}`,
-      {
-        headers: {
-          "x-access-token": token,
-        },
+    try {
+      const token = getItem("userToken");
+      const { data } = await axios.get(
+        `${api}/admin/professionals?ciudadID=${payload.ciudadID}&provinciaID=${payload.provinciaID}`,
+        {
+          headers: {
+            "x-access-token": token,
+          },
+        }
+      );
+      if (data.success) {
+        return dispatch({ type: "GET_PROFESSIONALS", payload: data.message });
+      } else {
+        return dispatch({ type: "ERRORS", payload: data });
       }
-    );
-    if (data.success) {
-      return dispatch({ type: "GET_PROFESSIONALS", payload: data.message });
-    } else {
-      return dispatch({ type: "ERRORS", payload: data });
+    } catch (error) {
+      console.error(error);
+      return { error: error.message };
     }
   };
 }
 
 export function addProfessional(payload) {
   return async (dispatch) => {
-    const token = getItem("userToken");
-    const { data } = await axios.post(`${api}/admin/addProfessional`, payload, {
-      headers: {
-        "x-access-token": token,
-      },
-    });
-    return data;
+    try {
+      const token = getItem("userToken");
+      const { data } = await axios.post(
+        `${api}/admin/addProfessional`,
+        payload,
+        {
+          headers: {
+            "x-access-token": token,
+          },
+        }
+      );
+      if (data.success) {
+        dispatch({
+          type: alertConstants.SUCCESS,
+          message: "Profesional Cargado",
+        });
+      } else {
+        dispatch({
+          type: alertConstants.ERROR,
+          message: "Error al agregar el profesional",
+        });
 
-    // const response = await axios.post(`${api}/admin/addPharmacy`, data);
-    // return response.data.message;
-    // if(data.success){
-    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
-    // } else {
-    //     return dispatch({type: "ERRORS", payload: data})
-
-    // }
+        return; // dispatch({type: NOT_AUTHENTICATED, payload: data})
+      }
+    } catch (error) {
+      console.error(error);
+      return { error: error.message };
+    }
   };
 }
 
@@ -597,70 +614,100 @@ export const getProfessionalData = (payload) => {
 
 export function updateProfessional(payload) {
   return async (dispatch) => {
-    const token = getItem("userToken");
-    const { data } = await axios.put(
-      `${api}/admin/updateProfessional`,
-      payload,
-      {
-        headers: {
-          "x-access-token": token,
-        },
+    try {
+      const token = getItem("userToken");
+      const { data } = await axios.put(
+        `${api}/admin/updateProfessional`,
+        payload,
+        {
+          headers: {
+            "x-access-token": token,
+          },
+        }
+      );
+
+      if (data.success) {
+        dispatch({
+          type: alertConstants.SUCCESS,
+          message: "Profesional modificado",
+        });
+      } else {
+        dispatch({
+          type: alertConstants.ERROR,
+          message: "Error al mdificar el profesional",
+        });
+
+        return; // dispatch({type: NOT_AUTHENTICATED, payload: data})
       }
-    );
-
-    return data;
-
-    // if(data.success){
-    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
-    // } else {
-    //     return dispatch({type: "ERRORS", payload: data})
-
-    // }
+    } catch (error) {
+      console.error(error);
+      return { error: error.message };
+    }
   };
 }
 
 export function upDownProfessionalAct(payload) {
   return async (dispatch) => {
-    const token = getItem("userToken");
-    const { data } = await axios.put(
-      `${api}/admin/upDownProfessional`,
-      payload,
-      {
-        headers: {
-          "x-access-token": token,
-        },
+    try {
+      const token = getItem("userToken");
+      const { data } = await axios.put(
+        `${api}/admin/upDownProfessional`,
+        payload,
+        {
+          headers: {
+            "x-access-token": token,
+          },
+        }
+      );
+      if (data.success) {
+        dispatch({
+          type: alertConstants.SUCCESS,
+          message: "Profesional dado de baja/alta",
+        });
+      } else {
+        dispatch({
+          type: alertConstants.ERROR,
+          message: "Error al dar de baja/alta al profesional",
+        });
+
+        return; // dispatch({type: NOT_AUTHENTICATED, payload: data})
       }
-    );
-
-    return data;
-
-    // if(data.success){
-    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
-    // } else {
-    //     return dispatch({type: "ERRORS", payload: data})
-    // }
+    } catch (error) {
+      console.error(error);
+      return { error: error.message };
+    }
   };
 }
 
 export function deleteProfessional(payload) {
   return async (dispatch) => {
-    const token = getItem("userToken");
-    const { data } = await axios.delete(
-      `${api}/admin/deleteProfessional/${payload}`,
-      {
-        headers: {
-          "x-access-token": token,
-        },
+    try {
+      const token = getItem("userToken");
+      const { data } = await axios.delete(
+        `${api}/admin/deleteProfessional/${payload}`,
+        {
+          headers: {
+            "x-access-token": token,
+          },
+        }
+      );
+      if (data.success) {
+        dispatch({
+          type: alertConstants.SUCCESS,
+          message: "Profesional eliminado",
+        });
+      } else {
+        dispatch({
+          type: alertConstants.ERROR,
+          message: "Error al eliminar el profesional",
+        });
+
+        return; // dispatch({type: NOT_AUTHENTICATED, payload: data})
       }
-    );
-    return data;
-
-    // if(data.success){
-    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
-    // } else {
-    //     return dispatch({type: "ERRORS", payload: data})
-
-    // }
+    } catch (error) {
+      console.error(error);
+      return { error: error.message };
+    }
   };
 }
 
@@ -687,20 +734,28 @@ export function getPrescriptionById(payload) {
 
 export function getPrescriptionsByDNI(payload) {
   return async (dispatch) => {
-    const token = getItem("userToken");
-    const { data } = await axios.get(
-      `${api}/admin/prescriptionByDNI/${payload}`,
-      {
-        headers: {
-          "x-access-token": token,
-        },
-      }
-    );
+    try {
+      const token = getItem("userToken");
+      const { data } = await axios.get(
+        `${api}/admin/prescriptionByDNI/${payload}`,
+        {
+          headers: {
+            "x-access-token": token,
+          },
+        }
+      );
 
-    if (data.success) {
-      return dispatch({ type: "GET_PRESCRPTIONS_DNI", payload: data.message });
-    } else {
-      return dispatch({ type: "ERRORS", payload: data });
+      if (data.success) {
+        return dispatch({
+          type: "GET_PRESCRPTIONS_DNI",
+          payload: data.message,
+        });
+      } else {
+        return dispatch({ type: "ERRORS", payload: data });
+      }
+    } catch (error) {
+      console.error(error);
+      return { error: error.message };
     }
   };
 }

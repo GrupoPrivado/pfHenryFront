@@ -9,16 +9,8 @@ import {
 } from "../../../actions/actionAMBAdmin";
 
 import styles from "./UpDownProfessional.module.css";
-
-const functionErrors = (data) => {
-  const arrayKeys = Object.keys(data);
-  const arrayData = arrayKeys.filter((element, index) => data[element] !== "");
-  if (arrayKeys.length === arrayData.length) {
-    return false;
-  } else {
-    return true;
-  }
-}; //cambiarla en un utils ya que se puede usar en todos los forms
+import { functionErrorsBtn } from "../../../utils/adminFormsControllers";
+import { enableBtn, disableBtn } from "../../../utils/ABMStyles";
 
 const UpDownProfessional = ({ setShowModalUpDown }) => {
   const dispatch = useDispatch();
@@ -52,20 +44,16 @@ const UpDownProfessional = ({ setShowModalUpDown }) => {
 
     setupDowndateProfessionalData(updatedProfessional);
 
-    setErrors(functionErrors(updatedProfessional));
+    setErrors(functionErrorsBtn(updatedProfessional));
   };
 
-  const handleSubmitUpdateProfessional = async (event) => {
+  const handleSubmitUpdateProfessional = (event) => {
     event.preventDefault();
-    let response = await dispatch(
-      upDownProfessionalAct(upDownProfessionalData)
-    );
-    alert(response.success);
-    setupDowndateProfessionalData(upDownProfessionalDataStruct);
+
+    dispatch(upDownProfessionalAct(upDownProfessionalData));
     setShowModalUpDown(false);
     dispatch(getAllProfessionals());
     dispatch(resetDataUpdate());
-    setErrors(true);
   };
 
   const handleClose = () => {
@@ -160,7 +148,6 @@ const UpDownProfessional = ({ setShowModalUpDown }) => {
                     onChange={(e) => handleUpdateProfessional(e)}
                     value={upDownProfessionalData.activo}
                   >
-                    <option value="">Seleccione:</option>
                     <option value={true}>Si</option>
                     <option value={false}>No</option>
                   </select>
@@ -169,22 +156,15 @@ const UpDownProfessional = ({ setShowModalUpDown }) => {
             </div>
             <div className="flex justify-center mt-4 ">
               <div className="flex w-2/3 justify-around">
-                {errors ? (
-                  <button
-                    className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    disabled={errors}
-                    className="disabledButton"
-                  >
-                    Guardar
-                  </button>
-                ) : (
-                  <button
-                    onClick={handleSubmitUpdateProfessional}
-                    className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  >
-                    Guardar
-                  </button>
-                )}
+                <button
+                  onClick={handleSubmitUpdateProfessional}
+                  key="submitFormButton"
+                  className={errors ? disableBtn : enableBtn}
+                  disabled={errors}
+                >
+                  Guardar
+                </button>
+
                 <button
                   onClick={() => handleClose()}
                   className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
