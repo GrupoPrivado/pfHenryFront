@@ -31,9 +31,10 @@ const ABMAffiliatesList = ({
     setShowModalUpDown(true);
   };
 
-  const handleEditProfessional = async (event) => {
-    console.log('event update', event.target.value)
-    await dispatch(getProfessionalData(event.target.value));
+  const handleEditProfessional = (event) => {
+    console.log('event update')
+    //event.preventDefault()
+    dispatch(getProfessionalData(event.target.value));
     setShowModalUpdate(true);
   };
 
@@ -162,6 +163,7 @@ const ABMAffiliatesList = ({
                             key={element._id}
                             className="grid overflow-hidden grid-cols-8 grid-rows-1 gap-0 justify-between  py-1 px-4 items-center border-t text-sm font-normal mt-4 space-x-4"
                           >
+                            {console.log(element._id)}
                             <div className=" flex justify-center ">
                               <span>{element.matricula}</span>
                             </div>
@@ -195,7 +197,7 @@ const ABMAffiliatesList = ({
                                 title="Edit"
                                 key={"edit" + element._id}
                                 value={element._id}
-                                onClick={(e)=>handleEditProfessional(e.target.value)}
+                                onClick={(e)=>handleEditProfessional(e)}
                               >
                                 Editar
                               </button>
