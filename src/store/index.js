@@ -9,6 +9,8 @@ import reducerRecetas from "../reducer/reducerRecetas";
 import reducerABMAdmin from "../reducer/reducerABMAdmin"
 import reducerProffesionals from '../reducer/reducerProfessionals'
 import { reducerAlerts } from "../reducer/reducerAlerts";
+import reducerHistorial from "../reducer/reducerConsultas";
+import reducerFacturas from "../reducer/reducerFacturas";
 
 
 const reducers= combineReducers({
@@ -19,6 +21,8 @@ const reducers= combineReducers({
     recetas: reducerRecetas,
     ABMAdmin: reducerABMAdmin,
     alerts: reducerAlerts,
+    consultas: reducerHistorial,
+    facturas: reducerFacturas,
     professionals: reducerProffesionals
     
 })

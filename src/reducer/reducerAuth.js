@@ -5,7 +5,7 @@ const inicialState = {
   medicalToken: [],
   data: false,
   route: '',
-  error: ''
+  error: '',
 };
 
 export default function reducerAuth(state = inicialState, {type, payload}) {
@@ -37,6 +37,12 @@ export default function reducerAuth(state = inicialState, {type, payload}) {
         ...state,
         error: payload
       }
+    
+    // case GET_RECIPES:
+    //   return {
+    //     ...state,
+    //     recipes: payload
+    //   }
 
     default:
       return state;

@@ -14,7 +14,7 @@ const functionErrors = (data) => {
     }
   };
 
-export default function     FormContact() {
+export default function FormContact({setActiveAlert, setErrorAlert}) {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -46,29 +46,38 @@ export default function     FormContact() {
 
         if(Object.entries(validateErrors).length <= 0){
             let response = await dispatch(sendMail(input));
-            setInput({
-                name: "",
-                lastName: "",
-                phone: "",
-                mail:"",
-                message:""
-            })
-            navigate("/");
-        } 
-        
+            setActiveAlert(true)
+            setTimeout(() => {
+                setActiveAlert(false)
+                navigate("/");                
+            }, 5000);
+            // setInput({
+            //     name: "",
+            //     lastName: "",
+            //     phone: "",
+            //     mail:"",
+            //     message:""
+            // })
+          
+        } else {
+            setErrorAlert(true)
+            setTimeout(() => {
+                setErrorAlert(false)
+            }, 5000);
+        }   
     }
 
     return (
         <div className='w-full px-4 py-12 sm:px-6 lg:px-8'>
-            <div className="w-70vw max-w-md space-y-8 m-auto ">
+            <div className="max-w-md m-auto space-y-8 w-70vw ">
                 <form className="mt-8 space-y-6 " onSubmit={(e) => handleSubmit(e)}>
-                    <div className="grid items-center grid-cols-2 grid-rows-5 gap-4 -space-y-px rounded-md shadow-sm -z-0 w-full sm:grid-cols-4 sm:grid-rows-2">
-                        <h3 className='col-span-4 row-span-1 text-2xl font-bold text-left text-primary'>Contacto</h3>
+                    <div className="grid items-center w-full grid-cols-2 grid-rows-5 gap-4 -space-y-px rounded-md shadow-sm -z-0 sm:grid-cols-4 sm:grid-rows-2">
+                        <h3 className='col-span-4 row-span-1 text-4xl font-bold text-left text-primary'>Contacto</h3>
                             <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
                                 <label className='text-lg font-semibold'>Nombre: </label>
                                 <input type="text" 
                                 className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none -z-0 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                required 
+                                 
                                 value={input.name}
                                 onChange={(e) => handleChange(e)} name="name"/>
                                 {errores.name && (
@@ -81,7 +90,7 @@ export default function     FormContact() {
                                 className='text-lg font-semibold'>Apellido: </label>
                                 <input type="text" 
                                 className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                required
+                                
                                 value={input.lastName}
                                 onChange={(e) => handleChange(e)}
                                 name='lastName'/>
@@ -105,7 +114,7 @@ export default function     FormContact() {
                                 className='text-lg font-semibold'>Mail: </label>
                                 <input type="text" 
                                 className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                required
+                                
                                 value={input.mail}
                                 onChange={(e) => handleChange(e)}
                                 name='mail'/>
@@ -118,8 +127,8 @@ export default function     FormContact() {
                                 <label
                                 className='text-lg font-semibold'>Consulta: </label>
                                 <textarea type="text" 
-                                className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm h-40"
-                                required
+                                className="relative block w-full h-40 px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                
                                 value={input.message}
                                 onChange={(e) => handleChange(e)}
                                 name='message'/>
@@ -130,7 +139,7 @@ export default function     FormContact() {
 
                             <input type="submit"
                                 value="Enviar"
-                                className='inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 h-10'
+                                className='inline-flex justify-center h-10 px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
                             />
                         </div>
                 </form>

@@ -1,74 +1,40 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Logo from "./../../assets/bg2.jpg"
+import { useSelector, useDispatch } from 'react-redux'
+import { getHistorial } from "../../actions/actionConsultas";
+
 
 function MedicalHistoryDetails() {
+    const dispatch = useDispatch();
+    const { user } = useSelector(state => state.auth);
+    const { consultas } = useSelector(state => state.consultas);
+    console.log(consultas, "consultassssss")
+    useEffect(() => {
+        dispatch(getHistorial())
+    }, [dispatch])
 
-    const history = {
-        consult: [
-            {
-                date: "01/01/2022",
-                professionalName: "Dra. Fortunato",
-                specialty: "Dermatología"
-            },
-            {
-                date: "02/01/2022",
-                professionalName: "Dr. Machado",
-                specialty: "Kinesiología"
-            },
-            {
-                date: "03/01/2022",
-                professionalName: "Dr. Barbieri",
-                specialty: "Traumatología"
-            },
-            {
-                date: "04/01/2022",
-                professionalName: "Dr. Sinicco",
-                specialty: "Clínica médica"
-            },
-            {
-                date: "05/01/2022",
-                professionalName: "Dr. Padro",
-                specialty: "Urología"
-            },
-            {
-                date: "06/01/2022",
-                professionalName: "Dra. Perassi",
-                specialty: "Ginecología"
-            }
-        ]
-    }
     return (
-        <div>
-            <div className="flex items-center justify-center w-full min-h-screen bg-cover contenair" style={{ backgroundImage: `url(${Logo})` }}>
-                {/* card */}
-                <div className="w-1/2 p-5 bg-white bg-opacity-40 rounded-xl backdrop-filter backdrop-blur-lg">
-                    <div className="flex justify-between font-semibold header-card">
-                        <p>Historial de Consultas</p>
-                    </div>
-                    {/* end header */}
-                    {history.consult.map((consult, index) => (
-                    <div key={index} className="flex flex-col mt-5 divide-y card-content gap-y-3">
-                        <div className="flex items-center justify-between card-content-profil">
-                            <div className="flex items-center gap-x-2">
-                                <div className="text-s card-name-user">
-                                    <h3 className="font-semibold">{consult.date}</h3>
-                                    <div className="flex items-center gap-x-1">
-                                        <span className="w-3 h-3 bg-green-500 rounded-full" />
-                                        <span>{consult.professionalName}</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="card-action">
-                                <button className="flex items-center px-2 py-1 text-white bg-gray-500 text-s hover:bg-gray-600">
-                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" /></svg>
-                                    <span>{consult.specialty}</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    ))}
-                </div>
-            </div>
+        <div className="flex flex-col w-full bg-cover start min-h-70vh contenair" style={{ backgroundImage: `url(${Logo})` }}>
+            <h3 className='mt-3 ml-3 text-4xl font-bold text-left text-white'>Historial de consultas</h3>
+            <table className="mx-auto mt-10 text-gray-900 bg-white shadow-none w-80vw bg-opacity-40 rounded-xl backdrop-filter backdrop-blur-lg">
+                <thead>
+                    <tr>
+                        <th className="p-2 text-white bg-primary bg-opacity-40 backdrop-filter backdrop-blur-lg">Fecha</th>
+                        <th className="p-2 text-white bg-primary bg-opacity-40 backdrop-filter backdrop-blur-lg">Especialidad</th>
+                        <th className="p-2 text-white bg-primary bg-opacity-40 backdrop-filter backdrop-blur-lg">Profesional</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {consultas ?
+                        consultas.map((consult, index) => (
+                            <tr key={index} className="text-center text-blue-900 bg-white shadow-none bg-opacity-40 backdrop-filter backdrop-blur-lg">
+                                <td className="p-2">{consult.fechaConsulta}</td>
+                                {/* <td className="p-2">{consult.especID.nombre}</td> */}
+                                <td className="p-2">Dr.{consult.profesionalID.apellido}, {consult.profesionalID.nombre}</td>
+                            </tr>
+                        )) : <tr className="text-center text-blue-900 bg-white shadow-none bg-opacity-40 backdrop-filter backdrop-blur-lg"><td className="p-2">Sin consultas</td></tr>}
+                </tbody>
+            </table>
         </div>
     );
 }
