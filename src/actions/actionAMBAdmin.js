@@ -953,7 +953,7 @@ export function updateEmployee(payload) {
       } else {
         dispatch({
           type: alertConstants.ERROR,
-          message: "Error al mdificar a empleado",
+          message: "Error al modificar a empleado",
         });
 
         return; // dispatch({type: NOT_AUTHENTICATED, payload: data})

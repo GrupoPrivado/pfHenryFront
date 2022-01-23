@@ -15,6 +15,7 @@ const ABMEmployeesList = ({
   setShowModalUpdate,
   setShowModalAdd,
   setShowModalUpDown,
+  setDeleteState,
 }) => {
   const dispatch = useDispatch();
 
@@ -123,7 +124,7 @@ const ABMEmployeesList = ({
                                   key={"delete" + element._id}
                                   title="Delete"
                                   value={element._id}
-                                  onClick={(e) => handleDeleteEmployee(e)}
+                                  onClick={(e)=>setDeleteState(e.target.value)}
                                 >
                                   Eliminar
                                 </button>
