@@ -17,20 +17,33 @@ export function getAllCities(payload) {
           type: "GET_ALL_CITIES",
           payload: data.message,
         });
+      } else {
+        return dispatch({ type: "ERRORS", payload: data });
       }
     } catch (error) {
-      return console.log(error, "error en get all cities");
+      console.error(error);
+      return { error: error.message };
     }
   };
 }
 
 export function getAllProvinces() {
   return async function (dispatch) {
-    const { data } = await axios.get(`${api}/provincias`);
-    return dispatch({
-      type: "GET_ALL_PROVINCES",
-      payload: data.message,
-    });
+    try {
+      const { data } = await axios.get(`${api}/provincias`);
+
+      if (data.success) {
+        return dispatch({
+          type: "GET_ALL_PROVINCES",
+          payload: data.message,
+        });
+      } else {
+        return dispatch({ type: "ERRORS", payload: data });
+      }
+    } catch (error) {
+      console.error(error);
+      return { error: error.message };
+    }
   };
 }
 
@@ -166,107 +179,161 @@ export function deleteSpeciality(payload) {
 
 export function getAllAffiliates() {
   return async (dispatch) => {
-    const token = getItem("userToken");
-    const { data } = await axios.get(`${api}/admin/allAffiliates`, {
-      headers: {
-        "x-access-token": token,
-      },
-    });
-    if (data.success) {
-      return dispatch({ type: "GET_AFFILIATES", payload: data.message });
-    } else {
-      return dispatch({ type: "ERRORS", payload: data });
+    try {
+      const token = getItem("userToken");
+      const { data } = await axios.get(`${api}/admin/allAffiliates`, {
+        headers: {
+          "x-access-token": token,
+        },
+      });
+      if (data.success) {
+        return dispatch({ type: "GET_AFFILIATES", payload: data.message });
+      } else {
+        return dispatch({ type: "ERRORS", payload: data });
+      }
+    } catch (error) {
+      console.error(error);
+      return { error: error.message };
     }
   };
 }
 
 export function addAffiliate(payload) {
   return async (dispatch) => {
-    const token = getItem("userToken");
-    const { data } = await axios.post(`${api}/admin/addAffiliate`, payload, {
-      headers: {
-        "x-access-token": token,
-      },
-    });
+    try {
+      const token = getItem("userToken");
+      const { data } = await axios.post(`${api}/admin/addAffiliate`, payload, {
+        headers: {
+          "x-access-token": token,
+        },
+      });
 
-    return data;
-    // if(data.success){
-    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
-    // } else {
-    //     return dispatch({type: "ERRORS", payload: data})
-
-    // }
+      if (data.success) {
+        dispatch({
+          type: alertConstants.SUCCESS,
+          message: "Afiliado agregado",
+        });
+      } else {
+        dispatch({
+          type: alertConstants.ERROR,
+          message: "Error al agregar al afiliado",
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      return { error: error.message };
+    }
   };
 }
 
 export const getAffiliateData = (payload) => {
   return async (dispatch) => {
-    const token = getItem("userToken");
-    const { data } = await axios.get(
-      `${api}/admin/affiliateData?idAfilFam=${payload}`,
-      {
-        headers: {
-          "x-access-token": token,
-        },
+    try {
+      const token = getItem("userToken");
+      const { data } = await axios.get(
+        `${api}/admin/affiliateData?idAfilFam=${payload}`,
+        {
+          headers: {
+            "x-access-token": token,
+          },
+        }
+      );
+
+      if (data.success) {
+        return dispatch({
+          type: "AFFILIATE_DATA",
+          payload: data.message,
+        });
+      } else {
+        return dispatch({ type: "ERRORS", payload: data });
       }
-    );
-    return dispatch({
-      type: "AFFILIATE_DATA",
-      payload: data.message,
-    });
-
-    // if(data.success){
-    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
-    // } else {
-    //     return dispatch({type: "ERRORS", payload: data})
-
-    // }
+    } catch (error) {
+      console.error(error);
+      return { error: error.message };
+    }
   };
 };
 
 export function updateAffiliateAct(payload) {
   return async (dispatch) => {
-    const token = getItem("userToken");
-    const { data } = await axios.put(`${api}/admin/updateAffiliate`, payload, {
-      headers: {
-        "x-access-token": token,
-      },
-    });
+    try {
+      const token = getItem("userToken");
+      const { data } = await axios.put(
+        `${api}/admin/updateAffiliate`,
+        payload,
+        {
+          headers: {
+            "x-access-token": token,
+          },
+        }
+      );
 
-    return data;
-    // if(data.success){
-    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
-    // } else {
-    //     return dispatch({type: "ERRORS", payload: data})
-    // }
+      if (data.success) {
+        dispatch({
+          type: alertConstants.SUCCESS,
+          message: "Afiliado modificado",
+        });
+        return getAllSpecialities();
+      } else {
+        dispatch({
+          type: alertConstants.ERROR,
+          message: "Error al moficiar al afiliado",
+        });
+
+        return; // dispatch({type: NOT_AUTHENTICATED, payload: data})
+      }
+    } catch (error) {
+      console.error(error);
+      return { error: error.message };
+    }
   };
 }
 
 export function upDownAffiliateAct(payload) {
   return async (dispatch) => {
-    const token = getItem("userToken");
-    const { data } = await axios.put(`${api}/admin/upDownAffiliate`, payload, {
-      headers: {
-        "x-access-token": token,
-      },
-    });
-    return data;
+    try {
+      const token = getItem("userToken");
+      const { data } = await axios.put(
+        `${api}/admin/upDownAffiliate`,
+        payload,
+        {
+          headers: {
+            "x-access-token": token,
+          },
+        }
+      );
+      if (data.success) {
+        dispatch({
+          type: alertConstants.SUCCESS,
+          message: "afiliado dado de baja/alta",
+        });
+      } else {
+        dispatch({
+          type: alertConstants.ERROR,
+          message: "Error al dar de baja/alta al afiliado",
+        });
 
-    // if(data.success){
-    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
-    // } else {
-    //     return dispatch({type: "ERRORS", payload: data})
-    // }
+        return; // dispatch({type: NOT_AUTHENTICATED, payload: data})
+      }
+    } catch (error) {
+      console.error(error);
+      return { error: error.message };
+    }
   };
 }
 
 export function getAllPlans() {
   return async (dispatch) => {
-    const { data } = await axios.get(`${api}/planesMutual`);
-    if (data.success) {
-      return dispatch({ type: "GET_PLANS", payload: data.message });
-    } else {
-      return dispatch({ type: "ERRORS", payload: data });
+    try {
+      const { data } = await axios.get(`${api}/planesMutual`);
+      if (data.success) {
+        return dispatch({ type: "GET_PLANS", payload: data.message });
+      } else {
+        return dispatch({ type: "ERRORS", payload: data });
+      }
+    } catch (error) {
+      console.error(error);
+      return { error: error.message };
     }
   };
 }
@@ -717,17 +784,24 @@ export function deleteProfessional(payload) {
 //Ver si esta se saca xq la busqueda es por DNI y ya trae todos los datos
 export function getPrescriptionById(payload) {
   return async (dispatch) => {
-    const token = getItem("userToken");
-    const { data } = await axios.get(`${api}/prescriptionByID?id=${payload}`, {
-      headers: {
-        "x-access-token": token,
-      },
-    });
-
-    if (data.success) {
-      return dispatch({ type: "GET_PRESCRPTION_ID", payload: data.message });
-    } else {
-      return dispatch({ type: "ERRORS", payload: data });
+    try {
+      const token = getItem("userToken");
+      const { data } = await axios.get(
+        `${api}/prescriptionByID?id=${payload}`,
+        {
+          headers: {
+            "x-access-token": token,
+          },
+        }
+      );
+      if (data.success) {
+        return dispatch({ type: "GET_PRESCRPTION_ID", payload: data.message });
+      } else {
+        return dispatch({ type: "ERRORS", payload: data });
+      }
+    } catch (error) {
+      console.error(error);
+      return { error: error.message };
     }
   };
 }
@@ -769,25 +843,34 @@ export const getPrescriptionData = (payload) => {
 
 export function updatePrescription(payload) {
   return async (dispatch) => {
-    const token = getItem("userToken");
-    const { data } = await axios.put(
-      `${api}/admin/updatePrescription`,
-      payload,
-      {
-        headers: {
-          "x-access-token": token,
-        },
+    try {
+      const token = getItem("userToken");
+      const { data } = await axios.put(
+        `${api}/admin/updatePrescription`,
+        payload,
+        {
+          headers: {
+            "x-access-token": token,
+          },
+        }
+      );
+      if (data.success) {
+        dispatch({
+          type: alertConstants.SUCCESS,
+          message: "Receta modificada",
+        });
+      } else {
+        dispatch({
+          type: alertConstants.ERROR,
+          message: "Error al mdificar la receta",
+        });
+
+        return; // dispatch({type: NOT_AUTHENTICATED, payload: data})
       }
-    );
-
-    return data;
-
-    // if(data.success){
-    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
-    // } else {
-    //     return dispatch({type: "ERRORS", payload: data})
-
-    // }
+    } catch (error) {
+      console.error(error);
+      return { error: error.message };
+    }
   };
 }
 
@@ -797,39 +880,52 @@ export function updatePrescription(payload) {
 
 export function getAllEmployees(payload) {
   return async (dispatch) => {
-    const token = getItem("userToken");
+    try {
+      const token = getItem("userToken");
 
-    const { data } = await axios.get(`${api}/admin/employees`, {
-      headers: {
-        "x-access-token": token,
-      },
-    });
-    if (data.success) {
-      return dispatch({ type: "GET_EMPLOYEES", payload: data.message });
-    } else {
-      return dispatch({ type: "ERRORS", payload: data });
+      const { data } = await axios.get(`${api}/admin/employees`, {
+        headers: {
+          "x-access-token": token,
+        },
+      });
+      if (data.success) {
+        return dispatch({ type: "GET_EMPLOYEES", payload: data.message });
+      } else {
+        return dispatch({ type: "ERRORS", payload: data });
+      }
+    } catch (error) {
+      console.error(error);
+      return { error: error.message };
     }
   };
 }
 
 export function addEmployee(payload) {
   return async (dispatch) => {
-    const token = getItem("userToken");
-    const { data } = await axios.post(`${api}/admin/addEmployee`, payload, {
-      headers: {
-        "x-access-token": token,
-      },
-    });
-    return data;
+    try {
+      const token = getItem("userToken");
+      const { data } = await axios.post(`${api}/admin/addEmployee`, payload, {
+        headers: {
+          "x-access-token": token,
+        },
+      });
+      if (data.success) {
+        dispatch({
+          type: alertConstants.SUCCESS,
+          message: "Empleado Cargado",
+        });
+      } else {
+        dispatch({
+          type: alertConstants.ERROR,
+          message: "Error al agregar el empleado",
+        });
 
-    // const response = await axios.post(`${api}/admin/addPharmacy`, data);
-    // return response.data.message;
-    // if(data.success){
-    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
-    // } else {
-    //     return dispatch({type: "ERRORS", payload: data})
-
-    // }
+        return; // dispatch({type: NOT_AUTHENTICATED, payload: data})
+      }
+    } catch (error) {
+      console.error(error);
+      return { error: error.message };
+    }
   };
 }
 
@@ -842,62 +938,93 @@ export const getEmployeeData = (payload) => {
 
 export function updateEmployee(payload) {
   return async (dispatch) => {
-    const token = getItem("userToken");
-    const { data } = await axios.put(`${api}/admin/updateEmployee`, payload, {
-      headers: {
-        "x-access-token": token,
-      },
-    });
+    try {
+      const token = getItem("userToken");
+      const { data } = await axios.put(`${api}/admin/updateEmployee`, payload, {
+        headers: {
+          "x-access-token": token,
+        },
+      });
 
-    return data;
+      if (data.success) {
+        dispatch({
+          type: alertConstants.SUCCESS,
+          message: "Empleado modificado",
+        });
+      } else {
+        dispatch({
+          type: alertConstants.ERROR,
+          message: "Error al mdificar a empleado",
+        });
 
-    // if(data.success){
-    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
-    // } else {
-    //     return dispatch({type: "ERRORS", payload: data})
-
-    // }
+        return; // dispatch({type: NOT_AUTHENTICATED, payload: data})
+      }
+    } catch (error) {
+      console.error(error);
+      return { error: error.message };
+    }
   };
 }
 
 export function upDownEmployeeAct(payload) {
   return async (dispatch) => {
-    const token = getItem("userToken");
-    const { data } = await axios.put(`${api}/admin/upDownEmployee`, payload, {
-      headers: {
-        "x-access-token": token,
-      },
-    });
+    try {
+      const token = getItem("userToken");
+      const { data } = await axios.put(`${api}/admin/upDownEmployee`, payload, {
+        headers: {
+          "x-access-token": token,
+        },
+      });
 
-    return data;
+      if (data.success) {
+        dispatch({
+          type: alertConstants.SUCCESS,
+          message: "Empleado dado de baja/alta",
+        });
+      } else {
+        dispatch({
+          type: alertConstants.ERROR,
+          message: "Error al dar de baja/alta al empleado",
+        });
 
-    // if(data.success){
-    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
-    // } else {
-    //     return dispatch({type: "ERRORS", payload: data})
-    // }
+        return; // dispatch({type: NOT_AUTHENTICATED, payload: data})
+      }
+    } catch (error) {
+      console.error(error);
+      return { error: error.message };
+    }
   };
 }
 
 export function deleteEmployee(payload) {
   return async (dispatch) => {
-    const token = getItem("userToken");
-    const { data } = await axios.delete(
-      `${api}/admin/deleteEmployee/${payload}`,
-      {
-        headers: {
-          "x-access-token": token,
-        },
+    try {
+      const token = getItem("userToken");
+      const { data } = await axios.delete(
+        `${api}/admin/deleteEmployee/${payload}`,
+        {
+          headers: {
+            "x-access-token": token,
+          },
+        }
+      );
+      if (data.success) {
+        dispatch({
+          type: alertConstants.SUCCESS,
+          message: "Empleado eliminado",
+        });
+      } else {
+        dispatch({
+          type: alertConstants.ERROR,
+          message: "Error al eliminar al empleado",
+        });
+
+        return; // dispatch({type: NOT_AUTHENTICATED, payload: data})
       }
-    );
-    return data;
-
-    // if(data.success){
-    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
-    // } else {
-    //     return dispatch({type: "ERRORS", payload: data})
-
-    // }
+    } catch (error) {
+      console.error(error);
+      return { error: error.message };
+    }
   };
 }
 
