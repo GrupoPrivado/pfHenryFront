@@ -154,7 +154,10 @@ const UpdatePharmacy = ({ setShowModalUpdate }) => {
               )}
             </div>
 
-            <div className="flex w-2/3 justify-around">
+       
+          </div>
+        </form>
+        <div className="flex w-2/3 justify-around">
               <button
                 key="submitFormButton"
                 onClick={handleSubmitUpdatePharmacy}
@@ -170,8 +173,6 @@ const UpdatePharmacy = ({ setShowModalUpdate }) => {
                 Cerrar
               </button>
             </div>
-          </div>
-        </form>
       </div>
     </section>
   );

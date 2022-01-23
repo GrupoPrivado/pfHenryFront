@@ -101,7 +101,7 @@ const AddProfessional = ({ setShowModalAdd }) => {
           </h5>
         </div>
 
-        <div cclassName="modal-content py-4 text-left px-6 h-90% ">
+        <div className="modal-content py-4 text-left px-6 h-90% ">
           <form>
             <div className="flex">
               <div className="w-1/2">
@@ -264,7 +264,7 @@ const AddProfessional = ({ setShowModalAdd }) => {
                     allSpecialities.map((element) => {
                       if (element.activa) {
                         return (
-                          <option value={element._id} id={element._id}>
+                          <option value={element._id} id={element._id} key={element._id}>
                             {element.nombre}
                           </option>
                         );

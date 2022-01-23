@@ -45,7 +45,7 @@ export const validatePlan = (input) => {
     errores.precio = "Debe ingresar un valor válido";
   }
 
-  if (input.planActivo === "true") {
+  if (input.planActivo === "") {
     errores.planActivo = "Debe seleccionar si la especialidad esta activa o no";
   }
 

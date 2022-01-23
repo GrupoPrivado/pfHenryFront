@@ -23,10 +23,10 @@ const ABMPrescriptionsSearch = () => {
 
   return (
     <div>
-      <div class="max-w-md mx-auto">
-        <div class="relative flex items-center w-15 h-12 rounded-lg focus-within:shadow-lg bg-white overflow-hidden px-3">
+      <div className="max-w-md mx-auto">
+        <div className="relative flex items-center w-15 h-12 rounded-lg focus-within:shadow-lg bg-white overflow-hidden px-3">
       <input
-      class="peer h-full w-full outline-none text-sm text-gray-700 pr-2"
+      className="peer h-full w-full outline-none text-sm text-gray-700 pr-2"
         type="text"
         name="DNI"
         autoComplete="off"

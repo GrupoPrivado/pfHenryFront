@@ -154,7 +154,11 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
                     {allPlans &&
                       allPlans.map((element) => {
                         return (
-                          <option value={element._id} id={element._id}>
+                          <option
+                            value={element._id}
+                            id={element._id}
+                            key={element._id}
+                          >
                             {element.name}
                           </option>
                         );
@@ -210,21 +214,9 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
               </div>
             </div>
 
-            <div className="flex justify-between h-1/3">
-              <div className="flex w-1/3 items-center">
-                <label className="text-md text-gray-600">Activo: </label>
-                <select
-                  className="border-2 p-1 border-gray-300  rounded-md"
-                  id="activo"
-                  name="activo"
-                  // onChange={(e) => handleChange(e)}
-                  defaultValue={0}
-                >
-                  <option value="">Seleccione</option>
-                  <option value="false">No</option>
-                  <option value="true">Si</option>
-                </select>
-              </div>
+       
+          </form>
+          <div className="flex justify-between h-1/3">
               <div className="flex w-2/3 justify-around items-center">
                 {errors ? (
                   <button
@@ -250,7 +242,6 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
                 </button>
               </div>
             </div>
-          </form>
         </div>
       </section>
     </div>

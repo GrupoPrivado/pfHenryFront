@@ -279,7 +279,7 @@ const AddAffiliate = ({ setShowModalAdd }) => {
                   {allPlans &&
                     allPlans.map((element) => {
                       return (
-                        <option value={element._id} id={element._id}>
+                        <option value={element._id} id={element._id} key={element._id}>
                           {element.name}
                         </option>
                       );

@@ -95,7 +95,7 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
         <div className="modal-content py-4 text-left px-6 mt-1 ">
           <form>
             <div className="flex justify-around ">
-              <div lassName="flex flex-col mt-3">
+              <div className="flex flex-col mt-3">
                 <div>
                   <label className="text-md text-gray-600">
                     Nombre:{" "}
@@ -121,7 +121,7 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
                   </label>
                 </div>
               </div>
-              <div lassName="flex flex-col justify-center">
+              <div className="flex flex-col justify-center">
                 <div>
                   <label className="text-md text-gray-600">
                     Grupo familiar:{" "}
@@ -158,8 +158,10 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
                 <div>
                   <div>
                     <label className="text-md text-gray-600">Texto: </label>
-                    <input
-                      className="h-6 p-10 w-2/3 border-2 border-gray-300 mb-3 rounded-md"
+                    <textarea
+                      className="h-6 p-10 w-2/3 border-2 border-gray-300 mb-3 rounded-md resize-none"
+                      rows="8"
+                      cols="50"
                       type="textarea"
                       name="text"
                       autoComplete="off"
@@ -178,7 +180,6 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
                     onChange={(e) => handleUpdateAffiliate(e)}
                     value={upDownAffiliateData.alta}
                   >
-                    <option value="">Seleccione:</option>
                     <option value={true}>Si</option>
                     <option value={false}>No</option>
                   </select>
@@ -191,14 +192,15 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
                     onChange={(e) => handleUpdateAffiliate(e)}
                     value={upDownAffiliateData.activo}
                   >
-                    <option value="">Seleccione:</option>
                     <option value={true}>Si</option>
                     <option value={false}>No</option>
                   </select>
                 </div>
               </div>
             </div>
-            <div className="flex justify-center mt-6 ">
+   
+          </form>
+          <div className="flex justify-center mt-6 ">
               <div className="flex w-2/3 justify-around">
                 {errors ? (
                   <button
@@ -224,7 +226,6 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
                 </button>
               </div>
             </div>
-          </form>
         </div>
       </section>
     </div>

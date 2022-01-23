@@ -90,7 +90,7 @@ const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
           </h5>
         </div>
         <div className="modal-content py-4 text-left px-6 h-90% ">
-          {/* <form onSubmit={handleSubmit} id="addAdhernt"> */}
+        
           <form>
             <div className="flex">
               <div className="w-1/3">
@@ -233,7 +233,7 @@ const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
               </div>
             </div>
             <div className="flex justify-between items-end  mt-4">
-              <div lassName="flex w-1/2 items-center">
+              <div className="flex w-1/2 items-center">
               <label className="text-md text-gray-600">Parentesco </label>
                 <select
 
@@ -245,7 +245,7 @@ className="border-2 p-1 border-gray-300 mb-3 rounded-md"id="parentesco"
                   <option value="">Seleccione</option>
                   {arrParentesco.map((element) => {
                     return (
-                      <option value={element.value} id={element.value}>
+                      <option value={element.value} id={element.value} key={element.value}>
                         {element.display}
                       </option>
                     );
