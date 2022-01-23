@@ -107,7 +107,6 @@ const AddSpeciality = ({ setShowModalAdd }) => {
                   id="activa"
                   name="activa"
                   onChange={(e) => handleChange(e)}
-                  defaultValue={0}
                 >
                   <option value="">Seleccione</option>
                   <option value="false">No</option>

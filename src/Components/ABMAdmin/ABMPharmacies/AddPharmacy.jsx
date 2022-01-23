@@ -70,7 +70,7 @@ const AddPharmacy = ({ setShowModalAdd }) => {
     const validateError = validatePharmacy(inputPharmacy);
     setErrores(validateError);
     if (Object.entries(validateError).length <= 0) {
-      console.log('fdshfjkbsdfgcvnsncgnfgjcfsdkscggcgnk')
+      console.log("fdshfjkbsdfgcvnsncgnfgjcfsdkscggcgnk");
       dispatch(addPharmacy(inputPharmacy));
       //setInputPharmacy(inputPharmacyStruct);
       //setErrors(true);
@@ -239,7 +239,6 @@ const AddPharmacy = ({ setShowModalAdd }) => {
                   id="activo"
                   name="activo"
                   onChange={(e) => handleChange(e)}
-                  defaultValue={0}
                 >
                   <option value="">Seleccione</option>
                   <option value="false">No</option>
@@ -263,7 +262,7 @@ const AddPharmacy = ({ setShowModalAdd }) => {
                   key="closeBtn"
                   type="button"
                   name="closeBtn"
-                  onClick={ handleClose}
+                  onClick={handleClose}
                   className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
                   Cerrar

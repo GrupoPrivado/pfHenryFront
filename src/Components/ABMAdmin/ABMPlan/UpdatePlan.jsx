@@ -248,7 +248,6 @@ const UpdatePlan = ({ setShowModalUpdate }) => {
               name="planActivo"
               onChange={(e) => handleUpdatePlan(e)}
               value={updatePlanData.planActivo}
-              defaultValue={0}
             >
               <option value="">Seleccione</option>
               <option value="false">No</option>

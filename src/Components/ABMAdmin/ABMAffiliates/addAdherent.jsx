@@ -267,7 +267,6 @@ const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
                   id="parentesco"
                   name="parentesco"
                   onChange={(e) => handleChange(e)}
-                  defaultValue={0}
                 >
                   <option value="">Seleccione</option>
                   {arrParentesco.map((element) => {

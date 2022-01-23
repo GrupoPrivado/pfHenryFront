@@ -46,7 +46,6 @@ const UpdatePharmacy = ({ setShowModalUpdate }) => {
   }, [updateData]);
 
   const handleUpdatePharmacy = async (event) => {
-   
     let updatedPharmacy = {
       ...updatePharmacyData,
       [event.target.name]: event.target.value,
@@ -57,7 +56,7 @@ const UpdatePharmacy = ({ setShowModalUpdate }) => {
   };
 
   const handleSubmitUpdatePharmacy = async (event) => {
-    event.preventDefault()
+    event.preventDefault();
     const validateError = validateUpdatePharmacy(updatePharmacyData);
     setErrores(validateError);
 
@@ -143,7 +142,6 @@ const UpdatePharmacy = ({ setShowModalUpdate }) => {
                 name="activo"
                 onChange={(e) => handleUpdatePharmacy(e)}
                 value={updatePharmacyData.activo}
-                defaultValue={0}
               >
                 <option value="">Seleccione</option>
                 <option value="false">No</option>
@@ -153,26 +151,24 @@ const UpdatePharmacy = ({ setShowModalUpdate }) => {
                 <p className="absolute text-red-700">{errores.activo}</p>
               )}
             </div>
-
-       
           </div>
         </form>
         <div className="flex w-2/3 justify-around">
-              <button
-                key="submitFormButton"
-                onClick={handleSubmitUpdatePharmacy}
-                className={errors ? disableBtn : enableBtn}
-                disabled={errors}
-              >
-                Guardar
-              </button>
-              <button
-                onClick={() => handleClose()}
-                className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              >
-                Cerrar
-              </button>
-            </div>
+          <button
+            key="submitFormButton"
+            onClick={handleSubmitUpdatePharmacy}
+            className={errors ? disableBtn : enableBtn}
+            disabled={errors}
+          >
+            Guardar
+          </button>
+          <button
+            onClick={() => handleClose()}
+            className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            Cerrar
+          </button>
+        </div>
       </div>
     </section>
   );
