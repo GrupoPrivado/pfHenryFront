@@ -42,7 +42,7 @@ function DashAfil() {
     }, [])
 
     const toggleClass = (e) => {
-        //console.log(e.target.getAttribute('name'))
+    
         const name = e.target.getAttribute('name')
         const modal = isActive[name]
         setActive({

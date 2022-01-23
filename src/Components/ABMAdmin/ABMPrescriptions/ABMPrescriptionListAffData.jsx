@@ -3,12 +3,11 @@ import React from "react";
 import styles from "./ABMPrescriptions.module.css";
 
 const ABMPrescriptionsListAffData = ({ affiliatePrescriptionData }) => {
-  //const { prescriptionDNI } = useSelector((state) => state.ABMAdmin);
 
   return (
     
       
-        <div class="bg-white p-4 rounded-md w-full">
+        <div className="bg-white p-4 rounded-md w-full">
           <div className="flex ">
             <div className=" flex flex-col w-2/5">
               <label className="text-md text-gray-600">

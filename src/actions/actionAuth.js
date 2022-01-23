@@ -100,7 +100,10 @@ export const getNewMedicalToken = () => {
           headers: {
             "x-access-token": token,
           },});
+<<<<<<< HEAD
   
+=======
+>>>>>>> development
       if (data.success) {
         return dispatch({ type: GET_AFILIATE, payload: data.message });
       } else {
@@ -124,7 +127,10 @@ export const updateUser = (payload) => {
           headers: {
             "x-access-token": token,
           },});
+<<<<<<< HEAD
   
+=======
+>>>>>>> development
       if(data.success){
         dispatch({type: alertConstants.SUCCESS, message: 'Afiliado actualizado'})
         return dispatch({type: GET_AFILIATE, payload: data.message})

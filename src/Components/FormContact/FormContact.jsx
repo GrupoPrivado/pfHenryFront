@@ -50,14 +50,7 @@ export default function FormContact({setActiveAlert, setErrorAlert}) {
                 setActiveAlert(false)
                 navigate("/");                
             }, 5000);
-            // setInput({
-            //     name: "",
-            //     lastName: "",
-            //     phone: "",
-            //     mail:"",
-            //     message:""
-            // })
-          
+         
         } else {
             setErrorAlert(true)
             setTimeout(() => {

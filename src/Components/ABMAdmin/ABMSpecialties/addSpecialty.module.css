@@ -4,7 +4,7 @@
     left: 0;
     width:100%;
     height: 100%;
-    background: gray;
+    background-color: rgba(0,0,0, 0.5) !important;
   }
   
   .modalmain {
@@ -16,6 +16,7 @@
     left:50%;
     transform: translate(-50%,-50%);
     border-radius: 2rem;
+   
     
   }
   

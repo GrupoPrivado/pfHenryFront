@@ -3,28 +3,27 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
 import {
-  getAllEmployees,
+  
   resetDataUpdate,
   upDownEmployeeAct,
 } from "../../../actions/actionAMBAdmin";
 
 import styles from "./UpDownEmployee.module.css";
 
-const functionErrors = (data) => {
-  const arrayKeys = Object.keys(data);
-  const arrayData = arrayKeys.filter((element, index) => data[element] !== "");
-  if (arrayKeys.length === arrayData.length) {
-    return false;
-  } else {
-    return true;
-  }
-}; //cambiarla en un utils ya que se puede usar en todos los forms
+import { enableBtn, disableBtn } from "../../../utils/ABMStyles";
+import {
+  functionErrorsBtn,
+  
+} from "../../../utils/adminFormsControllers";
+
+
 
 const UpDownEmployee = ({ setShowModalUpDown }) => {
   const dispatch = useDispatch();
   const { updateData } = useSelector((state) => state.ABMAdmin);
 
   const [errors, setErrors] = useState(false);
+  
 
   const upDownDataInput = {
     id: "",
@@ -42,6 +41,7 @@ const UpDownEmployee = ({ setShowModalUpDown }) => {
       id: updateData._id,
       email: updateData.email,
       activo: updateData.activo,
+      
     });
   }, [updateData]);
 
@@ -53,20 +53,23 @@ const UpDownEmployee = ({ setShowModalUpDown }) => {
 
     setUpDowndateEmployeeData(updatedEmployee);
 
-    setErrors(functionErrors(updatedEmployee));
+    setErrors(functionErrorsBtn(updatedEmployee));
   };
 
   const handleSubmitUpdateEmployee = async (event) => {
     event.preventDefault();
-    let response = await dispatch(upDownEmployeeAct(upDownEmployeeData));
-    alert(response.success);
+   
+    
+    
+      dispatch(upDownEmployeeAct(upDownEmployeeData))
     setUpDowndateEmployeeData(upDownDataInput);
     setShowModalUpDown(false);
-    dispatch(getAllEmployees());
+    
     dispatch(resetDataUpdate());
-    setErrors(true);
-  };
+    
 
+  };
+ 
   const handleClose = () => {
     setUpDowndateEmployeeData(upDownDataInput);
     setShowModalUpDown(false);
@@ -75,7 +78,7 @@ const UpDownEmployee = ({ setShowModalUpDown }) => {
   };
 
   return (
-    <div>
+    <div className={styles.modal}>
       <section className={styles.modalmain}>
         <div className="flex justify-center">
           <h5 className="text-2xl font-bold text-gray-500">
@@ -125,6 +128,7 @@ const UpDownEmployee = ({ setShowModalUpDown }) => {
                     onChange={(e) => handleUpdateEmployee(e)}
                     placeholder="Ingrese el asunto...."
                   />
+                  
                 </div>
                 <div>
                   <div>
@@ -138,6 +142,8 @@ const UpDownEmployee = ({ setShowModalUpDown }) => {
                       onChange={(e) => handleUpdateEmployee(e)}
                       placeholder="Ingrese el texto...."
                     />
+                  
+                    
                   </div>
                 </div>
               </div>
@@ -149,32 +155,25 @@ const UpDownEmployee = ({ setShowModalUpDown }) => {
                     onChange={(e) => handleUpdateEmployee(e)}
                     value={upDownEmployeeData.activo}
                   >
-                    <option value="">Seleccione:</option>
+                    
                     <option value={true}>Si</option>
                     <option value={false}>No</option>
                   </select>
                 </div>
+               
               </div>
             </div>
             <div className="flex justify-center mt-10 ">
           
           <div className="flex w-2/3 justify-around">
-            {errors ? (
-              <button
-                className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                disabled={errors}
-                className="disabledButton"
-              >
-                Guardar
-              </button>
-            ) : (
-              <button
+          <button
                 onClick={handleSubmitUpdateEmployee}
-                className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className={errors ? disableBtn : enableBtn}
+                  disabled={errors}
               >
                 Guardar
               </button>
-            )}
+            
             <button
               onClick={() => handleClose()}
               className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"

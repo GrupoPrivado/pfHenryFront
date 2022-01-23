@@ -5,11 +5,10 @@ import { useEffect, useState } from "react";
 
 import {
   getPharmacyData,
-  deletePharmacy,
   getAllCities,
   getAllPharmacies,
   getAllProvinces,
-  filterActiv
+  filterActiv,
 } from "../../../actions/actionAMBAdmin";
 
 import styles from "./ABMPharmacies.module.css";
@@ -18,6 +17,7 @@ const ABMPharmaciesList = ({
   allPharmacies,
   setShowModalUpdate,
   setShowModalAdd,
+  setDeleteState,
 }) => {
   const dispatch = useDispatch();
 
@@ -39,19 +39,14 @@ const ABMPharmaciesList = ({
   };
 
   const handleChangeCity = (e) => {
-    console.log(e.target.value);
     if (e.target.value !== "")
       dispatch(getAllPharmacies({ ciudadID: e.target.value }));
     else dispatch(getAllPharmacies(filter));
   };
   const handleChangeActiv = (e) => {
-        if(e.target.value !== ""){
-      
-      dispatch(filterActiv(e.target.value))}
-      
-      
-    else if(e.target.value === "") dispatch(getAllPharmacies())
-    
+    if (e.target.value !== "") {
+      dispatch(filterActiv(e.target.value));
+    } else if (e.target.value === "") dispatch(getAllPharmacies());
   };
 
   const handleEditPharmacy = async (event) => {
@@ -59,18 +54,12 @@ const ABMPharmaciesList = ({
     setShowModalUpdate(true);
   };
 
-  const handleDeletePharmacy = async (event) => {
-    let response = await dispatch(deletePharmacy(event.target.value));
-
-    await dispatch(getAllPharmacies({}));
-  };
-
   return (
     <div className={styles.divScroll}>
-      <div class="bg-gray-50 min-h-screen  ">
+      <div className="bg-gray-50 min-h-screen  ">
         <div>
-          <div class="p-4">
-            <div class="bg-white p-6 rounded-md">
+          <div className="p-4">
+            <div className="bg-white p-6 rounded-md">
               <div>
                 <div className=" flex justify-end">
                   <button
@@ -87,12 +76,12 @@ const ABMPharmaciesList = ({
                       className="text-lg font-semibold text-indigo-800"
                       htmlFor="provincia"
                     >
-                     Filtra por Provincia{" "}
+                      Filtra por Provincia{" "}
                     </label>
                     <select
                       onChange={handleChangeProvince}
                       name="provinciaID"
-                      className=" block w-full  my-2 text-lg font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 appearance-none rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
+                      className=" uppercase block w-full  my-2 text-lg font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 appearance-none rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
                       required
                     >
                       <option value="">Seleccione Provincia</option>
@@ -104,19 +93,18 @@ const ABMPharmaciesList = ({
                         ))}
                     </select>
                   </div>
-                  
 
-                  <div  className="px-4">
+                  <div className="px-4">
                     <label
                       className="text-lg font-semibold text-indigo-800"
                       htmlFor="localidad"
                     >
-                     Filtra por Localidad{" "}
+                      Filtra por Localidad{" "}
                     </label>
                     <select
                       onChange={(e) => handleChangeCity(e)}
                       name="ciudadID"
-                      className=" block w-full text-lg  my-2  font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 appearance-none rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
+                      className=" uppercase block w-full text-lg  my-2  font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 appearance-none rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
                       required
                     >
                       <option value="">Seleccione Localidad</option>
@@ -133,7 +121,7 @@ const ABMPharmaciesList = ({
                       className="text-lg font-semibold text-indigo-800"
                       htmlFor="activo"
                     >
-                     Filtra por Activa{" "}
+                      Filtra por Activa{" "}
                     </label>
                     <select
                       onChange={handleChangeActiv}
@@ -149,7 +137,7 @@ const ABMPharmaciesList = ({
                 </div>
                 <div className="mt-3.5">
                   <div>
-                    <div class=" grid overflow-hidden grid-cols-6 grid-rows-1 gap-0 bg-gradient-to-tr from-indigo-600 to-purple-600 rounded-md py-2 px-4 text-white font-bold text-md">
+                    <div className=" grid overflow-hidden grid-cols-6 grid-rows-1 gap-0 bg-gradient-to-tr from-indigo-600 to-purple-600 rounded-md py-2 px-4 text-white font-bold text-md">
                       <div className=" flex justify-center">
                         <span>Nombre </span>
                       </div>
@@ -176,29 +164,31 @@ const ABMPharmaciesList = ({
                       allPharmacies.map((element) => {
                         return (
                           <div key={element._id} className={styles.tabla}>
-                            <div class="grid overflow-hidden grid-cols-6 grid-rows-1 gap-0 justify-between  py-1 px-4 items-center border-t text-sm font-normal mt-4 space-x-4">
-                              <div class=" flex justify-center ">
+                            <div className="grid overflow-hidden grid-cols-6 grid-rows-1 gap-0 justify-between  py-1 px-4 items-center border-t text-sm font-normal mt-4 space-x-4">
+                              <div className=" flex justify-center ">
                                 <span>{element.nombre}</span>
                               </div>
-                              <div class=" flex justify-center ">
+                              <div className=" flex justify-center ">
                                 <span>{element.direccion}</span>
                               </div>
-                              <div class=" flex justify-center ">
+                              <div className=" flex justify-center ">
                                 <span>{element.ciudadID.localidad}</span>
                               </div>
-                              <div class=" flex justify-center ">
+                              <div className=" flex justify-center uppercase ">
                                 <span>{element.provinciaID.nombre}</span>
                               </div>
 
-                              <div class=" flex justify-center ">
+                              <div className=" flex justify-center ">
                                 <span>{element.activo ? "Si" : "No"}</span>
                               </div>
-                              <div class=" flex justify-around ">
+                              <div className=" flex justify-around ">
                                 <button
                                   key={"delete" + element._id}
                                   title="Delete"
                                   value={element._id}
-                                  onClick={(e) => handleDeletePharmacy(e)}
+                                  onClick={(e) =>
+                                    setDeleteState(e.target.value)
+                                  }
                                 >
                                   Eliminar
                                 </button>

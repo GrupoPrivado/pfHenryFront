@@ -90,8 +90,6 @@ export function filterByCity(ciudadID, codeEsp) {
             type: "FILTER_BY_CITY",
             payload: data.message,
           });
-        } else {
-          console.log('errooooooor filter')
         }
       
     } catch (error) {
@@ -100,7 +98,6 @@ export function filterByCity(ciudadID, codeEsp) {
   };
 }
 // export function filterBySpecialties(payload) {
-//   console.log('special',payload)
 //   return {
 //     type: "FILTER_BY_SPECIALTIES",
 //     payload,
