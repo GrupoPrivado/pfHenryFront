@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteFamiliar, findFamiliar, registerFamilies } from "../../actions/actionRegister";
+import {
+  deleteFamiliar,
+  findFamiliar,
+  registerFamilies,
+} from "../../actions/actionRegister";
 import { getAllCities } from "../../actions/actionProviders";
 import date from "./../../utils/date.js";
 import { validate } from "../../utils/constantes";
-
+import { TrashIcon, PencilIcon } from '@heroicons/react/outline'
 
 export default function FormAsociate({
   setEditModal,
@@ -33,7 +37,6 @@ export default function FormAsociate({
     parentesco: "titular",
   });
 
-
   function handleChange(e) {
     const newInp = {
       ...input,
@@ -48,7 +51,7 @@ export default function FormAsociate({
     setErrores(validateError);
     if (Object.entries(validateError).length <= 0) {
       const newState = [input, ...familiarData];
-      dispatch(registerFamilies(newState))
+      dispatch(registerFamilies(newState));
     }
   };
   function handleSelect(e) {
@@ -60,13 +63,14 @@ export default function FormAsociate({
     }
   }
   function handleDelete(e) {
-    dispatch(deleteFamiliar(e.target.value))
+    dispatch(deleteFamiliar(e.target.value));
   }
 
   const handleEdit = (e) => {
-    dispatch(findFamiliar(e.target.value))
-    setEditModal(true)
-  }
+    console.log(e.target.value, 'value edit')
+    dispatch(findFamiliar(e.target.value));
+    setEditModal(true);
+  };
 
   const handleChangeProvince = (e) => {
     const newData = {
@@ -343,22 +347,33 @@ export default function FormAsociate({
           <div>
             <ul>
               {familiarData?.map((e, index) => (
-                <div key={index} className="flex items-center justify-between my-4">
+                <div
+                  key={index}
+                  className="flex items-center justify-between my-4"
+                >
                   <li
                     value={e.name}
                     className="py-3 pr-3 text-lg font-semibold"
                   >
-                    {e.nombre}   {e.apellido}
+                    {e.nombre} {e.apellido}
                   </li>
-                  <button value={e.idAf} className="relative flex justify-center w-10 p-2 text-sm font-medium text-white bg-red-500 border border-transparent rounded-md group h-9 hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" onClick={handleEdit}>
-                      edit (poner icon)
-                  </button>
-                  <button value={e.idAf}
-                    className="relative flex justify-center w-10 p-2 text-sm font-medium text-white bg-red-500 border border-transparent rounded-md group h-9 hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    onClick={handleDelete}
-                  >
-                    x
-                  </button>
+                  <div className="flex gap-2">
+                    <button
+                      value={e.idAf}
+                      className="relative flex justify-center w-10 p-2 text-sm font-medium text-white bg-secondary border border-transparent rounded-md group h-9 hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                      onClick={handleEdit}
+                    >
+                     <PencilIcon className="pointer-events-none h-5 w-5 text-white"/>
+
+                    </button>
+                    <button
+                      value={e.idAf}
+                      className="flex justify-center w-10 p-2 text-sm font-medium text-white bg-red-500 border border-transparent rounded-md group h-9 hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                      onClick={handleDelete}
+                    >
+                     <TrashIcon className="pointer-events-none h-5 w-5 text-white"/>
+                    </button>
+                  </div>
                 </div>
               ))}
             </ul>
@@ -374,7 +389,6 @@ export default function FormAsociate({
           </button>
         </div>
       </div>
-
     </div>
   );
 }
