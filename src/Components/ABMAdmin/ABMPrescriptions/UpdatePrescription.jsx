@@ -10,17 +10,10 @@ import {
 
 import styles from "./UpdatePrescription.module.css";
 
-const functionErrors = (data) => {
-  const arrayKeys = Object.keys(data);
-  const arrayData = arrayKeys.filter((element, index) => data[element] !== "");
-  if (arrayKeys.length === arrayData.length) {
-    return false;
-  } else {
-    return true;
-  }
-}; //cambiarla en un utils ya que se puede usar en todos los forms
+import { functionErrorsBtn } from "../../../utils/adminFormsControllers";
+import { enableBtn, disableBtn } from "../../../utils/ABMStyles";
 
-const UpdatePrescription = ({ setShowModalUpdate, showModalUpdate }) => {
+const UpdatePrescription = ({ setShowModalUpdate }) => {
   const dispatch = useDispatch();
 
   const { updateData, affiliatePrescriptionData } = useSelector(
@@ -37,7 +30,6 @@ const UpdatePrescription = ({ setShowModalUpdate, showModalUpdate }) => {
   };
 
   const statusPrescriptionOpc = ["Autorizada", "Rechazada", "Pendiente"];
-  const typePrescription = ["Farmacia", "Estudio"];
 
   const [errors, setErrors] = useState(false);
 
@@ -50,7 +42,7 @@ const UpdatePrescription = ({ setShowModalUpdate, showModalUpdate }) => {
       tipoReceta: updateData.tipoReceta,
       status: updateData.status,
       motivoNoAuto: "N/C",
-      realizada: false,
+      realizada: updateData.realizada,
       correoElectronico: updateData.afiliadoID.correoElectronico,
     });
   }, []);
@@ -63,18 +55,16 @@ const UpdatePrescription = ({ setShowModalUpdate, showModalUpdate }) => {
 
     setUpdatePrescriptionData(updatedPlanPrescription);
 
-    setErrors(functionErrors(updatedPlanPrescription));
+    setErrors(functionErrorsBtn(updatedPlanPrescription));
   };
 
   const handleSubmitUpdatePrescription = async (event) => {
     event.preventDefault();
-    let response = await dispatch(updatePrescription(updatePrescriptionData));
-    alert(response.success);
+    dispatch(updatePrescription(updatePrescriptionData));
     setUpdatePrescriptionData(inputPrescription);
     setShowModalUpdate(false);
     dispatch(resetDataUpdate());
     dispatch(getPrescriptionsByDNI(updateData.afiliadoID.DNI));
-    setErrors(true);
   };
 
   const handleClose = () => {
@@ -131,14 +121,18 @@ const UpdatePrescription = ({ setShowModalUpdate, showModalUpdate }) => {
                 onChange={(e) => handleUpdatePrescription(e)}
               >
                 {statusPrescriptionOpc.map((stat) => {
-                  return <option value={stat} key={stat}>{stat}</option>;
+                  return (
+                    <option value={stat} key={stat}>
+                      {stat}
+                    </option>
+                  );
                 })}
               </select>
             </div>
             <label className="text-md text-gray-600">Realizada: </label>
             <select
               className=" h-1/2 w-full  border-2 border-gray-300 mb-5 rounded-md"
-              id="activo"
+              id="realizada"
               name="realizada"
               onChange={(e) => handleUpdatePrescription(e)}
               value={updatePrescriptionData.realizada}
@@ -164,24 +158,15 @@ const UpdatePrescription = ({ setShowModalUpdate, showModalUpdate }) => {
             </div>
           </form>
           <div className="  mt-10 flex justify-around w-full">
-            {errors ? (
-              <button
-                className="group relative w-15 h-10 flex justify-center py-2 px-3 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                key="submitFormButton1"
-                disabled={errors}
-                className="disabledButton"
-              >
-                Guardar
-              </button>
-            ) : (
-              <button
-                className="group relative w-15 h-10 flex justify-center py-2 px-3 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                key="submitFormButton"
-                onClick={handleSubmitUpdatePrescription}
-              >
-                Guardar
-              </button>
-            )}
+            <button
+              className={errors ? disableBtn : enableBtn}
+              disabled={errors}
+              key="submitFormButton"
+              onClick={handleSubmitUpdatePrescription}
+            >
+              Guardar
+            </button>
+
             <button
               className="group relative w-15 h-10 flex justify-center py-2 px-3 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 "
               onClick={() => handleClose()}

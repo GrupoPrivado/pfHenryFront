@@ -78,7 +78,7 @@ const ABMPrescriptionsList = ({ setShowModalUpdate }) => {
                               </span>
                             </div >
                             <div className="  flex justify-center">
-                              <span>{element.planActivo ? "Si" : "No"}</span>
+                              <span>{element.realizada ? "Si" : "No"}</span>
                             </div>
 
                             <div className="  flex justify-center">
