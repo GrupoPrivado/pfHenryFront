@@ -13,7 +13,7 @@ import styles from "./UpDownEmployee.module.css";
 import { enableBtn, disableBtn } from "../../../utils/ABMStyles";
 import {
   functionErrorsBtn,
-  validateUpdownEmployee,
+  
 } from "../../../utils/adminFormsControllers";
 
 
@@ -23,7 +23,7 @@ const UpDownEmployee = ({ setShowModalUpDown }) => {
   const { updateData } = useSelector((state) => state.ABMAdmin);
 
   const [errors, setErrors] = useState(false);
-  const [errores, setErrores] = useState({});
+  
 
   const upDownDataInput = {
     id: "",
@@ -41,8 +41,7 @@ const UpDownEmployee = ({ setShowModalUpDown }) => {
       id: updateData._id,
       email: updateData.email,
       activo: updateData.activo,
-      subject: "",
-      text: "",
+      
     });
   }, [updateData]);
 
@@ -59,16 +58,15 @@ const UpDownEmployee = ({ setShowModalUpDown }) => {
 
   const handleSubmitUpdateEmployee = async (event) => {
     event.preventDefault();
-    const validateError = validateUpdownEmployee(upDownEmployeeData);
-    setErrores(validateError);
+   
     
-    if (Object.entries(validateError).length <= 0) {
+    
       dispatch(upDownEmployeeAct(upDownEmployeeData))
     setUpDowndateEmployeeData(upDownDataInput);
     setShowModalUpDown(false);
     
     dispatch(resetDataUpdate());
-    setErrors(true);}
+    
 
   };
  
@@ -130,9 +128,7 @@ const UpDownEmployee = ({ setShowModalUpDown }) => {
                     onChange={(e) => handleUpdateEmployee(e)}
                     placeholder="Ingrese el asunto...."
                   />
-                  {errores.subject && (
-              <p className="absolute text-red-700">{errores.subject}</p>
-            )}
+                  
                 </div>
                 <div>
                   <div>
@@ -146,9 +142,7 @@ const UpDownEmployee = ({ setShowModalUpDown }) => {
                       onChange={(e) => handleUpdateEmployee(e)}
                       placeholder="Ingrese el texto...."
                     />
-                    {errores.text && (
-              <p className="absolute text-red-700">{errores.text}</p>
-            )}
+                  
                     
                   </div>
                 </div>
@@ -161,14 +155,12 @@ const UpDownEmployee = ({ setShowModalUpDown }) => {
                     onChange={(e) => handleUpdateEmployee(e)}
                     value={upDownEmployeeData.activo}
                   >
-                    <option value="">Seleccione:</option>
+                    
                     <option value={true}>Si</option>
                     <option value={false}>No</option>
                   </select>
                 </div>
-                {errores.activo && (
-              <p className="absolute text-red-700">{errores.activo}</p>
-            )}
+               
               </div>
             </div>
             <div className="flex justify-center mt-10 ">

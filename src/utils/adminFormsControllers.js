@@ -303,7 +303,8 @@ export const validateAdherent = (input) => {
   }
   if (input.parentesco.length <= 0) {
     errores.parentesco = "Debe seleccionar un parentesco";
-=======
+  }
+}
 export const validateAddEmployee = (input) => {
   let errores = {};
 
@@ -379,20 +380,5 @@ export const validateUpdateEmployee = (input) => {
   }
   return errores;
 };
-export const validateUpdownEmployee = (input) => {
-  console.log('input validate', input)
-  let errores = {};
-  
-  if (input.activo === " ") {
-    errores.activo = "Debe seleccionar si la especialidad esta activa o no";
-  }
 
-  if (input.text === '') {
-    errores.text = "Debe tener al menos un asunto";
-  }
-  if (input.subject === '') {
-    errores.subject= "Dentener al menos una descripcion";
-  }
-  return errores;
-};
 
