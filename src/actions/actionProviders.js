@@ -86,14 +86,11 @@ export function filterByCity(ciudadID, codeEsp) {
       var {data} = await axios.get(
         `${api}/profesionales?ciudadID=${ciudadID}&codeEsp=${codeEsp}`
         );
-        console.log('json', data.message)
         if(data.success){
           return dispatch({
             type: "FILTER_BY_CITY",
             payload: data.message,
           });
-        } else {
-          console.log('errooooooor filter')
         }
       
     } catch (error) {
@@ -102,7 +99,6 @@ export function filterByCity(ciudadID, codeEsp) {
   };
 }
 // export function filterBySpecialties(payload) {
-//   console.log('special',payload)
 //   return {
 //     type: "FILTER_BY_SPECIALTIES",
 //     payload,

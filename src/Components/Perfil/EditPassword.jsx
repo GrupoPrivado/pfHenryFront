@@ -12,7 +12,7 @@ function EditPassword({ setErrorAlert, setAlertMessage, modal, setModal }) {
     newPass: "",
     repeat: "",
   });
-  //const [activeAlert, setActiveAlert] = useState(false);
+ 
   const handleSubmit = (e) => {
     e.preventDefault(e);
     const validateError = validatePassword(passwords);

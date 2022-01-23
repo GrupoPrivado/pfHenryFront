@@ -21,7 +21,6 @@ export default function FamilyGroupDetail() {
         }
 
     }, [dispatch,user.grupFamID, user.data])
-    console.log("group: ", group)
 
     const [isActive, setActive] = useState(false);
 
