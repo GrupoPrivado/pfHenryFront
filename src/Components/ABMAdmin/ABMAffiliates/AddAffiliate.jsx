@@ -13,16 +13,11 @@ import AddAdherent from "./addAdherent";
 
 import styles from "./addAffiliate.module.css";
 
-const functionErrors = (data) => {
-  const arrayKeys = Object.keys(data);
-  const arrayData = arrayKeys.filter((element, index) => data[element] !== "");
-
-  if (arrayKeys.length === arrayData.length) {
-    return false;
-  } else {
-    return true;
-  }
-}; //cambiarla en un utils ya que se puede usar en todos los forms
+import { enableBtn, disableBtn } from "../../../utils/ABMStyles";
+import {
+  functionErrorsBtn,
+  validateAffiliate,
+} from "../../../utils/adminFormsControllers";
 
 const AddAffiliate = ({ setShowModalAdd }) => {
   const dispatch = useDispatch();
@@ -31,9 +26,14 @@ const AddAffiliate = ({ setShowModalAdd }) => {
     (state) => state.ABMAdmin
   );
 
+  useEffect(() => {
+    dispatch(getAllProvinces());
+  }, []);
+
   let [showModalAdherent, setShowModalAdherent] = useState(false);
 
   const [errors, setErrors] = useState(true);
+  const [errores, setErrores] = useState({});
 
   const inputAffiliateStruct = {
     nombre: "",
@@ -54,10 +54,6 @@ const AddAffiliate = ({ setShowModalAdd }) => {
 
   const [inputAffiliate, setInputAffiliate] = useState(inputAffiliateStruct);
 
-  useEffect(() => {
-    dispatch(getAllProvinces());
-  }, []);
-
   let [inputAdherent, setInputAdherent] = useState([]);
 
   const handleChange = (event) => {
@@ -70,7 +66,7 @@ const AddAffiliate = ({ setShowModalAdd }) => {
     }
     setInputAffiliate(newAffiliate);
 
-    setErrors(functionErrors(newAffiliate));
+    setErrors(functionErrorsBtn(newAffiliate));
 
     newAffiliate = {};
   };
@@ -98,14 +94,16 @@ const AddAffiliate = ({ setShowModalAdd }) => {
 
   const handleSubmitAffiliate = async (event) => {
     event.preventDefault();
+
     const outputAffiliate = [inputAffiliate, ...inputAdherent];
 
-    let response = await dispatch(addAffiliate(outputAffiliate));
-    alert(response.success);
-    setInputAffiliate(inputAffiliateStruct);
-    setShowModalAdd(false);
-    dispatch(getAllAffiliates());
-    setErrors(true);
+    const validateError = validateAffiliate(inputAffiliate);
+    setErrores(validateError);
+    if (Object.entries(validateError).length <= 0) {
+      dispatch(addAffiliate(outputAffiliate));
+      dispatch(getAllAffiliates());
+      setShowModalAdd(false);
+    }
   };
 
   const handleClose = () => {
@@ -137,6 +135,9 @@ const AddAffiliate = ({ setShowModalAdd }) => {
                   onChange={(e) => handleChange(e)}
                   placeholder="Ingrese el nombre...."
                 />
+                {errores.nombre && (
+                  <p className="absolute text-red-700">{errores.nombre}</p>
+                )}
               </div>
 
               <div className="w-1/3">
@@ -150,6 +151,9 @@ const AddAffiliate = ({ setShowModalAdd }) => {
                   onChange={(e) => handleChange(e)}
                   placeholder="Ingrese el apellido...."
                 />
+                {errores.apellido && (
+                  <p className="absolute text-red-700">{errores.apellido}</p>
+                )}
               </div>
 
               <div className="w-1/3">
@@ -163,6 +167,9 @@ const AddAffiliate = ({ setShowModalAdd }) => {
                   onChange={(e) => handleChange(e)}
                   placeholder="Ingrese el DNI...."
                 />
+                {errores.DNI && (
+                  <p className="absolute text-red-700">{errores.DNI}</p>
+                )}
               </div>
             </div>
             <div className="flex">
@@ -179,6 +186,11 @@ const AddAffiliate = ({ setShowModalAdd }) => {
                   onChange={(e) => handleChange(e)}
                   placeholder="Ingrese Fecha Nacimiento...."
                 />
+                {errores.fechaNacimiento && (
+                  <p className="absolute text-red-700">
+                    {errores.fechaNacimiento}
+                  </p>
+                )}
               </div>
 
               <div className="w-1/2">
@@ -192,6 +204,9 @@ const AddAffiliate = ({ setShowModalAdd }) => {
                   onChange={(e) => handleChange(e)}
                   placeholder="Ingrese el Teléfono...."
                 />
+                {errores.telefono && (
+                  <p className="absolute text-red-700">{errores.telefono}</p>
+                )}
               </div>
             </div>
             <div className="flex">
@@ -206,6 +221,11 @@ const AddAffiliate = ({ setShowModalAdd }) => {
                   onChange={(e) => handleChange(e)}
                   placeholder="Ingrese el E-Mail...."
                 />
+                {errores.correoElectronico && (
+                  <p className="absolute text-red-700">
+                    {errores.correoElectronico}
+                  </p>
+                )}
               </div>
 
               <div className="w-1/2">
@@ -219,6 +239,9 @@ const AddAffiliate = ({ setShowModalAdd }) => {
                   onChange={(e) => handleChange(e)}
                   placeholder="Ingrese el domocilio...."
                 />
+                {errores.direccion && (
+                  <p className="absolute text-red-700">{errores.direccion}</p>
+                )}
               </div>
             </div>
             <div className="flex">
@@ -241,6 +264,9 @@ const AddAffiliate = ({ setShowModalAdd }) => {
                       </option>
                     ))}
                 </select>
+                {errores.provinciaID && (
+                  <p className="absolute text-red-700">{errores.provinciaID}</p>
+                )}
               </div>
 
               <div className="w-1/2">
@@ -262,6 +288,9 @@ const AddAffiliate = ({ setShowModalAdd }) => {
                       </option>
                     ))}
                 </select>
+                {errores.ciudadID && (
+                  <p className="absolute text-red-700">{errores.ciudadID}</p>
+                )}
               </div>
             </div>
 
@@ -279,11 +308,18 @@ const AddAffiliate = ({ setShowModalAdd }) => {
                   {allPlans &&
                     allPlans.map((element) => {
                       return (
-                        <option value={element._id} id={element._id}>
+                        <option
+                          value={element._id}
+                          id={element._id}
+                          key={element._id}
+                        >
                           {element.name}
                         </option>
                       );
                     })}
+                  {errores.planID && (
+                    <p className="absolute text-red-700">{errores.planID}</p>
+                  )}
                 </select>
               </div>
               <div>
@@ -297,6 +333,9 @@ const AddAffiliate = ({ setShowModalAdd }) => {
                   <option value={true}>Si</option>
                   <option value={false}>No</option>
                 </select>
+                {errores.alta && (
+                  <p className="absolute text-red-700">{errores.alta}</p>
+                )}
               </div>
 
               <div>
@@ -310,6 +349,9 @@ const AddAffiliate = ({ setShowModalAdd }) => {
                   <option value={true}>Si</option>
                   <option value={false}>No</option>
                 </select>
+                {errores.activo && (
+                  <p className="absolute text-red-700">{errores.activo}</p>
+                )}
               </div>
             </div>
           </form>
@@ -349,22 +391,14 @@ const AddAffiliate = ({ setShowModalAdd }) => {
             </div>
 
             <div className=" flex justify-between w-2/6">
-              {errors ? (
-                <button
-                  className="group relative w-15 h-10 flex justify-center py-2 px-3 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  disabled={errors}
-                >
-                  Guardar
-                </button>
-              ) : (
-                <button
-                  key="submitFormButton"
-                  className="group relative w-15 h-10 flex justify-center py-2 px-3 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  onClick={handleSubmitAffiliate}
-                >
-                  Guardar
-                </button>
-              )}
+              <button
+                key="submitFormButton"
+                className={errors ? disableBtn : enableBtn}
+                disabled={errors}
+                onClick={handleSubmitAffiliate}
+              >
+                Guardar
+              </button>
 
               <button
                 className="group relative w-15 h-10 flex justify-center py-2 px-3 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -378,7 +412,10 @@ const AddAffiliate = ({ setShowModalAdd }) => {
       </section>
 
       {showModalAdherent && (
-        <AddAdherent handleAddAdherent={handleAddAdherent} setShowModalAdherent={setShowModalAdherent} />
+        <AddAdherent
+          handleAddAdherent={handleAddAdherent}
+          setShowModalAdherent={setShowModalAdherent}
+        />
       )}
     </div>
   );

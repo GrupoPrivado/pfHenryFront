@@ -24,10 +24,10 @@ const ABMSpecialitiesList = ({
 
   return (
     <div className={styles.divScroll}>
-      <div class="bg-gray-50 min-h-screen  ">
+      <div className="bg-gray-50 min-h-screen  ">
         <div>
-          <div class="p-4">
-            <div class="bg-white p-6 rounded-md">
+          <div className="p-4">
+            <div className="bg-white p-6 rounded-md">
               <div>
                 <div className=" flex justify-end">
                   <button
@@ -40,7 +40,7 @@ const ABMSpecialitiesList = ({
                 </div>
                 <div className="mt-3.5">
                   <div>
-                    <div class="grid overflow-hidden grid-cols-4 grid-rows-1 gap-0 bg-gradient-to-tr from-indigo-600 to-purple-600 rounded-md py-2 px-4 text-white font-bold text-md">
+                    <div className="grid overflow-hidden grid-cols-4 grid-rows-1 gap-0 bg-gradient-to-tr from-indigo-600 to-purple-600 rounded-md py-2 px-4 text-white font-bold text-md">
                       <div className="  flex justify-center">
                         <span>Nombre</span>
                       </div>
@@ -59,18 +59,18 @@ const ABMSpecialitiesList = ({
                       allSpecialities.map((element) => {
                         return (
                           <div key={element._id} className={styles.tabla}>
-                            <div class="grid overflow-hidden grid-cols-4 grid-rows-1 gap-0  py-1 px-4 items-center border-t text-sm font-normal mt-4 space-x-4">
-                              <div class="  flex justify-center">
+                            <div className="grid overflow-hidden grid-cols-4 grid-rows-1 gap-0  py-1 px-4 items-center border-t text-sm font-normal mt-4 space-x-4">
+                              <div className="  flex justify-center">
                                 <span>{element.nombre}</span>
                               </div>
-                              <div class="  flex justify-center">
+                              <div className="  flex justify-center">
                                 <span>{element.descripcion}</span>
                               </div>
-                              <div class=" flex justify-center ">
+                              <div className=" flex justify-center ">
                                 <span>{element.activa ? "Si" : "No"}</span>
                               </div>
 
-                              <div class="  flex justify-around">
+                              <div className="  flex justify-around">
                                 <button
                                   key={"delete" + element._id}
                                   title="Delete"

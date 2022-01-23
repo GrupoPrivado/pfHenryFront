@@ -21,7 +21,7 @@ const ViewPlansUpdate = ({ setShowModalViewUpdate }) => {
           return (
             <div>
               <div>
-                <span class="inline-flex bg-indigo-600 text-white rounded-full h-6 px-3 justify-center items-center">
+                <span className="inline-flex bg-indigo-600 text-white rounded-full h-6 px-3 justify-center items-center">
                   {e[0]}
                 </span>
               </div>

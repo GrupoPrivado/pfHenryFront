@@ -41,7 +41,7 @@ const UpdateSpeciality = ({ setShowModalUpdate }) => {
     });
   }, [updateData]);
 
-  const handleUpdateSpeciality =  (event) => {
+  const handleUpdateSpeciality = (event) => {
     let updatedSpeciality = {
       ...updateSpecialityData,
       [event.target.name]: event.target.value,
@@ -52,7 +52,7 @@ const UpdateSpeciality = ({ setShowModalUpdate }) => {
     setErrors(functionErrorsBtn(updatedSpeciality));
   };
 
-  const handleSubmitUpdateSpeciality =  () => {
+  const handleSubmitUpdateSpeciality = () => {
     const validateError = validateEspeciality(updateSpecialityData);
     setErrores(validateError);
 
@@ -133,26 +133,25 @@ const UpdateSpeciality = ({ setShowModalUpdate }) => {
                   <p className="absolute text-red-700">{errores.activa}</p>
                 )}
               </div>
-
-              <div className="flex w-2/3 justify-around  ">
-                <button
-                  onClick={handleSubmitUpdateSpeciality}
-                  key="submitFormButton"
-                  className={errors ? disableBtn : enableBtn}
-                  disabled={errors}
-                >
-                  Guardar
-                </button>
-
-                <button
-                  onClick={() => handleClose()}
-                  className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
-                  Cerrar
-                </button>
-              </div>
             </div>
           </form>
+          <div className="flex w-2/3 justify-around  ">
+            <button
+              onClick={handleSubmitUpdateSpeciality}
+              key="submitFormButton"
+              className={errors ? disableBtn : enableBtn}
+              disabled={errors}
+            >
+              Guardar
+            </button>
+
+            <button
+              onClick={() => handleClose()}
+              className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              Cerrar
+            </button>
+          </div>
         </div>
       </section>
     </div>
