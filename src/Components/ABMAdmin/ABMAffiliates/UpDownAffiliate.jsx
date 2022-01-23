@@ -10,15 +10,8 @@ import {
 
 import styles from "./UpDownAffiliate.module.css";
 
-const functionErrors = (data) => {
-  const arrayKeys = Object.keys(data);
-  const arrayData = arrayKeys.filter((element, index) => data[element] !== "");
-  if (arrayKeys.length === arrayData.length) {
-    return false;
-  } else {
-    return true;
-  }
-}; //cambiarla en un utils ya que se puede usar en todos los forms
+import { functionErrorsBtn } from "../../../utils/adminFormsControllers";
+import { enableBtn, disableBtn } from "../../../utils/ABMStyles";
 
 const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
   const dispatch = useDispatch();
@@ -62,18 +55,16 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
 
     setupDowndateAffiliateData(updatedAffiliate);
 
-    setErrors(functionErrors(updatedAffiliate));
+    setErrors(functionErrorsBtn(updatedAffiliate));
   };
 
   const handleSubmitUpdateAffiliate = async (event) => {
     event.preventDefault();
-    let response = await dispatch(upDownAffiliateAct(upDownAffiliateData));
-    alert(response.success);
-    setupDowndateAffiliateData(upDownAffiliateStruct);
+    dispatch(upDownAffiliateAct(upDownAffiliateData));
+
     setShowModalUpDown(false);
     dispatch(getAllAffiliates());
     dispatch(resetDataUpdate());
-    setErrors(true);
   };
 
   const handleClose = () => {
@@ -198,34 +189,25 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
                 </div>
               </div>
             </div>
-   
           </form>
           <div className="flex justify-center mt-6 ">
-              <div className="flex w-2/3 justify-around">
-                {errors ? (
-                  <button
-                    className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    disabled={errors}
-                    className="disabledButton"
-                  >
-                    Guardar
-                  </button>
-                ) : (
-                  <button
-                    onClick={handleSubmitUpdateAffiliate}
-                    className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  >
-                    Guardar
-                  </button>
-                )}
-                <button
-                  onClick={() => handleClose()}
-                  className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
-                  Cerrar
-                </button>
-              </div>
+            <div className="flex w-2/3 justify-around">
+              <button
+                onClick={handleSubmitUpdateAffiliate}
+                className={errors ? disableBtn : enableBtn}
+                disabled={errors}
+              >
+                Guardar
+              </button>
+
+              <button
+                onClick={() => handleClose()}
+                className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                Cerrar
+              </button>
             </div>
+          </div>
         </div>
       </section>
     </div>
