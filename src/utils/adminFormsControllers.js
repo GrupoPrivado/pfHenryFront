@@ -209,3 +209,64 @@ export const validateProfesionalUpdate = (input) => {
 
   return errores;
 };
+
+export const validateAddEmployee = (input) => {
+  let errores = {};
+
+  if (input.name && input.name.length < 5) {
+    errores.name = "El nombre debe tener minimo 5 caracteres";
+  }
+  if (input.lastName && input.lastName.length < 5) {
+    errores.lastName = "El apellido debe tener minimo 5 caracteres";
+  }
+
+  if (input.activo === "") {
+    errores.activo = "Debe seleccionar si la especialidad esta activa o no";
+  }
+
+  if (input.legajo && input.legajo.length > 5) {
+    errores.legajo = "El legajo debe tener menos de 5 caracteres";
+  }
+  if (
+    input.telefono &&
+    (input.telefono.length < 3 || input.telefono.length > 14)
+  ) {
+    errores.telefono = "El telefono debe tener entre 3 y 14 caracteres";
+  }
+  if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(input.email)) {
+    errores.email = "Ingrese un mail válido";
+  }
+
+  return errores;
+};
+export const validateUpdateEmployee = (input) => {
+ 
+  let errores = {};
+
+  if (
+    input.telefono &&
+    (input.telefono.length < 3 || input.telefono.length > 14)
+  ) {
+    errores.telefono = "El código debe tener entre 3 y 14 caracteres";
+  }
+  if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(input.email)) {
+    errores.email = "Ingrese un mail válido";
+  }
+  return errores;
+};
+export const validateUpdownEmployee = (input) => {
+  console.log('input validate', input)
+  let errores = {};
+  
+  if (input.activo === " ") {
+    errores.activo = "Debe seleccionar si la especialidad esta activa o no";
+  }
+
+  if (input.text === '') {
+    errores.text = "Debe tener al menos un asunto";
+  }
+  if (input.subject === '') {
+    errores.subject= "Dentener al menos una descripcion";
+  }
+  return errores;
+};
