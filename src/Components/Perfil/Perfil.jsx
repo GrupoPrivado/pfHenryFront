@@ -32,7 +32,7 @@ function Perfil() {
 
   useEffect(() => {
     if (!data) {
-      dispatch(getAfiliate(getItem()));
+      dispatch(getAfiliate());
     }
     if (provinces.length === 0) dispatch(getAllProvinces());
 
