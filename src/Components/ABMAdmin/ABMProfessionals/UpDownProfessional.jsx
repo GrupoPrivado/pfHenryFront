@@ -128,9 +128,11 @@ const UpDownProfessional = ({ setShowModalUpDown }) => {
                 <div>
                   <div>
                     <label className="text-md text-gray-600">Texto: </label>
-                    <input
+                    <textarea
                       className="h-6 p-10 w-2/3 border-2 border-gray-300 mb-3 rounded-md"
-                      type="textarea"
+                      type="text"
+                      rows="8"
+                      cols="50"
                       name="text"
                       autoComplete="off"
                       value={upDownProfessionalData.text}
@@ -154,26 +156,26 @@ const UpDownProfessional = ({ setShowModalUpDown }) => {
                 </div>
               </div>
             </div>
-            <div className="flex justify-center mt-4 ">
-              <div className="flex w-2/3 justify-around">
-                <button
-                  onClick={handleSubmitUpdateProfessional}
-                  key="submitFormButton"
-                  className={errors ? disableBtn : enableBtn}
-                  disabled={errors}
-                >
-                  Guardar
-                </button>
-
-                <button
-                  onClick={() => handleClose()}
-                  className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
-                  Cerrar
-                </button>
-              </div>
-            </div>
           </form>
+          <div className="flex justify-center mt-4 ">
+            <div className="flex w-2/3 justify-around">
+              <button
+                onClick={handleSubmitUpdateProfessional}
+                key="submitFormButton"
+                className={errors ? disableBtn : enableBtn}
+                disabled={errors}
+              >
+                Guardar
+              </button>
+
+              <button
+                onClick={handleClose}
+                className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                Cerrar
+              </button>
+            </div>
+          </div>
         </div>
       </section>
     </div>

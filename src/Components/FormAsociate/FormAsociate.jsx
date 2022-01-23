@@ -28,7 +28,6 @@ export default function FormAsociate({
   output,
   modal,
   setModal,
-  error,
 }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -60,12 +59,6 @@ export default function FormAsociate({
     setErrors(functionErrors(newInp));
   }
 
-  // useEffect(() => {
-  //   if(error){
-  //     setOutput([])
-  //   }
-  // }, [error,  setOutput]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const validateError = validate(input);
@@ -86,7 +79,7 @@ export default function FormAsociate({
         }, 5000);
       } else {
         setErrorAlert(true);
-        setAlertMessage("error en el registro");
+        setAlertMessage(result.data);
         setOutput([]);
         setTimeout(() => {
           setErrorAlert(false);
@@ -122,7 +115,7 @@ export default function FormAsociate({
         <form className="mt-8 space-y-6 " onSubmit={handleSubmit}>
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="grid items-center grid-cols-3 grid-rows-5 gap-4 -space-y-px rounded-md shadow-sm -z-0 w-90vw sm:grid-cols-4 sm:grid-rows-2">
-            <h3 className="col-span-4 row-span-1 text-2xl font-bold text-left text-primary">
+            <h3 className="col-span-4 row-span-1 text-4xl font-bold text-left text-primary">
               Formulario de registro
             </h3>
             <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">

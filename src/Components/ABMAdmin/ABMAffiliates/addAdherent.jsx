@@ -6,16 +6,11 @@ import { getAllCities } from "../../../actions/actionAMBAdmin";
 
 import styles from "./addAffiliate.module.css";
 
-const functionErrors = (data) => {
-  const arrayKeys = Object.keys(data);
-  const arrayData = arrayKeys.filter((element, index) => data[element] !== "");
-
-  if (arrayKeys.length === arrayData.length) {
-    return false;
-  } else {
-    return true;
-  }
-}; //cambiarla en un utils ya que se puede usar en todos los forms
+import { enableBtn, disableBtn } from "../../../utils/ABMStyles";
+import {
+  functionErrorsBtn,
+  validateAdherent,
+} from "../../../utils/adminFormsControllers";
 
 const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
   const dispatch = useDispatch();
@@ -23,6 +18,7 @@ const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
   const { cities, provinces } = useSelector((state) => state.ABMAdmin);
 
   const [errors, setErrors] = useState(true);
+  const [errores, setErrores] = useState({});
 
   const arrParentesco = [
     { display: "Hijo/a", value: "hijo" },
@@ -55,10 +51,13 @@ const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
   };
 
   const handleSubmit = () => {
-    alert("Me cree");
-    setShowModalAdherent(false);
-    handleAddAdherent(inputAdherent);
-    setInputAdherent(inputAdherentStruct);
+    const validateError = validateAdherent(inputAdherent);
+    setErrores(validateError);
+    if (Object.entries(validateError).length <= 0) {
+      setShowModalAdherent(false);
+      handleAddAdherent(inputAdherent);
+      setInputAdherent(inputAdherentStruct);
+    }
   };
 
   const handleChange = (event) => {
@@ -68,7 +67,7 @@ const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
     };
     setInputAdherent(newAdherent);
 
-    setErrors(functionErrors(newAdherent));
+    setErrors(functionErrorsBtn(newAdherent));
 
     newAdherent = {};
   };
@@ -78,11 +77,9 @@ const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
     setErrors(true);
     setShowModalAdherent(false);
   };
-  const showHideClassName = setShowModalAdherent
-    ? "displayblock"
-    : "displaynone";
+
   return (
-    <div className={styles[showHideClassName]}>
+    <div>
       <section className={styles.modalmain}>
         <div className="flex justify-center h-10%">
           <h5 className="text-2xl font-bold text-gray-500">
@@ -90,7 +87,6 @@ const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
           </h5>
         </div>
         <div className="modal-content py-4 text-left px-6 h-90% ">
-          {/* <form onSubmit={handleSubmit} id="addAdhernt"> */}
           <form>
             <div className="flex">
               <div className="w-1/3">
@@ -104,6 +100,9 @@ const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
                   onChange={(e) => handleChange(e)}
                   placeholder="Ingrese el nombre...."
                 />
+                {errores.nombre && (
+                  <p className="absolute text-red-700">{errores.nombre}</p>
+                )}
               </div>
 
               <div className="w-1/3">
@@ -117,6 +116,9 @@ const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
                   onChange={(e) => handleChange(e)}
                   placeholder="Ingrese el apellido...."
                 />
+                {errores.apellido && (
+                  <p className="absolute text-red-700">{errores.apellido}</p>
+                )}
               </div>
 
               <div className="w-1/3">
@@ -130,6 +132,9 @@ const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
                   onChange={(e) => handleChange(e)}
                   placeholder="Ingrese el DNI...."
                 />
+                {errores.DNI && (
+                  <p className="absolute text-red-700">{errores.DNI}</p>
+                )}
               </div>
             </div>
             <div className="flex">
@@ -146,6 +151,11 @@ const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
                   onChange={(e) => handleChange(e)}
                   placeholder="Ingrese Fecha Nacimiento...."
                 />
+                {errores.fechaNacimiento && (
+                  <p className="absolute text-red-700">
+                    {errores.fechaNacimiento}
+                  </p>
+                )}
               </div>
 
               <div className="w-1/2">
@@ -160,6 +170,9 @@ const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
                   onChange={(e) => handleChange(e)}
                   placeholder="Ingrese el Teléfono...."
                 />
+                {errores.telefono && (
+                  <p className="absolute text-red-700">{errores.telefono}</p>
+                )}
               </div>
             </div>
             <div className="flex">
@@ -174,6 +187,11 @@ const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
                   onChange={(e) => handleChange(e)}
                   placeholder="Ingrese el E-Mail...."
                 />
+                {errores.correoElectronico && (
+                  <p className="absolute text-red-700">
+                    {errores.correoElectronico}
+                  </p>
+                )}
               </div>
 
               <div className="w-1/2">
@@ -187,6 +205,9 @@ const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
                   onChange={(e) => handleChange(e)}
                   placeholder="Ingrese el domocilio...."
                 />
+                {errores.direccion && (
+                  <p className="absolute text-red-700">{errores.direccion}</p>
+                )}
               </div>
             </div>
             <div className="flex">
@@ -209,6 +230,9 @@ const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
                       </option>
                     ))}
                 </select>
+                {errores.provinciaID && (
+                  <p className="absolute text-red-700">{errores.provinciaID}</p>
+                )}
               </div>
 
               <div className="w-1/2">
@@ -230,14 +254,17 @@ const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
                       </option>
                     ))}
                 </select>
+                {errores.ciudadID && (
+                  <p className="absolute text-red-700">{errores.ciudadID}</p>
+                )}
               </div>
             </div>
             <div className="flex justify-between items-end  mt-4">
-              <div lassName="flex w-1/2 items-center">
-              <label className="text-md text-gray-600">Parentesco </label>
+              <div className="flex w-1/2 items-center">
+                <label className="text-md text-gray-600">Parentesco </label>
                 <select
-
-className="border-2 p-1 border-gray-300 mb-3 rounded-md"id="parentesco"
+                  className="border-2 p-1 border-gray-300 mb-3 rounded-md"
+                  id="parentesco"
                   name="parentesco"
                   onChange={(e) => handleChange(e)}
                   defaultValue={0}
@@ -245,32 +272,37 @@ className="border-2 p-1 border-gray-300 mb-3 rounded-md"id="parentesco"
                   <option value="">Seleccione</option>
                   {arrParentesco.map((element) => {
                     return (
-                      <option value={element.value} id={element.value}>
+                      <option
+                        value={element.value}
+                        id={element.value}
+                        key={element.value}
+                      >
                         {element.display}
                       </option>
                     );
                   })}
                 </select>
+                {errores.parentesco && (
+                  <p className="absolute text-red-700">{errores.parentesco}</p>
+                )}
               </div>
               <div className=" flex justify-around  w-1/2">
-              {errors ? (
                 <button
-                  type="submit"
                   key="submitFormButton"
-                  form="addAdhernt"
+                  className={errors ? disableBtn : enableBtn}
                   disabled={errors}
-                  className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  onClick={handleSubmit}
                 >
                   Guardar
                 </button>
-              ) : (
-                <button className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" key="submitFormButton" onClick={handleSubmit}>
-                  Guardar
+
+                <button
+                  className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  onClick={() => handleClose()}
+                >
+                  Cerrar
                 </button>
-              )}
-              <button className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              onClick={() => handleClose()}>Cerrar</button>
-            </div>
+              </div>
             </div>
           </form>
         </div>

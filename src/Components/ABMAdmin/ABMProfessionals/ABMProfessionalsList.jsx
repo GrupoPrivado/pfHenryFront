@@ -31,9 +31,8 @@ const ABMAffiliatesList = ({
     setShowModalUpDown(true);
   };
 
-  const handleEditProfessional = async (event) => {
-    console.log('event update', event.target.value)
-    await dispatch(getProfessionalData(event.target.value));
+  const handleEditProfessional = (event) => {
+    dispatch(getProfessionalData(event.target.value));
     setShowModalUpdate(true);
   };
 
@@ -56,10 +55,10 @@ const ABMAffiliatesList = ({
 
   return (
     <div className={styles.divScroll}>
-      <div class="bg-gray-50 min-h-screen  ">
+      <div className="bg-gray-50 min-h-screen  ">
         <div>
-          <div class="p-4">
-            <div class="bg-white p-6 rounded-md">
+          <div className="p-4">
+            <div className="bg-white p-6 rounded-md">
               <div>
                 <div className=" flex justify-end">
                   <button
@@ -125,7 +124,7 @@ const ABMAffiliatesList = ({
 
                 <div className="mt-3.5">
                   <div>
-                    <div class="grid overflow-hidden grid-cols-8 grid-rows-1 gap-0 bg-gradient-to-tr from-indigo-600 to-purple-600 rounded-md py-2 px-4 text-white font-bold text-md">
+                    <div className="grid overflow-hidden grid-cols-8 grid-rows-1 gap-0 bg-gradient-to-tr from-indigo-600 to-purple-600 rounded-md py-2 px-4 text-white font-bold text-md">
                       <div className=" flex justify-center">
                         <span>Matricula </span>
                       </div>
@@ -173,7 +172,7 @@ const ABMAffiliatesList = ({
                             <div className=" flex justify-center ">
                               <span>{element.ciudadID.localidad}</span>
                             </div>
-                            <div class=" flex justify-center ">
+                            <div className=" flex justify-center ">
                               <span className="uppercase">
                                 {element.provinciaID.nombre}
                               </span>
@@ -195,7 +194,7 @@ const ABMAffiliatesList = ({
                                 title="Edit"
                                 key={"edit" + element._id}
                                 value={element._id}
-                                onClick={(e)=>handleEditProfessional(e.target.value)}
+                                onClick={(e) => handleEditProfessional(e)}
                               >
                                 Editar
                               </button>

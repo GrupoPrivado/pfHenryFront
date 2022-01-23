@@ -130,9 +130,8 @@ const UpdatePrescription = ({ setShowModalUpdate, showModalUpdate }) => {
                 value={updatePrescriptionData.status}
                 onChange={(e) => handleUpdatePrescription(e)}
               >
-                <option value="">Elija el estado de lareceta</option>
                 {statusPrescriptionOpc.map((stat) => {
-                  return <option value={stat}>{stat}</option>;
+                  return <option value={stat} key={stat}>{stat}</option>;
                 })}
               </select>
             </div>
@@ -145,15 +144,16 @@ const UpdatePrescription = ({ setShowModalUpdate, showModalUpdate }) => {
               value={updatePrescriptionData.realizada}
               defaultValue={0}
             >
-              <option value="">Seleccione</option>
               <option value="false">No</option>
               <option value="true">Si</option>
             </select>
 
             <div>
               <label>Motivo no autorización: </label>
-              <input
-                className="h-2 p-4  w-full border-2 border-gray-300 mb-2 rounded-md"
+              <textarea
+                className="h-2 p-4  w-full border-2 border-gray-300 mb-2 rounded-md resize-none"
+                rows="8"
+                cols="50"
                 type="text"
                 name="motivoNoAuto"
                 autoComplete="off"

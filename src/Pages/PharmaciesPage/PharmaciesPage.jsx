@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  deleteCities,
   getAllCities,
   getAllPharmacies,
   getAllProvinces,
 } from "../../actions/actionProviders";
-import Pharmacies from "../PharmaciesPage/Pharmacies";
+import Pharmacies from "./Pharmacies";
+import Logo from "./../../assets/bg2.jpg"
 
 
 const PharmaciesPage = () => {
@@ -23,12 +25,15 @@ const PharmaciesPage = () => {
     provinciaID: "",
     ciudadID: "",
   });
-
   useEffect(() => {
     dispatch(getAllProvinces());
-    // dispatch(getAllCities(filter.provinciaID));
+  }, [])
+
+  useEffect(() => {
+    //dispatch(getAllCities(filter.provinciaID));
     dispatch(getAllPharmacies(filter.provinciaID, filter.ciudadID));
-  }, [dispatch, filter.ciudadID, filter.provinciaID]);
+  }, [filter.ciudadID, filter.provinciaID]);
+
 
   const handleSelectCity = (e) => {
 
@@ -39,29 +44,35 @@ const PharmaciesPage = () => {
 
     setfilter(newData);
 
-    dispatch(getAllPharmacies());
+    //dispatch(getAllPharmacies());
   };
 
   const handleChangeProvince = (e) => {
+    const newProvince = e.target.value
     const newFilters = {
       ciudadID: "",
       provinciaID: e.target.value,
     };
-    dispatch(getAllCities(newFilters.provinciaID));
+    if (newProvince !== '') {
+      dispatch(getAllCities(newFilters.provinciaID));
+    } else {
+      dispatch(deleteCities())
+    }
     setfilter(newFilters);
   };
   return (
-    <div className="h-70vh">
+    <div className="flex flex-col w-full bg-cover start min-h-70vh contenair" style={{ backgroundImage: `url(${Logo})` }}>
+      <h3 className='mt-3 ml-3 text-4xl font-bold text-left text-white'>Farmacias</h3>
       <div className="flex justify-center gap-6 ">
         <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
-          <label className="text-lg font-semibold">
+          <label className="text-lg font-semibold text-white">
             Seleccione una Provincia:
           </label>
           <select
             name="provincia"
             value={filter.provinciaID}
             onChange={handleChangeProvince}
-            className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 bg-white"
+            className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 bg-white border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10"
           >
             <option value="">Todas</option>
             {provinces &&
@@ -73,13 +84,13 @@ const PharmaciesPage = () => {
           </select>
         </div>
         <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
-          <label className="text-lg font-semibold">
+          <label className="text-lg font-semibold text-white">
             Seleccione una Ciudad:
           </label>
           <select
             name="ciudadID"
             onChange={handleSelectCity}
-            className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 bg-white"
+            className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 bg-white border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10"
           >
             <option value="">Todas</option>
             {cities?.map((e) => (

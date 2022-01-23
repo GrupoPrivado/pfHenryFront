@@ -25,8 +25,8 @@ const ABMPrescriptionsList = ({ setShowModalUpdate }) => {
   return (
     <div>
       <div>
-        <div class="p-4">
-          <div class="bg-white p-6 rounded-md">
+        <div className="p-4">
+          <div className="bg-white p-6 rounded-md">
             <div>
               <div className="flex ">
                 <div className="flex w-1/2 ">
@@ -40,7 +40,7 @@ const ABMPrescriptionsList = ({ setShowModalUpdate }) => {
               </div>
               <div className="mt-3.5">
                 <div>
-                  <div class="grid overflow-hidden grid-cols-5 grid-rows-1 gap-0 bg-gradient-to-tr from-indigo-600 to-purple-600 rounded-md py-2 px-4 text-white font-bold text-md">
+                  <div className="grid overflow-hidden grid-cols-5 grid-rows-1 gap-0 bg-gradient-to-tr from-indigo-600 to-purple-600 rounded-md py-2 px-4 text-white font-bold text-md">
                     <div className="  flex justify-center">
                       <span>Receta Nº</span>
                     </div>

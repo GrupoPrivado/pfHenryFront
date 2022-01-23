@@ -1,5 +1,6 @@
 import axios from "axios";
 import { api } from "../urlHostApi";
+import { getItem } from "./actionAuth";
 
 export const GET_ALL_PROVINCES = 'GET_ALL_PROVINCES'
 export const GET_ALL_PHARMACIES = 'GET_ALL_PHARMACIES'
@@ -17,13 +18,14 @@ export function getAllProviders() {
 
 
 export const getAllPharmacies = (provinciaID, ciudadID) => {
-  let url = `${api}/farmacias`
-  if(provinciaID !== ''){
-     url = `${api}/farmacias/${provinciaID}?ciudadID=${ciudadID}`
-  }
+  const token = getItem('userToken')
   return async (dispatch) => {
-   
-    const {data} = await axios.get(`${url}`);
+    const {data} = await axios.get(`${api}/afiliados/farmacias?ciudadID=${ciudadID}&provinciaID=${provinciaID}`, {
+      headers: {
+        "x-access-token": token
+      }
+    });
+    console.log(data, '< farmacias >')
 
     return dispatch({
       type: GET_ALL_PHARMACIES,
@@ -63,6 +65,11 @@ export function getAllCities(payload) {
     }
   };
 }
+
+export const deleteCities = () => dispatch => {
+  return dispatch({type: 'RESET_CITIES'})
+}
+
 export function getAllSpecialties() {
   return async function (dispatch) {
     var json = await axios.get(`${api}/especialidades`);
