@@ -10,9 +10,11 @@ import Logo from "../../assets/logo.svg";
 import RecoverPassword from "../../Components/FormLogin/RecoverPassword";
 import SuccessAlert from "../../Components/Alerts/SuccessAlert";
 import ErrorAlert from "../../Components/Alerts/ErrorAlert";
+import { alertSweet } from "../../Components/Alerts/alertSweet";
+import {motion} from 'framer-motion'
 
 function Login() {
-  const [activeForm, setForm] = useState(false)
+  const [activeForm, setForm] = useState(false);
   const navigate = useNavigate();
   useTitle("Ingresa a tu ArpyMedical");
 
@@ -21,27 +23,27 @@ function Login() {
 
   const [alertMessage, setAlertMessage] = useState("");
 
-  
   const handleChangeAlerts = (type, message, set) => {
-    if(type === 'error'){
-      setErrorAlert(set)
-      setAlertMessage(message)
-      
+    if (type === "error") {
+      setErrorAlert(set);
+      setAlertMessage(message);
     }
-    if(type === 'success'){
-      setActiveAlert(set)
-      setAlertMessage(message)
+    if (type === "success") {
+      setActiveAlert(set);
+      setAlertMessage(message);
     }
-  }
-
-
+  };
+  
   useEffect(() => {
     const userType = getItem("userType");
     if (userType) navigate(`/${userType}`);
   }, [navigate]);
   //
   return (
-    <div className="w-screen h-[91vh]">
+    <motion.div className="w-screen h-[91vh]" animate={{ opacity: 1, y: 0 }}
+    initial={{ opacity: 0, y: 20 }}
+    exit={{ opacity: 0, y: -20 }}
+    transition={{ duration: 0.15 }}>
       <div className="flex w-full h-full">
         <div className="flex justify-center w-1/2 h-full">
           <img
@@ -52,23 +54,51 @@ function Login() {
         </div>
         <div className="w-1/2 flex flex-column items-center justify-center">
           <div>
-            {
-              activeForm ? <RecoverPassword setForm={setForm} activeForm={activeForm} handleChangeAlerts={handleChangeAlerts} /> : <FormLogin setForm={setForm} activeForm={activeForm} handleChangeAlerts={handleChangeAlerts}/>
-            }
-
-
-            
+            {activeForm ? (
+              <RecoverPassword
+                setForm={setForm}
+                activeForm={activeForm}
+                handleChangeAlerts={handleChangeAlerts}
+              />
+            ) : (
+              <FormLogin
+                setForm={setForm}
+                activeForm={activeForm}
+                handleChangeAlerts={handleChangeAlerts}
+              />
+            )}
           </div>
         </div>
       </div>
-      {activeAlert && <SuccessAlert message={alertMessage}/>}
-      {errorAlert && <ErrorAlert message={alertMessage} />}
-    </div>
+      {activeAlert &&
+        alertSweet(
+          "success",
+          alertMessage,
+          false,
+          false,
+          () => {},
+          !activeAlert,
+          () => {},
+          false,
+          2500
+        )}
+      {errorAlert &&
+        alertSweet(
+          "error",
+          alertMessage,
+          false,
+          false,
+          setErrorAlert,
+          !errorAlert,
+          () => {},
+          false,
+          3000
+        )}
+    </motion.div>
   );
 }
 
 export default Login;
-
 
 /*
   return (

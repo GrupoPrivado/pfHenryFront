@@ -5,9 +5,9 @@ import { getItem } from "./actionAuth";
 export const GET_ALL_PROVINCES = 'GET_ALL_PROVINCES'
 export const GET_ALL_PHARMACIES = 'GET_ALL_PHARMACIES'
 
-export function getAllProviders() {
+export function getAllProviders(provinciaID,ciudadID, especID) {
   return async function (dispatch) {
-    var json = await axios.get(`${api}/profesionales`);
+    var json = await axios.get(`${api}/profesionales?ciudadID=${ciudadID}&provinciaID=${provinciaID}&especID=${especID}`);
 
     return dispatch({
       type: "GET_ALL_PROVIDERS",
@@ -25,7 +25,6 @@ export const getAllPharmacies = (provinciaID, ciudadID) => {
         "x-access-token": token
       }
     });
-    console.log(data, '< farmacias >')
 
     return dispatch({
       type: GET_ALL_PHARMACIES,

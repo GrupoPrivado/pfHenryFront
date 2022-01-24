@@ -1,7 +1,7 @@
 import {GET_RECIPES, GET_RECIPES_ID} from "./../actions/actionRecet"
 const inicialState = {
   recipes: [],
-  detail:[]
+  detail:{}
   };
   export default function reducerRecetas(state = inicialState, {type, payload}) {
     switch (type) {

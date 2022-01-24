@@ -14,8 +14,10 @@ const Authorizations = () => {
     }, [])
 
     const handleClick = (e) => {
-        setModal(!modal)
+        e.preventDefault()
+        console.log(e.target.value, 'target')
         dispatch(getRecetaDetail(e.target.value))
+        setModal(true)
     }
     return (
         <div className="flex flex-col w-full bg-cover start min-h-70vh contenair" style={{ backgroundImage: `url(${Logo})` }}>
@@ -38,7 +40,7 @@ const Authorizations = () => {
                                 <td className="p-2">{recipe.status}</td>
                                 <td className="flex justify-center p-2">
                                     <button value={recipe._id} onClick={handleClick} className="flex items-center w-3/5 px-2 py-1 text-white bg-gray-500 text-s hover:bg-gray-600">
-                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" /></svg>
+                                        {/* <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" /></svg> */}
                                         <span>{recipe.descripcion}</span>
                                     </button>
                                 </td>

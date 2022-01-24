@@ -43,7 +43,6 @@ export default function FormContact({setActiveAlert, setErrorAlert}) {
         e.preventDefault();
         const validateErrors = validateContact(input)
         setErrores(validateErrors)
-
         if(Object.entries(validateErrors).length <= 0){
             let response = await dispatch(sendMail(input));
             setActiveAlert(true)
@@ -51,14 +50,7 @@ export default function FormContact({setActiveAlert, setErrorAlert}) {
                 setActiveAlert(false)
                 navigate("/");                
             }, 5000);
-            // setInput({
-            //     name: "",
-            //     lastName: "",
-            //     phone: "",
-            //     mail:"",
-            //     message:""
-            // })
-          
+         
         } else {
             setErrorAlert(true)
             setTimeout(() => {
