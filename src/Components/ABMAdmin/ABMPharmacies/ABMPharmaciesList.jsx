@@ -27,26 +27,30 @@ const ABMPharmaciesList = ({
     dispatch(getAllProvinces());
   }, []);
 
-  const [filter, setFilter] = useState({ provinciaID: undefined });
+  const [filter, setFilter] = useState("");
 
   const handleChangeProvince = (e) => {
     dispatch(getAllCities(e.target.value));
     if (e.target.value !== "")
       dispatch(getAllPharmacies({ provinciaID: e.target.value }));
-    else dispatch(getAllPharmacies({ provinciaID: undefined }));
-
-    setFilter({ provinciaID: e.target.value });
+    else {
+      dispatch(getAllPharmacies({ provinciaID: undefined }));
+      
+    }
+    setFilter("");
   };
 
   const handleChangeCity = (e) => {
     if (e.target.value !== "")
       dispatch(getAllPharmacies({ ciudadID: e.target.value }));
-    else dispatch(getAllPharmacies(filter));
+    else {
+      dispatch(getAllPharmacies(filter));
+      setFilter("");
+    }
   };
   const handleChangeActiv = (e) => {
-    if (e.target.value !== "") {
-      dispatch(filterActiv(e.target.value));
-    } else if (e.target.value === "") dispatch(getAllPharmacies());
+    setFilter(e.target.value);
+    dispatch(filterActiv(e.target.value));
   };
 
   const handleEditPharmacy = async (event) => {
@@ -127,7 +131,7 @@ const ABMPharmaciesList = ({
                       onChange={handleChangeActiv}
                       name="activo"
                       className=" block w-full  my-2 text-lg font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 appearance-none rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
-                      required
+                      value={filter}
                     >
                       <option value="">Todas</option>
                       <option value="Si">Si</option>
