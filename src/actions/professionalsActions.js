@@ -7,7 +7,6 @@ export const GET_PROFESSIONAL = "GET_PROFESSIONAL"
 
 export function getconsultaMedica(payload) {
   return async function (dispatch) {
-    console.log("<<<<<<<", payload, ">>>>>>>>>");
     const token = getItem("userToken");
     const { data } = await axios.get(
       `${api}/profesionales/consultaMedica?DNI=${payload.DNI}&token=${payload.token}`,
@@ -82,5 +81,43 @@ export function postRecetaMedica(payload) {
     //     return dispatch({type: "ERRORS", payload: data})
 
     // }
+  };
+}
+
+export function putConsultaMedica(payload) {
+  return async (dispatch) => {
+    const token = getItem("userToken");
+    const { data } = await axios.put(`${api}/profesionales`, payload, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
+    return data;
+
+    // if(data.success){
+    //     return dispatch({type: "GET_CIUDADES", payload: data.message})
+    // } else {
+    //     return dispatch({type: "ERRORS", payload: data})
+
+    // }
+  };
+}
+
+export function getClinicHistory(payload) {
+  return async function (dispatch) {
+    const token = getItem("userToken");
+    const { data } = await axios.get(`${api}/profesionales/historiaMedica/${payload}`, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
+    if (data.success) {
+      return dispatch({
+        type: "GET_MEDICAL_HISTORY",
+        payload: data.message,
+      });
+    } else {
+      return dispatch({ type: "ERRORS", payload: data });
+    }
   };
 }

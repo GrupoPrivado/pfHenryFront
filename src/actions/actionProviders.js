@@ -5,9 +5,9 @@ import { getItem } from "./actionAuth";
 export const GET_ALL_PROVINCES = 'GET_ALL_PROVINCES'
 export const GET_ALL_PHARMACIES = 'GET_ALL_PHARMACIES'
 
-export function getAllProviders() {
+export function getAllProviders(provinciaID,ciudadID, especID) {
   return async function (dispatch) {
-    var json = await axios.get(`${api}/profesionales`);
+    var json = await axios.get(`${api}/profesionales?ciudadID=${ciudadID}&provinciaID=${provinciaID}&especID=${especID}`);
 
     return dispatch({
       type: "GET_ALL_PROVIDERS",
@@ -25,7 +25,6 @@ export const getAllPharmacies = (provinciaID, ciudadID) => {
         "x-access-token": token
       }
     });
-    console.log(data, '< farmacias >')
 
     return dispatch({
       type: GET_ALL_PHARMACIES,
@@ -86,14 +85,11 @@ export function filterByCity(ciudadID, codeEsp) {
       var {data} = await axios.get(
         `${api}/profesionales?ciudadID=${ciudadID}&codeEsp=${codeEsp}`
         );
-        console.log('json', data.message)
         if(data.success){
           return dispatch({
             type: "FILTER_BY_CITY",
             payload: data.message,
           });
-        } else {
-          console.log('errooooooor filter')
         }
       
     } catch (error) {
@@ -102,7 +98,6 @@ export function filterByCity(ciudadID, codeEsp) {
   };
 }
 // export function filterBySpecialties(payload) {
-//   console.log('special',payload)
 //   return {
 //     type: "FILTER_BY_SPECIALTIES",
 //     payload,

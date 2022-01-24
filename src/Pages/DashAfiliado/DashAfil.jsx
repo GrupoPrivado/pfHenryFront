@@ -11,6 +11,7 @@ import { getAfiliate, getItem, removeItem } from '../../actions/actionAuth';
 import Credencial from '../../Components/Credencial/Credencial'
 import { getRecetas } from '../../actions/actionRecet'
 import Modal from '../../Components/Modal/Modal'
+import {motion} from 'framer-motion'
 
 function DashAfil() {
     const { user, route } = useSelector(state => state.auth)
@@ -42,7 +43,7 @@ function DashAfil() {
     }, [])
 
     const toggleClass = (e) => {
-        //console.log(e.target.getAttribute('name'))
+    
         const name = e.target.getAttribute('name')
         const modal = isActive[name]
         setActive({
@@ -52,7 +53,7 @@ function DashAfil() {
     };
 
     return (
-        <div>
+        <motion.div >
             <style dangerouslySetInnerHTML={{ __html: "\n\t@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&display=swap');\n\n\t* {\n\t\tfont-family: 'Noto Sans JP', sans-serif;\n\t}\n\n\t.bg-app {\n\t\tbackground-image: url('');\n\t}\n" }} />
             <div className="flex flex-row items-center justify-center min-h-screen bg-center bg-no-repeat bg-cover opacity-80 bg-app" style={{ backgroundImage: `url(${Logo})` }}>
                 <main className="flex flex-col w-full max-w-5xl m-4 overflow-hidden bg-white shadow-lg lg:flex-row backdrop-filter backdrop-blur-lg bg-opacity-20 rounded-xl lg:m-6">
@@ -64,7 +65,7 @@ function DashAfil() {
                             <div className="ml-4 font-bold">Bienvenidx {user.nombre}</div>
                         </div>
                         <div className="grid gap-4 sm:grid-cols-3 sm:grid-rows-3 md:grid-rows-2 md:grid-cols-3">
-                            <MedicalHistory />
+                            <MedicalHistory  />
                             <DashAuthorizations />
                             <FamilyGroupDash />
 
@@ -99,7 +100,7 @@ function DashAfil() {
                     </div>
                 </main>
             </div>
-        </div>
+        </motion.div>
     )
 }
 

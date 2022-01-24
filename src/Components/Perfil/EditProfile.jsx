@@ -29,7 +29,6 @@ function EditProfile({ user }) {
 
     }, [user])
 
-
     const [activityChanged, setActivityChanged] = useState(false);
     const handleChange = (e) => {
         setInput({

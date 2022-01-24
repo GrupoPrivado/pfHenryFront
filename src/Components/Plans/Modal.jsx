@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { Dialog, Transition } from '@headlessui/react'
 
 
-const Modal = ({toggleClass, plan}) => {
+const Modal = ({toggleClass, plan }) => {
 
     const [active, setActive] = useState(true)
 
@@ -11,7 +11,6 @@ const Modal = ({toggleClass, plan}) => {
 
     const cancelButtonRef = useRef(null)
 
-    console.log(plan)
     return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="fixed inset-0 z-10 overflow-y-auto" initialFocus={cancelButtonRef} onClose={setOpen}>
@@ -58,7 +57,7 @@ const Modal = ({toggleClass, plan}) => {
                             ))
                         }
                     </div>
-                    <button name="plans" onClick={toggleClass} className="self-end p-1 bg-white border-2 rounded-md w-14 text-primary hover:bg-primary border-primary hover:text-white hover:border-2 hover:border-white">Cerrar</button>
+                    <button name={plan.name} onClick={toggleClass} className="self-end p-1 bg-white border-2 rounded-md w-14 text-primary hover:bg-primary border-primary hover:text-white hover:border-2 hover:border-white">Cerrar</button>
                   </div>
               </div>
             </div>

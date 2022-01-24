@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getAllCities } from "../../actions/actionProviders";
+import { addFamiliar } from "../../actions/actionRegister";
 import { validate } from "../../utils/constantes";
 import date from "./../../utils/date.js"
 
@@ -19,15 +20,16 @@ const functionErrors = (data) => {
 export default function FormAddAsociateGroup({
   provinces,
   cities,
-  setOutput,
-  output,
   modal,
   setModal,
 }) {
+  const randomNumber = (min, max) => Math.floor(Math.random() * (max-min) + min);
+
   const dispatch = useDispatch();
   const [errors, setErrors] = useState(true);
   const [errores, setErrores] = useState({})
   const [input, setInput] = useState({
+    idAf: randomNumber(3000,4000),
     nombre: "",
     apellido: "",
     DNI: "",
@@ -54,27 +56,10 @@ export default function FormAddAsociateGroup({
     e.preventDefault();
     const validateError = validate(input)
     setErrores(validateError)
-    console.log(validateError, "Validate")
     if (Object.entries(validateError).length <= 0) {
-      console.log(Object.entries(validateError).length)
-      const newState = [input, ...output];
-
-      setOutput(newState);
-      setInput({
-        nombre: "",
-        apellido: "",
-        DNI: "",
-        fechaNacimiento: "",
-        telefono: "",
-        correoElectronico: "",
-        ciudadID: "",
-        provinciaID: "",
-        direccion: "",
-        planID: "",
-      });
+      dispatch(addFamiliar(input))
       setModal(!modal);
     }
-
   }
 
   const handleChangeProvince = (e) => {

@@ -12,12 +12,10 @@ function EditPassword({ setErrorAlert, setAlertMessage, modal, setModal }) {
     newPass: "",
     repeat: "",
   });
-  //const [activeAlert, setActiveAlert] = useState(false);
   const handleSubmit = (e) => {
     e.preventDefault(e);
     const validateError = validatePassword(passwords);
     setErrors(validateError);
-    console.log(Object.entries(validateError), "validate errors passwords")
     if (passwords.newPass === passwords.repeat && Object.entries(validateError).length <= 0) {
       dispatch(changePassword(passwords));
       setPasswords({

@@ -10,15 +10,8 @@ import {
 
 import styles from "./UpDownAffiliate.module.css";
 
-const functionErrors = (data) => {
-  const arrayKeys = Object.keys(data);
-  const arrayData = arrayKeys.filter((element, index) => data[element] !== "");
-  if (arrayKeys.length === arrayData.length) {
-    return false;
-  } else {
-    return true;
-  }
-}; //cambiarla en un utils ya que se puede usar en todos los forms
+import { functionErrorsBtn } from "../../../utils/adminFormsControllers";
+import { enableBtn, disableBtn } from "../../../utils/ABMStyles";
 
 const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
   const dispatch = useDispatch();
@@ -62,18 +55,16 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
 
     setupDowndateAffiliateData(updatedAffiliate);
 
-    setErrors(functionErrors(updatedAffiliate));
+    setErrors(functionErrorsBtn(updatedAffiliate));
   };
 
   const handleSubmitUpdateAffiliate = async (event) => {
     event.preventDefault();
-    let response = await dispatch(upDownAffiliateAct(upDownAffiliateData));
-    alert(response.success);
-    setupDowndateAffiliateData(upDownAffiliateStruct);
+    dispatch(upDownAffiliateAct(upDownAffiliateData));
+
     setShowModalUpDown(false);
     dispatch(getAllAffiliates());
     dispatch(resetDataUpdate());
-    setErrors(true);
   };
 
   const handleClose = () => {
@@ -95,7 +86,7 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
         <div className="modal-content py-4 text-left px-6 mt-1 ">
           <form>
             <div className="flex justify-around ">
-              <div lassName="flex flex-col mt-3">
+              <div className="flex flex-col mt-3">
                 <div>
                   <label className="text-md text-gray-600">
                     Nombre:{" "}
@@ -121,7 +112,7 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
                   </label>
                 </div>
               </div>
-              <div lassName="flex flex-col justify-center">
+              <div className="flex flex-col justify-center">
                 <div>
                   <label className="text-md text-gray-600">
                     Grupo familiar:{" "}
@@ -141,7 +132,7 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
                 </div>
               </div>
             </div>
-            <div className="flex items-center">
+            <div className="flex items-center mt-3">
               <div>
                 <div>
                   <label className="text-md text-gray-600">Asunto: </label>
@@ -158,8 +149,10 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
                 <div>
                   <div>
                     <label className="text-md text-gray-600">Texto: </label>
-                    <input
-                      className="h-6 p-10 w-2/3 border-2 border-gray-300 mb-3 rounded-md"
+                    <textarea
+                      className="h-6 p-10 w-2/3 border-2 border-gray-300 mb-3 rounded-md resize-none"
+                      rows="8"
+                      cols="50"
                       type="textarea"
                       name="text"
                       autoComplete="off"
@@ -178,7 +171,6 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
                     onChange={(e) => handleUpdateAffiliate(e)}
                     value={upDownAffiliateData.alta}
                   >
-                    <option value="">Seleccione:</option>
                     <option value={true}>Si</option>
                     <option value={false}>No</option>
                   </select>
@@ -191,40 +183,31 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
                     onChange={(e) => handleUpdateAffiliate(e)}
                     value={upDownAffiliateData.activo}
                   >
-                    <option value="">Seleccione:</option>
                     <option value={true}>Si</option>
                     <option value={false}>No</option>
                   </select>
                 </div>
               </div>
             </div>
-            <div className="flex justify-center mt-1 ">
-              <div className="flex w-2/3 justify-around">
-                {errors ? (
-                  <button
-                    className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    disabled={errors}
-                    className="disabledButton"
-                  >
-                    Guardar
-                  </button>
-                ) : (
-                  <button
-                    onClick={handleSubmitUpdateAffiliate}
-                    className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  >
-                    Guardar
-                  </button>
-                )}
-                <button
-                  onClick={() => handleClose()}
-                  className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
-                  Cerrar
-                </button>
-              </div>
-            </div>
           </form>
+          <div className="flex justify-center mt-6 ">
+            <div className="flex w-2/3 justify-around">
+              <button
+                onClick={handleSubmitUpdateAffiliate}
+                className={errors ? disableBtn : enableBtn}
+                disabled={errors}
+              >
+                Guardar
+              </button>
+
+              <button
+                onClick={() => handleClose()}
+                className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                Cerrar
+              </button>
+            </div>
+          </div>
         </div>
       </section>
     </div>

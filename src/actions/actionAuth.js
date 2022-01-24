@@ -16,11 +16,9 @@ export const removeItem = (item) => localStorage.removeItem(item)
 
 
 export const postAfiliate = (payload) => {
-  console.log('Llega >>>>>>>>', payload)
   return async function (dispatch) {
     try {
       const {data} = await axios.post(`${api}/addPreCarga`, payload);
-      console.log(' >>>>>>> ', data)
       return data;
       // tanto back y front => verificar si el ddni de registro ya existe en la DB
     } catch (error) {
@@ -39,7 +37,6 @@ export const getAfiliate = (payload) => {
                       'x-access-token' : token
                   }
           });
-          //console.log(data)
           if(data.success){
               return dispatch({type: GET_AFILIATE, payload: data.message})
           } else {
@@ -104,7 +101,6 @@ export const getNewMedicalToken = () => {
             "x-access-token": token,
           },});
   
-      console.log('<<< data action >>> ', data)
       if (data.success) {
         return dispatch({ type: GET_AFILIATE, payload: data.message });
       } else {
@@ -129,7 +125,6 @@ export const updateUser = (payload) => {
             "x-access-token": token,
           },});
   
-      console.log('<<< data action >>> ', data)
       if(data.success){
         dispatch({type: alertConstants.SUCCESS, message: 'Afiliado actualizado'})
         return dispatch({type: GET_AFILIATE, payload: data.message})
@@ -147,7 +142,6 @@ export const updateUser = (payload) => {
 };
 
 export const changePassword = (payload) => {
-  console.log('<<< data payload password >>> ', payload)
   return async (dispatch) => {
     try {
       const token = getItem("userToken");
@@ -177,7 +171,6 @@ export const changePassword = (payload) => {
 
 
 export const putProfilePhoto = (payload) => {
-  console.log('<<< data action profile photo >>> ', payload)
   return async (dispatch) => {
     try {
       const token = getItem("userToken");

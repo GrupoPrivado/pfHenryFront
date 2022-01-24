@@ -41,7 +41,7 @@ const PharmaciesPage = () => {
       ...filter,
       [e.target.name]: e.target.value,
     };
-    console.log("hand  ", newData);
+
     setfilter(newData);
 
     //dispatch(getAllPharmacies());
