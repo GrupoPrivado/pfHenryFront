@@ -39,7 +39,7 @@ function Plans() {
                         <button name={plan.name} onClick={toggleClass} className='p-2 text-lg bg-white rounded-md'>Conocer más</button>
                     {/* </Link> */}
                     {
-                         active[plan.name] && <Modal plan={plan} />
+                         active[plan.name] && <Modal plan={plan} toggleClass={toggleClass} />
                     }
                 </div>
                 

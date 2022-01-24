@@ -66,7 +66,7 @@ function RecoverPassword({setForm, activeForm, handleChangeAlerts}) {
           <img className="mx-auto h-12 w-auto" src={Logo} alt="Workflow" />
         </div>
         <motion.form className="mt-8 space-y-6 "   animate={{ rotateY: 360 }}
-  transition={{ type: 'spring', duration: 0.8 }}>
+  transition={{ type: 'spring', duration: 1.8 }}>
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="-space-y-px rounded-md shadow-sm">
             <select
