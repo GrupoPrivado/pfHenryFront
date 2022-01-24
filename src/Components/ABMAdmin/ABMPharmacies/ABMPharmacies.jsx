@@ -14,6 +14,7 @@ import ABMPharmacyList from "./ABMPharmaciesList";
 
 import { alertActions } from "../../../actions/actionAlerts";
 import { alertSweet } from "../../Alerts/alertSweet";
+import FilterPharmacy from "./FilterPharmacy";
 
 const ABMPharmacies = () => {
   const dispatch = useDispatch();
@@ -66,6 +67,7 @@ const ABMPharmacies = () => {
 
   return (
     <div>
+      <FilterPharmacy/> 
       <ABMPharmacyList
         allPharmacies={allPharmacies}
         setShowModalUpdate={setShowModalUpdate}
