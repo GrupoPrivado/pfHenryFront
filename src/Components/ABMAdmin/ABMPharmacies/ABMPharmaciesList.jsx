@@ -44,9 +44,7 @@ const ABMPharmaciesList = ({
     else dispatch(getAllPharmacies(filter));
   };
   const handleChangeActiv = (e) => {
-    if (e.target.value !== "") {
       dispatch(filterActiv(e.target.value));
-    } else if (e.target.value === "") dispatch(getAllPharmacies());
   };
 
   const handleEditPharmacy = async (event) => {

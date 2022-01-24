@@ -365,16 +365,9 @@ export function getAllPharmacies(payload) {
   };
 }
 
-// export function getFilterPharmacy(payload) {
-//   return async (dispatch) => {
-//     const { data } = await axios.get(`${api}/farmaciasFilter?ciudadID=${payload}`);
-//     if (data.success) {
-//       return dispatch({ type: "GET_PHARMACIES", payload: data.message });
-//     } else {
-//       return dispatch({ type: "ERRORS", payload: data });
-//     }
-//   };
-// }
+export function getFilterPharmacy(payload) {
+  return { type: "GET_PHARMACIES", payload: payload };
+}
 
 export function addPharmacy(payload) {
   return async (dispatch) => {

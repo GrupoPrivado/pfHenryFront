@@ -44,7 +44,6 @@ export default function reducerABMAdmin(state = initialState, action) {
       return { ...state, allAffiliates: action.payload };
 
     case "AFFILIATE_DATA":
-
       return {
         ...state,
         updateData: action.payload,
@@ -129,24 +128,22 @@ export default function reducerABMAdmin(state = initialState, action) {
 
     case "GET_PLANES_VIEW":
       let plan = state.allPlansData.filter((e) => e._id === action.payload);
-      
+
       return {
         ...state,
         viewPlan: plan,
       };
 
-    // case "FILTER_ACTIV":
-    //   let filterActiv = undefined;
-    //   if (action.payload !== "") {
-    //     filterActiv =
-    //       action.payload === "Si"
-    //         ? state.pharmacies.filter((element) => element.activo === true)
-    //         : state.pharmacies.filter((element) => element.activo !== true);
-    //   } else {
-    //     filterActiv = state.pharmacies;
-    //   }
-    //   return { ...state, allPharmacies: filterActiv };
-      
+    case "FILTER_ACTIV":
+      let filteredPharm = state.pharmacies;
+      if (action.payload !== "") {
+        filteredPharm =
+          action.payload === "Si"
+            ? filteredPharm.filter((element) => element.activo === true)
+            : filteredPharm.filter((element) => element.activo !== true);
+      }
+      return { ...state, allPharmacies: filteredPharm };
+
     default:
       return state;
   }
