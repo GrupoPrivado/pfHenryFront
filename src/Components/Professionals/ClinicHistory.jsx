@@ -13,7 +13,7 @@ const ClinicHistory = () => {
   useEffect(() => {
     dispatch(getClinicHistory(consultaMedicaData.afiliadoID.DNI));
   }, []);
-console.log(clinicHistory,'----------clinicHistory---------')
+
   return (
     <div>
       <label>Paciente</label>

@@ -15,7 +15,7 @@ export function getPlanes() {
       
     };
   }
-
+  
 // export function postAfiliate(payload) {
 //   return async function (dispatch) {
 //     var json = await axios.post(
@@ -30,24 +30,22 @@ export function getPlanes() {
 export const postAfiliate = async (payload) => {
     try {
       const {data} = await axios.post(`${api}/addPreCarga`, payload);
-      console.log(data)
       if(data.success){
         return { success: true, data: data.message }
       } else {
         return { success: false, data: data.message }
       }
     } catch (error) {
-      console.log(error, 'error post afiliate')
       return {success: false, data: error}
     }
   
 }
 
 // export const postAfiliate = (payload) => {
-//   console.log(payload, "payload form")
+
 //   return async (dispatch) => {
 //     const {data} = await axios.post(`${api}/addPreCarga`, payload);
-//     console.log(data)
+// 
 //     if(data.success){
 //       dispatch({type: alertConstants.SUCCESS , message: 'Registro exitoso', error: false})
 //     } else {

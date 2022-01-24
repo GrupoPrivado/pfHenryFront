@@ -1,10 +1,10 @@
 import axios from "axios";
+import {api} from '../urlHostApi'
 
 export function sendMail(payload){
   return async function(dispatch){
-    console.log('payload', payload)
     const response = await axios.post(
-      "https://arpymedical.herokuapp.com/api/sendMail/",
+      `${api}/sendMail`,
       payload
     );
     return response

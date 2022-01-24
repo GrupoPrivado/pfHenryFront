@@ -1,39 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-//import { Link } from "react-router-dom";
-import { getPlanes } from "../../actions/actionPlanes";
-import { postAfiliate } from "../../actions/actionPlanes";
-import { useNavigate } from "react-router-dom";
+import {
+  deleteFamiliar,
+  findFamiliar,
+  registerFamilies,
+} from "../../actions/actionRegister";
 import { getAllCities } from "../../actions/actionProviders";
 import date from "./../../utils/date.js";
 import { validate } from "../../utils/constantes";
-
-const functionErrors = (data) => {
-  const arrayKeys = Object.keys(data);
-  const arrayData = arrayKeys.filter((element, index) => data[element] !== "");
-  if (arrayKeys.length === arrayData.length) {
-    return false;
-  } else {
-    return true;
-  }
-};
+import { TrashIcon, PencilIcon } from '@heroicons/react/outline'
 
 export default function FormAsociate({
-  setAlertMessage,
-  setActiveAlert,
-  setErrorAlert,
+  setEditModal,
   provinces,
   cities,
-  setOutput,
-  output,
   modal,
   setModal,
-  error,
 }) {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { planes } = useSelector((state) => state.planes);
-  const [errors, setErrors] = useState(true);
+  const { familiarData } = useSelector((state) => state.associate);
   const [errores, setErrores] = useState({});
 
   const [input, setInput] = useState({
@@ -57,42 +43,15 @@ export default function FormAsociate({
       [e.target.name]: e.target.value,
     };
     setInput(newInp);
-    setErrors(functionErrors(newInp));
   }
-
-  // useEffect(() => {
-  //   if(error){
-  //     setOutput([])
-  //   }
-  // }, [error,  setOutput]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const validateError = validate(input);
     setErrores(validateError);
-    console.log(validateError, "Validate");
     if (Object.entries(validateError).length <= 0) {
-      console.log(Object.entries(validateError).length);
-      const newState = [input, ...output];
-
-      setOutput(newState);
-      const result = await postAfiliate(newState);
-      if (result.success) {
-        setActiveAlert(true);
-        setAlertMessage("Registro Exitoso");
-        setTimeout(() => {
-          setActiveAlert(false);
-          navigate("/login");
-        }, 5000);
-      } else {
-        setErrorAlert(true);
-        console.log(result.data);
-        setAlertMessage("error en el registro");
-        setOutput([]);
-        setTimeout(() => {
-          setErrorAlert(false);
-        }, 5000);
-      }
+      const newState = [input, ...familiarData];
+      dispatch(registerFamilies(newState));
     }
   };
   function handleSelect(e) {
@@ -104,10 +63,15 @@ export default function FormAsociate({
     }
   }
   function handleDelete(e) {
-    const newOutput = [...output];
-    const newOutputFilter = newOutput.filter((f) => f.nombre !== e.nombre);
-    setOutput(newOutputFilter);
+    dispatch(deleteFamiliar(e.target.value));
   }
+
+  const handleEdit = (e) => {
+    console.log(e.target.value, 'value edit')
+    dispatch(findFamiliar(e.target.value));
+    setEditModal(true);
+  };
+
   const handleChangeProvince = (e) => {
     const newData = {
       ...input,
@@ -123,7 +87,7 @@ export default function FormAsociate({
         <form className="mt-8 space-y-6 " onSubmit={handleSubmit}>
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="grid items-center grid-cols-3 grid-rows-5 gap-4 -space-y-px rounded-md shadow-sm -z-0 w-90vw sm:grid-cols-4 sm:grid-rows-2">
-            <h3 className="col-span-4 row-span-1 text-2xl font-bold text-left text-primary">
+            <h3 className="col-span-4 row-span-1 text-4xl font-bold text-left text-primary">
               Formulario de registro
             </h3>
             <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
@@ -382,26 +346,34 @@ export default function FormAsociate({
 
           <div>
             <ul>
-              {output?.map((e, index) => (
-                <div key={index} className="flex items-center justify-between my-4">
+              {familiarData?.map((e, index) => (
+                <div
+                  key={index}
+                  className="flex items-center justify-between my-4"
+                >
                   <li
                     value={e.name}
                     className="py-3 pr-3 text-lg font-semibold"
                   >
                     {e.nombre} {e.apellido}
                   </li>
-                  <button
-                    className="relative flex justify-center w-10 p-2 text-sm font-medium text-white bg-red-500 border border-transparent rounded-md group h-9 hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    onClick={() => handleDelete(e)}
-                  >
-                    x
-                  </button>
-                  {/* <label htmlFor="" value={e.name}>
-                        {e.nombre}
-                      </label> */}
-                  {/* <label htmlFor="" value={e.apellido}>
-                        {e.apellido}
-                      </label> */}
+                  <div className="flex gap-2">
+                    <button
+                      value={e.idAf}
+                      className="relative flex justify-center w-10 p-2 text-sm font-medium text-white border border-transparent rounded-md bg-secondary group h-9 hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                      onClick={handleEdit}
+                    >
+                      <PencilIcon className="w-5 h-5 text-white pointer-events-none" />
+
+                    </button>
+                    <button
+                      value={e.idAf}
+                      className="flex justify-center w-10 p-2 text-sm font-medium text-white bg-red-500 border border-transparent rounded-md group h-9 hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                      onClick={handleDelete}
+                    >
+                      <TrashIcon className="w-5 h-5 text-white pointer-events-none" />
+                    </button>
+                  </div>
                 </div>
               ))}
             </ul>

@@ -9,7 +9,6 @@ const GeneracionRecetas = ({
   setRecetasModal,
 }) => {
   const dispatch = useDispatch();
-    console.log('affiliateData', )
   const tipoReceta = ["Farmacia", "Estudio"];
 
   const inputRecetaStruct = {
@@ -65,7 +64,6 @@ const GeneracionRecetas = ({
           id="recetaType"
           name="tipoReceta"
           onChange={(e) => handleChange(e)}
-          defaultValue={0}
         >
           <option value="">Seleccione</option>
           {tipoReceta.map((e) => {
@@ -87,10 +85,26 @@ const GeneracionRecetas = ({
         </div>
       </article>
 
-          <div className="w-56 flex justify-between">
-            <button onClick={handleSendInfo} name="crearReceta">Crear</button>
-            <button onClick={handleClose} name="close">Cerrar</button>
-          </div>
+      <div>
+        <label>Receta: </label>
+        <textarea
+          rows="4"
+          cols="50"
+          name="descripcion"
+          className="resize-none"
+          autoComplete="off"
+          value={inputReceta.descripcion}
+          onChange={(e) => handleChange(e)}
+          placeholder="Ingrese lo recetado...."
+        />
+      </div>
+
+      <button onClick={handleSendInfo} name="crearReceta">
+        Crear
+      </button>
+      <button onClick={handleClose} name="close">
+        Cerrar
+      </button>
     </section>
   );
 };

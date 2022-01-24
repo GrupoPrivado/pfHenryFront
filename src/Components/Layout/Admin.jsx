@@ -12,7 +12,7 @@ import ABMProfessionals from "../../Components/ABMAdmin/ABMProfessionals/ABMProf
 import ABMPlans from '../ABMAdmin/ABMPlan/ABMPlans'
 import ABMPrescriptions from '../ABMAdmin/ABMPrescriptions/ABMPrescriptions'
 import ABMEmployees from '../ABMAdmin/ABMEmployees/ABMEmployees'
-
+import FooterAdmin from '../Footer/FooterAdmin'
 
 const Admin = () => {
     const [showSidebar, setShowSidebar] = useState(false);
@@ -32,7 +32,7 @@ const Admin = () => {
                 <Route path='/empleados' element={<PrivateRouter rol={roles.ADMIN}><ABMEmployees/></PrivateRouter>}/>
 
             </Routes>
-
+ <FooterAdmin/>
         </div>
     )
 }

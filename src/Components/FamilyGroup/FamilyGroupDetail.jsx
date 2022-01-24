@@ -21,7 +21,6 @@ export default function FamilyGroupDetail() {
         }
 
     }, [dispatch,user.grupFamID, user.data])
-    console.log("group: ", group)
 
     const [isActive, setActive] = useState(false);
 
@@ -31,12 +30,10 @@ export default function FamilyGroupDetail() {
 
     return (
         <div>
-            <div className="flex items-center justify-center w-full min-h-screen bg-cover contenair" style={{ backgroundImage: `url(${Logo})` }}>
+            <div className="flex flex-col w-full min-h-screen bg-cover contenair" style={{ backgroundImage: `url(${Logo})` }}>
+                <h3 className='self-start mt-3 ml-3 text-4xl font-bold text-white'>Grupo Familiar</h3>
                 {/* card */}
-                <div className="flex flex-col items-center justify-center w-1/2 p-5 bg-white bg-opacity-40 rounded-xl backdrop-filter backdrop-blur-lg">
-                    <div className="flex justify-between font-semibold header-card">
-                        <p className='text-4xl font-semibold text-white'>Grupo Familiar</p>
-                    </div>
+                <div className="flex flex-wrap items-center w-full p-5 justify-evenly ">
                     {/* end header */}
                     {group && group.map((member) => (
                         <div key={member._id} className="relative inline-block h-full overflow-hidden align-middle transition-all transform border-t border-l border-solid shadow-xl bg-gradient-to-b from-white-rgba to-white-rgba2 rounded-3xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full border-t-gray-200 border-l-gray-200">

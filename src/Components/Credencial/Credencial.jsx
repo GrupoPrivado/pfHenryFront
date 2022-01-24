@@ -56,7 +56,7 @@ function Credencial({toggleClass, name, lastname, dni, plan}) {
                         PLAN {plan}
                       </h3>
                     </div>
-                    <button name="credencial" onClick={toggleClass} className="self-end p-1 bg-white border-2 rounded-md w-14 text-primary hover:bg-primary border-primary hover:text-white hover:border-2 hover:border-white">Cerrar</button>
+                    <button name="credencial" onClick={toggleClass} className="self-end w-20 p-1 text-lg font-bold bg-white border-2 rounded-md text-primary hover:bg-primary border-primary hover:text-white hover:border-2 hover:border-white">Cerrar</button>
                   </div>
                 </div>
               </div>

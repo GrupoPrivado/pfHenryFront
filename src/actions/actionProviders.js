@@ -1,12 +1,13 @@
 import axios from "axios";
 import { api } from "../urlHostApi";
+import { getItem } from "./actionAuth";
 
 export const GET_ALL_PROVINCES = 'GET_ALL_PROVINCES'
 export const GET_ALL_PHARMACIES = 'GET_ALL_PHARMACIES'
 
-export function getAllProviders() {
+export function getAllProviders(provinciaID,ciudadID, especID) {
   return async function (dispatch) {
-    var json = await axios.get(`${api}/profesionales`);
+    var json = await axios.get(`${api}/profesionales?ciudadID=${ciudadID}&provinciaID=${provinciaID}&especID=${especID}`);
 
     return dispatch({
       type: "GET_ALL_PROVIDERS",
@@ -17,15 +18,13 @@ export function getAllProviders() {
 
 
 export const getAllPharmacies = (provinciaID, ciudadID) => {
-  console.log('desde action ', provinciaID, ciudadID) 
-  let url = `${api}/farmacias`
-  if(provinciaID !== ''){
-     url = `${api}/farmacias/${provinciaID}?ciudadID=${ciudadID}`
-  }
+  const token = getItem('userToken')
   return async (dispatch) => {
-   
-    const {data} = await axios.get(`${url}`);
-    console.log(data, '< farmacias >')
+    const {data} = await axios.get(`${api}/afiliados/farmacias?ciudadID=${ciudadID}&provinciaID=${provinciaID}`, {
+      headers: {
+        "x-access-token": token
+      }
+    });
 
     return dispatch({
       type: GET_ALL_PHARMACIES,
@@ -65,6 +64,11 @@ export function getAllCities(payload) {
     }
   };
 }
+
+export const deleteCities = () => dispatch => {
+  return dispatch({type: 'RESET_CITIES'})
+}
+
 export function getAllSpecialties() {
   return async function (dispatch) {
     var json = await axios.get(`${api}/especialidades`);
@@ -81,14 +85,11 @@ export function filterByCity(ciudadID, codeEsp) {
       var {data} = await axios.get(
         `${api}/profesionales?ciudadID=${ciudadID}&codeEsp=${codeEsp}`
         );
-        console.log('json', data.message)
         if(data.success){
           return dispatch({
             type: "FILTER_BY_CITY",
             payload: data.message,
           });
-        } else {
-          console.log('errooooooor filter')
         }
       
     } catch (error) {
@@ -97,7 +98,6 @@ export function filterByCity(ciudadID, codeEsp) {
   };
 }
 // export function filterBySpecialties(payload) {
-//   console.log('special',payload)
 //   return {
 //     type: "FILTER_BY_SPECIALTIES",
 //     payload,

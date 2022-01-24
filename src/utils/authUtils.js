@@ -4,7 +4,6 @@ import {api} from '../urlHostApi'
 export const getUserToken = async(user) => {
     try {
         const result = await axios.post(`${api}/login`, user);
-        console.log('result authUtils', result)
         if(result.data.token){
             localStorage.setItem('userToken', result.data.token);
             localStorage.setItem('userType', result.data.TipoUsuario);
@@ -13,10 +12,18 @@ export const getUserToken = async(user) => {
         return {error: 'Su nombre de usuario o contraseña es inválida'};
         
     } catch (error) {
-        console.error(error) 
         return {error: error.message} 
     }
     
+}
+
+export const recoverPassword = async (input) => {
+    try {
+        const {data} = await axios.post(`${api}/login/recoverPassword`, input)
+        return data
+    } catch (error) {
+        return console.error(error)
+    }
 }
                         
 export const verifyRole = (autorizado) => {

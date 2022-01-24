@@ -1,34 +1,50 @@
 import axios from "axios";
-import {api} from '../urlHostApi'
+import { api } from '../urlHostApi'
 import { getItem } from "./actionAuth";
+export const GET_RECIPES = "GET_RECIPES"
+export const GET_RECIPES_ID = "GET_RECIPES_ID"
 
-export function getRecetas() {
+export function getRecetas(payload) {
     return async function (dispatch) {
-      const token = getItem("userToken");
-      const { data } = await axios.get(`${api}/recetas`,{
-          headers: {
-            "x-access-token": token,
-          },});
-  console.log('getRecetas<<<<<<<<<<', data)
-      return dispatch({
-        type: "GET_RECETAS",
-        payload: data.message,
-      });
+        const token = getItem("userToken");
+        try {
+            const { data } = await axios.get(`${api}/recetas`, {
+                headers: {
+                    'x-access-token': token
+                }
+            });
+            console.log(data, "data recipes")
+            if (data.success) {
+                return dispatch({ type: GET_RECIPES, payload: data.message })
+            } else {
+                return { error: true }
+            }
+        } catch (error) {
+            console.error(error)
+            return { error: error.message }
+        }
     };
 }
 
-export function getConsultas() {
-  return async function (dispatch) {
-    const token = getItem("userToken");
-    const { data } = await axios.get(`${api}/consultasMedicas`,{
-        headers: {
-          "x-access-token": token,
-        },});
-console.log('consultas medicas<<<<<<<<<<', data)
-return data
-// return dispatch({
-    //   type: "GET_RECETAS",
-    //   payload: data.message,
-    // });
-  };
+export function getRecetaDetail(id){
+    console.log(id, 'id en action')
+    return async function(dispatch){
+        const token = getItem("userToken");
+        try {
+            const { data } = await axios.get(`${api}/recetas/${id}`, {
+                headers: {
+                    'x-access-token': token
+                }
+            });
+            console.log(data, "Recipes por id")
+            if (data.success) {
+                return dispatch({ type: GET_RECIPES_ID, payload: data.message })
+            } else {
+                return { error: true }
+            }
+        } catch (error) {
+            console.error(error)
+            return { error: error.message }
+        }
+    }
 }

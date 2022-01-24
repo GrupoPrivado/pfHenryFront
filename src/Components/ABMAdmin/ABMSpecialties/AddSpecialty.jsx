@@ -3,16 +3,13 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import {
-  addSpeciality,
-  getAllSpecialities,
-} from "../../../actions/actionAMBAdmin";
+import { addSpeciality } from "../../../actions/actionAMBAdmin";
 
 import styles from "./addSpecialty.module.css";
 import { enableBtn, disableBtn } from "../../../utils/ABMStyles";
 import {
-  validateAddEspeciality,
   functionErrorsBtn,
+  validateEspeciality,
 } from "../../../utils/adminFormsControllers";
 
 const AddSpeciality = ({ setShowModalAdd }) => {
@@ -44,15 +41,12 @@ const AddSpeciality = ({ setShowModalAdd }) => {
   const handleSubmitSpeciality = async (event) => {
     event.preventDefault();
 
-    const validateError = validateAddEspeciality(inputSpeciality);
+    const validateError = validateEspeciality(inputSpeciality);
     setErrores(validateError);
-    console.log(validateError);
     if (Object.entries(validateError).length <= 0) {
       dispatch(addSpeciality(inputSpeciality));
-      //alert(response.success);
       setInputSpeciality(inputSpecialityStruct);
       setShowModalAdd(false);
-      //dispatch(getAllSpecialities());
       setErrors(true);
     }
   };
@@ -72,7 +66,7 @@ const AddSpeciality = ({ setShowModalAdd }) => {
           </h5>
         </div>
         <div className="modal-content py-4 text-left px-6 h-90% ">
-          <form onSubmit={(e) => handleSubmitSpeciality(e)} id="addSpeciality">
+          <form>
             <div>
               <label className="text-md text-gray-600">Nombre: </label>
               <input
@@ -91,48 +85,49 @@ const AddSpeciality = ({ setShowModalAdd }) => {
 
             <div>
               <label className="text-md text-gray-600">Descripción: </label>
-              <input
-                className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md"
-                type="text"
+              <textarea
+                className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md resize-none"
+                rows="8"
+                cols="50"
                 name="descripcion"
                 autoComplete="off"
                 value={inputSpeciality.descripcion}
                 onChange={(e) => handleChange(e)}
                 placeholder="Ingrese la Descripcion...."
               />
-              {errores.nombre && (
+              {errores.descripcion && (
                 <p className="absolute text-red-700">{errores.descripcion}</p>
               )}
             </div>
             <div className="flex justify-between mt-8">
-              <div className="flex w-1/3 items-center">
+              <div className="flex w-1/3 ">
                 <label className="text-md text-gray-600">Activo: </label>
                 <select
+                  className=" h-1/2 w-full  border-2 border-gray-300 mb-5 rounded-md"
                   id="activa"
                   name="activa"
                   onChange={(e) => handleChange(e)}
-                  defaultValue={0}
                 >
                   <option value="">Seleccione</option>
                   <option value="false">No</option>
                   <option value="true">Si</option>
                 </select>
-                {errores.nombre && (
+                {errores.activa && (
                   <p className="absolute text-red-700">{errores.activa}</p>
                 )}
               </div>
               <div className="flex w-2/3 justify-around">
                 <button
-                  type="submit"
                   key="submitFormButton"
-                  form="addSpeciality"
                   className={errors ? disableBtn : enableBtn}
                   disabled={errors}
+                  onClick={handleSubmitSpeciality}
                 >
                   Guardar
                 </button>
 
                 <button
+                  type="button"
                   onClick={() => handleClose()}
                   className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
