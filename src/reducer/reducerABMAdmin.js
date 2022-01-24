@@ -57,6 +57,7 @@ export default function reducerABMAdmin(state = initialState, action) {
         ...state,
         allPharmacies: action.payload,
         pharmacies: action.payload,
+        cities: [],
       };
 
     case "PHARMACY_DATA":
