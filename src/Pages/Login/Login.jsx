@@ -11,6 +11,7 @@ import RecoverPassword from "../../Components/FormLogin/RecoverPassword";
 import SuccessAlert from "../../Components/Alerts/SuccessAlert";
 import ErrorAlert from "../../Components/Alerts/ErrorAlert";
 import { alertSweet } from "../../Components/Alerts/alertSweet";
+import {motion} from 'framer-motion'
 
 function Login() {
   const [activeForm, setForm] = useState(false);
@@ -39,7 +40,10 @@ function Login() {
   }, [navigate]);
   //
   return (
-    <div className="w-screen h-[91vh]">
+    <motion.div className="w-screen h-[91vh]" animate={{ opacity: 1, y: 0 }}
+    initial={{ opacity: 0, y: 20 }}
+    exit={{ opacity: 0, y: -20 }}
+    transition={{ duration: 0.15 }}>
       <div className="flex w-full h-full">
         <div className="flex justify-center w-1/2 h-full">
           <img
@@ -90,7 +94,7 @@ function Login() {
           false,
           3000
         )}
-    </div>
+    </motion.div>
   );
 }
 

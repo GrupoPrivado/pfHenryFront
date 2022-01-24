@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux"
 import { getPlanes } from "../../actions/actionPlanes";
 import {Link} from "react-router-dom"
 import Modal from './Modal';
+import {motion} from 'framer-motion'
 
 function Plans() {
     const dispatch = useDispatch()
@@ -27,7 +28,10 @@ function Plans() {
     };
 
     return (
-        <div className='flex justify-evenly'>
+        <motion.div animate={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, y: 30 }}
+        exit={{ opacity: 0, y: -30 }}
+        transition={{ duration: 1.30 }} className='flex justify-evenly'>
             {planes.length && planes.map((plan) => (
                 <div key={plan._id} className='relative flex flex-col items-center p-6 m-10 w-80 h-80 bg-gradient-to-r from-indigo-500 to-indigo-900 rounded-3xl justify-evenly'>
                     <h2 className='text-5xl text-center text-white '>Plan {plan.name}</h2>
@@ -42,7 +46,7 @@ function Plans() {
                    
                 
             ))}
-        </div>
+        </motion.div>
     )
 }
 
