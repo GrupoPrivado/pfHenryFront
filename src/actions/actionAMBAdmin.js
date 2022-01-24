@@ -177,17 +177,17 @@ export function deleteSpeciality(payload) {
 
 /************* Actions Para ABM Afiliados***********/
 
-export function getAllAffiliates() {
+export function getAllAffiliates(skip, limit) {
   return async (dispatch) => {
     try {
       const token = getItem("userToken");
-      const { data } = await axios.get(`${api}/admin/allAffiliates`, {
+      const { data } = await axios.get(`${api}/admin/allAffiliates?skip=${skip}&limit=${limit}`, {
         headers: {
           "x-access-token": token,
         },
       });
       if (data.success) {
-        return dispatch({ type: "GET_AFFILIATES", payload: data.message });
+        return dispatch({ type: "GET_AFFILIATES", payload: data.message, limitPaged: data.limitPaged });
       } else {
         return dispatch({ type: "ERRORS", payload: data });
       }
@@ -365,16 +365,9 @@ export function getAllPharmacies(payload) {
   };
 }
 
-// export function getFilterPharmacy(payload) {
-//   return async (dispatch) => {
-//     const { data } = await axios.get(`${api}/farmaciasFilter?ciudadID=${payload}`);
-//     if (data.success) {
-//       return dispatch({ type: "GET_PHARMACIES", payload: data.message });
-//     } else {
-//       return dispatch({ type: "ERRORS", payload: data });
-//     }
-//   };
-// }
+export function getFilterPharmacy(payload) {
+  return { type: "GET_PHARMACIES", payload: payload };
+}
 
 export function addPharmacy(payload) {
   return async (dispatch) => {
