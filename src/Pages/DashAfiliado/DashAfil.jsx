@@ -13,6 +13,7 @@ import { getRecetas } from '../../actions/actionRecet'
 import Modal from '../../Components/Modal/Modal'
 import {motion} from 'framer-motion'
 import { IdentificationIcon, KeyIcon } from '@heroicons/react/outline'
+import { getHistorial } from '../../actions/actionConsultas'
 
 function DashAfil() {
     const { user, route } = useSelector(state => state.auth)
@@ -37,9 +38,11 @@ function DashAfil() {
 
     useEffect(() => {
         if (user.grupFamID) dispatch(getGroup(user.grupFamID))
-    }, [dispatch, user])
+    }, [user])
 
     useEffect(() => {
+        dispatch(getRecetas())
+        dispatch(getHistorial())
         dispatch(getRecetas())
     }, [])
 
@@ -58,7 +61,7 @@ function DashAfil() {
             [name]: !modal
         })
     };
-
+console.log('renderiza')
     return (
         <motion.div >
             <style dangerouslySetInnerHTML={{ __html: "\n\t@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&display=swap');\n\n\t* {\n\t\tfont-family: 'Noto Sans JP', sans-serif;\n\t}\n\n\t.bg-app {\n\t\tbackground-image: url('');\n\t}\n" }} />
