@@ -85,20 +85,6 @@ const GeneracionRecetas = ({
         </div>
       </article>
 
-      <div>
-        <label>Receta: </label>
-        <textarea
-          rows="4"
-          cols="50"
-          name="descripcion"
-          className="resize-none"
-          autoComplete="off"
-          value={inputReceta.descripcion}
-          onChange={(e) => handleChange(e)}
-          placeholder="Ingrese lo recetado...."
-        />
-      </div>
-
       <button onClick={handleSendInfo} name="crearReceta">
         Crear
       </button>
