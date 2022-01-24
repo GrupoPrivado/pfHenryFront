@@ -165,7 +165,7 @@ function EditProfile({ user }) {
                             <button
                                 type="submit"
                                 value="Guardar Cambios"
-                                className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md disabled:bg-gray-500 bg-primary group hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                                className="w-full px-4 py-2 mt-5 text-sm font-medium text-white border border-transparent rounded-md disabled:bg-gray-500 bg-primary group hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                                 disabled={
                                     !activityChanged ||
                                     !input.correoElectronico ||

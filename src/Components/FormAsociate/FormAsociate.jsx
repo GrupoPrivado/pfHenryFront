@@ -360,10 +360,10 @@ export default function FormAsociate({
                   <div className="flex gap-2">
                     <button
                       value={e.idAf}
-                      className="relative flex justify-center w-10 p-2 text-sm font-medium text-white bg-secondary border border-transparent rounded-md group h-9 hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                      className="relative flex justify-center w-10 p-2 text-sm font-medium text-white border border-transparent rounded-md bg-secondary group h-9 hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                       onClick={handleEdit}
                     >
-                     <PencilIcon className="pointer-events-none h-5 w-5 text-white"/>
+                      <PencilIcon className="w-5 h-5 text-white pointer-events-none" />
 
                     </button>
                     <button
@@ -371,7 +371,7 @@ export default function FormAsociate({
                       className="flex justify-center w-10 p-2 text-sm font-medium text-white bg-red-500 border border-transparent rounded-md group h-9 hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                       onClick={handleDelete}
                     >
-                     <TrashIcon className="pointer-events-none h-5 w-5 text-white"/>
+                      <TrashIcon className="w-5 h-5 text-white pointer-events-none" />
                     </button>
                   </div>
                 </div>
