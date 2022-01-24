@@ -136,7 +136,6 @@ const UpdatePrescription = ({ setShowModalUpdate }) => {
               name="realizada"
               onChange={(e) => handleUpdatePrescription(e)}
               value={updatePrescriptionData.realizada}
-              defaultValue={0}
             >
               <option value="false">No</option>
               <option value="true">Si</option>

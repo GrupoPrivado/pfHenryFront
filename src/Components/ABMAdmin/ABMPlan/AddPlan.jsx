@@ -251,7 +251,6 @@ const AddPlan = ({ setShowModalAdd }) => {
                 id="activo"
                 name="planActivo"
                 onChange={(e) => handleChange(e)}
-                defaultValue={0}
               >
                 <option value="">Seleccione</option>
                 <option value="false">No</option>

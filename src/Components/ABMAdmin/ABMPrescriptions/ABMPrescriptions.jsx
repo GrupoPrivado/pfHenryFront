@@ -39,7 +39,7 @@ const ABMPrescriptions = () => {
   }, [ message, type, activeAlert, errorAlert]);
 
   return (
-    <div>
+    <div className="min-h-[81vh]">
  
 
       <ABMPrescriptionsList setShowModalUpdate={setShowModalUpdate} />

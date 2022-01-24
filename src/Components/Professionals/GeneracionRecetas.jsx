@@ -65,7 +65,6 @@ const GeneracionRecetas = ({
           id="recetaType"
           name="tipoReceta"
           onChange={(e) => handleChange(e)}
-          defaultValue={0}
         >
           <option value="">Seleccione</option>
           {tipoReceta.map((e) => {
@@ -88,8 +87,12 @@ const GeneracionRecetas = ({
         />
       </div>
 
-      <button onClick={handleSendInfo} name="crearReceta">Crear</button>
-      <button onClick={handleClose} name="close">Cerrar</button>
+      <button onClick={handleSendInfo} name="crearReceta">
+        Crear
+      </button>
+      <button onClick={handleClose} name="close">
+        Cerrar
+      </button>
     </div>
   );
 };
