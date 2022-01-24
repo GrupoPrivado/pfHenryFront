@@ -12,6 +12,7 @@ import UpDownAffiliate from "./UpDownAffiliate";
 
 import { alertActions } from "../../../actions/actionAlerts";
 import { alertSweet } from "../../Alerts/alertSweet";
+import ABMPaged from "../ABMPaged";
 
 const ABMAffiliates = () => {
   const dispatch = useDispatch();
@@ -47,12 +48,14 @@ const ABMAffiliates = () => {
   let [showModalUpDown, setShowModalUpDown] = useState(false);
 
   useEffect(() => {
-    dispatch(getAllAffiliates());
+    dispatch(getAllAffiliates(0, 10));
     dispatch(getAllPlans());
   }, []);
 
   return (
     <div>
+      <ABMPaged />
+
       <ABMAffiliatesList
         allAffiliates={allAffiliates}
         setShowModalUpdate={setShowModalUpdate}

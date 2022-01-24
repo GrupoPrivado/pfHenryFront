@@ -13,6 +13,7 @@ const initialState = {
   affiliatePrescriptionData: [],
   updateData: {},
   viewPlan: [],
+  limitPaged: 0
 };
 
 export default function reducerABMAdmin(state = initialState, action) {
@@ -41,7 +42,7 @@ export default function reducerABMAdmin(state = initialState, action) {
       };
 
     case "GET_AFFILIATES":
-      return { ...state, allAffiliates: action.payload };
+      return { ...state, allAffiliates: action.payload, limitPaged: action.limitPaged };
 
     case "AFFILIATE_DATA":
       return {
