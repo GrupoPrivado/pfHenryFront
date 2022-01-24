@@ -54,8 +54,9 @@ export default function CartPrest() {
   const handleChangeProvince = (e) => {
     const newProvince = e.target.value
     const newFilters = {
+      ...filter,
       ciudadID: "",
-      especID:'',
+      //especID:'',
       provinciaID: e.target.value,
     };
     if (newProvince !== '') {
