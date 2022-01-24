@@ -114,7 +114,7 @@ const UpdatePlan = ({ setShowModalUpdate }) => {
   };
 
   return (
-    <div>
+    <div className={styles.modal}>
       <section className={styles.modalmain}>
         <div className="flex justify-center h-10%">
           <div className="flex justify-center items-center">

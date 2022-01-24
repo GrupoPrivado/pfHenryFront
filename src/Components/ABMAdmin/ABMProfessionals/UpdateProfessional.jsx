@@ -91,7 +91,7 @@ const UpdateProfessional = ({ setShowModalUpdate }) => {
   };
 
   return (
-    <div>
+    <div className={styles.modal}>
       <section className={styles.modalmain}>
         <div className="flex justify-center h-10%">
           <h5 className="text-2xl font-bold text-gray-500">

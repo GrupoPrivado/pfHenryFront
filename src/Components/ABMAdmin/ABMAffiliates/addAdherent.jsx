@@ -79,7 +79,7 @@ const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
   };
 
   return (
-    <div>
+    <div >
       <section className={styles.modalmain}>
         <div className="flex justify-center h-10%">
           <h5 className="text-2xl font-bold text-gray-500">
