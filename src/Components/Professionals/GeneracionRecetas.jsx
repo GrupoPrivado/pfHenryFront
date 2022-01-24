@@ -9,7 +9,6 @@ const GeneracionRecetas = ({
   setRecetasModal,
 }) => {
   const dispatch = useDispatch();
-
   const tipoReceta = ["Farmacia", "Estudio"];
 
   const inputRecetaStruct = {

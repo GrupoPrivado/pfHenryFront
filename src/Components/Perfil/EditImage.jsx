@@ -30,15 +30,6 @@ function EditImage({ photo, modal, setModal }) {
         e.preventDefault();
         if (file) {
             sendImages(file)
-            // .then((result) => console.log(result))
-            // .catch((error) => console.log(error));
-            // setTimeout(() => {
-            //     setActiveAlert(true)
-            // }, 1000);
-            // setTimeout(() => {
-            //     setActiveAlert(false)
-            // }, 4000)
-            // setActiveButton(false)
         }
     };
 
