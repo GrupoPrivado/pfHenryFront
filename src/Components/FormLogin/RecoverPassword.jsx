@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { LockClosedIcon } from "@heroicons/react/solid";
 import Logo from "../../assets/logo.svg";
 import { getUserToken, recoverPassword } from "../../utils/authUtils";
+import {motion } from 'framer-motion'
+
 
 function RecoverPassword({setForm, activeForm, handleChangeAlerts}) {
   const [input, setInput] = useState({
@@ -43,13 +45,28 @@ function RecoverPassword({setForm, activeForm, handleChangeAlerts}) {
     img: "mx-auto h-12 w-auto",
   };
 
+  const divVariant = {
+    hidden: {
+      x: "0"
+    },
+    show: {
+      x: '0',
+      transition: {
+        duration: 0.3,
+        ease: 'easeIn',
+      
+      }
+    }
+  }
+
   return (
     <div className={styles.contenedor}>
       <div className="w-full max-w-md space-y-8">
         <div>
           <img className="mx-auto h-12 w-auto" src={Logo} alt="Workflow" />
         </div>
-        <form className="mt-8 space-y-6 ">
+        <motion.form className="mt-8 space-y-6 "   animate={{ rotateY: 360 }}
+  transition={{ type: 'spring', duration: 0.8 }}>
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="-space-y-px rounded-md shadow-sm">
             <select
@@ -117,7 +134,7 @@ function RecoverPassword({setForm, activeForm, handleChangeAlerts}) {
               Recuperar Contraseña
             </button>
           </div>
-        </form>
+        </motion.form>
       </div>
     </div>
   );
