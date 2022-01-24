@@ -77,7 +77,7 @@ function Perfil() {
           <EditImage photo={user.urlPhoto} />
           <button
             onClick={handleClick}
-            className="relative flex justify-center w-1/2 px-4 py-2 text-sm font-semibold text-white border border-transparent rounded-md mt-7 disabled:bg-gray-500 bg-primary group hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+            className="flex justify-center px-4 py-2 mx-auto text-sm font-semibold text-white border border-transparent rounded-md w-52 mt-7 disabled:bg-gray-500 bg-primary group hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
           >
             Cambiar Contraseña
           </button>
