@@ -13,7 +13,7 @@ const initialState = {
   affiliatePrescriptionData: [],
   updateData: {},
   viewPlan: [],
-  limitPaged: 0
+  limitPaged: 0,
 };
 
 export default function reducerABMAdmin(state = initialState, action) {
@@ -30,7 +30,11 @@ export default function reducerABMAdmin(state = initialState, action) {
       };
 
     case "GET_SPECIALITIES":
-      return { ...state, allSpecialities: action.payload };
+      return {
+        ...state,
+        allSpecialities: action.payload,
+        limitPaged: action.limitPaged,
+      };
 
     case "SPECIALITY_DATA":
       let speData = state.allSpecialities.filter(
@@ -42,7 +46,11 @@ export default function reducerABMAdmin(state = initialState, action) {
       };
 
     case "GET_AFFILIATES":
-      return { ...state, allAffiliates: action.payload, limitPaged: action.limitPaged };
+      return {
+        ...state,
+        allAffiliates: action.payload,
+        limitPaged: action.limitPaged,
+      };
 
     case "AFFILIATE_DATA":
       return {
@@ -58,6 +66,7 @@ export default function reducerABMAdmin(state = initialState, action) {
         ...state,
         allPharmacies: action.payload,
         pharmacies: action.payload,
+        limitPaged: action.limitPaged,
         cities: [],
       };
 
@@ -83,7 +92,11 @@ export default function reducerABMAdmin(state = initialState, action) {
       };
 
     case "GET_PROFESSIONALS":
-      return { ...state, allProfessionals: action.payload };
+      return {
+        ...state,
+        allProfessionals: action.payload,
+        limitPaged: action.limitPaged,
+      };
 
     case "PROFESSIONAL_DATA":
       let profData = state.allProfessionals.filter(
@@ -111,10 +124,15 @@ export default function reducerABMAdmin(state = initialState, action) {
       return {
         ...state,
         updateData: prescData[0],
+        limitPaged: action.limitPaged,
       };
 
     case "GET_EMPLOYEES":
-      return { ...state, allEmployees: action.payload };
+      return {
+        ...state,
+        allEmployees: action.payload,
+        limitPaged: action.limitPaged,
+      };
 
     case "EMPLOYEE_DATA":
       let emploData = state.allEmployees.filter(
