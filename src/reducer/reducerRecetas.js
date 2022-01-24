@@ -1,9 +1,10 @@
 import {GET_RECIPES, GET_RECIPES_ID} from "./../actions/actionRecet"
 const inicialState = {
   recipes: [],
-  detail:[]
+  detail:{},
+  isLoading: false
   };
-  export default function reducerRecetas(state = inicialState, {type, payload}) {
+  export default function reducerRecetas(state = inicialState, {type, payload, loading}) {
     switch (type) {
       case GET_RECIPES:
         return {
@@ -11,10 +12,18 @@ const inicialState = {
           recipes: payload,
         };
       case GET_RECIPES_ID:
+        if(payload){
+          return {
+            ...state,
+            detail: payload,
+            isLoading: loading
+          }
+        }
         return {
           ...state,
-          detail: payload
+          isLoading: loading
         }
+
       
       default:
         return state;

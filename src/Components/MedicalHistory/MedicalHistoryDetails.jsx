@@ -8,7 +8,6 @@ function MedicalHistoryDetails() {
     const dispatch = useDispatch();
     const { user } = useSelector(state => state.auth);
     const { consultas } = useSelector(state => state.consultas);
-    console.log(consultas, "Desde medical history details")
     useEffect(() => {
         dispatch(getHistorial())
     }, [dispatch])

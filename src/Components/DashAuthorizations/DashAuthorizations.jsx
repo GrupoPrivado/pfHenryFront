@@ -7,10 +7,9 @@ function DashAuthorizations() {
   const dispatch = useDispatch();
   const { user } = useSelector(state => state.auth);
   const  {recipes}  = useSelector(state => state.recetas);
-  console.log(recipes, "Recipes dash")
-  useEffect(() => {
-    dispatch(getRecetas())
-  }, [dispatch])
+  // useEffect(() => {
+  //   dispatch(getRecetas())
+  // }, [dispatch])
 
   return (
     <Link to="/afiliado/autorizaciones" className="relative flex flex-col justify-start p-4 bg-white md:col-span-2 md:row-span-1 sm:row-span-1 sm:col-span-3 shrink-0 rounded-2xl backdrop-filter backdrop-blur-lg bg-opacity-20 undefined">
