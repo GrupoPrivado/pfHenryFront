@@ -38,7 +38,7 @@ const ABMPharmaciesList = ({
       <div className="bg-gray-50 min-h-screen  ">
         <div>
           <div className="">
-            <div className="bg-white p-6 rounded-md">
+            <div className="bg-white px-6 pb-6 pt-1 rounded-md">
               <div>
                 <div className=" flex justify-end">
                   <button

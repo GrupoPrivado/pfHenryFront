@@ -42,7 +42,7 @@ export default function FilterPharmacy() {
     dispatch(filterActiv(e.target.value));}
 
     return (
-      <div>
+      <div className="px-3">
         <div className="grid overflow-hidden grid-cols-3 grid-rows-1 gap-0">
           <div className="px-4">
             <label
