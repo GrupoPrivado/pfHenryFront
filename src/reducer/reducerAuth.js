@@ -15,7 +15,6 @@ export default function reducerAuth(state = inicialState, {type, payload, loadin
       return {
         ...state,
         route: '',
-        medicalToken: [],
         data: true,
         user: payload,
         error: ''
