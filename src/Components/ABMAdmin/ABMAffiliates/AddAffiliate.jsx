@@ -111,10 +111,10 @@ const AddAffiliate = ({ setShowModalAdd }) => {
     setShowModalAdd(false);
     setErrors(true);
   };
-  const showHideClassName = setShowModalAdd ? "displayblock" : "displaynone";
+  
 
   return (
-    <div className={styles[showHideClassName]}>
+    <div className={styles.modal}>
       <section className={styles.modalmain}>
         <div className="flex justify-center h-10%">
           <h5 className="text-2xl font-bold text-gray-500">

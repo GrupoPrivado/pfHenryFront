@@ -1,15 +1,18 @@
 import React from "react";
 
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useDispatch,  } from "react-redux";
+import { useEffect, } from "react";
 
 import {
   getPharmacyData,
-  getAllCities,
-  getAllPharmacies,
+  
   getAllProvinces,
+<<<<<<< HEAD
   filterActiv,
   deleteCities,
+=======
+  
+>>>>>>> development
 } from "../../../actions/actionAMBAdmin";
 
 import styles from "./ABMPharmacies.module.css";
@@ -21,6 +24,7 @@ const ABMPharmaciesList = ({
 }) => {
   const dispatch = useDispatch();
 
+<<<<<<< HEAD
   const { cities, provinces, allPharmacies } = useSelector((state) => state.ABMAdmin);
 
   // useEffect(() => {
@@ -67,6 +71,15 @@ const ABMPharmaciesList = ({
   //   setFilter(e.target.value);
   //   dispatch(filterActiv(e.target.value));
   // };
+=======
+  
+
+  useEffect(() => {
+    dispatch(getAllProvinces());
+  }, []);
+
+  
+>>>>>>> development
 
   const handleEditPharmacy = async (event) => {
     await dispatch(getPharmacyData(event.target.value));
@@ -77,8 +90,8 @@ const ABMPharmaciesList = ({
     <div className={styles.divScroll}>
       <div className="bg-gray-50 min-h-screen  ">
         <div>
-          <div className="p-4">
-            <div className="bg-white p-6 rounded-md">
+          <div className="">
+            <div className="bg-white px-6 pb-6 pt-1 rounded-md">
               <div>
                 <div className=" flex justify-end">
                   <button
@@ -89,6 +102,7 @@ const ABMPharmaciesList = ({
                     Agregar Farmacia
                   </button>
                 </div>
+<<<<<<< HEAD
                 <div className="grid overflow-hidden grid-cols-3 grid-rows-1 gap-0">
                   {/* <div className="px-4">
                     <label
@@ -154,6 +168,9 @@ const ABMPharmaciesList = ({
                     </select>
                   </div> */}
                 </div>
+=======
+                
+>>>>>>> development
                 <div className="mt-3.5">
                   <div>
                     <div className=" grid overflow-hidden grid-cols-6 grid-rows-1 gap-0 bg-gradient-to-tr from-indigo-600 to-purple-600 rounded-md py-2 px-4 text-white font-bold text-md">

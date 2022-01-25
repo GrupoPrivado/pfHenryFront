@@ -97,7 +97,7 @@ const AddPlan = ({ setShowModalAdd }) => {
     setErrors(true);
   };
   return (
-    <div className="relative">
+    <div className={styles.modal}>
       <section className={styles.modalmain}>
         <div className="flex justify-center h-10%">
           <h5 className="text-2xl font-bold text-gray-500">
