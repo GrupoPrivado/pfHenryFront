@@ -627,7 +627,7 @@ export function deletePlan(payload) {
 
 /************* Actions Para ABM Profesionales***********/
 
-export function getAllProfessionals(skip, limit, ciudadID, provinciaID) {
+export function getAllProfessionals(skip, limit, provinciaID, ciudadID) {
   return async (dispatch) => {
     try {
       const token = getItem("userToken");

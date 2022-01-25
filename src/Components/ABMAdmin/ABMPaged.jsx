@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-//import { getAllAffiliates } from "../../actions/actionAMBAdmin";
 import { disableBtnPage, enableBtnPage } from "../../utils/ABMStyles";
 
 const ABMPaged = ({ getFunction }) => {
