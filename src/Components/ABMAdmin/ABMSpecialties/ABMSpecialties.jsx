@@ -44,7 +44,7 @@ const ABMSpecialities = () => {
   let [showModalUpdate, setShowModalUpdate] = useState(false);
 
   useEffect(() => {
-    dispatch(getAllSpecialities());
+    dispatch(getAllSpecialities(0,10));
   }, []);
 
   /********* Funciones para borrar un elemento*********/
