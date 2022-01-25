@@ -22,7 +22,7 @@ const ABMAffiliatesList = ({ allAffiliates, setShowModalUpdate, setShowModalAdd,
   
   return (
     
-
+ 
       <div className={styles.divScroll}>
         <div className="bg-gray-50 min-h-screen  ">
           <div>
@@ -140,6 +140,7 @@ const ABMAffiliatesList = ({ allAffiliates, setShowModalUpdate, setShowModalAdd,
           </div>
         </div>
       </div>
+      
     
   );
 };

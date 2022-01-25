@@ -1,17 +1,14 @@
 import React from "react";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import {
-  deleteEmployee,
   getEmployeeData,
-  getAllEmployees,
 } from "../../../actions/actionAMBAdmin";
 
 import styles from "./ABMEmployees.module.css";
 
 const ABMEmployeesList = ({
-  allEmployees,
   setShowModalUpdate,
   setShowModalAdd,
   setShowModalUpDown,
@@ -19,15 +16,11 @@ const ABMEmployeesList = ({
 }) => {
   const dispatch = useDispatch();
 
+  const { allEmployees } = useSelector((state) => state.ABMAdmin);
+
   const handleBajaAltaEmployee = async (event) => {
     await dispatch(getEmployeeData(event.target.value));
     setShowModalUpDown(true);
-  };
-
-  const handleDeleteEmployee = async (event) => {
-    let response = await dispatch(deleteEmployee(event.target.value));
-
-    await dispatch(getAllEmployees());
   };
 
   const handleEditEmployee = async (event) => {

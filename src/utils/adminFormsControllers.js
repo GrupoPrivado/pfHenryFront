@@ -310,10 +310,10 @@ export const validateAdherent = (input) => {
 export const validateAddEmployee = (input) => {
   let errores = {};
 
-  if (input.name && input.name.length < 5) {
+  if (input.name && input.name.length < 3) {
     errores.name = "El nombre debe tener minimo 5 caracteres";
   }
-  if (input.lastName && input.lastName.length < 5) {
+  if (input.lastName && input.lastName.length < 3) {
     errores.lastName = "El apellido debe tener minimo 5 caracteres";
   }
 
@@ -321,8 +321,8 @@ export const validateAddEmployee = (input) => {
     errores.activo = "Debe seleccionar si la especialidad esta activa o no";
   }
 
-  if (input.legajo && input.legajo.length > 5) {
-    errores.legajo = "El legajo debe tener menos de 5 caracteres";
+  if (input.legajo && input.legajo.length > 7) {
+    errores.legajo = "El legajo debe tener maximo 7 caracteres";
   }
   if (
     input.telefono &&

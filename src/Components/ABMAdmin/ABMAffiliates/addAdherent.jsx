@@ -39,7 +39,7 @@ const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
     parentesco: "",
   };
 
-  let [inputAdherent, setInputAdherent] = useState(inputAdherentStruct);
+  const [inputAdherent, setInputAdherent] = useState(inputAdherentStruct);
 
   const handleChangeProvince = (e) => {
     const newData = {
@@ -55,8 +55,8 @@ const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
     console.log(validateError, 'validate error')
     setErrores(validateError);
     if (Object.entries(validateError).length <= 0) {
-      setShowModalAdherent(false);
       handleAddAdherent(inputAdherent);
+      setShowModalAdherent(false);
       setInputAdherent(inputAdherentStruct);
     }
   };
@@ -80,7 +80,7 @@ const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
   };
 
   return (
-    <div>
+    <div >
       <section className={styles.modalmain}>
         <div className="flex justify-center h-10%">
           <h5 className="text-2xl font-bold text-gray-500">

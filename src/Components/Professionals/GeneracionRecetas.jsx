@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { useDispatch } from "react-redux";
 import { postRecetaMedica } from "../../actions/professionalsActions";
+import { validateReceta } from "../../utils/professionalFormsControllers";
 
 const GeneracionRecetas = ({
   affiliateData,
@@ -10,6 +11,7 @@ const GeneracionRecetas = ({
 }) => {
   const dispatch = useDispatch();
   const tipoReceta = ["Farmacia", "Estudio"];
+  const [errores, setErrores] = useState({});
 
   const inputRecetaStruct = {
     afiliadoID: "",
@@ -38,9 +40,13 @@ const GeneracionRecetas = ({
   };
 
   const handleSendInfo = () => {
-    setRecetasModal(false);
-    dispatch(postRecetaMedica(inputReceta));
-    setInputReceta(inputRecetaStruct);
+    const validateError = validateReceta(inputReceta);
+    console.log(validateError);
+    setErrores(validateError);
+    if (Object.entries(validateError).length <= 0) {
+      dispatch(postRecetaMedica(inputReceta));
+      setRecetasModal(false);
+    }
   };
 
   const handleClose = () => {
@@ -51,11 +57,15 @@ const GeneracionRecetas = ({
   return (
     <section className="w-full flex flex-col gap-8 justify-center items-center">
       <article className="grid grid-cols-2 gap-2 justify-items-center w-64">
-        <label className="col-span-2">Nombre y Apellido: {affiliateData.nombre} {affiliateData.apellido}</label>
+        <label className="col-span-2">
+          Nombre y Apellido: {affiliateData.nombre} {affiliateData.apellido}
+        </label>
         {/* <label>Nombre: </label> */}
         <label>DNI: {affiliateData.DNI}</label>
         <label>Activo: {affiliateData.activo ? "Si" : "No"}</label>
-        <label className="col-span-2">E-mail: {affiliateData.correoElectronico}</label>
+        <label className="col-span-2">
+          E-mail: {affiliateData.correoElectronico}
+        </label>
       </article>
 
       <article className="flex flex-col">
@@ -70,6 +80,9 @@ const GeneracionRecetas = ({
             return <option value={e}>{e}</option>;
           })}
         </select>
+        {errores.tipoReceta && (
+          <p className="absolute text-red-700">{errores.tipoReceta}</p>
+        )}
         <div className="flex flex-col">
           <label>Receta: </label>
           <textarea
@@ -82,22 +95,11 @@ const GeneracionRecetas = ({
             onChange={(e) => handleChange(e)}
             placeholder="Ingrese lo recetado...."
           />
+          {errores.descripcion && (
+            <p className="absolute text-red-700">{errores.descripcion}</p>
+          )}
         </div>
       </article>
-
-      <div>
-        <label>Receta: </label>
-        <textarea
-          rows="4"
-          cols="50"
-          name="descripcion"
-          className="resize-none"
-          autoComplete="off"
-          value={inputReceta.descripcion}
-          onChange={(e) => handleChange(e)}
-          placeholder="Ingrese lo recetado...."
-        />
-      </div>
 
       <button onClick={handleSendInfo} name="crearReceta">
         Crear

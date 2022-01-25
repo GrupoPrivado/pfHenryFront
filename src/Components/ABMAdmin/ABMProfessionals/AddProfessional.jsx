@@ -81,7 +81,7 @@ const AddProfessional = ({ setShowModalAdd }) => {
     setErrores(validateError);
     if (Object.entries(validateError).length <= 0) {
       dispatch(addProfessional(inputProfessional));
-      dispatch(getAllProfessionals({}));
+      dispatch(getAllProfessionals(0,10));
       setShowModalAdd(false);
     }
   };
@@ -93,7 +93,7 @@ const AddProfessional = ({ setShowModalAdd }) => {
   };
 
   return (
-    <div>
+    <div className={styles.modal}>
       <section className={styles.modalmain}>
         <div className="flex justify-center h-10%">
           <h5 className="text-2xl font-bold text-gray-500">
