@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   deleteProfessional,
   getAllProfessionals,
-  getAllSpecialities,
+  getAllEspecialities,
 } from "../../../actions/actionAMBAdmin";
 import FilterProfessionals from "./FilterProfessionals";
 import AddProfessional from "./AddProfessional";
@@ -60,7 +60,7 @@ const ABMProfessionals = () => {
   let [showModalUpDown, setShowModalUpDown] = useState(false);
 
   useEffect(() => {
-    dispatch(getAllSpecialities());
+    dispatch(getAllEspecialities());
     dispatch(getAllProfessionals(0,10));
   }, []);
 

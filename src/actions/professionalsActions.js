@@ -3,7 +3,7 @@ import { api } from "../urlHostApi";
 import { getItem } from "./actionAuth";
 
 import axios from "axios";
-export const GET_PROFESSIONAL = "GET_PROFESSIONAL"
+export const GET_PROFESSIONAL = "GET_PROFESSIONAL";
 
 export function getconsultaMedica(payload) {
   return async function (dispatch) {
@@ -68,11 +68,15 @@ export function getProfessionalData() {
 export function postRecetaMedica(payload) {
   return async (dispatch) => {
     const token = getItem("userToken");
-    const { data } = await axios.post(`${api}/profesionales/postRecetaMedica`, payload, {
-      headers: {
-        "x-access-token": token,
-      },
-    });
+    const { data } = await axios.post(
+      `${api}/profesionales/postRecetaMedica`,
+      payload,
+      {
+        headers: {
+          "x-access-token": token,
+        },
+      }
+    );
     return data;
 
     // if(data.success){
@@ -106,11 +110,14 @@ export function putConsultaMedica(payload) {
 export function getClinicHistory(payload) {
   return async function (dispatch) {
     const token = getItem("userToken");
-    const { data } = await axios.get(`${api}/profesionales/historiaMedica/${payload}`, {
-      headers: {
-        "x-access-token": token,
-      },
-    });
+    const { data } = await axios.get(
+      `${api}/profesionales/historiaMedica/${payload}`,
+      {
+        headers: {
+          "x-access-token": token,
+        },
+      }
+    );
     if (data.success) {
       return dispatch({
         type: "GET_MEDICAL_HISTORY",
@@ -119,5 +126,11 @@ export function getClinicHistory(payload) {
     } else {
       return dispatch({ type: "ERRORS", payload: data });
     }
+  };
+}
+
+export function resetData() {
+  return {
+    type: "RESET_DATA",
   };
 }
