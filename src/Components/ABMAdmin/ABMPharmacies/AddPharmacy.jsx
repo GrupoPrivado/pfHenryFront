@@ -70,7 +70,6 @@ const AddPharmacy = ({ setShowModalAdd }) => {
     const validateError = validatePharmacy(inputPharmacy);
     setErrores(validateError);
     if (Object.entries(validateError).length <= 0) {
-      console.log("fdshfjkbsdfgcvnsncgnfgjcfsdkscggcgnk");
       dispatch(addPharmacy(inputPharmacy));
       //setInputPharmacy(inputPharmacyStruct);
       //setErrors(true);
