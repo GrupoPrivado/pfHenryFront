@@ -88,7 +88,7 @@ const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
         </div>
         <div className="modal-content py-4 text-left px-6 h-90% ">
           <form>
-            <div className="flex">
+            <div className="flex mb-5">
               <div className="w-1/3">
                 <label className="text-md text-gray-600">Nombre: </label>
                 <input
@@ -101,7 +101,7 @@ const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
                   placeholder="Ingrese el nombre...."
                 />
                 {errores.nombre && (
-                  <p className="absolute text-red-700">{errores.nombre}</p>
+                  <p className=" absolute text-red-700 text-xs font-bold">{errores.nombre}</p>
                 )}
               </div>
 
@@ -117,7 +117,7 @@ const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
                   placeholder="Ingrese el apellido...."
                 />
                 {errores.apellido && (
-                  <p className="absolute text-red-700">{errores.apellido}</p>
+                  <p className=" absolute text-red-700 text-xs font-bold">{errores.apellido}</p>
                 )}
               </div>
 
@@ -133,11 +133,11 @@ const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
                   placeholder="Ingrese el DNI...."
                 />
                 {errores.DNI && (
-                  <p className="absolute text-red-700">{errores.DNI}</p>
+                  <p className=" absolute text-red-700 text-xs font-bold">{errores.DNI}</p>
                 )}
               </div>
             </div>
-            <div className="flex">
+            <div className="flex mb-5">
               <div className="w-1/2">
                 <label className="text-md text-gray-600">
                   Fecha de Nacimiento:{" "}
@@ -152,7 +152,7 @@ const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
                   placeholder="Ingrese Fecha Nacimiento...."
                 />
                 {errores.fechaNacimiento && (
-                  <p className="absolute text-red-700">
+                  <p className=" absolute text-red-700 text-xs font-bold">
                     {errores.fechaNacimiento}
                   </p>
                 )}
@@ -171,11 +171,11 @@ const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
                   placeholder="Ingrese el Teléfono...."
                 />
                 {errores.telefono && (
-                  <p className="absolute text-red-700">{errores.telefono}</p>
+                  <p className=" absolute text-red-700 text-xs font-bold">{errores.telefono}</p>
                 )}
               </div>
             </div>
-            <div className="flex">
+            <div className="flex mb-5">
               <div className="w-1/2">
                 <label className="text-md text-gray-600">E-Mail: </label>
                 <input
@@ -188,7 +188,7 @@ const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
                   placeholder="Ingrese el E-Mail...."
                 />
                 {errores.correoElectronico && (
-                  <p className="absolute text-red-700">
+                  <p className=" absolute text-red-700 text-xs font-bold">
                     {errores.correoElectronico}
                   </p>
                 )}
@@ -206,11 +206,11 @@ const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
                   placeholder="Ingrese el domocilio...."
                 />
                 {errores.direccion && (
-                  <p className="absolute text-red-700">{errores.direccion}</p>
+                  <p className=" absolute text-red-700 text-xs font-bold">{errores.direccion}</p>
                 )}
               </div>
             </div>
-            <div className="flex">
+            <div className="flex mb-5">
               <div className="w-1/2">
                 <label className="text-md text-gray-600" htmlFor="provincia">
                   Provincia{" "}
@@ -231,7 +231,7 @@ const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
                     ))}
                 </select>
                 {errores.provinciaID && (
-                  <p className="absolute text-red-700">{errores.provinciaID}</p>
+                  <p className=" absolute text-red-700 text-xs font-bold">{errores.provinciaID}</p>
                 )}
               </div>
 
@@ -255,7 +255,7 @@ const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
                     ))}
                 </select>
                 {errores.ciudadID && (
-                  <p className="absolute text-red-700">{errores.ciudadID}</p>
+                  <p className=" absolute text-red-700 text-xs font-bold">{errores.ciudadID}</p>
                 )}
               </div>
             </div>
@@ -282,7 +282,7 @@ const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
                   })}
                 </select>
                 {errores.parentesco && (
-                  <p className="absolute text-red-700">{errores.parentesco}</p>
+                  <p className=" absolute text-red-700 text-xs font-bold">{errores.parentesco}</p>
                 )}
               </div>
               <div className=" flex justify-around  w-1/2">
