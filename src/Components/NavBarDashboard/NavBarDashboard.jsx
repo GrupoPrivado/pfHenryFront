@@ -105,7 +105,7 @@ export default function NavBarDashboard() {
                                             </button>
 
                                             {/* Profile dropdown */}
-                                            <Menu as="div" className="relative z-50 ml-3">
+                                            <Menu as="div" className="relative z-40 ml-3">
                                                 <div>
                                                     <Menu.Button className="flex items-center max-w-xs text-sm bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                                                         <span className="sr-only">Open user menu</span>

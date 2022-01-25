@@ -304,6 +304,8 @@ export const validateAdherent = (input) => {
   if (input.parentesco.length <= 0) {
     errores.parentesco = "Debe seleccionar un parentesco";
   }
+
+  return errores;
 }
 export const validateAddEmployee = (input) => {
   let errores = {};

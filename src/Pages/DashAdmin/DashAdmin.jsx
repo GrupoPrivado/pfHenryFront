@@ -25,7 +25,7 @@ function DashAdmin() {
 
   return (
     <div className="h-90vh bg- w-full grid overflow-hidden grid-cols-3 grid-rows-2 gap-0">
-      <div className="shadow-xl rounded-xl m-2 p-4 bg-clip-padding backdrop-filter  bg-opacity-60 border border-gray-200">
+      {/* <div className="shadow-xl rounded-xl m-2 p-4 bg-clip-padding backdrop-filter  bg-opacity-60 border border-gray-200">
         <Profesionals />
       </div>
       <div className="shadow-xl rounded-xl  m-2 p-4 bg-clip-padding backdrop-filter  bg-opacity-60 border border-gray-200">
@@ -44,7 +44,7 @@ function DashAdmin() {
 
       <div className="shadow-xl rounded-xl m-2 p-4 bg-clip-padding backdrop-filter  bg-opacity-60 border border-gray-200">
         <PrescriptionStatus />
-      </div>
+      </div> */}
     </div>
     
     

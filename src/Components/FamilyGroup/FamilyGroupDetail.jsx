@@ -30,7 +30,7 @@ export default function FamilyGroupDetail() {
 
     return (
         <div>
-            <div className="flex flex-col w-full min-h-screen bg-cover contenair" style={{ backgroundImage: `url(${Logo})` }}>
+            <div className="flex flex-col w-full min-h-screen bg-center bg-no-repeat bg-cover contenair" style={{ backgroundImage: `url(${Logo})` }}>
                 <h3 className='self-start mt-3 ml-3 text-4xl font-bold text-white'>Grupo Familiar</h3>
                 {/* card */}
                 <div className="flex flex-wrap items-center w-full p-5 justify-evenly ">
