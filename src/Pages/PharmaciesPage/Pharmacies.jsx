@@ -10,6 +10,7 @@ const Pharmacies = ({ pharmacies }) => {
                         <th className="p-2 text-white bg-primary bg-opacity-40 backdrop-filter backdrop-blur-lg">Nombre</th>
                         <th className="p-2 text-white bg-primary bg-opacity-40 backdrop-filter backdrop-blur-lg">Teléfono</th>
                         <th className="p-2 text-white bg-primary bg-opacity-40 backdrop-filter backdrop-blur-lg">Mail</th>
+                        <th className="p-2 text-white bg-primary bg-opacity-40 backdrop-filter backdrop-blur-lg">Dirección</th>
                         <th className="p-2 text-white bg-primary bg-opacity-40 backdrop-filter backdrop-blur-lg">Provincia</th>
                         <th className="p-2 text-white bg-primary bg-opacity-40 backdrop-filter backdrop-blur-lg">Localidad</th>
                     </tr>

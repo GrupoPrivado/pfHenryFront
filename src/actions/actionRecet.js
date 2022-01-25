@@ -13,7 +13,6 @@ export function getRecetas(payload) {
                     'x-access-token': token
                 }
             });
-            console.log(data, "data recipes")
             if (data.success) {
                 return dispatch({ type: GET_RECIPES, payload: data.message })
             } else {
@@ -27,19 +26,20 @@ export function getRecetas(payload) {
 }
 
 export function getRecetaDetail(id){
+    console.log(id, 'id en action')
     return async function(dispatch){
         const token = getItem("userToken");
         try {
+            dispatch({type: GET_RECIPES_ID, payload: {}, loading: true })
             const { data } = await axios.get(`${api}/recetas/${id}`, {
                 headers: {
                     'x-access-token': token
                 }
             });
-            console.log(data, "Recipes por id")
             if (data.success) {
-                return dispatch({ type: GET_RECIPES_ID, payload: data.message })
+                return dispatch({ type: GET_RECIPES_ID, payload: data.message, loading: false })
             } else {
-                return { error: true }
+                return { type: GET_RECIPES_ID, payload: {}, loading: false }
             }
         } catch (error) {
             console.error(error)

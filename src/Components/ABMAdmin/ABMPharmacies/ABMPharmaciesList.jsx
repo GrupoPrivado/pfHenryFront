@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useDispatch,  } from "react-redux";
+import { useDispatch, useSelector,  } from "react-redux";
 import { useEffect, } from "react";
 
 import {
@@ -13,14 +13,13 @@ import {
 import styles from "./ABMPharmacies.module.css";
 
 const ABMPharmaciesList = ({
-  allPharmacies,
   setShowModalUpdate,
   setShowModalAdd,
   setDeleteState,
 }) => {
   const dispatch = useDispatch();
 
-  
+  const { allPharmacies } = useSelector((state) => state.ABMAdmin);
 
   useEffect(() => {
     dispatch(getAllProvinces());

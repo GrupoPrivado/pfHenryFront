@@ -4,7 +4,6 @@ import date from "./date.js"
 export const profilePhoto = photo;
 
 export const validate = (input) => {
-
     let errores = {};
     if (input.password && input.password.length < 8) {
         errores.password = "La contraseña debe tener minimo 8 caracteres";
@@ -44,12 +43,10 @@ export const validate = (input) => {
     if(input.planID && input.planID.length <= 0){
         errores.planID = "Debe seleccionar un plan"
     }
-
     return errores;
 };
 
 export const validateContact = (input) => {
-
     let errores = {};
     if(
         !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(input.mail)
@@ -65,7 +62,6 @@ export const validateContact = (input) => {
     if(input.message.lenght < 10){
         errores.message = 'Escriba una consulta válida'
     }
-
     return errores;
 }
 

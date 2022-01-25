@@ -2,13 +2,13 @@ import React from "react";
 
 const AffiliateData = ({ affiliateData }) => {
   return (
-    <div>
+    <section className="grid grid-cols-2 gap-2 justify-items-center">
+      <label className="col-span-2 justify-self-center">Nombre y Apellido: {affiliateData.nombre} {affiliateData.apellido}</label>
+      {/* <label>Apellido: </label> */}
       <label>DNI: {affiliateData.DNI}</label>
-      <label>Apellido: {affiliateData.apellido}</label>
-      <label>Nombre: {affiliateData.nombre}</label>
-      <label>E-mail: {affiliateData.correoElectronico}</label>
       <label>Activo: {affiliateData.activo ? "Si" : "No"}</label>
-    </div>
+      <label className="col-span-2 justify-self-center">E-mail: {affiliateData.correoElectronico}</label>
+    </section>
   );
 };
 

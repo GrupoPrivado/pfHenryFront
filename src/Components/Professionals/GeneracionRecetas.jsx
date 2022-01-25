@@ -9,7 +9,6 @@ const GeneracionRecetas = ({
   setRecetasModal,
 }) => {
   const dispatch = useDispatch();
-
   const tipoReceta = ["Farmacia", "Estudio"];
 
   const inputRecetaStruct = {
@@ -50,16 +49,16 @@ const GeneracionRecetas = ({
   };
 
   return (
-    <div>
-      <div>
+    <section className="w-full flex flex-col gap-8 justify-center items-center">
+      <article className="grid grid-cols-2 gap-2 justify-items-center w-64">
+        <label className="col-span-2">Nombre y Apellido: {affiliateData.nombre} {affiliateData.apellido}</label>
+        {/* <label>Nombre: </label> */}
         <label>DNI: {affiliateData.DNI}</label>
-        <label>Apellido: {affiliateData.apellido}</label>
-        <label>Nombre: {affiliateData.nombre}</label>
-        <label>E-mail: {affiliateData.correoElectronico}</label>
         <label>Activo: {affiliateData.activo ? "Si" : "No"}</label>
-      </div>
+        <label className="col-span-2">E-mail: {affiliateData.correoElectronico}</label>
+      </article>
 
-      <div>
+      <article className="flex flex-col">
         <label>Seleccione el tipo de receta: </label>
         <select
           id="recetaType"
@@ -71,21 +70,20 @@ const GeneracionRecetas = ({
             return <option value={e}>{e}</option>;
           })}
         </select>
-      </div>
-
-      <div>
-        <label>Receta: </label>
-        <textarea
-          rows="4"
-          cols="50"
-          name="descripcion"
-          className="resize-none"
-          autoComplete="off"
-          value={inputReceta.descripcion}
-          onChange={(e) => handleChange(e)}
-          placeholder="Ingrese lo recetado...."
-        />
-      </div>
+        <div className="flex flex-col">
+          <label>Receta: </label>
+          <textarea
+            rows="4"
+            cols="50"
+            name="descripcion"
+            className="resize-none"
+            autoComplete="off"
+            value={inputReceta.descripcion}
+            onChange={(e) => handleChange(e)}
+            placeholder="Ingrese lo recetado...."
+          />
+        </div>
+      </article>
 
       <button onClick={handleSendInfo} name="crearReceta">
         Crear
@@ -93,7 +91,7 @@ const GeneracionRecetas = ({
       <button onClick={handleClose} name="close">
         Cerrar
       </button>
-    </div>
+    </section>
   );
 };
 

@@ -6,6 +6,7 @@ import {
   getconsultaMedica,
   putConsultaMedica,
 } from "../../actions/professionalsActions";
+import { disableBtnProf, enableBtnProf } from "../../utils/ABMStyles";
 import AffiliateData from "./AffiliateData";
 import GeneracionRecetas from "./GeneracionRecetas";
 import ProfessionalData from "./ProfessionalData";
@@ -56,11 +57,11 @@ const IndexProfessional = () => {
   };
 
   const handleUpdate = () => {
-    const dataSend = {...inputData, token: dataAffiliate.token }
+    const dataSend = { ...inputData, token: dataAffiliate.token };
     setInputData(dataSend);
     dispatch(putConsultaMedica(dataSend));
-    setDataAffiliate(dataAffiliateStruct)
-    setInputData(inputDataStruct)
+    setDataAffiliate(dataAffiliateStruct);
+    setInputData(inputDataStruct);
   };
 
   /****** Fin Variables y funciones para llenar consulta medica Func 2******/
@@ -72,49 +73,64 @@ const IndexProfessional = () => {
   /****** Variables y funciones la generación de recetas Func 3******/
 
   return (
-    <div>
+    <div className="w-full flex justify-center items-center flex-col gap-8">
       {/*Busqueda Consulta Medica Func 1*/}
-      <div>
-        <label>DNI Afiliado: </label>
-        <input
-          type="number"
-          name="DNI"
-          autoComplete="off"
-          value={dataAffiliate.DNI}
-          onChange={(e) => handleChange(e)}
-          placeholder="Ingrese el DNI...."
-        />
-      </div>
-
-      <div>
-        <label>Token Consulta: </label>
-        <input
-          type="number"
-          name="token"
-          autoComplete="off"
-          value={dataAffiliate.token}
-          onChange={(e) => handleChange(e)}
-          placeholder="Ingrese el Token...."
-        />
-      </div>
-
-      <div>
-        <label>Token Consulta: </label>
-        <button name="searchBtn" onClick={(e) => handleSendInfo(e)}>
-          Buscar
-        </button>
-      </div>
-
+      <section className="flex justify-center items-center h-20">
+        <div>
+          <label>DNI Afiliado: </label>
+          <input
+            type="number"
+            name="DNI"
+            autoComplete="off"
+            value={dataAffiliate.DNI}
+            onChange={(e) => handleChange(e)}
+            placeholder="Ingrese el DNI...."
+          />
+        </div>
+        <div>
+          <label>Token Consulta: </label>
+          <input
+            type="number"
+            name="token"
+            autoComplete="off"
+            value={dataAffiliate.token}
+            onChange={(e) => handleChange(e)}
+            placeholder="Ingrese el Token...."
+          />
+        </div>
+        <div>
+          {/* <label>Token Consulta: </label> */}
+          <button name="searchBtn" onClick={(e) => handleSendInfo(e)}>
+            Buscar
+          </button>
+        </div>
+      </section>
       {/*Fin Busqueda Consulta Medica */}
 
       {/* Botonera */}
-      <Link to="/profesional/historiaclinica">
-        <button>Historial Medico</button>
-      </Link>
+      <div className="flex justify-around items-center w-40vw h-10">
+        <Link to="/profesional/historiaclinica">
+          <button
+            className={
+              consultaMedicaData.afiliadoID ? enableBtnProf : disableBtnProf
+            }
+            disabled={consultaMedicaData.afiliadoID ? false : true}
+          >
+            Historial Medico
+          </button>
+        </Link>
 
-      <button name="recetasModal" onClick={() => setRecetasModal(true)}>
-        Generar Receta
-      </button>
+        <button
+          name="recetasModal"
+          onClick={() => setRecetasModal(true)}
+          className={
+            consultaMedicaData.afiliadoID ? enableBtnProf : disableBtnProf
+          }
+          disabled={consultaMedicaData.afiliadoID ? false : true}
+        >
+          Generar Receta
+        </button>
+      </div>
       {/* Fin Botonera */}
 
       {/* Generar Receta */}
@@ -142,7 +158,7 @@ const IndexProfessional = () => {
       {/* Fin Datos Personales Medico */}
 
       {/* Diagnostico Func 2*/}
-      <div>
+      <div className="flex flex-col">
         <label>Diagnóstico: </label>
         <textarea
           rows="4"
@@ -156,7 +172,10 @@ const IndexProfessional = () => {
         />
       </div>
 
-      <button onClick={handleUpdate} name="guardar"> Guardar</button>
+      <button onClick={handleUpdate} name="guardar">
+        {" "}
+        Guardar
+      </button>
       {/* Fin Diagnostico */}
     </div>
   );

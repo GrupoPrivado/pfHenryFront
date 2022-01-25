@@ -12,12 +12,10 @@ function EditPassword({ setErrorAlert, setAlertMessage, modal, setModal }) {
     newPass: "",
     repeat: "",
   });
- 
   const handleSubmit = (e) => {
     e.preventDefault(e);
     const validateError = validatePassword(passwords);
     setErrors(validateError);
-    console.log(Object.entries(validateError), "validate errors passwords")
     if (passwords.newPass === passwords.repeat && Object.entries(validateError).length <= 0) {
       dispatch(changePassword(passwords));
       setPasswords({
@@ -109,7 +107,7 @@ function EditPassword({ setErrorAlert, setAlertMessage, modal, setModal }) {
                   <button
                     type="submit"
                     value="Cambiar Contraseña"
-                    className="relative flex self-center justify-center w-1/2 px-4 py-2 text-sm font-semibold text-white border border-transparent rounded-md disabled:bg-gray-500 bg-primary group hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                    className="flex self-center justify-center w-1/2 px-4 py-2 mx-auto text-sm font-semibold text-white border border-transparent rounded-md disabled:bg-gray-500 bg-primary group hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                     disabled={
                       !passwords.old || !passwords.newPass || !passwords.repeat
                     }
