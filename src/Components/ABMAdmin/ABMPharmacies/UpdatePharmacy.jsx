@@ -78,6 +78,7 @@ const UpdatePharmacy = ({ setShowModalUpdate }) => {
   };
 
   return (
+    <div className={styles.modal}>
     <section className={styles.modalmain}>
       <div className="flex justify-center">
         <h5 className="text-2xl font-bold text-gray-500">Modificar Farmacia</h5>
@@ -171,6 +172,7 @@ const UpdatePharmacy = ({ setShowModalUpdate }) => {
         </div>
       </div>
     </section>
+    </div>
   );
 };
 

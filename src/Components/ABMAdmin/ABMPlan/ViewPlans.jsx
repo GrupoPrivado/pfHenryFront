@@ -15,6 +15,7 @@ const ViewPlans = ({ setShowModalView }) => {
   };
 
   return (
+    <div className={styles.modal}>
     <div className={styles.modalmain}>
       <div className="h-4/5 overflow-auto p-4">
         {viewPlan[0].descripcion?.map((e) => {
@@ -22,7 +23,7 @@ const ViewPlans = ({ setShowModalView }) => {
             <div>
               <div>
 
-                <span className="inline-flex bg-indigo-600 text-white rounded-full h-6 px-3 justify-center items-center">
+                <span className="inline-flex bg-indigo-600 text-white rounded-full rounded-tr-none h-6 px-3 justify-center items-center">
                   {e[0]}
                 </span>
               </div>
@@ -42,6 +43,7 @@ const ViewPlans = ({ setShowModalView }) => {
           Volver
         </button>
       </div>
+    </div>
     </div>
   );
 };

@@ -76,7 +76,7 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
   const showHideClassName = showModalUpDown ? "displayblock" : "displaynone";
 
   return (
-    <div className={styles[showHideClassName]}>
+    <div className={styles.modal}>
       <section className={styles.modalmain}>
         <div className="flex justify-center">
           <h5 className="text-2xl font-bold text-gray-500">
