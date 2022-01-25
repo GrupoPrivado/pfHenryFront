@@ -1,4 +1,4 @@
-nav, .container, .menuList {
+.navBar, .container, .menuList {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -6,11 +6,11 @@ nav, .container, .menuList {
 .logo img{
     width: 280px;
     margin: 10px;
-    padding: 20px 4px
+    padding: 17px 4px
 }
 .toggleMenu {
     width: 80%;
-    padding: 20px 4px;
+    padding: 17px 4px;
 }
 .container {
     position: absolut;
@@ -24,7 +24,8 @@ nav, .container, .menuList {
 }
 
 
-@media screen and (max-width: 1200px) {
+
+@media screen and (max-width: 900px) {
     .container{
             display: none;
         }

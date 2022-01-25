@@ -32,7 +32,7 @@ const NavbarAfiliado = () => {
   // aray de li
 
   return (
-    <nav>
+    <nav className={styles.navBar}>
       <div className={styles.logo}>
         <img src={Logo} alt="" />
       </div>
@@ -112,12 +112,12 @@ const NavbarAfiliado = () => {
             <div className="relative">
               <button onClick={handleClickMenu}>
                 <img
-                  className="w-10 h-10 rounded-full"
+                  className="w-12 h-12 rounded-full"
                   src={user.urlPhoto || profilePhoto}
                   alt=""
                 />
               </button>
-              {isOpen && <MenuList />}
+              {isOpen && <MenuList setIsOpen={setIsOpen} />}
             </div>
           </div>
         </div>
@@ -127,14 +127,14 @@ const NavbarAfiliado = () => {
 
 export default NavbarAfiliado;
 
-export const MenuList = () => {
+export const MenuList = ({setIsOpen}) => {
   const navigate = useNavigate();
   return (
     <div className="absolute bg-white rounded-md shadow-md w-48 h-26 z-50 right-0">
-      <ul>
+      <ul><Link to={"perfil"} onClick={() => setIsOpen(false)} >
         <li className="p-2 text-center rounded-tl-md rounded-tr-md hover:bg-gray-200">
-          <Link to={"perfil"}>Mi Cuenta</Link>
-        </li>
+        Mi Cuenta
+        </li></Link>
         <li
           className="p-2 text-center rounded-bl-md rounded-br-md rounded-tl-md hover:bg-gray-200 cursor-pointer"
           onClick={() => {
