@@ -375,7 +375,7 @@ export const validateUpdateEmployee = (input) => {
     input.telefono &&
     (input.telefono.length < 3 || input.telefono.length > 14)
   ) {
-    errores.telefono = "El código debe tener entre 3 y 14 caracteres";
+    errores.telefono = "El telefono debe tener entre 3 y 14 caracteres";
   }
   if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(input.email)) {
     errores.email = "Ingrese un mail válido";
