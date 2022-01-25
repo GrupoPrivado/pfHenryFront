@@ -20,7 +20,7 @@ import FilterPharmacy from "./FilterPharmacy";
 const ABMPharmacies = () => {
   const dispatch = useDispatch();
 
-  const { allPharmacies } = useSelector((state) => state.ABMAdmin);
+
 
   const { type, message } = useSelector((state) => state.alerts);
 
