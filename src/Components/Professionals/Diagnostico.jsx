@@ -4,7 +4,7 @@ import {
   putConsultaMedica,
   resetData,
 } from "../../actions/professionalsActions";
-import { validateDignostico } from "../../utils/professionalFormsControllers";
+import { validateDignostico } from "../../utils/professionalFormsCOntrollers";
 
 function Diagnostico({ token }) {
   const dispatch = useDispatch();
