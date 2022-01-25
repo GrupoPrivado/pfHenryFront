@@ -7,6 +7,7 @@ import {
   putConsultaMedica,
 } from "../../actions/professionalsActions";
 import { disableBtnProf, enableBtnProf } from "../../utils/ABMStyles";
+import { validateDNIToken } from "../../utils/professionalFormsCOntrollers";
 import AffiliateData from "./AffiliateData";
 import GeneracionRecetas from "./GeneracionRecetas";
 import ProfessionalData from "./ProfessionalData";
@@ -17,6 +18,8 @@ const IndexProfessional = () => {
   const { consultaMedicaData, professionalData } = useSelector(
     (state) => state.professionals
   );
+
+  const [errores, setErrores] = useState({});
 
   /****** Variables y funciones para buscar la consulta medica Func 1******/
   const dataAffiliateStruct = { DNI: "", token: "" };
@@ -33,7 +36,11 @@ const IndexProfessional = () => {
   };
 
   const handleSendInfo = () => {
-    dispatch(getconsultaMedica(dataAffiliate));
+    const validateError = validateDNIToken(dataAffiliate);
+    setErrores(validateError);
+    if (Object.entries(validateError).length <= 0) {
+      dispatch(getconsultaMedica(dataAffiliate));
+    }
   };
 
   /****** Fin Variables y funciones para buscar la consulta medica Func 1******/
@@ -86,6 +93,9 @@ const IndexProfessional = () => {
             onChange={(e) => handleChange(e)}
             placeholder="Ingrese el DNI...."
           />
+            {errores.DNI && (
+                <p className="absolute text-red-700">{errores.DNI}</p>
+              )}
         </div>
         <div>
           <label>Token Consulta: </label>
@@ -97,10 +107,18 @@ const IndexProfessional = () => {
             onChange={(e) => handleChange(e)}
             placeholder="Ingrese el Token...."
           />
+              {errores.token && (
+                <p className="absolute text-red-700">{errores.token}</p>
+              )}
         </div>
         <div>
           {/* <label>Token Consulta: </label> */}
-          <button name="searchBtn" onClick={(e) => handleSendInfo(e)}>
+          <button
+            name="searchBtn"
+            onClick={handleSendInfo}
+            // className={errores ? enableBtnProf : disableBtnProf}
+            // disabled={errores}
+          >
             Buscar
           </button>
         </div>

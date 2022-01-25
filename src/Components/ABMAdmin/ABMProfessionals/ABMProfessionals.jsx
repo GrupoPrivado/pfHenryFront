@@ -20,8 +20,6 @@ import { alertSweet } from "../../Alerts/alertSweet";
 const ABMProfessionals = () => {
   const dispatch = useDispatch();
 
-  const { allProfessionals } = useSelector((state) => state.ABMAdmin);
-
   const { type, message } = useSelector((state) => state.alerts);
 
   const [activeAlert, setActiveAlert] = useState(false);
@@ -42,8 +40,6 @@ const ABMProfessionals = () => {
       setErrorAlert(true);
       setAlertMessage(message);
     }
-
-    dispatch(getAllProfessionals({}));
   }, [ message, type, activeAlert, errorAlert]);
 
    /********* Funciones para borrar un elemento*********/
@@ -52,7 +48,7 @@ const ABMProfessionals = () => {
  
    const deleteProfFunc = async (value) => {
      dispatch(deleteProfessional(value));
-     dispatch(getAllProfessionals());
+     dispatch(getAllProfessionals(0,10));
      setDeleteState("");
      setConfirmDeleteState(true);
    };
@@ -65,7 +61,7 @@ const ABMProfessionals = () => {
 
   useEffect(() => {
     dispatch(getAllSpecialities());
-    dispatch(getAllProfessionals({}));
+    dispatch(getAllProfessionals(0,10));
   }, []);
 
   return (
@@ -73,7 +69,6 @@ const ABMProfessionals = () => {
       
 <FilterProfessionals/>
       <ProfessionalsList
-        allProfessionals={allProfessionals}
         setShowModalUpdate={setShowModalUpdate}
         setShowModalAdd={setShowModalAdd}
         setShowModalUpDown={setShowModalUpDown}

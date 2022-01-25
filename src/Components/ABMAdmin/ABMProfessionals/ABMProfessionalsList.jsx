@@ -1,18 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 
 import {
-  getAllProfessionals,
   getProfessionalData,
-  getAllCities,
-  getAllProvinces,
 } from "../../../actions/actionAMBAdmin";
 
 import styles from "./ABMProfessionals.module.css";
 
 const ABMAffiliatesList = ({
-  allProfessionals,
   setShowModalUpdate,
   setShowModalAdd,
   setShowModalUpDown,
@@ -20,11 +16,7 @@ const ABMAffiliatesList = ({
 }) => {
   const dispatch = useDispatch();
 
-  const { cities, provinces } = useSelector((state) => state.ABMAdmin);
-
-  useEffect(() => {
-    dispatch(getAllProvinces());
-  }, []);
+  const { allProfessionals } = useSelector((state) => state.ABMAdmin);
 
   const handleBajaAltaProfessional = async (event) => {
     await dispatch(getProfessionalData(event.target.value));
@@ -34,23 +26,6 @@ const ABMAffiliatesList = ({
   const handleEditProfessional = (event) => {
     dispatch(getProfessionalData(event.target.value));
     setShowModalUpdate(true);
-  };
-
-  const [filter, setFilter] = useState({ provinciaID: undefined });
-
-  const handleChangeProvince = (e) => {
-    dispatch(getAllCities(e.target.value));
-    if (e.target.value !== "")
-      dispatch(getAllProfessionals({ provinciaID: e.target.value }));
-    else dispatch(getAllProfessionals({ provinciaID: undefined }));
-
-    setFilter({ provinciaID: e.target.value });
-  };
-
-  const handleChangeCity = (e) => {
-    if (e.target.value !== "")
-      dispatch(getAllProfessionals({ ciudadID: e.target.value }));
-    else dispatch(getAllProfessionals(filter));
   };
 
   return (

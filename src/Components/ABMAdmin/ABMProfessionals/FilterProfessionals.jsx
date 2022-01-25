@@ -7,6 +7,7 @@ import {
   getProfessionalData,
   getAllCities,
   getAllProvinces,
+  deleteCities,
 } from "../../../actions/actionAMBAdmin";
 
 export default function FilterProfessionals() {
@@ -17,22 +18,47 @@ export default function FilterProfessionals() {
   useEffect(() => {
     dispatch(getAllProvinces());
   }, []);
-  const [filter, setFilter] = useState({ provinciaID: undefined });
 
+  const [filter, setFilter] = useState("");
+  const [filterProvCit, setFilterProvCit] = useState({
+    provinciaID: "",
+    ciudadID: "",
+  });
+
+  useEffect(() => {
+    dispatch(
+      getAllProfessionals(0, 10, filterProvCit.provinciaID, filterProvCit.ciudadID)
+    );
+  }, [filterProvCit.ciudadID, filterProvCit.provinciaID]);
+  
   const handleChangeProvince = (e) => {
-    dispatch(getAllCities(e.target.value));
-    if (e.target.value !== "")
-      dispatch(getAllProfessionals({ provinciaID: e.target.value }));
-    else dispatch(getAllProfessionals({ provinciaID: undefined }));
-
-    setFilter({ provinciaID: e.target.value });
+    const newProvince = e.target.value;
+    const newFilters = {
+      ciudadID: "",
+      provinciaID: e.target.value,
+    };
+    if (newProvince !== "") {
+      dispatch(getAllCities(newFilters.provinciaID));
+    }
+    else {
+      dispatch(deleteCities())
+    }
+    setFilterProvCit(newFilters);
   };
 
   const handleChangeCity = (e) => {
-    if (e.target.value !== "")
-      dispatch(getAllProfessionals({ ciudadID: e.target.value }));
-    else dispatch(getAllProfessionals(filter));
+    const newData = {
+      ...filterProvCit,
+      [e.target.name]: e.target.value,
+    };
+    setFilterProvCit(newData);
   };
+
+  // const handleChangeActiv = (e) => {
+  //   setFilter(e.target.value);
+  //   dispatch(filterActiv(e.target.value));
+  // };
+
 
   return (
     
