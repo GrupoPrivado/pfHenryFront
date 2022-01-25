@@ -19,8 +19,6 @@ import ABMPaged from "../ABMPaged";
 const ABMEmployees = () => {
   const dispatch = useDispatch();
 
-  const { allEmployees } = useSelector((state) => state.ABMAdmin);
-
   let [showModalAdd, setShowModalAdd] = useState(false);
   let [showModalUpdate, setShowModalUpdate] = useState(false);
   let [showModalUpDown, setShowModalUpDown] = useState(false);
@@ -45,12 +43,13 @@ const ABMEmployees = () => {
       setErrorAlert(true);
       setAlertMessage(message);
     }
-    dispatch(getAllEmployees());
+
   }, [message, type, activeAlert, errorAlert]);
 
   useEffect(() => {
     dispatch(getAllEmployees(0, 10));
-  }, [dispatch]);
+  }, []);
+
   const [deleteState, setDeleteState] = useState("");
   const [confirmDeleteState, setConfirmDeleteState] = useState(false);
 
@@ -63,14 +62,14 @@ const ABMEmployees = () => {
 
   return (
     <div>
-      <ABMPaged getFunction= {getAllEmployees}/>
+      
       <ABMEmployeesList
-        allEmployees={allEmployees}
         setShowModalUpdate={setShowModalUpdate}
         setShowModalAdd={setShowModalAdd}
         setShowModalUpDown={setShowModalUpDown}
         setDeleteState={setDeleteState}
       />
+      <ABMPaged getFunction= {getAllEmployees}/>
       {showModalAdd && (
         <AddEmployee
           showModalAdd={showModalAdd}

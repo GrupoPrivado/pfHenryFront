@@ -81,7 +81,7 @@ const AddProfessional = ({ setShowModalAdd }) => {
     setErrores(validateError);
     if (Object.entries(validateError).length <= 0) {
       dispatch(addProfessional(inputProfessional));
-      dispatch(getAllProfessionals({}));
+      dispatch(getAllProfessionals(0,10));
       setShowModalAdd(false);
     }
   };

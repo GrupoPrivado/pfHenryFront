@@ -12,7 +12,7 @@ import {
   deleteCities,
 } from "../../../actions/actionAMBAdmin";
 
-import styles from "./ABMPharmacies.module.css";
+
 
 const FilterPharmacy = ({
 

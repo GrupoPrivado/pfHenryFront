@@ -20,8 +20,6 @@ import FilterPharmacy from "./FilterPharmacy";
 const ABMPharmacies = () => {
   const dispatch = useDispatch();
 
-
-
   const { type, message } = useSelector((state) => state.alerts);
 
   const [activeAlert, setActiveAlert] = useState(false);
@@ -42,8 +40,7 @@ const ABMPharmacies = () => {
       setErrorAlert(true);
       setAlertMessage(message);
     }
-    console.log("1");
-    //dispatch(getAllPharmacies());
+
   }, [message, type, activeAlert, errorAlert]);
 
   let [showModalAdd, setShowModalAdd] = useState(false);
@@ -64,18 +61,18 @@ const ABMPharmacies = () => {
 
   useEffect(() => {
     dispatch(getAllPharmacies(0, 10));
-    console.log("2");
   }, []);
 
   return (
     <div>
-      <ABMPaged getFunction={getAllPharmacies} />
+      
       <FilterPharmacy />
       <ABMPharmacyList
         setShowModalUpdate={setShowModalUpdate}
         setShowModalAdd={setShowModalAdd}
         setDeleteState={setDeleteState}
       />
+      <ABMPaged getFunction={getAllPharmacies} />
 
       {showModalAdd && <AddPharmacy setShowModalAdd={setShowModalAdd} />}
 
