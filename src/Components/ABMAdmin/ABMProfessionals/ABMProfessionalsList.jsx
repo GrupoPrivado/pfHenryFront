@@ -57,8 +57,8 @@ const ABMAffiliatesList = ({
     <div className={styles.divScroll}>
       <div className="bg-gray-50 min-h-screen  ">
         <div>
-          <div className="p-4">
-            <div className="bg-white p-6 rounded-md">
+          <div className="">
+            <div className="bg-white px-6 pb-6 pt-1 rounded-md">
               <div>
                 <div className=" flex justify-end">
                   <button
@@ -70,57 +70,7 @@ const ABMAffiliatesList = ({
                   </button>
                 </div>
 
-                <div className="grid overflow-hidden grid-cols-2 grid-rows-1 gap-0">
-                  <div className="px-4">
-                    <label
-                      className="text-lg font-semibold text-indigo-800"
-                      htmlFor="provincia"
-                    >
-                      Provincia{" "}
-                    </label>
-                    <select
-                      onChange={handleChangeProvince}
-                      name="provinciaID"
-                      className=" uppercase block w-full  my-2 text-lg font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 appearance-none rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
-                      required
-                    >
-                      <option value="">Seleccione Provincia</option>
-                      {provinces &&
-                        provinces.map((p) => (
-                          <option
-                            className="uppercase"
-                            key={p._id}
-                            value={p._id}
-                          >
-                            {p.nombre}
-                          </option>
-                        ))}
-                    </select>
-                  </div>
-
-                  <div className="px-4">
-                    <label
-                      className="text-lg font-semibold text-indigo-800"
-                      htmlFor="localidad"
-                    >
-                      Localidad{" "}
-                    </label>
-                    <select
-                      onChange={(e) => handleChangeCity(e)}
-                      name="ciudadID"
-                      className=" uppercase block w-full  my-2 text-lg font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 appearance-none rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
-                      required
-                    >
-                      <option value="">Seleccione Localidad</option>
-                      {cities &&
-                        cities.map((c) => (
-                          <option key={c._id} value={c._id}>
-                            {c.localidad}
-                          </option>
-                        ))}
-                    </select>
-                  </div>
-                </div>
+                
 
                 <div className="mt-3.5">
                   <div>

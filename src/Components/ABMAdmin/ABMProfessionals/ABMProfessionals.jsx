@@ -8,12 +8,12 @@ import {
   getAllProfessionals,
   getAllSpecialities,
 } from "../../../actions/actionAMBAdmin";
-
+import FilterProfessionals from "./FilterProfessionals";
 import AddProfessional from "./AddProfessional";
 import UpdateProfessional from "./UpdateProfessional";
 import ProfessionalsList from "./ABMProfessionalsList";
 import UpDownProfessional from "./UpDownProfessional";
-
+import ABMPaged from "../ABMPaged";
 import { alertActions } from "../../../actions/actionAlerts";
 import { alertSweet } from "../../Alerts/alertSweet";
 
@@ -69,7 +69,7 @@ const ABMProfessionals = () => {
   return (
     <div>
       
-
+<FilterProfessionals/>
       <ProfessionalsList
         allProfessionals={allProfessionals}
         setShowModalUpdate={setShowModalUpdate}
@@ -77,6 +77,7 @@ const ABMProfessionals = () => {
         setShowModalUpDown={setShowModalUpDown}
         setDeleteState={setDeleteState}
       />
+      <ABMPaged getFunction={getAllProfessionals} />
 
       {showModalAdd && <AddProfessional setShowModalAdd={setShowModalAdd} />}
 
