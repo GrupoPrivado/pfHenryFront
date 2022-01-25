@@ -94,7 +94,8 @@ export const getMedicalToken = () => {
 };
 export const getNewMedicalToken = () => {
   return async (dispatch) => {
-    try {
+    try { 
+      dispatch({type: GET_MEDICAL_TOKEN, payload:[], loading: true})
       const token = getItem("userToken");
       const { data } = await axios.get(`${api}/afiliados/newToken`,{
           headers: {
@@ -102,9 +103,9 @@ export const getNewMedicalToken = () => {
           },});
   
       if (data.success) {
-        return dispatch({ type: GET_AFILIATE, payload: data.message });
+        return dispatch({ type: GET_MEDICAL_TOKEN, payload: data.message, loading: false });
       } else {
-        return {error: true}
+        return dispatch({ type: GET_MEDICAL_TOKEN, payload: [], loading: false });
       }
       
     } catch (error) {

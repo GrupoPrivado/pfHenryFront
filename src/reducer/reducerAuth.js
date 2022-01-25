@@ -6,9 +6,10 @@ const inicialState = {
   data: false,
   route: '',
   error: '',
+  isLoading: false
 };
 
-export default function reducerAuth(state = inicialState, {type, payload}) {
+export default function reducerAuth(state = inicialState, {type, payload, loading}) {
   switch (type) {
     case GET_AFILIATE:
       return {
@@ -22,7 +23,8 @@ export default function reducerAuth(state = inicialState, {type, payload}) {
     case GET_MEDICAL_TOKEN:
       return {
         ...state,
-        medicalToken: payload
+        medicalToken: payload,
+        isLoading: loading
       }
     case NOT_AUTHENTICATED:
       return {
