@@ -13,7 +13,7 @@ import AddAdherent from "./addAdherent";
 
 import styles from "./addAffiliate.module.css";
 
-import { enableBtn, disableBtn } from "../../../utils/ABMStyles";
+import { enableBtn, disableBtn, formError } from "../../../utils/ABMStyles";
 import {
   functionErrorsBtn,
   validateAffiliate,
@@ -138,7 +138,7 @@ const AddAffiliate = ({ setShowModalAdd }) => {
                 />
                 <span>
                   {errores.nombre && (
-                    <p className=" absolute  text-red-700 text-xs font-bold">
+                    <p className={formError}>
                       {errores.nombre}
                     </p>
                   )}
@@ -161,7 +161,7 @@ const AddAffiliate = ({ setShowModalAdd }) => {
                 />
                 <span>
                     {errores.apellido && (
-                      <p className=" absolute  text-red-700 text-xs font-bold">
+                      <p className={formError}>
                         {errores.apellido}
                       </p>
                     )}
@@ -184,7 +184,7 @@ const AddAffiliate = ({ setShowModalAdd }) => {
                 />
                 <span>
                     {errores.DNI && (
-                      <p className=" absolute text-red-700 text-xs font-bold">
+                      <p className={formError}>
                         {errores.DNI}
                       </p>
                     )}
@@ -210,7 +210,7 @@ const AddAffiliate = ({ setShowModalAdd }) => {
                 />
                 <span>
                     {errores.fechaNacimiento && (
-                      <p className=" absolute text-red-700 text-xs font-bold">
+                      <p className={formError}>
                         {errores.fechaNacimiento}
                       </p>
                     )}
@@ -233,7 +233,7 @@ const AddAffiliate = ({ setShowModalAdd }) => {
                 />
                 <span>
                     {errores.telefono && (
-                      <p className=" absolute text-red-700 text-xs font-bold">
+                      <p className={formError}>
                         {errores.telefono}
                       </p>
                     )}
@@ -257,7 +257,7 @@ const AddAffiliate = ({ setShowModalAdd }) => {
                 />
                 <span>
                     {errores.correoElectronico && (
-                      <p className=" absolute text-red-700 text-xs font-bold">
+                      <p className={formError}>
                         {errores.correoElectronico}
                       </p>
                     )}
@@ -280,7 +280,7 @@ const AddAffiliate = ({ setShowModalAdd }) => {
                 />
                 <span>
                     {errores.direccion && (
-                      <p className="absolute text-red-700 text-xs font-bold">
+                      <p className={formError}>
                         {errores.direccion}
                       </p>
                     )}
@@ -310,7 +310,7 @@ const AddAffiliate = ({ setShowModalAdd }) => {
                 </select>
                 <span>
                     {errores.provinciaID && (
-                      <p className=" absolute text-red-700 text-xs font-bold">
+                      <p className={formError}>
                         {errores.provinciaID}
                       </p>
                     )}
@@ -339,7 +339,7 @@ const AddAffiliate = ({ setShowModalAdd }) => {
                 </select>
                 <span>
                     {errores.ciudadID && (
-                      <p className=" absolute text-red-700 text-xs font-bold">
+                      <p className={formError}>
                         {errores.ciudadID}
                       </p>
                     )}
@@ -371,7 +371,7 @@ const AddAffiliate = ({ setShowModalAdd }) => {
                       );
                     })}
                   {errores.planID && (
-                    <p className=" absolute text-red-700 text-xs font-bold">{errores.planID}</p>
+                    <p className={formError}>{errores.planID}</p>
                   )}
                 </select>
               </div>
@@ -387,7 +387,7 @@ const AddAffiliate = ({ setShowModalAdd }) => {
                   <option value={false}>No</option>
                 </select>
                 {errores.alta && (
-                  <p className=" absolute text-red-700 text-xs font-bold">{errores.alta}</p>
+                  <p className={formError}>{errores.alta}</p>
                 )}
               </div>
 
@@ -403,7 +403,7 @@ const AddAffiliate = ({ setShowModalAdd }) => {
                   <option value={false}>No</option>
                 </select>
                 {errores.activo && (
-                  <p className=" absolute text-red-700 text-xs font-bold">{errores.activo}</p>
+                  <p className={formError}>{errores.activo}</p>
                 )}
               </div>
             </div>

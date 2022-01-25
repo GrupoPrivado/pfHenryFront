@@ -15,7 +15,7 @@ import {
   functionErrorsBtn,
   validateAffiliateUpdate,
 } from "../../../utils/adminFormsControllers";
-import { enableBtn, disableBtn } from "../../../utils/ABMStyles";
+import { enableBtn, disableBtn , formError} from "../../../utils/ABMStyles";
 
 const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
   const dispatch = useDispatch();
@@ -122,7 +122,7 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
                   placeholder="Ingrese el Teléfono...."
                 />
                 {errores.telefono && (
-                  <p className="absolute text-red-700 text-xs font-bold">
+                  <p className={formError}>
                     {errores.telefono}
                   </p>
                 )}
@@ -141,7 +141,7 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
                     placeholder="Ingrese el domocilio...."
                   />
                   {errores.direccion && (
-                    <p className="absolute text-red-700 text-xs font-bold">
+                    <p className={formError}>
                       {errores.direccion}
                     </p>
                   )}
@@ -161,7 +161,7 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
                   placeholder="Ingrese el E-Mail...."
                 />
                 {errores.correoElectronico && (
-                  <p className="absolute text-red-700 text-xs font-bold">
+                  <p className={formError}>
                     {errores.correoElectronico}
                   </p>
                 )}
@@ -193,7 +193,7 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
                     })}
                 </select>
                 {errores.planID && (
-                  <p className="absolute text-red-700 text-xs font-bold">
+                  <p className={formError}>
                     {errores.planID}
                   </p>
                 )}
@@ -221,7 +221,7 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
                       ))}
                   </select>
                   {errores.provinciaID && (
-                    <p className="absolute text-red-700 text-xs font-bold">
+                    <p className={formError}>
                       {errores.provinciaID}
                     </p>
                   )}
@@ -246,7 +246,7 @@ const UpdateAffiliate = ({ setShowModalUpdate, showModalUpdate }) => {
                       ))}
                   </select>
                   {errores.ciudadID && (
-                    <p className="absolute text-red-700 text-xs font-bold">
+                    <p className={formError}>
                       {errores.ciudadID}
                     </p>
                   )}

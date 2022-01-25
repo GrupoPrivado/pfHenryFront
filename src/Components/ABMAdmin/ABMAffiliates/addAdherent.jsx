@@ -6,7 +6,7 @@ import { getAllCities } from "../../../actions/actionAMBAdmin";
 
 import styles from "./addAffiliate.module.css";
 
-import { enableBtn, disableBtn } from "../../../utils/ABMStyles";
+import { enableBtn, disableBtn, formError } from "../../../utils/ABMStyles";
 import {
   functionErrorsBtn,
   validateAdherent,
@@ -101,7 +101,7 @@ const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
                   placeholder="Ingrese el nombre...."
                 />
                 {errores.nombre && (
-                  <p className=" absolute text-red-700 text-xs font-bold">{errores.nombre}</p>
+                  <p className={formError}>{errores.nombre}</p>
                 )}
               </div>
 
@@ -117,7 +117,7 @@ const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
                   placeholder="Ingrese el apellido...."
                 />
                 {errores.apellido && (
-                  <p className=" absolute text-red-700 text-xs font-bold">{errores.apellido}</p>
+                  <p className={formError}>{errores.apellido}</p>
                 )}
               </div>
 
@@ -133,7 +133,7 @@ const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
                   placeholder="Ingrese el DNI...."
                 />
                 {errores.DNI && (
-                  <p className=" absolute text-red-700 text-xs font-bold">{errores.DNI}</p>
+                  <p className={formError}>{errores.DNI}</p>
                 )}
               </div>
             </div>
@@ -152,7 +152,7 @@ const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
                   placeholder="Ingrese Fecha Nacimiento...."
                 />
                 {errores.fechaNacimiento && (
-                  <p className=" absolute text-red-700 text-xs font-bold">
+                  <p className={formError}>
                     {errores.fechaNacimiento}
                   </p>
                 )}
@@ -171,7 +171,7 @@ const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
                   placeholder="Ingrese el Teléfono...."
                 />
                 {errores.telefono && (
-                  <p className=" absolute text-red-700 text-xs font-bold">{errores.telefono}</p>
+                  <p className={formError}>{errores.telefono}</p>
                 )}
               </div>
             </div>
@@ -188,7 +188,7 @@ const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
                   placeholder="Ingrese el E-Mail...."
                 />
                 {errores.correoElectronico && (
-                  <p className=" absolute text-red-700 text-xs font-bold">
+                  <p className={formError}>
                     {errores.correoElectronico}
                   </p>
                 )}
@@ -206,7 +206,7 @@ const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
                   placeholder="Ingrese el domocilio...."
                 />
                 {errores.direccion && (
-                  <p className=" absolute text-red-700 text-xs font-bold">{errores.direccion}</p>
+                  <p className={formError}>{errores.direccion}</p>
                 )}
               </div>
             </div>
@@ -231,7 +231,7 @@ const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
                     ))}
                 </select>
                 {errores.provinciaID && (
-                  <p className=" absolute text-red-700 text-xs font-bold">{errores.provinciaID}</p>
+                  <p className={formError}>{errores.provinciaID}</p>
                 )}
               </div>
 
@@ -255,7 +255,7 @@ const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
                     ))}
                 </select>
                 {errores.ciudadID && (
-                  <p className=" absolute text-red-700 text-xs font-bold">{errores.ciudadID}</p>
+                  <p className={formError}>{errores.ciudadID}</p>
                 )}
               </div>
             </div>
@@ -282,7 +282,7 @@ const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
                   })}
                 </select>
                 {errores.parentesco && (
-                  <p className=" absolute text-red-700 text-xs font-bold">{errores.parentesco}</p>
+                  <p className={formError}>{errores.parentesco}</p>
                 )}
               </div>
               <div className=" flex justify-around  w-1/2">
