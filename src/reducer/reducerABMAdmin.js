@@ -67,7 +67,6 @@ export default function reducerABMAdmin(state = initialState, action) {
         allPharmacies: action.payload,
         pharmacies: action.payload,
         limitPaged: action.limitPaged,
-        cities: [],
       };
 
     case "PHARMACY_DATA":
@@ -153,6 +152,10 @@ export default function reducerABMAdmin(state = initialState, action) {
         ...state,
         viewPlan: plan,
       };
+
+      case 'RESET_CITIES_ABM':
+        console.log('elimine las ciudades')
+        return {...state, cities: [] }
 
     case "FILTER_ACTIV":
       let filteredPharm = state.pharmacies;

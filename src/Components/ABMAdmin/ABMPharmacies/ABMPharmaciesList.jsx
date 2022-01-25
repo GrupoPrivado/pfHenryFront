@@ -9,49 +9,64 @@ import {
   getAllPharmacies,
   getAllProvinces,
   filterActiv,
+  deleteCities,
 } from "../../../actions/actionAMBAdmin";
 
 import styles from "./ABMPharmacies.module.css";
 
 const ABMPharmaciesList = ({
-  allPharmacies,
   setShowModalUpdate,
   setShowModalAdd,
   setDeleteState,
 }) => {
   const dispatch = useDispatch();
 
-  const { cities, provinces } = useSelector((state) => state.ABMAdmin);
+  const { cities, provinces, allPharmacies } = useSelector((state) => state.ABMAdmin);
 
-  useEffect(() => {
-    dispatch(getAllProvinces());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getAllProvinces());
+  // }, []);
 
-  const [filter, setFilter] = useState("");
+  // const [filter, setFilter] = useState("");
+  // const [filterProvCit, setFilterProvCit] = useState({
+  //   provinciaID: "",
+  //   ciudadID: "",
+  // });
 
-  const handleChangeProvince = (e) => {
-    dispatch(getAllCities(e.target.value));
-    if (e.target.value !== "")
-      dispatch(getAllPharmacies({ provinciaID: e.target.value }));
-    else {
-      dispatch(getAllPharmacies({ provinciaID: undefined }));
-      
-    }
-    setFilter("");
-  };
+  // useEffect(() => {
+  //   dispatch(
+  //     getAllPharmacies(0, 10, filterProvCit.provinciaID, filterProvCit.ciudadID)
+  //   );
+  // }, [filterProvCit.ciudadID, filterProvCit.provinciaID]);
 
-  const handleChangeCity = (e) => {
-    if (e.target.value !== "")
-      dispatch(getAllPharmacies({ ciudadID: e.target.value }));
-    else {
-      dispatch(getAllPharmacies(filter));
-      setFilter("");
-    }
-  };
-  const handleChangeActiv = (e) => {
-    setFilter(e.target.value);
-    dispatch(filterActiv(e.target.value));
-  };
+  // const handleChangeProvince = (e) => {
+  //   const newProvince = e.target.value
+  //   const newFilters = {
+  //     ...filterProvCit,
+  //     ciudadID: "",
+  //     provinciaID: e.target.value,
+  //   };
+  //   if (newProvince !== '') {
+  //     dispatch(getAllCities(newFilters.provinciaID));
+  //   } 
+  //   // else {
+  //   //   dispatch(deleteCities())
+  //   // }
+  //   setFilterProvCit(newFilters);
+  // };
+
+  // const handleSelectCity = (e) => {
+  //   const newData = {
+  //     ...filterProvCit,
+  //     [e.target.name]: e.target.value,
+  //   };
+  //   setFilterProvCit(newData)
+  // };
+
+  // const handleChangeActiv = (e) => {
+  //   setFilter(e.target.value);
+  //   dispatch(filterActiv(e.target.value));
+  // };
 
   const handleEditPharmacy = async (event) => {
     await dispatch(getPharmacyData(event.target.value));
@@ -75,7 +90,7 @@ const ABMPharmaciesList = ({
                   </button>
                 </div>
                 <div className="grid overflow-hidden grid-cols-3 grid-rows-1 gap-0">
-                  <div className="px-4">
+                  {/* <div className="px-4">
                     <label
                       className="text-lg font-semibold text-indigo-800"
                       htmlFor="provincia"
@@ -86,7 +101,7 @@ const ABMPharmaciesList = ({
                       onChange={handleChangeProvince}
                       name="provinciaID"
                       className=" uppercase block w-full  my-2 text-lg font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 appearance-none rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
-                      required
+                      value={filterProvCit.provinciaID}
                     >
                       <option value="">Seleccione Provincia</option>
                       {provinces &&
@@ -96,9 +111,9 @@ const ABMPharmaciesList = ({
                           </option>
                         ))}
                     </select>
-                  </div>
+                  </div> */}
 
-                  <div className="px-4">
+                  {/* <div className="px-4">
                     <label
                       className="text-lg font-semibold text-indigo-800"
                       htmlFor="localidad"
@@ -106,10 +121,10 @@ const ABMPharmaciesList = ({
                       Filtra por Localidad{" "}
                     </label>
                     <select
-                      onChange={(e) => handleChangeCity(e)}
+                      onChange={handleSelectCity}
                       name="ciudadID"
                       className=" uppercase block w-full text-lg  my-2  font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 appearance-none rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
-                      required
+                      
                     >
                       <option value="">Seleccione Localidad</option>
                       {cities &&
@@ -119,8 +134,8 @@ const ABMPharmaciesList = ({
                           </option>
                         ))}
                     </select>
-                  </div>
-                  <div className="px-4">
+                  </div> */}
+                  {/* <div className="px-4">
                     <label
                       className="text-lg font-semibold text-indigo-800"
                       htmlFor="activo"
@@ -137,7 +152,7 @@ const ABMPharmaciesList = ({
                       <option value="Si">Si</option>
                       <option value="No">No</option>
                     </select>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="mt-3.5">
                   <div>

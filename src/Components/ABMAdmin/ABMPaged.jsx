@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllAffiliates } from "../../actions/actionAMBAdmin";
+//import { getAllAffiliates } from "../../actions/actionAMBAdmin";
 import { disableBtn, enableBtn } from "../../utils/ABMStyles";
 
 
-const ABMPaged = () => {
+const ABMPaged = ({getFunction}) => {
   const dispatch = useDispatch();
 
   const { limitPaged } = useSelector((state) => state.ABMAdmin);
@@ -22,7 +22,7 @@ const ABMPaged = () => {
   };
 
   useEffect(() => {
-    dispatch(getAllAffiliates(skip, limit));
+    dispatch(getFunction(skip, limit));
   }, [skip, limit]);
 
   const handleChange = (element) => {

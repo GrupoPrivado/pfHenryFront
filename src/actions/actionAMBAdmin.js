@@ -17,9 +17,11 @@ export function getAllCities(payload) {
           type: "GET_ALL_CITIES",
           payload: data.message,
         });
-      } else {
-        return dispatch({ type: "ERRORS", payload: data });
-      }
+      } 
+      
+      // else {
+      //   return dispatch({ type: "ERRORS", payload: data });
+      // }
     } catch (error) {
       console.error(error);
       return { error: error.message };
@@ -354,12 +356,13 @@ export function getAllPlans() {
 
 /************* Actions Para ABM Farmacias***********/
 
-export function getAllPharmacies(skip, limit, ciudadID, provinciaID) {
+export function getAllPharmacies(skip, limit, provinciaID, ciudadID) {
   return async (dispatch) => {
     try {
+      console.log(skip, limit, ciudadID, provinciaID)
       const token = getItem("userToken");
       const { data } = await axios.get(
-        `${api}/admin/farmacias?ciudadID=${ciudadID}&provinciaID=${provinciaID}&kip=${skip}&limit=${limit}`,
+        `${api}/admin/farmacias?ciudadID=${ciudadID}&provinciaID=${provinciaID}&skip=${skip}&limit=${limit}`,
         {
           headers: {
             "x-access-token": token,
@@ -909,6 +912,7 @@ export function getAllEmployees(skip, limit) {
           },
         }
       );
+      console.log('<<<<<<<<<<<data',data)
       if (data.success) {
         return dispatch({
           type: "GET_EMPLOYEES",
@@ -1069,5 +1073,9 @@ export const filterActiv = (payload) => {
     payload: payload,
   };
 };
+
+export const deleteCities = () => dispatch => {
+  return dispatch({type: 'RESET_CITIES_ABM'})
+}
 
 /*************FIN Actions Comunes Para ABM***********/
