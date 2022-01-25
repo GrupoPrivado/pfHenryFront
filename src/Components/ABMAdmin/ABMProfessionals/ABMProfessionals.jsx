@@ -24,7 +24,7 @@ const ABMProfessionals = () => {
 
   const [activeAlert, setActiveAlert] = useState(false);
   const [errorAlert, setErrorAlert] = useState(false);
-   
+
   const [alertMessage, setAlertMessage] = useState("");
 
   useEffect(() => {
@@ -40,34 +40,33 @@ const ABMProfessionals = () => {
       setErrorAlert(true);
       setAlertMessage(message);
     }
-  }, [ message, type, activeAlert, errorAlert]);
+  }, [message, type, activeAlert, errorAlert]);
 
-   /********* Funciones para borrar un elemento*********/
-   const [deleteState, setDeleteState] = useState("");
-   const [confirmDeleteState, setConfirmDeleteState] = useState(false);
- 
-   const deleteProfFunc = async (value) => {
-     dispatch(deleteProfessional(value));
-     dispatch(getAllProfessionals(0,10));
-     setDeleteState("");
-     setConfirmDeleteState(true);
-   };
- 
-   /********* Fin Funciones para borrar un elemento*********/
-  
+  /********* Funciones para borrar un elemento*********/
+  const [deleteState, setDeleteState] = useState("");
+  const [confirmDeleteState, setConfirmDeleteState] = useState(false);
+
+  const deleteProfFunc = async (value) => {
+    dispatch(deleteProfessional(value));
+    dispatch(getAllProfessionals(0, 10));
+    setDeleteState("");
+    setConfirmDeleteState(true);
+  };
+
+  /********* Fin Funciones para borrar un elemento*********/
+
   let [showModalAdd, setShowModalAdd] = useState(false);
   let [showModalUpdate, setShowModalUpdate] = useState(false);
   let [showModalUpDown, setShowModalUpDown] = useState(false);
 
   useEffect(() => {
     dispatch(getAllEspecialities());
-    dispatch(getAllProfessionals(0,10));
+    dispatch(getAllProfessionals(0, 10));
   }, []);
 
   return (
     <div>
-      
-<FilterProfessionals/>
+      <FilterProfessionals />
       <ProfessionalsList
         setShowModalUpdate={setShowModalUpdate}
         setShowModalAdd={setShowModalAdd}
@@ -78,17 +77,15 @@ const ABMProfessionals = () => {
 
       {showModalAdd && <AddProfessional setShowModalAdd={setShowModalAdd} />}
 
-       {showModalUpdate && <UpdateProfessional
-        setShowModalUpdate={setShowModalUpdate}
-      />} 
-
-  {showModalUpDown && (
-        <UpDownProfessional
-          setShowModalUpDown={setShowModalUpDown}
-        />
+      {showModalUpdate && (
+        <UpdateProfessional setShowModalUpdate={setShowModalUpdate} />
       )}
 
-{activeAlert &&
+      {showModalUpDown && (
+        <UpDownProfessional setShowModalUpDown={setShowModalUpDown} />
+      )}
+
+      {activeAlert &&
         alertSweet(
           "success",
           alertMessage,
@@ -138,7 +135,6 @@ const ABMProfessionals = () => {
           false,
           2500
         )}
-
     </div>
   );
 };
