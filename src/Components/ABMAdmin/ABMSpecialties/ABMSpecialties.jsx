@@ -10,14 +10,12 @@ import {
 import AddSpeciality from "./AddSpecialty";
 import UpdateSpeciality from "./UpdateSpecialty";
 import ABMSpecialitiesList from "./ABMSpecialtiesList";
-
+import ABMPaged from "../ABMPaged";
 import { alertActions } from "../../../actions/actionAlerts";
 import { alertSweet } from "../../Alerts/alertSweet";
 
 const ABMSpecialities = () => {
   const dispatch = useDispatch();
-
-  const { allSpecialities } = useSelector((state) => state.ABMAdmin);
 
   const { type, message } = useSelector((state) => state.alerts);
 
@@ -39,15 +37,15 @@ const ABMSpecialities = () => {
       setErrorAlert(true);
       setAlertMessage(message);
     }
-    dispatch(getAllSpecialities());
+
   }, [message, type, activeAlert, errorAlert]);
 
   let [showModalAdd, setShowModalAdd] = useState(false);
   let [showModalUpdate, setShowModalUpdate] = useState(false);
 
   useEffect(() => {
-    dispatch(getAllSpecialities());
-  }, [allSpecialities]);
+    dispatch(getAllSpecialities(0,10));
+  }, []);
 
   /********* Funciones para borrar un elemento*********/
   const [deleteState, setDeleteState] = useState("");
@@ -67,10 +65,10 @@ const ABMSpecialities = () => {
       <ABMSpecialitiesList
         showModalAdd={showModalAdd}
         setShowModalAdd={setShowModalAdd}
-        allSpecialities={allSpecialities}
         setShowModalUpdate={setShowModalUpdate}
         setDeleteState={setDeleteState}
       />
+      <ABMPaged getFunction= {getAllSpecialities}/>
 
       {showModalAdd && <AddSpeciality setShowModalAdd={setShowModalAdd} />}
 
