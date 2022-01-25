@@ -18,7 +18,7 @@ const ClinicHistory = () => {
     <div>
       <label>Paciente</label>
     <AffiliateData affiliateData={consultaMedicaData.afiliadoID}/>
-      {clinicHistory &&
+      {clinicHistory?.length > 0?
         clinicHistory.map((e) => {
         return (  <div>
             <label>Fecha Consulta: {e.fechaConsulta}</label>
@@ -28,7 +28,7 @@ const ClinicHistory = () => {
             <label>Especialidad.: {e.profesionalID.especID.nombre}</label>
             <label>Diagnóstico: {e.diagnostico}</label>
           </div>);
-        })}
+        }): <div> El paciente no posee historial medico </div>}
     </div>
   );
 };
