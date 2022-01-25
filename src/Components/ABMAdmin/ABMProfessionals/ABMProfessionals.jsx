@@ -20,8 +20,6 @@ import { alertSweet } from "../../Alerts/alertSweet";
 const ABMProfessionals = () => {
   const dispatch = useDispatch();
 
-  const { allProfessionals } = useSelector((state) => state.ABMAdmin);
-
   const { type, message } = useSelector((state) => state.alerts);
 
   const [activeAlert, setActiveAlert] = useState(false);
@@ -71,7 +69,6 @@ const ABMProfessionals = () => {
       
 <FilterProfessionals/>
       <ProfessionalsList
-        allProfessionals={allProfessionals}
         setShowModalUpdate={setShowModalUpdate}
         setShowModalAdd={setShowModalAdd}
         setShowModalUpDown={setShowModalUpDown}

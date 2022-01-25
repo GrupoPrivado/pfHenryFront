@@ -17,8 +17,6 @@ import { alertSweet } from "../../Alerts/alertSweet";
 const ABMSpecialities = () => {
   const dispatch = useDispatch();
 
-  const { allSpecialities } = useSelector((state) => state.ABMAdmin);
-
   const { type, message } = useSelector((state) => state.alerts);
 
   const [activeAlert, setActiveAlert] = useState(false);
@@ -39,7 +37,7 @@ const ABMSpecialities = () => {
       setErrorAlert(true);
       setAlertMessage(message);
     }
-    dispatch(getAllSpecialities());
+
   }, [message, type, activeAlert, errorAlert]);
 
   let [showModalAdd, setShowModalAdd] = useState(false);
@@ -47,7 +45,7 @@ const ABMSpecialities = () => {
 
   useEffect(() => {
     dispatch(getAllSpecialities());
-  }, [allSpecialities]);
+  }, []);
 
   /********* Funciones para borrar un elemento*********/
   const [deleteState, setDeleteState] = useState("");
@@ -67,7 +65,6 @@ const ABMSpecialities = () => {
       <ABMSpecialitiesList
         showModalAdd={showModalAdd}
         setShowModalAdd={setShowModalAdd}
-        allSpecialities={allSpecialities}
         setShowModalUpdate={setShowModalUpdate}
         setDeleteState={setDeleteState}
       />
