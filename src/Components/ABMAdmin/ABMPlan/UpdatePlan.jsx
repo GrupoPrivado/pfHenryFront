@@ -128,24 +128,45 @@ const UpdatePlan = ({ setShowModalUpdate }) => {
         </div>
 
         <div className="modal-content py-4 text-left px-6 h-90%">
-          <div>
-            <label className="text-md text-gray-600">Precio: </label>
-            <input
-              className="h-2 p-4 w-full border-2 border-gray-300 mb-2 rounded-md"
-              type="text"
-              name="precio"
-              autoComplete="off"
-              value={updatePlanData.precio}
-              onChange={(e) => handleUpdatePlan(e)}
-              placeholder="Ingrese el precio...."
-            />
-            {errores.precio && (
-              <p className="absolute text-red-700">{errores.precio}</p>
-            )}
+          <div className="flex justify-center items-center">
+            <div>
+              <label className="text-md text-gray-600">Precio: </label>
+              <input
+                className="h-2 p-4 w-full border-2 border-gray-300 m rounded-md"
+                type="text"
+                name="precio"
+                autoComplete="off"
+                value={updatePlanData.precio}
+                onChange={(e) => handleUpdatePlan(e)}
+                placeholder="Ingrese el precio...."
+              />
+              {errores.precio && (
+                <p className="absolute text-red-700">{errores.precio}</p>
+              )}{" "}
+            </div>
+            <div>
+              
+                <label className="text-md text-gray-600">Activo: </label>
+                <select
+                  className=" h-1/2 w-full  border-2 border-gray-300  rounded-md"
+                  id="activo"
+                  name="planActivo"
+                  onChange={(e) => handleUpdatePlan(e)}
+                  value={updatePlanData.planActivo}
+                >
+                  <option value="">Seleccione</option>
+                  <option value="false">No</option>
+                  <option value="true">Si</option>
+                </select>
+             
+              {errores.planActivo && (
+                <p className="absolute text-red-700">{errores.planActivo}</p>
+              )}
+            </div>
           </div>
 
-          <div className="flex ">
-            <div className="w-1/2">
+          <div className="flex flex-col ">
+            <div className=" flex">
               <div>
                 <label className="text-md text-gray-600">Tipo: </label>
                 <input
@@ -157,15 +178,24 @@ const UpdatePlan = ({ setShowModalUpdate }) => {
                   onChange={(e) => handleChangeDescription(e)}
                   placeholder="Ingrese la Descripcion...."
                 />
+                <div className="h-20% flex  justify-center items-center">
+                <button
+                  className="group relative w-full mx-1 h-6 flex items-center justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-400 focus:outline-none focus:ring-2 focus:ring-offset-2 "
+                  name="descripcion"
+                  onClick={(e) => handleAddDescription(e)}
+                >
+                  Cargar descripcion
+                </button>
               </div>
-              <div className="h-2/3">
-                <label className=" h-1/3 text-md text-gray-600">
+              </div>
+              <div className="">
+                <label className="  text-md text-gray-600">
                   Descripción:{" "}
                 </label>
                 <textarea
-                  className="h-2/3 p-4  w-full border-2 border-gray-300 mb-2 rounded-md resize-none"
-                  rows="8"
-                  cols="50"
+                  className="  overflow-y-scroll p-4  w-full border-2 border-gray-300 mb-2 rounded-md resize-none"
+                  rows="2"
+                  cols="30"
                   name="description"
                   autoComplete="off"
                   value={description}
@@ -174,29 +204,22 @@ const UpdatePlan = ({ setShowModalUpdate }) => {
                 />
               </div>
             </div>
-            <div className="w-1/2">
-              <div className="h-20% flex  justify-center items-center">
-                <button
-                  className="group relative w-2/3 h-6 flex items-center justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-400 focus:outline-none focus:ring-2 focus:ring-offset-2 "
-                  name="descripcion"
-                  onClick={(e) => handleAddDescription(e)}
-                >
-                  Cargar descripcion
-                </button>
-              </div>
+            <div className="w">
+              
 
-              <div className="h-80% border overflow-y-scroll flex  border-gray-300  rounded-md">
-                <button>Ver descripcion </button>
+              <div className=" border overflow-y-scroll
+              h-24 flex flex-col border-gray-300  rounded-md">
+                
                 {updatePlanData.descripcion &&
                   updatePlanData.descripcion.map((element, index) => {
                     return (
                       <div
-                        className="grid overflow-hidden auto-cols-auto auto-rows-auto gap-0"
+                        className=" flex  flex-col"
                         key={"divDesc" + index}
                       >
                         <div className="flex">
                           <label
-                            className="text-md text-gray-600"
+                            className="inline-flex bg-indigo-600 text-white rounded-full rounded-tr-none h-6 px-3 justify-center items-center"
                             key={"labelTipo" + index}
                           >
                             {element[0]}:{" "}
@@ -214,18 +237,7 @@ const UpdatePlan = ({ setShowModalUpdate }) => {
                             id={index}
                             onClick={(e) => handleDeleteDescr(e)}
                           >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="h-3 w-3 "
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
+                            x
                           </button>
                         </div>
                       </div>
@@ -237,27 +249,8 @@ const UpdatePlan = ({ setShowModalUpdate }) => {
               </div>
             </div>
           </div>
-        </div>
-
-        <div className="flex justify-between items-end  ">
-          <div className="flex w-1/3 items-center">
-            <label className="text-md text-gray-600">Activo: </label>
-            <select
-              className=" h-1/2 w-full  border-2 border-gray-300 mb-5 rounded-md"
-              id="activo"
-              name="planActivo"
-              onChange={(e) => handleUpdatePlan(e)}
-              value={updatePlanData.planActivo}
-            >
-              <option value="">Seleccione</option>
-              <option value="false">No</option>
-              <option value="true">Si</option>
-            </select>
-          </div>
-          {errores.planActivo && (
-            <p className="absolute text-red-700">{errores.planActivo}</p>
-          )}
-          <div className="flex w-2/3 justify-around mt-4">
+          <div className="flex justify-center ">
+          <div className="flex w-2/3 justify-around  mt-2">
             <button
               key="submitFormButton"
               onClick={handleSubmitUpdatePlan}
@@ -274,6 +267,9 @@ const UpdatePlan = ({ setShowModalUpdate }) => {
             </button>
           </div>
         </div>
+        </div>
+
+        
       </section>
     </div>
   );
