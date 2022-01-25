@@ -9,6 +9,7 @@ import UpdatePrescription from "./UpdatePrescription";
 import ABMPrescriptionsList from "./ABMPrescriptionsList";
 import { alertActions } from "../../../actions/actionAlerts";
 import { alertSweet } from "../../Alerts/alertSweet";
+import ABMPaged from "../ABMPaged";
 
 const ABMPrescriptions = () => {
   const dispatch = useDispatch();
@@ -43,7 +44,7 @@ const ABMPrescriptions = () => {
  
 
       <ABMPrescriptionsList setShowModalUpdate={setShowModalUpdate} />
-
+      {/* <ABMPaged getFunction={undefined}/> */}
       {showModalUpdate && (
         <UpdatePrescription setShowModalUpdate={setShowModalUpdate} />
       )}
