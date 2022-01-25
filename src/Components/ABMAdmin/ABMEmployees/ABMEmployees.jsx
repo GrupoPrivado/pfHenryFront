@@ -63,7 +63,7 @@ const ABMEmployees = () => {
 
   return (
     <div>
-      <ABMPaged getFunction= {getAllEmployees}/>
+      
       <ABMEmployeesList
         allEmployees={allEmployees}
         setShowModalUpdate={setShowModalUpdate}
@@ -71,6 +71,7 @@ const ABMEmployees = () => {
         setShowModalUpDown={setShowModalUpDown}
         setDeleteState={setDeleteState}
       />
+      <ABMPaged getFunction= {getAllEmployees}/>
       {showModalAdd && (
         <AddEmployee
           showModalAdd={showModalAdd}

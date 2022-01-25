@@ -10,7 +10,7 @@ import {
 import AddSpeciality from "./AddSpecialty";
 import UpdateSpeciality from "./UpdateSpecialty";
 import ABMSpecialitiesList from "./ABMSpecialtiesList";
-
+import ABMPaged from "../ABMPaged";
 import { alertActions } from "../../../actions/actionAlerts";
 import { alertSweet } from "../../Alerts/alertSweet";
 
@@ -71,6 +71,7 @@ const ABMSpecialities = () => {
         setShowModalUpdate={setShowModalUpdate}
         setDeleteState={setDeleteState}
       />
+      <ABMPaged getFunction= {getAllSpecialities}/>
 
       {showModalAdd && <AddSpeciality setShowModalAdd={setShowModalAdd} />}
 

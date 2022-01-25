@@ -69,13 +69,14 @@ const ABMPharmacies = () => {
 
   return (
     <div>
-      <ABMPaged getFunction={getAllPharmacies} />
+      
       <FilterPharmacy />
       <ABMPharmacyList
         setShowModalUpdate={setShowModalUpdate}
         setShowModalAdd={setShowModalAdd}
         setDeleteState={setDeleteState}
       />
+      <ABMPaged getFunction={getAllPharmacies} />
 
       {showModalAdd && <AddPharmacy setShowModalAdd={setShowModalAdd} />}
 
