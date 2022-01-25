@@ -10,9 +10,9 @@ const ClinicHistory = () => {
     (state) => state.professionals
   );
 
-  useEffect(() => {
-    dispatch(getClinicHistory(consultaMedicaData.afiliadoID.DNI));
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getClinicHistory(consultaMedicaData.afiliadoID.DNI));
+  // }, []);
 
   return (
     <div>
