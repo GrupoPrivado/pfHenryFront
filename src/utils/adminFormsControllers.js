@@ -321,7 +321,7 @@ export const validateAddEmployee = (input) => {
     errores.activo = "Debe seleccionar si la especialidad esta activa o no";
   }
 
-  if (input.legajo && input.legajo.length < 7) {
+  if (input.legajo && input.legajo.length > 7) {
     errores.legajo = "El legajo debe tener maximo 7 caracteres";
   }
   if (
