@@ -15,7 +15,7 @@ function Credencial({toggleClass, name, lastname, dni, plan}) {
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="fixed inset-0 z-10 overflow-y-auto" initialFocus={cancelButtonRef} onClose={setOpen}>
         <div className="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
-          <Transition.Child
+          {/* <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
             enterFrom="opacity-0"
@@ -25,13 +25,13 @@ function Credencial({toggleClass, name, lastname, dni, plan}) {
             leaveTo="opacity-0"
           >
             <Dialog.Overlay className="fixed inset-0 transition-opacity bg-gray-900 bg-opacity-75" />
-          </Transition.Child>
+          </Transition.Child> */}
 
           {/* This element is to trick the browser into centering the modal contents. */}
           <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
             &#8203;
           </span>
-          <Transition.Child
+          {/* <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
             enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
@@ -39,7 +39,7 @@ function Credencial({toggleClass, name, lastname, dni, plan}) {
             leave="ease-in duration-200"
             leaveFrom="opacity-80 translate-y-0 sm:scale-100"
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-          >
+          > */}
             <div className="inline-block h-full overflow-hidden align-middle transition-all transform border-t border-l border-solid shadow-xl bg-gradient-to-b from-white-rgba to-white-rgba2 rounded-3xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full border-t-gray-200 border-l-gray-200">
               <div className="px-4 pt-5 pb-5 sm:p-6">
                 <div className="sm:flex backdrop-filter backdrop-blur-lg">
@@ -61,7 +61,7 @@ function Credencial({toggleClass, name, lastname, dni, plan}) {
                 </div>
               </div>
             </div>
-          </Transition.Child>
+          {/* </Transition.Child> */}
         </div>
       </Dialog>
     </Transition.Root>

@@ -17,7 +17,7 @@ const Authorizations = () => {
     const handleClick = (e, rec_id) => {
         if(rec_id){
             dispatch(getRecetaDetail(rec_id))
-                setModal(true)
+            setModal(true)
         } 
 
     }

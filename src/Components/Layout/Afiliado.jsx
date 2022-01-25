@@ -13,11 +13,13 @@ import PrivateRouter from '../PrivateRouter/PrivateRouter'
 import CartPrest from '../Providers/CartPrest'
 import Authorizations from '../../Pages/Authorizations/Authorizations'
 import PharmaciesPage from '../../Pages/PharmaciesPage/PharmaciesPage'
+import NavbarAfiliado from '../NavBarDashboard/NavbarAfiliado'
 
 const Afiliado = () => {
   return (
     <div>
-      <NavBarDashboard />
+      <NavbarAfiliado/>
+      {/* <NavBarDashboard /> */}
       <Routes>
         <Route
           path="/"
