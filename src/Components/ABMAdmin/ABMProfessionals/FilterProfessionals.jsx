@@ -36,8 +36,8 @@ export default function FilterProfessionals() {
 
   return (
     
-      <div className="px-3 flex ">
-        <div className="grid overflow-hidden  w-2/3 grid-cols-2 grid-rows-1 gap-0">
+      <div className="px-3  ">
+        <div className="grid overflow-hidden   grid-cols-2 grid-rows-1 gap-0">
           <div className="px-4">
             <label
               className="text-lg font-semibold text-indigo-800"
