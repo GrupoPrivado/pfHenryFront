@@ -1,53 +1,31 @@
 import React from "react";
 
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useDispatch, useSelector,  } from "react-redux";
+import { useEffect, } from "react";
 
 import {
   getPharmacyData,
-  getAllCities,
-  getAllPharmacies,
+  
   getAllProvinces,
-  filterActiv,
+  
 } from "../../../actions/actionAMBAdmin";
 
 import styles from "./ABMPharmacies.module.css";
 
 const ABMPharmaciesList = ({
-  allPharmacies,
   setShowModalUpdate,
   setShowModalAdd,
   setDeleteState,
 }) => {
   const dispatch = useDispatch();
 
-  const { cities, provinces } = useSelector((state) => state.ABMAdmin);
+  const { allPharmacies } = useSelector((state) => state.ABMAdmin);
 
   useEffect(() => {
     dispatch(getAllProvinces());
   }, []);
 
-  const [filter, setFilter] = useState({ provinciaID: undefined });
-
-  const handleChangeProvince = (e) => {
-    dispatch(getAllCities(e.target.value));
-    if (e.target.value !== "")
-      dispatch(getAllPharmacies({ provinciaID: e.target.value }));
-    else dispatch(getAllPharmacies({ provinciaID: undefined }));
-
-    setFilter({ provinciaID: e.target.value });
-  };
-
-  const handleChangeCity = (e) => {
-    if (e.target.value !== "")
-      dispatch(getAllPharmacies({ ciudadID: e.target.value }));
-    else dispatch(getAllPharmacies(filter));
-  };
-  const handleChangeActiv = (e) => {
-    if (e.target.value !== "") {
-      dispatch(filterActiv(e.target.value));
-    } else if (e.target.value === "") dispatch(getAllPharmacies());
-  };
+  
 
   const handleEditPharmacy = async (event) => {
     await dispatch(getPharmacyData(event.target.value));
@@ -58,8 +36,8 @@ const ABMPharmaciesList = ({
     <div className={styles.divScroll}>
       <div className="bg-gray-50 min-h-screen  ">
         <div>
-          <div className="p-4">
-            <div className="bg-white p-6 rounded-md">
+          <div className="">
+            <div className="bg-white px-6 pb-6 pt-1 rounded-md">
               <div>
                 <div className=" flex justify-end">
                   <button
@@ -70,71 +48,7 @@ const ABMPharmaciesList = ({
                     Agregar Farmacia
                   </button>
                 </div>
-                <div className="grid overflow-hidden grid-cols-3 grid-rows-1 gap-0">
-                  <div className="px-4">
-                    <label
-                      className="text-lg font-semibold text-indigo-800"
-                      htmlFor="provincia"
-                    >
-                      Filtra por Provincia{" "}
-                    </label>
-                    <select
-                      onChange={handleChangeProvince}
-                      name="provinciaID"
-                      className=" uppercase block w-full  my-2 text-lg font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 appearance-none rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
-                      required
-                    >
-                      <option value="">Seleccione Provincia</option>
-                      {provinces &&
-                        provinces.map((p) => (
-                          <option key={p._id} value={p._id}>
-                            {p.nombre}
-                          </option>
-                        ))}
-                    </select>
-                  </div>
-
-                  <div className="px-4">
-                    <label
-                      className="text-lg font-semibold text-indigo-800"
-                      htmlFor="localidad"
-                    >
-                      Filtra por Localidad{" "}
-                    </label>
-                    <select
-                      onChange={(e) => handleChangeCity(e)}
-                      name="ciudadID"
-                      className=" uppercase block w-full text-lg  my-2  font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 appearance-none rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
-                      required
-                    >
-                      <option value="">Seleccione Localidad</option>
-                      {cities &&
-                        cities.map((c) => (
-                          <option key={c._id} value={c._id}>
-                            {c.localidad}
-                          </option>
-                        ))}
-                    </select>
-                  </div>
-                  <div className="px-4">
-                    <label
-                      className="text-lg font-semibold text-indigo-800"
-                      htmlFor="activo"
-                    >
-                      Filtra por Activa{" "}
-                    </label>
-                    <select
-                      onChange={handleChangeActiv}
-                      name="activo"
-                      className=" block w-full  my-2 text-lg font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 appearance-none rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
-                      required
-                    >
-                      <option value="">Todas</option>
-                      <option value="Si">Si</option>
-                      <option value="No">No</option>
-                    </select>
-                  </div>
-                </div>
+                
                 <div className="mt-3.5">
                   <div>
                     <div className=" grid overflow-hidden grid-cols-6 grid-rows-1 gap-0 bg-gradient-to-tr from-indigo-600 to-purple-600 rounded-md py-2 px-4 text-white font-bold text-md">

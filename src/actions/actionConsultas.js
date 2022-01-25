@@ -12,7 +12,6 @@ export function getHistorial(payload) {
                     'x-access-token' : token
                 }
         });
-        console.log(data, "data HISTORIAL CONSULTAS")
         if(data.success){
             return dispatch({type: GET_CONSULTS, payload: data.message})
         } else {
