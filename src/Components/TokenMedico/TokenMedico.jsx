@@ -1,12 +1,11 @@
 import React, { useEffect, useState, Fragment, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getMedicalToken, getNewMedicalToken } from "../../actions/actionAuth";
-import { Link } from "react-router-dom";
+import { getNewMedicalToken } from "../../actions/actionAuth";
 import { Dialog, Transition } from "@headlessui/react";
 import logo from "../../assets/logo_white_large.png";
 import { motion } from "framer-motion";
 import { SpinnerCircular } from "spinners-react";
-
+  
 export const TokenMedico = ({ toggleClass }) => {
   const [active, setActive] = useState(true);
   const { medicalToken, isLoading } = useSelector((state) => state.auth);
@@ -14,19 +13,14 @@ export const TokenMedico = ({ toggleClass }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // if (medicalToken.length < 3) dispatch(getMedicalToken())
     if (medicalToken.length === 3) setActive(false);
   }, [medicalToken.length]);
 
   const newToken = () => {
-    const { error } = dispatch(getNewMedicalToken());
-    if (error) {
-      setActive(false);
-    }
+    dispatch(getNewMedicalToken());
   };
 
   const [open, setOpen] = useState(true);
-  const { user, route } = useSelector((state) => state.auth);
   const cancelButtonRef = useRef(null);
 
   return (
@@ -69,7 +63,7 @@ export const TokenMedico = ({ toggleClass }) => {
                             >
                               {token}
                             </h3>
-                          )) : <p>¡Genera un nuevo token!</p>}
+                          )) : <p className="text-white">¡Genera un nuevo token!</p>}
   
                         {active && (
                           <button

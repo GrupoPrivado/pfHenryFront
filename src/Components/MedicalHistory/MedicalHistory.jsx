@@ -20,7 +20,7 @@ function MedicalHistory() {
         animate={{ opacity: 1, y: 0 }}
         initial={{ opacity: 0, y: 20 }}
         exit={{ opacity: 0, y: -20 }}
-        transition={{ duration: 1.5 }}
+        transition={{ duration: 1 }}
       >
         <div className="mt-4 mb-2 text-lg font-medium text-center text-white">
           <h3>Historial Médico</h3>

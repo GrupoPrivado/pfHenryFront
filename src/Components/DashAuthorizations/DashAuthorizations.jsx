@@ -22,7 +22,7 @@ function DashAuthorizations() {
           <motion.div animate={{ opacity: 1, y: 0 }}
       initial={{ opacity: 0, y: 20 }}
       exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 1.5 }} className='flex flex-col px-2.5 font-normal text-white w-full shrink-0'>
+      transition={{ duration: 1 }} className='flex flex-col px-2.5 font-normal text-white w-full shrink-0'>
 
             {recipes ? recipes.map(e => (
               <li key={e.numReceta} className='flex justify-between text-left sm:px-10 md:px-0'>

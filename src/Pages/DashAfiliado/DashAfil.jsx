@@ -48,13 +48,13 @@ function DashAfil() {
     dispatch(getRecetas());
     dispatch(getHistorial());
     dispatch(getRecetas());
+    dispatch(getMedicalToken());
   }, []);
 
-  const { medicalToken } = useSelector((state) => state.auth);
-  useEffect(() => {
-    if (medicalToken.length < 3) dispatch(getMedicalToken());
-    // if (medicalToken.length === 3) setActive(false)
-  }, [dispatch, medicalToken.length]);
+//   const { medicalToken } = useSelector((state) => state.auth);
+//   useEffect(() => {
+//     // if (medicalToken.length === 3) setActive(false)
+//   }, []);
 
   const toggleClass = (e) => {
     const name = e.target.getAttribute("name");

@@ -81,7 +81,7 @@ export const getMedicalToken = () => {
             "x-access-token": token,
           },});
       if (data.success) {
-        return dispatch({ type: GET_MEDICAL_TOKEN, payload: data.message });
+        return dispatch({ type: GET_MEDICAL_TOKEN, payload: data.message, loading: false });
       } else {
         return dispatch({ type: NOT_AUTHENTICATED }) 
       }

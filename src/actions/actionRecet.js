@@ -26,7 +26,7 @@ export function getRecetas(payload) {
 }
 
 export function getRecetaDetail(id){
-    console.log(id, 'id en action')
+
     return async function(dispatch){
         const token = getItem("userToken");
         try {
@@ -39,7 +39,7 @@ export function getRecetaDetail(id){
             if (data.success) {
                 return dispatch({ type: GET_RECIPES_ID, payload: data.message, loading: false })
             } else {
-                return { type: GET_RECIPES_ID, payload: {}, loading: false }
+                return dispatch({ type: GET_RECIPES_ID, payload: {}, loading: false })
             }
         } catch (error) {
             console.error(error)
