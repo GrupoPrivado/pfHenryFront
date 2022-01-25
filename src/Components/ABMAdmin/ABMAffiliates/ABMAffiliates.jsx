@@ -54,7 +54,7 @@ const ABMAffiliates = () => {
 
   return (
     <div>
-      <ABMPaged />
+      <ABMPaged getFunction= {getAllAffiliates}/>
 
       <ABMAffiliatesList
         allAffiliates={allAffiliates}
