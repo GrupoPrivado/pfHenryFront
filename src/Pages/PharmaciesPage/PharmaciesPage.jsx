@@ -96,7 +96,7 @@ const PharmaciesPage = () => {
             name="provincia"
             value={filter.provinciaID}
             onChange={handleChangeProvince}
-            className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 bg-white border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10"
+            className="relative block w-[400px] px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 bg-white border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10"
           >
             <option value="">Todas</option>
             {provinces &&
@@ -114,7 +114,7 @@ const PharmaciesPage = () => {
           <select
             name="ciudadID"
             onChange={handleSelectCity}
-            className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 bg-white border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10"
+            className="relative block w-[400px] px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 bg-white border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10"
           >
             <option value="">Todas</option>
             {cities?.map((e) => (
