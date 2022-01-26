@@ -33,11 +33,11 @@ export default function FamilyGroupDetail() {
             <div className="flex flex-col w-full min-h-screen bg-center bg-no-repeat bg-cover contenair" style={{ backgroundImage: `url(${Logo})` }}>
                 <h3 className='self-start mt-3 ml-3 text-4xl font-bold text-white'>Grupo Familiar</h3>
                 {/* card */}
-                <div className="flex flex-wrap items-center w-full p-5 justify-evenly ">
+                <div className="flex flex-col flex-wrap items-center w-full p-5 justify-evenly ">
                     {/* end header */}
                     {group && group.map((member) => (
                         <div key={member._id} className="relative inline-block h-full overflow-hidden align-middle transition-all transform border-t border-l border-solid shadow-xl bg-gradient-to-b from-white-rgba to-white-rgba2 rounded-3xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full border-t-gray-200 border-l-gray-200">
-                            <div className="px-4 pt-5 pb-5 sm:p-6">
+                            <div className="px-8 py-5 sm:p-6">
                                 <div className="sm:flex backdrop-filter ">
                                     <div className="flex flex-col mt-6 sm:mt-0 sm:ml-4 justify-evenly">
                                         <img src={logo} alt="Logo" className="top-0 self-center w-full pb-8 " />
