@@ -40,7 +40,7 @@ export default function FormAddAsociateGroup({
     ciudadID: "",
     provinciaID: "",
     direccion: "",
-    planID: "",
+    //planID: "",
     parentesco: "",
   });
 
