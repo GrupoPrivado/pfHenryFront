@@ -1,5 +1,6 @@
-import React, { useMemo } from "react";
-
+import React from "react";
+import { useSelector } from 'react-redux';
+import { SpinnerCircular } from "spinners-react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -21,18 +22,7 @@ ChartJS.register(
   Legend
 );
 
-export const options = {
-  responsive: true,
-  plugins: {
-    // legend: {
-    //   position: 'top' as const,
-    // },
-    // title: {
-    //   display: true,
-    //   text: "Asociados por provincia",
-    // },
-  },
-};
+
 
 const labels = [
   "Buenos Aires",
@@ -45,27 +35,40 @@ const labels = [
 ];
 
 export default function CityDash() {
-  const data = useMemo(() => {
-    return {
+  const { afilProv, isLoadingAfilProv } = useSelector((state) => state.ABMAdmin);
+
+   const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: false
+      },
+      title: {
+      display: true,
+      text: "Asociados por provincia",
+    },
+
+      
+    },
+  };
+  const data = {
+    
       datasets: [
         {
           label: "Asociados por provincia",
-          data: [188, 55, 56,445,74 , 200, 23],
-          backgroundColor: "rgba(169, 110, 247 , 0.8)",
+          data: afilProv.map((e)=> e.affilCoutn),
+          backgroundColor: "rgba(39, 174, 96, 0.8)",
         },
-        // {
-        //   label: "Dataset 2",
-        //   data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-        //   backgroundColor: "rgba(53, 162, 235, 0.5)",
-        // },
+       
       ],
-      labels,
+      labels: afilProv.map((e)=> e.nombre)
     };
-  }, []);
+  
+
  return(
-     <div>
-         <Bar data={data} options={options}/>
-     </div>
+     
+         isLoadingAfilProv? (<SpinnerCircular style={{ margin: 'auto', paddingTop: '20px' }}/>) : (<Bar data={data} options={options}/>)
+     
  )
 }
 

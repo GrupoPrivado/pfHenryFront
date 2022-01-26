@@ -1106,3 +1106,135 @@ export const deleteCities = () => (dispatch) => {
 };
 
 /*************FIN Actions Comunes Para ABM***********/
+
+/************* FIN Actions Para ABM Empleados***********/
+
+/*************Actions graficos Para ABM***********/
+export const getProfEspec = () => {
+  return async function (dispatch) {
+    dispatch({
+      type: "GET_PROF_ESP",
+      payload: [],
+      loading: true,
+    });
+    const token = getItem("userToken");
+    const { data } = await axios.get(`${api}/statistics/profEspec`, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
+
+    return dispatch({
+      type: "GET_PROF_ESP",
+      payload: data,
+      loading: false,
+    });
+  };
+};
+
+export const getPlanAfil = () => {
+  return async function (dispatch) {
+    dispatch({
+      type: "GET_AFIL_PLANS",
+      payload: [],
+      loading: true,
+    });
+    const token = getItem("userToken");
+    const { data } = await axios.get(`${api}/statistics/affilPlans`, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
+
+    return dispatch({
+      type: "GET_AFIL_PLANS",
+      payload: data,
+      loading: false,
+    });
+  };
+};
+export const getAfilProv= () => {
+  return async function (dispatch) {
+    dispatch({
+      type: "GET_AFIL_PRO",
+      payload: [],
+      loading: true,
+    });
+    const token = getItem("userToken");
+    const { data } = await axios.get(`${api}/statistics/affilProv`, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
+
+    return dispatch({
+      type: "GET_AFIL_PRO",
+      payload: data,
+      loading: false,
+    });
+  };
+};
+export const getPresStat= () => {
+  return async function (dispatch) {
+    dispatch({
+      type: "GET_PRES_STAT",
+      payload: [],
+      loading: true,
+    });
+    const token = getItem("userToken");
+    const { data } = await axios.get(`${api}/statistics/recetasStatus`, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
+
+    return dispatch({
+      type: "GET_PRES_STAT",
+      payload: data,
+      loading: false,
+    });
+  };
+};
+export const getAfilStat= () => {
+  return async function (dispatch) {
+    dispatch({
+      type: "GET_AFIL_STAT",
+      payload: [],
+      loading: true,
+    });
+    const token = getItem("userToken");
+    const { data } = await axios.get(`${api}/statistics/affilStatus`, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
+
+    return dispatch({
+      type: "GET_AFIL_STAT",
+      payload: data,
+      loading: false,
+    });
+  };
+};
+export const getPharmCity= () => {
+  return async function (dispatch) {
+    dispatch({
+      type: "GET_PHARM_CITY",
+      payload: [],
+      loading: true,
+    });
+    const token = getItem("userToken");
+    const { data } = await axios.get(`${api}/statistics/farmaciaProvicia`, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
+
+    return dispatch({
+      type: "GET_PHARM_CITY",
+      payload: data,
+      loading: false,
+    });
+  };
+};
+/*************FIN Actions grafico Para ABM***********/
