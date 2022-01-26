@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
-
-
 import CityDash from "../../Components/ABMAdmin/AMBDashAdmin/CityDash";
 import { PlansDash } from "../../Components/ABMAdmin/AMBDashAdmin/PlansDash";
 import { AfiliateEvolution } from "../../Components/ABMAdmin/AMBDashAdmin/AfiliateEvolution";
@@ -12,8 +10,6 @@ import { CashFlow } from "../../Components/ABMAdmin/AMBDashAdmin/CashFlow";
 import { Profesionals } from "../../Components/ABMAdmin/AMBDashAdmin/Profesionals";
 
 function DashAdmin() {
-
-  
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -46,10 +42,7 @@ function DashAdmin() {
         <PrescriptionStatus />
       </div>
     </div>
-    
-    
   );
-
 }
 
 export default DashAdmin;

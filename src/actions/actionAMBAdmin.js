@@ -241,6 +241,35 @@ export function getAllAffiliates(skip, limit) {
   };
 }
 
+export function getAllAffiliatesTitular(skip, limit, DNI) {
+  return async (dispatch) => {
+    try {
+      console.log(skip, limit, DNI)
+      const token = getItem("userToken");
+      const { data } = await axios.get(
+        `${api}/admin/allAffiliatesTitular?skip=${skip}&limit=${limit}&DNI=${DNI}`,
+        {
+          headers: {
+            "x-access-token": token,
+          },
+        }
+      );
+      if (data.success) {
+        return dispatch({
+          type: "GET_AFFILIATES_TITULAR",
+          payload: data.message,
+          limitPaged: data.limitPaged,
+        });
+      } else {
+        return dispatch({ type: "ERRORS", payload: data });
+      }
+    } catch (error) {
+      console.error(error);
+      return { error: error.message };
+    }
+  };
+}
+
 export function addAffiliate(payload) {
   return async (dispatch) => {
     try {
@@ -1132,3 +1161,59 @@ export const deleteCities = () => (dispatch) => {
 };
 
 /*************FIN Actions Comunes Para ABM***********/
+
+
+export function addFactura(payload) {
+  return async (dispatch) => {
+    try {
+      const token = getItem("userToken");
+      const { data } = await axios.post(`${api}/facturas`, payload, {
+        headers: {
+          "x-access-token": token,
+        },
+      });
+      if (data.success) {
+        dispatch({
+          type: alertConstants.SUCCESS,
+          message: "Factura realizada con éxito",
+        });
+      } else {
+        dispatch({
+          type: alertConstants.ERROR,
+          message: "Error al realizar la factura",
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      return { error: error.message };
+    }
+  };
+}
+
+export function addAllFactura() {
+  return async (dispatch) => {
+    try {
+      const token = getItem("userToken");
+      console.log(token)
+      const { data } = await axios.post(`${api}/facturas/allFacturas`, "",{
+        headers: {
+          "x-access-token": token,
+        },
+      });
+      if (data.success) {
+        dispatch({
+          type: alertConstants.SUCCESS,
+          message: "Facturas realizadas con éxito",
+        });
+      } else {
+        dispatch({
+          type: alertConstants.ERROR,
+          message: "Error al realizar las facturas",
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      return { error: error.message };
+    }
+  };
+}

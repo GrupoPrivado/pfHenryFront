@@ -3,6 +3,7 @@ const initialState = {
   provinces: [],
   allSpecialities: [],
   allAffiliates: [],
+  allAffiliatesTitular:[],
   allPlans: [],
   allPharmacies: [],
   pharmacies: [],
@@ -51,6 +52,14 @@ export default function reducerABMAdmin(state = initialState, action) {
         allAffiliates: action.payload,
         limitPaged: action.limitPaged,
       };
+
+      case "GET_AFFILIATES_TITULAR":
+        return {
+          ...state,
+          allAffiliatesTitular: action.payload,
+          limitPaged: action.limitPaged,
+        };
+  
 
       case "AFFILIATE_DNI":
         return {
