@@ -34,7 +34,7 @@ const Authorizations = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {recipes ?
+                    {recipes.length ?
                         recipes.map((recipe) => (
                             <tr key={recipe._id} className="text-center text-blue-900 bg-white shadow-none bg-opacity-40 backdrop-filter backdrop-blur-lg">
                                 <td className="p-2">{recipe.numReceta}</td>

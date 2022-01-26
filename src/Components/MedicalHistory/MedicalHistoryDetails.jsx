@@ -24,7 +24,7 @@ function MedicalHistoryDetails() {
                     </tr>
                 </thead>
                 <tbody>
-                    {consultas ?
+                    {consultas.length ?
                         consultas.map((consult, index) => (
                             <tr key={index} className="text-center text-blue-900 bg-white shadow-none bg-opacity-40 backdrop-filter backdrop-blur-lg">
                                 <td className="p-2">{consult.fechaConsulta}</td>

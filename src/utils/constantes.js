@@ -112,3 +112,7 @@ export const validateContactDetails = (input) => {
     }
     return errores;
 }
+
+export function convertClassName(...classes) {
+    return classes.filter(Boolean).join(' ')
+  }
