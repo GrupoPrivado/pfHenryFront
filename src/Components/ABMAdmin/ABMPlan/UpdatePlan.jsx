@@ -10,7 +10,7 @@ import {
 } from "../../../utils/adminFormsControllers";
 
 import styles from "./UpdatePlan.module.css";
-import { enableBtn, disableBtn } from "../../../utils/ABMStyles";
+import { enableBtn, disableBtn, formError } from "../../../utils/ABMStyles";
 
 const UpdatePlan = ({ setShowModalUpdate }) => {
   const dispatch = useDispatch();
@@ -127,8 +127,8 @@ const UpdatePlan = ({ setShowModalUpdate }) => {
           </div>
         </div>
 
-        <div className="modal-content py-4 text-left px-6 h-90%">
-          <div className="flex justify-center items-center">
+        <div className="modal-content pb-4 text-left px-6 h-90%">
+          <div className="flex w-full justify-around items-center">
             <div>
               <label className="text-md text-gray-600">Precio: </label>
               <input
@@ -141,60 +141,59 @@ const UpdatePlan = ({ setShowModalUpdate }) => {
                 placeholder="Ingrese el precio...."
               />
               {errores.precio && (
-                <p className="absolute text-red-700">{errores.precio}</p>
+                <p className={formError}>{errores.precio}</p>
               )}{" "}
             </div>
             <div>
-              
-                <label className="text-md text-gray-600">Activo: </label>
-                <select
-                  className=" h-1/2 w-full  border-2 border-gray-300  rounded-md"
-                  id="activo"
-                  name="planActivo"
-                  onChange={(e) => handleUpdatePlan(e)}
-                  value={updatePlanData.planActivo}
-                >
-                  <option value="">Seleccione</option>
-                  <option value="false">No</option>
-                  <option value="true">Si</option>
-                </select>
-             
+              <label className="text-md text-gray-600">Activo: </label>
+              <select
+                className=" h-1/2 w-full  border-2 border-gray-300  rounded-md"
+                id="activo"
+                name="planActivo"
+                onChange={(e) => handleUpdatePlan(e)}
+                value={updatePlanData.planActivo}
+              >
+                <option value="">Seleccione</option>
+                <option value="false">No</option>
+                <option value="true">Si</option>
+              </select>
+
               {errores.planActivo && (
-                <p className="absolute text-red-700">{errores.planActivo}</p>
+                <p className={formError}>{errores.planActivo}</p>
               )}
             </div>
           </div>
 
-          <div className="flex flex-col ">
-            <div className=" flex">
-              <div>
-                <label className="text-md text-gray-600">Tipo: </label>
-                <input
-                  className="h-2 p-4  w-full border-2 border-gray-300 mb-2 rounded-md"
-                  type="text"
-                  name="type"
-                  autoComplete="off"
-                  value={type}
-                  onChange={(e) => handleChangeDescription(e)}
-                  placeholder="Ingrese la Descripcion...."
-                />
-                <div className="h-20% flex  justify-center items-center">
-                <button
-                  className="group relative w-full mx-1 h-6 flex items-center justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-400 focus:outline-none focus:ring-2 focus:ring-offset-2 "
-                  name="descripcion"
-                  onClick={(e) => handleAddDescription(e)}
-                >
-                  Cargar descripcion
-                </button>
+          <div className="flex flex-col mb-5">
+            <div className=" flex flex-col">
+              <div className="  w-full flex justify-center items-end  mb-2">
+                <div className=" w-1/2 ">
+                  <label className="text-md text-gray-600">Tipo: </label>
+                  <input
+                    className="h-2 p-4  w-full border-2 border-gray-300  rounded-md"
+                    type="text"
+                    name="type"
+                    autoComplete="off"
+                    value={type}
+                    onChange={(e) => handleChangeDescription(e)}
+                    placeholder="Ingrese la Descripcion...."
+                  />
+                </div>
+                <div className="h-1/2 w-1/2 flex  justify-center items-end ">
+                  <button
+                    className="group relative  mx-1 h-6 flex items-center justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-400 focus:outline-none focus:ring-2 focus:ring-offset-2 "
+                    name="descripcion"
+                    onClick={(e) => handleAddDescription(e)}
+                  >
+                    Cargar descripcion
+                  </button>
+                </div>
               </div>
-              </div>
-              <div className="">
-                <label className="  text-md text-gray-600">
-                  Descripción:{" "}
-                </label>
+              <div className="mb-2">
+                <label className="  text-md text-gray-600">Descripción: </label>
                 <textarea
-                  className="  overflow-y-scroll p-4  w-full border-2 border-gray-300 mb-2 rounded-md resize-none"
-                  rows="2"
+                  className="  overflow-y-scroll p-4  w-full border-2 border-gray-300  rounded-md resize-none"
+                  rows="1"
                   cols="30"
                   name="description"
                   autoComplete="off"
@@ -205,18 +204,14 @@ const UpdatePlan = ({ setShowModalUpdate }) => {
               </div>
             </div>
             <div className="w">
-              
-
-              <div className=" border overflow-y-scroll
-              h-24 flex flex-col border-gray-300  rounded-md">
-                
+              <div
+                className=" border overflow-y-scroll
+              h-24 w-full flex flex-col border-gray-300  rounded-md"
+              >
                 {updatePlanData.descripcion &&
                   updatePlanData.descripcion.map((element, index) => {
                     return (
-                      <div
-                        className=" flex  flex-col"
-                        key={"divDesc" + index}
-                      >
+                      <div className=" flex  flex-col" key={"divDesc" + index}>
                         <div className="flex">
                           <label
                             className="inline-flex bg-indigo-600 text-white rounded-full rounded-tr-none h-6 px-3 justify-center items-center"
@@ -244,32 +239,30 @@ const UpdatePlan = ({ setShowModalUpdate }) => {
                     );
                   })}
                 {errores.descripcion && (
-                  <p className="absolute text-red-700">{errores.descripcion}</p>
+                  <p className={formError}>{errores.descripcion}</p>
                 )}
               </div>
             </div>
           </div>
           <div className="flex justify-center ">
-          <div className="flex w-2/3 justify-around  mt-2">
-            <button
-              key="submitFormButton"
-              onClick={handleSubmitUpdatePlan}
-              className={errors ? disableBtn : enableBtn}
-              disabled={errors}
-            >
-              Guardar
-            </button>
-            <button
-              onClick={() => handleClose()}
-              className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              Cerrar
-            </button>
+            <div className="flex w-2/3 justify-around  ">
+              <button
+                key="submitFormButton"
+                onClick={handleSubmitUpdatePlan}
+                className={errors ? disableBtn : enableBtn}
+                disabled={errors}
+              >
+                Guardar
+              </button>
+              <button
+                onClick={() => handleClose()}
+                className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                Cerrar
+              </button>
+            </div>
           </div>
         </div>
-        </div>
-
-        
       </section>
     </div>
   );
