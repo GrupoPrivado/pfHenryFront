@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { useDispatch } from "react-redux";
 import { postRecetaMedica } from "../../actions/professionalsActions";
-import { validateReceta } from "../../utils/professionalFormsControllers";
+import { validateReceta } from "../../utils/professionalFormsCOntrollers";
 
 const GeneracionRecetas = ({
   affiliateData,

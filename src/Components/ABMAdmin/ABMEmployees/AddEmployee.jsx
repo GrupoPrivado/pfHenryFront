@@ -7,7 +7,7 @@ import { addEmployee, getAllEmployees } from "../../../actions/actionAMBAdmin";
 
 import styles from "./AddEmployee.module.css";
 
-import { enableBtn, disableBtn } from "../../../utils/ABMStyles";
+import { enableBtn, disableBtn , formError} from "../../../utils/ABMStyles";
 import {
   functionErrorsBtn,
   validateAddEmployee,
@@ -77,7 +77,7 @@ const AddEmployee = ({ setShowModalAdd, showModalAdd }) => {
         </div>
         <div className="modal-content py-4 text-left px-6 h-90% ">
           <form>
-            <div className="flex">
+            <div className="flex mb-4">
               <div className=" w-1/2">
                 <label className="text-md text-gray-600">Nombre: </label>
                 <input
@@ -90,7 +90,7 @@ const AddEmployee = ({ setShowModalAdd, showModalAdd }) => {
                   placeholder="Ingrese el nombre...."
                 />
                 {errores.name && (
-                  <p className="absolute text-red-700">{errores.name}</p>
+                  <p className={formError}>{errores.name}</p>
                 )}
               </div>
 
@@ -106,11 +106,11 @@ const AddEmployee = ({ setShowModalAdd, showModalAdd }) => {
                   placeholder="Ingrese el apellido...."
                 />
                 {errores.lastName && (
-                  <p className="absolute text-red-700">{errores.lastName}</p>
+                  <p className={formError}>{errores.lastName}</p>
                 )}
               </div>
             </div>
-            <div className="flex">
+            <div className="flex mb-4">
               <div className=" w-1/2">
                 <label className="text-md text-gray-600">Legajo: </label>
                 <input
@@ -123,7 +123,7 @@ const AddEmployee = ({ setShowModalAdd, showModalAdd }) => {
                   placeholder="Ingrese el legajo...."
                 />
                 {errores.legajo && (
-                  <p className="absolute text-red-700">{errores.legajo}</p>
+                  <p className={formError}>{errores.legajo}</p>
                 )}
               </div>
 
@@ -139,11 +139,12 @@ const AddEmployee = ({ setShowModalAdd, showModalAdd }) => {
                   placeholder="Ingrese el Teléfono...."
                 />
                 {errores.telefono && (
-                  <p className="absolute text-red-700">{errores.telefono}</p>
+                  <p className={formError}>{errores.telefono}</p>
                 )}
               </div>
             </div>
-            <div>
+            <div className="flex mb-4">
+            <div className="w-1/2">
               <label className="text-md text-gray-600">E-mail: </label>
               <input
                 className="h-2 p-4 w-full border-2 border-gray-300 mb-1 rounded-md"
@@ -155,12 +156,11 @@ const AddEmployee = ({ setShowModalAdd, showModalAdd }) => {
                 placeholder="Ingrese el e-mail...."
               />
               {errores.email && (
-                  <p className="absolute text-red-700">{errores.email}</p>
+                  <p className={formError}>{errores.email}</p>
                 )}
-            </div>
 
-            <div className="flex  mt-8 justify-between items-center">
-              <div className="flex w-1/3 items-center">
+            </div>
+            <div className="w-1/2">
                 <label className="text-md text-gray-600">Activo: </label>
                 <select
                   className=" h-1/2 w-full  border-2 border-gray-300  rounded-md"
@@ -172,6 +172,10 @@ const AddEmployee = ({ setShowModalAdd, showModalAdd }) => {
                   <option value={false}>No</option>
                 </select>
               </div>
+              </div>
+
+            <div className="flex mt-5  justify-center items-center">
+              
               <div className="flex w-2/3 justify-around">
               <button
                   type="submit"
@@ -190,7 +194,7 @@ const AddEmployee = ({ setShowModalAdd, showModalAdd }) => {
               </div>
             </div>
             {errores.activo && (
-              <p className="absolute text-red-700">{errores.activo}</p>
+              <p className={formError}>{errores.activo}</p>
             )}
           </form>
         </div>

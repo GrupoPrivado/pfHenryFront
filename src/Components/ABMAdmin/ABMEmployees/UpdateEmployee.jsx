@@ -9,7 +9,7 @@ import {
 } from "../../../actions/actionAMBAdmin";
 
 import styles from "./UpdateEmployee.module.css";
-import { enableBtn, disableBtn } from "../../../utils/ABMStyles";
+import { enableBtn, disableBtn, formError } from "../../../utils/ABMStyles";
 import {
   functionErrorsBtn,
   validateUpdateEmployee,
@@ -104,7 +104,7 @@ const UpdateEmployee = ({ setShowModalUpdate }) => {
                 placeholder="Ingrese el Teléfono...."
               />
               {errores.telefono && (
-              <p className="absolute text-red-700">{errores.telefono}</p>
+              <p className={formError}>{errores.telefono}</p>
             )}
             </div>
 
@@ -120,16 +120,17 @@ const UpdateEmployee = ({ setShowModalUpdate }) => {
                 placeholder="Ingrese el E-Mail...."
               />
               {errores.email && (
-              <p className="absolute text-red-700">{errores.email}</p> )}
+              <p className={formError}>{errores.email}</p> )}
              
             </div>
-          
-          <div className="flex w-full justify-around mt-10">
+          <div className="flex justify-center">
+          <div className="flex w-2/3 justify-around mt-10">
           
             <button className={errors ? disableBtn : enableBtn}
                   disabled={errors} onClick={handleSubmitUpdateEmployee}>Guardar</button>
           
           <button  className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" onClick={() => handleClose()}>Cerrar</button>
+        </div>
         </div>
         </form>
         </div>

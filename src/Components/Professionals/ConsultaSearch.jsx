@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getconsultaMedica } from "../../actions/professionalsActions";
-import { validateDNIToken } from "../../utils/professionalFormsControllers";
+import { validateDNIToken } from "../../utils/professionalFormsCOntrollers";
 
 function ConsultaSearch() {
   const dispatch = useDispatch();

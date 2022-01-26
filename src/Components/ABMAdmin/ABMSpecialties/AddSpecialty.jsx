@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { addSpeciality } from "../../../actions/actionAMBAdmin";
 
 import styles from "./addSpecialty.module.css";
-import { enableBtn, disableBtn } from "../../../utils/ABMStyles";
+import { enableBtn, disableBtn, formError } from "../../../utils/ABMStyles";
 import {
   functionErrorsBtn,
   validateEspeciality,
@@ -67,10 +67,10 @@ const AddSpeciality = ({ setShowModalAdd }) => {
         </div>
         <div className="modal-content py-4 text-left px-6 h-90% ">
           <form>
-            <div>
+            <div className="mb-8">
               <label className="text-md text-gray-600">Nombre: </label>
               <input
-                className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md"
+                className="h-3 p-6 w-full border-2 border-gray-300  rounded-md"
                 type="text"
                 name="nombre"
                 autoComplete="off"
@@ -78,15 +78,16 @@ const AddSpeciality = ({ setShowModalAdd }) => {
                 onChange={(e) => handleChange(e)}
                 placeholder="Ingrese el nombre...."
               />
-            </div>
-            {errores.nombre && (
-              <p className="absolute text-red-700">{errores.nombre}</p>
+              {errores.nombre && (
+              <p className={formError}>{errores.nombre}</p>
             )}
+            </div>
+            
 
-            <div>
+            <div className="mb-12">
               <label className="text-md text-gray-600">Descripción: </label>
               <textarea
-                className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md resize-none"
+                className="h-3 p-6 w-full border-2 border-gray-300  rounded-md resize-none"
                 rows="8"
                 cols="50"
                 name="descripcion"
@@ -96,7 +97,7 @@ const AddSpeciality = ({ setShowModalAdd }) => {
                 placeholder="Ingrese la Descripcion...."
               />
               {errores.descripcion && (
-                <p className="absolute text-red-700">{errores.descripcion}</p>
+                <p className={formError}>{errores.descripcion}</p>
               )}
             </div>
             <div className="flex justify-between mt-8">
@@ -113,7 +114,7 @@ const AddSpeciality = ({ setShowModalAdd }) => {
                   <option value="true">Si</option>
                 </select>
                 {errores.activa && (
-                  <p className="absolute text-red-700">{errores.activa}</p>
+                  <p className={formError}>{errores.activa}</p>
                 )}
               </div>
               <div className="flex w-2/3 justify-around">
