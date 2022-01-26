@@ -57,15 +57,16 @@ export function getAllEspecialities() {
     try {
       const { data } = await axios.get(`${api}/especialidades`);
 
-      if (data.success) {
-        return dispatch({
-          type: "GET_SPECIALITIES",
-          payload: data.message,
-          limitPaged: data.limitPaged,
-        });
-      } else {
-        return dispatch({ type: "ERRORS", payload: data });
-      }
+      // if (data.success) {
+      return dispatch({
+        type: "GET_SPECIALITIES",
+        payload: data.message,
+        limitPaged: data.limitPaged,
+      });
+      //}
+      // else {
+      //   return dispatch({ type: "ERRORS", payload: data });
+      // }
     } catch (error) {
       console.error(error);
       return { error: error.message };
