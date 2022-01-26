@@ -31,6 +31,7 @@ function EditImage({ photo, modal, setModal }) {
         if (file) {
             sendImages(file)
         }
+        setActiveButton(false)
     };
 
     const onFileChange = (e) => {

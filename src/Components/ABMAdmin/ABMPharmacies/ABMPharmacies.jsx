@@ -14,11 +14,11 @@ import ABMPharmacyList from "./ABMPharmaciesList";
 
 import { alertActions } from "../../../actions/actionAlerts";
 import { alertSweet } from "../../Alerts/alertSweet";
+import ABMPaged from "../ABMPaged";
+import FilterPharmacy from "./FilterPharmacy";
 
 const ABMPharmacies = () => {
   const dispatch = useDispatch();
-
-  const { allPharmacies } = useSelector((state) => state.ABMAdmin);
 
   const { type, message } = useSelector((state) => state.alerts);
 
@@ -41,7 +41,6 @@ const ABMPharmacies = () => {
       setAlertMessage(message);
     }
 
-    dispatch(getAllPharmacies({}));
   }, [message, type, activeAlert, errorAlert]);
 
   let [showModalAdd, setShowModalAdd] = useState(false);
@@ -53,7 +52,7 @@ const ABMPharmacies = () => {
 
   const deletePharmacyFunc = async (value) => {
     dispatch(deletePharmacy(value));
-    dispatch(getAllPharmacies({}));
+    dispatch(getAllPharmacies());
     setDeleteState("");
     setConfirmDeleteState(true);
   };
@@ -61,24 +60,24 @@ const ABMPharmacies = () => {
   /********* Fin Funciones para borrar un elemento*********/
 
   useEffect(() => {
-    dispatch(getAllPharmacies({}));
+    dispatch(getAllPharmacies(0, 10));
   }, []);
 
   return (
     <div>
+      
+      <FilterPharmacy />
       <ABMPharmacyList
-        allPharmacies={allPharmacies}
         setShowModalUpdate={setShowModalUpdate}
         setShowModalAdd={setShowModalAdd}
         setDeleteState={setDeleteState}
       />
+      <ABMPaged getFunction={getAllPharmacies} />
 
       {showModalAdd && <AddPharmacy setShowModalAdd={setShowModalAdd} />}
 
       {showModalUpdate && (
-        <UpdatePharmacy
-          setShowModalUpdate={setShowModalUpdate}
-        />
+        <UpdatePharmacy setShowModalUpdate={setShowModalUpdate} />
       )}
 
       {activeAlert &&

@@ -3,8 +3,6 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { getAllPrescriptions } from "../../../actions/actionAMBAdmin";
-
 import UpdatePrescription from "./UpdatePrescription";
 import ABMPrescriptionsList from "./ABMPrescriptionsList";
 import { alertActions } from "../../../actions/actionAlerts";
@@ -18,7 +16,7 @@ const ABMPrescriptions = () => {
   let [showModalUpdate, setShowModalUpdate] = useState(false);
 
   const [errorAlert, setErrorAlert] = useState(false);
-   
+
   const [activeAlert, setActiveAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
 
@@ -35,20 +33,17 @@ const ABMPrescriptions = () => {
       setErrorAlert(true);
       setAlertMessage(message);
     }
-
-  }, [ message, type, activeAlert, errorAlert]);
+  }, [message, type, activeAlert, errorAlert]);
 
   return (
     <div className="min-h-[81vh]">
- 
-
       <ABMPrescriptionsList setShowModalUpdate={setShowModalUpdate} />
-
+      {/* <ABMPaged getFunction={undefined}/> */}
       {showModalUpdate && (
         <UpdatePrescription setShowModalUpdate={setShowModalUpdate} />
       )}
 
-{activeAlert &&
+      {activeAlert &&
         alertSweet(
           "success",
           alertMessage,

@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { addPlan } from "../../../actions/actionAMBAdmin";
 
 import styles from "./addPlan.module.css";
-import { enableBtn, disableBtn } from "../../../utils/ABMStyles";
+import { enableBtn, disableBtn, formError } from "../../../utils/ABMStyles";
 
 import {
   functionErrorsBtn,
@@ -97,7 +97,7 @@ const AddPlan = ({ setShowModalAdd }) => {
     setErrors(true);
   };
   return (
-    <div className="relative">
+    <div className={styles.modal}>
       <section className={styles.modalmain}>
         <div className="flex justify-center h-10%">
           <h5 className="text-2xl font-bold text-gray-500">
@@ -107,27 +107,27 @@ const AddPlan = ({ setShowModalAdd }) => {
         </div>
         <div className="modal-content py-4 text-left px-6 h-90%">
           <form>
-            <div className="flex">
+            <div className="flex mb-3">
               <div>
                 <label className="text-md text-gray-600">Codigo: </label>
                 <input
-                  className="h-2 p-4 mb-2.5 w-full border-2 border-gray-300  rounded-md"
+                  className="h-2 p-4  w-full border-2 border-gray-300  rounded-md"
                   type="text"
                   name="codePlan"
                   autoComplete="off"
                   value={inputPlan.codePlan}
                   onChange={(e) => handleChange(e)}
-                  placeholder="Ingrese el Codigo...."
-                />
+                  placeholder="Ingrese el Codigo..."
+                />{errores.codePlan && (
+                  <p className={formError}>{errores.codePlan}</p>
+                )}
               </div>
-              {errores.codePlan && (
-                <p className="absolute text-red-700">{errores.codePlan}</p>
-              )}
+              
 
               <div>
                 <label className="text-md text-gray-600">Nombre: </label>
                 <input
-                  className="h-2 p-4 mb-2.5 w-full border-2 border-gray-300  rounded-md"
+                  className="h-2 p-4 w-full border-2 border-gray-300  rounded-md"
                   type="text"
                   name="name"
                   autoComplete="off"
@@ -136,13 +136,15 @@ const AddPlan = ({ setShowModalAdd }) => {
                   placeholder="Ingrese el nombre...."
                 />
                 {errores.name && (
-                  <p className="absolute text-red-700">{errores.name}</p>
+                  <p className={formError}>{errores.name}</p>
                 )}
               </div>
-              <div>
+            </div>
+            <div className="flex">
+              <div className="mb-3">
                 <label className="text-md text-gray-600">Precio: </label>
                 <input
-                  className="h-2 p-4 mb-2.5 w-full border-2 border-gray-300 rounded-md"
+                  className="h-2 p-4  w-full border-2 border-gray-300 rounded-md"
                   type="number"
                   name="precio"
                   autoComplete="off"
@@ -151,13 +153,29 @@ const AddPlan = ({ setShowModalAdd }) => {
                   placeholder="Ingrese el precio...."
                 />
                 {errores.precio && (
-                  <p className="absolute text-red-700">{errores.precio}</p>
+                  <p className={formError}>{errores.precio}</p>
+                )}
+              </div>
+              <div className="flex w-1/3 items-center">
+                <label className="text-md text-gray-600">Activo: </label>
+                <select
+                className="border-2 p-1 border-gray-300  rounded-md"
+                  id="activo"
+                  name="planActivo"
+                  onChange={(e) => handleChange(e)}
+                >
+                  <option value="">Seleccione</option>
+                  <option value="false">No</option>
+                  <option value="true">Si</option>
+                </select>
+                {errores.planActivo && (
+                  <p className={formError}>{errores.planActivo}</p>
                 )}
               </div>
             </div>
           </form>
 
-          <div className="flex ">
+          <div className="flex mb-2 ">
             <div className="w-1/2">
               <div>
                 <label className="text-md text-gray-600">Tipo: </label>
@@ -171,14 +189,14 @@ const AddPlan = ({ setShowModalAdd }) => {
                   placeholder="Ingrese la Descripcion...."
                 />
               </div>
-              <div className="h-2/3">
+              <div className="">
                 <label className=" h-1/3 text-md text-gray-600">
                   Descripción:{" "}
                 </label>
                 <textarea
-                  className="h-2/3 p-4  w-full border-2 border-gray-300 mb-2 rounded-md resize-none"
-                  rows="8"
-                  cols="50"
+                  className="h-2/3 p-4  w-full border-2 border-gray-300  rounded-md resize-none"
+                  rows="3"
+                  cols="15"
                   name="description"
                   autoComplete="off"
                   value={description}
@@ -188,7 +206,7 @@ const AddPlan = ({ setShowModalAdd }) => {
               </div>
             </div>
             <div className="w-1/2">
-              <div className="h-1/3 flex  justify-center items-center">
+              <div className="h-1/2 flex  justify-center items-center">
                 <button
                   className="group relative w-2/3 h-6 flex items-center justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-400 focus:outline-none focus:ring-2 focus:ring-offset-2 "
                   name="descripcion"
@@ -197,7 +215,7 @@ const AddPlan = ({ setShowModalAdd }) => {
                   Cargar descripcion
                 </button>
               </div>
-              <div className="h-2/3 border  flex  border-gray-300 m rounded-md">
+              <div className="h-1/3 border  flex  border-gray-300 m rounded-md">
                 {inputPlan.descripcion &&
                   inputPlan.descripcion.map((element, index) => {
                     return (
@@ -238,30 +256,14 @@ const AddPlan = ({ setShowModalAdd }) => {
                     );
                   })}
                 {errores.descripcion && (
-                  <p className="absolute text-red-700">{errores.descripcion}</p>
+                  <p className={formError}>{errores.descripcion}</p>
                 )}
               </div>
             </div>
           </div>
 
-          <div className="flex justify-between items-end ">
-            <div className="flex w-1/3 items-center">
-              <label className="text-md text-gray-600">Activo: </label>
-              <select
-                id="activo"
-                name="planActivo"
-                onChange={(e) => handleChange(e)}
-              >
-                <option value="">Seleccione</option>
-                <option value="false">No</option>
-                <option value="true">Si</option>
-              </select>
-              {errores.planActivo && (
-                <p className="absolute text-red-700">{errores.planActivo}</p>
-              )}
-            </div>
-
-            <div className="flex w-2/3 justify-around mt-4">
+          <div className="flex w-full justify-center items-end ">
+            <div className="flex w-2/3 justify-around ">
               <button
                 key="submitFormButton"
                 onClick={handleSubmitPlan}

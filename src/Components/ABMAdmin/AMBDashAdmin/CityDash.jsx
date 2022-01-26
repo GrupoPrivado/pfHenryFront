@@ -10,6 +10,8 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
+import { SpinnerCircular } from "spinners-react";
+import { useSelector } from "react-redux";
 
 
 ChartJS.register(
@@ -45,6 +47,7 @@ const labels = [
 ];
 
 export default function CityDash() {
+ //const {isLoading} = useSelector(state => state.)
   const data = useMemo(() => {
     return {
       datasets: [
@@ -64,7 +67,10 @@ export default function CityDash() {
   }, []);
  return(
      <div>
-         <Bar data={data} options={options}/>
+        {/* {isLoading ?  */}
+        {/* (<SpinnerCircular style={{ margin: 'auto', paddingTop: '20px' }}/>) :  */}
+        <Bar data={data} options={options}/>
+         {/* } */}
      </div>
  )
 }

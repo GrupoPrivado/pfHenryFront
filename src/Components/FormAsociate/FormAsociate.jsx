@@ -34,6 +34,7 @@ export default function FormAsociate({
     direccion: "",
     planID: "",
     password: "",
+    repeatPassword: "",
     parentesco: "titular",
   });
 
@@ -327,6 +328,23 @@ export default function FormAsociate({
               />
               {errores.password && (
                 <p className="absolute text-red-700">{errores.password}</p>
+              )}
+            </div>
+
+            <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
+              <label htmlFor="repeatPassword" className="text-lg font-semibold">
+                Repetir contraseña
+              </label>
+              <input
+                required
+                className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                type="password"
+                name="repeatPassword"
+                onChange={(e) => handleChange(e)}
+                placeholder="Repetir contraseña"
+              />
+              {errores.repeatPassword && (
+                <p className="absolute text-red-700">{errores.repeatPassword}</p>
               )}
             </div>
           </div>

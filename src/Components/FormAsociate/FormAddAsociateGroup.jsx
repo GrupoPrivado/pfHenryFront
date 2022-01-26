@@ -23,13 +23,14 @@ export default function FormAddAsociateGroup({
   modal,
   setModal,
 }) {
-  const randomNumber = (min, max) => Math.floor(Math.random() * (max-min) + min);
+  const randomNumber = (min, max) => Math.floor(Math.random() * (max - min) + min);
 
   const dispatch = useDispatch();
   const [errors, setErrors] = useState(true);
   const [errores, setErrores] = useState({})
+  
   const [input, setInput] = useState({
-    idAf: randomNumber(3000,4000),
+    idAf: randomNumber(3000, 4000),
     nombre: "",
     apellido: "",
     DNI: "",
@@ -39,7 +40,7 @@ export default function FormAddAsociateGroup({
     ciudadID: "",
     provinciaID: "",
     direccion: "",
-    planID: "",
+    //planID: "",
     parentesco: "",
   });
 
@@ -58,7 +59,7 @@ export default function FormAddAsociateGroup({
     setErrores(validateError)
     if (Object.entries(validateError).length <= 0) {
       dispatch(addFamiliar(input))
-      setModal(!modal);
+      setModal(false);
     }
   }
 
@@ -260,26 +261,13 @@ export default function FormAddAsociateGroup({
               </div>
 
               <div className="flex justify-around">
-                {errors ? (
-                  <button
-                    // type="submit"
-                    // form="formulario"
-                    
-                    onClick={handleSubmit}
-                    className="relative flex justify-center px-4 py-2 text-sm font-medium text-white bg-blue-400 border border-transparent rounded-md group w-28 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  >
-                    Guardar
-                  </button>
-                ) : (
-                  <button
-                    // type="submit"
-                    // form="formulario"
-                    onClick={handleSubmit}
-                    className="relative flex justify-center px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md group w-28 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  >
-                    Guardar
-                  </button>
-                )}
+                <button
+                  onClick={handleSubmit}
+                  className="relative flex justify-center px-4 py-2 text-sm font-medium text-white bg-blue-400 border border-transparent rounded-md group w-28 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                  Guardar
+                </button>
+
                 <button
                   onClick={() => setModal(!modal)}
                   className="relative flex justify-center px-4 py-2 text-sm font-medium text-white bg-red-500 border border-transparent rounded-md group w-28 hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"

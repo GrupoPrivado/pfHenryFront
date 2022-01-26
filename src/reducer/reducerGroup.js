@@ -1,6 +1,7 @@
 const inicialState = {
     group: [],
     afiliate:[],
+    isLoading: false
   };
   export default function reducerGroup(state = inicialState, action) {
     switch (action.type) {
@@ -8,6 +9,7 @@ const inicialState = {
         return {
           ...state,
           group: action.payload,
+          isLoading: action.loading
         };
         case "GET_AFILIATE":
             return {

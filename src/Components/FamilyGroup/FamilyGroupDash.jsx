@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { UserGroupIcon } from '@heroicons/react/outline'
+import { UserGroupIcon } from "@heroicons/react/outline";
 
 import { getGroup } from "../../actions/actionGroup";
+import { motion } from "framer-motion";
 
 export default function FamilyGroupDash() {
   const { group } = useSelector((state) => state.grupos);
-  const { afiliate} = useSelector((state) => state.grupos);
+  const { afiliate } = useSelector((state) => state.grupos);
 
   const dispatch = useDispatch();
 
@@ -25,19 +26,26 @@ export default function FamilyGroupDash() {
         <div className="flex items-center mb-8 text-4xl text-white">
           <UserGroupIcon className="text-white pointer-events-none h-11 w-11" />
         </div>
-        <div className='flex flex-col justify-around px-2.5 w-full font-normal text-white shrink-0'>
+        <motion.div
+          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 20 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 1 }}
+          className="flex flex-col justify-around px-2.5 w-full font-normal text-white shrink-0"
+        >
           {group.length ? (
-            group.map((e) => 
-            <li key={e._id} className='flex justify-between text-left'>
-              <p>{e.nombre}</p>
-              <p>{e.apellido}</p>
-            </li>
-              )) : (
+            group.map((e) => (
+              <li key={e._id} className="flex justify-between text-left">
+                <p>{e.nombre}</p>
+                <p>{e.apellido}</p>
+              </li>
+            ))
+          ) : (
             <div>
-              <h3 className='text-center'>Sin Grupo Familiar</h3>
+              <h3 className="text-center">Sin Grupo Familiar</h3>
             </div>
           )}
-        </div>
+        </motion.div>
       </div>
     </Link>
   );

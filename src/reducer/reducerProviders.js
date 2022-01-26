@@ -10,6 +10,8 @@ const inicialState = {
   provinces: [],
   specialties: [],
   pharmacies: [],
+  limitPaged: 0,
+  isLoading: false
 };
 export default function reducerPrestadores(state = inicialState, action) {
   switch (action.type) {
@@ -18,11 +20,15 @@ export default function reducerPrestadores(state = inicialState, action) {
         ...state,
         providers: action.payload,
         allProviders: action.payload,
+        limitPaged: action.limitPaged,
+        isLoading: action.loading
       };
     case GET_ALL_PHARMACIES:
       return {
         ...state,
         pharmacies: action.payload,
+        limitPaged: action.limitPaged,
+        isLoading: action.loading
       };
     case GET_ALL_PROVINCES:
       return {

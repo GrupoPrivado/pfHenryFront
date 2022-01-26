@@ -89,7 +89,7 @@ function EditProfile({ user }) {
                                 type="tel"
                                 autoComplete="telefono"
                                 value={input.telefono || ''}
-                                placeholder="Tu dirección"
+                                placeholder="Tu teléfono"
                                 required
                                 className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
                             />

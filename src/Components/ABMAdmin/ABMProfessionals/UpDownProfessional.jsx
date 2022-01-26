@@ -64,7 +64,7 @@ const UpDownProfessional = ({ setShowModalUpDown }) => {
   };
 
   return (
-    <div>
+    <div className={styles.modal}>
       <section className={styles.modalmain}>
         <div className="flex  justify-center">
           <h5 className="text-2xl font-bold text-gray-500">
@@ -113,7 +113,7 @@ const UpDownProfessional = ({ setShowModalUpDown }) => {
             </div>
             <div className="flex items-center mt-5">
               <div>
-                <div>
+                <div className="mb-2">
                   <label className="text-md text-gray-600">Asunto: </label>
                   <input
                     className="h-2 p-4 w-2/3 border-2 border-gray-300 mb-3 rounded-md"
@@ -126,10 +126,10 @@ const UpDownProfessional = ({ setShowModalUpDown }) => {
                   />
                 </div>
                 <div>
-                  <div>
+                  <div className="mb-2">
                     <label className="text-md text-gray-600">Texto: </label>
                     <textarea
-                      className="h-6 p-10 w-2/3 border-2 border-gray-300 mb-3 rounded-md"
+                      className="h-6 p-10 w-2/3 border-2 border-gray-300  rounded-md"
                       type="text"
                       rows="8"
                       cols="50"
