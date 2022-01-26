@@ -39,4 +39,5 @@ export const verifyRole = (autorizado) => {
 export const logout = () => {
     localStorage.removeItem('userToken');
     localStorage.removeItem('userType');
+    localStorage.removeItem('haveFamily');
 }

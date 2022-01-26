@@ -13,6 +13,7 @@ export { GET_AFILIATE, GET_MEDICAL_TOKEN, NOT_AUTHENTICATED, GET_ERROR, DELETE_R
 
 
 export const getItem = (item) => localStorage.getItem(item)
+export const setItem = (item, value) => localStorage.setItem(item, value)
 export const removeItem = (item) => localStorage.removeItem(item)
 
 
@@ -39,6 +40,8 @@ export const getAfiliate = (payload) => {
                   }
           });
           if(data.success){
+            //if(data.message.urlPhoto) setItem('userPhoto', data.message.urlPhoto)
+              setItem('haveFamily', data.message.grupoFamiliar)
               return dispatch({type: GET_AFILIATE, payload: data.message})
           } else {
               return dispatch({type: NOT_AUTHENTICATED, payload: data})
