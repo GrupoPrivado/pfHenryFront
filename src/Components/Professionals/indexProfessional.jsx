@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { alertActions } from "../../actions/actionAlerts";
 import { getClinicHistory } from "../../actions/professionalsActions";
 import { disableBtnProf, enableBtnProf } from "../../utils/ABMStyles";
@@ -14,7 +14,7 @@ import ProfessionalData from "./ProfessionalData";
 
 const IndexProfessional = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const { consultaMedicaData, professionalData } = useSelector(
     (state) => state.professionals
@@ -46,12 +46,12 @@ const IndexProfessional = () => {
 
   const [recetasModal, setRecetasModal] = useState(false);
 
-  const enterPage = () =>{
+  const enterPage = () => {
     dispatch(getClinicHistory(consultaMedicaData.afiliadoID.DNI));
     setTimeout(() => {
-      navigate("/profesional/historiaclinica")
+      navigate("/profesional/historiaclinica");
     }, 2000);
-  }
+  };
 
   /****** Variables y funciones la generación de recetas Func 3******/
 
@@ -63,15 +63,15 @@ const IndexProfessional = () => {
 
       <div className="flex justify-around items-center w-40vw h-10">
         {/* <Link to="/profesional/historiaclinica"> */}
-          <button
-            className={
-              consultaMedicaData.afiliadoID ? enableBtnProf : disableBtnProf
-            }
-            disabled={consultaMedicaData.afiliadoID ? false : true}
-            onClick={enterPage}
-          >
-            Historial Medico
-          </button>
+        <button
+          className={
+            consultaMedicaData.afiliadoID ? enableBtnProf : disableBtnProf
+          }
+          disabled={consultaMedicaData.afiliadoID ? false : true}
+          onClick={enterPage}
+        >
+          Historial Medico
+        </button>
         {/* </Link> */}
 
         <button
@@ -101,7 +101,7 @@ const IndexProfessional = () => {
       {consultaMedicaData.afiliadoID && (
         <Diagnostico token={consultaMedicaData.tokenMedico} />
       )}
-         {activeAlert &&
+      {activeAlert &&
         alertSweet(
           "success",
           alertMessage,

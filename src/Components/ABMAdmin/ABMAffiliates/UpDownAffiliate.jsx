@@ -73,7 +73,6 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
     dispatch(resetDataUpdate());
     setErrors(true);
   };
-  const showHideClassName = showModalUpDown ? "displayblock" : "displaynone";
 
   return (
     <div className={styles.modal}>
@@ -133,7 +132,7 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
               </div>
             </div>
             <div className="flex items-center mt-3">
-              <div >
+              <div>
                 <div className="mb-5">
                   <label className="text-md text-gray-600">Asunto: </label>
                   <input
@@ -167,7 +166,7 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
                 <div className="flex">
                   <label className="text-md text-gray-600">Alta: </label>
                   <select
-                  className="border-2 p-1 border-gray-300 rounded-md"
+                    className="border-2 p-1 border-gray-300 rounded-md"
                     name="alta"
                     onChange={(e) => handleUpdateAffiliate(e)}
                     value={upDownAffiliateData.alta}
@@ -177,10 +176,10 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
                   </select>
                 </div>
 
-                <div className="flex"> 
+                <div className="flex">
                   <label className="text-md text-gray-600">Activo: </label>
                   <select
-                  className="border-2 p-1 border-gray-300 rounded-md"
+                    className="border-2 p-1 border-gray-300 rounded-md"
                     name="activo"
                     onChange={(e) => handleUpdateAffiliate(e)}
                     value={upDownAffiliateData.activo}
