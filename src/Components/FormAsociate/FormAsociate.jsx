@@ -69,7 +69,6 @@ export default function FormAsociate({
   }
 
   const handleEdit = (e) => {
-    console.log(e.target.value, "value edit");
     dispatch(findFamiliar(e.target.value));
     setEditModal(true);
   };

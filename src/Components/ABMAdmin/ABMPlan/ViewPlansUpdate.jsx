@@ -8,10 +8,9 @@ import styles from "./ViewPlans.module.css";
 const ViewPlansUpdate = ({ setShowModalViewUpdate }) => {
   const dispatch = useDispatch();
   const { viewPlan } = useSelector((state) => state.ABMAdmin);
-  console.log(viewPlan[0].descripcion);
 
   const handleClose = () => {
-    setShowModalView(false);
+    setShowModalViewUpdate(false);
   };
 
   return (

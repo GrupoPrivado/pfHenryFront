@@ -181,7 +181,6 @@ export default function reducerABMAdmin(state = initialState, action) {
       };
 
     case "RESET_CITIES_ABM":
-      console.log("elimine las ciudades");
       return { ...state, cities: [] };
 
     // case "FILTER_ACTIV":
