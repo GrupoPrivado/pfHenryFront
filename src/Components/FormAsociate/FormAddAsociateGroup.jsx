@@ -59,7 +59,7 @@ export default function FormAddAsociateGroup({
     setErrores(validateError)
     if (Object.entries(validateError).length <= 0) {
       dispatch(addFamiliar(input))
-      setModal(!modal);
+      setModal(false);
     }
   }
 

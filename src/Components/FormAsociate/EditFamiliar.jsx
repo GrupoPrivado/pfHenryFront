@@ -5,41 +5,41 @@ import { editFamiliar } from "../../actions/actionRegister";
 import { validate } from "../../utils/constantes";
 import InputData from "../InputData";
 
-const EditFamiliar = ({provinces, cities, setEditModal}) => {
-    const dispatch = useDispatch()
-    const [errores, setErrores] = useState({})
+const EditFamiliar = ({ provinces, cities, setEditModal }) => {
+  const dispatch = useDispatch()
+  const [errores, setErrores] = useState({})
 
-    const {member} = useSelector(state => state.associate)
-    
-    const [input, setInput] = useState(member)
-  
-    const handleChange = (e) => {
-      const newInp = {
-        ...input,
-        [e.target.name]: e.target.value,
-      };
-      setInput(newInp);
+  const { member } = useSelector(state => state.associate)
+
+  const [input, setInput] = useState(member)
+
+  const handleChange = (e) => {
+    const newInp = {
+      ...input,
+      [e.target.name]: e.target.value,
+    };
+    setInput(newInp);
+  }
+
+  const handleChangeProvince = (e) => {
+    const newData = {
+      ...input,
+      provinciaID: e.target.value,
+    };
+    dispatch(getAllCities(newData.provinciaID));
+    setInput(newData);
+  };
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const validateError = validate(input)
+    setErrores(validateError)
+    if (Object.entries(validateError).length <= 0) {
+      dispatch(editFamiliar(input))
+      setEditModal(false);
     }
 
-    const handleChangeProvince = (e) => {
-        const newData = {
-          ...input,
-          provinciaID: e.target.value,
-        };
-        dispatch(getAllCities(newData.provinciaID));
-        setInput(newData);
-      };
-  
-    function handleSubmit(e) {
-        e.preventDefault();
-        const validateError = validate(input)
-        setErrores(validateError)
-        if (Object.entries(validateError).length <= 0) {
-          dispatch(editFamiliar(input))
-          setEditModal(false);
-        }
-    
-      }
+  }
 
 
 
@@ -59,7 +59,7 @@ const EditFamiliar = ({provinces, cities, setEditModal}) => {
               <input type="hidden" name="remember" defaultValue="true" />
               <div className="grid items-center grid-cols-3 grid-rows-5 gap-4 -space-y-px rounded-md shadow-sm w-40vw sm:grid-cols-4 sm:grid-rows-2">
                 <h3 className="col-span-4 row-span-1 text-2xl font-bold text-left text-primary">
-                  Agregar miembro
+                  Editar miembro
                 </h3>
 
                 <InputData
@@ -69,7 +69,8 @@ const EditFamiliar = ({provinces, cities, setEditModal}) => {
                   type={"text"}
                   value={input.nombre}
                   onChange={handleChange}
-                />
+                  errores={errores.nombre}
+                  />
 
                 <InputData
                   name={"apellido"}
@@ -78,6 +79,7 @@ const EditFamiliar = ({provinces, cities, setEditModal}) => {
                   type={"text"}
                   value={input.apellido}
                   onChange={handleChange}
+                  errores={errores.apellido}
                 />
 
                 <InputData
@@ -87,6 +89,7 @@ const EditFamiliar = ({provinces, cities, setEditModal}) => {
                   type={"number"}
                   value={input.DNI}
                   onChange={handleChange}
+                  errores={errores.DNI}
                 />
 
                 <InputData
@@ -96,15 +99,17 @@ const EditFamiliar = ({provinces, cities, setEditModal}) => {
                   type={"date"}
                   value={input.fechaNacimiento}
                   onChange={handleChange}
+                  errores={errores.fechaNacimiento}
                 />
 
                 <InputData
                   name={"telefono"}
                   title={"Teléfono"}
-                  placeholder="Tu e-mail"
+                  placeholder="Tu teléfono"
                   type={"tel"}
                   value={input.telefono}
                   onChange={handleChange}
+                  errores={errores.telefono}
                 />
 
                 <InputData
@@ -114,16 +119,17 @@ const EditFamiliar = ({provinces, cities, setEditModal}) => {
                   type={"email"}
                   value={input.correoElectronico}
                   onChange={handleChange}
+                  errores={errores.correoElectronico}
                 />
-
 
                 <InputData
                   name={"direccion"}
                   title={"Tu domicilio"}
-                  placeholder="Tu e-mail"
+                  placeholder="Tu dirección"
                   type={"text"}
                   value={input.direccion}
                   onChange={handleChange}
+                  errores={errores.direccion}
                 />
 
                 <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
@@ -210,15 +216,15 @@ const EditFamiliar = ({provinces, cities, setEditModal}) => {
               </div>
 
               <div className="flex justify-around">
-                  <button
-                    // type="submit"
-                    // form="formulario"
-                    onClick={handleSubmit}
-                    className="relative flex justify-center px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md group w-28 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  >
-                    Guardar
-                  </button>
-                
+                <button
+                  // type="submit"
+                  // form="formulario"
+                  onClick={handleSubmit}
+                  className="relative flex justify-center px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md group w-28 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                  Guardar
+                </button>
+
                 <button
                   onClick={() => setEditModal(false)}
                   className="relative flex justify-center px-4 py-2 text-sm font-medium text-white bg-red-500 border border-transparent rounded-md group w-28 hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"

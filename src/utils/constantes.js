@@ -8,6 +8,9 @@ export const validate = (input) => {
     if (input.hasOwnProperty("password") && input.password.length <= 0 && input.password.length < 8) {
         errores.password = "La contraseña debe tener minimo 8 caracteres";
     }
+    if (input.hasOwnProperty("repeatPassword") && input.repeatPassword.length <= 0 && input.repeatPassword.length < 8 || input.repeatPassword !== input.password) {
+        errores.repeatPassword = "Las contraseñas no coinciden";
+    }
     if (
         !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(input.correoElectronico)
     ) {
