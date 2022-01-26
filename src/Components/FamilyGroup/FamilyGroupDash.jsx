@@ -20,12 +20,6 @@ export default function FamilyGroupDash() {
   return (
     <Link to="/afiliado/group">
       <div className="relative flex flex-col items-center h-full p-4 bg-white justify-evenly md:col-span-1 md:row-span-1 rounded-2xl backdrop-filter backdrop-blur-lg bg-opacity-20 undefined">
-        <div className="mt-4 mb-2 text-lg font-medium text-center text-white place-self-center">
-          <h3>Grupo Familiar</h3>
-        </div>
-        <div className="flex items-center mb-8 text-4xl text-white">
-          <UserGroupIcon className="text-white pointer-events-none h-11 w-11" />
-        </div>
         <motion.div
           animate={{ opacity: 1, y: 0 }}
           initial={{ opacity: 0, y: 20 }}
@@ -33,6 +27,12 @@ export default function FamilyGroupDash() {
           transition={{ duration: 1 }}
           className="flex flex-col justify-around px-2.5 w-full font-normal text-white shrink-0"
         >
+        <div className="mt-4 mb-2 text-lg font-medium text-center text-white place-self-center">
+          <h3>Grupo Familiar</h3>
+        </div>
+        <div className="flex items-center justify-center mb-8 text-4xl text-white">
+          <UserGroupIcon className="text-white pointer-events-none h-11 w-11" />
+        </div>
           {group.length ? (
             group.map((e) => (
               <li key={e._id} className="flex justify-between text-left">
