@@ -38,7 +38,7 @@ export default function Asociate() {
     }
   }, [message, type]);
 
-  const {provinces, cities} = useSelector(state => state.providers)
+  const {provinces, cities, isLoadingCities} = useSelector(state => state.providers)
   useTitle("Asociate a ArpyMedical");
   
 useEffect(() => {
@@ -56,6 +56,7 @@ useEffect(() => {
             modal={modal}
             setModal={setModal}
             setEditModal={setEditModal}
+            isLoadingCities={isLoadingCities}
           />
         
         {modal && (
