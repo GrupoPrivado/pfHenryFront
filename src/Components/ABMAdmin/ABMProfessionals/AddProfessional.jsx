@@ -12,9 +12,10 @@ import {
 
 import styles from "./AddProfessional.module.css";
 
-import { enableBtn, disableBtn , formError} from "../../../utils/ABMStyles";
+import { enableBtn, disableBtn, formError } from "../../../utils/ABMStyles";
 import {
-  functionErrorsBtn, validateProfessional,
+  functionErrorsBtn,
+  validateProfessional,
 } from "../../../utils/adminFormsControllers";
 
 const AddProfessional = ({ setShowModalAdd }) => {
@@ -81,7 +82,7 @@ const AddProfessional = ({ setShowModalAdd }) => {
     setErrores(validateError);
     if (Object.entries(validateError).length <= 0) {
       dispatch(addProfessional(inputProfessional));
-      dispatch(getAllProfessionals(0,10));
+      dispatch(getAllProfessionals(0, 10));
       setShowModalAdd(false);
     }
   };
@@ -148,9 +149,7 @@ const AddProfessional = ({ setShowModalAdd }) => {
                   onChange={(e) => handleChange(e)}
                   placeholder="Ingrese el DNI...."
                 />
-                {errores.DNI && (
-                  <p className={formError}>{errores.DNI}</p>
-                )}
+                {errores.DNI && <p className={formError}>{errores.DNI}</p>}
               </div>
 
               <div className="w-1/2">
@@ -197,9 +196,7 @@ const AddProfessional = ({ setShowModalAdd }) => {
                   onChange={(e) => handleChange(e)}
                   placeholder="Ingrese el e-mail...."
                 />
-                {errores.mail && (
-                  <p className={formError}>{errores.mail}</p>
-                )}
+                {errores.mail && <p className={formError}>{errores.mail}</p>}
               </div>
             </div>
             <div className="flex mb-3">
@@ -264,11 +261,15 @@ const AddProfessional = ({ setShowModalAdd }) => {
                     allSpecialities.map((element) => {
                       if (element.activa) {
                         return (
-                          <option value={element._id} id={element._id} key={element._id}>
+                          <option
+                            value={element._id}
+                            id={element._id}
+                            key={element._id}
+                          >
                             {element.nombre}
                           </option>
                         );
-                      }
+                      } else return;
                     })}
                 </select>
                 {errores.especID && (
@@ -294,23 +295,23 @@ const AddProfessional = ({ setShowModalAdd }) => {
             </div>
           </form>
           <div className="flex w-full justify-center ">
-          <div className="flex w-2/3 justify-around ">
-            <button
-              key="submitFormButton"
-              className={errors ? disableBtn : enableBtn}
-              disabled={errors}
-              onClick={handleSubmitProfessional}
-            >
-              Guardar
-            </button>
+            <div className="flex w-2/3 justify-around ">
+              <button
+                key="submitFormButton"
+                className={errors ? disableBtn : enableBtn}
+                disabled={errors}
+                onClick={handleSubmitProfessional}
+              >
+                Guardar
+              </button>
 
-            <button
-              className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              onClick={() => handleClose()}
-            >
-              Cerrar
-            </button>
-          </div>
+              <button
+                className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                onClick={() => handleClose()}
+              >
+                Cerrar
+              </button>
+            </div>
           </div>
         </div>
       </section>

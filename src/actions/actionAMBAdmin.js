@@ -55,7 +55,6 @@ export function getAllProvinces() {
 export function getAllEspecialities() {
   return async (dispatch) => {
     try {
-      const token = getItem("userToken");
       const { data } = await axios.get(`${api}/especialidades`);
 
       if (data.success) {

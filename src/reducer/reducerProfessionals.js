@@ -1,4 +1,3 @@
-import { GET_PROFESSIONAL } from "./../actions/professionalsActions";
 const initialState = {
   professionalData: {},
   consultaMedicaData: {},
