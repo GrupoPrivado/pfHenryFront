@@ -84,20 +84,7 @@ function DashAfil() {
         <main className="flex flex-col w-full max-w-5xl m-4 overflow-hidden bg-white shadow-lg lg:flex-row backdrop-filter backdrop-blur-lg bg-opacity-20 rounded-xl lg:m-6">
           <div className="flex-1 p-4 lg:p-6">
             <div className="flex items-center mb-8 text-4xl text-white">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-9 w-9"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokelineloin="round"
-                  strokeWidth="2"
-                  d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
+
               <div className="ml-4 font-bold">Bienvenidx {user.nombre}</div>
             </div>
             <div className="grid gap-4 sm:grid-cols-3 sm:grid-rows-3 md:grid-rows-2 md:grid-cols-3">

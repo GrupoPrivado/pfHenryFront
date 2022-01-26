@@ -35,18 +35,18 @@ function CardReceta({ setModal, modal }) {
                 <h4 className="pb-2 text-xl font-medium">
                   {detail.tipoReceta}
                 </h4>
-                <p className="p-12 text-4xl">{detail.descripcion}</p>
+                <p className="p-8 text-4xl">{detail.descripcion}</p>
               </div>
               <div className="flex flex-col w-full text-center text-white">
                 <h3 className="text-2xl font-bold">
-                  Dr.{detail.profesionalID.nombre}{" "}
+                  Dr. {detail.profesionalID.nombre}{" "}
                   {detail.profesionalID.apellido}
                 </h3>
                 <h4 className="text-xl font-bold">
                   Especialista en {detail.profesionalID.especID.nombre}
                 </h4>
                 <h5 className="text-lg font-semibold">
-                  M.P{detail.profesionalID.matricula}
+                  M.P {detail.profesionalID.matricula}
                 </h5>
               </div>
             </>
