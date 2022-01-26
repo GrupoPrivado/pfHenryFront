@@ -133,8 +133,6 @@ export const changePassword = (payload) => {
           },});
 
       if(data.success){
-        
-
         dispatch({type: alertConstants.SUCCESS , message: 'Contraseña actualizada'})
  
         return dispatch({type: GET_AFILIATE, payload: data.message})
