@@ -53,7 +53,6 @@ function EditProfile({ user }) {
         const validateError = validateContactDetails(input);
         setErrors(validateError);
         if (Object.entries(validateError).length <= 0) {
-            console.log(Object.entries(validateError))
             dispatch(updateUser(input));
         }
         //alert("Cambios guardados con éxito")

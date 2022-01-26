@@ -5,6 +5,7 @@ import { logout } from "../../utils/authUtils";
 import { useSelector } from "react-redux";
 import { profilePhoto } from "../../utils/constantes";
 import styles from './NavbarAfiliado.module.css'
+import { getItem } from "../../actions/actionAuth";
 
 const NavbarAfiliado = () => {
   let activeClassName =
@@ -29,7 +30,8 @@ const NavbarAfiliado = () => {
 
   const { user } = useSelector((state) => state.auth);
 
-  // aray de li
+  const haveFamily = getItem('haveFamily')
+
 
   return (
     <nav className={styles.navBar}>
@@ -54,7 +56,8 @@ const NavbarAfiliado = () => {
                   Dashboard
                 </NavLink>
               </li>
-              <li>
+              {
+                haveFamily === 'true' &&  <li>
                 <NavLink
                   to="group"
                   className={({ isActive }) =>
@@ -64,6 +67,8 @@ const NavbarAfiliado = () => {
                   Grupo Familiar
                 </NavLink>
               </li>
+              }
+
               <li>
                 <NavLink to="autorizaciones">
                   {({ isActive }) => (

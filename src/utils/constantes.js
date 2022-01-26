@@ -82,7 +82,6 @@ export const validateContact = (input) => {
 }
 
 export const validatePassword = (passwords) => {
-    console.log(passwords)
     let errors = {};
     if (passwords.newPass && passwords.newPass.length < 8) {
         errors.passwordNew = "La contraseña debe tener minimo 8 caracteres";
