@@ -244,7 +244,6 @@ export function getAllAffiliates(skip, limit) {
 export function getAllAffiliatesTitular(skip, limit, DNI) {
   return async (dispatch) => {
     try {
-      console.log(skip, limit, DNI)
       const token = getItem("userToken");
       const { data } = await axios.get(
         `${api}/admin/allAffiliatesTitular?skip=${skip}&limit=${limit}&DNI=${DNI}`,
@@ -445,7 +444,6 @@ export function getAllPlans() {
 export function getAllPharmacies(skip, limit, provinciaID, ciudadID, activo) {
   return async (dispatch) => {
     try {
-      console.log(skip, limit, ciudadID, provinciaID, activo);
       const token = getItem("userToken");
       const { data } = await axios.get(
         `${api}/admin/farmacias?ciudadID=${ciudadID}&provinciaID=${provinciaID}&skip=${skip}&limit=${limit}&activo=${activo}`,
@@ -994,7 +992,6 @@ export function getAllEmployees(skip, limit) {
           },
         }
       );
-      console.log("<<<<<<<<<<<data", data);
       if (data.success) {
         return dispatch({
           type: "GET_EMPLOYEES",

@@ -52,7 +52,6 @@ const AddAdherent = ({ handleAddAdherent, setShowModalAdherent }) => {
 
   const handleSubmit = () => {
     const validateError = validateAdherent(inputAdherent);
-    console.log(validateError, 'validate error')
     setErrores(validateError);
     if (Object.entries(validateError).length <= 0) {
       handleAddAdherent(inputAdherent);

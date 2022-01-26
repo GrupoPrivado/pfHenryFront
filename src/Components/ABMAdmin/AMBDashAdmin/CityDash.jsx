@@ -11,8 +11,6 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
-import { SpinnerCircular } from "spinners-react";
-import { useSelector } from "react-redux";
 
 
 ChartJS.register(
