@@ -73,8 +73,6 @@ export default function CartPrest() {
   };
 
   const handleNextPage = () => {
-    console.log('entra')
-    console.log(filter.skip, limitPaged)
     if(filter.skip < limitPaged){
       setfilter({
         ...filter,

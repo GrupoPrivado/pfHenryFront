@@ -14,14 +14,14 @@ import { Profesionals } from "../../Components/ABMAdmin/AMBDashAdmin/Profesional
 function DashAdmin() {
 
   
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const dispatch = useDispatch();
+  // const navigate = useNavigate();
 
-  const { route } = useSelector((state) => state.auth);
+  // const { route } = useSelector((state) => state.auth);
 
-  useEffect(() => {
-    if (route !== "") navigate(`/${route}`);
-  }, [dispatch, route, navigate]);
+  // // useEffect(() => {
+  // //   if (route !== "") navigate(`/${route}`);
+  // // }, [dispatch, route, navigate]);
 
   return (
     <div className="h-90vh bg- w-full grid overflow-hidden grid-cols-3 grid-rows-2 gap-0">

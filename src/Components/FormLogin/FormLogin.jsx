@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { LockClosedIcon } from "@heroicons/react/solid";
 import Logo from "../../assets/logo.svg";
 import { getUserToken } from "../../utils/authUtils";
+import { useDispatch } from "react-redux";
+import { deleteRoute } from "../../actions/actionAuth";
 
 function FormLogin({ setForm, activeForm, handleChangeAlerts }) {
   const [input, setInput] = useState({
@@ -19,9 +21,10 @@ function FormLogin({ setForm, activeForm, handleChangeAlerts }) {
       [e.target.name]: e.target.value,
     });
   };
-
+  const dispatch = useDispatch()
   const handleSubmit = async (e) => {
     e.preventDefault();
+    dispatch(deleteRoute());
     const result = await getUserToken(input);
     if (result.error) {
       handleChangeAlerts("error", result.error, true);

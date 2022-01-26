@@ -17,7 +17,6 @@ function RecoverPassword({ setForm, activeForm, handleChangeAlerts }) {
 
   const navigate = useNavigate();
   const [errores, setErrores] = useState({})
-  console.log(errores, "errores")
 
   const handleChange = (e) => {
     setInput({

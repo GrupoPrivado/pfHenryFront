@@ -8,7 +8,6 @@ import {motion} from 'framer-motion'
 function Plans() {
     const dispatch = useDispatch()
     const {planes} = useSelector((state) => state.planes)
-        console.log(planes)
     useEffect(() => {
         dispatch(getPlanes());
     }, [dispatch]);

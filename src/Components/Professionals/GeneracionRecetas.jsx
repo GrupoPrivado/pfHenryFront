@@ -41,7 +41,6 @@ const GeneracionRecetas = ({
 
   const handleSendInfo = () => {
     const validateError = validateReceta(inputReceta);
-    console.log(validateError);
     setErrores(validateError);
     if (Object.entries(validateError).length <= 0) {
       dispatch(postRecetaMedica(inputReceta));
