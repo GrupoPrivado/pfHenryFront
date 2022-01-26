@@ -7,7 +7,7 @@ function Facturas() {
     const dispatch = useDispatch();
     const {facturas } = useSelector((state) => state.facturas);
 
-    console.log("facturas <>>>>>", facturas);
+
 
     useEffect(() => {
         dispatch(getFacturas());

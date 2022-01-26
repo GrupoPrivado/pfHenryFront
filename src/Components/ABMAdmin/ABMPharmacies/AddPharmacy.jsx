@@ -11,7 +11,7 @@ import {
 
 import styles from "./addPharmacy.module.css";
 
-import { enableBtn, disableBtn } from "../../../utils/ABMStyles";
+import { enableBtn, disableBtn, formError } from "../../../utils/ABMStyles";
 
 import {
   functionErrorsBtn,
@@ -92,13 +92,13 @@ const AddPharmacy = ({ setShowModalAdd }) => {
           </h5>
         </div>
 
-        <div className="modal-content py-4 text-left px-6 h-90% ">
+        <div className="modal-content pb-4 text-left px-6 h-90% ">
           <form>
-            <div className="flex">
+            <div className="flex mb-4">
               <div className=" w-1/2">
                 <label className="text-md text-gray-600">Nombre: </label>
                 <input
-                  className="h-2 p-4 w-full border-2 border-gray-300 mb-1 rounded-md"
+                  className="h-2 p-4 w-full border-2 border-gray-300  rounded-md"
                   type="text"
                   name="nombre"
                   autoComplete="off"
@@ -106,17 +106,18 @@ const AddPharmacy = ({ setShowModalAdd }) => {
                   onChange={(e) => handleChange(e)}
                   placeholder="Ingrese el Nombre...."
                 />
-              </div>
-              {errores.nombre && (
-                <p className="absolute text-red-700">{errores.nombre}</p>
+                {errores.nombre && (
+                <p className={formError}>{errores.nombre}</p>
               )}
 
+              </div>
+              
               <div className=" w-1/2">
                 <label className="text-md text-gray-600">
                   Nro. Habilitación:{" "}
                 </label>
                 <input
-                  className="h-2 p-4 w-full border-2 border-gray-300 mb-1 rounded-md"
+                  className="h-2 p-4 w-full border-2 border-gray-300  rounded-md"
                   type="number"
                   name="numHabilitacion"
                   autoComplete="off"
@@ -125,17 +126,17 @@ const AddPharmacy = ({ setShowModalAdd }) => {
                   placeholder="Ingrese el Nro. Habilit....."
                 />
                 {errores.numHabilitacion && (
-                  <p className="absolute text-red-700">
+                  <p className={formError}>
                     {errores.numHabilitacion}
                   </p>
                 )}
               </div>
             </div>
 
-            <div>
+            <div className="mb-4">
               <label className="text-md text-gray-600">Dirección: </label>
               <input
-                className="h-2 p-4 w-full border-2 border-gray-300 mb-1 rounded-md"
+                className="h-2 p-4 w-full border-2 border-gray-300  rounded-md"
                 type="text"
                 name="direccion"
                 autoComplete="off"
@@ -144,15 +145,15 @@ const AddPharmacy = ({ setShowModalAdd }) => {
                 placeholder="Ingrese la Dirección...."
               />
               {errores.direccion && (
-                <p className="absolute text-red-700">{errores.direccion}</p>
+                <p className={formError}>{errores.direccion}</p>
               )}
             </div>
 
-            <div className="flex">
+            <div className="flex mb-4">
               <div className="w-1/2">
                 <label className="text-md text-gray-600">Teléfono: </label>
                 <input
-                  className="h-2 p-4 w-full border-2 border-gray-300 mb-1 rounded-md"
+                  className="h-2 p-4 w-full border-2 border-gray-300  rounded-md"
                   type="number"
                   name="telefono"
                   autoComplete="off"
@@ -161,13 +162,13 @@ const AddPharmacy = ({ setShowModalAdd }) => {
                   placeholder="Ingrese el Teléfono...."
                 />
                 {errores.telefono && (
-                  <p className="absolute text-red-700">{errores.telefono}</p>
+                  <p className={formError}>{errores.telefono}</p>
                 )}
               </div>
               <div className="w-1/2">
                 <label className="text-md text-gray-600">E-mail: </label>
                 <input
-                  className="h-2 p-4 w-full border-2 border-gray-300 mb-5 rounded-md"
+                  className="h-2 p-4 w-full border-2 border-gray-300 rounded-md"
                   type="mail"
                   name="mail"
                   autoComplete="off"
@@ -176,11 +177,11 @@ const AddPharmacy = ({ setShowModalAdd }) => {
                   placeholder="Ingrese el E-mail...."
                 />
                 {errores.mail && (
-                  <p className="absolute text-red-700">{errores.mail}</p>
+                  <p className={formError}>{errores.mail}</p>
                 )}
               </div>
             </div>
-            <div className="flex">
+            <div className="flex mb-5 ">
               <div className="w-1/2">
                 <label className="text-md text-gray-600" htmlFor="provincia">
                   Provincia:{" "}
@@ -189,7 +190,7 @@ const AddPharmacy = ({ setShowModalAdd }) => {
                   value={inputPharmacy.provinciaID}
                   onChange={handleChangeProvince}
                   name="provinciaID"
-                  className=" h-1/2 w-full  border-2 border-gray-300 mb-5 rounded-md"
+                  className=" h-1/2 w-full  border-2 border-gray-300  rounded-md"
                   required
                 >
                   <option>Seleccione Provincia</option>
@@ -201,7 +202,7 @@ const AddPharmacy = ({ setShowModalAdd }) => {
                     ))}
                 </select>
                 {errores.provinciaID && (
-                  <p className="absolute text-red-700">{errores.provinciaID}</p>
+                  <p className={formError}>{errores.provinciaID}</p>
                 )}
               </div>
 
@@ -225,7 +226,7 @@ const AddPharmacy = ({ setShowModalAdd }) => {
                     ))}
                 </select>
                 {errores.ciudadID && (
-                  <p className="absolute text-red-700">{errores.ciudadID}</p>
+                  <p className={formError}>{errores.ciudadID}</p>
                 )}
               </div>
             </div>
@@ -244,7 +245,7 @@ const AddPharmacy = ({ setShowModalAdd }) => {
                   <option value="true">Si</option>
                 </select>
                 {errores.activo && (
-                  <p className="absolute text-red-700">{errores.activo}</p>
+                  <p className={formError}>{errores.activo}</p>
                 )}
               </div>
               <div className="flex w-2/3 justify-around">
