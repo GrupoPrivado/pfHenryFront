@@ -5,10 +5,10 @@ import { useEffect, useState } from "react";
 
 import {
   getPharmacyData,
-  deletePharmacy,
   getAllCities,
   getAllPharmacies,
   getAllProvinces,
+  filterActiv,
 } from "../../../actions/actionAMBAdmin";
 
 import styles from "./ABMPharmacies.module.css";
@@ -17,6 +17,7 @@ const ABMPharmaciesList = ({
   allPharmacies,
   setShowModalUpdate,
   setShowModalAdd,
+  setDeleteState,
 }) => {
   const dispatch = useDispatch();
 
@@ -26,13 +27,30 @@ const ABMPharmaciesList = ({
     dispatch(getAllProvinces());
   }, []);
 
+  const [filter, setFilter] = useState("");
+
   const handleChangeProvince = (e) => {
     dispatch(getAllCities(e.target.value));
-    dispatch(getAllPharmacies({provinciaID:e.target.value}));
+    if (e.target.value !== "")
+      dispatch(getAllPharmacies({ provinciaID: e.target.value }));
+    else {
+      dispatch(getAllPharmacies({ provinciaID: undefined }));
+      
+    }
+    setFilter("");
   };
 
   const handleChangeCity = (e) => {
-    dispatch(getAllPharmacies({ciudadID:e.target.value}));
+    if (e.target.value !== "")
+      dispatch(getAllPharmacies({ ciudadID: e.target.value }));
+    else {
+      dispatch(getAllPharmacies(filter));
+      setFilter("");
+    }
+  };
+  const handleChangeActiv = (e) => {
+    setFilter(e.target.value);
+    dispatch(filterActiv(e.target.value));
   };
 
   const handleEditPharmacy = async (event) => {
@@ -40,18 +58,12 @@ const ABMPharmaciesList = ({
     setShowModalUpdate(true);
   };
 
-  const handleDeletePharmacy = async (event) => {
-    let response = await dispatch(deletePharmacy(event.target.value));
-
-    await dispatch(getAllPharmacies({}));
-  };
-
   return (
     <div className={styles.divScroll}>
-      <div class="bg-gray-50 min-h-screen  ">
+      <div className="bg-gray-50 min-h-screen  ">
         <div>
-          <div class="p-4">
-            <div class="bg-white p-6 rounded-md">
+          <div className="p-4">
+            <div className="bg-white p-6 rounded-md">
               <div>
                 <div className=" flex justify-end">
                   <button
@@ -62,67 +74,93 @@ const ABMPharmaciesList = ({
                     Agregar Farmacia
                   </button>
                 </div>
+                <div className="grid overflow-hidden grid-cols-3 grid-rows-1 gap-0">
+                  <div className="px-4">
+                    <label
+                      className="text-lg font-semibold text-indigo-800"
+                      htmlFor="provincia"
+                    >
+                      Filtra por Provincia{" "}
+                    </label>
+                    <select
+                      onChange={handleChangeProvince}
+                      name="provinciaID"
+                      className=" uppercase block w-full  my-2 text-lg font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 appearance-none rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
+                      required
+                    >
+                      <option value="">Seleccione Provincia</option>
+                      {provinces &&
+                        provinces.map((p) => (
+                          <option key={p._id} value={p._id}>
+                            {p.nombre}
+                          </option>
+                        ))}
+                    </select>
+                  </div>
 
-                <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
-                  <label className="text-lg font-semibold" htmlFor="provincia">
-                    Provincia{" "}
-                  </label>
-                  <select
-                    onChange={handleChangeProvince}
-                    name="provinciaID"
-                    className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
-                    required
-                  >
-                    {provinces &&
-                      provinces.map((p) => (
-                        <option key={p._id} value={p._id}>
-                          {p.nombre}
-                        </option>
-                      ))}
-                  </select>
+                  <div className="px-4">
+                    <label
+                      className="text-lg font-semibold text-indigo-800"
+                      htmlFor="localidad"
+                    >
+                      Filtra por Localidad{" "}
+                    </label>
+                    <select
+                      onChange={(e) => handleChangeCity(e)}
+                      name="ciudadID"
+                      className=" uppercase block w-full text-lg  my-2  font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 appearance-none rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
+                      required
+                    >
+                      <option value="">Seleccione Localidad</option>
+                      {cities &&
+                        cities.map((c) => (
+                          <option key={c._id} value={c._id}>
+                            {c.localidad}
+                          </option>
+                        ))}
+                    </select>
+                  </div>
+                  <div className="px-4">
+                    <label
+                      className="text-lg font-semibold text-indigo-800"
+                      htmlFor="activo"
+                    >
+                      Filtra por Activa{" "}
+                    </label>
+                    <select
+                      onChange={handleChangeActiv}
+                      name="activo"
+                      className=" block w-full  my-2 text-lg font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 appearance-none rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
+                      value={filter}
+                    >
+                      <option value="">Todas</option>
+                      <option value="Si">Si</option>
+                      <option value="No">No</option>
+                    </select>
+                  </div>
                 </div>
-
-                <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
-                  <label className="text-lg font-semibold" htmlFor="localidad">
-                    Localidad{" "}
-                  </label>
-                  <select
-                    onChange={(e) => handleChangeCity(e)}
-                    name="ciudadID"
-                    className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
-                    required
-                  >
-                    {cities &&
-                      cities.map((c) => (
-                        <option key={c._id} value={c._id}>
-                          {c.localidad}
-                        </option>
-                      ))}
-                  </select>
-                </div>
-
                 <div className="mt-3.5">
                   <div>
-                    <div class=" flex justify-between bg-gradient-to-tr from-indigo-600 to-purple-600 rounded-md py-2 px-4 text-white font-bold text-md">
-                      <div className="w-1/6  flex justify-center">
+                    <div className=" grid overflow-hidden grid-cols-6 grid-rows-1 gap-0 bg-gradient-to-tr from-indigo-600 to-purple-600 rounded-md py-2 px-4 text-white font-bold text-md">
+                      <div className=" flex justify-center">
                         <span>Nombre </span>
                       </div>
-                      <div className="w-1/6 flex justify-center">
+                      <div className=" flex justify-center">
                         <span> Direccion</span>
                       </div>
 
-                      <div className="w-1/6 flex justify-center">
+                      <div className=" flex justify-center">
                         <span>Localidad</span>
                       </div>
-                      <div className="w-1/6  flex justify-center">
+                      <div className="  flex justify-center">
                         <span>Provincia</span>
                       </div>
 
-                      <div className="w-1/6  flex justify-center">
+                      <div className="  flex justify-center">
                         <span>Activa </span>
                       </div>
 
-                      <div className="w-1/6 flex justify-center">
+                      <div className="flex justify-center">
                         <span>Editar</span>
                       </div>
                     </div>
@@ -130,27 +168,31 @@ const ABMPharmaciesList = ({
                       allPharmacies.map((element) => {
                         return (
                           <div key={element._id} className={styles.tabla}>
-                            <div class="flex justify-between  py-1 px-4 items-center border-t text-sm font-normal mt-4 space-x-4">
-                              <div class="w-1/6 flex justify-center ">
+                            <div className="grid overflow-hidden grid-cols-6 grid-rows-1 gap-0 justify-between  py-1 px-4 items-center border-t text-sm font-normal mt-4 space-x-4">
+                              <div className=" flex justify-center ">
                                 <span>{element.nombre}</span>
                               </div>
-                              <div class="w-1/6 flex justify-center ">
+                              <div className=" flex justify-center ">
                                 <span>{element.direccion}</span>
                               </div>
-                              <div class="w-1/6 flex justify-center ">
-                                <span>{element.apellido}</span>
+                              <div className=" flex justify-center ">
+                                <span>{element.ciudadID.localidad}</span>
                               </div>
-                              <div class="w-1/6 flex justify-center "></div>
-                              <div class="w-1/6 flex justify-center ">
-                                <span>{element.activa ? "Si" : "No"}</span>
+                              <div className=" flex justify-center uppercase ">
+                                <span>{element.provinciaID.nombre}</span>
                               </div>
 
-                              <div class="w-1/6 flex justify-around ">
+                              <div className=" flex justify-center ">
+                                <span>{element.activo ? "Si" : "No"}</span>
+                              </div>
+                              <div className=" flex justify-around ">
                                 <button
                                   key={"delete" + element._id}
                                   title="Delete"
                                   value={element._id}
-                                  onClick={(e) => handleDeletePharmacy(e)}
+                                  onClick={(e) =>
+                                    setDeleteState(e.target.value)
+                                  }
                                 >
                                   Eliminar
                                 </button>

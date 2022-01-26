@@ -5,54 +5,62 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { getAllAffiliates, getAllPlans } from "../../../actions/actionAMBAdmin";
 
-import { alertActions } from "../../../actions/actionAlerts";
-import { getItem, removeItem } from "../../../actions/actionAuth";
-
 import AddAffiliate from "./AddAffiliate";
 import UpdateAffiliate from "./UpdateAffiliate";
 import ABMAffiliatesList from "./ABMAffiliatesList";
 import UpDownAffiliate from "./UpDownAffiliate";
 
+import { alertActions } from "../../../actions/actionAlerts";
+import { alertSweet } from "../../Alerts/alertSweet";
+import ABMPaged from "../ABMPaged";
+
 const ABMAffiliates = () => {
   const dispatch = useDispatch();
 
-  const { allAffiliates, type, message } = useSelector(
-    (state) => state.ABMAdmin
-  );
+  const { allAffiliates } = useSelector((state) => state.ABMAdmin);
+
+  const { type, message } = useSelector((state) => state.alerts);
+
+  const [activeAlert, setActiveAlert] = useState(false);
+  const [errorAlert, setErrorAlert] = useState(false);
+
+  const [alertMessage, setAlertMessage] = useState("");
+
+  useEffect(() => {
+    if (!activeAlert || !errorAlert) {
+      dispatch(alertActions.clear());
+    }
+
+    if (type === "alert-success") {
+      setActiveAlert(true);
+      setAlertMessage(message);
+    }
+    if (type === "alert-danger") {
+      setErrorAlert(true);
+      setAlertMessage(message);
+    }
+
+    dispatch(getAllAffiliates());
+  }, [message, type, activeAlert, errorAlert]);
 
   let [showModalAdd, setShowModalAdd] = useState(false);
   let [showModalUpdate, setShowModalUpdate] = useState(false);
   let [showModalUpDown, setShowModalUpDown] = useState(false);
 
   useEffect(() => {
-    // dispatch(alertActions.clear())
-    // if(type){
-    //   alert(message)
-    // }
-
-    //    if (!allAffiliates) {
-    dispatch(getAllAffiliates());
-    // }
-    // if (route !== "") {
-    //   removeItem("userType");
-    //   navigate(`/${route}`);
-    // }
-
+    dispatch(getAllAffiliates(0, 10));
     dispatch(getAllPlans());
-  }, [dispatch]);
+  }, []);
 
   return (
     <div>
-      {/* <button title="Agregar Afiliado" onClick={() => setShowModalAdd(true)}>
-        Agregar Afiliado
-      </button> */}
+      <ABMPaged />
 
       <ABMAffiliatesList
         allAffiliates={allAffiliates}
         setShowModalUpdate={setShowModalUpdate}
         setShowModalUpDown={setShowModalUpDown}
         setShowModalAdd={setShowModalAdd}
-        
       />
 
       {showModalAdd && (
@@ -75,6 +83,31 @@ const ABMAffiliates = () => {
           setShowModalUpDown={setShowModalUpDown}
         />
       )}
+
+      {activeAlert &&
+        alertSweet(
+          "success",
+          alertMessage,
+          false,
+          false,
+          setActiveAlert,
+          !activeAlert,
+          () => {},
+          false,
+          2500
+        )}
+      {errorAlert &&
+        alertSweet(
+          "error",
+          alertMessage,
+          false,
+          false,
+          setErrorAlert,
+          !errorAlert,
+          () => {},
+          false,
+          2500
+        )}
     </div>
   );
 };

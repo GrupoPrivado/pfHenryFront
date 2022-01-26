@@ -35,6 +35,7 @@ export default function NavBarDashboard() {
         { name: 'Recetas', href: '/afiliado/autorizaciones', current: false },
         { name: 'Historial', href: '/afiliado/historial', current: false },
         { name: 'Cartilla', href: '/afiliado/prestadores', current: false },
+        { name: 'Farmacias', href: '/afiliado/farmacias', current: false },
     ])
     const [profile, setProfile] = useState([
         { name: "Perfil", href: "/afiliado/perfil", current: false }
@@ -164,9 +165,9 @@ export default function NavBarDashboard() {
 
                             <Disclosure.Panel className="md:hidden">
                                 <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                                    {navigation.map((item) => (
+                                    {navigation.map((item, index) => (
                                         <Disclosure.Button
-                                            key={item.name}
+                                            key={index}
                                             as="a"
                                             href={item.href}
                                             className={classNames(
@@ -200,9 +201,9 @@ export default function NavBarDashboard() {
                                     </div>
                                 </div>
                                 <div className="px-2 mt-3 space-y-1">
-                                    {profileNavigation.map((item) => (
+                                    {profileNavigation.map((item, index) => (
                                         <Disclosure.Button
-                                            key={profileNavigation.name}
+                                            key={index}
                                             as="a"
                                             href={profileNavigation.href}
                                             onClick={() => { navigate(profileNavigation.href) }}

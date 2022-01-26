@@ -5,16 +5,22 @@ import { Link } from "react-router-dom";
 import Credencial from '../Credencial/Credencial';
 import { getGroup } from '../../actions/actionGroup';
 import  logo  from '../../assets/logo_white_large.png'
+import { getAfiliate } from '../../actions/actionAuth';
 
 export default function FamilyGroupDetail() {
     const { group } = useSelector((state) => state.grupos);
     const { user, route } = useSelector(state => state.auth)
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(getGroup(user.grupFamID))
+        if(!user.data){
+            dispatch(getAfiliate())
+        }
+        if(user.grupFamID){
+            dispatch(getGroup(user.grupFamID))
 
-    }, [dispatch,user.grupFamID])
-    console.log("group: ", group)
+        }
+
+    }, [dispatch,user.grupFamID, user.data])
 
     const [isActive, setActive] = useState(false);
 
@@ -24,15 +30,13 @@ export default function FamilyGroupDetail() {
 
     return (
         <div>
-            <div className="flex items-center justify-center w-full min-h-screen bg-cover contenair" style={{ backgroundImage: `url(${Logo})` }}>
+            <div className="flex flex-col w-full min-h-screen bg-cover contenair" style={{ backgroundImage: `url(${Logo})` }}>
+                <h3 className='self-start mt-3 ml-3 text-4xl font-bold text-white'>Grupo Familiar</h3>
                 {/* card */}
-                <div className="flex flex-col items-center justify-center w-1/2 p-5 bg-white bg-opacity-40 rounded-xl backdrop-filter backdrop-blur-lg">
-                    <div className="flex justify-between font-semibold header-card">
-                        <p className='text-4xl font-semibold text-white'>Grupo Familiar</p>
-                    </div>
+                <div className="flex flex-wrap items-center w-full p-5 justify-evenly ">
                     {/* end header */}
                     {group && group.map((member) => (
-                        <div className="relative inline-block h-full overflow-hidden align-middle transition-all transform border-t border-l border-solid shadow-xl bg-gradient-to-b from-white-rgba to-white-rgba2 rounded-3xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full border-t-gray-200 border-l-gray-200">
+                        <div key={member._id} className="relative inline-block h-full overflow-hidden align-middle transition-all transform border-t border-l border-solid shadow-xl bg-gradient-to-b from-white-rgba to-white-rgba2 rounded-3xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full border-t-gray-200 border-l-gray-200">
                             <div className="px-4 pt-5 pb-5 sm:p-6">
                                 <div className="sm:flex backdrop-filter ">
                                     <div className="flex flex-col mt-6 sm:mt-0 sm:ml-4 justify-evenly">
