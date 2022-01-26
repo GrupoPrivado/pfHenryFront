@@ -19,11 +19,14 @@ const PharmaciesPage = () => {
     providers,
     pharmacies,
     provinces,
+    limitPaged,
+    isLoading
   } = useSelector((state) => state.providers);
-
+  
   const [filter, setfilter] = useState({
     provinciaID: "",
     ciudadID: "",
+    skip: 0
   });
   useEffect(() => {
     dispatch(getAllProvinces());
@@ -31,14 +34,15 @@ const PharmaciesPage = () => {
 
   useEffect(() => {
     //dispatch(getAllCities(filter.provinciaID));
-    dispatch(getAllPharmacies(filter.provinciaID, filter.ciudadID));
-  }, [filter.ciudadID, filter.provinciaID]);
+    dispatch(getAllPharmacies(filter.provinciaID, filter.ciudadID, filter.skip));
+  }, [filter.ciudadID, filter.provinciaID, filter.skip]);
 
 
   const handleSelectCity = (e) => {
 
     const newData = {
       ...filter,
+      skip: 0,
       [e.target.name]: e.target.value,
     };
 
@@ -52,6 +56,7 @@ const PharmaciesPage = () => {
     const newFilters = {
       ciudadID: "",
       provinciaID: e.target.value,
+      skip: 0
     };
     if (newProvince !== '') {
       dispatch(getAllCities(newFilters.provinciaID));
@@ -59,6 +64,25 @@ const PharmaciesPage = () => {
       dispatch(deleteCities())
     }
     setfilter(newFilters);
+  };
+
+  const handleNextPage = () => {
+    if(filter.skip < limitPaged){
+      setfilter({
+        ...filter,
+        skip: filter.skip + 10
+      });
+    }
+  };
+
+  const handlePrevPage = () => {
+    if(filter.skip >= 10)  {
+      setfilter({
+        ...filter,
+        skip: filter.skip - 10
+      });  
+
+    }
   };
   return (
     <div className="flex flex-col w-full bg-cover start min-h-70vh contenair" style={{ backgroundImage: `url(${Logo})` }}>
@@ -101,7 +125,11 @@ const PharmaciesPage = () => {
           </select>
         </div>
       </div>
-      <Pharmacies pharmacies={pharmacies} />
+      <Pharmacies pharmacies={pharmacies} isLoading={isLoading} />
+      <div>
+        <button className="p-4" onClick={handlePrevPage}>Anterior</button>
+        <button className="p-4" onClick={handleNextPage}>Siguiente</button>
+      </div>
     </div>
   );
 };

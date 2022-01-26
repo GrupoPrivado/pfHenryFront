@@ -17,18 +17,21 @@ export function getAllProviders(provinciaID,ciudadID, especID) {
 }
 
 
-export const getAllPharmacies = (provinciaID, ciudadID) => {
+export const getAllPharmacies = (provinciaID, ciudadID, skip) => {
   const token = getItem('userToken')
   return async (dispatch) => {
-    const {data} = await axios.get(`${api}/afiliados/farmacias?ciudadID=${ciudadID}&provinciaID=${provinciaID}`, {
+    dispatch({type: GET_ALL_PHARMACIES, payload: [], loading: true })
+
+    const {data} = await axios.get(`${api}/afiliados/farmacias?ciudadID=${ciudadID}&provinciaID=${provinciaID}&skip=${skip}`, {
       headers: {
         "x-access-token": token
       }
     });
-
     return dispatch({
       type: GET_ALL_PHARMACIES,
-      payload: data.message
+      payload: data.message,
+      limitPaged: data.limitPaged,
+      loading: false
     })
 
   } 
