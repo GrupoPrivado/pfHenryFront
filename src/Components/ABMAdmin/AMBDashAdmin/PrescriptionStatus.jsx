@@ -1,66 +1,60 @@
 import React from 'react';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-} from 'chart.js';
-import { Bar } from 'react-chartjs-2';
+import { useSelector } from 'react-redux';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Doughnut } from 'react-chartjs-2';
+import { SpinnerCircular } from "spinners-react";
+
+ChartJS.register(ArcElement, Tooltip, Legend);
+ 
 
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
 
-export const options = {
-  plugins: {
-    title: {
-      display: true,
-      text: 'Status de recetas',
-    },
-  },
-  responsive: true,
-  scales: {
-    x: {
-      stacked: true,
-    },
-    y: {
-      stacked: true,
-    },
-  },
-};
 
-const labels = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: 'Rechazadas',
-      data:[3,0,10,2,4,20,9,12,1,4,0,2],
-      backgroundColor: 'rgb(255, 99, 132)',
-    },
-    {
-      label: 'Pendientes',
-      data: [1,3,0,0,2,3,9,1,0,4,0,7],
-      backgroundColor: 'rgb(253, 249, 4 )',
-    },
-    {
-      label: 'Aprobadas',
-      data: [33,44,10,42,44,60,21,69,11,64,70,52] ,
-      backgroundColor: 'rgb(53, 162, 235)',
-    },
-  ],
-};
+
 
 export function PrescriptionStatus() {
-  return <Bar options={options} data={data} />;
+  const { presStat, isLoadingPresStat } = useSelector((state) => state.ABMAdmin);
+
+   const data = {
+    labels: ['autorizadas','rechazadas','pendientes'],
+    datasets: [
+      {
+        label: '# of Votes',
+        data: [presStat.autorizada , presStat.rechazada ,presStat.pendiente],
+        backgroundColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          ,
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          
+        ],
+        borderWidth: 1,
+      },
+    ],
+    
+  };
+  const options = {
+    responsive: true,
+    maintainAspectRatio :false,
+    
+    plugins: {
+      
+      title: {
+        display: true,
+        text: "Status recetas",
+      },
+    },
+    
+  };
+  
+  
+  return isLoadingPresStat? (<SpinnerCircular style={{ margin: 'auto', paddingTop: '20px' }}/>) : (<Doughnut data={data} options={options}/>);
 }
+
+  
