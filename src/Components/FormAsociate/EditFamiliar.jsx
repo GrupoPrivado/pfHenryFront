@@ -5,13 +5,13 @@ import { editFamiliar } from "../../actions/actionRegister";
 import { validate } from "../../utils/constantes";
 import InputData from "../InputData";
 
-const EditFamiliar = ({ provinces, cities, setEditModal }) => {
-  const dispatch = useDispatch()
-  const [errores, setErrores] = useState({})
+const EditFamiliar = ({ provinces, cities, setEditModal, isLoadingCities }) => {
+  const dispatch = useDispatch();
+  const [errores, setErrores] = useState({});
 
-  const { member } = useSelector(state => state.associate)
+  const { member } = useSelector((state) => state.associate);
 
-  const [input, setInput] = useState(member)
+  const [input, setInput] = useState(member);
 
   const handleChange = (e) => {
     const newInp = {
@@ -19,7 +19,7 @@ const EditFamiliar = ({ provinces, cities, setEditModal }) => {
       [e.target.name]: e.target.value,
     };
     setInput(newInp);
-  }
+  };
 
   const handleChangeProvince = (e) => {
     const newData = {
@@ -32,16 +32,13 @@ const EditFamiliar = ({ provinces, cities, setEditModal }) => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    const validateError = validate(input)
-    setErrores(validateError)
+    const validateError = validate(input);
+    setErrores(validateError);
     if (Object.entries(validateError).length <= 0) {
-      dispatch(editFamiliar(input))
+      dispatch(editFamiliar(input));
       setEditModal(false);
     }
-
   }
-
-
 
   return (
     <div className="flex items-center justify-center w-full px-4 py-6 sm:px-6 lg:px-8">
@@ -70,7 +67,7 @@ const EditFamiliar = ({ provinces, cities, setEditModal }) => {
                   value={input.nombre}
                   onChange={handleChange}
                   errores={errores.nombre}
-                  />
+                />
 
                 <InputData
                   name={"apellido"}
@@ -175,9 +172,15 @@ const EditFamiliar = ({ provinces, cities, setEditModal }) => {
                     onChange={handleChange}
                     placeholder="Seleccionar localidad"
                   >
-                    <option disabled value="">
-                      Seleccionar localidad
-                    </option>
+                    {isLoadingCities ? (
+                      <option  value="">
+                        Cargando...
+                      </option>
+                    ) : (
+                      <option disabled value="">
+                        Seleccionar localidad
+                      </option>
+                    )}
                     {cities &&
                       cities.map((c) => (
                         <option key={c._id} value={c._id}>

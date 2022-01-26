@@ -22,6 +22,7 @@ export default function FormAddAsociateGroup({
   cities,
   modal,
   setModal,
+  isLoadingCities
 }) {
   const randomNumber = (min, max) => Math.floor(Math.random() * (max - min) + min);
 
@@ -226,7 +227,10 @@ export default function FormAddAsociateGroup({
                     onChange={handleChange}
                     placeholder="Seleccionar localidad"
                   >
-                    <option disabled value=''>Seleccionar localidad</option>
+                      {
+                        isLoadingCities ? <option disabled value=''>Cargando...</option> : <option disabled value=''>Seleccionar localidad</option>
+                      }
+                    
                     {
                       cities && cities.map(c => (
                         <option key={c._id} value={c._id}>{c.localidad}</option>

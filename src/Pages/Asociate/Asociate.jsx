@@ -65,9 +65,10 @@ useEffect(() => {
             cities={cities}
             modal={modal}
             setModal={setModal}
+            isLoadingCities={isLoadingCities}
           />
         )}
-      {editModal && <EditFamiliar provinces={provinces} cities={cities} setEditModal={setEditModal} /> }
+      {editModal && <EditFamiliar provinces={provinces} cities={cities} setEditModal={setEditModal} isLoadingCities={isLoadingCities} /> }
 
       {activeAlert && alertSweet('success', alertMessage, false, false, setActiveAlert, !activeAlert , () => {}, false, 2500)}
       {errorAlert && alertSweet('error', alertMessage, false, false, setErrorAlert, !errorAlert , () => {},  false, 2800)}
