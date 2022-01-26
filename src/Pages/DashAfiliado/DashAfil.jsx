@@ -78,7 +78,7 @@ function DashAfil() {
         }}
       />
       <div
-        className="flex flex-row items-center justify-center min-h-screen bg-center bg-no-repeat bg-cover bg-app"
+        className="flex flex-row items-center justify-center min-h-[70vh] bg-center bg-no-repeat bg-cover bg-app"
         style={{ backgroundImage: `url(${Logo})` }}
       >
         <main className="flex flex-col w-full max-w-5xl m-4 overflow-hidden bg-white shadow-lg lg:flex-row backdrop-filter backdrop-blur-lg bg-opacity-20 rounded-xl lg:m-6">
