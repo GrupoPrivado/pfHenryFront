@@ -3,21 +3,23 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import UpdatePrescription from "./UpdatePrescription";
-import ABMPrescriptionsList from "./ABMPrescriptionsList";
+import { addAllFactura, getAllAffiliatesTitular, getAllPlans } from "../../../actions/actionAMBAdmin";
+
 import { alertActions } from "../../../actions/actionAlerts";
 import { alertSweet } from "../../Alerts/alertSweet";
+import ABMPaged from "../ABMPaged";
+import GetAfifilDNI from "./ABMAffilSearch";
+import ABMAffilFactList from "./ABMAffilList";
+import { enableBtnProf } from "../../../utils/ABMStyles";
 
-const ABMPrescriptions = () => {
+const ABMAffilFacturas = () => {
   const dispatch = useDispatch();
 
   const { type, message } = useSelector((state) => state.alerts);
 
-  let [showModalUpdate, setShowModalUpdate] = useState(false);
-
+  const [activeAlert, setActiveAlert] = useState(false);
   const [errorAlert, setErrorAlert] = useState(false);
 
-  const [activeAlert, setActiveAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
 
   useEffect(() => {
@@ -33,14 +35,35 @@ const ABMPrescriptions = () => {
       setErrorAlert(true);
       setAlertMessage(message);
     }
+
   }, [message, type, activeAlert, errorAlert]);
 
+  useEffect(() => {
+    dispatch(getAllAffiliatesTitular(0, 10));
+    dispatch(getAllPlans());
+  }, []);
+
+  const createAllFacturas = () =>{
+    dispatch(addAllFactura())
+  }
+
   return (
-    <div className="min-h-[81vh]">
-      <ABMPrescriptionsList setShowModalUpdate={setShowModalUpdate} />
-      {showModalUpdate && (
-        <UpdatePrescription setShowModalUpdate={setShowModalUpdate} />
-      )}
+    <div>
+      <GetAfifilDNI />
+
+      <button
+          className={
+          enableBtnProf 
+          }
+          
+          onClick={createAllFacturas}
+        >
+          Generar Facturas
+        </button>
+
+      <ABMAffilFactList
+      />
+      <ABMPaged getFunction={getAllAffiliatesTitular} />
 
       {activeAlert &&
         alertSweet(
@@ -70,4 +93,4 @@ const ABMPrescriptions = () => {
   );
 };
 
-export default ABMPrescriptions;
+export default ABMAffilFacturas;

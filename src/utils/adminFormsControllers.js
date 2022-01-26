@@ -220,7 +220,7 @@ export const validateAffiliate = (input) => {
   ) {
     errores.correoElectronico = "Ingrese un mail válido";
   }
-  if (input.DNI.length < 8) {
+  if (input.DNI.length < 8 || input.DNI.length > 9) {
     errores.DNI = "DNI mínimo 8 caracteres";
   }
   if (input.telefono.length < 8 || input.telefono.length > 11) {
@@ -272,7 +272,7 @@ export const validateAdherent = (input) => {
     errores.apellido = "Escriba un apellido válido";
   }
 
-  if (input.DNI.length < 8) {
+  if (input.DNI.length < 8 || input.DNI.length > 9) {
     errores.DNI = "DNI mínimo 8 caracteres";
   }
 

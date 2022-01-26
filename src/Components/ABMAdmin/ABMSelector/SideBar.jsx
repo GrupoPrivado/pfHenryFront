@@ -248,6 +248,31 @@ export default function SideBar({ showSidebar, setShowSidebar }) {
                       </div>
                     </li>
                   </Link>
+                  <Link to="/administrador/facturas">
+                    <li onClick={() => setShowSidebar(!showSidebar)}>
+                      <div className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6">
+                        <span className="inline-flex justify-center items-center ml-4">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-5 w-5"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                            />
+                          </svg>
+                        </span>
+                        <span className="ml-2 text-sm tracking-wide truncate">
+                          Facturas
+                        </span>
+                      </div>
+                    </li>
+                  </Link>
 
                   {/* <li>
           <a href="#" className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6">

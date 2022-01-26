@@ -62,10 +62,10 @@ const UpdatePharmacy = ({ setShowModalUpdate }) => {
 
     if (Object.entries(validateError).length <= 0) {
       dispatch(updatePharmacy(updatePharmacyData));
-      setShowModalUpdate(false);
       //setUpdatePharmacyData(updatePharmacyDataStruct);
       //setErrors(true);
       dispatch(resetDataUpdate());
+      setShowModalUpdate(false);
     }
   };
 

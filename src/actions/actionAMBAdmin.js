@@ -241,6 +241,35 @@ export function getAllAffiliates(skip, limit) {
   };
 }
 
+export function getAllAffiliatesTitular(skip, limit, DNI) {
+  return async (dispatch) => {
+    try {
+      console.log(skip, limit, DNI)
+      const token = getItem("userToken");
+      const { data } = await axios.get(
+        `${api}/admin/allAffiliatesTitular?skip=${skip}&limit=${limit}&DNI=${DNI}`,
+        {
+          headers: {
+            "x-access-token": token,
+          },
+        }
+      );
+      if (data.success) {
+        return dispatch({
+          type: "GET_AFFILIATES_TITULAR",
+          payload: data.message,
+          limitPaged: data.limitPaged,
+        });
+      } else {
+        return dispatch({ type: "ERRORS", payload: data });
+      }
+    } catch (error) {
+      console.error(error);
+      return { error: error.message };
+    }
+  };
+}
+
 export function addAffiliate(payload) {
   return async (dispatch) => {
     try {
@@ -295,6 +324,35 @@ export const getAffiliateData = (payload) => {
     }
   };
 };
+
+export const getAffiliateyDNI = (DNI) => {
+  return async (dispatch) => {
+    try {
+      const token = getItem("userToken");
+      const { data } = await axios.get(
+        `${api}/admin/affiliateDNI?DNI=${DNI}`,
+        {
+          headers: {
+            "x-access-token": token,
+          },
+        }
+      );
+
+      if (data.success) {
+        return dispatch({
+          type: "AFFILIATE_DNI",
+          payload: data.message,
+        });
+      } else {
+        return dispatch({ type: "ERRORS", payload: data });
+      }
+    } catch (error) {
+      console.error(error);
+      return { error: error.message };
+    }
+  };
+};
+
 
 export function updateAffiliateAct(payload) {
   return async (dispatch) => {
@@ -384,13 +442,13 @@ export function getAllPlans() {
 
 /************* Actions Para ABM Farmacias***********/
 
-export function getAllPharmacies(skip, limit, provinciaID, ciudadID) {
+export function getAllPharmacies(skip, limit, provinciaID, ciudadID, activo) {
   return async (dispatch) => {
     try {
-      console.log(skip, limit, ciudadID, provinciaID);
+      console.log(skip, limit, ciudadID, provinciaID, activo);
       const token = getItem("userToken");
       const { data } = await axios.get(
-        `${api}/admin/farmacias?ciudadID=${ciudadID}&provinciaID=${provinciaID}&skip=${skip}&limit=${limit}`,
+        `${api}/admin/farmacias?ciudadID=${ciudadID}&provinciaID=${provinciaID}&skip=${skip}&limit=${limit}&activo=${activo}`,
         {
           headers: {
             "x-access-token": token,
@@ -411,10 +469,6 @@ export function getAllPharmacies(skip, limit, provinciaID, ciudadID) {
       return { error: error.message };
     }
   };
-}
-
-export function getFilterPharmacy(payload) {
-  return { type: "GET_PHARMACIES", payload: payload };
 }
 
 export function addPharmacy(payload) {
@@ -854,12 +908,12 @@ export function getPrescriptionById(payload, skip, limit) {
   };
 }
 
-export function getPrescriptionsByDNI(payload, skip, limit) {
+export function getPrescriptionsByDNI(payload) {
   return async (dispatch) => {
     try {
       const token = getItem("userToken");
       const { data } = await axios.get(
-        `${api}/admin/prescriptionByDNI/${payload}&skip=${skip}&limit=${limit}`,
+        `${api}/admin/prescriptionByDNI/${payload}`,
         {
           headers: {
             "x-access-token": token,
@@ -1107,3 +1161,59 @@ export const deleteCities = () => (dispatch) => {
 };
 
 /*************FIN Actions Comunes Para ABM***********/
+
+
+export function addFactura(payload) {
+  return async (dispatch) => {
+    try {
+      const token = getItem("userToken");
+      const { data } = await axios.post(`${api}/facturas`, payload, {
+        headers: {
+          "x-access-token": token,
+        },
+      });
+      if (data.success) {
+        dispatch({
+          type: alertConstants.SUCCESS,
+          message: "Factura realizada con éxito",
+        });
+      } else {
+        dispatch({
+          type: alertConstants.ERROR,
+          message: "Error al realizar la factura",
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      return { error: error.message };
+    }
+  };
+}
+
+export function addAllFactura() {
+  return async (dispatch) => {
+    try {
+      const token = getItem("userToken");
+      console.log(token)
+      const { data } = await axios.post(`${api}/facturas/allFacturas`, "",{
+        headers: {
+          "x-access-token": token,
+        },
+      });
+      if (data.success) {
+        dispatch({
+          type: alertConstants.SUCCESS,
+          message: "Facturas realizadas con éxito",
+        });
+      } else {
+        dispatch({
+          type: alertConstants.ERROR,
+          message: "Error al realizar las facturas",
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      return { error: error.message };
+    }
+  };
+}
