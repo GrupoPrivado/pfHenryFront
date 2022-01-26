@@ -854,12 +854,12 @@ export function getPrescriptionById(payload, skip, limit) {
   };
 }
 
-export function getPrescriptionsByDNI(payload, skip, limit) {
+export function getPrescriptionsByDNI(payload) {
   return async (dispatch) => {
     try {
       const token = getItem("userToken");
       const { data } = await axios.get(
-        `${api}/admin/prescriptionByDNI/${payload}&skip=${skip}&limit=${limit}`,
+        `${api}/admin/prescriptionByDNI/${payload}`,
         {
           headers: {
             "x-access-token": token,

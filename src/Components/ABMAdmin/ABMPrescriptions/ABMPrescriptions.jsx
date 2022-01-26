@@ -38,7 +38,6 @@ const ABMPrescriptions = () => {
   return (
     <div className="min-h-[81vh]">
       <ABMPrescriptionsList setShowModalUpdate={setShowModalUpdate} />
-      {/* <ABMPaged getFunction={undefined}/> */}
       {showModalUpdate && (
         <UpdatePrescription setShowModalUpdate={setShowModalUpdate} />
       )}
