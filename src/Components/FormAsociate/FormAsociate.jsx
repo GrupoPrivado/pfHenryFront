@@ -8,7 +8,7 @@ import {
 import { getAllCities } from "../../actions/actionProviders";
 import date from "./../../utils/date.js";
 import { validate } from "../../utils/constantes";
-import { TrashIcon, PencilIcon } from '@heroicons/react/outline'
+import { TrashIcon, PencilIcon } from "@heroicons/react/outline";
 
 export default function FormAsociate({
   setEditModal,
@@ -16,12 +16,13 @@ export default function FormAsociate({
   cities,
   modal,
   setModal,
+  isLoadingCities,
 }) {
   const dispatch = useDispatch();
   const { planes } = useSelector((state) => state.planes);
   const { familiarData } = useSelector((state) => state.associate);
   const [errores, setErrores] = useState({});
-  
+
   const [input, setInput] = useState({
     nombre: "",
     apellido: "",
@@ -34,6 +35,7 @@ export default function FormAsociate({
     direccion: "",
     planID: "",
     password: "",
+    repeatPassword: "",
     parentesco: "titular",
   });
 
@@ -67,7 +69,7 @@ export default function FormAsociate({
   }
 
   const handleEdit = (e) => {
-    console.log(e.target.value, 'value edit')
+    console.log(e.target.value, "value edit");
     dispatch(findFamiliar(e.target.value));
     setEditModal(true);
   };
@@ -267,9 +269,16 @@ export default function FormAsociate({
                 onChange={handleChange}
                 placeholder="Seleccionar localidad"
               >
-                <option disabled value="">
-                  Seleccionar localidad
-                </option>
+                {isLoadingCities ? (
+                  <option disabled value="">
+                    Cargando...
+                  </option>
+                ) : (
+                  <option disabled value="">
+                    Seleccionar localidad
+                  </option>
+                )}
+
                 {cities &&
                   cities.map((c) => (
                     <option key={c._id} value={c._id}>
@@ -329,6 +338,25 @@ export default function FormAsociate({
                 <p className="absolute text-red-700">{errores.password}</p>
               )}
             </div>
+
+            <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
+              <label htmlFor="repeatPassword" className="text-lg font-semibold">
+                Repetir contraseña
+              </label>
+              <input
+                required
+                className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                type="password"
+                name="repeatPassword"
+                onChange={(e) => handleChange(e)}
+                placeholder="Repetir contraseña"
+              />
+              {errores.repeatPassword && (
+                <p className="absolute text-red-700">
+                  {errores.repeatPassword}
+                </p>
+              )}
+            </div>
           </div>
         </form>
 
@@ -364,7 +392,6 @@ export default function FormAsociate({
                       onClick={handleEdit}
                     >
                       <PencilIcon className="w-5 h-5 text-white pointer-events-none" />
-
                     </button>
                     <button
                       value={e.idAf}

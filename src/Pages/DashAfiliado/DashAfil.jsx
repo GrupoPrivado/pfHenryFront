@@ -24,6 +24,7 @@ function DashAfil() {
   const { user, route } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  
 
   const [isActive, setActive] = useState({
     credencial: false,
@@ -34,11 +35,14 @@ function DashAfil() {
 
   useEffect(() => {
     dispatch(getAfiliate());
-    if (route !== "") {
-      removeItem("userType");
-      navigate(`/${route}`);
-    }
-  }, [route, navigate]);
+    // if (route === "login") {
+    //   removeItem("userType");
+    //   navigate(`/${route}`);
+    // }
+    // if (route !== "") {
+    //   navigate(`/${route}`);
+    // }
+  }, []);
 
   useEffect(() => {
     if (user.grupFamID) dispatch(getGroup(user.grupFamID));

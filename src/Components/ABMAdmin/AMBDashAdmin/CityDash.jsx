@@ -11,6 +11,8 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
+import { SpinnerCircular } from "spinners-react";
+import { useSelector } from "react-redux";
 
 
 ChartJS.register(
@@ -35,6 +37,7 @@ const labels = [
 ];
 
 export default function CityDash() {
+
   const { afilProv, isLoadingAfilProv } = useSelector((state) => state.ABMAdmin);
 
    const options = {
@@ -53,6 +56,9 @@ export default function CityDash() {
   };
   const data = {
     
+
+  
+
       datasets: [
         {
           label: "Asociados por provincia",
@@ -66,9 +72,11 @@ export default function CityDash() {
   
 
  return(
+
      
          isLoadingAfilProv? (<SpinnerCircular style={{ margin: 'auto', paddingTop: '20px' }}/>) : (<Bar data={data} options={options}/>)
      
+
  )
 }
 

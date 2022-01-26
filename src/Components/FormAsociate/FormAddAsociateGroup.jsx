@@ -22,6 +22,7 @@ export default function FormAddAsociateGroup({
   cities,
   modal,
   setModal,
+  isLoadingCities
 }) {
   const randomNumber = (min, max) => Math.floor(Math.random() * (max - min) + min);
 
@@ -40,7 +41,7 @@ export default function FormAddAsociateGroup({
     ciudadID: "",
     provinciaID: "",
     direccion: "",
-    planID: "",
+    //planID: "",
     parentesco: "",
   });
 
@@ -59,7 +60,7 @@ export default function FormAddAsociateGroup({
     setErrores(validateError)
     if (Object.entries(validateError).length <= 0) {
       dispatch(addFamiliar(input))
-      setModal(!modal);
+      setModal(false);
     }
   }
 
@@ -226,7 +227,10 @@ export default function FormAddAsociateGroup({
                     onChange={handleChange}
                     placeholder="Seleccionar localidad"
                   >
-                    <option disabled value=''>Seleccionar localidad</option>
+                      {
+                        isLoadingCities ? <option disabled value=''>Cargando...</option> : <option disabled value=''>Seleccionar localidad</option>
+                      }
+                    
                     {
                       cities && cities.map(c => (
                         <option key={c._id} value={c._id}>{c.localidad}</option>
