@@ -24,7 +24,6 @@ function FormLogin({ setForm, activeForm, handleChangeAlerts }) {
   const dispatch = useDispatch()
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(deleteRoute());
     const result = await getUserToken(input);
     if (result.error) {
       handleChangeAlerts("error", result.error, true);
@@ -33,6 +32,7 @@ function FormLogin({ setForm, activeForm, handleChangeAlerts }) {
       }, 5000);
       return;
     } else {
+      dispatch(deleteRoute());
       handleChangeAlerts("success", "Iniciando sesión...", true);
       setTimeout(() => {
         navigate(`/${result.url}`);

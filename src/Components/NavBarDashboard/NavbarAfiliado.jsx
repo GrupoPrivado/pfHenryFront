@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import Logo from "../../assets/logo.svg";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { logout } from "../../utils/authUtils";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { profilePhoto } from "../../utils/constantes";
 import styles from './NavbarAfiliado.module.css'
-import { getItem } from "../../actions/actionAuth";
+import { getItem, resetAuth } from "../../actions/actionAuth";
+import { resetGroup } from "../../actions/actionGroup";
 
 const NavbarAfiliado = () => {
   let activeClassName =
@@ -134,6 +135,7 @@ export default NavbarAfiliado;
 
 export const MenuList = ({setIsOpen}) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch()
   return (
     <div className="absolute bg-white rounded-md shadow-md w-48 h-26 z-50 right-0">
       <ul><Link to={"perfil"} onClick={() => setIsOpen(false)} >
@@ -144,6 +146,8 @@ export const MenuList = ({setIsOpen}) => {
           className="p-2 text-center rounded-bl-md rounded-br-md rounded-tl-md hover:bg-gray-200 cursor-pointer"
           onClick={() => {
             logout();
+            dispatch(resetAuth())
+            dispatch(resetGroup())
             navigate("/");
           }}
         >

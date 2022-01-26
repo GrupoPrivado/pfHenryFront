@@ -176,3 +176,7 @@ export const putProfilePhoto = (payload) => {
     }
   };
 };
+
+export const resetAuth = () => dispatch => {
+  return dispatch({type: 'RESET_AUTH'})
+}

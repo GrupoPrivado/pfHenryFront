@@ -55,12 +55,12 @@ export default function reducerAuth(state = inicialState, {type, payload, loadin
         ...state,
         error: payload
       }
+
+    case 'RESET_AUTH': 
+    return {
+      ...inicialState
+    }
     
-    // case GET_RECIPES:
-    //   return {
-    //     ...state,
-    //     recipes: payload
-    //   }
 
     default:
       return state;
