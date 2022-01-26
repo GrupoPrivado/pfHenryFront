@@ -8,10 +8,9 @@ import {
 } from "../../actions/actionProviders";
 import Pharmacies from "./Pharmacies";
 import Logo from "./../../assets/bg2.jpg"
+import { convertClassName } from "../../utils/constantes";
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
+
 
 const PharmaciesPage = () => {
   const dispatch = useDispatch();
@@ -40,7 +39,6 @@ const PharmaciesPage = () => {
     dispatch(getAllPharmacies(filter.provinciaID, filter.ciudadID, filter.skip));
   }, [filter.ciudadID, filter.provinciaID, filter.skip]);
 
-  console.log('page limit', limitPaged)
 
   const handleSelectCity = (e) => {
 
@@ -85,7 +83,6 @@ const PharmaciesPage = () => {
         ...filter,
         skip: filter.skip - 20
       });  
-
     }
   };
   return (
@@ -130,8 +127,8 @@ const PharmaciesPage = () => {
         </div>
       </div>
       <div className="flex justify-end w-90vw mx-auto">
-        <button className={classNames(filter.skip === 0 ? 'hidden' : '',"p-4 text-white font-bold hover:bg-[rgba(38,52,155,1)] hover:rounded-md")   } onClick={handlePrevPage}> {'<< Anterior'}</button>
-        <button className={classNames(filter.skip + 20 >= limitPaged ? 'hidden' : '',"p-4 text-white font-bold hover:bg-[rgba(38,52,155,1)] hover:rounded-md")   } onClick={handleNextPage}>{'Siguiente >>'}</button>
+        <button className={convertClassName(filter.skip === 0 ? 'hidden' : '',"p-4 text-white font-bold hover:bg-[rgba(38,52,155,1)] hover:rounded-md")   } onClick={handlePrevPage}> {'<< Anterior'}</button>
+        <button className={convertClassName(filter.skip + 20 >= limitPaged ? 'hidden' : '',"p-4 text-white font-bold hover:bg-[rgba(38,52,155,1)] hover:rounded-md")   } onClick={handleNextPage}>{'Siguiente >>'}</button>
       </div>
       <Pharmacies pharmacies={pharmacies} isLoading={isLoading} />
 

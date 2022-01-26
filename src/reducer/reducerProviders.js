@@ -20,6 +20,8 @@ export default function reducerPrestadores(state = inicialState, action) {
         ...state,
         providers: action.payload,
         allProviders: action.payload,
+        limitPaged: action.limitPaged,
+        isLoading: action.loading
       };
     case GET_ALL_PHARMACIES:
       return {

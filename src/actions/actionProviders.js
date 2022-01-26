@@ -5,13 +5,20 @@ import { getItem } from "./actionAuth";
 export const GET_ALL_PROVINCES = 'GET_ALL_PROVINCES'
 export const GET_ALL_PHARMACIES = 'GET_ALL_PHARMACIES'
 
-export function getAllProviders(provinciaID,ciudadID, especID) {
+export function getAllProviders(provinciaID,ciudadID, especID, skip) {
   return async function (dispatch) {
-    var json = await axios.get(`${api}/profesionales?ciudadID=${ciudadID}&provinciaID=${provinciaID}&especID=${especID}`);
+    dispatch({
+      type: "GET_ALL_PROVIDERS",
+      payload: [],
+      loading: true
+    })
+    const {data} = await axios.get(`${api}/profesionales?ciudadID=${ciudadID}&provinciaID=${provinciaID}&especID=${especID}&skip=${skip}`);
 
     return dispatch({
       type: "GET_ALL_PROVIDERS",
-      payload: json.data.message,
+      payload: data.message,
+      limitPaged: data.limitPaged,
+      loading: false
     });
   };
 }

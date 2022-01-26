@@ -16,6 +16,7 @@ import { User } from "heroicons-react";
 import { getAfiliate, getItem } from "../../actions/actionAuth";
 import Logo from "./../../assets/bg2.jpg"
 import CartillaMedica from "./CartillaMedica";
+import { convertClassName } from "../../utils/constantes";
 
 
 export default function CartPrest() {
@@ -24,13 +25,16 @@ export default function CartPrest() {
     cities,
     providers,
     provinces,
-    specialties
+    specialties,
+    limitPaged,
+    isLoading
   } = useSelector((state) => state.providers);
 
   const [filter, setfilter] = useState({
     provinciaID: "",
     ciudadID: "",
-    especID: ""
+    especID: "",
+    skip: 0
   });
 
   useEffect(() => {
@@ -39,13 +43,14 @@ export default function CartPrest() {
   }, [])
 
   useEffect(() => {
-    dispatch(getAllProviders(filter.provinciaID, filter.ciudadID, filter.especID));
-  }, [filter.ciudadID, filter.provinciaID, filter.especID]);
+    dispatch(getAllProviders(filter.provinciaID, filter.ciudadID, filter.especID, filter.skip));
+  }, [filter.ciudadID, filter.provinciaID, filter.especID, filter.skip]);
 
 
   const handleSelectCity = (e) => {
     const newData = {
       ...filter,
+      skip: 0,
       [e.target.name]: e.target.value,
     };
     setfilter(newData)
@@ -56,7 +61,7 @@ export default function CartPrest() {
     const newFilters = {
       ...filter,
       ciudadID: "",
-      //especID:'',
+      skip:0,
       provinciaID: e.target.value,
     };
     if (newProvince !== '') {
@@ -65,6 +70,26 @@ export default function CartPrest() {
       dispatch(deleteCities())
     }
     setfilter(newFilters);
+  };
+
+  const handleNextPage = () => {
+    console.log('entra')
+    console.log(filter.skip, limitPaged)
+    if(filter.skip < limitPaged){
+      setfilter({
+        ...filter,
+        skip: filter.skip + 20
+      });
+    }
+  };
+
+  const handlePrevPage = () => {
+    if(filter.skip >= 20)  {
+      setfilter({
+        ...filter,
+        skip: filter.skip - 20
+      });  
+    }
   };
 
   return (
@@ -77,7 +102,7 @@ export default function CartPrest() {
           name="provincia"
           value={filter.provinciaID}
           onChange={handleChangeProvince}
-          className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 bg-white border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10"
+          className="w-[400px] relative block px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 bg-white border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10"
         >
           <option value="">Todas</option>
           {provinces &&
@@ -92,7 +117,7 @@ export default function CartPrest() {
         <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
 
         <label className="text-lg font-semibold text-white">Seleccione una Ciudad:</label>
-        <select name="ciudadID" onChange={handleSelectCity} className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 bg-white border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10">
+        <select name="ciudadID" onChange={handleSelectCity} className="relative block w-[400px] px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 bg-white border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10">
           <option value="">Todas</option>
           {cities?.map((e) => (
             <option key={e._id} value={e._id}>
@@ -104,7 +129,7 @@ export default function CartPrest() {
         <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
 
         <label className="text-lg font-semibold text-white">Seleccione una Especialidad:</label>
-        <select name="especID" value={filter.especID} onChange={handleSelectCity} className="relative block w-full px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 bg-white border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10">
+        <select name="especID" value={filter.especID} onChange={handleSelectCity} className="relative block w-[400px] px-3 py-2 my-3 text-xl font-semibold text-gray-500 placeholder-gray-500 bg-white border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10">
           <option value="">Todas</option>
           {specialties?.map((e) => (
             <option key={e._id} value={e._id}>
@@ -114,7 +139,11 @@ export default function CartPrest() {
         </select>
         </div>
       </div>
-      <CartillaMedica providers={providers}/>
+      <div className="flex justify-end w-90vw mx-auto h-[56px]">
+        <button className={convertClassName(filter.skip === 0 ? 'hidden' : '',"p-4 text-white font-bold hover:bg-[rgba(38,52,155,1)] hover:rounded-md")   } onClick={handlePrevPage}> {'<< Anterior'}</button>
+        <button className={convertClassName(filter.skip + 20 >= limitPaged ? 'hidden' : '',"p-4 text-white font-bold hover:bg-[rgba(38,52,155,1)] hover:rounded-md")   } onClick={handleNextPage}>{'Siguiente >>'}</button>
+      </div>
+      <CartillaMedica providers={providers} isLoading={isLoading}/>
     </div>
   );
 }

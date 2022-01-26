@@ -1,12 +1,11 @@
 import React from "react";
 import { SpinnerCircular } from "spinners-react";
-import Logo from "./../../assets/bg2.jpg";
 
 const Pharmacies = ({ pharmacies, isLoading }) => {
   return (
     <div
       className="flex flex-col w-full bg-cover start min-h-70vh contenair mb-10"
-      style={{ backgroundImage: `url(${Logo})` }}
+      
     >
       <table className="mx-auto text-gray-900 bg-white shadow-none w-90vw bg-opacity-40 rounded-tl-xl rounded-tr-xl backdrop-filter backdrop-blur-lg">
         <thead>
@@ -18,7 +17,7 @@ const Pharmacies = ({ pharmacies, isLoading }) => {
               Teléfono
             </th>
             <th className="p-2 w-[280px] text-white bg-primary bg-opacity-40 backdrop-filter backdrop-blur-lg">
-              Mail
+              E-Mail
             </th>
             <th className="p-2 w-[320px] text-white bg-primary bg-opacity-40 backdrop-filter backdrop-blur-lg">
               Dirección
