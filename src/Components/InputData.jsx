@@ -1,9 +1,9 @@
 import React from 'react'
 
 
-const InputData = ({name, title, value, onChange, placeholder, type}) => {
-    return (
-      <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
+const InputData = ({ name, title, value, onChange, placeholder, type, errores }) => {
+  return (
+    <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
       <label htmlFor="DNI" className="text-lg font-semibold">{title}</label>
       <input
         required
@@ -14,9 +14,11 @@ const InputData = ({name, title, value, onChange, placeholder, type}) => {
         onChange={onChange}
         placeholder={placeholder}
       />
+      {errores && (
+        <p className="absolute text-red-700">{errores}</p>
+      )}
     </div>
-    )
-  }
+  )
+}
 
-  export default InputData
-  
+export default InputData

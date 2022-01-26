@@ -8,6 +8,9 @@ export const validate = (input) => {
     if (input.hasOwnProperty("password") && input.password.length <= 0 && input.password.length < 8) {
         errores.password = "La contraseña debe tener minimo 8 caracteres";
     }
+    if (input.hasOwnProperty("repeatPassword") && input.repeatPassword.length <= 0 && input.repeatPassword.length < 8 || input.repeatPassword !== input.password) {
+        errores.repeatPassword = "Las contraseñas no coinciden";
+    }
     if (
         !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(input.correoElectronico)
     ) {
@@ -17,7 +20,7 @@ export const validate = (input) => {
         errores.DNI = "El DNI debe contener 8 caracteres";
     }
     if (input.telefono.length < 8 || input.telefono.length > 13) {
-        errores.telefono = "Ingrese un teléfono válido (mínimo 8 dígitos)";
+        errores.telefono = "Mínimo 8 dígitos";
     }
     if (input.fechaNacimiento.length <= 0 || input.fechaNacimiento > date) {
         errores.fechaNacimiento = "La fecha debe ser menor al día de hoy";
@@ -98,8 +101,8 @@ export const validateContactDetails = (input) => {
     ) {
         errores.correoElectronico = "Ingrese un mail válido";
     }
-    if (input.telefono.length < 8 || input.telefono.length > 11) {
-        errores.telefono = "Ingrese un teléfono válido";
+    if (input.telefono.length < 8 || input.telefono.length > 13) {
+        errores.telefono = "Ingrese un teléfono válido (mínimo 8 dígitos)";
     }
     if (input.direccion.length < 4) {
         errores.direccion = "Escriba una dirección válida";

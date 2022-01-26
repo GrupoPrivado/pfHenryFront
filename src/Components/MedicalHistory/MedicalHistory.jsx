@@ -13,7 +13,7 @@ function MedicalHistory() {
 
   return (
     <Link
-      className="relative flex flex-col justify-center p-4 bg-white md:col-span-1 rounded-2xl backdrop-filter backdrop-blur-lg bg-opacity-20 undefined sm:row-span-1 sm:col-span-3 md:row-span-1"
+      className="relative flex flex-col justify-start p-4 bg-white md:col-span-1 rounded-2xl backdrop-filter backdrop-blur-lg bg-opacity-20 undefined sm:row-span-1 sm:col-span-3 md:row-span-1"
       to="/afiliado/historial"
     >
       <motion.div
@@ -26,7 +26,7 @@ function MedicalHistory() {
           <h3>Historial Médico</h3>
         </div>
         <div className="flex flex-col px-2.5 font-normal text-white w-full shrink-0">
-          {consultas ? (
+          {consultas.length > 0 ? (
             consultas.map((el) => (
               <li
                 key={el._id}
@@ -37,8 +37,8 @@ function MedicalHistory() {
               </li>
             ))
           ) : (
-            <div>
-              <h3 className="text-center">Sin Recetas</h3>
+            <div className="flex flex-col items-center h-full justify center">
+              <h3 className="text-center">Sin Consultas</h3>
             </div>
           )}
         </div>

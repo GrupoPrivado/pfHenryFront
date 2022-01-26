@@ -23,6 +23,9 @@ function EditPassword({ setErrorAlert, setAlertMessage, modal, setModal }) {
         newPass: "",
         repeat: "",
       })
+      setTimeout(() => {
+        setModal(false)
+      }, 3000);
     } else {
       setErrorAlert(true)
       setAlertMessage('Las contraseñas deben coincidir')
