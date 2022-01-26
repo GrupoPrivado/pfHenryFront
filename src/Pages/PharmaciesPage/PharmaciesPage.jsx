@@ -9,6 +9,9 @@ import {
 import Pharmacies from "./Pharmacies";
 import Logo from "./../../assets/bg2.jpg"
 
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ')
+}
 
 const PharmaciesPage = () => {
   const dispatch = useDispatch();
@@ -37,6 +40,7 @@ const PharmaciesPage = () => {
     dispatch(getAllPharmacies(filter.provinciaID, filter.ciudadID, filter.skip));
   }, [filter.ciudadID, filter.provinciaID, filter.skip]);
 
+  console.log('page limit', limitPaged)
 
   const handleSelectCity = (e) => {
 
@@ -70,16 +74,16 @@ const PharmaciesPage = () => {
     if(filter.skip < limitPaged){
       setfilter({
         ...filter,
-        skip: filter.skip + 10
+        skip: filter.skip + 20
       });
     }
   };
 
   const handlePrevPage = () => {
-    if(filter.skip >= 10)  {
+    if(filter.skip >= 20)  {
       setfilter({
         ...filter,
-        skip: filter.skip - 10
+        skip: filter.skip - 20
       });  
 
     }
@@ -125,13 +129,14 @@ const PharmaciesPage = () => {
           </select>
         </div>
       </div>
-      <Pharmacies pharmacies={pharmacies} isLoading={isLoading} />
-      <div>
-        <button className="p-4" onClick={handlePrevPage}>Anterior</button>
-        <button className="p-4" onClick={handleNextPage}>Siguiente</button>
+      <div className="flex justify-end w-90vw mx-auto">
+        <button className={classNames(filter.skip === 0 ? 'hidden' : '',"p-4 text-white font-bold hover:bg-[rgba(38,52,155,1)] hover:rounded-md")   } onClick={handlePrevPage}> {'<< Anterior'}</button>
+        <button className={classNames(filter.skip + 20 >= limitPaged ? 'hidden' : '',"p-4 text-white font-bold hover:bg-[rgba(38,52,155,1)] hover:rounded-md")   } onClick={handleNextPage}>{'Siguiente >>'}</button>
       </div>
+      <Pharmacies pharmacies={pharmacies} isLoading={isLoading} />
+
     </div>
   );
 };
-
+// classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700 cursor-pointer')
 export default PharmaciesPage;
