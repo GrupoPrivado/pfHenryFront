@@ -5,12 +5,14 @@ import { UserGroupIcon } from "@heroicons/react/outline";
 
 import { getGroup } from "../../actions/actionGroup";
 import { motion } from "framer-motion";
+import { getItem } from "../../actions/actionAuth";
+import { disableBtn } from "../../utils/ABMStyles";
 
 export default function FamilyGroupDash() {
   const { group } = useSelector((state) => state.grupos);
   const { afiliate } = useSelector((state) => state.grupos);
 
-  const dispatch = useDispatch();
+  const haveFamily = getItem('haveFamily')
 
   // useEffect(()=>{
   //     dispatch(getGroup(afiliado.codeGF))
@@ -18,7 +20,7 @@ export default function FamilyGroupDash() {
   // },[dispatch])
 
   return (
-    <Link to="/afiliado/group">
+    <Link to="/afiliado/group" className={ haveFamily === 'true' ? '' : 'pointer-events-none' } >
       <div className="relative flex flex-col items-center h-full p-4 bg-white justify-evenly md:col-span-1 md:row-span-1 rounded-2xl backdrop-filter backdrop-blur-lg bg-opacity-20 undefined">
         <div className="mt-4 mb-2 text-lg font-medium text-center text-white place-self-center">
           <h3>Grupo Familiar</h3>

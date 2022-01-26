@@ -56,7 +56,7 @@ export const validateLogIn = (input) => {
     ) {
         errores.correoElectronico = "Ingrese un mail válido";
     }
-    if (input.DNI.length <= 8 || input.DNI.length >= 3) {
+    if (input.DNI.length > 8 || input.DNI.length < 3) {
         errores.DNI = "Ingrese un DNI válido";
     }
     return errores;
