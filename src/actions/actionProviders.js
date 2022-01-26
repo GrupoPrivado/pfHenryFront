@@ -15,7 +15,6 @@ export function getAllProviders(provinciaID, ciudadID, especID, skip) {
     const { data } = await axios.get(
       `${api}/profesionales?ciudadID=${ciudadID}&provinciaID=${provinciaID}&especID=${especID}&skip=${skip}`
     );
-
     return dispatch({
       type: "GET_ALL_PROVIDERS",
       payload: data.message,
