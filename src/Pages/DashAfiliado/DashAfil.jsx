@@ -55,10 +55,10 @@ function DashAfil() {
     dispatch(getMedicalToken());
   }, []);
 
-//   const { medicalToken } = useSelector((state) => state.auth);
-//   useEffect(() => {
-//     // if (medicalToken.length === 3) setActive(false)
-//   }, []);
+  //   const { medicalToken } = useSelector((state) => state.auth);
+  //   useEffect(() => {
+  //     // if (medicalToken.length === 3) setActive(false)
+  //   }, []);
 
   const toggleClass = (e) => {
     const name = e.target.getAttribute("name");
@@ -96,12 +96,20 @@ function DashAfil() {
               <DashAuthorizations />
               <FamilyGroupDash />
 
+
               <div
                 name="credencial"
                 onClick={toggleClass}
                 className="relative flex flex-col items-center justify-start object-top p-4 bg-white cursor-pointer rounded-2xl backdrop-filter backdrop-blur-lg bg-opacity-20 undefined"
               >
-                <div className="flex flex-col items-center justify-start mt-4 mb-2 text-lg text-center text-white">
+                {/* <div className="flex flex-col items-center justify-start mt-4 mb-2 text-lg text-center text-white"> */}
+                <motion.div
+                  animate={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.3 }}
+                  className="flex flex-col items-center justify-start mt-4 mb-2 text-lg text-center text-white"
+                >
                   <label
                     name="credencial"
                     className="text-xl font-medium cursor-pointer"
@@ -111,7 +119,8 @@ function DashAfil() {
                   <button name="credencial" onClick={toggleClass}>
                     <IdentificationIcon className="text-white pointer-events-none h-28 w-28" />
                   </button>
-                </div>
+                </motion.div>
+                {/* </div> */}
               </div>
               {isActive.credencial && (
                 <Credencial
@@ -128,7 +137,14 @@ function DashAfil() {
                 onClick={toggleClass}
                 className="relative flex flex-col items-center justify-start object-top p-4 bg-white cursor-pointer rounded-2xl backdrop-filter backdrop-blur-lg bg-opacity-20 undefined"
               >
-                <div className="flex flex-col items-center justify-start mt-4 mb-2 text-lg text-center text-white">
+                {/* <div className="flex flex-col items-center justify-start mt-4 mb-2 text-lg text-center text-white"> */}
+                <motion.div
+                  animate={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.3 }}
+                  className="flex flex-col items-center justify-start mt-4 mb-2 text-lg text-center text-white"
+                >
                   <label
                     name="token"
                     className="text-xl font-medium cursor-pointer "
@@ -138,7 +154,8 @@ function DashAfil() {
                   <button name="token" onClick={toggleClass}>
                     <KeyIcon className="text-white pointer-events-none h-28 w-28" />
                   </button>
-                </div>
+                  {/* </div> */}
+                </motion.div>
               </div>
               {isActive.token && <TokenMedico toggleClass={toggleClass} />}
             </div>

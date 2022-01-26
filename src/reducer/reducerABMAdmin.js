@@ -3,6 +3,7 @@ const initialState = {
   provinces: [],
   allSpecialities: [],
   allAffiliates: [],
+  allAffiliatesTitular:[],
   allPlans: [],
   allPharmacies: [],
   pharmacies: [],
@@ -63,6 +64,20 @@ export default function reducerABMAdmin(state = initialState, action) {
         allAffiliates: action.payload,
         limitPaged: action.limitPaged,
       };
+
+      case "GET_AFFILIATES_TITULAR":
+        return {
+          ...state,
+          allAffiliatesTitular: action.payload,
+          limitPaged: action.limitPaged,
+        };
+  
+
+      case "AFFILIATE_DNI":
+        return {
+          ...state,
+          allAffiliates: action.payload,
+        };
 
     case "AFFILIATE_DATA":
       return {
@@ -169,15 +184,16 @@ export default function reducerABMAdmin(state = initialState, action) {
       console.log("elimine las ciudades");
       return { ...state, cities: [] };
 
-    case "FILTER_ACTIV":
-      let filteredPharm = state.pharmacies;
-      if (action.payload !== "") {
-        filteredPharm =
-          action.payload === "Si"
-            ? filteredPharm.filter((element) => element.activo === true)
-            : filteredPharm.filter((element) => element.activo !== true);
-      }
-      return { ...state, allPharmacies: filteredPharm };
+    // case "FILTER_ACTIV":
+    //   let filteredPharm = state.pharmacies;
+    //   if (action.payload !== "") {
+    //     filteredPharm =
+    //       action.payload === "Si"
+    //         ? filteredPharm.filter((element) => element.activo === true)
+    //         : filteredPharm.filter((element) => element.activo !== true);
+    //   }
+    //   console.log(filteredPharm,'filteredPharm')
+    //   return { ...state, allPharmacies: filteredPharm };
 
     case "GET_PROF_ESP":
       return {

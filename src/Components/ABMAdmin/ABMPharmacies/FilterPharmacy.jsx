@@ -20,21 +20,28 @@ const FilterPharmacy = () => {
     dispatch(getAllProvinces());
   }, []);
 
-  const [filter, setFilter] = useState("");
   const [filterProvCit, setFilterProvCit] = useState({
     provinciaID: "",
     ciudadID: "",
+    activo: "",
   });
 
   useEffect(() => {
     dispatch(
-      getAllPharmacies(0, 10, filterProvCit.provinciaID, filterProvCit.ciudadID)
+      getAllPharmacies(
+        0,
+        10,
+        filterProvCit.provinciaID,
+        filterProvCit.ciudadID,
+        filterProvCit.activo
+      )
     );
-  }, [filterProvCit.ciudadID, filterProvCit.provinciaID]);
+  }, [filterProvCit.ciudadID, filterProvCit.provinciaID, filterProvCit.activo]);
 
   const handleChangeProvince = (e) => {
     const newProvince = e.target.value;
     const newFilters = {
+      ...filterProvCit,
       ciudadID: "",
       provinciaID: e.target.value,
     };
@@ -55,8 +62,11 @@ const FilterPharmacy = () => {
   };
 
   const handleChangeActiv = (e) => {
-    setFilter(e.target.value);
-    dispatch(filterActiv(e.target.value));
+    const newData = {
+      ...filterProvCit,
+      activo: e.target.value,
+    };
+    setFilterProvCit(newData);
   };
 
   return (
@@ -117,11 +127,11 @@ const FilterPharmacy = () => {
             onChange={handleChangeActiv}
             name="activo"
             className=" block w-full  my-2 text-lg font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 appearance-none rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
-            value={filter}
+            value={filterProvCit.activo}
           >
             <option value="">Todas</option>
-            <option value="Si">Si</option>
-            <option value="No">No</option>
+            <option value="true">Si</option>
+            <option value="false">No</option>
           </select>
         </div>
       </div>

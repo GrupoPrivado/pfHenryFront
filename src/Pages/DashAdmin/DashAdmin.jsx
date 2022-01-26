@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
-
-
 import CityDash from "../../Components/ABMAdmin/AMBDashAdmin/CityDash";
 import { PlansDash } from "../../Components/ABMAdmin/AMBDashAdmin/PlansDash";
 import { AfiliateEvolution } from "../../Components/ABMAdmin/AMBDashAdmin/AfiliateEvolution";
@@ -14,10 +12,10 @@ import {getProfEspec, getPlanAfil ,getAfilProv, getPresStat , getAfilStat , getP
 import { ProfesionalBySpe } from "../../Components/ABMAdmin/AMBDashAdmin/ProfesionalBySpe";
 
 function DashAdmin() {
-
   
   // const dispatch = useDispatch();
   // const navigate = useNavigate();
+
 
   // const { route } = useSelector((state) => state.auth);
 
@@ -57,10 +55,7 @@ function DashAdmin() {
         <ProfesionalBySpe />
       </div>
     </div>
-    
-    
   );
-
 }
 
 export default DashAdmin;

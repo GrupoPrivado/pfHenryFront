@@ -1,5 +1,6 @@
 const inicialState = {
   planes: [],
+  isLoading: false
   
 };
 export default function getPlanes(state = inicialState, action) {
@@ -8,6 +9,7 @@ export default function getPlanes(state = inicialState, action) {
       return {
         ...state,
         planes: action.payload,
+        isLoading: action.loading
       };
       case "GET_PLANES_VIEW":
         let plan = state.planes.filter( e=> e._id === action.payload)

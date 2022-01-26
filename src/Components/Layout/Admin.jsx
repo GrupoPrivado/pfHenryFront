@@ -13,6 +13,7 @@ import ABMPlans from '../ABMAdmin/ABMPlan/ABMPlans'
 import ABMPrescriptions from '../ABMAdmin/ABMPrescriptions/ABMPrescriptions'
 import ABMEmployees from '../ABMAdmin/ABMEmployees/ABMEmployees'
 import FooterAdmin from '../Footer/FooterAdmin'
+import ABMAffilFacturas from '../ABMAdmin/ABMFacturas/ABMFacturas'
 
 const Admin = () => {
     const [showSidebar, setShowSidebar] = useState(false);
@@ -30,6 +31,7 @@ const Admin = () => {
                 <Route path='/planes' element={<PrivateRouter rol={roles.ADMIN}><ABMPlans/></PrivateRouter>}/>
                 <Route path='/recetas' element={<PrivateRouter rol={roles.ADMIN}><ABMPrescriptions/></PrivateRouter>}/>
                 <Route path='/empleados' element={<PrivateRouter rol={roles.ADMIN}><ABMEmployees/></PrivateRouter>}/>
+                <Route path='/facturas' element={<PrivateRouter rol={roles.ADMIN}><ABMAffilFacturas/></PrivateRouter>}/>
 
             </Routes>
  <FooterAdmin/>
