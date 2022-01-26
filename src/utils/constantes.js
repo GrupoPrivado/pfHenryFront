@@ -5,7 +5,7 @@ export const profilePhoto = photo;
 
 export const validate = (input) => {
     let errores = {};
-    if (input.password && input.password.length < 8) {
+    if (input.hasOwnProperty("password") && input.password.length <= 0 && input.password.length < 8) {
         errores.password = "La contraseña debe tener minimo 8 caracteres";
     }
     if (
@@ -13,11 +13,11 @@ export const validate = (input) => {
     ) {
         errores.correoElectronico = "Ingrese un mail válido";
     }
-    if (input.DNI.length < 8) {
-        errores.DNI = "DNI mínimo 8 caracteres";
+    if (input.DNI.length < 8 || input.DNI.length > 8) {
+        errores.DNI = "El DNI debe contener 8 caracteres";
     }
-    if (input.telefono.length < 8 || input.telefono.length > 11) {
-        errores.telefono = "Ingrese un teléfono válido";
+    if (input.telefono.length < 8 || input.telefono.length > 13) {
+        errores.telefono = "Ingrese un teléfono válido (mínimo 8 dígitos)";
     }
     if (input.fechaNacimiento.length <= 0 || input.fechaNacimiento > date) {
         errores.fechaNacimiento = "La fecha debe ser menor al día de hoy";
@@ -40,8 +40,21 @@ export const validate = (input) => {
     if (input.parentesco.length <= 0) {
         errores.parentesco = "Debe seleccionar un parentesco";
     }
-    if(input.planID && input.planID.length <= 0){
+    if(input.hasOwnProperty("planID") && input.planID.length <= 0){
         errores.planID = "Debe seleccionar un plan"
+    }
+    return errores;
+};
+
+export const validateLogIn = (input) => {
+    let errores = {};
+    if (
+        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(input.correoElectronico)
+    ) {
+        errores.correoElectronico = "Ingrese un mail válido";
+    }
+    if (input.DNI.length <= 8 || input.DNI.length >= 3) {
+        errores.DNI = "Ingrese un DNI válido";
     }
     return errores;
 };
@@ -99,3 +112,7 @@ export const validateContactDetails = (input) => {
     }
     return errores;
 }
+
+export function convertClassName(...classes) {
+    return classes.filter(Boolean).join(' ')
+  }

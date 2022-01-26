@@ -37,14 +37,13 @@ const ABMSpecialities = () => {
       setErrorAlert(true);
       setAlertMessage(message);
     }
-
   }, [message, type, activeAlert, errorAlert]);
 
   let [showModalAdd, setShowModalAdd] = useState(false);
   let [showModalUpdate, setShowModalUpdate] = useState(false);
 
   useEffect(() => {
-    dispatch(getAllSpecialities());
+    dispatch(getAllSpecialities(0, 10));
   }, []);
 
   /********* Funciones para borrar un elemento*********/
@@ -68,7 +67,7 @@ const ABMSpecialities = () => {
         setShowModalUpdate={setShowModalUpdate}
         setDeleteState={setDeleteState}
       />
-      <ABMPaged getFunction= {getAllSpecialities}/>
+      <ABMPaged getFunction={getAllSpecialities} />
 
       {showModalAdd && <AddSpeciality setShowModalAdd={setShowModalAdd} />}
 

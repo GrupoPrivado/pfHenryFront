@@ -6,6 +6,11 @@ import {api} from '../urlHostApi'
 
 export function getGroup(grupFamID) {
   return async function (dispatch) {
+    dispatch({
+      type: "GET_GROUP",
+      payload: [],
+      loading: true
+    })
     const { data } = await axios.get(
       `${api}/gruposFamiliares/${grupFamID}`,
       {
@@ -17,6 +22,7 @@ export function getGroup(grupFamID) {
     return dispatch({
       type: "GET_GROUP",
       payload: data.message,
+      loading: false
     });
   };
 }

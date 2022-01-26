@@ -1,142 +1,78 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import {
-  getconsultaMedica,
-  putConsultaMedica,
-} from "../../actions/professionalsActions";
+import { useNavigate } from "react-router-dom";
+import { alertActions } from "../../actions/actionAlerts";
+import { getClinicHistory } from "../../actions/professionalsActions";
 import { disableBtnProf, enableBtnProf } from "../../utils/ABMStyles";
-import { validateDNIToken } from "../../utils/professionalFormsCOntrollers";
+import { alertSweet } from "../Alerts/alertSweet";
 import AffiliateData from "./AffiliateData";
+import ConsultaSearch from "./ConsultaSearch";
+import Diagnostico from "./Diagnostico";
 import GeneracionRecetas from "./GeneracionRecetas";
 import ProfessionalData from "./ProfessionalData";
 
 const IndexProfessional = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { consultaMedicaData, professionalData } = useSelector(
     (state) => state.professionals
   );
 
-  const [errores, setErrores] = useState({});
+  const { type, message } = useSelector((state) => state.alerts);
 
-  /****** Variables y funciones para buscar la consulta medica Func 1******/
-  const dataAffiliateStruct = { DNI: "", token: "" };
+  const [activeAlert, setActiveAlert] = useState(false);
+  const [errorAlert, setErrorAlert] = useState(false);
 
-  const [dataAffiliate, setDataAffiliate] = useState(dataAffiliateStruct);
+  const [alertMessage, setAlertMessage] = useState("");
 
-  const handleChange = (event) => {
-    const data = {
-      ...dataAffiliate,
-      [event.target.name]: event.target.value,
-    };
-
-    setDataAffiliate(data);
-  };
-
-  const handleSendInfo = () => {
-    const validateError = validateDNIToken(dataAffiliate);
-    setErrores(validateError);
-    if (Object.entries(validateError).length <= 0) {
-      dispatch(getconsultaMedica(dataAffiliate));
+  useEffect(() => {
+    if (!activeAlert || !errorAlert) {
+      dispatch(alertActions.clear());
     }
-  };
 
-  /****** Fin Variables y funciones para buscar la consulta medica Func 1******/
-
-  /****** Variables y funciones para llenar consulta medica Func 2******/
-
-  const inputDataStruct = {
-    diagnostico: "",
-    token: "",
-  };
-
-  const [inputData, setInputData] = useState(inputDataStruct);
-
-  const handleChangeDiag = (event) => {
-    const data = {
-      ...inputData,
-      [event.target.name]: event.target.value,
-    };
-
-    setInputData(data);
-  };
-
-  const handleUpdate = () => {
-    const dataSend = { ...inputData, token: dataAffiliate.token };
-    setInputData(dataSend);
-    dispatch(putConsultaMedica(dataSend));
-    setDataAffiliate(dataAffiliateStruct);
-    setInputData(inputDataStruct);
-  };
-
-  /****** Fin Variables y funciones para llenar consulta medica Func 2******/
+    if (type === "alert-success") {
+      setActiveAlert(true);
+      setAlertMessage(message);
+    }
+    if (type === "alert-danger") {
+      setErrorAlert(true);
+      setAlertMessage(message);
+    }
+  }, [message, type, activeAlert, errorAlert]);
 
   /****** Variables y funciones para la generación de recetas Func 3******/
 
   const [recetasModal, setRecetasModal] = useState(false);
 
+  const enterPage = () => {
+    dispatch(getClinicHistory(consultaMedicaData.afiliadoID.DNI));
+    setTimeout(() => {
+      navigate("/profesional/historiaclinica");
+    }, 2000);
+  };
+
   /****** Variables y funciones la generación de recetas Func 3******/
 
   return (
     <div className="w-full flex justify-center items-center flex-col gap-8">
-      {/*Busqueda Consulta Medica Func 1*/}
-      <section className="flex justify-center items-center h-20">
-        <div>
-          <label>DNI Afiliado: </label>
-          <input
-            type="number"
-            name="DNI"
-            autoComplete="off"
-            value={dataAffiliate.DNI}
-            onChange={(e) => handleChange(e)}
-            placeholder="Ingrese el DNI...."
-          />
-            {errores.DNI && (
-                <p className="absolute text-red-700">{errores.DNI}</p>
-              )}
-        </div>
-        <div>
-          <label>Token Consulta: </label>
-          <input
-            type="number"
-            name="token"
-            autoComplete="off"
-            value={dataAffiliate.token}
-            onChange={(e) => handleChange(e)}
-            placeholder="Ingrese el Token...."
-          />
-              {errores.token && (
-                <p className="absolute text-red-700">{errores.token}</p>
-              )}
-        </div>
-        <div>
-          {/* <label>Token Consulta: </label> */}
-          <button
-            name="searchBtn"
-            onClick={handleSendInfo}
-            // className={errores ? enableBtnProf : disableBtnProf}
-            // disabled={errores}
-          >
-            Buscar
-          </button>
-        </div>
-      </section>
-      {/*Fin Busqueda Consulta Medica */}
+      <ProfessionalData professionalData={professionalData} />
 
-      {/* Botonera */}
+      {!consultaMedicaData._id && <ConsultaSearch />}
+
       <div className="flex justify-around items-center w-40vw h-10">
-        <Link to="/profesional/historiaclinica">
-          <button
-            className={
-              consultaMedicaData.afiliadoID ? enableBtnProf : disableBtnProf
-            }
-            disabled={consultaMedicaData.afiliadoID ? false : true}
-          >
-            Historial Medico
-          </button>
-        </Link>
+        {/* <Link to="/profesional/historiaclinica"> */}
+        <button
+          className={
+            consultaMedicaData.afiliadoID ? enableBtnProf : disableBtnProf
+          }
+          disabled={consultaMedicaData.afiliadoID ? false : true}
+          onClick={enterPage}
+        >
+          Historial Medico
+        </button>
+        {/* </Link> */}
 
         <button
           name="recetasModal"
@@ -149,9 +85,6 @@ const IndexProfessional = () => {
           Generar Receta
         </button>
       </div>
-      {/* Fin Botonera */}
-
-      {/* Generar Receta */}
 
       {recetasModal && (
         <GeneracionRecetas
@@ -160,41 +93,38 @@ const IndexProfessional = () => {
           setRecetasModal={setRecetasModal}
         />
       )}
-      {/* Fin Generar Receta */}
 
-      {/*  Historial Medico */}
-      {/* Fin  Historial Medico */}
-
-      {/* Datos Personales Afiliado */}
       {consultaMedicaData.afiliadoID && (
         <AffiliateData affiliateData={consultaMedicaData.afiliadoID} />
       )}
-      {/* Fin Datos Personales Afiliado */}
 
-      {/* Datos Personales Medico */}
-      <ProfessionalData professionalData={professionalData} />
-      {/* Fin Datos Personales Medico */}
-
-      {/* Diagnostico Func 2*/}
-      <div className="flex flex-col">
-        <label>Diagnóstico: </label>
-        <textarea
-          rows="4"
-          cols="50"
-          className="resize-none"
-          name="diagnostico"
-          autoComplete="off"
-          value={inputData.diagnostico}
-          onChange={(e) => handleChangeDiag(e)}
-          placeholder="Ingrese el Diagnostico...."
-        />
-      </div>
-
-      <button onClick={handleUpdate} name="guardar">
-        {" "}
-        Guardar
-      </button>
-      {/* Fin Diagnostico */}
+      {consultaMedicaData.afiliadoID && (
+        <Diagnostico token={consultaMedicaData.tokenMedico} />
+      )}
+      {activeAlert &&
+        alertSweet(
+          "success",
+          alertMessage,
+          false,
+          false,
+          setActiveAlert,
+          !activeAlert,
+          () => {},
+          false,
+          2500
+        )}
+      {errorAlert &&
+        alertSweet(
+          "error",
+          alertMessage,
+          false,
+          false,
+          setErrorAlert,
+          !errorAlert,
+          () => {},
+          false,
+          2500
+        )}
     </div>
   );
 };

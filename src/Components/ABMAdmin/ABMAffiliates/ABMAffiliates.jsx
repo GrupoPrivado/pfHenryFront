@@ -54,15 +54,13 @@ const ABMAffiliates = () => {
 
   return (
     <div>
-      
-
       <ABMAffiliatesList
         allAffiliates={allAffiliates}
         setShowModalUpdate={setShowModalUpdate}
         setShowModalUpDown={setShowModalUpDown}
         setShowModalAdd={setShowModalAdd}
       />
-      <ABMPaged getFunction= {getAllAffiliates}/>
+      <ABMPaged getFunction={getAllAffiliates} />
 
       {showModalAdd && (
         <AddAffiliate

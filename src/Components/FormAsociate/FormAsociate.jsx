@@ -21,7 +21,7 @@ export default function FormAsociate({
   const { planes } = useSelector((state) => state.planes);
   const { familiarData } = useSelector((state) => state.associate);
   const [errores, setErrores] = useState({});
-
+  
   const [input, setInput] = useState({
     nombre: "",
     apellido: "",

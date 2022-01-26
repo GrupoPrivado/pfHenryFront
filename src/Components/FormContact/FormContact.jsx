@@ -60,16 +60,16 @@ export default function FormContact({setActiveAlert, setErrorAlert}) {
     }
 
     return (
-        <div className='w-full px-4 py-12 sm:px-6 lg:px-8'>
-            <div className="max-w-md m-auto space-y-8 w-70vw ">
-                <form className="mt-8 space-y-6 " onSubmit={(e) => handleSubmit(e)}>
-                    <div className="grid items-center w-full grid-cols-2 grid-rows-5 gap-4 -space-y-px rounded-md shadow-sm -z-0 sm:grid-cols-4 sm:grid-rows-2">
+        <div className="sm:flex items-center justify-center w-full px-4 py-8 sm:px-6 lg:px-8">
+            <div className="w-full max-w-md space-y-8">
+                <form className="mt-6 space-y-6" onSubmit={(e) => handleSubmit(e)}>
+                    <div className="sm:grid items-center w-full grid-cols-2 grid-rows-5 gap-4 -space-y-px rounded-md shadow-sm -z-0 shadow-sm sm:grid-cols-4 sm:grid-rows-2">
                         <h3 className='col-span-4 row-span-1 text-4xl font-bold text-left text-primary'>Contacto</h3>
                             <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
                                 <label className='text-lg font-semibold'>Nombre: </label>
                                 <input type="text" 
-                                className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none -z-0 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                 
+                                className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none -z-0 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"   
+                                required
                                 value={input.name}
                                 onChange={(e) => handleChange(e)} name="name"/>
                                 {errores.name && (
@@ -83,6 +83,7 @@ export default function FormContact({setActiveAlert, setErrorAlert}) {
                                 <input type="text" 
                                 className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                 
+                                required
                                 value={input.lastName}
                                 onChange={(e) => handleChange(e)}
                                 name='lastName'/>
@@ -107,6 +108,7 @@ export default function FormContact({setActiveAlert, setErrorAlert}) {
                                 <input type="text" 
                                 className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                 
+                                required
                                 value={input.mail}
                                 onChange={(e) => handleChange(e)}
                                 name='mail'/>
@@ -120,7 +122,8 @@ export default function FormContact({setActiveAlert, setErrorAlert}) {
                                 className='text-lg font-semibold'>Consulta: </label>
                                 <textarea type="text" 
                                 className="relative block w-full h-40 px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                
+                                cols="40" rows="5"
+                                required
                                 value={input.message}
                                 onChange={(e) => handleChange(e)}
                                 name='message'/>

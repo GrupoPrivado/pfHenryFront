@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
 import {
-
   getAllCities,
   getAllPharmacies,
   getAllProvinces,
@@ -12,11 +11,7 @@ import {
   deleteCities,
 } from "../../../actions/actionAMBAdmin";
 
-
-
-const FilterPharmacy = ({
-
-}) => {
+const FilterPharmacy = () => {
   const dispatch = useDispatch();
 
   const { cities, provinces } = useSelector((state) => state.ABMAdmin);
@@ -45,9 +40,8 @@ const FilterPharmacy = ({
     };
     if (newProvince !== "") {
       dispatch(getAllCities(newFilters.provinciaID));
-    }
-    else {
-      dispatch(deleteCities())
+    } else {
+      dispatch(deleteCities());
     }
     setFilterProvCit(newFilters);
   };
@@ -64,7 +58,6 @@ const FilterPharmacy = ({
     setFilter(e.target.value);
     dispatch(filterActiv(e.target.value));
   };
-
 
   return (
     <div className="px-3">
@@ -99,7 +92,7 @@ const FilterPharmacy = ({
             Filtra por Localidad{" "}
           </label>
           <select
-             onChange={handleSelectCity}
+            onChange={handleSelectCity}
             name="ciudadID"
             className=" uppercase block w-full text-lg  my-2  font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 appearance-none rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
             value={filterProvCit.ciudadID}
@@ -121,7 +114,7 @@ const FilterPharmacy = ({
             Filtra por Activa{" "}
           </label>
           <select
-             onChange={handleChangeActiv}
+            onChange={handleChangeActiv}
             name="activo"
             className=" block w-full  my-2 text-lg font-semibold text-gray-500 placeholder-gray-500 border border-gray-300 appearance-none rounded-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 "
             value={filter}
@@ -134,8 +127,6 @@ const FilterPharmacy = ({
       </div>
     </div>
   );
-;
-
 };
 
 export default FilterPharmacy;

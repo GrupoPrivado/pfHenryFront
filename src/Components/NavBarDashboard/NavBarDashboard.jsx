@@ -51,6 +51,11 @@ export default function NavBarDashboard() {
     const navigate = useNavigate()
     const { user, route } = useSelector(state => state.auth)
 
+    const handleLogOut = () => {
+        logout()
+        navigate('/') 
+    }
+
     return (
         <>
             <div className="min-h-full">
@@ -105,7 +110,7 @@ export default function NavBarDashboard() {
                                             </button>
 
                                             {/* Profile dropdown */}
-                                            <Menu as="div" className="relative z-50 ml-3">
+                                            <Menu as="div" className="relative z-40 ml-3">
                                                 <div>
                                                     <Menu.Button className="flex items-center max-w-xs text-sm bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                                                         <span className="sr-only">Open user menu</span>
@@ -138,7 +143,7 @@ export default function NavBarDashboard() {
                                                                 <a
                                                                     href="/"
                                                                     className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                                                                    onClick={() => { logout(); navigate('/') }}
+                                                                    onClick={handleLogOut}
                                                                 >
                                                                     Cerrar Sesión
                                                                 </a>
@@ -205,23 +210,24 @@ export default function NavBarDashboard() {
                                         <Disclosure.Button
                                             key={index}
                                             as="a"
-                                            href={profileNavigation.href}
-                                            onClick={() => { navigate(profileNavigation.href) }}
+                                            href={profileNavigation[0].href}
+                                            onClick={() => { navigate(profileNavigation[0].href) }}
                                             className="block px-3 py-2 text-base font-medium text-gray-500 rounded-md hover:text-white hover:bg-gray-700"
                                         >
-                                            {profileNavigation.name}
+                                            {profileNavigation[0].name}
                                         </Disclosure.Button>
                                     ))}
+                                    { logOutNavigation.map ((item, index) => (
                                     <Disclosure.Button
-                                        key={profileNavigation.name}
+                                        key={index}
                                         as="a"
-                                        href={profileNavigation.href}
-                                        onClick={() => { navigate(profileNavigation.href) }}
-                                        className="block px-3 py-2 text-base font-medium text-gray-500 rounded-md hover:text-white hover:bg-gray-700"
+                                        href={logOutNavigation[0].href}
+                                        onClick={handleLogOut}
+                                        className="block px-3 py-2 mb-3 text-base font-medium text-gray-500 rounded-md hover:text-white hover:bg-gray-700"
                                     >
-                                        {profileNavigation.name}
+                                        {logOutNavigation[0].name}
                                     </Disclosure.Button>
-
+                                    ))}
                                 </div>
                             </Disclosure.Panel>
                         </>

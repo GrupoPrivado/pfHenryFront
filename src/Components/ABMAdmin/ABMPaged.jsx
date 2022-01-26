@@ -5,11 +5,13 @@ import { disableBtnPage, enableBtnPage } from "../../utils/ABMStyles";
 const ABMPaged = ({ getFunction }) => {
   const dispatch = useDispatch();
 
+  const { cities, provinces } = useSelector((state) => state.ABMAdmin);
   const { limitPaged } = useSelector((state) => state.ABMAdmin);
 
   const selector = [10, 20, 40];
   const [limit, setLimit] = useState(10);
   const [skip, setSkip] = useState(0);
+  const [reset, setReset] = useState(false);
 
   const nextPage = () => {
     setSkip(skip + limit);
@@ -20,8 +22,16 @@ const ABMPaged = ({ getFunction }) => {
   };
 
   useEffect(() => {
+    if (!reset )
     dispatch(getFunction(skip, limit));
+    setReset(false)
   }, [skip, limit]);
+
+  useEffect(() => {
+    setLimit(10)
+    setSkip(0)
+    setReset(true)
+  }, [cities, provinces]);
 
   const handleChange = (element) => {
     setLimit(Number(element.target.value));

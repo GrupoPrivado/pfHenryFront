@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import {Link} from "react-router-dom"
@@ -18,7 +19,10 @@ function DashAuthorizations() {
           <h3>Recetas</h3>
         </div>
         <div >
-          <div className='flex flex-col px-2.5 font-normal text-white w-full shrink-0'>
+          <motion.div animate={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: 20 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 1 }} className='flex flex-col px-2.5 font-normal text-white w-full shrink-0'>
 
             {recipes ? recipes.map(e => (
               <li key={e.numReceta} className='flex justify-between text-left sm:px-10 md:px-0'>
@@ -29,7 +33,7 @@ function DashAuthorizations() {
             )) : <div>
               <h3 className='text-center'>Sin Recetas</h3>
             </div>}
-          </div>
+          </motion.div>
         </div>
       {/* </div> */}
     </Link>

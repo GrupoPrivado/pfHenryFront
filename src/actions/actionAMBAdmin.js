@@ -17,8 +17,8 @@ export function getAllCities(payload) {
           type: "GET_ALL_CITIES",
           payload: data.message,
         });
-      } 
-      
+      }
+
       // else {
       //   return dispatch({ type: "ERRORS", payload: data });
       // }
@@ -52,13 +52,40 @@ export function getAllProvinces() {
 /************* Fin Actions Para ABM Ciudades***********/
 
 /************* Actions Para ABM Especialidades***********/
+export function getAllEspecialities() {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(`${api}/especialidades`);
+
+      if (data.success) {
+        return dispatch({
+          type: "GET_SPECIALITIES",
+          payload: data.message,
+          limitPaged: data.limitPaged,
+        });
+      } else {
+        return dispatch({ type: "ERRORS", payload: data });
+      }
+    } catch (error) {
+      console.error(error);
+      return { error: error.message };
+    }
+  };
+}
 
 export function getAllSpecialities(skip, limit) {
   return async (dispatch) => {
     try {
+      const token = getItem("userToken");
       const { data } = await axios.get(
-        `${api}/especialidades?skip=${skip}&limit=${limit}`
+        `${api}/admin/allEspecilities?skip=${skip}&limit=${limit}`,
+        {
+          headers: {
+            "x-access-token": token,
+          },
+        }
       );
+
       if (data.success) {
         return dispatch({
           type: "GET_SPECIALITIES",
@@ -359,7 +386,7 @@ export function getAllPlans() {
 export function getAllPharmacies(skip, limit, provinciaID, ciudadID) {
   return async (dispatch) => {
     try {
-      console.log(skip, limit, ciudadID, provinciaID)
+      console.log(skip, limit, ciudadID, provinciaID);
       const token = getItem("userToken");
       const { data } = await axios.get(
         `${api}/admin/farmacias?ciudadID=${ciudadID}&provinciaID=${provinciaID}&skip=${skip}&limit=${limit}`,
@@ -912,7 +939,7 @@ export function getAllEmployees(skip, limit) {
           },
         }
       );
-      console.log('<<<<<<<<<<<data',data)
+      console.log("<<<<<<<<<<<data", data);
       if (data.success) {
         return dispatch({
           type: "GET_EMPLOYEES",
@@ -1074,8 +1101,8 @@ export const filterActiv = (payload) => {
   };
 };
 
-export const deleteCities = () => dispatch => {
-  return dispatch({type: 'RESET_CITIES_ABM'})
-}
+export const deleteCities = () => (dispatch) => {
+  return dispatch({ type: "RESET_CITIES_ABM" });
+};
 
 /*************FIN Actions Comunes Para ABM***********/

@@ -57,6 +57,9 @@ const Modal = ({ toggleClass, plan }) => {
                       ))
                     }
                   </div>
+                  <div>
+                    <h3 className='text-3xl font-bold text-white'>${plan.precio}</h3>
+                  </div>
                   <button name={plan.name} onClick={toggleClass} className="self-end p-1 bg-white border-2 rounded-md w-14 text-primary hover:bg-primary border-primary hover:text-white hover:border-2 hover:border-white">Cerrar</button>
                 </div>
               </div>
