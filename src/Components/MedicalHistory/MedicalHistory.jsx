@@ -33,7 +33,7 @@ function MedicalHistory() {
                 className="flex justify-between text-left sm:px-10 md:px-0"
               >
                 <p>{el.fechaConsulta}</p>
-                <p>{el.especID.nombre}</p>
+                <p className="w-1/2 text-right">{el.especID.nombre}</p>
               </li>
             ))
           ) : (
