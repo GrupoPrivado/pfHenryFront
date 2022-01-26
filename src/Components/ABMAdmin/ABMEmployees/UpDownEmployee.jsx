@@ -115,9 +115,9 @@ const UpDownEmployee = ({ setShowModalUpDown }) => {
                 </div>
               
             </div>
-            <div className="flex items-center  mt-8">
-              <div>
-                <div>
+            <div className="flex items-center  mt-5 ">
+              <div className="">
+                <div className="mb-3">
                   <label className="text-md text-gray-600">Asunto: </label>
                   <input
                     className="h-2 p-4 w-2/3 border-2 border-gray-300 mb-3 rounded-md"
@@ -130,12 +130,13 @@ const UpDownEmployee = ({ setShowModalUpDown }) => {
                   />
                   
                 </div>
-                <div>
+                <div className="mt">
                   <div>
                     <label className=" w-1/3 text-md text-gray-600">Texto: </label>
-                    <input
-                      className="h-6 p-10 w-2/3 border-2 border-gray-300  rounded-md"
-                      type="textarea"
+                    <textarea
+                      className="h-6 p-10 w-2/3 border-2 border-gray-300 resize-none rounded-md"
+                      rows="8"
+                      cols="30"
                       name="text"
                       autoComplete="off"
                       value={upDownEmployeeData.text}
@@ -147,7 +148,7 @@ const UpDownEmployee = ({ setShowModalUpDown }) => {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col gap-10">
+              <div className="flex flex-col gap-8">
                 <div>
                   <label className="text-md text-gray-600">Activo: </label>
                   <select

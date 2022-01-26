@@ -13,7 +13,7 @@ import AddAdherent from "./addAdherent";
 
 import styles from "./addAffiliate.module.css";
 
-import { enableBtn, disableBtn } from "../../../utils/ABMStyles";
+import { enableBtn, disableBtn, formError } from "../../../utils/ABMStyles";
 import {
   functionErrorsBtn,
   validateAffiliate,
@@ -111,10 +111,9 @@ const AddAffiliate = ({ setShowModalAdd }) => {
     setShowModalAdd(false);
     setErrors(true);
   };
-  
 
   return (
-    <div className={styles.modal}>
+    <div className={styles.modal}> 
       <section className={styles.modalmain}>
         <div className="flex justify-center h-10%">
           <h5 className="text-2xl font-bold text-gray-500">
@@ -123,11 +122,13 @@ const AddAffiliate = ({ setShowModalAdd }) => {
         </div>
         <div className="modal-content pb-4 text-left px-6 h-90% ">
           <form>
-            <div className="flex">
-              <div className="w-1/3">
-                <label className="text-md text-gray-600">Nombre: </label>
+            <div className="flex mb-4">
+              <div className="w-1/3 ">
+                <div className="flex items-center gap-1">
+                  <label className="text-md text-gray-600">Nombre: </label>
+                </div>
                 <input
-                  className="h-2 p-4 w-full border-2 border-gray-300 mb-1 rounded-md"
+                  className="h-2 p-4 w-full border-2 border-gray-300  rounded-md "
                   type="text"
                   name="nombre"
                   autoComplete="off"
@@ -135,15 +136,22 @@ const AddAffiliate = ({ setShowModalAdd }) => {
                   onChange={(e) => handleChange(e)}
                   placeholder="Ingrese el nombre...."
                 />
-                {errores.nombre && (
-                  <p className="absolute text-red-700">{errores.nombre}</p>
-                )}
+                <span>
+                  {errores.nombre && (
+                    <p className={formError}>
+                      {errores.nombre}
+                    </p>
+                  )}
+                </span>
               </div>
 
-              <div className="w-1/3">
-                <label className="text-md text-gray-600">Apellido: </label>
+              <div className="w-1/3 ">
+                <div className="flex items-center gap-1">
+                  <label className="text-md text-gray-600">Apellido: </label>
+                  
+                </div>
                 <input
-                  className="h-2 p-4 w-full border-2 border-gray-300 mb-1 rounded-md"
+                  className="h-2 p-4 w-full border-2 border-gray-300  rounded-md"
                   type="text"
                   name="apellido"
                   autoComplete="off"
@@ -151,15 +159,22 @@ const AddAffiliate = ({ setShowModalAdd }) => {
                   onChange={(e) => handleChange(e)}
                   placeholder="Ingrese el apellido...."
                 />
-                {errores.apellido && (
-                  <p className="absolute text-red-700">{errores.apellido}</p>
-                )}
+                <span>
+                    {errores.apellido && (
+                      <p className={formError}>
+                        {errores.apellido}
+                      </p>
+                    )}
+                  </span>
               </div>
 
-              <div className="w-1/3">
-                <label className="text-md text-gray-600">DNI: </label>
+              <div className="w-1/3 ">
+                <div className="flex items-center gap-1">
+                  <label className="text-md text-gray-600">DNI: </label>
+                  
+                </div>
                 <input
-                  className="h-2 p-4 w-full border-2 border-gray-300 mb-1 rounded-md"
+                  className="h-2 p-4 w-full border-2 border-gray-300  rounded-md"
                   type="number"
                   name="DNI"
                   autoComplete="off"
@@ -167,18 +182,25 @@ const AddAffiliate = ({ setShowModalAdd }) => {
                   onChange={(e) => handleChange(e)}
                   placeholder="Ingrese el DNI...."
                 />
-                {errores.DNI && (
-                  <p className="absolute text-red-700">{errores.DNI}</p>
-                )}
+                <span>
+                    {errores.DNI && (
+                      <p className={formError}>
+                        {errores.DNI}
+                      </p>
+                    )}
+                  </span>
               </div>
             </div>
-            <div className="flex">
-              <div className="w-1/2">
-                <label className="text-md text-gray-600">
-                  Fehca de Nacimiento:{" "}
-                </label>
+            <div className="flex mb-4">
+              <div className="w-1/2 ">
+                <div className="flex items-center gap-1 ">
+                  <label className="text-md text-gray-600">
+                    Fecha de Nacimiento{" "}
+                  </label>
+                  
+                </div>
                 <input
-                  className="h-2 p-4 w-full border-2 border-gray-300 mb-1 rounded-md"
+                  className="h-2 p-4 w-full border-2 border-gray-300 rounded-md"
                   type="date"
                   name="fechaNacimiento"
                   autoComplete="off"
@@ -186,17 +208,22 @@ const AddAffiliate = ({ setShowModalAdd }) => {
                   onChange={(e) => handleChange(e)}
                   placeholder="Ingrese Fecha Nacimiento...."
                 />
-                {errores.fechaNacimiento && (
-                  <p className="absolute text-red-700">
-                    {errores.fechaNacimiento}
-                  </p>
-                )}
+                <span>
+                    {errores.fechaNacimiento && (
+                      <p className={formError}>
+                        {errores.fechaNacimiento}
+                      </p>
+                    )}
+                  </span>
               </div>
 
               <div className="w-1/2">
-                <label className="text-md text-gray-600">Teléfono: </label>
+                <div className="flex items-center gap-1 ">
+                  <label className="text-md text-gray-600">Telefono: </label>
+                  
+                </div>
                 <input
-                  className="h-2 p-4 w-full border-2 border-gray-300 mb-1 rounded-md"
+                  className="h-2 p-4 w-full border-2 border-gray-300 rounded-md"
                   type="number"
                   name="telefono"
                   autoComplete="off"
@@ -204,16 +231,23 @@ const AddAffiliate = ({ setShowModalAdd }) => {
                   onChange={(e) => handleChange(e)}
                   placeholder="Ingrese el Teléfono...."
                 />
-                {errores.telefono && (
-                  <p className="absolute text-red-700">{errores.telefono}</p>
-                )}
+                <span>
+                    {errores.telefono && (
+                      <p className={formError}>
+                        {errores.telefono}
+                      </p>
+                    )}
+                  </span>
               </div>
             </div>
-            <div className="flex">
+            <div className="flex mb-4">
               <div className="w-1/2">
-                <label className="text-md text-gray-600">E-Mail: </label>
+                <div className="flex items-center gap-1">
+                  <label className="text-md text-gray-600">Email: </label>
+                  
+                </div>
                 <input
-                  className="h-2 p-4 w-full border-2 border-gray-300 mb-1 rounded-md"
+                  className="h-2 p-4 w-full border-2 border-gray-300  rounded-md"
                   type="email"
                   name="correoElectronico"
                   autoComplete="off"
@@ -221,17 +255,22 @@ const AddAffiliate = ({ setShowModalAdd }) => {
                   onChange={(e) => handleChange(e)}
                   placeholder="Ingrese el E-Mail...."
                 />
-                {errores.correoElectronico && (
-                  <p className="absolute text-red-700">
-                    {errores.correoElectronico}
-                  </p>
-                )}
+                <span>
+                    {errores.correoElectronico && (
+                      <p className={formError}>
+                        {errores.correoElectronico}
+                      </p>
+                    )}
+                  </span>
               </div>
 
               <div className="w-1/2">
-                <label className="text-md text-gray-600">Domicilio: </label>
+                <div className="flex items-center gap-1">
+                  <label className="text-md text-gray-600">Domicilio: </label>
+                  
+                </div>
                 <input
-                  className="h-2 p-4 w-full border-2 border-gray-300 mb-1 rounded-md"
+                  className="h-2 p-4 w-full border-2 border-gray-300  rounded-md"
                   type="test"
                   name="direccion"
                   autoComplete="off"
@@ -239,21 +278,26 @@ const AddAffiliate = ({ setShowModalAdd }) => {
                   onChange={(e) => handleChange(e)}
                   placeholder="Ingrese el domocilio...."
                 />
-                {errores.direccion && (
-                  <p className="absolute text-red-700">{errores.direccion}</p>
-                )}
+                <span>
+                    {errores.direccion && (
+                      <p className={formError}>
+                        {errores.direccion}
+                      </p>
+                    )}
+                  </span>
               </div>
             </div>
-            <div className="flex">
+            <div className="flex mb-6">
               <div className="w-1/2">
-                <label className="text-md text-gray-600" htmlFor="provincia">
-                  Provincia{" "}
-                </label>
+                <div className="flex items-center gap-1">
+                  <label className="text-md text-gray-600">Provincia: </label>
+                  
+                </div>
                 <select
                   value={inputAffiliate.provinciaID}
                   onChange={handleChangeProvince}
                   name="provinciaID"
-                  className=" h-1/2 w-full  border-2 border-gray-300 mb-5 rounded-md"
+                  className=" h-3/5 w-full  border-2 border-gray-300  rounded-md"
                   required
                 >
                   <option>Seleccione Provincia</option>
@@ -264,20 +308,25 @@ const AddAffiliate = ({ setShowModalAdd }) => {
                       </option>
                     ))}
                 </select>
-                {errores.provinciaID && (
-                  <p className="absolute text-red-700">{errores.provinciaID}</p>
-                )}
+                <span>
+                    {errores.provinciaID && (
+                      <p className={formError}>
+                        {errores.provinciaID}
+                      </p>
+                    )}
+                  </span>
               </div>
 
               <div className="w-1/2">
-                <label className="text-md text-gray-600" htmlFor="localidad">
-                  Localidad{" "}
-                </label>
+                <div className="flex items-center gap-1">
+                  <label className="text-md text-gray-600">Localidad: </label>
+                  
+                </div>
                 <select
                   onChange={(e) => handleChange(e)}
                   value={inputAffiliate.ciudadID}
                   name="ciudadID"
-                  className=" h-1/2 w-full  border-2 border-gray-300 mb-5 rounded-md"
+                  className=" h-3/5 w-full  border-2 border-gray-300  rounded-md"
                   required
                 >
                   <option>Seleccione Localidad</option>
@@ -288,17 +337,21 @@ const AddAffiliate = ({ setShowModalAdd }) => {
                       </option>
                     ))}
                 </select>
-                {errores.ciudadID && (
-                  <p className="absolute text-red-700">{errores.ciudadID}</p>
-                )}
+                <span>
+                    {errores.ciudadID && (
+                      <p className={formError}>
+                        {errores.ciudadID}
+                      </p>
+                    )}
+                  </span>
               </div>
             </div>
 
-            <div className="flex  justify-between">
+            <div className="flex  justify-between mb-5">
               <div>
                 <label className="text-md text-gray-600">Plan: </label>
                 <select
-                  className="border-2 p-1 border-gray-300 mb-3 rounded-md"
+                  className="border-2 p-1 border-gray-300  rounded-md"
                   id="planes"
                   name="planID"
                   onChange={(e) => handleChange(e)}
@@ -318,14 +371,14 @@ const AddAffiliate = ({ setShowModalAdd }) => {
                       );
                     })}
                   {errores.planID && (
-                    <p className="absolute text-red-700">{errores.planID}</p>
+                    <p className={formError}>{errores.planID}</p>
                   )}
                 </select>
               </div>
               <div>
                 <label className="text-md text-gray-600">Alta: </label>
                 <select
-                  className="border-2 p-1 border-gray-300 mb-3 rounded-md"
+                  className="border-2 p-1 border-gray-300  rounded-md"
                   name="alta"
                   onChange={(e) => handleChange(e)}
                 >
@@ -334,14 +387,14 @@ const AddAffiliate = ({ setShowModalAdd }) => {
                   <option value={false}>No</option>
                 </select>
                 {errores.alta && (
-                  <p className="absolute text-red-700">{errores.alta}</p>
+                  <p className={formError}>{errores.alta}</p>
                 )}
               </div>
 
               <div>
                 <label className="text-md text-gray-600">Activo: </label>
                 <select
-                  className="border-2 p-1 border-gray-300 mb-3 rounded-md"
+                  className="border-2 p-1 border-gray-300  rounded-md"
                   name="activo"
                   onChange={(e) => handleChange(e)}
                 >
@@ -350,22 +403,22 @@ const AddAffiliate = ({ setShowModalAdd }) => {
                   <option value={false}>No</option>
                 </select>
                 {errores.activo && (
-                  <p className="absolute text-red-700">{errores.activo}</p>
+                  <p className={formError}>{errores.activo}</p>
                 )}
               </div>
             </div>
           </form>
           <div className="flex ">
-            <div className="w-4/6 flex">
-              <div className="w-1/3">
+            <div className="w-1/2 flex gap-3">
+              <div className="w-1/3 h-2/3">
                 <button
-                  className="group relative   h-full flex items-center justify-center py-2 px-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-400 focus:outline-none focus:ring-2 focus:ring-offset-2 "
+                  className="group relative   h-full flex items-center justify-center py-4 px-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-400 focus:outline-none focus:ring-2 focus:ring-offset-2 "
                   onClick={() => setShowModalAdherent(true)}
                 >
                   Agregar Adherente
                 </button>
               </div>
-              <div className=" w-2/3 border  flex  border-gray-300 m rounded-md">
+              <div className=" w-1/2 border overflow-y-scroll flex  border-gray-300 m rounded-md">
                 {inputAdherent &&
                   inputAdherent.map((element) => {
                     return (
@@ -390,7 +443,7 @@ const AddAffiliate = ({ setShowModalAdd }) => {
               </div>
             </div>
 
-            <div className=" flex justify-between w-2/6">
+            <div className=" flex justify-around items-center w-1/2">
               <button
                 key="submitFormButton"
                 className={errors ? disableBtn : enableBtn}
@@ -401,7 +454,7 @@ const AddAffiliate = ({ setShowModalAdd }) => {
               </button>
 
               <button
-                className="group relative w-15 h-10 flex justify-center py-2 px-3 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 onClick={() => handleClose()}
               >
                 Cerrar
