@@ -52,6 +52,12 @@ export default function reducerABMAdmin(state = initialState, action) {
         limitPaged: action.limitPaged,
       };
 
+      case "AFFILIATE_DNI":
+        return {
+          ...state,
+          allAffiliates: action.payload,
+        };
+
     case "AFFILIATE_DATA":
       return {
         ...state,
@@ -157,15 +163,16 @@ export default function reducerABMAdmin(state = initialState, action) {
         console.log('elimine las ciudades')
         return {...state, cities: [] }
 
-    case "FILTER_ACTIV":
-      let filteredPharm = state.pharmacies;
-      if (action.payload !== "") {
-        filteredPharm =
-          action.payload === "Si"
-            ? filteredPharm.filter((element) => element.activo === true)
-            : filteredPharm.filter((element) => element.activo !== true);
-      }
-      return { ...state, allPharmacies: filteredPharm };
+    // case "FILTER_ACTIV":
+    //   let filteredPharm = state.pharmacies;
+    //   if (action.payload !== "") {
+    //     filteredPharm =
+    //       action.payload === "Si"
+    //         ? filteredPharm.filter((element) => element.activo === true)
+    //         : filteredPharm.filter((element) => element.activo !== true);
+    //   }
+    //   console.log(filteredPharm,'filteredPharm')
+    //   return { ...state, allPharmacies: filteredPharm };
 
     default:
       return state;

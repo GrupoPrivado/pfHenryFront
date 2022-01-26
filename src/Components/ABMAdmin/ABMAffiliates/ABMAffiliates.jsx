@@ -13,11 +13,10 @@ import UpDownAffiliate from "./UpDownAffiliate";
 import { alertActions } from "../../../actions/actionAlerts";
 import { alertSweet } from "../../Alerts/alertSweet";
 import ABMPaged from "../ABMPaged";
+import GetAfifilDNI from "./ABMAffiliateSearch";
 
 const ABMAffiliates = () => {
   const dispatch = useDispatch();
-
-  const { allAffiliates } = useSelector((state) => state.ABMAdmin);
 
   const { type, message } = useSelector((state) => state.alerts);
 
@@ -54,8 +53,9 @@ const ABMAffiliates = () => {
 
   return (
     <div>
+      <GetAfifilDNI />
+
       <ABMAffiliatesList
-        allAffiliates={allAffiliates}
         setShowModalUpdate={setShowModalUpdate}
         setShowModalUpDown={setShowModalUpDown}
         setShowModalAdd={setShowModalAdd}
