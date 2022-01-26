@@ -9,7 +9,6 @@ import { SpinnerCircular } from "spinners-react";
 function Plans() {
   const dispatch = useDispatch();
   const { planes, isLoading } = useSelector((state) => state.planes);
-  console.log(isLoading);
   useEffect(() => {
     dispatch(getPlanes());
   }, [dispatch]);

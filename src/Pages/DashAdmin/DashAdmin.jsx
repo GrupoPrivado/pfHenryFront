@@ -13,7 +13,7 @@ import { ProfesionalBySpe } from "../../Components/ABMAdmin/AMBDashAdmin/Profesi
 
 function DashAdmin() {
   
-  // const dispatch = useDispatch();
+   const dispatch = useDispatch();
   // const navigate = useNavigate();
 
 
@@ -21,18 +21,18 @@ function DashAdmin() {
 
 
   useEffect(() => {
-    if (route !== "") navigate(`/${route}`);
+    //if (route !== "") navigate(`/${route}`);
     dispatch(getProfEspec())
     dispatch(getPlanAfil())
     dispatch(getAfilProv())
     dispatch(getPresStat())
     dispatch(getAfilStat())
     dispatch(getPharmCity())
-  }, [dispatch, route, navigate]);
+  }, []);
 
 
   return (
-    <div className=" h-full  w-full  grid overflow-hidden grid-cols-3 grid-rows-2 gap-0">
+    <div className="min-h-[86vh]  w-full  grid overflow-hidden grid-cols-3 grid-rows-2 gap-0">
        <div className="shadow-xl rounded-xl m-2 p-4 bg-clip-padding backdrop-filter  bg-opacity-60 border border-gray-200">
         <PharmacyProv/>
       </div> 

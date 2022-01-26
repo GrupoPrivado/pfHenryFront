@@ -4,7 +4,6 @@ import { SpinnerCircular } from "spinners-react";
 import { getAllProviders } from "./../../actions/actionProviders";
 
 function CartillaMedica({ providers, isLoading }) {
-  console.log(providers)
   return (
     <div className="flex flex-col w-full bg-cover start min-h-70vh contenair mb-10">
       <table className="mx-auto text-gray-900 bg-white shadow-none w-90vw bg-opacity-40 rounded-tl-xl rounded-tr-xl backdrop-filter backdrop-blur-lg">
