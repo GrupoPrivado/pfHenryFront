@@ -6,6 +6,11 @@ import {api} from '../urlHostApi'
 
 export function getGroup(grupFamID) {
   return async function (dispatch) {
+    dispatch({
+      type: "GET_GROUP",
+      payload: [],
+      loading: true
+    })
     const { data } = await axios.get(
       `${api}/gruposFamiliares/${grupFamID}`,
       {
@@ -17,9 +22,15 @@ export function getGroup(grupFamID) {
     return dispatch({
       type: "GET_GROUP",
       payload: data.message,
+      loading: false
     });
   };
 }
+
+
+export const resetGroup = () => dispatch => dispatch({type: 'RESET_GROUP'})
+
+
 // export function getAfiliate(dni){
  
 //     return async function (dispatch) {

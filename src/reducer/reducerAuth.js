@@ -1,4 +1,4 @@
-import { GET_AFILIATE, GET_MEDICAL_TOKEN, NOT_AUTHENTICATED, GET_ERROR } from "../actions/actionAuth";
+import { GET_AFILIATE, GET_MEDICAL_TOKEN, NOT_AUTHENTICATED, GET_ERROR, DELETE_ROUTE } from "../actions/actionAuth";
 
 const inicialState = {
   user: {},
@@ -6,23 +6,34 @@ const inicialState = {
   data: false,
   route: '',
   error: '',
+  isLoading: false
 };
 
-export default function reducerAuth(state = inicialState, {type, payload}) {
+export default function reducerAuth(state = inicialState, {type, payload, loading}) {
   switch (type) {
     case GET_AFILIATE:
-      return {
-        ...state,
-        route: '',
-        medicalToken: [],
-        data: true,
-        user: payload,
-        error: ''
+      if(payload.activo){
+        return {
+          ...state,
+          route: '',
+          data: true,
+          user: payload,
+          error: ''
+        }
+      } else {
+        return {
+          ...state,
+          route: 'afiliado/perfil',
+          data: true,
+          user: payload,
+          error: ''
+        }
       }
     case GET_MEDICAL_TOKEN:
       return {
         ...state,
-        medicalToken: payload
+        medicalToken: payload,
+        isLoading: loading
       }
     case NOT_AUTHENTICATED:
       return {
@@ -32,17 +43,24 @@ export default function reducerAuth(state = inicialState, {type, payload}) {
         route: 'login'
       }
 
+    case DELETE_ROUTE: {
+      return {
+        ...state,
+        route:''
+      }
+    }
+
     case GET_ERROR: 
       return {
         ...state,
         error: payload
       }
+
+    case 'RESET_AUTH': 
+    return {
+      ...inicialState
+    }
     
-    // case GET_RECIPES:
-    //   return {
-    //     ...state,
-    //     recipes: payload
-    //   }
 
     default:
       return state;

@@ -17,9 +17,11 @@ export function getAllCities(payload) {
           type: "GET_ALL_CITIES",
           payload: data.message,
         });
-      } else {
-        return dispatch({ type: "ERRORS", payload: data });
       }
+
+      // else {
+      //   return dispatch({ type: "ERRORS", payload: data });
+      // }
     } catch (error) {
       console.error(error);
       return { error: error.message };
@@ -50,13 +52,47 @@ export function getAllProvinces() {
 /************* Fin Actions Para ABM Ciudades***********/
 
 /************* Actions Para ABM Especialidades***********/
-
-export function getAllSpecialities() {
+export function getAllEspecialities() {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(`${api}/especialidades`);
+
+      // if (data.success) {
+      return dispatch({
+        type: "GET_SPECIALITIES",
+        payload: data.message,
+        limitPaged: data.limitPaged,
+      });
+      //}
+      // else {
+      //   return dispatch({ type: "ERRORS", payload: data });
+      // }
+    } catch (error) {
+      console.error(error);
+      return { error: error.message };
+    }
+  };
+}
+
+export function getAllSpecialities(skip, limit) {
+  return async (dispatch) => {
+    try {
+      const token = getItem("userToken");
+      const { data } = await axios.get(
+        `${api}/admin/allEspecilities?skip=${skip}&limit=${limit}`,
+        {
+          headers: {
+            "x-access-token": token,
+          },
+        }
+      );
+
       if (data.success) {
-        return dispatch({ type: "GET_SPECIALITIES", payload: data.message });
+        return dispatch({
+          type: "GET_SPECIALITIES",
+          payload: data.message,
+          limitPaged: data.limitPaged,
+        });
       } else {
         return dispatch({ type: "ERRORS", payload: data });
       }
@@ -181,13 +217,49 @@ export function getAllAffiliates(skip, limit) {
   return async (dispatch) => {
     try {
       const token = getItem("userToken");
-      const { data } = await axios.get(`${api}/admin/allAffiliates?skip=${skip}&limit=${limit}`, {
-        headers: {
-          "x-access-token": token,
-        },
-      });
+      const { data } = await axios.get(
+        `${api}/admin/allAffiliates?skip=${skip}&limit=${limit}`,
+        {
+          headers: {
+            "x-access-token": token,
+          },
+        }
+      );
       if (data.success) {
-        return dispatch({ type: "GET_AFFILIATES", payload: data.message, limitPaged: data.limitPaged });
+        return dispatch({
+          type: "GET_AFFILIATES",
+          payload: data.message,
+          limitPaged: data.limitPaged,
+        });
+      } else {
+        return dispatch({ type: "ERRORS", payload: data });
+      }
+    } catch (error) {
+      console.error(error);
+      return { error: error.message };
+    }
+  };
+}
+
+export function getAllAffiliatesTitular(skip, limit, DNI) {
+  return async (dispatch) => {
+    try {
+      console.log(skip, limit, DNI)
+      const token = getItem("userToken");
+      const { data } = await axios.get(
+        `${api}/admin/allAffiliatesTitular?skip=${skip}&limit=${limit}&DNI=${DNI}`,
+        {
+          headers: {
+            "x-access-token": token,
+          },
+        }
+      );
+      if (data.success) {
+        return dispatch({
+          type: "GET_AFFILIATES_TITULAR",
+          payload: data.message,
+          limitPaged: data.limitPaged,
+        });
       } else {
         return dispatch({ type: "ERRORS", payload: data });
       }
@@ -252,6 +324,35 @@ export const getAffiliateData = (payload) => {
     }
   };
 };
+
+export const getAffiliateyDNI = (DNI) => {
+  return async (dispatch) => {
+    try {
+      const token = getItem("userToken");
+      const { data } = await axios.get(
+        `${api}/admin/affiliateDNI?DNI=${DNI}`,
+        {
+          headers: {
+            "x-access-token": token,
+          },
+        }
+      );
+
+      if (data.success) {
+        return dispatch({
+          type: "AFFILIATE_DNI",
+          payload: data.message,
+        });
+      } else {
+        return dispatch({ type: "ERRORS", payload: data });
+      }
+    } catch (error) {
+      console.error(error);
+      return { error: error.message };
+    }
+  };
+};
+
 
 export function updateAffiliateAct(payload) {
   return async (dispatch) => {
@@ -341,12 +442,13 @@ export function getAllPlans() {
 
 /************* Actions Para ABM Farmacias***********/
 
-export function getAllPharmacies(payload) {
+export function getAllPharmacies(skip, limit, provinciaID, ciudadID, activo) {
   return async (dispatch) => {
     try {
+      console.log(skip, limit, ciudadID, provinciaID, activo);
       const token = getItem("userToken");
       const { data } = await axios.get(
-        `${api}/admin/farmacias?ciudadID=${payload.ciudadID}&provinciaID=${payload.provinciaID}`,
+        `${api}/admin/farmacias?ciudadID=${ciudadID}&provinciaID=${provinciaID}&skip=${skip}&limit=${limit}&activo=${activo}`,
         {
           headers: {
             "x-access-token": token,
@@ -354,7 +456,11 @@ export function getAllPharmacies(payload) {
         }
       );
       if (data.success) {
-        return dispatch({ type: "GET_PHARMACIES", payload: data.message });
+        return dispatch({
+          type: "GET_PHARMACIES",
+          payload: data.message,
+          limitPaged: data.limitPaged,
+        });
       } else {
         return dispatch({ type: "ERRORS", payload: data });
       }
@@ -363,10 +469,6 @@ export function getAllPharmacies(payload) {
       return { error: error.message };
     }
   };
-}
-
-export function getFilterPharmacy(payload) {
-  return { type: "GET_PHARMACIES", payload: payload };
 }
 
 export function addPharmacy(payload) {
@@ -607,12 +709,12 @@ export function deletePlan(payload) {
 
 /************* Actions Para ABM Profesionales***********/
 
-export function getAllProfessionals(payload) {
+export function getAllProfessionals(skip, limit, provinciaID, ciudadID) {
   return async (dispatch) => {
     try {
       const token = getItem("userToken");
       const { data } = await axios.get(
-        `${api}/admin/professionals?ciudadID=${payload.ciudadID}&provinciaID=${payload.provinciaID}`,
+        `${api}/admin/professionals?ciudadID=${ciudadID}&provinciaID=${provinciaID}&skip=${skip}&limit=${limit}`,
         {
           headers: {
             "x-access-token": token,
@@ -620,7 +722,11 @@ export function getAllProfessionals(payload) {
         }
       );
       if (data.success) {
-        return dispatch({ type: "GET_PROFESSIONALS", payload: data.message });
+        return dispatch({
+          type: "GET_PROFESSIONALS",
+          payload: data.message,
+          limitPaged: data.limitPaged,
+        });
       } else {
         return dispatch({ type: "ERRORS", payload: data });
       }
@@ -774,12 +880,12 @@ export function deleteProfessional(payload) {
 
 /************* Actions Para ABM Prescripciones***********/
 //Ver si esta se saca xq la busqueda es por DNI y ya trae todos los datos
-export function getPrescriptionById(payload) {
+export function getPrescriptionById(payload, skip, limit) {
   return async (dispatch) => {
     try {
       const token = getItem("userToken");
       const { data } = await axios.get(
-        `${api}/prescriptionByID?id=${payload}`,
+        `${api}/prescriptionByID?id=${payload}&skip=${skip}&limit=${limit}`,
         {
           headers: {
             "x-access-token": token,
@@ -787,7 +893,11 @@ export function getPrescriptionById(payload) {
         }
       );
       if (data.success) {
-        return dispatch({ type: "GET_PRESCRPTION_ID", payload: data.message });
+        return dispatch({
+          type: "GET_PRESCRPTION_ID",
+          payload: data.message,
+          limitPaged: data.limitPaged,
+        });
       } else {
         return dispatch({ type: "ERRORS", payload: data });
       }
@@ -815,6 +925,7 @@ export function getPrescriptionsByDNI(payload) {
         return dispatch({
           type: "GET_PRESCRPTIONS_DNI",
           payload: data.message,
+          limitPaged: data.limitPaged,
         });
       } else {
         return dispatch({ type: "ERRORS", payload: data });
@@ -870,18 +981,26 @@ export function updatePrescription(payload) {
 
 /************* Actions Para ABM Empleados***********/
 
-export function getAllEmployees(payload) {
+export function getAllEmployees(skip, limit) {
   return async (dispatch) => {
     try {
       const token = getItem("userToken");
 
-      const { data } = await axios.get(`${api}/admin/employees`, {
-        headers: {
-          "x-access-token": token,
-        },
-      });
+      const { data } = await axios.get(
+        `${api}/admin/employees?skip=${skip}&limit=${limit}`,
+        {
+          headers: {
+            "x-access-token": token,
+          },
+        }
+      );
+      console.log("<<<<<<<<<<<data", data);
       if (data.success) {
-        return dispatch({ type: "GET_EMPLOYEES", payload: data.message });
+        return dispatch({
+          type: "GET_EMPLOYEES",
+          payload: data.message,
+          limitPaged: data.limitPaged,
+        });
       } else {
         return dispatch({ type: "ERRORS", payload: data });
       }
@@ -1037,4 +1156,197 @@ export const filterActiv = (payload) => {
   };
 };
 
+export const deleteCities = () => (dispatch) => {
+  return dispatch({ type: "RESET_CITIES_ABM" });
+};
+
 /*************FIN Actions Comunes Para ABM***********/
+
+
+/************* FIN Actions Para ABM Empleados***********/
+
+/*************Actions graficos Para ABM***********/
+export const getProfEspec = () => {
+  return async function (dispatch) {
+    dispatch({
+      type: "GET_PROF_ESP",
+      payload: [],
+      loading: true,
+    });
+    const token = getItem("userToken");
+    const { data } = await axios.get(`${api}/statistics/profEspec`, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
+
+    return dispatch({
+      type: "GET_PROF_ESP",
+      payload: data,
+      loading: false,
+    });
+  };
+};
+
+export const getPlanAfil = () => {
+  return async function (dispatch) {
+    dispatch({
+      type: "GET_AFIL_PLANS",
+      payload: [],
+      loading: true,
+    });
+    const token = getItem("userToken");
+    const { data } = await axios.get(`${api}/statistics/affilPlans`, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
+
+    return dispatch({
+      type: "GET_AFIL_PLANS",
+      payload: data,
+      loading: false,
+    });
+  };
+};
+export const getAfilProv= () => {
+  return async function (dispatch) {
+    dispatch({
+      type: "GET_AFIL_PRO",
+      payload: [],
+      loading: true,
+    });
+    const token = getItem("userToken");
+    const { data } = await axios.get(`${api}/statistics/affilProv`, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
+
+    return dispatch({
+      type: "GET_AFIL_PRO",
+      payload: data,
+      loading: false,
+    });
+  };
+};
+export const getPresStat= () => {
+  return async function (dispatch) {
+    dispatch({
+      type: "GET_PRES_STAT",
+      payload: [],
+      loading: true,
+    });
+    const token = getItem("userToken");
+    const { data } = await axios.get(`${api}/statistics/recetasStatus`, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
+
+    return dispatch({
+      type: "GET_PRES_STAT",
+      payload: data,
+      loading: false,
+    });
+  };
+};
+export const getAfilStat= () => {
+  return async function (dispatch) {
+    dispatch({
+      type: "GET_AFIL_STAT",
+      payload: [],
+      loading: true,
+    });
+    const token = getItem("userToken");
+    const { data } = await axios.get(`${api}/statistics/affilStatus`, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
+
+    return dispatch({
+      type: "GET_AFIL_STAT",
+      payload: data,
+      loading: false,
+    });
+  };
+};
+export const getPharmCity= () => {
+  return async function (dispatch) {
+    dispatch({
+      type: "GET_PHARM_CITY",
+      payload: [],
+      loading: true,
+    });
+    const token = getItem("userToken");
+    const { data } = await axios.get(`${api}/statistics/farmaciaProvicia`, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
+
+    return dispatch({
+      type: "GET_PHARM_CITY",
+      payload: data,
+      loading: false,
+    });
+  };
+};
+/*************FIN Actions grafico Para ABM***********/
+
+
+export function addFactura(payload) {
+  return async (dispatch) => {
+    try {
+      const token = getItem("userToken");
+      const { data } = await axios.post(`${api}/facturas`, payload, {
+        headers: {
+          "x-access-token": token,
+        },
+      });
+      if (data.success) {
+        dispatch({
+          type: alertConstants.SUCCESS,
+          message: "Factura realizada con éxito",
+        });
+      } else {
+        dispatch({
+          type: alertConstants.ERROR,
+          message: "Error al realizar la factura",
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      return { error: error.message };
+    }
+  };
+}
+
+export function addAllFactura() {
+  return async (dispatch) => {
+    try {
+      const token = getItem("userToken");
+      console.log(token)
+      const { data } = await axios.post(`${api}/facturas/allFacturas`, "",{
+        headers: {
+          "x-access-token": token,
+        },
+      });
+      if (data.success) {
+        dispatch({
+          type: alertConstants.SUCCESS,
+          message: "Facturas realizadas con éxito",
+        });
+      } else {
+        dispatch({
+          type: alertConstants.ERROR,
+          message: "Error al realizar las facturas",
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      return { error: error.message };
+    }
+  };
+}

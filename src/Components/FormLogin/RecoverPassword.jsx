@@ -3,10 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { LockClosedIcon } from "@heroicons/react/solid";
 import Logo from "../../assets/logo.svg";
 import { getUserToken, recoverPassword } from "../../utils/authUtils";
-import {motion } from 'framer-motion'
+import { motion } from 'framer-motion'
+import { validateLogIn } from "../../utils/constantes";
 
 
-function RecoverPassword({setForm, activeForm, handleChangeAlerts}) {
+
+function RecoverPassword({ setForm, activeForm, handleChangeAlerts }) {
   const [input, setInput] = useState({
     DNI: "",
     correoElectronico: "",
@@ -14,6 +16,7 @@ function RecoverPassword({setForm, activeForm, handleChangeAlerts}) {
   });
 
   const navigate = useNavigate();
+  const [errores, setErrores] = useState({})
 
   const handleChange = (e) => {
     setInput({
@@ -24,18 +27,21 @@ function RecoverPassword({setForm, activeForm, handleChangeAlerts}) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const validateError = validateLogIn(input)
+    setErrores(validateError)
     const result = await recoverPassword(input);
-    if(result.success){
+    if (Object.entries(validateError).length <= 0) {
+      if (result.success) {
         handleChangeAlerts('success', result.message, true)
         setTimeout(() => {
-            //handleChangeAlerts('success', '', false)
-            navigate('/')
+          navigate('/')
         }, 4000);
-    } else {
+      } else {
         handleChangeAlerts('error', result.message, true)
         setTimeout(() => {
-            handleChangeAlerts('error', '', false)
+          handleChangeAlerts('error', '', false)
         }, 5000);
+      }
     }
   };
 
@@ -54,7 +60,7 @@ function RecoverPassword({setForm, activeForm, handleChangeAlerts}) {
       transition: {
         duration: 0.3,
         ease: 'easeIn',
-      
+
       }
     }
   }
@@ -63,10 +69,10 @@ function RecoverPassword({setForm, activeForm, handleChangeAlerts}) {
     <div className={styles.contenedor}>
       <div className="w-full max-w-md space-y-8">
         <div>
-          <img className="mx-auto h-12 w-auto" src={Logo} alt="Workflow" />
+          <img className="w-auto h-12 mx-auto" src={Logo} alt="Workflow" />
         </div>
-        <motion.form className="mt-8 space-y-6 "   animate={{ rotateY: 360 }}
-  transition={{ type: 'spring', duration: 1.8 }}>
+        <motion.form className="mt-8 space-y-6 " animate={{ rotateY: 360 }}
+          transition={{ type: 'spring', duration: 1.8 }}>
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="-space-y-px rounded-md shadow-sm">
             <select
@@ -88,7 +94,7 @@ function RecoverPassword({setForm, activeForm, handleChangeAlerts}) {
                 name="DNI"
                 type="dni"
                 autoComplete="dni"
-                
+
                 className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="DNI"
                 onChange={(e) => handleChange(e)}
@@ -104,7 +110,7 @@ function RecoverPassword({setForm, activeForm, handleChangeAlerts}) {
                 name="correoElectronico"
                 type="text"
 
-                
+
                 className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Correo Electrónico"
                 onChange={(e) => handleChange(e)}
@@ -112,16 +118,16 @@ function RecoverPassword({setForm, activeForm, handleChangeAlerts}) {
               />
             </div>
           </div>
-
+          
           <div className="flex items-center justify-between">
             <div className="text-sm">
               <button type="button" className="font-medium text-indigo-600 hover:text-indigo-500" onClick={() => setForm(!activeForm)}>...volver al inicio de sesión </button>
             </div>
           </div>
 
-          <div>
+          <div className="relative">
             <button
-            type="submit"
+              type="submit"
               onClick={handleSubmit}
               className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md group hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
@@ -133,6 +139,12 @@ function RecoverPassword({setForm, activeForm, handleChangeAlerts}) {
               </span>
               Recuperar Contraseña
             </button>
+          {errores.DNI && (
+            <p className="absolute text-red-700 ">{errores.DNI}</p>
+          )}
+          {errores.correoElectronico && (
+            <p className="absolute text-red-700 top-16">{errores.correoElectronico}</p>
+          )}
           </div>
         </motion.form>
       </div>

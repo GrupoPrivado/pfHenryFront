@@ -1,26 +1,24 @@
 import React from "react";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import {
-  getSpecialityData,
-} from "../../../actions/actionAMBAdmin";
+import { getSpecialityData } from "../../../actions/actionAMBAdmin";
 
 import styles from "./ABMSpecialties.module.css";
 
 const ABMSpecialitiesList = ({
-  allSpecialities,
   setShowModalUpdate,
   setShowModalAdd,
-  setDeleteState
+  setDeleteState,
 }) => {
   const dispatch = useDispatch();
+
+  const { allSpecialities } = useSelector((state) => state.ABMAdmin);
 
   const handleEditSpeciality = async (event) => {
     await dispatch(getSpecialityData(event.target.value));
     setShowModalUpdate(true);
   };
-
 
   return (
     <div className={styles.divScroll}>
@@ -75,7 +73,9 @@ const ABMSpecialitiesList = ({
                                   key={"delete" + element._id}
                                   title="Delete"
                                   value={element._id}
-                                  onClick={(e)=>setDeleteState(e.target.value)}
+                                  onClick={(e) =>
+                                    setDeleteState(e.target.value)
+                                  }
                                   className="pr-3 "
                                 >
                                   Eliminar

@@ -12,9 +12,10 @@ import {
 
 import styles from "./AddProfessional.module.css";
 
-import { enableBtn, disableBtn } from "../../../utils/ABMStyles";
+import { enableBtn, disableBtn, formError } from "../../../utils/ABMStyles";
 import {
-  functionErrorsBtn, validateProfessional,
+  functionErrorsBtn,
+  validateProfessional,
 } from "../../../utils/adminFormsControllers";
 
 const AddProfessional = ({ setShowModalAdd }) => {
@@ -81,7 +82,7 @@ const AddProfessional = ({ setShowModalAdd }) => {
     setErrores(validateError);
     if (Object.entries(validateError).length <= 0) {
       dispatch(addProfessional(inputProfessional));
-      dispatch(getAllProfessionals({}));
+      dispatch(getAllProfessionals(0, 10));
       setShowModalAdd(false);
     }
   };
@@ -93,7 +94,7 @@ const AddProfessional = ({ setShowModalAdd }) => {
   };
 
   return (
-    <div>
+    <div className={styles.modal}>
       <section className={styles.modalmain}>
         <div className="flex justify-center h-10%">
           <h5 className="text-2xl font-bold text-gray-500">
@@ -103,11 +104,11 @@ const AddProfessional = ({ setShowModalAdd }) => {
 
         <div className="modal-content py-4 text-left px-6 h-90% ">
           <form>
-            <div className="flex">
+            <div className="flex mb-3">
               <div className="w-1/2">
                 <label className="text-md text-gray-600">Nombre: </label>
                 <input
-                  className="h-2 p-4 w-full border-2 border-gray-300 mb-1 rounded-md"
+                  className="h-2 p-4 w-full border-2 border-gray-300  rounded-md"
                   type="text"
                   name="nombre"
                   autoComplete="off"
@@ -116,14 +117,14 @@ const AddProfessional = ({ setShowModalAdd }) => {
                   placeholder="Ingrese el nombre...."
                 />
                 {errores.nombre && (
-                  <p className="absolute text-red-700">{errores.nombre}</p>
+                  <p className={formError}>{errores.nombre}</p>
                 )}
               </div>
 
               <div className="w-1/2">
                 <label className="text-md text-gray-600">Apellido: </label>
                 <input
-                  className="h-2 p-4 w-full border-2 border-gray-300 mb-1 rounded-md"
+                  className="h-2 p-4 w-full border-2 border-gray-300  rounded-md"
                   type="text"
                   name="apellido"
                   autoComplete="off"
@@ -132,15 +133,15 @@ const AddProfessional = ({ setShowModalAdd }) => {
                   placeholder="Ingrese el apellido...."
                 />
                 {errores.apellido && (
-                  <p className="absolute text-red-700">{errores.apellido}</p>
+                  <p className={formError}>{errores.apellido}</p>
                 )}
               </div>
             </div>
-            <div className="flex">
+            <div className="flex mb-3">
               <div className="w-1/2">
                 <label className="text-md text-gray-600">DNI: </label>
                 <input
-                  className="h-2 p-4 w-full border-2 border-gray-300 mb-1 rounded-md"
+                  className="h-2 p-4 w-full border-2 border-gray-300  rounded-md"
                   type="number"
                   name="DNI"
                   autoComplete="off"
@@ -148,15 +149,13 @@ const AddProfessional = ({ setShowModalAdd }) => {
                   onChange={(e) => handleChange(e)}
                   placeholder="Ingrese el DNI...."
                 />
-                {errores.DNI && (
-                  <p className="absolute text-red-700">{errores.DNI}</p>
-                )}
+                {errores.DNI && <p className={formError}>{errores.DNI}</p>}
               </div>
 
               <div className="w-1/2">
                 <label className="text-md text-gray-600">Matrícula: </label>
                 <input
-                  className="h-2 p-4 w-full border-2 border-gray-300 mb-1 rounded-md"
+                  className="h-2 p-4 w-full border-2 border-gray-300  rounded-md"
                   type="number"
                   name="matricula"
                   autoComplete="off"
@@ -165,15 +164,15 @@ const AddProfessional = ({ setShowModalAdd }) => {
                   placeholder="Ingrese la Matrícula...."
                 />
                 {errores.matricula && (
-                  <p className="absolute text-red-700">{errores.matricula}</p>
+                  <p className={formError}>{errores.matricula}</p>
                 )}
               </div>
             </div>
-            <div className="flex">
+            <div className="flex mb-3">
               <div className="w-1/2">
                 <label className="text-md text-gray-600">Teléfono: </label>
                 <input
-                  className="h-2 p-4 w-full border-2 border-gray-300 mb-1 rounded-md"
+                  className="h-2 p-4 w-full border-2 border-gray-300  rounded-md"
                   type="number"
                   name="telefono"
                   autoComplete="off"
@@ -182,14 +181,14 @@ const AddProfessional = ({ setShowModalAdd }) => {
                   placeholder="Ingrese el Teléfono...."
                 />
                 {errores.telefono && (
-                  <p className="absolute text-red-700">{errores.telefono}</p>
+                  <p className={formError}>{errores.telefono}</p>
                 )}
               </div>
 
               <div className="w-1/2">
                 <label className="text-md text-gray-600">E-mail: </label>
                 <input
-                  className="h-2 p-4 w-full border-2 border-gray-300 mb-1 rounded-md"
+                  className="h-2 p-4 w-full border-2 border-gray-300  rounded-md"
                   type="text"
                   name="mail"
                   autoComplete="off"
@@ -197,12 +196,10 @@ const AddProfessional = ({ setShowModalAdd }) => {
                   onChange={(e) => handleChange(e)}
                   placeholder="Ingrese el e-mail...."
                 />
-                {errores.mail && (
-                  <p className="absolute text-red-700">{errores.mail}</p>
-                )}
+                {errores.mail && <p className={formError}>{errores.mail}</p>}
               </div>
             </div>
-            <div className="flex">
+            <div className="flex mb-3">
               <div className=" w-1/2">
                 <label className="text-md text-gray-600" htmlFor="provincia">
                   Provincia{" "}
@@ -223,7 +220,7 @@ const AddProfessional = ({ setShowModalAdd }) => {
                     ))}
                 </select>
                 {errores.provinciaID && (
-                  <p className="absolute text-red-700">{errores.provinciaID}</p>
+                  <p className={formError}>{errores.provinciaID}</p>
                 )}
               </div>
 
@@ -247,14 +244,14 @@ const AddProfessional = ({ setShowModalAdd }) => {
                     ))}
                 </select>
                 {errores.ciudadID && (
-                  <p className="absolute text-red-700">{errores.ciudadID}</p>
+                  <p className={formError}>{errores.ciudadID}</p>
                 )}
               </div>
             </div>
-            <div className="flex w-full ">
+            <div className="flex w-full mb-5">
               <div className="w-1/2">
                 <select
-                  className=" h-1/2 w-full  border-2 border-gray-300 mb-5 rounded-md"
+                  className=" h-full w-full  border-2 border-gray-300  rounded-md"
                   id="especialities"
                   name="especID"
                   onChange={(e) => handleChange(e)}
@@ -264,22 +261,26 @@ const AddProfessional = ({ setShowModalAdd }) => {
                     allSpecialities.map((element) => {
                       if (element.activa) {
                         return (
-                          <option value={element._id} id={element._id} key={element._id}>
+                          <option
+                            value={element._id}
+                            id={element._id}
+                            key={element._id}
+                          >
                             {element.nombre}
                           </option>
                         );
-                      }
+                      } else return;
                     })}
                 </select>
                 {errores.especID && (
-                  <p className="absolute text-red-700">{errores.especID}</p>
+                  <p className={formError}>{errores.especID}</p>
                 )}
               </div>
 
               <div className="flex w-1/2">
                 <label className="text-md text-gray-600">Activo: </label>
                 <select
-                  className=" h-1/2 w-full  border-2 border-gray-300 mb-5 rounded-md"
+                  className=" h-full w-full  border-2 border-gray-300  rounded-md"
                   name="activo"
                   onChange={(e) => handleChange(e)}
                 >
@@ -288,27 +289,29 @@ const AddProfessional = ({ setShowModalAdd }) => {
                   <option value={false}>No</option>
                 </select>
                 {errores.activo && (
-                  <p className="absolute text-red-700">{errores.activo}</p>
+                  <p className={formError}>{errores.activo}</p>
                 )}
               </div>
             </div>
           </form>
-          <div className="flex w-full justify-around">
-            <button
-              key="submitFormButton"
-              className={errors ? disableBtn : enableBtn}
-              disabled={errors}
-              onClick={handleSubmitProfessional}
-            >
-              Guardar
-            </button>
+          <div className="flex w-full justify-center ">
+            <div className="flex w-2/3 justify-around ">
+              <button
+                key="submitFormButton"
+                className={errors ? disableBtn : enableBtn}
+                disabled={errors}
+                onClick={handleSubmitProfessional}
+              >
+                Guardar
+              </button>
 
-            <button
-              className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              onClick={() => handleClose()}
-            >
-              Cerrar
-            </button>
+              <button
+                className="group relative w-15 h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                onClick={() => handleClose()}
+              >
+                Cerrar
+              </button>
+            </div>
           </div>
         </div>
       </section>

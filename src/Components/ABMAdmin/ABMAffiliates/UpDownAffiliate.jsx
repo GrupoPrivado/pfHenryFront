@@ -73,10 +73,9 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
     dispatch(resetDataUpdate());
     setErrors(true);
   };
-  const showHideClassName = showModalUpDown ? "displayblock" : "displaynone";
 
   return (
-    <div className={styles[showHideClassName]}>
+    <div className={styles.modal}>
       <section className={styles.modalmain}>
         <div className="flex justify-center">
           <h5 className="text-2xl font-bold text-gray-500">
@@ -134,10 +133,10 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
             </div>
             <div className="flex items-center mt-3">
               <div>
-                <div>
+                <div className="mb-5">
                   <label className="text-md text-gray-600">Asunto: </label>
                   <input
-                    className="h-2 p-4 w-2/3 border-2 border-gray-300 mb-3 rounded-md"
+                    className="h-2 p-4 w-2/3 border-2 border-gray-300  rounded-md"
                     type="text"
                     name="subject"
                     autoComplete="off"
@@ -150,9 +149,9 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
                   <div>
                     <label className="text-md text-gray-600">Texto: </label>
                     <textarea
-                      className="h-6 p-10 w-2/3 border-2 border-gray-300 mb-3 rounded-md resize-none"
+                      className="h-6 p-10 w-2/3 border-2 border-gray-300 m rounded-md resize-none"
                       rows="8"
-                      cols="50"
+                      cols="30"
                       type="textarea"
                       name="text"
                       autoComplete="off"
@@ -163,10 +162,11 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col gap-10">
-                <div>
+              <div className="flex flex-col gap-8">
+                <div className="flex">
                   <label className="text-md text-gray-600">Alta: </label>
                   <select
+                    className="border-2 p-1 border-gray-300 rounded-md"
                     name="alta"
                     onChange={(e) => handleUpdateAffiliate(e)}
                     value={upDownAffiliateData.alta}
@@ -176,9 +176,10 @@ const UpDownAffiliate = ({ setShowModalUpDown, showModalUpDown }) => {
                   </select>
                 </div>
 
-                <div>
+                <div className="flex">
                   <label className="text-md text-gray-600">Activo: </label>
                   <select
+                    className="border-2 p-1 border-gray-300 rounded-md"
                     name="activo"
                     onChange={(e) => handleUpdateAffiliate(e)}
                     value={upDownAffiliateData.activo}

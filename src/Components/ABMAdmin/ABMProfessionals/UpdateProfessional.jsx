@@ -15,7 +15,7 @@ import {
   functionErrorsBtn,
   validateProfesionalUpdate,
 } from "../../../utils/adminFormsControllers";
-import { enableBtn, disableBtn } from "../../../utils/ABMStyles";
+import { enableBtn, disableBtn, formError } from "../../../utils/ABMStyles";
 
 const UpdateProfessional = ({ setShowModalUpdate }) => {
   const dispatch = useDispatch();
@@ -91,7 +91,7 @@ const UpdateProfessional = ({ setShowModalUpdate }) => {
   };
 
   return (
-    <div>
+    <div className={styles.modal}>
       <section className={styles.modalmain}>
         <div className="flex justify-center h-10%">
           <h5 className="text-2xl font-bold text-gray-500">
@@ -100,10 +100,10 @@ const UpdateProfessional = ({ setShowModalUpdate }) => {
         </div>
         <div className="modal-content py-4 text-left px-6 h-90% ">
           <form>
-            <div>
+            <div className="mb-4">
               <label className="text-md text-gray-600">Teléfono: </label>
               <input
-                className="h-2 p-4 w-full border-2 border-gray-300 mb-1 rounded-md"
+                className="h-2 p-4 w-full border-2 border-gray-300  rounded-md"
                 type="number"
                 name="telefono"
                 autoComplete="off"
@@ -112,14 +112,14 @@ const UpdateProfessional = ({ setShowModalUpdate }) => {
                 placeholder="Ingrese el Teléfono...."
               />
               {errores.telefono && (
-                <p className="absolute text-red-700">{errores.telefono}</p>
+                <p className={formError}>{errores.telefono}</p>
               )}
             </div>
 
-            <div>
+            <div className="mb-4">
               <label className="text-md text-gray-600">E-Mail: </label>
               <input
-                className="h-2 p-4 w-full border-2 border-gray-300 mb-1 rounded-md"
+                className="h-2 p-4 w-full border-2 border-gray-300  rounded-md"
                 type="email"
                 name="mail"
                 autoComplete="off"
@@ -128,11 +128,11 @@ const UpdateProfessional = ({ setShowModalUpdate }) => {
                 placeholder="Ingrese el E-Mail...."
               />
               {errores.mail && (
-                <p className="absolute text-red-700">{errores.mail}</p>
+                <p className={formError}>{errores.mail}</p>
               )}
             </div>
 
-            <div>
+            <div className="mb-4">
               <label className="text-md text-gray-600" htmlFor="provincia">
                 Provincia{" "}
               </label>
@@ -140,7 +140,7 @@ const UpdateProfessional = ({ setShowModalUpdate }) => {
                 value={updateProfessionalData.provinciaID}
                 onChange={handleChangeProvince}
                 name="provinciaID"
-                className=" h-1/2 w-full  border-2 border-gray-300 mb-5 rounded-md uppercase"
+                className=" h-full w-full  border-2 border-gray-300 rounded-md uppercase"
                 required
                 defaultValue={updateProfessionalData.provinciaID}
               >
@@ -153,11 +153,11 @@ const UpdateProfessional = ({ setShowModalUpdate }) => {
                   ))}
               </select>
               {errores.provinciaID && (
-                <p className="absolute text-red-700">{errores.provinciaID}</p>
+                <p className={formError}>{errores.provinciaID}</p>
               )}
             </div>
 
-            <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
+            <div className="mb-4">
               <label className="text-md text-gray-600" htmlFor="localidad">
                 Localidad{" "}
               </label>
@@ -165,7 +165,7 @@ const UpdateProfessional = ({ setShowModalUpdate }) => {
                 onChange={handleUpdateProfessional}
                 value={updateProfessionalData.ciudadID}
                 name="ciudadID"
-                className=" h-1/2 w-full  border-2 border-gray-300 mb-5 rounded-md"
+                className=" h-full w-full  border-2 border-gray-300  rounded-md"
                 defaultValue={updateProfessionalData.ciudadID}
               >
                 <option>Seleccione Localidad</option>
@@ -177,12 +177,12 @@ const UpdateProfessional = ({ setShowModalUpdate }) => {
                   ))}
               </select>
               {errores.ciudadID && (
-                <p className="absolute text-red-700">{errores.ciudadID}</p>
+                <p className={formError}>{errores.ciudadID}</p>
               )}
             </div>
           </form>
-
-          <div className="flex w-full justify-around">
+<div className="flex justify-center">
+          <div className="flex w-2/3 justify-around">
             <button
               key="submitFormButton"
               className={errors ? disableBtn : enableBtn}
@@ -199,6 +199,7 @@ const UpdateProfessional = ({ setShowModalUpdate }) => {
               Cerrar
             </button>
           </div>
+        </div>
         </div>
       </section>
     </div>

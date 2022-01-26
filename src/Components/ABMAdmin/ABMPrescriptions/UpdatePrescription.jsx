@@ -75,7 +75,7 @@ const UpdatePrescription = ({ setShowModalUpdate }) => {
   };
 
   return (
-    <div>
+    <div className={styles.modal}>
       <section className={styles.modalmain}>
         <div className="flex flex-col items-center h-20%">
           <div>

@@ -8,7 +8,6 @@ function MedicalHistoryDetails() {
     const dispatch = useDispatch();
     const { user } = useSelector(state => state.auth);
     const { consultas } = useSelector(state => state.consultas);
-    console.log(consultas, "Desde medical history details")
     useEffect(() => {
         dispatch(getHistorial())
     }, [dispatch])
@@ -25,12 +24,12 @@ function MedicalHistoryDetails() {
                     </tr>
                 </thead>
                 <tbody>
-                    {consultas ?
+                    {consultas.length ?
                         consultas.map((consult, index) => (
                             <tr key={index} className="text-center text-blue-900 bg-white shadow-none bg-opacity-40 backdrop-filter backdrop-blur-lg">
                                 <td className="p-2">{consult.fechaConsulta}</td>
                                 <td className="p-2">{consult.especID.nombre}</td>
-                                <td className="p-2">Dr.{consult.profesionalID.apellido}, {consult.profesionalID.nombre}</td>
+                                <td className="p-2">Dr. {consult.profesionalID.apellido}, {consult.profesionalID.nombre}</td>
                             </tr>
                         )) : <tr className="text-center text-blue-900 bg-white shadow-none bg-opacity-40 backdrop-filter backdrop-blur-lg"><td className="p-2">Sin consultas</td></tr>}
                 </tbody>

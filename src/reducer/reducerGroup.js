@@ -1,20 +1,20 @@
 const inicialState = {
-    group: [],
-    afiliate:[],
-  };
-  export default function reducerGroup(state = inicialState, action) {
-    switch (action.type) {
-      case "GET_GROUP":
-        return {
-          ...state,
-          group: action.payload,
-        };
-        case "GET_AFILIATE":
-            return {
-              ...state,
-              afiliate: action.payload,
-            };
-      default:
-        return state;
-    }
+  group: [],
+  isLoading: false,
+};
+export default function reducerGroup(state = inicialState, action) {
+  switch (action.type) {
+    case "GET_GROUP":
+      return {
+        ...state,
+        group: action.payload,
+        isLoading: action.loading,
+      };
+    case "RESET_GROUP":
+      return {
+        ...inicialState,
+      };
+    default:
+      return state;
   }
+}

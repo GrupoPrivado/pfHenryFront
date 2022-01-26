@@ -12,7 +12,7 @@ import {
   functionErrorsBtn,
   validateEspeciality,
 } from "../../../utils/adminFormsControllers";
-import { enableBtn, disableBtn } from "../../../utils/ABMStyles";
+import { enableBtn, disableBtn, formError } from "../../../utils/ABMStyles";
 
 const UpdateSpeciality = ({ setShowModalUpdate }) => {
   const dispatch = useDispatch();
@@ -73,7 +73,7 @@ const UpdateSpeciality = ({ setShowModalUpdate }) => {
   };
 
   return (
-    <div>
+    <div className={styles.modal}>
       <section className={styles.modalmain}>
         <div className="flex justify-center h-10%">
           <h5 className="text-2xl font-bold text-gray-500">
@@ -82,10 +82,10 @@ const UpdateSpeciality = ({ setShowModalUpdate }) => {
         </div>
         <div className="modal-content py-4 text-left px-6 h-90%">
           <form>
-            <div>
+            <div className="mb-8">
               <label className="text-md text-gray-600">Nombre: </label>
               <input
-                className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md"
+                className="h-3 p-6 w-full border-2 border-gray-300  rounded-md"
                 type="text"
                 name="nombre"
                 autoComplete="off"
@@ -94,14 +94,14 @@ const UpdateSpeciality = ({ setShowModalUpdate }) => {
                 placeholder="Ingrese el nombre...."
               />
               {errores.nombre && (
-                <p className="absolute text-red-700">{errores.nombre}</p>
+                <p className={formError}>{errores.nombre}</p>
               )}
             </div>
 
             <div>
               <label className="text-md text-gray-600">Descripción: </label>
               <textarea
-                className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md resize-none"
+                className="h-3 p-6 w-full border-2 border-gray-300  rounded-md resize-none"
                 rows="8"
                 cols="50"
                 name="descripcion"
@@ -111,15 +111,17 @@ const UpdateSpeciality = ({ setShowModalUpdate }) => {
                 placeholder="Ingrese la Descripcion...."
               />
               {errores.descripcion && (
-                <p className="absolute text-red-700">{errores.descripcion}</p>
+                <p className={formError}>{errores.descripcion}</p>
               )}
             </div>
 
-            <div className="flex justify-between items-end mt-8">
+            
+          </form>
+          <div className="flex justify-between items-end mt-8">
               <div className="flex w-1/3  ">
                 <label className="text-md text-gray-600">Activo: </label>
                 <select
-                  className=" h-1/2 w-full  border-2 border-gray-300 mb-5 rounded-md"
+                  className=" h-1/2 w-full  border-2 border-gray-300  rounded-md"
                   id="activa"
                   name="activa"
                   onChange={(e) => handleUpdateSpeciality(e)}
@@ -133,8 +135,7 @@ const UpdateSpeciality = ({ setShowModalUpdate }) => {
                   <p className="absolute text-red-700">{errores.activa}</p>
                 )}
               </div>
-            </div>
-          </form>
+           
           <div className="flex w-2/3 justify-around  ">
             <button
               onClick={handleSubmitUpdateSpeciality}
@@ -151,6 +152,7 @@ const UpdateSpeciality = ({ setShowModalUpdate }) => {
             >
               Cerrar
             </button>
+          </div>
           </div>
         </div>
       </section>

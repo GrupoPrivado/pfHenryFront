@@ -13,7 +13,7 @@ import {
 } from "../../../utils/adminFormsControllers";
 
 import styles from "./UpdatePharmacy.module.css";
-import { enableBtn, disableBtn } from "../../../utils/ABMStyles";
+import { enableBtn, disableBtn, formError } from "../../../utils/ABMStyles";
 
 const UpdatePharmacy = ({ setShowModalUpdate }) => {
   const dispatch = useDispatch();
@@ -62,10 +62,10 @@ const UpdatePharmacy = ({ setShowModalUpdate }) => {
 
     if (Object.entries(validateError).length <= 0) {
       dispatch(updatePharmacy(updatePharmacyData));
-      setShowModalUpdate(false);
       //setUpdatePharmacyData(updatePharmacyDataStruct);
       //setErrors(true);
       dispatch(resetDataUpdate());
+      setShowModalUpdate(false);
     }
   };
 
@@ -78,16 +78,17 @@ const UpdatePharmacy = ({ setShowModalUpdate }) => {
   };
 
   return (
+    <div className={styles.modal}>
     <section className={styles.modalmain}>
       <div className="flex justify-center">
         <h5 className="text-2xl font-bold text-gray-500">Modificar Farmacia</h5>
       </div>
       <div className="modal-content py-4 text-left px-6 ">
         <form>
-          <div>
+          <div className="mb-4">
             <label className="text-md text-gray-600">Dirección: </label>
             <input
-              className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md"
+              className="h-3 p-6 w-full border-2 border-gray-300 m rounded-md"
               type="text"
               name="direccion"
               autoComplete="off"
@@ -96,14 +97,14 @@ const UpdatePharmacy = ({ setShowModalUpdate }) => {
               placeholder="Ingrese la Dirección...."
             />
             {errores.direccion && (
-              <p className="absolute text-red-700">{errores.direccion}</p>
+              <p className={formError}>{errores.direccion}</p>
             )}
           </div>
 
-          <div>
+          <div className="mb-4">
             <label className="text-md text-gray-600">Teléfono: </label>
             <input
-              className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md"
+              className="h-3 p-6 w-full border-2 border-gray-300  rounded-md"
               type="number"
               name="telefono"
               autoComplete="off"
@@ -113,14 +114,14 @@ const UpdatePharmacy = ({ setShowModalUpdate }) => {
             />
 
             {errores.telefono && (
-              <p className="absolute text-red-700">{errores.telefono}</p>
+              <p className={formError}>{errores.telefono}</p>
             )}
           </div>
 
-          <div>
+          <div className="mb-5">
             <label className="text-md text-gray-600">E-mail: </label>
             <input
-              className="h-3 p-6 w-full border-2 border-gray-300 mb-5 rounded-md"
+              className="h-3 p-6 w-full border-2 border-gray-300  rounded-md"
               type="mail"
               name="mail"
               autoComplete="off"
@@ -129,15 +130,17 @@ const UpdatePharmacy = ({ setShowModalUpdate }) => {
               placeholder="Ingrese el E-mail...."
             />
             {errores.mail && (
-              <p className="absolute text-red-700">{errores.mail}</p>
+              <p className={formError}>{errores.mail}</p>
             )}
           </div>
 
-          <div className="flex justify-between">
+          
+        </form>
+        <div className="flex justify-between ">
             <div className="flex w-1/3 ">
               <label className="text-md text-gray-600">Activo: </label>
               <select
-                className=" h-1/2 w-full  border-2 border-gray-300 mb-5 rounded-md"
+                className=" h-4/5 border-2 p-1 border-gray-300  rounded-md"
                 id="activa"
                 name="activo"
                 onChange={(e) => handleUpdatePharmacy(e)}
@@ -148,12 +151,10 @@ const UpdatePharmacy = ({ setShowModalUpdate }) => {
                 <option value="true">Si</option>
               </select>
               {errores.activo && (
-                <p className="absolute text-red-700">{errores.activo}</p>
+                <p className={formError}>{errores.activo}</p>
               )}
             </div>
-          </div>
-        </form>
-        <div className="flex w-2/3 justify-around">
+            <div className="flex w-2/3 justify-around">
           <button
             key="submitFormButton"
             onClick={handleSubmitUpdatePharmacy}
@@ -169,8 +170,11 @@ const UpdatePharmacy = ({ setShowModalUpdate }) => {
             Cerrar
           </button>
         </div>
+          </div>
+        
       </div>
     </section>
+    </div>
   );
 };
 
