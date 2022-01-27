@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { verifyRole } from '../../utils/authUtils';
 import AccesoDenegado from '../../Pages/AccesoDenegado/AccesoDenegado';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { removeItem } from '../../actions/actionAuth';
 
 const PrivateRouter = ({rol , children}) => { 
@@ -26,7 +26,8 @@ const PrivateRouter = ({rol , children}) => {
     if (isAuthenticated) {
         return children
     }    
-    return <AccesoDenegado/>
+    return <Navigate to="/" />
+
 }
 
 export default PrivateRouter
