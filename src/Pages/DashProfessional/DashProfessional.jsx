@@ -35,7 +35,7 @@ function DashProfessional() {
   }, []);
 
   return (
-    <div className="min-h-[91vh]">
+    <div className="">
       <IndexProfessional />
     </div>
   );

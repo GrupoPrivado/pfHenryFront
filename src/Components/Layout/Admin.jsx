@@ -17,7 +17,7 @@ import FooterAdmin from '../Footer/FooterAdmin'
 const Admin = () => {
     const [showSidebar, setShowSidebar] = useState(false);
     return (
-        <div>
+        <div className="flex flex-col">
             <NavbarDashAdmin showSidebar={showSidebar} setShowSidebar={setShowSidebar}/>
             <SideBar showSidebar={showSidebar} setShowSidebar={setShowSidebar}/>
             <Routes>

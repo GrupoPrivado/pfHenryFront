@@ -9,7 +9,7 @@ import ClinicHistory from '../Professionals/ClinicHistory'
 
 const Profesionales = () => {
     return (
-        <div>
+        <div className="flex flex-col">
             <NavbarProfessional />
             <Routes>
                 <Route path='/' element={<PrivateRouter rol={roles.PROF}><div> <DashProfessional/> </div></PrivateRouter>}/>

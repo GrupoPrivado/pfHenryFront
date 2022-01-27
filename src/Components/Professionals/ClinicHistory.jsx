@@ -22,6 +22,7 @@ const ClinicHistory = () => {
             Volver
           </button>
       <AffiliateData affiliateData={consultaMedicaData.afiliadoID} />
+      <hr className="w-70vw mx-auto mt-8  border-black border-opacity-50" />
       {clinicHistory?.length > 0 ? (
         clinicHistory.map((e) => {
           return (

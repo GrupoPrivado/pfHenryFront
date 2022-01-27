@@ -9,7 +9,7 @@ import NavBar from '../NavBar/NavBar'
 
 const Guest = () => {
     return (
-        <div>
+        <main>
             <NavBar/>
             <Routes>
                 <Route path='/' element={<LandingPage/>}/>
@@ -21,7 +21,7 @@ const Guest = () => {
             </Routes>
             <Footer />
 
-        </div>
+        </main>
     )
 }
 
