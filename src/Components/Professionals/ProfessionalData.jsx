@@ -7,7 +7,7 @@ const ProfessionalData = ({ professionalData }) => {
       <div className="flex gap-4">
         <div className="relative">
           <label className="absolute bg-white -top-[1.3rem] left-4 px-1 text-green-500">Nombre y Apellido</label>
-          <label className="resize-none ring-2 ring-stone-800 focus:ring-blue-500 outline-none rounded-md p-2 px-12">{professionalData.nombre}{professionalData.apellido}</label>
+          <label className="resize-none ring-2 ring-stone-800 focus:ring-blue-500 outline-none rounded-md p-2 px-12">{professionalData.nombre} {professionalData.apellido}</label>
         </div>
         <div className="relative">
           <label className="absolute bg-white -top-[1.3rem] left-4 px-1 text-green-500">DNI</label>
