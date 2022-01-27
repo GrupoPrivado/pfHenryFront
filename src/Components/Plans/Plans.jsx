@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux"
 import { getPlanes } from "../../actions/actionPlanes";
 import Modal from './Modal';
 // import {Link} from "react-router-dom"
-// import {motion} from 'framer-motion'
+import {motion} from 'framer-motion'
 
 function Plans() {
     const dispatch = useDispatch()
