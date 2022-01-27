@@ -1,11 +1,13 @@
-import React, { useEffect, useState, Fragment, useRef } from 'react'
-import { useSelector } from 'react-redux'
+import React, { 
+  // useEffect, 
+  useState, Fragment, useRef } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
+// import { useSelector } from 'react-redux'
 
 
 const Modal = ({ toggleClass, plan }) => {
 
-  const [active, setActive] = useState(true)
+  // const [active, setActive] = useState(true)
 
   const [open, setOpen] = useState(true)
 

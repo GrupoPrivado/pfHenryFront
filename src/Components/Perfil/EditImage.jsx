@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch
+    // , useSelector 
+} from "react-redux";
 import { putProfilePhoto } from "../../actions/actionAuth";
 import { profilePhoto } from "../../utils/constantes";
-import SuccessAlert from "../Alerts/SuccessAlert";
-import EditPassword from "./EditPassword";
+// import SuccessAlert from "../Alerts/SuccessAlert";
+// import EditPassword from "./EditPassword";
 
 function EditImage({ photo, modal, setModal }) {
     const dispatch = useDispatch();
@@ -13,7 +15,7 @@ function EditImage({ photo, modal, setModal }) {
 
     /// alertas 
     const [activeButton, setActiveButton] = useState(false)
-    const [activeAlert, setActiveAlert] = useState(false)
+    // const [activeAlert, setActiveAlert] = useState(false)
 
     useEffect(() => {
         if (photo) {
@@ -51,9 +53,9 @@ function EditImage({ photo, modal, setModal }) {
         }
     };
 
-    const handleClick = () => {
-        setModal(!modal)
-    }
+    // const handleClick = () => {
+    //     setModal(!modal)
+    // }
 
     return (
         <div className="flex flex-col items-center justify-evenly sm:w-50vw">

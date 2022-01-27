@@ -4,7 +4,7 @@ import Afiliado from "./Components/Layout/Afiliado";
 import Guest from "./Components/Layout/Guest";
 import Admin from "./Components/Layout/Admin";
 import Profesionales from "./Components/Layout/Profesionales";
-import Footer from "./Components/Footer/Footer";
+// import Footer from "./Components/Footer/Footer";
 
 function App() {
   return (

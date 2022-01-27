@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { 
+  // useEffect, 
+  useState } from "react";
 import { useDispatch } from "react-redux";
 import { changePassword } from "../../actions/actionAuth";
-import SuccessAlert from "../Alerts/SuccessAlert";
 import { validatePassword } from "../../utils/constantes";
+// import SuccessAlert from "../Alerts/SuccessAlert";
 
 function EditPassword({ setErrorAlert, setAlertMessage, modal, setModal }) {
   const dispatch = useDispatch();

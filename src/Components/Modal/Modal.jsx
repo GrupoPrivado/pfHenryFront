@@ -1,21 +1,21 @@
-import { Fragment, useRef, useState } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import { ExclamationIcon } from '@heroicons/react/outline'
+// import { Fragment, useRef, useState } from 'react'
+// import { Dialog, Transition } from '@headlessui/react'
+// import { ExclamationIcon } from '@heroicons/react/outline'
 
-export default function Modal() {
+// export default function Modal() {
 
-    return (
-        <div>
-            {/* <div>
-                <button>X</button>
-                <div>
-                    <h1>Credencial</h1>
-                </div>
-                <div></div>
-                <div></div>
-            </div> */}
-        </div>
-    )
+//     return (
+//         <div>
+//             <div>
+//                 <button>X</button>
+//                 <div>
+//                     <h1>Credencial</h1>
+//                 </div>
+//                 <div></div>
+//                 <div></div>
+//             </div>
+//         </div>
+//     )
 
 //   const [open, setOpen] = useState(false)
 
@@ -92,4 +92,4 @@ export default function Modal() {
 //       </Dialog>
 //     </Transition.Root>
 //   )
-}
+// }

@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from "react";
-import NavBarDashboard from "../NavBarDashboard/NavBarDashboard";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getAllProviders,
   getAllCities,
   getAllSpecialties,
-  filterByCity,
-  getAllPharmacies,
+  // filterByCity,
+  // getAllPharmacies,
   getAllProvinces,
   deleteCities,
 } from "../../actions/actionProviders";
-import Pharmacies from "../../Pages/PharmaciesPage/Pharmacies";
-import { User } from "heroicons-react";
-import { getAfiliate, getItem } from "../../actions/actionAuth";
-import Logo from "./../../assets/bg2.jpg";
+import Logo from "./../../assets/bg2.jpg"
 import CartillaMedica from "./CartillaMedica";
 import { convertClassName } from "../../utils/constantes";
+// import { Link } from "react-router-dom";
+// import NavBarDashboard from "../NavBarDashboard/NavBarDashboard";
+// import Pharmacies from "../../Pages/PharmaciesPage/Pharmacies";
+// import { User } from "heroicons-react";
+// import { getAfiliate, getItem } from "../../actions/actionAuth";
 
 export default function CartPrest() {
   const dispatch = useDispatch();
@@ -39,18 +39,13 @@ export default function CartPrest() {
 
   useEffect(() => {
     dispatch(getAllProvinces());
-    dispatch(getAllSpecialties());
-  }, []);
+    dispatch(getAllSpecialties())
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   useEffect(() => {
-    dispatch(
-      getAllProviders(
-        filter.provinciaID,
-        filter.ciudadID,
-        filter.especID,
-        filter.skip
-      )
-    );
+    dispatch(getAllProviders(filter.provinciaID, filter.ciudadID, filter.especID, filter.skip));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter.ciudadID, filter.provinciaID, filter.especID, filter.skip]);
 
   const handleSelectCity = (e) => {

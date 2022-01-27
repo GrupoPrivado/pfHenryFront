@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FormLogin from "../../Components/FormLogin/FormLogin";
-//import Logo from "./../../assets/logo.svg"
 import HappyFamily from "./../../assets/happyFamily.jpeg";
-import NavBar from "../../Components/NavBar/NavBar";
 import { getItem } from "../../actions/actionAuth";
 import { useTitle } from "../../hooks/useTitle";
-import Logo from "../../assets/logo.svg";
 import RecoverPassword from "../../Components/FormLogin/RecoverPassword";
-import SuccessAlert from "../../Components/Alerts/SuccessAlert";
-import ErrorAlert from "../../Components/Alerts/ErrorAlert";
 import { alertSweet } from "../../Components/Alerts/alertSweet";
 import {motion} from 'framer-motion'
+//import Logo from "./../../assets/logo.svg"
+// import NavBar from "../../Components/NavBar/NavBar";
+// import Logo from "../../assets/logo.svg";
+// import SuccessAlert from "../../Components/Alerts/SuccessAlert";
+// import ErrorAlert from "../../Components/Alerts/ErrorAlert";
 
 function Login() {
   const [activeForm, setForm] = useState(false);
