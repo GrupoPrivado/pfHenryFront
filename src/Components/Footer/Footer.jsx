@@ -12,7 +12,7 @@ const Footer = () => {
   return (
     <>
       {actualRoute && (
-        <footer className="absolute bottom-0 w-full h-30vh grid items-start grid-cols-1 p-5 bg-gray-800 md:justify-items-center md:grid-cols-8">
+        <footer className="bottom-0 w-full h-24vh grid items-start grid-cols-1 p-5 bg-gray-800 md:justify-items-center md:grid-cols-8">
           <div className="pb-2 md:col-span-2 md:mb-0">
             <p className="text-gray-200">Nosotros</p>
             <ul className="pt-5 text-gray-400">

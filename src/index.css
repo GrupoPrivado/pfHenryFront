@@ -2,10 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-html{
+/* html{
     min-height: 100%;
     position: relative;
 }
 body{
     margin-bottom: 24vh;
-}
+} */
