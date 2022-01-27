@@ -9,3 +9,9 @@ html{
 body{
     margin-bottom: 24vh;
 }
+
+@media screen and (max-width: 1700px) {
+    body{
+        margin-bottom: 35vh;
+    }
+}
