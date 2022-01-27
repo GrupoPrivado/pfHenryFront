@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import DashProfessional from '../../Pages/DashProfessional/DashProfessional'
 import { roles } from '../../utils/roles'
 import FooterProfessional from '../Footer/FooterProfessional'
@@ -14,7 +14,7 @@ const Profesionales = () => {
             <Routes>
                 <Route path='/' element={<PrivateRouter rol={roles.PROF}><div> <DashProfessional/> </div></PrivateRouter>}/>
                 <Route path='/historiaclinica' element={<PrivateRouter rol={roles.PROF}><div> <ClinicHistory/> </div></PrivateRouter>}/>
-                <Route path='*' element={<div><h1>Recurso no encontrado</h1></div>} />
+                <Route path='*' element={<Navigate to="/" />} />
             </Routes>
             <FooterProfessional />
         </div>

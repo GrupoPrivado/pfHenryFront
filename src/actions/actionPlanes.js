@@ -4,12 +4,14 @@ import {api} from '../../src/urlHostApi'
 
 export function getPlanes() {
     return async function (dispatch) {
-     
+      dispatch({type: "GET_PLANES",
+      payload: [], loading: true})
       var json = await axios.get(`${api}/planesMutual`);
        
       return dispatch({
         type: "GET_PLANES",
         payload: json.data.message,
+        loading: false
       });
     
       

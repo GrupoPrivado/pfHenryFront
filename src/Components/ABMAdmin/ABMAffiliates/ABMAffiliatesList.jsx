@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import {
   getAffiliateData,
@@ -8,8 +8,10 @@ import {
 
 import styles from "./ABMAffiliates.module.css";
 
-const ABMAffiliatesList = ({ allAffiliates, setShowModalUpdate, setShowModalAdd, setShowModalUpDown }) => {
+const ABMAffiliatesList = ({ setShowModalUpdate, setShowModalAdd, setShowModalUpDown }) => {
   const dispatch = useDispatch();
+
+  const { allAffiliates } = useSelector((state) => state.ABMAdmin);
 
   const handleEditAffiliate = async (event) => {
     await dispatch(getAffiliateData(event.target.value));
@@ -26,7 +28,7 @@ const ABMAffiliatesList = ({ allAffiliates, setShowModalUpdate, setShowModalAdd,
       <div className={styles.divScroll}>
         <div className="bg-gray-50 min-h-screen  ">
           <div>
-            <div className="p-4">
+            <div className="px-4 pb-4">
               <div className="bg-white p-6 rounded-md">
                 <div>
                   <div className=" flex justify-end">

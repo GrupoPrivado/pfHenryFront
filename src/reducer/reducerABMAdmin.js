@@ -3,6 +3,7 @@ const initialState = {
   provinces: [],
   allSpecialities: [],
   allAffiliates: [],
+  allAffiliatesTitular:[],
   allPlans: [],
   allPharmacies: [],
   pharmacies: [],
@@ -14,6 +15,18 @@ const initialState = {
   updateData: {},
   viewPlan: [],
   limitPaged: 0,
+  isLoadingProfEspec: true,
+  profEspec: [],
+  isLoadingAllPlans: true,
+  allPlan: [],
+  isLoadingAfilProv: true,
+  afilProv: [],
+  isLoadingPresStat: true,
+  presStat: [],
+  isLoadingAfilStat: true,
+  afilStat: [],
+  pharmCity: [],
+  isLoadingPharmCity: true,
 };
 
 export default function reducerABMAdmin(state = initialState, action) {
@@ -51,6 +64,20 @@ export default function reducerABMAdmin(state = initialState, action) {
         allAffiliates: action.payload,
         limitPaged: action.limitPaged,
       };
+
+      case "GET_AFFILIATES_TITULAR":
+        return {
+          ...state,
+          allAffiliatesTitular: action.payload,
+          limitPaged: action.limitPaged,
+        };
+  
+
+      case "AFFILIATE_DNI":
+        return {
+          ...state,
+          allAffiliates: action.payload,
+        };
 
     case "AFFILIATE_DATA":
       return {
@@ -153,19 +180,56 @@ export default function reducerABMAdmin(state = initialState, action) {
         viewPlan: plan,
       };
 
-      case 'RESET_CITIES_ABM':
-        console.log('elimine las ciudades')
-        return {...state, cities: [] }
+    case "RESET_CITIES_ABM":
+      return { ...state, cities: [] };
 
-    case "FILTER_ACTIV":
-      let filteredPharm = state.pharmacies;
-      if (action.payload !== "") {
-        filteredPharm =
-          action.payload === "Si"
-            ? filteredPharm.filter((element) => element.activo === true)
-            : filteredPharm.filter((element) => element.activo !== true);
-      }
-      return { ...state, allPharmacies: filteredPharm };
+    // case "FILTER_ACTIV":
+    //   let filteredPharm = state.pharmacies;
+    //   if (action.payload !== "") {
+    //     filteredPharm =
+    //       action.payload === "Si"
+    //         ? filteredPharm.filter((element) => element.activo === true)
+    //         : filteredPharm.filter((element) => element.activo !== true);
+    //   }
+    //   console.log(filteredPharm,'filteredPharm')
+    //   return { ...state, allPharmacies: filteredPharm };
+
+    case "GET_PROF_ESP":
+      return {
+        ...state,
+        profEspec: action.payload,
+        isLoadingProfEspec: action.loading,
+      };
+    case "GET_AFIL_PLANS":
+      return {
+        ...state,
+        allPlan: action.payload,
+        isLoadingAllPlans: action.loading,
+      };
+    case "GET_AFIL_PRO":
+      return {
+        ...state,
+        afilProv: action.payload,
+        isLoadingAfilProv: action.loading,
+      };
+    case "GET_PRES_STAT":
+      return {
+        ...state,
+        presStat: action.payload,
+        isLoadingPresStat: action.loading,
+      };
+    case "GET_AFIL_STAT":
+      return {
+        ...state,
+        afilStat: action.payload,
+        isLoadingAfilStat: action.loading,
+      };
+    case "GET_PHARM_CITY":
+      return {
+        ...state,
+        pharmCity: action.payload,
+        isLoadingPharmCity: action.loading,
+      };
 
     default:
       return state;

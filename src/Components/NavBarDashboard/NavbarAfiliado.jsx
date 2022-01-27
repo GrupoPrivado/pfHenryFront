@@ -4,9 +4,11 @@ import React, {
 import Logo from "../../assets/logo.svg";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { logout } from "../../utils/authUtils";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { profilePhoto } from "../../utils/constantes";
 import styles from './NavbarAfiliado.module.css'
+import { getItem, resetAuth } from "../../actions/actionAuth";
+import { resetGroup } from "../../actions/actionGroup";
 
 const NavbarAfiliado = () => {
   let activeClassName =
@@ -31,7 +33,8 @@ const NavbarAfiliado = () => {
 
   const { user } = useSelector((state) => state.auth);
 
-  // aray de li
+  const haveFamily = getItem('haveFamily')
+
 
   return (
     <nav className={styles.navBar}>
@@ -56,7 +59,8 @@ const NavbarAfiliado = () => {
                   Dashboard
                 </NavLink>
               </li>
-              <li>
+              {
+                haveFamily === 'true' &&  <li>
                 <NavLink
                   to="group"
                   className={({ isActive }) =>
@@ -66,6 +70,8 @@ const NavbarAfiliado = () => {
                   Grupo Familiar
                 </NavLink>
               </li>
+              }
+
               <li>
                 <NavLink to="autorizaciones">
                   {({ isActive }) => (
@@ -131,6 +137,7 @@ export default NavbarAfiliado;
 
 export const MenuList = ({setIsOpen}) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch()
   return (
     <div className="absolute bg-white rounded-md shadow-md w-48 h-26 z-50 right-0">
       <ul><Link to={"perfil"} onClick={() => setIsOpen(false)} >
@@ -141,6 +148,8 @@ export const MenuList = ({setIsOpen}) => {
           className="p-2 text-center rounded-bl-md rounded-br-md rounded-tl-md hover:bg-gray-200 cursor-pointer"
           onClick={() => {
             logout();
+            dispatch(resetAuth())
+            dispatch(resetGroup())
             navigate("/");
           }}
         >

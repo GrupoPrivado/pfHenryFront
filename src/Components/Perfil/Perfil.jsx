@@ -58,16 +58,17 @@ function Perfil() {
       setAlertMessage(message);
     }
 
-    // if (!data) {
-    //   dispatch(getAfiliate(getItem()));
+    // if (route === "login") {
+    //   removeItem("userType");
+    //   navigate(`/${route}`);
     // }
-    if (route !== "") {
-      removeItem("userType");
-      navigate(`/${route}`);
-    }
+    // if (route !== "") {
+    //   navigate(`/${route}`);
+    // }
+
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [route, message, type, activeAlert, errorAlert]);
+  }, [message, type, activeAlert, errorAlert]);
 
   const handleClick = () => {
     setModal(!modal)

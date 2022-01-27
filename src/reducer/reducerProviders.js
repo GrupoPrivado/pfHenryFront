@@ -11,7 +11,9 @@ const inicialState = {
   specialties: [],
   pharmacies: [],
   limitPaged: 0,
-  isLoading: false
+  isLoading: false,
+  isLoadingCities: false
+
 };
 export default function reducerPrestadores(state = inicialState, action) {
   switch (action.type) {
@@ -39,6 +41,7 @@ export default function reducerPrestadores(state = inicialState, action) {
       return {
         ...state,
         cities: action.payload,
+        isLoadingCities: action.loading
       };
 
     case "GET_ALL_SPECIALTIES":

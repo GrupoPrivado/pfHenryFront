@@ -8,7 +8,7 @@ import {
 import { getAllCities } from "../../actions/actionProviders";
 import date from "./../../utils/date.js";
 import { validate } from "../../utils/constantes";
-import { TrashIcon, PencilIcon } from '@heroicons/react/outline'
+import { TrashIcon, PencilIcon } from "@heroicons/react/outline";
 
 export default function FormAsociate({
   setEditModal,
@@ -16,6 +16,7 @@ export default function FormAsociate({
   cities,
   modal,
   setModal,
+  isLoadingCities,
 }) {
   const dispatch = useDispatch();
   const { planes } = useSelector((state) => state.planes);
@@ -68,7 +69,6 @@ export default function FormAsociate({
   }
 
   const handleEdit = (e) => {
-    console.log(e.target.value, 'value edit')
     dispatch(findFamiliar(e.target.value));
     setEditModal(true);
   };
@@ -268,9 +268,16 @@ export default function FormAsociate({
                 onChange={handleChange}
                 placeholder="Seleccionar localidad"
               >
-                <option disabled value="">
-                  Seleccionar localidad
-                </option>
+                {isLoadingCities ? (
+                  <option disabled value="">
+                    Cargando...
+                  </option>
+                ) : (
+                  <option disabled value="">
+                    Seleccionar localidad
+                  </option>
+                )}
+
                 {cities &&
                   cities.map((c) => (
                     <option key={c._id} value={c._id}>
@@ -344,7 +351,9 @@ export default function FormAsociate({
                 placeholder="Repetir contraseña"
               />
               {errores.repeatPassword && (
-                <p className="absolute text-red-700">{errores.repeatPassword}</p>
+                <p className="absolute text-red-700">
+                  {errores.repeatPassword}
+                </p>
               )}
             </div>
           </div>
@@ -382,7 +391,6 @@ export default function FormAsociate({
                       onClick={handleEdit}
                     >
                       <PencilIcon className="w-5 h-5 text-white pointer-events-none" />
-
                     </button>
                     <button
                       value={e.idAf}

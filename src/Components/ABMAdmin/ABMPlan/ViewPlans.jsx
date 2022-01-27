@@ -8,7 +8,6 @@ import styles from "./ViewPlans.module.css";
 const ViewPlans = ({ setShowModalView }) => {
   const dispatch = useDispatch();
   const { viewPlan } = useSelector((state) => state.ABMAdmin);
-  console.log(viewPlan[0].descripcion);
 
   const handleClose = () => {
     setShowModalView(false);

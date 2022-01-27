@@ -26,6 +26,11 @@ export function getGroup(grupFamID) {
     });
   };
 }
+
+
+export const resetGroup = () => dispatch => dispatch({type: 'RESET_GROUP'})
+
+
 // export function getAfiliate(dni){
  
 //     return async function (dispatch) {

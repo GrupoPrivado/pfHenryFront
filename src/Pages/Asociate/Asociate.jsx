@@ -39,7 +39,7 @@ export default function Asociate() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [message, type]);
 
-  const {provinces, cities} = useSelector(state => state.providers)
+  const {provinces, cities, isLoadingCities} = useSelector(state => state.providers)
   useTitle("Asociate a ArpyMedical");
   
 useEffect(() => {
@@ -57,6 +57,7 @@ useEffect(() => {
             modal={modal}
             setModal={setModal}
             setEditModal={setEditModal}
+            isLoadingCities={isLoadingCities}
           />
         
         {modal && (
@@ -65,9 +66,10 @@ useEffect(() => {
             cities={cities}
             modal={modal}
             setModal={setModal}
+            isLoadingCities={isLoadingCities}
           />
         )}
-      {editModal && <EditFamiliar provinces={provinces} cities={cities} setEditModal={setEditModal} /> }
+      {editModal && <EditFamiliar provinces={provinces} cities={cities} setEditModal={setEditModal} isLoadingCities={isLoadingCities} /> }
 
       {activeAlert && alertSweet('success', alertMessage, false, false, setActiveAlert, !activeAlert , () => {}, false, 2500)}
       {errorAlert && alertSweet('error', alertMessage, false, false, setErrorAlert, !errorAlert , () => {},  false, 2800)}

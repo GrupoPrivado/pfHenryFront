@@ -41,7 +41,7 @@ function CartillaMedica({ providers, isLoading }) {
       ) : (
         <table className="mx-auto text-gray-900 bg-white shadow-none w-90vw bg-opacity-40 rounded-br-xl rounded-bl-xl backdrop-filter backdrop-blur-lg">
           <tbody>
-            {typeof providers === "object" ? (
+            {providers.length ? (
               providers.map((prof, index) => (
                 <tr
                   key={index}
