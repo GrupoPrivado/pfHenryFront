@@ -34,7 +34,7 @@ const ABMPharmaciesList = ({
 
   return (
     <div className={styles.divScroll}>
-      <div className="bg-gray-50 min-h-screen  ">
+      <div className="bg-gray-50 min-h-[60vh]  ">
         <div>
           <div className="">
             <div className="bg-white px-6 pb-6 pt-1 rounded-md">
