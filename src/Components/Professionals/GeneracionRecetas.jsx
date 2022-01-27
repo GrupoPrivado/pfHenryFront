@@ -56,7 +56,7 @@ const GeneracionRecetas = ({
   };
 
   return (
-    <section className="absolute top-0 left-0 w-100vw full min-h-100vh bg-white flex flex-col gap-12 justify-center items-center z-50 p-4">
+    <section className="absolute top-0 left-0 w-100vw full min-h-100vh bg-white flex flex-col gap-12 justify-center items-center z-50 p-8">
       <article className=" flex flex-col gap-4 items-center justify-center">
       <label className="py-4 mt-8 text-3xl">Afiliado</label>
       <div className="flex gap-4">
