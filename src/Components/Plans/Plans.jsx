@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import {useDispatch, useSelector} from "react-redux"
 import { getPlanes } from "../../actions/actionPlanes";
-import {Link} from "react-router-dom"
 import Modal from './Modal';
-import {motion} from 'framer-motion'
+// import {Link} from "react-router-dom"
+// import {motion} from 'framer-motion'
 
 function Plans() {
     const dispatch = useDispatch()

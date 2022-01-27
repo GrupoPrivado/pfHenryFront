@@ -1,8 +1,8 @@
 import React from "react";
 import CarouselSlide from "../../Components/CarouselSlide/CarouselSlide";
-import NavBar from '../../Components/NavBar/NavBar'
 import Plans from "../../Components/Plans/Plans";
 import {motion} from 'framer-motion'
+// import NavBar from '../../Components/NavBar/NavBar'
 
 export default function LandingPage() {
     return (

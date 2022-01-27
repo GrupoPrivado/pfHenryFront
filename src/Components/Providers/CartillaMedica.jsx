@@ -1,7 +1,9 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React
+// , { useEffect } 
+from "react";
 import { SpinnerCircular } from "spinners-react";
-import { getAllProviders } from "./../../actions/actionProviders";
+// import { useSelector, useDispatch } from "react-redux";
+// import { getAllProviders } from "./../../actions/actionProviders";
 
 function CartillaMedica({ providers, isLoading }) {
   return (

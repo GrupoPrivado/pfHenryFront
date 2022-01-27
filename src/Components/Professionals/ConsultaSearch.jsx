@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getconsultaMedica } from "../../actions/professionalsActions";
 import { validateDNIToken } from "../../utils/professionalFormsCOntrollers";
+import { hoverBtnProf, disableBtnProf } from "../../utils/ABMStyles";
 
 function ConsultaSearch() {
   const dispatch = useDispatch();
@@ -35,9 +36,9 @@ function ConsultaSearch() {
 
   return (
     <div>
-      <section className="flex justify-center items-center h-20">
-        <div>
-          <label>DNI Afiliado: </label>
+      <section className="flex justify-center items-center h-20 gap-10">
+        <div className=" relative flex flex-col">
+          <label className="absolute bg-white -top-[1rem] left-4 px-1">DNI Afiliado</label>
           <input
             type="number"
             name="DNI"
@@ -45,13 +46,14 @@ function ConsultaSearch() {
             value={dataAffiliate.DNI}
             onChange={(e) => handleChange(e)}
             placeholder="Ingrese el DNI...."
+            className="ring-2 ring-green-500 focus:ring-blue-500 outline-none rounded-md p-2"
           />
           {errores.DNI && (
-            <p className="absolute text-red-700">{errores.DNI}</p>
+            <p className="absolute top-[2.5rem] text-red-700">{errores.DNI}</p>
           )}
         </div>
-        <div>
-          <label>Token Consulta: </label>
+        <div className="relative flex flex-col">
+          <label className="absolute bg-white -top-[1rem] left-4 px-1">Token Consulta</label>
           <input
             type="number"
             name="token"
@@ -59,14 +61,17 @@ function ConsultaSearch() {
             value={dataAffiliate.token}
             onChange={(e) => handleChange(e)}
             placeholder="Ingrese el Token...."
+            className="ring-2 ring-green-500 focus:ring-blue-500 outline-none rounded-md p-2"
           />
           {errores.token && (
-            <p className="absolute text-red-700">{errores.token}</p>
+            <p className="absolute top-[2.5rem] text-red-700">{errores.token}</p>
           )}
         </div>
         <div>
           {/* <label>Token Consulta: </label> */}
-          <button name="searchBtn" onClick={handleSendInfo}>
+          <button name="searchBtn" 
+          className={disableBtnProf + " " + hoverBtnProf}
+          onClick={handleSendInfo}>
             Buscar
           </button>
         </div>

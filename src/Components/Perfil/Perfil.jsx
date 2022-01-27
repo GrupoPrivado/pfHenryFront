@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getAfiliate, getItem, removeItem } from "../../actions/actionAuth";
+import { getAfiliate, 
+  // getItem, 
+  removeItem } from "../../actions/actionAuth";
 import { alertActions } from "../../actions/actionAlerts";
 
 import EditImage from "./EditImage";
 import EditPassword from "./EditPassword";
 import EditProfile from "./EditProfile";
-import SuccessAlert from "../Alerts/SuccessAlert";
-import ErrorAlert from "../Alerts/ErrorAlert";
 import { getAllCities, getAllProvinces } from "../../actions/actionProviders";
 import { alertSweet } from '../Alerts/alertSweet'
 import PersonalDetails from "./PersonalDetails";
+// import SuccessAlert from "../Alerts/SuccessAlert";
+// import ErrorAlert from "../Alerts/ErrorAlert";
 
 
 
@@ -25,7 +27,9 @@ function Perfil() {
 
   const [activeAlert, setActiveAlert] = useState(false);
   const [errorAlert, setErrorAlert] = useState(false);
-  const { cities, provinces } = useSelector((state) => state.providers);
+  const { 
+                // cities, 
+                provinces } = useSelector((state) => state.providers);
 
   const [alertMessage, setAlertMessage] = useState("");
   const [modal, setModal] = useState(false)
@@ -37,6 +41,7 @@ function Perfil() {
     if (provinces.length === 0) dispatch(getAllProvinces());
 
     if (user.provinciaID) dispatch(getAllCities(user.provinciaID));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user.provinciaID]);
 
   useEffect(() => {
@@ -61,6 +66,7 @@ function Perfil() {
       navigate(`/${route}`);
     }
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [route, message, type, activeAlert, errorAlert]);
 
   const handleClick = () => {

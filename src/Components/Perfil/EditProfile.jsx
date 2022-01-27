@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux"
 import { updateUser } from '../../actions/actionAuth';
-import { filterByCity, getAllCities, getAllProvinces } from '../../actions/actionProviders';
+import { 
+    // filterByCity, 
+    getAllCities
+    // , getAllProvinces 
+} from '../../actions/actionProviders';
 import Facturas from '../Facturas/Facturas';
 import { validateContactDetails } from "../../utils/constantes";
 

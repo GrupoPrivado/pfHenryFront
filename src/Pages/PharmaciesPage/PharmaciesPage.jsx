@@ -15,10 +15,10 @@ import { convertClassName } from "../../utils/constantes";
 const PharmaciesPage = () => {
   const dispatch = useDispatch();
   const {
-    allProviders,
+    // allProviders,
+    // specialties,
+    // providers,
     cities,
-    specialties,
-    providers,
     pharmacies,
     provinces,
     limitPaged,
@@ -32,11 +32,13 @@ const PharmaciesPage = () => {
   });
   useEffect(() => {
     dispatch(getAllProvinces());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
     //dispatch(getAllCities(filter.provinciaID));
     dispatch(getAllPharmacies(filter.provinciaID, filter.ciudadID, filter.skip));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter.ciudadID, filter.provinciaID, filter.skip]);
 
 

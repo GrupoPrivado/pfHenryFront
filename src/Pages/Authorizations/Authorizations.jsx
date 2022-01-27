@@ -12,6 +12,7 @@ const Authorizations = () => {
     const [modal, setModal] = useState(false);
     useEffect(() => {
         if(!recipes.length) dispatch(getRecetas())
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const handleClick = (e, rec_id) => {
