@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import DashAfil from '../../Pages/DashAfiliado/DashAfil'
 import MiCuenta from '../../Pages/MiCuenta/MiCuenta'
 import { roles } from '../../utils/roles'
@@ -39,7 +39,7 @@ const Afiliado = () => {
         <Route path="/farmacias" element={<PrivateRouter rol={roles.AFIL}><PharmaciesPage /></PrivateRouter>} />
         <Route path="/perfil" element={<PrivateRouter rol={roles.AFIL}><Perfil/></PrivateRouter>} />
 
-        <Route path='*' element={<div><h1>Recurso no encontrado</h1></div>} />
+        <Route path='*' element={<Navigate to="/" />} />
       </Routes>
       <Footer /> 
     </div>

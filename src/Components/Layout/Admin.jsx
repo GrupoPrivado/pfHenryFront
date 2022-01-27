@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import DashAdmin from '../../Pages/DashAdmin/DashAdmin'
 import { roles } from '../../utils/roles'
 import NavbarDashAdmin from '../NavBarDashboard/NavbarDashAdmin'
@@ -23,7 +23,7 @@ const Admin = () => {
             <SideBar showSidebar={showSidebar} setShowSidebar={setShowSidebar}/>
             <Routes>
                 <Route path='/' element={<PrivateRouter rol={roles.ADMIN}><DashAdmin /></PrivateRouter>}/>
-                <Route path='*' element={<div><h1>Recurso no encontrado</h1></div>} />
+                <Route path='*' element={<Navigate to="/" />} />
                 <Route path='/especialidades' element={<PrivateRouter rol={roles.ADMIN}><ABMSpecialities/></PrivateRouter>}/>
                 <Route path='/farmacias' element={<PrivateRouter rol={roles.ADMIN}><ABMPharmacies/></PrivateRouter>}/>
                 <Route path='/afiliados' element={<PrivateRouter rol={roles.ADMIN}><ABMAffiliates/></PrivateRouter>}/>
