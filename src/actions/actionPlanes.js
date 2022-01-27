@@ -1,6 +1,6 @@
 import axios from "axios";
 import {api} from '../../src/urlHostApi'
-import { alertConstants } from "./actionAlerts";
+// import { alertConstants } from "./actionAlerts";
 
 export function getPlanes() {
     return async function (dispatch) {

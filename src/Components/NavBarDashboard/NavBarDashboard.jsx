@@ -4,7 +4,9 @@ import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import { logout } from '../../utils/authUtils';
 import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom"
-import { useDispatch, useSelector } from 'react-redux'
+import { 
+    // useDispatch,
+     useSelector } from 'react-redux'
 import Logo from "../../assets/logo.svg"
 import { profilePhoto } from '../../utils/constantes';
 
@@ -18,14 +20,14 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-const navigationa = [
-    { name: 'Dashboard', href: '/afiliado', current: true },
-    { name: 'Grupo Familiar', href: '/afiliado/group', current: false },
-    { name: 'Credencial Digital', href: '/afiliado/credencial', current: false }, // anularia la ruta
-    { name: 'Autorizaciones', href: '/afiliado/autorizaciones', current: false },
-    { name: 'Historial', href: '/afiliado/historial', current: false },
-    { name: 'Cartilla', href: '/afiliado/prestadores', current: false },
-]
+// const navigationa = [
+//     { name: 'Dashboard', href: '/afiliado', current: true },
+//     { name: 'Grupo Familiar', href: '/afiliado/group', current: false },
+//     { name: 'Credencial Digital', href: '/afiliado/credencial', current: false }, // anularia la ruta
+//     { name: 'Autorizaciones', href: '/afiliado/autorizaciones', current: false },
+//     { name: 'Historial', href: '/afiliado/historial', current: false },
+//     { name: 'Cartilla', href: '/afiliado/prestadores', current: false },
+// ]
 
 
 export default function NavBarDashboard() {
@@ -37,6 +39,7 @@ export default function NavBarDashboard() {
         { name: 'Cartilla', href: '/afiliado/prestadores', current: false },
         { name: 'Farmacias', href: '/afiliado/farmacias', current: false },
     ])
+    // eslint-disable-next-line no-unused-vars
     const [profile, setProfile] = useState([
         { name: "Perfil", href: "/afiliado/perfil", current: false }
     ])
@@ -49,6 +52,7 @@ export default function NavBarDashboard() {
     ]
 
     const navigate = useNavigate()
+    // eslint-disable-next-line no-unused-vars
     const { user, route } = useSelector(state => state.auth)
 
     const handleLogOut = () => {

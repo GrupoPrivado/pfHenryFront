@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import NavBar from '../../Components/NavBar/NavBar'
 import FormContact from '../../Components/FormContact/FormContact'
 import {useTitle} from '../../hooks/useTitle'
-import SuccessAlert from '../../Components/Alerts/SuccessAlert'
-import ErrorAlert from '../../Components/Alerts/ErrorAlert'
+// import NavBar from '../../Components/NavBar/NavBar'
+// import SuccessAlert from '../../Components/Alerts/SuccessAlert'
+// import ErrorAlert from '../../Components/Alerts/ErrorAlert'
 
 import { alertSweet} from '../../Components/Alerts/alertSweet'
 

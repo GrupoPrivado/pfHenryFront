@@ -1,18 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, 
+  // useState 
+} from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { logout } from "../../utils/authUtils";
-import NavBarDashAdmin from "../../Components/NavBarDashboard/NavbarDashAdmin";
-
-import ABMSpecialities from "../../Components/ABMAdmin/ABMSpecialties/ABMSpecialties";
-import ABMAffiliates from "../../Components/ABMAdmin/ABMAffiliates/ABMAffiliates";
-import ABMPharmacies from "../../Components/ABMAdmin/ABMPharmacies/ABMPharmacies";
-import ABMPlans from "../../Components/ABMAdmin/ABMPlan/ABMPlans";
-import ABMProfessionals from "../../Components/ABMAdmin/ABMProfessionals/ABMProfessionals";
-import ABMPrescriptions from "../../Components/ABMAdmin/ABMPrescriptions/ABMPrescriptions";
-import ABMPharmaciesList from "../../Components/ABMAdmin/ABMPharmacies/ABMPharmaciesList";
+import { 
+  // Link,
+  useNavigate } from "react-router-dom";
 import IndexProfessional from "../../Components/Professionals/indexProfessional";
 import { getProfessionalData } from "../../actions/professionalsActions";
+// import { logout } from "../../utils/authUtils";
+// import NavBarDashAdmin from "../../Components/NavBarDashboard/NavbarDashAdmin";
+
+// import ABMSpecialities from "../../Components/ABMAdmin/ABMSpecialties/ABMSpecialties";
+// import ABMAffiliates from "../../Components/ABMAdmin/ABMAffiliates/ABMAffiliates";
+// import ABMPharmacies from "../../Components/ABMAdmin/ABMPharmacies/ABMPharmacies";
+// import ABMPlans from "../../Components/ABMAdmin/ABMPlan/ABMPlans";
+// import ABMProfessionals from "../../Components/ABMAdmin/ABMProfessionals/ABMProfessionals";
+// import ABMPrescriptions from "../../Components/ABMAdmin/ABMPrescriptions/ABMPrescriptions";
+// import ABMPharmaciesList from "../../Components/ABMAdmin/ABMPharmacies/ABMPharmaciesList";
 
 function DashProfessional() {
   const dispatch = useDispatch();
@@ -27,10 +31,11 @@ function DashProfessional() {
 
   useEffect(() => {
     if (!!professionalData) dispatch(getProfessionalData());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div className="min-h-[91vh]">
+    <div className="">
       <IndexProfessional />
     </div>
   );

@@ -26,7 +26,7 @@ const ABMPlansList = ({
 
   return (
     <div className={styles.divScroll}>
-      <div className="bg-gray-50 min-h-screen  ">
+      <div className="bg-gray-50 min-h-[60vh]  ">
         <div>
           <div className="p-4">
             <div className="bg-white p-6 rounded-md">

@@ -8,17 +8,17 @@ import Logo from "./../../assets/bg2.jpg";
 import { useNavigate } from "react-router-dom";
 import { getGroup } from "../../actions/actionGroup";
 import {
+  // getItem,
   getAfiliate,
-  getItem,
   getMedicalToken,
   removeItem,
 } from "../../actions/actionAuth";
 import Credencial from "../../Components/Credencial/Credencial";
 import { getRecetas } from "../../actions/actionRecet";
-import Modal from "../../Components/Modal/Modal";
 import { motion } from "framer-motion";
 import { IdentificationIcon, KeyIcon } from "@heroicons/react/outline";
 import { getHistorial } from "../../actions/actionConsultas";
+// import Modal from "../../Components/Modal/Modal";
 
 function DashAfil() {
   const { user, route } = useSelector((state) => state.auth);
@@ -42,10 +42,12 @@ function DashAfil() {
     // if (route !== "") {
     //   navigate(`/${route}`);
     // }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (user.grupFamID) dispatch(getGroup(user.grupFamID));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user.grupFamID]);
 
   useEffect(() => {
@@ -53,6 +55,7 @@ function DashAfil() {
     dispatch(getHistorial());
     dispatch(getRecetas());
     dispatch(getMedicalToken());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   //   const { medicalToken } = useSelector((state) => state.auth);
@@ -82,7 +85,7 @@ function DashAfil() {
         }}
       />
       <div
-        className="flex flex-row items-center justify-center min-h-[70vh] bg-center bg-no-repeat bg-cover bg-app"
+        className="flex flex-row items-center justify-center min-h-[100vh] bg-center bg-no-repeat bg-cover bg-app"
         style={{ backgroundImage: `url(${Logo})` }}
       >
         <main className="flex flex-col w-full max-w-5xl m-4 overflow-hidden bg-white shadow-lg lg:flex-row backdrop-filter backdrop-blur-lg bg-opacity-20 rounded-xl lg:m-6">

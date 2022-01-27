@@ -50,16 +50,18 @@ const ABMAffilFacturas = () => {
   return (
     <div>
       <GetAfifilDNI />
-
+      <div className="flex justify-end mr-10">
       <button
           className={
-          enableBtnProf 
+          enableBtnProf
           }
           
           onClick={createAllFacturas}
         >
           Generar Facturas
         </button>
+
+      </div>
 
       <ABMAffilFactList
       />

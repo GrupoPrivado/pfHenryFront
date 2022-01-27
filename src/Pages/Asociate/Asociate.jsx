@@ -36,6 +36,7 @@ export default function Asociate() {
       setErrorAlert(true);
       setAlertMessage(message);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [message, type]);
 
   const {provinces, cities, isLoadingCities} = useSelector(state => state.providers)

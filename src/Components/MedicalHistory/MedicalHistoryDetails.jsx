@@ -6,7 +6,7 @@ import { getHistorial } from "../../actions/actionConsultas";
 
 function MedicalHistoryDetails() {
     const dispatch = useDispatch();
-    const { user } = useSelector(state => state.auth);
+    // const { user } = useSelector(state => state.auth);
     const { consultas } = useSelector(state => state.consultas);
     useEffect(() => {
         dispatch(getHistorial())

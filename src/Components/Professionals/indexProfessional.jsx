@@ -40,6 +40,7 @@ const IndexProfessional = () => {
       setErrorAlert(true);
       setAlertMessage(message);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [message, type, activeAlert, errorAlert]);
 
   /****** Variables y funciones para la generación de recetas Func 3******/
@@ -57,11 +58,10 @@ const IndexProfessional = () => {
 
   return (
     <div className="w-full flex justify-center items-center flex-col gap-8">
-      <ProfessionalData professionalData={professionalData} />
 
       {!consultaMedicaData._id && <ConsultaSearch />}
 
-      <div className="flex justify-around items-center w-40vw h-10">
+      <div className="flex justify-center items-center w-40vw h-10 gap-20 mt-4">
         {/* <Link to="/profesional/historiaclinica"> */}
         <button
           className={
@@ -85,6 +85,9 @@ const IndexProfessional = () => {
           Generar Receta
         </button>
       </div>
+        
+      <div className="relative p-6">
+      <ProfessionalData professionalData={professionalData} />
 
       {recetasModal && (
         <GeneracionRecetas
@@ -101,6 +104,7 @@ const IndexProfessional = () => {
       {consultaMedicaData.afiliadoID && (
         <Diagnostico token={consultaMedicaData.tokenMedico} />
       )}
+      </div>
       {activeAlert &&
         alertSweet(
           "success",
