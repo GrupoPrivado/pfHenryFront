@@ -57,11 +57,11 @@ const IndexProfessional = () => {
   /****** Variables y funciones la generación de recetas Func 3******/
 
   return (
-    <div className="w-full flex justify-center items-center flex-col gap-8">
+    <div className="w-full relative flex justify-center items-center flex-col gap-8">
 
       {!consultaMedicaData._id && <ConsultaSearch />}
 
-      <div className="flex justify-center items-center w-40vw h-10 gap-20 mt-4">
+      <div className="flex justify-center items-center w-60vw h-10 gap-20 mt-4">
         {/* <Link to="/profesional/historiaclinica"> */}
         <button
           className={
@@ -85,9 +85,6 @@ const IndexProfessional = () => {
           Generar Receta
         </button>
       </div>
-        
-      <div className="relative p-6">
-      <ProfessionalData professionalData={professionalData} />
 
       {recetasModal && (
         <GeneracionRecetas
@@ -96,6 +93,9 @@ const IndexProfessional = () => {
           setRecetasModal={setRecetasModal}
         />
       )}
+        
+      <div className="relative p-6">
+      <ProfessionalData professionalData={professionalData} />
 
       {consultaMedicaData.afiliadoID && (
         <AffiliateData affiliateData={consultaMedicaData.afiliadoID} />

@@ -56,13 +56,13 @@ const GeneracionRecetas = ({
   };
 
   return (
-    <section className="absolute top-0 left-0 w-100vw full min-h-100vh bg-white flex flex-col gap-12 justify-center items-center z-50 p-8">
+    <section className="absolute top-0 left-0 w-[100vw] min-h-[92vh] bg-white flex flex-col gap-12 justify-center items-center z-50 mx-auto">
       <article className=" flex flex-col gap-4 items-center justify-center">
       <label className="py-4 mt-8 text-3xl">Afiliado</label>
       <div className="flex gap-4">
         <div className="relative">
           <label className="absolute bg-white -top-[1.3rem] left-4 px-1 text-green-500">Nombre y Apellido</label>
-        <label className="resize-none ring-2 ring-stone-800 focus:ring-blue-500 outline-none rounded-md p-2 px-12">{affiliateData.nombre} {affiliateData.apellido}</label>
+        <label className=" ring-2 ring-stone-800 focus:ring-blue-500 outline-none rounded-md p-2 px-12">{affiliateData.nombre} {affiliateData.apellido}</label>
         </div>
         <div className="relative">
           <label className="absolute bg-white -top-[1.3rem] left-4 px-1 text-green-500">DNI</label>
