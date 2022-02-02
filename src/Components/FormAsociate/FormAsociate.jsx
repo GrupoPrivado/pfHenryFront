@@ -361,13 +361,12 @@ export default function FormAsociate({
 
         <div>
           <div className="col-span-3 row-span-1 -space-y-px rounded-md shadow-sm sm:col-span-2 sm:row-span-1">
-            <label className="text-lg font-semibold">Miembro familiar</label>
             <button
               required
               className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               onClick={() => setModal(!modal)}
             >
-              Agregar
+              Agregar Familiar
             </button>
           </div>
 
