@@ -12,7 +12,6 @@ const Authorizations = () => {
     const [modal, setModal] = useState(false);
     useEffect(() => {
         if(!recipes.length) dispatch(getRecetas())
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const handleClick = (e, rec_id) => {
@@ -23,7 +22,7 @@ const Authorizations = () => {
 
     }
     return (
-        <div className="flex flex-col w-full bg-cover start min-h-90vh contenair" style={{ backgroundImage: `url(${Logo})` }}>
+        <div className="flex flex-col w-full bg-cover start min-h-[85vh] contenair" style={{ backgroundImage: `url(${Logo})` }}>
             <h3 className='mt-3 ml-3 text-4xl font-bold text-left text-white'>Recetas y Autorizaciones</h3>
             <table className="mx-auto mt-10 text-gray-900 bg-white shadow-none w-80vw bg-opacity-40 rounded-xl backdrop-filter backdrop-blur-lg">
                 <thead>
