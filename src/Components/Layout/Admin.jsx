@@ -34,7 +34,7 @@ const Admin = () => {
                 <Route path='/facturas' element={<PrivateRouter rol={roles.ADMIN}><ABMAffilFacturas/></PrivateRouter>}/>
 
             </Routes>
- <FooterAdmin/>
+            <FooterAdmin/>
         </div>
     )
 }
